@@ -1,0 +1,2160 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Full API &#8212; Astra Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css?v=a885cde7" />
+    <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=734355ca" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=91d07486"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/unabridged_orphan';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/astra_logo.png"/>
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Astra is undergoing heavy updates at the moment. Do not expect this documentation to remain stable.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/astra_logo.png" class="logo__image only-dark" alt=""/>
+    <img src="../_static/astra_logo.png" class="logo__image only-light pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">Astra Documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../manual.html">
+    Manual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Astra API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/RobotLeopard86/Astra" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../manual.html">
+    Manual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Astra API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/RobotLeopard86/Astra" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Full API</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="full-api">
+<h1>Full API<a class="headerlink" href="#full-api" title="Link to this heading"><span/></a></h1>
+<section id="directories">
+<h2>Directories<a class="headerlink" href="#directories" title="Link to this heading"><span/></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include.html">Directory include</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra.html">Directory astra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_alloc.html">Directory alloc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_alloc.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_error.html">Directory error</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_error.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_reflection.html">Directory reflection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_reflection.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_serialization.html">Directory serialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_serialization.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_tools.html">Directory tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_tools.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info.html">Directory type_info</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants.html">Directory variants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_array.html">Directory array</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_array.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_enum.html">Directory enum</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_enum.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_floating.html">Directory floating</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_floating.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_integer.html">Directory integer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_integer.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_map.html">Directory map</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_map.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_object.html">Directory object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_object.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_pointer.html">Directory pointer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_pointer.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence.html">Directory sequence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_list.html">Directory list</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_list.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_queue.html">Directory queue</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_queue.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_set.html">Directory set</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_set.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_stack.html">Directory stack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_stack.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_vector.html">Directory vector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_sequence_vector.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_type_info_variants_string.html">Directory string</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_type_info_variants_string.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_types.html">Directory types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_types.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_types.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_types_array.html">Directory array</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_types_array.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_types_pointers.html">Directory pointers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_types_pointers.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_variable.html">Directory variable</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_variable.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_astra_variant.html">Directory variant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dir_include_astra_variant.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading"><span/></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_access.hpp.html">File access.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_access.hpp.html#definition-include-astra-type-info-variants-object-access-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/access.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_access.hpp.html">Program Listing for File access.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_access.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_access.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_access.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_access.hpp.html#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_access.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_reflection_actions.hpp.html">File actions.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_actions.hpp.html#definition-include-astra-reflection-actions-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/actions.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_reflection_actions.hpp.html">Program Listing for File actions.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_actions.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_actions.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_actions.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_actions.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_all_types.hpp.html">File all_types.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_all_types.hpp.html#definition-include-astra-types-all-types-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/all_types.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_all_types.hpp.html">Program Listing for File all_types.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_all_types.hpp.html#includes">Includes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_alloc_alloc.hpp.html">File alloc.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_alloc.hpp.html#definition-include-astra-alloc-alloc-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/alloc/alloc.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_alloc_alloc.hpp.html">Program Listing for File alloc.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_alloc.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_alloc.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_alloc.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_alloc.hpp.html#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_alloc.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_tools_append_buf.hpp.html">File append_buf.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_append_buf.hpp.html#definition-include-astra-tools-append-buf-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/tools/append_buf.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_tools_append_buf.hpp.html">Program Listing for File append_buf.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_append_buf.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_append_buf.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_append_buf.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_append_buf.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_array_array.hpp.html">File array.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_array.hpp.html#definition-include-astra-type-info-variants-array-array-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/array/array.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_array_array.hpp.html">Program Listing for File array.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_array.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_array.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_array.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_array.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_serialization_binary.hpp.html">File binary.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_binary.hpp.html#definition-include-astra-serialization-binary-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/serialization/binary.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_serialization_binary.hpp.html">Program Listing for File binary.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_binary.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_binary.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_binary.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_binary.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_bool.hpp.html">File bool.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_bool.hpp.html#definition-include-astra-type-info-variants-bool-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/bool.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_bool.hpp.html">Program Listing for File bool.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_bool.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_bool.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_bool.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_bool.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_bool.hpp.html">File bool.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_bool.hpp.html#definition-include-astra-types-bool-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/bool.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_bool.hpp.html">Program Listing for File bool.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_bool.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_bool.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_bool.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_bool.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_variable_box.hpp.html">File box.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_box.hpp.html#definition-include-astra-variable-box-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/variable/box.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_variable_box.hpp.html">Program Listing for File box.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_box.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_box.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_box.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_alloc_buff_alloc.hpp.html">File buff_alloc.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_buff_alloc.hpp.html#definition-include-astra-alloc-buff-alloc-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/alloc/buff_alloc.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_alloc_buff_alloc.hpp.html">Program Listing for File buff_alloc.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_buff_alloc.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_buff_alloc.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_alloc_buff_alloc.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_array_c_array.hpp.html">File c_array.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_c_array.hpp.html#definition-include-astra-type-info-variants-array-c-array-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/array/c_array.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_array_c_array.hpp.html">Program Listing for File c_array.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_c_array.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_c_array.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_c_array.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_c_array.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_array_c_array.hpp.html">File c_array.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_c_array.hpp.html#definition-include-astra-types-array-c-array-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/array/c_array.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_array_c_array.hpp.html">Program Listing for File c_array.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_c_array.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_c_array.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_c_array.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_c_array.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_string_c_string.hpp.html">File c_string.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_c_string.hpp.html#definition-include-astra-type-info-variants-string-c-string-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/string/c_string.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_string_c_string.hpp.html">Program Listing for File c_string.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_c_string.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_c_string.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_c_string.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_c_string.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_common_actions.hpp.html">File common_actions.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_common_actions.hpp.html#definition-include-astra-types-common-actions-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/common_actions.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_common_actions.hpp.html">Program Listing for File common_actions.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_common_actions.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_common_actions.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_common_actions.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_common_actions.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_constexpr_map.hpp.html">File constexpr_map.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_map.hpp.html#definition-include-astra-constexpr-map-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/constexpr_map.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_constexpr_map.hpp.html">Program Listing for File constexpr_map.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_map.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_map.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_map.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_map.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_constexpr_sort.hpp.html">File constexpr_sort.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_sort.hpp.html#definition-include-astra-constexpr-sort-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/constexpr_sort.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_constexpr_sort.hpp.html">Program Listing for File constexpr_sort.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_sort.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_sort.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_constexpr_sort.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_serialization_convert.hpp.html">File convert.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_convert.hpp.html#definition-include-astra-serialization-convert-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/serialization/convert.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_serialization_convert.hpp.html">Program Listing for File convert.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_convert.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_convert.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_convert.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum.hpp.html">File enum.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum.hpp.html#definition-include-astra-type-info-variants-enum-enum-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/enum/enum.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_enum_enum.hpp.html">Program Listing for File enum.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum_impl.hpp.html">File enum_impl.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum_impl.hpp.html#definition-include-astra-type-info-variants-enum-enum-impl-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/enum/enum_impl.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_enum_enum_impl.hpp.html">Program Listing for File enum_impl.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum_impl.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum_impl.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum_impl.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_enum_impl.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_err_helper.hpp.html">File err_helper.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_err_helper.hpp.html#definition-include-astra-type-info-variants-sequence-err-helper-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/err_helper.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_err_helper.hpp.html">Program Listing for File err_helper.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_err_helper.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_err_helper.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_err_helper.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_err_helper.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_error_error.hpp.html">File error.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_error.hpp.html#definition-include-astra-error-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/error/error.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_error_error.hpp.html">Program Listing for File error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_error.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_error.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_error.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_expected.hpp.html">File expected.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_expected.hpp.html#definition-include-astra-expected-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/expected.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_expected.hpp.html">Program Listing for File expected.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_expected.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_expected.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_expected.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_expected.hpp.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_expected.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_desc.hpp.html">File field_desc.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_desc.hpp.html#definition-include-astra-type-info-variants-object-field-desc-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/field_desc.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_field_desc.hpp.html">Program Listing for File field_desc.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_desc.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_desc.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_desc.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_desc.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_info.hpp.html">File field_info.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_info.hpp.html#definition-include-astra-type-info-variants-object-field-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/field_info.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_field_info.hpp.html">Program Listing for File field_info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_info.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_info.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_iterator.hpp.html">File field_iterator.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_iterator.hpp.html#definition-include-astra-type-info-variants-object-field-iterator-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/field_iterator.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_field_iterator.hpp.html">Program Listing for File field_iterator.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_iterator.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_iterator.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_iterator.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_field_iterator.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_fields.hpp.html">File fields.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_fields.hpp.html#definition-include-astra-type-info-variants-object-fields-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/fields.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_fields.hpp.html">Program Listing for File fields.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_fields.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_fields.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_fields.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_fields.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_floating_float.hpp.html">File float.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_float.hpp.html#definition-include-astra-type-info-variants-floating-float-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/floating/float.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_floating_float.hpp.html">Program Listing for File float.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_float.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_float.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_float.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_float.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_float.hpp.html">File float.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_float.hpp.html#definition-include-astra-types-float-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/float.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_float.hpp.html">Program Listing for File float.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_float.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_float.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_float.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_float.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_floating_floating.hpp.html">File floating.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_floating.hpp.html#definition-include-astra-type-info-variants-floating-floating-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/floating/floating.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_floating_floating.hpp.html">Program Listing for File floating.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_floating.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_floating.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_floating.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_floating.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_tools_format.hpp.html">File format.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_format.hpp.html#definition-include-astra-tools-format-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/tools/format.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_tools_format.hpp.html">Program Listing for File format.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_format.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_format.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_format.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_format.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_array_iarray.hpp.html">File iarray.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_iarray.hpp.html#definition-include-astra-type-info-variants-array-iarray-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/array/iarray.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_array_iarray.hpp.html">Program Listing for File iarray.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_iarray.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_iarray.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_iarray.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_iarray.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_enum_ienum.hpp.html">File ienum.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_ienum.hpp.html#definition-include-astra-type-info-variants-enum-ienum-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/enum/ienum.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_enum_ienum.hpp.html">Program Listing for File ienum.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_ienum.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_ienum.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_ienum.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_enum_ienum.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_floating_ifloating.hpp.html">File ifloating.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_ifloating.hpp.html#definition-include-astra-type-info-variants-floating-ifloating-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/floating/ifloating.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_floating_ifloating.hpp.html">Program Listing for File ifloating.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_ifloating.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_ifloating.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_ifloating.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_floating_ifloating.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_integer_iinteger.hpp.html">File iinteger.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_iinteger.hpp.html#definition-include-astra-type-info-variants-integer-iinteger-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/integer/iinteger.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_integer_iinteger.hpp.html">Program Listing for File iinteger.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_iinteger.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_iinteger.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_iinteger.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_iinteger.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_ilist.hpp.html">File ilist.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_ilist.hpp.html#definition-include-astra-type-info-variants-sequence-list-ilist-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/list/ilist.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_list_ilist.hpp.html">Program Listing for File ilist.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_ilist.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_ilist.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_ilist.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_ilist.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_map_imap.hpp.html">File imap.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_imap.hpp.html#definition-include-astra-type-info-variants-map-imap-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/map/imap.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_map_imap.hpp.html">Program Listing for File imap.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_imap.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_imap.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_imap.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_imap.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_integer_int.hpp.html">File int.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_int.hpp.html#definition-include-astra-type-info-variants-integer-int-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/integer/int.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_integer_int.hpp.html">Program Listing for File int.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_int.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_int.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_int.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_int.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_integer_integer.hpp.html">File integer.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_integer.hpp.html#definition-include-astra-type-info-variants-integer-integer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/integer/integer.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_integer_integer.hpp.html">Program Listing for File integer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_integer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_integer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_integer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_integer_integer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_integer.hpp.html">File integer.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_integer.hpp.html#definition-include-astra-types-integer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/integer.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_integer.hpp.html">Program Listing for File integer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_integer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_integer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_integer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_integer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_ipointer.hpp.html">File ipointer.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_ipointer.hpp.html#definition-include-astra-type-info-variants-pointer-ipointer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/pointer/ipointer.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_pointer_ipointer.hpp.html">Program Listing for File ipointer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_ipointer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_ipointer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_ipointer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_ipointer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_iqueue.hpp.html">File iqueue.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_iqueue.hpp.html#definition-include-astra-type-info-variants-sequence-queue-iqueue-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/queue/iqueue.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_queue_iqueue.hpp.html">Program Listing for File iqueue.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_iqueue.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_iqueue.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_iqueue.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_iqueue.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_isequence.hpp.html">File isequence.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_isequence.hpp.html#definition-include-astra-type-info-variants-sequence-isequence-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/isequence.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_isequence.hpp.html">Program Listing for File isequence.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_isequence.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_isequence.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_isequence.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_isequence.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_iset.hpp.html">File iset.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_iset.hpp.html#definition-include-astra-type-info-variants-sequence-set-iset-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/set/iset.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_set_iset.hpp.html">Program Listing for File iset.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_iset.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_iset.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_iset.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_iset.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_istack.hpp.html">File istack.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_istack.hpp.html#definition-include-astra-type-info-variants-sequence-stack-istack-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/stack/istack.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_stack_istack.hpp.html">Program Listing for File istack.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_istack.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_istack.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_istack.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_istack.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_string_istring.hpp.html">File istring.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_istring.hpp.html#definition-include-astra-type-info-variants-string-istring-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/string/istring.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_string_istring.hpp.html">Program Listing for File istring.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_istring.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_istring.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_istring.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_istring.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_ivector.hpp.html">File ivector.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_ivector.hpp.html#definition-include-astra-type-info-variants-sequence-vector-ivector-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/vector/ivector.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_vector_ivector.hpp.html">Program Listing for File ivector.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_ivector.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_ivector.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_ivector.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_ivector.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_serialization_json.hpp.html">File json.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_json.hpp.html#definition-include-astra-serialization-json-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/serialization/json.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_serialization_json.hpp.html">Program Listing for File json.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_json.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_json.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_json.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_json.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_map_map.hpp.html">File map.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_map.hpp.html#definition-include-astra-type-info-variants-map-map-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/map/map.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_map_map.hpp.html">Program Listing for File map.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_map.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_map.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_map.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_map.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_map.hpp.html">File map.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_map.hpp.html#definition-include-astra-types-map-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/map.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_map.hpp.html">Program Listing for File map.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_map.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_map.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_map.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_map.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_desc.hpp.html">File method_desc.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_desc.hpp.html#definition-include-astra-type-info-variants-object-method-desc-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/method_desc.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_method_desc.hpp.html">Program Listing for File method_desc.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_desc.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_desc.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_desc.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_desc.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_info.hpp.html">File method_info.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_info.hpp.html#definition-include-astra-type-info-variants-object-method-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/method_info.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_method_info.hpp.html">Program Listing for File method_info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_info.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_info.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_iterator.hpp.html">File method_iterator.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_iterator.hpp.html#definition-include-astra-type-info-variants-object-method-iterator-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/method_iterator.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_method_iterator.hpp.html">Program Listing for File method_iterator.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_iterator.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_iterator.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_iterator.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_method_iterator.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_methods.hpp.html">File methods.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_methods.hpp.html#definition-include-astra-type-info-variants-object-methods-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/methods.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_methods.hpp.html">Program Listing for File methods.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_methods.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_methods.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_methods.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_methods.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_tools_names.hpp.html">File names.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_names.hpp.html#definition-include-astra-tools-names-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/tools/names.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_tools_names.hpp.html">Program Listing for File names.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_names.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_names.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_names.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_names.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_object_object.hpp.html">File object.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_object.hpp.html#definition-include-astra-type-info-variants-object-object-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/object/object.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_object_object.hpp.html">Program Listing for File object.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_object.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_object.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_object.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_object_object.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_variant_overloaded.hpp.html">File overloaded.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_overloaded.hpp.html#definition-include-astra-variant-overloaded-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/variant/overloaded.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_variant_overloaded.hpp.html">Program Listing for File overloaded.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_overloaded.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_overloaded.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_overloaded.hpp.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_overloaded.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_pointer.hpp.html">File pointer.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_pointer.hpp.html#definition-include-astra-type-info-variants-pointer-pointer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/pointer/pointer.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_pointer_pointer.hpp.html">Program Listing for File pointer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_pointer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_pointer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_pointer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_pointer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_queue_iterator.hpp.html">File queue_iterator.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_queue_iterator.hpp.html#definition-include-astra-type-info-variants-sequence-queue-queue-iterator-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/queue/queue_iterator.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_queue_queue_iterator.hpp.html">Program Listing for File queue_iterator.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_queue_iterator.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_queue_iterator.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_queue_iterator.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_queue_iterator.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_reflectable.hpp.html">File reflectable.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflectable.hpp.html#definition-include-astra-reflectable-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflectable.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_reflectable.hpp.html">Program Listing for File reflectable.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflectable.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflectable.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflectable.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_reflection_reflection.hpp.html">File reflection.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_reflection.hpp.html#definition-include-astra-reflection-reflection-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/reflection.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_reflection_reflection.hpp.html">Program Listing for File reflection.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_reflection.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_reflection.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_reflection.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_sequence.hpp.html">File sequence.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_sequence.hpp.html#definition-include-astra-type-info-variants-sequence-sequence-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/sequence.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_sequence.hpp.html">Program Listing for File sequence.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_sequence.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_sequence.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_sequence.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_sequence.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_sequence.hpp.html">File sequence.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_sequence.hpp.html#definition-include-astra-types-sequence-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/sequence.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_sequence.hpp.html">Program Listing for File sequence.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_sequence.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_sequence.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_sequence.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_sequence.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_tools_sizeof.hpp.html">File sizeof.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_sizeof.hpp.html#definition-include-astra-tools-sizeof-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/tools/sizeof.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_tools_sizeof.hpp.html">Program Listing for File sizeof.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_sizeof.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_sizeof.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_sizeof.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_sizeof.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_stack_iterator.hpp.html">File stack_iterator.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_stack_iterator.hpp.html#definition-include-astra-type-info-variants-sequence-stack-stack-iterator-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/stack/stack_iterator.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_stack_stack_iterator.hpp.html">Program Listing for File stack_iterator.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_stack_iterator.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_stack_iterator.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_stack_iterator.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_stack_iterator.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_array_std_array.hpp.html">File std_array.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_std_array.hpp.html#definition-include-astra-type-info-variants-array-std-array-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/array/std_array.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_array_std_array.hpp.html">Program Listing for File std_array.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_std_array.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_std_array.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_std_array.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_array_std_array.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_array_std_array.hpp.html">File std_array.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_std_array.hpp.html#definition-include-astra-types-array-std-array-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/array/std_array.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_array_std_array.hpp.html">Program Listing for File std_array.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_std_array.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_std_array.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_array_std_array.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string.hpp.html">File std_basic_string.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string.hpp.html#definition-include-astra-type-info-variants-string-std-basic-string-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/string/std_basic_string.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_string_std_basic_string.hpp.html">Program Listing for File std_basic_string.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string_view.hpp.html">File std_basic_string_view.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string_view.hpp.html#definition-include-astra-type-info-variants-string-std-basic-string-view-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/string/std_basic_string_view.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_string_std_basic_string_view.hpp.html">Program Listing for File std_basic_string_view.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string_view.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string_view.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string_view.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_std_basic_string_view.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_deque.hpp.html">File std_deque.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_deque.hpp.html#definition-include-astra-type-info-variants-sequence-list-std-deque-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/list/std_deque.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_list_std_deque.hpp.html">Program Listing for File std_deque.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_deque.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_deque.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_deque.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_deque.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_list.hpp.html">File std_list.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_list.hpp.html#definition-include-astra-type-info-variants-sequence-list-std-list-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/list/std_list.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_list_std_list.hpp.html">Program Listing for File std_list.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_list.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_list.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_list.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_list_std_list.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_map.hpp.html">File std_map.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_map.hpp.html#definition-include-astra-type-info-variants-map-std-map-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/map/std_map.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_map_std_map.hpp.html">Program Listing for File std_map.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_map.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_map.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_map.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_map.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_std_queue.hpp.html">File std_queue.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_std_queue.hpp.html#definition-include-astra-type-info-variants-sequence-queue-std-queue-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/queue/std_queue.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_queue_std_queue.hpp.html">Program Listing for File std_queue.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_std_queue.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_std_queue.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_std_queue.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_queue_std_queue.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_set.hpp.html">File std_set.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_set.hpp.html#definition-include-astra-type-info-variants-sequence-set-std-set-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/set/std_set.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_set_std_set.hpp.html">Program Listing for File std_set.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_set.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_set.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_set.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_set.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_shared_ptr.hpp.html">File std_shared_ptr.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_shared_ptr.hpp.html#definition-include-astra-type-info-variants-pointer-std-shared-ptr-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/pointer/std_shared_ptr.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_pointer_std_shared_ptr.hpp.html">Program Listing for File std_shared_ptr.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_shared_ptr.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_shared_ptr.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_shared_ptr.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_shared_ptr.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_pointers_std_shared_ptr.hpp.html">File std_shared_ptr.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_shared_ptr.hpp.html#definition-include-astra-types-pointers-std-shared-ptr-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/pointers/std_shared_ptr.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_pointers_std_shared_ptr.hpp.html">Program Listing for File std_shared_ptr.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_shared_ptr.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_shared_ptr.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_shared_ptr.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_std_stack.hpp.html">File std_stack.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_std_stack.hpp.html#definition-include-astra-type-info-variants-sequence-stack-std-stack-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/stack/std_stack.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_stack_std_stack.hpp.html">Program Listing for File std_stack.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_std_stack.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_std_stack.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_std_stack.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_stack_std_stack.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_unique_ptr.hpp.html">File std_unique_ptr.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_unique_ptr.hpp.html#definition-include-astra-type-info-variants-pointer-std-unique-ptr-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/pointer/std_unique_ptr.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_pointer_std_unique_ptr.hpp.html">Program Listing for File std_unique_ptr.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_unique_ptr.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_unique_ptr.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_unique_ptr.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_pointer_std_unique_ptr.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_pointers_std_unique_ptr.hpp.html">File std_unique_ptr.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_unique_ptr.hpp.html#definition-include-astra-types-pointers-std-unique-ptr-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/pointers/std_unique_ptr.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_pointers_std_unique_ptr.hpp.html">Program Listing for File std_unique_ptr.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_unique_ptr.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_unique_ptr.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_pointers_std_unique_ptr.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_unordered_map.hpp.html">File std_unordered_map.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_unordered_map.hpp.html#definition-include-astra-type-info-variants-map-std-unordered-map-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/map/std_unordered_map.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_map_std_unordered_map.hpp.html">Program Listing for File std_unordered_map.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_unordered_map.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_unordered_map.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_unordered_map.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_map_std_unordered_map.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_unordered_set.hpp.html">File std_unordered_set.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_unordered_set.hpp.html#definition-include-astra-type-info-variants-sequence-set-std-unordered-set-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/set/std_unordered_set.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_set_std_unordered_set.hpp.html">Program Listing for File std_unordered_set.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_unordered_set.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_unordered_set.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_unordered_set.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_set_std_unordered_set.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_std_vector.hpp.html">File std_vector.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_std_vector.hpp.html#definition-include-astra-type-info-variants-sequence-vector-std-vector-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/sequence/vector/std_vector.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_sequence_vector_std_vector.hpp.html">Program Listing for File std_vector.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_std_vector.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_std_vector.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_std_vector.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_sequence_vector_std_vector.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_variants_string_string.hpp.html">File string.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_string.hpp.html#definition-include-astra-type-info-variants-string-string-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/variants/string/string.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_variants_string_string.hpp.html">Program Listing for File string.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_string.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_string.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_string.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_variants_string_string.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_string.hpp.html">File string.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_string.hpp.html#definition-include-astra-types-string-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/string.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_string.hpp.html">Program Listing for File string.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_string.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_string.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_string.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_string.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_tools_stringify.hpp.html">File stringify.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_stringify.hpp.html#definition-include-astra-tools-stringify-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/tools/stringify.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_tools_stringify.hpp.html">Program Listing for File stringify.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_stringify.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_stringify.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_stringify.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_reflection_the_great_table.hpp.html">File the_great_table.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_the_great_table.hpp.html#definition-include-astra-reflection-the-great-table-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/the_great_table.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_reflection_the_great_table.hpp.html">Program Listing for File the_great_table.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_the_great_table.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_the_great_table.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_the_great_table.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_the_great_table.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_error_tight_string.hpp.html">File tight_string.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_tight_string.hpp.html#definition-include-astra-error-tight-string-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/error/tight_string.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_error_tight_string.hpp.html">Program Listing for File tight_string.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_tight_string.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_tight_string.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_tight_string.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_error_tight_string.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html">File traits.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html#definition-include-astra-tools-traits-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/tools/traits.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_tools_traits.hpp.html">Program Listing for File traits.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_tools_traits.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_type_actions.hpp.html">File type_actions.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_type_actions.hpp.html#definition-include-astra-types-type-actions-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/type_actions.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_type_actions.hpp.html">Program Listing for File type_actions.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_type_actions.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_type_actions.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_type_actions.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_id.hpp.html">File type_id.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_id.hpp.html#definition-include-astra-type-id-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_id.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_id.hpp.html">Program Listing for File type_id.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_id.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_id.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_id.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_id.hpp.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_id.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_type_info_type_info.hpp.html">File type_info.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_type_info.hpp.html#definition-include-astra-type-info-type-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/type_info/type_info.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_type_info_type_info.hpp.html">Program Listing for File type_info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_type_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_type_info.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_type_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_type_info.hpp.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_type_info_type_info.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_reflection_type_name.hpp.html">File type_name.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_type_name.hpp.html#definition-include-astra-reflection-type-name-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/type_name.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_reflection_type_name.hpp.html">Program Listing for File type_name.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_type_name.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_type_name.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_type_name.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_reflection_type_name.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_types_unknown.hpp.html">File unknown.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_unknown.hpp.html#definition-include-astra-types-unknown-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/types/unknown.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_types_unknown.hpp.html">Program Listing for File unknown.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_unknown.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_unknown.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_unknown.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_types_unknown.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_variable_var.hpp.html">File var.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_var.hpp.html#definition-include-astra-variable-var-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/variable/var.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_variable_var.hpp.html">Program Listing for File var.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_var.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_var.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_var.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variable_var.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_variant_variant.hpp.html">File variant.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_variant.hpp.html#definition-include-astra-variant-variant-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/variant/variant.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_variant_variant.hpp.html">Program Listing for File variant.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_variant.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_variant.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_variant.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_variant.hpp.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_variant_variant.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_astra_serialization_yaml.hpp.html">File yaml.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_yaml.hpp.html#definition-include-astra-serialization-yaml-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/serialization/yaml.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_astra_serialization_yaml.hpp.html">Program Listing for File yaml.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_yaml.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_yaml.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_yaml.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_astra_serialization_yaml.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directories">Directories</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files">Files</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Owen Z. Siebers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
