@@ -13,7 +13,7 @@
 
 #include "../readers/ireader.hpp"
 
-namespace silica {
+namespace astra {
 
 	struct GroupReader {
 		GroupReader(const GroupReader& other) = delete;

@@ -1,4 +1,4 @@
-#include "silica/serialization/binary.hpp"
+#include "astra/serialization/binary.hpp"
 
 #include <iostream>
 
@@ -6,13 +6,13 @@
 #include "../readers/vector_reader.hpp"
 #include "../writers/stream_writer.hpp"
 #include "../writers/vector_writer.hpp"
-#include "silica/reflection/reflection.hpp"
-#include "silica/types/all_types.hpp"
-#include "silica/variable/box.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/types/all_types.hpp"
+#include "astra/variable/box.hpp"
 #include "group_reader.hpp"
 #include "group_writer.hpp"
 
-using namespace silica::serialization;
+using namespace astra::serialization;
 
 template<typename SeqT>
 inline void serialize_sequence(const SeqT& seq, GroupWriter* writer);

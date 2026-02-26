@@ -162,7 +162,7 @@ void Parser::find_sys_includes(const std::string& sample, const std::string& fal
 	std::set<std::string> includes;
 	if(ctp == CompilerType::GCCLike) {
 		//Empty file to feed in
-		path empty_file = std::filesystem::temp_directory_path() / "_silicasysincchk.cpp";
+		path empty_file = std::filesystem::temp_directory_path() / "_astrasysincchk.cpp";
 		{
 			std::ofstream ofstr(empty_file);
 			ofstr.close();
@@ -193,7 +193,7 @@ void Parser::find_sys_includes(const std::string& sample, const std::string& fal
         )cpp";
 
 		//Dummy file to feed in
-		path dummy_file = std::filesystem::temp_directory_path() / "_silicasysincchk.cpp";
+		path dummy_file = std::filesystem::temp_directory_path() / "_astrasysincchk.cpp";
 		{
 			std::ofstream ofstr(dummy_file);
 			ofstr << msvc_dummy_src;

@@ -3,9 +3,9 @@
 #include <cstddef>
 #include <string>
 
-#include "silica/tools/format.hpp"
+#include "astra/tools/format.hpp"
 
-namespace silica {
+namespace astra {
 
 	struct Position {
 		size_t column = 0;

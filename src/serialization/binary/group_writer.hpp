@@ -10,7 +10,7 @@
 
 #include "../writers/iwriter.hpp"
 
-namespace silica {
+namespace astra {
 
 	struct GroupWriter {
 		GroupWriter(const GroupWriter& other) = delete;

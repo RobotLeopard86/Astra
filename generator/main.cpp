@@ -30,7 +30,7 @@
 
 int main(int argc, char* argv[]) {
 	//Configure CLI
-	CLI::App app("Silica reflection info generator", std::filesystem::path(argv[0]).filename().string());
+	CLI::App app("Astra reflection info generator", std::filesystem::path(argv[0]).filename().string());
 	std::string compDbPath;
 	app.add_option("--compdb,-c", compDbPath, "Path to the compilation database directory")->check(CLI::ExistingDirectory)->required();
 	std::string outDir;
@@ -77,12 +77,12 @@ int main(int argc, char* argv[]) {
 	outDir = std::filesystem::canonical(outDir).string();
 	files.complete_files(&input);
 
-	//If the output directory doesn't exist, we need to make it, or if it exists we need to remove old Silica contents
+	//If the output directory doesn't exist, we need to make it, or if it exists we need to remove old Astra contents
 	std::filesystem::path out(outDir);
 	if(std::filesystem::exists(out)) {
-		if(std::filesystem::exists(out / "silica_types")) std::filesystem::remove_all(out / "silica_types");
-		std::filesystem::remove(out / (project + ".silica.hpp"));
-		std::filesystem::remove(out / (project + ".silica.cpp"));
+		if(std::filesystem::exists(out / "astra_types")) std::filesystem::remove_all(out / "astra_types");
+		std::filesystem::remove(out / (project + ".astra.hpp"));
+		std::filesystem::remove(out / (project + ".astra.cpp"));
 	}
 	std::filesystem::create_directories(out);
 	VERBOSE_LOG("Prepped output directory " << out)
@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
 
 	//Write root files
 	clock::time_point writeBegin = clock::now();
-	std::ofstream rootHeader(out / (project + ".silica.hpp"));
+	std::ofstream rootHeader(out / (project + ".astra.hpp"));
 	if(!rootHeader.is_open()) {
 		std::cerr << "Failed to open root header file for writing!" << std::endl;
 		return -1;
@@ -160,18 +160,18 @@ int main(int argc, char* argv[]) {
 	rootHeader << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Silica-generated reflection info file.   |
+|   Astra-generated reflection info file.   |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */
 
 #pragma once
 
-#include "silica/reflection/reflection.hpp"
-#include "silica/types/all_types.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/types/all_types.hpp"
 
 )";
-	std::ofstream rootCpp(out / (project + ".silica.cpp"));
+	std::ofstream rootCpp(out / (project + ".astra.cpp"));
 	if(!rootCpp.is_open()) {
 		std::cerr << "Failed to open root implementation file for writing!" << std::endl;
 		return -1;
@@ -179,16 +179,16 @@ int main(int argc, char* argv[]) {
 	rootCpp << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Silica-generated reflection info file.   |
+|   Astra-generated reflection info file.   |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */
 
 #include ")"
-			<< (project + ".silica.hpp") << "\"\n\n";
+			<< (project + ".astra.hpp") << "\"\n\n";
 
 	//Create type reflection directory
-	std::filesystem::path typesDir = out / "silica_types";
+	std::filesystem::path typesDir = out / "astra_types";
 	std::filesystem::create_directories(typesDir);
 
 	//Write file templates
@@ -198,7 +198,7 @@ int main(int argc, char* argv[]) {
 		//Generate filenames
 		auto filenameUTF8 = to_filename(object_name);
 		json["file_name"] = filenameUTF8;
-		filenameUTF8 += ".silica";
+		filenameUTF8 += ".astra";
 #ifdef _WIN32
 		auto fileName = files.from_utf8(filenameUTF8.data(), filenameUTF8.size());
 
@@ -226,7 +226,7 @@ int main(int argc, char* argv[]) {
 		hpp << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Silica-generated reflection info file.   |
+|   Astra-generated reflection info file.   |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */
@@ -235,7 +235,7 @@ int main(int argc, char* argv[]) {
 		cpp << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Silica-generated reflection info file.   |
+|   Astra-generated reflection info file.   |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */
@@ -255,16 +255,16 @@ int main(int argc, char* argv[]) {
 		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << cppFile.generic_string());
 
 		//Add includes to root files
-		const std::string includeStr = "#include \"silica_types/";
+		const std::string includeStr = "#include \"astra_types/";
 		rootHeader << includeStr << filenameUTF8 << ".hpp\"\n";
 		rootCpp << includeStr << filenameUTF8 << ".cpp\"\n";
 	}
 
 	//Close root files
 	rootHeader.close();
-	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".silica.hpp"));
+	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".astra.hpp"));
 	rootCpp.close();
-	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".silica.cpp"));
+	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".astra.cpp"));
 	clock::time_point writeEnd = clock::now();
 	VERBOSE_LOG("File generation completed in " << std::chrono::duration_cast<std::chrono::duration<float>>(writeEnd - writeBegin).count() << " seconds")
 

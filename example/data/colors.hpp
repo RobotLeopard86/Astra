@@ -1,6 +1,6 @@
 #pragma once
 
-enum class [[silica::reflect]] Color {
+enum class [[astra::reflect]] Color {
 	Red,
 	Orange,
 	Yellow,

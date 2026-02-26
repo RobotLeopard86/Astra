@@ -7,12 +7,12 @@
 #include <string>
 
 #include "../define_retry.hpp"
-#include "silica/expected.hpp"
-#include "silica/reflection/reflection.hpp"
-#include "silica/types/all_types.hpp"
-#include "silica/variable/box.hpp"
+#include "astra/expected.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/types/all_types.hpp"
+#include "astra/variable/box.hpp"
 
-using namespace silica;
+using namespace astra;
 
 ParserYaml::ParserYaml(const char* input, size_t input_size)//
   : LexerYaml(input, input_size),							//
@@ -388,15 +388,15 @@ bool ParserYaml::is_null(const std::string& word) {
 }
 
 Error ParserYaml::error(const char* str) {
-	return Error(silica::format("{}; {}", str, get_position().to_string()));
+	return Error(astra::format("{}; {}", str, get_position().to_string()));
 }
 
 Error ParserYaml::error_token(char token) {
-	return Error(silica::format("Unexpected token '{}'; {}", token, get_position().to_string()));
+	return Error(astra::format("Unexpected token '{}'; {}", token, get_position().to_string()));
 }
 
 Error ParserYaml::error_match() {
-	return Error(silica::format("Cannot match correct type; {}", get_position().to_string()));
+	return Error(astra::format("Cannot match correct type; {}", get_position().to_string()));
 }
 
 bool ParserYaml::parse_bool(std::string& str) {

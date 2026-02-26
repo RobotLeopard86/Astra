@@ -5,7 +5,7 @@
 
 #include "iwriter.hpp"
 
-namespace silica {
+namespace astra {
 
 	struct StringWriter final : IWriter {
 		StringWriter() = delete;

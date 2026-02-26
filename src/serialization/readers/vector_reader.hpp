@@ -6,7 +6,7 @@
 
 #include "ireader.hpp"
 
-namespace silica {
+namespace astra {
 	struct VectorReader final : IReader {
 		VectorReader() = delete;
 

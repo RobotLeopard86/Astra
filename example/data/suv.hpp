@@ -6,7 +6,7 @@
 #define SUV_REFINISH_FEE 1500
 
 namespace ExampleNamespace {
-	class [[silica::reflect("all")]] SUV : public Car {
+	class [[astra::reflect("all")]] SUV : public Car {
 	  public:
 		std::string nickname;
 		float trunkVolume;
@@ -15,6 +15,6 @@ namespace ExampleNamespace {
 			return Car::refinish(newColor) + SUV_REFINISH_FEE;
 		}
 
-		virtual silica::TypeId SILICA__gettypeid() const override;
+		virtual astra::TypeId ASTRA__gettypeid() const override;
 	};
 }

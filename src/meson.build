@@ -26,7 +26,7 @@ yaml_lex = custom_target('lexer_yaml.yy.[cpph]',
 )
 
 # Define sources
-silica_sources = [
+astra_sources = [
 	'err_helper.cpp',
 	'reflection' / 'reflection.cpp',
 	'variable' / 'box.cpp',
@@ -45,7 +45,7 @@ silica_sources = [
 includes = include_directories('..' / 'include')
 
 # Library
-libsilica = library('silica', silica_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, reflex_dep], pic: true)
+libastra = library('astra', astra_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, reflex_dep], pic: true)
 
 # Dependency
-silica_dep = declare_dependency(link_with: libsilica, include_directories: includes)
+astra_dep = declare_dependency(link_with: libastra, include_directories: includes)

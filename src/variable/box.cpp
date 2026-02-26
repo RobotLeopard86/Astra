@@ -1,12 +1,12 @@
-#include "silica/variable/box.hpp"
+#include "astra/variable/box.hpp"
 
 #include <cstdint>
 
-#include "silica/alloc/alloc.hpp"
-#include "silica/reflection/reflection.hpp"
-#include "silica/types/all_types.hpp"
+#include "astra/alloc/alloc.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/types/all_types.hpp"
 
-using namespace silica;
+using namespace astra;
 
 Box::Box(TypeId id, palloc_t* alloc)
   : _alloc(alloc) {

@@ -1,4 +1,4 @@
-#include "silica/serialization/json.hpp"
+#include "astra/serialization/json.hpp"
 
 #include <cmath>
 #include <string_view>
@@ -6,14 +6,14 @@
 #include "../writers/iwriter.hpp"
 #include "../writers/stream_writer.hpp"
 #include "../writers/string_writer.hpp"
-#include "silica/error/error.hpp"
-#include "silica/reflection/reflection.hpp"
-#include "silica/tools/stringify.hpp"
-#include "silica/type_info/type_info.hpp"
-#include "silica/types/all_types.hpp"
+#include "astra/error/error.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/tools/stringify.hpp"
+#include "astra/type_info/type_info.hpp"
+#include "astra/types/all_types.hpp"
 #include "parser_json.hpp"
 
-using namespace silica::serialization;
+using namespace astra::serialization;
 
 inline void append(IWriter* writer, std::string_view str) {
 	writer->write(str.data(), str.size());

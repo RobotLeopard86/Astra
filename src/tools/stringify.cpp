@@ -1,9 +1,9 @@
-#include "silica/tools/stringify.hpp"
+#include "astra/tools/stringify.hpp"
 
 #include <iomanip>
 #include <sstream>
 
-namespace silica {
+namespace astra {
 
 	std::string to_string(bool value) {
 		return value ? "true" : "false";

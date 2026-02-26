@@ -1,14 +1,14 @@
-#include "silica/reflection/reflection.hpp"
+#include "astra/reflection/reflection.hpp"
 
 #include <cstddef>
 #include <iostream>
 #include <memory_resource>
 
-#include "silica/reflection/the_great_table.hpp"
-#include "silica/types/all_types.hpp"
+#include "astra/reflection/the_great_table.hpp"
+#include "astra/types/all_types.hpp"
 #include "sprint.hpp"
 
-using namespace silica;
+using namespace astra;
 
 TypeInfo reflection::reflect(Var variable) {
 	return TheGreatTable::data()[variable.type().number()].reflect(const_cast<void*>(variable.raw()),
@@ -63,7 +63,7 @@ Expected<None> reflection::copy(Var to, Var from) {
 		return Error("Cannot assign to const value");
 	}
 	if(to.type() != from.type()) {
-		return Error(silica::format("Cannot copy {} to {}", type_name(from.type()), type_name(to.type())));
+		return Error(astra::format("Cannot copy {} to {}", type_name(from.type()), type_name(to.type())));
 	}
 	TheGreatTable::data()[to.type().number()].copy(to.raw_mut(), from.raw());
 	return None();

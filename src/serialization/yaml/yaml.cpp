@@ -1,15 +1,15 @@
-#include "silica/serialization/yaml.hpp"
+#include "astra/serialization/yaml.hpp"
 
 #include <ostream>
 
 #include "../writers/stream_writer.hpp"
 #include "../writers/string_writer.hpp"
-#include "silica/reflection/reflection.hpp"
-#include "silica/types/all_types.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/types/all_types.hpp"
 #include "parser_yaml.hpp"
 #include "serializer.hpp"
 
-using namespace silica::serialization;
+using namespace astra::serialization;
 
 void yaml::serialize(std::string* str, Var var) {
 	StringWriter string_w(str);

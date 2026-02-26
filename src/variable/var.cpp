@@ -1,10 +1,10 @@
-#include "silica/variable/var.hpp"
+#include "astra/variable/var.hpp"
 
-#include "silica/reflection/reflection.hpp"
-#include "silica/tools/format.hpp"
-#include "silica/types/all_types.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/tools/format.hpp"
+#include "astra/types/all_types.hpp"
 
-using namespace silica;
+using namespace astra;
 
 Var::Var()
   : _value(nullptr), _type(), _is_const(true) {
@@ -53,7 +53,7 @@ void Var::dispose() {
 }
 
 Error Var::error(TypeId type, TypeId desired_type) {
-	return Error(silica::format("Cannot cast {} to {}",//
+	return Error(astra::format("Cannot cast {} to {}",//
 		reflection::type_name(type),				   //
 		reflection::type_name(desired_type)));
 }

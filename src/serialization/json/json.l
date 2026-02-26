@@ -23,8 +23,8 @@
   LexerJson(const char* input, size_t input_size) : LexerJson(reflex::Input(input, input_size)){
   }
 
-  silica::Position get_position() {
-    return silica::Position{columno(), lineno()};
+  astra::Position get_position() {
+    return astra::Position{columno(), lineno()};
   }
 
   inline std::string& get_word() {

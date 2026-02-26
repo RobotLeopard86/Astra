@@ -24,7 +24,7 @@ struct JsonBuilder {
 	}
 
 	void handle_class(const CXXRecordDecl* c) {
-		if(!c->hasAttr<SilicaReflectAttr>()) {
+		if(!c->hasAttr<AstraReflectAttr>()) {
 			return;
 		}
 		_options = get_options(c);
@@ -33,7 +33,7 @@ struct JsonBuilder {
 	}
 
 	void handle_enum(const EnumDecl* e) {
-		if(!e->hasAttr<SilicaReflectAttr>()) {
+		if(!e->hasAttr<AstraReflectAttr>()) {
 			return;
 		}
 		_options = get_options(e);
@@ -43,7 +43,7 @@ struct JsonBuilder {
 
   private:
 	Context* _ctx;
-	std::unordered_set<SilicaReflectAttr::Option> _options;
+	std::unordered_set<AstraReflectAttr::Option> _options;
 
 	const SourceManager* _sm;
 	const LangOptions& _opts;
@@ -64,7 +64,7 @@ struct JsonBuilder {
 
 		std::vector<const clang::CXXRecordDecl*> decls;
 
-		if(_options.count(SilicaReflectAttr::Option::Base) != 0) {
+		if(_options.count(AstraReflectAttr::Option::Base) != 0) {
 			auto parents = nlohmann::json::array();
 
 			for(auto&& b : c->bases()) {
@@ -96,14 +96,14 @@ struct JsonBuilder {
 				func_names.push_back(f->getNameAsString());
 			} else if(const auto* nc = dyn_cast<CXXRecordDecl>(d)) {
 				if(!nc->isThisDeclarationADefinition() ||//
-					nc->hasAttr<SilicaReflectAttr>()) {
+					nc->hasAttr<AstraReflectAttr>()) {
 					//skip nested classes with dedicated 'reflect' attribute,
 					//handle them further as root declarations
 					continue;
 				}
 				add_class(nc);
 			} else if(const auto* ne = dyn_cast<EnumDecl>(d)) {
-				if(ne->hasAttr<SilicaReflectAttr>()) {
+				if(ne->hasAttr<AstraReflectAttr>()) {
 					//skip nested enums with dedicated 'reflect' attribute,
 					//handle them further as root declarations
 					continue;
@@ -125,14 +125,14 @@ struct JsonBuilder {
 					func_names.push_back(f->getNameAsString());
 				} else if(const auto* nc = dyn_cast<CXXRecordDecl>(d)) {
 					if(!nc->isThisDeclarationADefinition() ||//
-						nc->hasAttr<SilicaReflectAttr>()) {
+						nc->hasAttr<AstraReflectAttr>()) {
 						//skip nested classes with dedicated 'reflect' attribute,
 						//handle them further as root declarations
 						continue;
 					}
 					add_class(nc);
 				} else if(const auto* ne = dyn_cast<EnumDecl>(d)) {
-					if(ne->hasAttr<SilicaReflectAttr>()) {
+					if(ne->hasAttr<AstraReflectAttr>()) {
 						//skip nested enums with dedicated 'reflect' attribute,
 						//handle them further as root declarations
 						continue;
@@ -164,7 +164,7 @@ struct JsonBuilder {
 		auto& arr = json["constants"];
 
 		for(auto&& c : e->enumerators()) {
-			if(c->hasAttr<SilicaIgnoreAttr>()) {
+			if(c->hasAttr<AstraIgnoreAttr>()) {
 				continue;
 			}
 			auto& item = arr.emplace_back();
@@ -175,13 +175,13 @@ struct JsonBuilder {
 	}
 
 	void add_function(nlohmann::json* functions, const FunctionDecl* f, const std::string& class_name, bool inherited) {
-		if(f->hasAttr<SilicaIgnoreAttr>()) {
+		if(f->hasAttr<AstraIgnoreAttr>()) {
 			return;
 		}
 
 		auto acc = f->getAccess();
-		if((acc != clang::AS_public && _options.count(SilicaReflectAttr::Option::NonPublic) == 0) ||
-			_options.count(SilicaReflectAttr::Option::Func) == 0 || (acc == clang::AS_private && inherited)) {
+		if((acc != clang::AS_public && _options.count(AstraReflectAttr::Option::NonPublic) == 0) ||
+			_options.count(AstraReflectAttr::Option::Func) == 0 || (acc == clang::AS_private && inherited)) {
 			return;
 		}
 
@@ -211,13 +211,13 @@ struct JsonBuilder {
 	}
 
 	void add_field(nlohmann::json* fields, const ValueDecl* v, bool inherited) {
-		if(v->template hasAttr<SilicaIgnoreAttr>()) {
+		if(v->template hasAttr<AstraIgnoreAttr>()) {
 			return;
 		}
 
 		auto acc = v->getAccess();
-		if((acc != clang::AS_public && _options.count(SilicaReflectAttr::Option::NonPublic) == 0) ||
-			_options.count(SilicaReflectAttr::Option::Data) == 0 || (acc == clang::AS_private && inherited)) {
+		if((acc != clang::AS_public && _options.count(AstraReflectAttr::Option::NonPublic) == 0) ||
+			_options.count(AstraReflectAttr::Option::Data) == 0 || (acc == clang::AS_private && inherited)) {
 			return;
 		}
 
@@ -301,7 +301,7 @@ struct JsonBuilder {
 		(*item)["name"] = name;
 		(*item)["safe_name"] = name;
 
-		if(const auto* alias = decl->getAttr<SilicaAliasAttr>()) {
+		if(const auto* alias = decl->getAttr<AstraAliasAttr>()) {
 			(*item)["alias"] = alias->getName().str();
 
 			return;
@@ -309,23 +309,23 @@ struct JsonBuilder {
 		(*item)["alias"] = name;
 	}
 
-	static std::unordered_set<SilicaReflectAttr::Option> get_options(const NamedDecl* decl) {
-		std::unordered_set<SilicaReflectAttr::Option> opts;
+	static std::unordered_set<AstraReflectAttr::Option> get_options(const NamedDecl* decl) {
+		std::unordered_set<AstraReflectAttr::Option> opts;
 
-		if(const auto* r = decl->getAttr<SilicaReflectAttr>()) {
+		if(const auto* r = decl->getAttr<AstraReflectAttr>()) {
 			for(auto&& option : r->options()) {
 				opts.insert(option);
 			}
 		}
-		if(opts.count(SilicaReflectAttr::Option::All) != 0) {
-			opts.insert(SilicaReflectAttr::Option::Base);
-			opts.insert(SilicaReflectAttr::Option::NonPublic);
-			opts.insert(SilicaReflectAttr::Option::Data);
-			opts.insert(SilicaReflectAttr::Option::Func);
+		if(opts.count(AstraReflectAttr::Option::All) != 0) {
+			opts.insert(AstraReflectAttr::Option::Base);
+			opts.insert(AstraReflectAttr::Option::NonPublic);
+			opts.insert(AstraReflectAttr::Option::Data);
+			opts.insert(AstraReflectAttr::Option::Func);
 		}
 		if(opts.empty()) {
 			//default state
-			opts.insert(SilicaReflectAttr::Option::Data);
+			opts.insert(AstraReflectAttr::Option::Data);
 		}
 		return opts;
 	}

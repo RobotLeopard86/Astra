@@ -2,13 +2,13 @@
 
 #include <istream>
 
-#include "silica/expected.hpp"
-#include "silica/type_info/variants/array/array.hpp"
-#include "silica/type_info/variants/map/map.hpp"
-#include "silica/variable/var.hpp"
+#include "astra/expected.hpp"
+#include "astra/type_info/variants/array/array.hpp"
+#include "astra/type_info/variants/map/map.hpp"
+#include "astra/variable/var.hpp"
 #include "lexer_json.yy.h"
 
-namespace silica {
+namespace astra {
 
 	class TypeInfo;
 

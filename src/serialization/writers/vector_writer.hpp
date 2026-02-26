@@ -6,7 +6,7 @@
 
 #include "iwriter.hpp"
 
-namespace silica {
+namespace astra {
 
 	struct VectorWriter final : IWriter {
 		VectorWriter() = delete;

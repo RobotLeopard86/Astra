@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace silica {
+namespace astra {
 
 	struct IReader {
 		virtual void read(void* buff, size_t size) const = 0;

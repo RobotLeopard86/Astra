@@ -1,12 +1,12 @@
 R"(
-#include "{{file_name}}.silica.hpp"
+#include "{{file_name}}.astra.hpp"
 
 // clang-format off
-#include "silica/reflection/the_great_table.hpp"
-#include "silica/types/common_actions.hpp"
-#include "silica/types/type_actions.hpp"
+#include "astra/reflection/the_great_table.hpp"
+#include "astra/types/common_actions.hpp"
+#include "astra/types/type_actions.hpp"
 
-namespace silica {
+namespace astra {
 
 template <>
 struct TypeActions<{{name}}> {

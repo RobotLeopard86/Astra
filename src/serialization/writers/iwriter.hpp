@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace silica {
+namespace astra {
 
 	struct IWriter {
 		virtual void write(const void* ptr, size_t bytes) = 0;

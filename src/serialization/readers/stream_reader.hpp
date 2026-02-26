@@ -4,7 +4,7 @@
 
 #include "ireader.hpp"
 
-namespace silica {
+namespace astra {
 
 	struct StreamReader final : IReader {
 		StreamReader() = delete;

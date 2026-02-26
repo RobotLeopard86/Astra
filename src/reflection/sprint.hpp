@@ -2,11 +2,11 @@
 
 #include <string>
 
-#include "silica/reflection/reflection.hpp"
-#include "silica/tools/stringify.hpp"
-#include "silica/type_info/type_info.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/tools/stringify.hpp"
+#include "astra/type_info/type_info.hpp"
 
-namespace silica {
+namespace astra {
 
 	template<typename T>
 	void print_sequence(const T& sequence, std::string* result, int indention);

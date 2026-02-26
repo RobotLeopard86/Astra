@@ -46,8 +46,8 @@
   LexerYaml(const char* input, size_t input_size) : LexerYaml(reflex::Input(input, input_size)){
   }
 
-  silica::Position get_position() {
-    return silica::Position{columno(), lineno()};
+  astra::Position get_position() {
+    return astra::Position{columno(), lineno()};
   }
 
   size_t get_border() {

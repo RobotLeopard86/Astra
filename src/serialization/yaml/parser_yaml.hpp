@@ -2,13 +2,13 @@
 
 #include <memory>
 
-#include "silica/type_info/variants/array/array.hpp"
-#include "silica/type_info/variants/map/map.hpp"
-#include "silica/type_info/variants/object/object.hpp"
-#include "silica/variable/box.hpp"
+#include "astra/type_info/variants/array/array.hpp"
+#include "astra/type_info/variants/map/map.hpp"
+#include "astra/type_info/variants/object/object.hpp"
+#include "astra/variable/box.hpp"
 #include "lexer_yaml.yy.h"
 
-namespace silica {
+namespace astra {
 
 	class TypeInfo;
 

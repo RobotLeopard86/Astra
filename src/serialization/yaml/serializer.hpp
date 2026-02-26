@@ -4,13 +4,13 @@
 #include <string_view>
 
 #include "../writers/iwriter.hpp"
-#include "silica/error/error.hpp"
-#include "silica/reflection/reflection.hpp"
-#include "silica/tools/stringify.hpp"
-#include "silica/type_info/type_info.hpp"
-#include "silica/type_info/variants/integer/integer.hpp"
+#include "astra/error/error.hpp"
+#include "astra/reflection/reflection.hpp"
+#include "astra/tools/stringify.hpp"
+#include "astra/type_info/type_info.hpp"
+#include "astra/type_info/variants/integer/integer.hpp"
 
-namespace silica {
+namespace astra {
 
 	inline void append(IWriter* writer, std::string_view str) {
 		writer->write(str.data(), str.size());
