@@ -4,7 +4,7 @@
 <img src="astra_logo.png" width="200px" />
 
 > [!IMPORTANT]  
-> Looking for the old Astra library? [Click here](https://github.com/RobotLeopard86/Astra)
+> Looking for the old Silica library? [Click here](https://github.com/RobotLeopard86/Silica)
 
 ## About
 Astra is a codegen-based reflection and serialization library for C++, based in part on and inspired by [`easy_reflection_cpp`](https://github.com/chocolacula/easy_reflection_cpp). Astra relies on C++20 features.
@@ -43,3 +43,4 @@ Transitive dependency libraries that are compiled into engine binaries and used 
 All other transitive dependencies that are not involved in the build process or used at runtime will have their respective licenses found in the subproject directory of the owning project. This will not be downloaded until configure-time by Meson.
 
 All Git patches and Meson build definitions located in `subprojects/packagefiles` are provided under the [MIT License](https://opensource.org/license/mit) instead, as this is the same license used by Meson wraps.
+
