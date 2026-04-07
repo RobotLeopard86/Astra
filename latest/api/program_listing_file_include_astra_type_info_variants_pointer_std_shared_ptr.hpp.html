@@ -434,7 +434,7 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_null</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_value</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_value</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
@@ -442,7 +442,7 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">Var</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_nested</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">_value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">_value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">Error</span><span class="p">(</span><span class="s">&quot;Pointer is null&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Var</span><span class="p">(</span><span class="n">_value</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_const_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">);</span>
