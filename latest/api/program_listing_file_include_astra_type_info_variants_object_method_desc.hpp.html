@@ -419,23 +419,23 @@
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_fn</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_const</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isConst</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">_acc</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kConst</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kNone</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_static</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isStatic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">_acc</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kStatic</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kNone</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_public</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isPublic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">_acc</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kPublic</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kNone</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_protected</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isProtected</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">_acc</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kProtected</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kNone</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_private</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isPrivate</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">_acc</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kPrivate</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Access</span><span class="o">::</span><span class="n">kNone</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 

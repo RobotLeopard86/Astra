@@ -420,15 +420,15 @@
 <span class="w">        </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">None</span><span class="o">&gt;</span><span class="w"> </span><span class="n">assign</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">var</span><span class="p">.</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">_var</span><span class="p">.</span><span class="n">type</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">Error</span><span class="p">(</span><span class="n">astra</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Cannot assign type: {} to {}&quot;</span><span class="p">,</span><span class="c1">//</span>
-<span class="w">                    </span><span class="n">reflection</span><span class="o">::</span><span class="n">type_name</span><span class="p">(</span><span class="n">var</span><span class="p">.</span><span class="n">type</span><span class="p">()),</span><span class="w">                     </span><span class="c1">//</span>
-<span class="w">                    </span><span class="n">reflection</span><span class="o">::</span><span class="n">type_name</span><span class="p">(</span><span class="n">_var</span><span class="p">.</span><span class="n">type</span><span class="p">())));</span>
+<span class="w">                    </span><span class="n">reflection</span><span class="o">::</span><span class="n">typeName</span><span class="p">(</span><span class="n">var</span><span class="p">.</span><span class="n">type</span><span class="p">()),</span><span class="w">                     </span><span class="c1">//</span>
+<span class="w">                    </span><span class="n">reflection</span><span class="o">::</span><span class="n">typeName</span><span class="p">(</span><span class="n">_var</span><span class="p">.</span><span class="n">type</span><span class="p">())));</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="n">_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">var</span><span class="p">;</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">None</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unsafe_assign</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">_var</span><span class="p">.</span><span class="n">unsafe_assign</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unsafeAssign</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_var</span><span class="p">.</span><span class="n">unsafeAssign</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
@@ -438,10 +438,10 @@
 <span class="w">        </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">None</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Error</span><span class="p">(</span><span class="s">&quot;Trying to set const value&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">//keep it as possible implementation</span>
-<span class="w">            </span><span class="c1">//if (_var.is_const()) {</span>
+<span class="w">            </span><span class="c1">//if (_var.isConst()) {</span>
 <span class="w">            </span><span class="c1">//  return Error(&quot;Trying to set const value&quot;);</span>
 <span class="w">            </span><span class="c1">//}</span>
-<span class="w">            </span><span class="c1">//*static_cast&lt;std::string_view*&gt;(_var.raw_mut()) = value;</span>
+<span class="w">            </span><span class="c1">//*static_cast&lt;std::string_view*&gt;(_var.rawMut()) = value;</span>
 <span class="w">            </span><span class="c1">//return None();</span>
 <span class="w">        </span><span class="p">}</span>
 

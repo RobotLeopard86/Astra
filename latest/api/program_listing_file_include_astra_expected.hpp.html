@@ -433,7 +433,7 @@
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">BASE</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">error</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="c1">//NOLINT implicit constructor</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_error</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isError</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">BASE</span><span class="o">::</span><span class="k">template</span><span class="w"> </span><span class="n">is</span><span class="o">&lt;</span><span class="n">ErrorT</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
@@ -442,7 +442,7 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">unwrap</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">is_error</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">isError</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="n">error</span><span class="p">().</span><span class="n">what</span><span class="p">().</span><span class="n">data</span><span class="p">());</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">BASE</span><span class="o">::</span><span class="n">_content</span><span class="p">));</span>

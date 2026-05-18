@@ -434,30 +434,30 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">is_static</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">is_const</span><span class="p">()};</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">isStatic</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">isConst</span><span class="p">()};</span>
 <span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">shift</span><span class="p">(</span><span class="n">_base</span><span class="p">,</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">is_const</span><span class="p">()};</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">shift</span><span class="p">(</span><span class="n">_base</span><span class="p">,</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">isConst</span><span class="p">()};</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_const</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">is_const</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isConst</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">isConst</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_static</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">is_static</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isStatic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">isStatic</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_public</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">is_public</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isPublic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">isPublic</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_protected</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">is_protected</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isProtected</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">isProtected</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_private</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">is_private</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isPrivate</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">_data</span><span class="o">-&gt;</span><span class="n">isPrivate</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">      </span><span class="k">private</span><span class="o">:</span>
