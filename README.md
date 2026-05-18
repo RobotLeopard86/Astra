@@ -38,9 +38,7 @@ Configure the build directory with `meson setup build --native-file native.ini`,
 ## Licensing
 The Astra library and generator are licensed under the Apache License 2.0, which can be found in the root directory. All third-party licenses are present in the `licenses` directory, grouped by which component uses them.  
 
-Transitive dependency libraries that are compiled into engine binaries and used at runtime will have their respective licenses located in the `transitive` directory within the `licenses` directory.  
-
-All other transitive dependencies that are not involved in the build process or used at runtime will have their respective licenses found in the subproject directory of the owning project. This will not be downloaded until configure-time by Meson.
+Any transitive dependencies that are not involved in the build process or used at runtime will have their respective licenses found in the subproject directory of the project that pulled them in. These files will not be downloaded until configure-time by Meson.
 
 All Git patches and Meson build definitions located in `subprojects/packagefiles` are provided under the [MIT License](https://opensource.org/license/mit) instead, as this is the same license used by Meson wraps.
 
