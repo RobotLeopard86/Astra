@@ -29,11 +29,12 @@ You will need:
 * Git
 * Meson
 * Ninja
-* CMake  
+* CMake (optional)
+* LLVM development libraries for your system
 
 All other dependencies will be downloaded at configure time.  
 
-Configure the build directory with `meson setup build --native-file native.ini`, then run `meson compile -C build` to build the library. This can take a while, especially if building the generator, as it relies on a patched from-source build of LLVM. You do not have to use the native file (which sets the compiler to Clang and the linker to LLD), but it is recommended.
+Configure the build directory with `meson setup build --native-file native.ini`, then run `meson compile -C build` to build the library. You do not have to use the native file (which sets the compiler to Clang and the linker to LLD), but it is recommended.
 
 ## Licensing
 The Astra library and generator are licensed under the Apache License 2.0, which can be found in the root directory. All third-party licenses are present in the `licenses` directory, grouped by which component uses them.  
