@@ -1,10 +1,9 @@
 #pragma once
 
-#include "ast_callback.hpp"
+#include "callback.hpp"
 
-//clang
 #include "clang/Frontend/CompilerInstance.h"
-#include "clang/Frontend/FrontendActions.h"
+#include "clang/Tooling/Tooling.h"
 
 class Action : public ASTFrontendAction {
   public:
