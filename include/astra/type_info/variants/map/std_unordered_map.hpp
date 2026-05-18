@@ -11,57 +11,57 @@ namespace astra {
 	struct StdUnorderedMap final : public IMap {
 		StdUnorderedMap() = delete;
 
-		StdUnorderedMap(std::unordered_map<KeyT, ValueT>* map, bool is_const)
-		  : _map(map), _is_const(is_const) {
+		StdUnorderedMap(std::unordered_map<KeyT, ValueT>* map, bool isConst)
+		  : _map(map), _isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_map);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_map = static_cast<std::unordered_map<KeyT, ValueT>*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_map = static_cast<std::unordered_map<KeyT, ValueT>*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
-		Var own_var() const override {
-			return Var(_map, TypeId::get(_map), _is_const);
+		Var ownVar() const override {
+			return Var(_map, TypeId::get(_map), _isConst);
 		}
 
-		TypeId key_type() const override {
+		TypeId keyType() const override {
 			return TypeId::get<KeyT>();
 		}
 
-		TypeId val_type() const override {
+		TypeId valType() const override {
 			return TypeId::get<ValueT>();
 		}
 
-		void for_each(std::function<void(Var, Var)> callback) const override {
-			const auto value_type = TypeId::get<ValueT>();
+		void forEach(std::function<void(Var, Var)> callback) const override {
+			const auto valueType = TypeId::get<ValueT>();
 
 			for(auto&& pair : *_map) {
-				callback(Var(&pair.first), Var(&pair.second, value_type, true));
+				callback(Var(&pair.first), Var(&pair.second, valueType, true));
 			}
 		}
 
-		void for_each(std::function<void(Var, Var)> callback) override {
-			const auto value_type = TypeId::get<ValueT>();
+		void forEach(std::function<void(Var, Var)> callback) override {
+			const auto valueType = TypeId::get<ValueT>();
 
 			for(auto&& pair : *_map) {
-				callback(Var(&pair.first), Var(&pair.second, value_type, _is_const));
+				callback(Var(&pair.first), Var(&pair.second, valueType, _isConst));
 			}
 		}
 
-		void unsafe_for_each(std::function<void(void*, void*)> callback) const override {
+		void unsafeForEach(std::function<void(void*, void*)> callback) const override {
 			for(auto&& pair : *_map) {
 				callback(const_cast<KeyT*>(&pair.first), &pair.second);
 			}
@@ -76,13 +76,13 @@ namespace astra {
 		}
 
 		Expected<None> insert(Var key, Var value) override {
-			auto k = key.rt_cast<KeyT>();
-			if(k.is_error()) {
+			auto k = key.rtCast<KeyT>();
+			if(k.isError()) {
 				return k.template get<Error>();
 			}
 
-			auto v = value.rt_cast<ValueT>();
-			if(v.is_error()) {
+			auto v = value.rtCast<ValueT>();
+			if(v.isError()) {
 				return v.template get<Error>();
 			}
 
@@ -97,9 +97,9 @@ namespace astra {
 
 		Expected<None> remove(Var key) override {
 
-			auto k = key.rt_cast<KeyT>();
+			auto k = key.rtCast<KeyT>();
 
-			return k.match_move(
+			return k.matchMove(
 				[this](KeyT* ptr) -> Expected<None> {//
 					auto n = _map->erase(*ptr);
 
@@ -116,7 +116,7 @@ namespace astra {
 
 	  private:
 		std::unordered_map<KeyT, ValueT>* _map;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

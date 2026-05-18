@@ -9,12 +9,12 @@ namespace astra {
 
 	template<typename T>
 	struct CommonActions {
-		static std::string_view type_name() {
+		static std::string_view typeName() {
 			static auto name = Names<T>::get();
 			return name;
 		}
 
-		static size_t type_size() {
+		static size_t typeSize() {
 			return sizeof(T);
 		}
 

@@ -22,13 +22,13 @@ namespace astra {
 			_base(base),	  //
 			_acc(acc) {
 			//start from a valid element
-			if(!is_valid()) {
-				next_valid();
+			if(!isValid()) {
+				nextValid();
 			}
 		}
 
 		MethodIterator& operator++() noexcept {
-			next_valid();
+			nextValid();
 			return *this;
 		};
 
@@ -56,17 +56,17 @@ namespace astra {
 		const void* _base;
 		const Access _acc;
 
-		bool is_valid() {
-			return right_access() && (_base != nullptr || _it->second.is_static());
+		bool isValid() {
+			return rightAccess() && (_base != nullptr || _it->second.isStatic());
 		}
 
-		void next_valid() {
+		void nextValid() {
 			do {
 				++_it;
-			} while(!is_valid() && _it != _end);
+			} while(!isValid() && _it != _end);
 		}
 
-		inline bool right_access() {
+		inline bool rightAccess() {
 			return (_it->second.access() & _acc & (Access::kPublic | Access::kProtected | Access::kPrivate)) != Access::kNone;
 		}
 	};

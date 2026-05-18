@@ -11,16 +11,16 @@ namespace astra {
 		Floating() = delete;
 
 		template<typename T>
-		Floating(T* value, bool is_const) {
-			new(_mem) Float<T>(value, is_const);
+		Floating(T* value, bool isConst) {
+			new(_mem) Float<T>(value, isConst);
 		}
 
 		Expected<None> assign(Var var) {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			return impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			return impl()->unsafeAssign(ptr);
 		}
 
 		Var var() {

@@ -14,21 +14,21 @@ struct ConstexprSort {
 	template<typename T, typename LambdaT>
 	static constexpr void sort(T* arr, size_t size, LambdaT greater) {
 		if(size > 32) {
-			quick_sort(arr, size, greater);
+			quickSort(arr, size, greater);
 		} else {
-			insertion_sort(arr, size, greater);
+			insertionSort(arr, size, greater);
 		}
 	}
 
 	//Has complexity O(N^2)
 	template<typename T>
-	static constexpr void insertion_sort(T* arr, size_t size) {
-		insertion_sort(arr, size, [](T a, T b) { return a > b; });
+	static constexpr void insertionSort(T* arr, size_t size) {
+		insertionSort(arr, size, [](T a, T b) { return a > b; });
 	}
 
 	//Has complexity O(N^2)
 	template<typename T, typename LambdaT>
-	static constexpr void insertion_sort(T* arr, size_t size, LambdaT comp) {
+	static constexpr void insertionSort(T* arr, size_t size, LambdaT comp) {
 		for(auto i = 1; i < size; i++) {
 			auto key = arr[i];
 
@@ -43,26 +43,26 @@ struct ConstexprSort {
 
 	//Has complexity O(log(N))
 	template<typename T>
-	static constexpr void quick_sort(T* arr, size_t size) {
-		quick_sort(arr, size, [](T a, T b) { return a > b; });
+	static constexpr void quickSort(T* arr, size_t size) {
+		quickSort(arr, size, [](T a, T b) { return a > b; });
 	}
 
 	//Has complexity O(log(N))
 	template<typename T, typename LambdaT>
-	static constexpr void quick_sort(T* arr, size_t size, LambdaT greater) {
-		quick_sort_req(arr, 0, size - 1, greater);
+	static constexpr void quickSort(T* arr, size_t size, LambdaT greater) {
+		quickSortReq(arr, 0, size - 1, greater);
 	}
 
   private:
 	template<typename T, typename LambdaT>
-	static constexpr void quick_sort_req(T* arr, size_t begin, size_t end, LambdaT greater) {
+	static constexpr void quickSortReq(T* arr, size_t begin, size_t end, LambdaT greater) {
 		if(begin >= end) {
 			return;
 		}
 		auto pivot = hoare(arr, begin, end, greater);
 
-		quick_sort_req(arr, begin, pivot, greater);
-		quick_sort_req(arr, pivot + 1, end, greater);
+		quickSortReq(arr, begin, pivot, greater);
+		quickSortReq(arr, pivot + 1, end, greater);
 	}
 
 	template<typename T, typename LambdaT>

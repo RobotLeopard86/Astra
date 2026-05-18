@@ -9,30 +9,30 @@ namespace astra {
 
 	template<typename T>
 	struct Float : IFloating {
-		Float(T* value, bool is_const)
-		  : _value(value), _is_const(is_const) {
+		Float(T* value, bool isConst)
+		  : _value(value), _isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_value);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_value = static_cast<T*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_value = static_cast<T*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
 		Var var() override {
-			return Var(_value, _is_const);
+			return Var(_value, _isConst);
 		}
 
 		size_t size() override {
@@ -44,7 +44,7 @@ namespace astra {
 		}
 
 		Expected<None> set(double value) override {
-			if(_is_const) {
+			if(_isConst) {
 				return Error("Trying to set const value");
 			}
 			if(value != -std::numeric_limits<double>::infinity() && value != std::numeric_limits<double>::infinity() &&
@@ -58,7 +58,7 @@ namespace astra {
 
 	  private:
 		T* _value;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

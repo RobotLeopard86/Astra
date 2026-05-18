@@ -11,36 +11,36 @@ namespace astra::serialization {
 
 	struct binary {//NOLINT namespace like name
 		template<Reflectable T>
-		static Expected<T> from_vector(const std::vector<uint8_t>& vector) {
+		static Expected<T> fromVector(const std::vector<uint8_t>& vector) {
 			T obj;
 
 			auto exp = deserialize(Var(&obj), vector);
-			if(exp.is_error()) {
+			if(exp.isError()) {
 				return exp.error();
 			}
 			return obj;
 		}
 
 		template<Reflectable T>
-		static Expected<T> from_stream(std::istream& stream) {
+		static Expected<T> fromStream(std::istream& stream) {
 			T obj;
 
 			auto exp = deserialize(Var(&obj), stream);
-			if(exp.is_error()) {
+			if(exp.isError()) {
 				return exp.error();
 			}
 			return obj;
 		}
 
 		template<Reflectable T>
-		static Expected<std::vector<uint8_t>> to_vector(const T* obj) {
+		static Expected<std::vector<uint8_t>> toVector(const T* obj) {
 			std::vector<uint8_t> result;
 			serialize(&result, Var(obj));
 			return result;
 		}
 
 		template<Reflectable T>
-		static void to_stream(std::ostream& stream, const T* obj) {
+		static void toStream(std::ostream& stream, const T* obj) {
 			serialize(stream, Var(obj));
 		}
 

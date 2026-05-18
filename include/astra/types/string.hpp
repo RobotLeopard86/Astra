@@ -7,8 +7,8 @@ namespace astra {
 
 	template<typename T>
 	struct StringActions {
-		static TypeInfo reflect(void* value, bool is_const) {
-			return TypeInfo(String(static_cast<T*>(value), is_const));
+		static TypeInfo reflect(void* value, bool isConst) {
+			return TypeInfo(String(static_cast<T*>(value), isConst));
 		}
 	};
 
@@ -16,8 +16,8 @@ namespace astra {
 	typename std::enable_if_t<is_string_v<T>, TypeId>//
 	TypeId::get(T* ptr) {
 		static TypeId id(TheGreatTable::record(Actions(&StringActions<T>::reflect,//
-			&CommonActions<T>::type_name,										  //
-			&CommonActions<T>::type_size,										  //
+			&CommonActions<T>::typeName,										  //
+			&CommonActions<T>::typeSize,										  //
 			&CommonActions<T>::construct,										  //
 			&CommonActions<T>::destroy,											  //
 			&CommonActions<T>::copy,											  //

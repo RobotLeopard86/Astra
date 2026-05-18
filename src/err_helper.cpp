@@ -8,8 +8,8 @@
 using namespace astra;
 using namespace astra::sequence;
 
-Error ErrHelper::error(std::string_view message, TypeId type, TypeId nested_type) {
+Error ErrHelper::error(std::string_view message, TypeId type, TypeId nestedType) {
 	return Error(astra::format(message,//
-		reflection::type_name(type),	//
-		reflection::type_name(nested_type)));
+		reflection::typeName(type),	   //
+		reflection::typeName(nestedType)));
 }

@@ -10,7 +10,7 @@ namespace astra {
 
 template <>
 struct TypeActions<{{name}}> {
-  static TypeInfo reflect(void* value, bool is_const) {
+  static TypeInfo reflect(void* value, bool isConst) {
 
     static constexpr ConstexprMap<{{name}}, {{length(constants)}}> constants {% if length(constants) != 0 %}{{"{{{"}}
       {% else %}{};{% endif -%}
@@ -18,15 +18,15 @@ struct TypeActions<{{name}}> {
       {{"{"}}{{name}}::{{item.name}}, "{{item.alias}}"},
     {% if not loop.is_last %}  {% else %}}}};{% endif -%}
       {% endfor %}
-    return Enum(static_cast<{{name}}*>(value), is_const, constants);
+    return Enum(static_cast<{{name}}*>(value), isConst, constants);
   }
 };
 
 template <>
 TypeId TypeId::get({{name}}* /*unused*/) {
   static TypeId id(TheGreatTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
-                                                 &CommonActions<{{name}}>::type_name,  //
-                                                 &CommonActions<{{name}}>::type_size,  //
+                                                 &CommonActions<{{name}}>::typeName,  //
+                                                 &CommonActions<{{name}}>::typeSize,  //
                                                  &CommonActions<{{name}}>::construct,  //
                                                  &CommonActions<{{name}}>::destroy,    //
                                                  &CommonActions<{{name}}>::copy,       //

@@ -12,45 +12,45 @@ namespace astra {
 	struct StdUnorderedSet : public ISet, public sequence::ErrHelper {
 		StdUnorderedSet() = delete;
 
-		StdUnorderedSet(std::unordered_set<T>* set, bool is_const)
+		StdUnorderedSet(std::unordered_set<T>* set, bool isConst)
 		  : _set(set),//
-			_is_const(is_const) {
+			_isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_set);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_set = static_cast<std::unordered_set<T>*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_set = static_cast<std::unordered_set<T>*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
-		Var own_var() const override {
-			return Var(_set, TypeId::get(_set), _is_const);
+		Var ownVar() const override {
+			return Var(_set, TypeId::get(_set), _isConst);
 		}
 
-		TypeId nested_type() const override {
+		TypeId nestedType() const override {
 			return TypeId::get<T>();
 		}
 
-		void for_each(std::function<void(Var)> callback) const override {
+		void forEach(std::function<void(Var)> callback) const override {
 			for(auto&& entry : *_set) {
 				//const values
 				callback(Var(&entry));
 			}
 		}
 
-		void unsafe_for_each(std::function<void(void*)> callback) const override {
+		void unsafeForEach(std::function<void(void*)> callback) const override {
 			for(auto&& entry : *_set) {
 				//const values
 				callback(const_cast<T*>(&entry));
@@ -66,22 +66,22 @@ namespace astra {
 		}
 
 		Expected<None> push(Var value) override {
-			auto nested_type = TypeId::get<T>();
+			auto nestedType = TypeId::get<T>();
 
-			if(nested_type != value.type()) {
+			if(nestedType != value.type()) {
 				return error("Trying to set with type: {} to unordered_set<{}>",//
-					value.type(), nested_type);
+					value.type(), nestedType);
 			}
 			_set->insert(*static_cast<const T*>(value.raw()));
 			return None();
 		}
 
 		Expected<None> remove(Var value) override {
-			auto nested_type = TypeId::get<T>();
+			auto nestedType = TypeId::get<T>();
 
-			if(nested_type != value.type()) {
+			if(nestedType != value.type()) {
 				return error("Cannot remove value with type: {} from unordered_set<{}>",//
-					value.type(), nested_type);
+					value.type(), nestedType);
 			}
 			_set->erase(*static_cast<const T*>(value.raw()));
 			return None();
@@ -94,7 +94,7 @@ namespace astra {
 
 	  private:
 		std::unordered_set<T>* _set;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

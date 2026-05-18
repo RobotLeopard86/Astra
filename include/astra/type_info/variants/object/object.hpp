@@ -28,19 +28,19 @@ namespace astra {
 		Expected<None> assign(Var var) {
 			if(var.type() != _var.type()) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(_var.type())));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(_var.type())));
 			}
 			_var = var;
 
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) {
-			_var.unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			_var.unsafeAssign(ptr);
 		}
 
-		Expected<FieldInfo> get_field(std::string_view name) {
+		Expected<FieldInfo> getField(std::string_view name) {
 			auto it = _fields->find(name);
 
 			if(it != _fields->end()) {
@@ -49,23 +49,23 @@ namespace astra {
 			return Error(astra::format("There is no field with name: '{}'", name));
 		}
 
-		Fields get_fields(Access access = Access::kPublic, bool include_readonly = false) const {
-			return Fields(_var.raw(), _fields, access, include_readonly);
+		Fields getFields(Access access = Access::kPublic, bool includeReadonly = false) const {
+			return Fields(_var.raw(), _fields, access, includeReadonly);
 		}
 
-		Expected<MethodInfo> get_method(std::string_view name) {
+		Expected<MethodInfo> getMethod(std::string_view name) {
 			auto it = _methods->find(name);
 
 			if(it != _methods->end()) {
 
-				if(_var.is_const()) {
-					if(it->second.is_const()) {
+				if(_var.isConst()) {
+					if(it->second.isConst()) {
 						return MethodInfo(_var.raw(), &it->second);
 					}
 					return Error(astra::format("Cannot call non const method '{}' on const object", name));
 				}
 
-				return MethodInfo(_var.raw_mut(), &it->second);
+				return MethodInfo(_var.rawMut(), &it->second);
 			}
 			return Error(astra::format("There is no method with name: '{}'", name));
 		}

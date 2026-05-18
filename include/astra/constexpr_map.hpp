@@ -38,12 +38,12 @@ namespace astra {
 				_name_ptr[i] = &_data[i];
 			}
 
-			sort_value_ptr();
-			sort_name_ptr();
+			sortValuePtr();
+			sortNamePtr();
 		}
 
-		Expected<std::string_view> get_name(T value) const {
-			auto ptr = search_by_value(value, 0, size);
+		Expected<std::string_view> getName(T value) const {
+			auto ptr = searchByValue(value, 0, size);
 
 			if(ptr == nullptr) {
 				return Error("Cannot find an entry");
@@ -52,8 +52,8 @@ namespace astra {
 			return ptr->name;
 		}
 
-		Expected<T> get_value(std::string_view name) const {
-			auto ptr = search_by_name(name, 0, size);
+		Expected<T> getValue(std::string_view name) const {
+			auto ptr = searchByName(name, 0, size);
 
 			if(ptr == nullptr) {
 				return Error(astra::format("Cannot find the constant '{}'", name));
@@ -75,7 +75,7 @@ namespace astra {
 		std::array<Entry*, size> _value_ptr;
 		std::array<Entry*, size> _name_ptr;
 
-		constexpr Entry* search_by_value(T value, size_t begin, size_t end) const {
+		constexpr Entry* searchByValue(T value, size_t begin, size_t end) const {
 
 			while(begin < end) {
 
@@ -97,21 +97,21 @@ namespace astra {
 			return nullptr;
 		}
 
-		constexpr Entry* search_by_name(std::string_view name, size_t begin, size_t end) const {
+		constexpr Entry* searchByName(std::string_view name, size_t begin, size_t end) const {
 
 			while(begin < end) {
 
-				auto middle_idx = (begin + end) / 2;
-				auto middle_val = _name_ptr[middle_idx]->name;
+				auto middleIdx = (begin + end) / 2;
+				auto middleVal = _name_ptr[middleIdx]->name;
 
-				if(name == middle_val) {
-					return _name_ptr[middle_idx];
+				if(name == middleVal) {
+					return _name_ptr[middleIdx];
 				}
 
-				if(name < middle_val) {
-					end = middle_idx;
+				if(name < middleVal) {
+					end = middleIdx;
 				} else {
-					begin = ++middle_idx;
+					begin = ++middleIdx;
 				}
 			}
 
@@ -119,11 +119,11 @@ namespace astra {
 			return nullptr;
 		}
 
-		constexpr void sort_value_ptr() {
+		constexpr void sortValuePtr() {
 			ConstexprSort::sort(_value_ptr.data(), _value_ptr.size(),//
 				[](auto a, auto b) { return a->value > b->value; });
 		}
-		constexpr void sort_name_ptr() {
+		constexpr void sortNamePtr() {
 			ConstexprSort::sort(_name_ptr.data(), _name_ptr.size(),//
 				[](auto a, auto b) { return a->name > b->name; });
 		}

@@ -10,36 +10,36 @@ namespace astra::serialization {
 
 	struct json {//NOLINT namespace like name
 		template<Reflectable T>
-		static Expected<T> from_string(std::string_view str) {
+		static Expected<T> fromString(std::string_view str) {
 			T obj;
 
 			auto exp = deserialize(Var(&obj), str);
-			if(exp.is_error()) {
+			if(exp.isError()) {
 				return exp.error();
 			}
 			return obj;
 		}
 
 		template<Reflectable T>
-		static Expected<T> from_stream(std::istream& stream) {
+		static Expected<T> fromStream(std::istream& stream) {
 			T obj;
 
 			auto exp = deserialize(Var(&obj), stream);
-			if(exp.is_error()) {
+			if(exp.isError()) {
 				return exp.error();
 			}
 			return obj;
 		}
 
 		template<Reflectable T>
-		static Expected<std::string> to_string(const T* obj) {
+		static Expected<std::string> toString(const T* obj) {
 			std::string result;
 			serialize(&result, Var(obj));
 			return result;
 		}
 
 		template<Reflectable T>
-		static void to_stream(std::ostream& stream, const T* obj) {
+		static void toStream(std::ostream& stream, const T* obj) {
 			serialize(stream, Var(obj));
 		}
 

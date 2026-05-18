@@ -27,7 +27,7 @@ namespace astra {
 			return *static_cast<uint8_t*>(_stream.pword(pos));
 		}
 
-		void step_back(size_t bytes) override {
+		void stepBack(size_t bytes) override {
 			std::streamsize pos = _stream.tellp();
 			_stream.seekp(pos - static_cast<std::streamsize>(bytes));
 		}

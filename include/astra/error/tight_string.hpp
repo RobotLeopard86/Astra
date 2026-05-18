@@ -15,50 +15,50 @@ namespace astra {
 	///reduces dynamic allocations
 	struct TightString {
 		TightString(const TightString& other) {
-			if(other.is_owned()) {
+			if(other.isOwned()) {
 				new(&_raw[0]) std::string(other.str());
 			} else {
-				zero_tail();
+				zeroTail();
 				view() = other.view();
 			}
 		}
 
 		TightString& operator=(const TightString& other) {
-			if(other.is_owned()) {
+			if(other.isOwned()) {
 				new(&_raw[0]) std::string(other.str());
 			} else {
-				zero_tail();
+				zeroTail();
 				view() = other.view();
 			}
 			return *this;
 		}
 
 		TightString(TightString&& other) noexcept {
-			if(other.is_owned()) {
+			if(other.isOwned()) {
 				new(&_raw[0]) std::string(std::move(other.str()));
 			} else {
-				zero_tail();
+				zeroTail();
 				view() = other.view();
 			}
 		}
 
 		TightString& operator=(TightString&& other) {
-			if(other.is_owned()) {
+			if(other.isOwned()) {
 				new(&_raw[0]) std::string(std::move(other.str()));
 			} else {
-				zero_tail();
+				zeroTail();
 				view() = other.view();
 			}
 			return *this;
 		}
 
 		TightString(const char* shared) {//implicit
-			zero_tail();
+			zeroTail();
 			view() = shared;
 		}
 
 		TightString(std::string_view shared) {//implicit
-			zero_tail();
+			zeroTail();
 			view() = shared;
 		}
 
@@ -75,17 +75,17 @@ namespace astra {
 #pragma GCC diagnostic ignored "-Wfree-nonheap-object"
 #endif
 			//has the correct behaviour in runtime
-			if(is_owned()) {
+			if(isOwned()) {
 				str().std::string::~string();
 			}
 		};
 
-		[[nodiscard]] bool is_owned() const {
+		[[nodiscard]] bool isOwned() const {
 			return std::memcmp(&_raw[sizeof(std::string_view)], &kZeroes[0], kTailSize) != 0;
 		}
 
 		std::string_view get() const {
-			if(is_owned()) {
+			if(isOwned()) {
 				return str();
 			}
 			return view();
@@ -113,7 +113,7 @@ namespace astra {
 		static constexpr uint8_t kTailSize = sizeof(std::string) - sizeof(std::string_view);
 		static constexpr char kZeroes[kTailSize] {};
 
-		inline void zero_tail() {
+		inline void zeroTail() {
 			std::memset(&_raw[sizeof(std::string_view)], 0, kTailSize);
 		}
 	};

@@ -7,15 +7,15 @@
 namespace astra {
 
 	struct UnknownActions {
-		static TypeInfo reflect(void* /*value*/, bool /*is_const*/) {
+		static TypeInfo reflect(void* /*value*/, bool /*isConst*/) {
 			throw std::runtime_error("Cannot reflect a value with unknown type");
 		}
 
-		static std::string_view type_name() {
+		static std::string_view typeName() {
 			return "unknown";
 		}
 
-		static size_t type_size() {
+		static size_t typeSize() {
 			return 0;
 		}
 

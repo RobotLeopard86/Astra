@@ -9,7 +9,7 @@
 namespace astra {
 
 	struct Box {
-		Box(palloc_t* alloc = &default_alloc)
+		Box(palloc_t* alloc = &defaultAlloc)
 		  : _alloc(alloc) {};
 
 		Box(const Box& other) = delete;
@@ -18,7 +18,7 @@ namespace astra {
 		Box(Box&& other) noexcept;
 		Box& operator=(Box&& other) noexcept;
 
-		explicit Box(TypeId id, palloc_t* alloc = &default_alloc);
+		explicit Box(TypeId id, palloc_t* alloc = &defaultAlloc);
 		~Box();
 
 		Var var();

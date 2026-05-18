@@ -10,7 +10,7 @@ namespace astra {
 
 template <>
 struct TypeActions<{{name}}> {
-  static TypeInfo reflect(void* value, bool is_const) {
+  static TypeInfo reflect(void* value, bool isConst) {
     auto* p = static_cast<{{name}}*>(value);
 
     static std::map<std::string_view, FieldDesc> fields {% if length(fields) != 0 %}{
@@ -25,7 +25,7 @@ struct TypeActions<{{name}}> {
         {"{{item.alias}}", MethodDesc(&invoke_{{item.safe_name}}, Access::{{join(item.acc," | Access::")}})},
     {% if not loop.is_last %}  {% else %}};{% endif -%}
       {% endfor %}
-    return Object(Var(p, is_const), &fields, &methods);
+    return Object(Var(p, isConst), &fields, &methods);
   }
 {% for item in methods %}
   static Expected<None> invoke_{{item.safe_name}}(Var res, void* obj, const std::vector<Var>& args) {
@@ -35,7 +35,7 @@ struct TypeActions<{{name}}> {
 
     {% for type in item.params -%}
     if (args[{{loop.index}}].type() != TypeId::get<{{type}}>()) {
-      return Error(astra::format("Argument type expected: {{type}}, received: {}", reflection::type_name(args[{{loop.index}}].type())));
+      return Error(astra::format("Argument type expected: {{type}}, received: {}", reflection::typeName(args[{{loop.index}}].type())));
     }
     const {{type}}& a{{loop.index}} = *static_cast<const {{type}}*>(args[{{loop.index}}].raw());
 
@@ -43,7 +43,7 @@ struct TypeActions<{{name}}> {
 
     {% if item.return != "void" -%}
     if (res.type() != TypeId::get<{{item.return}}>()) {
-      return Error(astra::format("Return type expected: {{item.return}}, received: {}", reflection::type_name(res.type())));
+      return Error(astra::format("Return type expected: {{item.return}}, received: {}", reflection::typeName(res.type())));
     }
     *reinterpret_cast<{{item.return}}*>(res.raw_mut()) = //
     {% endif -%}
@@ -60,8 +60,8 @@ struct TypeActions<{{name}}> {
 template <>
 TypeId TypeId::get({{name}}* /*unused*/) {
   static TypeId id(TheGreatTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
-                                                 &CommonActions<{{name}}>::type_name,  //
-                                                 &CommonActions<{{name}}>::type_size,  //
+                                                 &CommonActions<{{name}}>::typeName,  //
+                                                 &CommonActions<{{name}}>::typeSize,  //
                                                  &CommonActions<{{name}}>::construct,  //
                                                  &CommonActions<{{name}}>::destroy,    //
                                                  &CommonActions<{{name}}>::copy,       //

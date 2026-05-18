@@ -14,42 +14,42 @@ namespace astra {
 
 	class ParserYaml : rf_yaml::LexerYaml {
 	  public:
-		ParserYaml(const char* input, size_t input_size);
+		ParserYaml(const char* input, size_t inputSize);
 		explicit ParserYaml(std::istream& stream);
 
 		Expected<None> deserialize(TypeInfo* info);
 
 	  private:
 		Expected<None> parse(TypeInfo* info);
-		Expected<None> parse_str(TypeInfo* info);
-		Expected<None> parse_ind(TypeInfo* info);
+		Expected<None> parseStr(TypeInfo* info);
+		Expected<None> parseInd(TypeInfo* info);
 
-		Expected<None> parse_seq(TypeInfo* info);
-		Expected<None> parse_seq(TypeId nested_type, std::function<Expected<None>(size_t, Var)> add);
-		Expected<None> parse_flow_seq(TypeId nested_type, std::function<Expected<None>(size_t, Var)> add);
+		Expected<None> parseSeq(TypeInfo* info);
+		Expected<None> parseSeq(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add);
+		Expected<None> parseFlowSeq(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add);
 
-		static inline Expected<None> add_to_array(Array& a, size_t i, Var var);
+		static inline Expected<None> addToArray(Array& a, size_t i, Var var);
 
-		Expected<None> parse_map(Map& map);
-		Expected<None> parse_map(std::function<Expected<None>()> add);
-		Expected<None> parse_flow_map(std::function<Expected<None>()> add);
-		inline Expected<None> parse_flow_map(Map& map);
-		Expected<None> parse_map_value(Map& map);
+		Expected<None> parseMap(Map& map);
+		Expected<None> parseMap(std::function<Expected<None>()> add);
+		Expected<None> parseFlowMap(std::function<Expected<None>()> add);
+		inline Expected<None> parseFlowMap(Map& map);
+		Expected<None> parseMapValue(Map& map);
 
-		inline Expected<None> add_to_obj(Object& obj);
-		inline Expected<None> add_to_map(Map& map, TypeInfo* info_key, TypeInfo* info_value);
+		inline Expected<None> addToObj(Object& obj);
+		inline Expected<None> addToMap(Map& map, TypeInfo* infoKey, TypeInfo* infoValue);
 
-		static inline bool is_end(int token);
-		static inline bool is_new_line(int token);
-		static inline bool is_null(const std::string& word);
+		static inline bool isEnd(int token);
+		static inline bool isNewLine(int token);
+		static inline bool isNull(const std::string& word);
 
 		inline Error error(const char* str);
-		inline Error error_token(char token);
-		inline Error error_match();
+		inline Error errorToken(char token);
+		inline Error errorMatch();
 
-		static inline bool parse_bool(std::string& str);
-		static inline int64_t parse_int(std::string_view str);
-		static inline double parse_double(std::string_view str);
+		static inline bool parseBool(std::string& str);
+		static inline int64_t parseInt(std::string_view str);
+		static inline double parseDouble(std::string_view str);
 
 		inline void next();
 		char _token;

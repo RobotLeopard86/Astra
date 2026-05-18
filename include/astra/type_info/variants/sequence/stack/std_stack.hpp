@@ -13,56 +13,56 @@ namespace astra {
 	struct StdStack : public IStack, public sequence::ErrHelper {
 		StdStack() = delete;
 
-		StdStack(std::stack<T>* stack, bool is_const)
+		StdStack(std::stack<T>* stack, bool isConst)
 		  : _stack(stack),//
-			_is_const(is_const) {
+			_isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_stack);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_stack = static_cast<std::stack<T>*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_stack = static_cast<std::stack<T>*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
-		Var own_var() const override {
-			return Var(_stack, TypeId::get(_stack), _is_const);
+		Var ownVar() const override {
+			return Var(_stack, TypeId::get(_stack), _isConst);
 		}
 
-		TypeId nested_type() const override {
+		TypeId nestedType() const override {
 			return TypeId::get<T>();
 		}
 
-		void for_each(std::function<void(Var)> callback) const override {
-			const auto nested_type = TypeId::get<T>();
+		void forEach(std::function<void(Var)> callback) const override {
+			const auto nestedType = TypeId::get<T>();
 			const auto end = StackIterator<T>::end(_stack);
 
 			for(auto it = StackIterator<T>::begin(_stack); it != end; ++it) {
-				callback(Var(&(*it), nested_type, true));
+				callback(Var(&(*it), nestedType, true));
 			}
 		}
 
-		void for_each(std::function<void(Var)> callback) override {
-			const auto nested_type = TypeId::get<T>();
+		void forEach(std::function<void(Var)> callback) override {
+			const auto nestedType = TypeId::get<T>();
 			const auto end = StackIterator<T>::end(_stack);
 
 			for(auto it = StackIterator<T>::begin(_stack); it != end; ++it) {
-				callback(Var(&(*it), nested_type, _is_const));
+				callback(Var(&(*it), nestedType, _isConst));
 			}
 		}
 
-		void unsafe_for_each(std::function<void(void*)> callback) const override {
+		void unsafeForEach(std::function<void(void*)> callback) const override {
 			for(auto it = StackIterator<T>::begin(_stack); it != StackIterator<T>::end(_stack); ++it) {
 				callback(&(*it));
 			}
@@ -79,11 +79,11 @@ namespace astra {
 		}
 
 		Expected<None> push(Var value) override {
-			auto nested_type = TypeId::get<T>();
+			auto nestedType = TypeId::get<T>();
 
-			if(nested_type != value.type()) {
+			if(nestedType != value.type()) {
 				return error("Trying to set with type: {} to set<{}>",//
-					value.type(), nested_type);
+					value.type(), nestedType);
 			}
 			_stack->push(*static_cast<const T*>(value.raw()));
 			return None();
@@ -98,12 +98,12 @@ namespace astra {
 				return Error("The stack is empty");
 			}
 
-			return Var(&_stack->top(), TypeId::get<T>(), _is_const);
+			return Var(&_stack->top(), TypeId::get<T>(), _isConst);
 		};
 
 	  private:
 		std::stack<T>* _stack;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

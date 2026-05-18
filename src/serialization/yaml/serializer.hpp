@@ -20,14 +20,14 @@ namespace astra {
 		writer->write(ch);
 	}
 
-	inline void append_indention(IWriter* writer, int num) {
+	inline void appendIndention(IWriter* writer, int num) {
 		for(auto i = 0; i < num; i++) {
 			writer->write(' ');
 		}
 	}
 
-	inline bool is_complex(const TypeInfo& info) {
-		switch(info.get_kind()) {
+	inline bool isComplex(const TypeInfo& info) {
+		switch(info.getKind()) {
 			case TypeInfo::Kind::kObject:
 				[[fallthrough]];
 			case TypeInfo::Kind::kArray:
@@ -37,12 +37,12 @@ namespace astra {
 			case TypeInfo::Kind::kMap:
 				return true;
 			case TypeInfo::Kind::kPointer: {
-				auto p = info.unsafe_get<Pointer>();
-				return p.get_nested().match_move(//
+				auto p = info.unsafeGet<Pointer>();
+				return p.getNested().matchMove(//
 					[](const Error& /*err*/) { return false; },
 					[](Var var) {
-						auto nested_info = reflection::reflect(var);
-						return is_complex(nested_info);
+						auto nestedInfo = reflection::reflect(var);
+						return isComplex(nestedInfo);
 					});
 			}
 			default:
@@ -51,9 +51,9 @@ namespace astra {
 	}
 
 	template<typename SeqT>
-	inline void serialize_sequence(const SeqT& seq, IWriter* writer, int indent);
+	inline void serializeSequence(const SeqT& seq, IWriter* writer, int indent);
 
-	std::string double_to_string(double value) {
+	std::string doubleToString(double value) {
 		if(value == -std::numeric_limits<double>::infinity()) {
 			return "!!float .-inf";
 		}
@@ -63,178 +63,178 @@ namespace astra {
 		if(std::isnan(value)) {
 			return "!!float .nan";
 		}
-		return to_string(value, 9);
+		return toString(value, 9);
 	}
 
-	void serialize_recursive(IWriter* writer, const TypeInfo& info, int indent) {
-		auto k = info.get_kind();
+	void serializeRecursive(IWriter* writer, const TypeInfo& info, int indent) {
+		auto k = info.getKind();
 
 		switch(k) {
 			case TypeInfo::Kind::kBool:
-				append(writer, to_string(info.unsafe_get<Bool>().get()));
+				append(writer, toString(info.unsafeGet<Bool>().get()));
 				break;
 			case TypeInfo::Kind::kInteger: {
-				auto i = info.unsafe_get<Integer>();
-				if(i.is_signed()) {
-					append(writer, to_string(i.as_signed()));
+				auto i = info.unsafeGet<Integer>();
+				if(i.isSigned()) {
+					append(writer, toString(i.asSigned()));
 				} else {
-					append(writer, to_string(i.as_unsigned()));
+					append(writer, toString(i.asUnsigned()));
 				}
 			} break;
 			case TypeInfo::Kind::kFloating:
-				append(writer, double_to_string(info.unsafe_get<Floating>().get()));
+				append(writer, doubleToString(info.unsafeGet<Floating>().get()));
 				break;
 			case TypeInfo::Kind::kString:
-				append(writer, info.unsafe_get<String>().get());
+				append(writer, info.unsafeGet<String>().get());
 				break;
 			case TypeInfo::Kind::kEnum:
-				append(writer, info.unsafe_get<Enum>().to_string());
+				append(writer, info.unsafeGet<Enum>().toString());
 				break;
 			case TypeInfo::Kind::kObject: {
-				const auto& o = info.unsafe_get<Object>();
+				const auto& o = info.unsafeGet<Object>();
 
-				bool is_first = true;
-				for(auto&& record : o.get_fields()) {
+				bool isFirst = true;
+				for(auto&& record : o.getFields()) {
 
-					if(!is_first) {
-						append_indention(writer, indent);
+					if(!isFirst) {
+						appendIndention(writer, indent);
 					}
-					is_first = false;
+					isFirst = false;
 
 					append(writer, record.first);
 
-					auto field_info = reflection::reflect(record.second.var());
+					auto fieldInfo = reflection::reflect(record.second.var());
 
-					if(is_complex(field_info)) {
+					if(isComplex(fieldInfo)) {
 						append(writer, ":\n");
 						append(writer, std::string(indent + 2, ' '));
-						serialize_recursive(writer, field_info, indent + 2);
+						serializeRecursive(writer, fieldInfo, indent + 2);
 
 					} else {
 						append(writer, ": ");
-						serialize_recursive(writer, field_info, indent + 2);
+						serializeRecursive(writer, fieldInfo, indent + 2);
 					}
 
 					append(writer, '\n');
 				}
-				writer->step_back(1);
+				writer->stepBack(1);
 				break;
 			}
 			case TypeInfo::Kind::kMap: {
 				//TODO clear this hell
-				const auto& m = info.unsafe_get<Map>();
+				const auto& m = info.unsafeGet<Map>();
 
 				if(m.size() == 0) {
 					append(writer, "{}\n");
 					return;
 				}
 
-				const auto ser_complex_key = [](IWriter* writer, int indent, const TypeInfo& info) {
+				const auto serComplexKey = [](IWriter* writer, int indent, const TypeInfo& info) {
 					append(writer, "? ");
-					serialize_recursive(writer, info, indent + 2);
+					serializeRecursive(writer, info, indent + 2);
 					append(writer, "\n");
-					append_indention(writer, indent);
+					appendIndention(writer, indent);
 				};
 
-				const auto ser_normal_key = [](IWriter* writer, int indent, const TypeInfo& info) {
-					serialize_recursive(writer, info, indent);
+				const auto serNormalKey = [](IWriter* writer, int indent, const TypeInfo& info) {
+					serializeRecursive(writer, info, indent);
 				};
 
-				const auto ser_complex_val = [](IWriter* writer, int indent, const TypeInfo& info) {
+				const auto serComplexVal = [](IWriter* writer, int indent, const TypeInfo& info) {
 					append(writer, ":\n");
 					append(writer, std::string(indent + 2, ' '));
-					serialize_recursive(writer, info, indent + 2);
+					serializeRecursive(writer, info, indent + 2);
 				};
 
-				const auto ser_normal_val = [](IWriter* writer, int indent, const TypeInfo& info) {
+				const auto serNormalVal = [](IWriter* writer, int indent, const TypeInfo& info) {
 					append(writer, ": ");
-					serialize_recursive(writer, info, indent + 2);
+					serializeRecursive(writer, info, indent + 2);
 				};
 
-				auto key_info = reflection::reflect(Var(nullptr, m.key_type(), false));
-				auto val_info = reflection::reflect(Var(nullptr, m.val_type(), false));
+				auto keyInfo = reflection::reflect(Var(nullptr, m.keyType(), false));
+				auto valInfo = reflection::reflect(Var(nullptr, m.valType(), false));
 
-				bool is_first = true;
-				m.unsafe_for_each([writer,															  //
-									  indent,														  //
-									  &key_info, &val_info,											  //
-									  &is_first,													  //
-									  ser_complex_key, ser_normal_key, ser_complex_val, ser_normal_val//
+				bool isFirst = true;
+				m.unsafeForEach([writer,													//
+									indent,													//
+									&keyInfo, &valInfo,										//
+									&isFirst,												//
+									serComplexKey, serNormalKey, serComplexVal, serNormalVal//
 				](void* key, void* value) {
-					if(!is_first) {
-						append_indention(writer, indent);
+					if(!isFirst) {
+						appendIndention(writer, indent);
 					}
-					is_first = false;
+					isFirst = false;
 
-					key_info.unsafe_assign(key);
-					val_info.unsafe_assign(value);
+					keyInfo.unsafeAssign(key);
+					valInfo.unsafeAssign(value);
 
-					void (*ser_val)(IWriter* writer, int indent, const TypeInfo& info);
-					void (*ser_key)(IWriter* writer, int indent, const TypeInfo& info);
+					void (*serVal)(IWriter* writer, int indent, const TypeInfo& info);
+					void (*serKey)(IWriter* writer, int indent, const TypeInfo& info);
 
-					if(is_complex(key_info)) {
-						ser_key = ser_complex_key;
-						ser_val = ser_normal_val;
+					if(isComplex(keyInfo)) {
+						serKey = serComplexKey;
+						serVal = serNormalVal;
 					} else {
-						ser_key = ser_normal_key;
-						if(is_complex(val_info)) {
-							ser_val = ser_complex_val;
+						serKey = serNormalKey;
+						if(isComplex(valInfo)) {
+							serVal = serComplexVal;
 						} else {
-							ser_val = ser_normal_val;
+							serVal = serNormalVal;
 						}
 					}
 
-					ser_key(writer, indent, key_info);
-					ser_val(writer, indent, val_info);
+					serKey(writer, indent, keyInfo);
+					serVal(writer, indent, valInfo);
 
 					append(writer, '\n');
 				});
-				writer->step_back(1);
+				writer->stepBack(1);
 				break;
 			}
 			case TypeInfo::Kind::kArray:
-				serialize_sequence(info.unsafe_get<Array>(), writer, indent);
+				serializeSequence(info.unsafeGet<Array>(), writer, indent);
 				break;
 			case TypeInfo::Kind::kSequence:
-				serialize_sequence(info.unsafe_get<Sequence>(), writer, indent);
+				serializeSequence(info.unsafeGet<Sequence>(), writer, indent);
 				break;
 			case TypeInfo::Kind::kPointer: {
-				auto p = info.unsafe_get<Pointer>();
-				p.get_nested().match_move(//
+				auto p = info.unsafeGet<Pointer>();
+				p.getNested().matchMove(//
 					[writer](const Error& /*err*/) { append(writer, "null"); },
 					[writer, indent](Var var) {
 						auto info = reflection::reflect(var);
-						serialize_recursive(writer, info, indent);
+						serializeRecursive(writer, info, indent);
 					});
 			} break;
 		}
 	}
 
 	template<typename SeqT>
-	inline void serialize_sequence(const SeqT& seq, IWriter* writer, int indent) {
+	inline void serializeSequence(const SeqT& seq, IWriter* writer, int indent) {
 		//TODO add possibility to write short sequences in one line
 		if(seq.size() == 0) {
 			append(writer, "[]\n");
 			return;
 		}
 
-		auto info = reflection::reflect(Var(nullptr, seq.nested_type(), false));
+		auto info = reflection::reflect(Var(nullptr, seq.nestedType(), false));
 
-		bool is_first = true;
-		seq.unsafe_for_each([writer, indent, &info, &is_first](void* ptr) {
-			if(!is_first) {
-				append_indention(writer, indent);
+		bool isFirst = true;
+		seq.unsafeForEach([writer, indent, &info, &isFirst](void* ptr) {
+			if(!isFirst) {
+				appendIndention(writer, indent);
 			}
-			is_first = false;
+			isFirst = false;
 
 			append(writer, "- ");
 
-			info.unsafe_assign(ptr);
-			serialize_recursive(writer, info, indent + 2);
+			info.unsafeAssign(ptr);
+			serializeRecursive(writer, info, indent + 2);
 
 			append(writer, '\n');
 		});
-		writer->step_back(1);
+		writer->stepBack(1);
 	}
 
 }

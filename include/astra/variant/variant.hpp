@@ -30,7 +30,7 @@ namespace astra {
 		}
 
 		template<typename... FuncT>
-		decltype(auto) match_move(FuncT... functions) {
+		decltype(auto) matchMove(FuncT... functions) {
 			return std::visit(Overloaded {functions...}, std::move(_content));
 		}
 
@@ -44,7 +44,7 @@ namespace astra {
 			return std::holds_alternative<SomeT>(_content);
 		}
 
-		[[nodiscard]] inline size_t variant_idx() const {
+		[[nodiscard]] inline size_t variantIdx() const {
 			return _content.index();
 		}
 
@@ -59,12 +59,12 @@ namespace astra {
 		}
 
 		template<typename SomeT>
-		inline const SomeT& unsafe_get() const {
+		inline const SomeT& unsafeGet() const {
 			return std::get<SomeT>(_content);
 		}
 
 		template<typename SomeT>
-		inline SomeT& unsafe_get() {
+		inline SomeT& unsafeGet() {
 			return std::get<SomeT>(_content);
 		}
 

@@ -43,18 +43,18 @@
 
 %class{
  public:
-  LexerYaml(const char* input, size_t input_size) : LexerYaml(reflex::Input(input, input_size)){
+  LexerYaml(const char* input, size_t inputSize) : LexerYaml(reflex::Input(input, inputSize)){
   }
 
-  astra::Position get_position() {
+  astra::Position getPosition() {
     return astra::Position{columno(), lineno()};
   }
 
-  size_t get_border() {
+  size_t getBorder() {
     return border();
   }
 
-  inline std::string& get_word() {
+  inline std::string& getWord() {
     return _word;
   }
 
@@ -65,7 +65,7 @@
   }
 
   // parse the indent value given after a '|' or '>', if present
-  void parse_indent(size_t offset)
+  void parseIndent(size_t offset)
   {
     indent = strtoul(text() + offset, NULL, 10);
   }
@@ -82,14 +82,14 @@
     }
   }
 
-  void add_unicode(wchar_t c) {
+  void addUnicode(wchar_t c) {
     char* c_ptr = reinterpret_cast<char*>(&c);
     _word.push_back(c_ptr[1]);
     _word.push_back(c_ptr[0]);
   }
 
   // add sp spaces to the string
-  void add_space() {
+  void addSpace() {
     _word.append(sp, ' ');
     sp = 0;
   }
@@ -169,12 +169,12 @@ br      \h+ | (\h* {lf})+
 "}"             { return '}'; }
 "'"             { clear(); start(APOS); }
 \"              { clear(); start(QUOT); }
-"|"  \d* {nl}   { clear(); parse_indent(1); mode = CLIP;  }
-"|-" \d* {nl}   { clear(); parse_indent(2); mode = STRIP; }
-"|+" \d* {nl}   { clear(); parse_indent(2); mode = KEEP;  }
-">"  \d* {nl}   { clear(); parse_indent(1); mode = CLIP;  }
-">-" \d* {nl}   { clear(); parse_indent(2); mode = STRIP; }
-">+" \d* {nl}   { clear(); parse_indent(2); mode = KEEP;  }
+"|"  \d* {nl}   { clear(); parseIndent(1); mode = CLIP;  }
+"|-" \d* {nl}   { clear(); parseIndent(2); mode = STRIP; }
+"|+" \d* {nl}   { clear(); parseIndent(2); mode = KEEP;  }
+">"  \d* {nl}   { clear(); parseIndent(1); mode = CLIP;  }
+">-" \d* {nl}   { clear(); parseIndent(2); mode = STRIP; }
+">+" \d* {nl}   { clear(); parseIndent(2); mode = KEEP;  }
 {tag}           { _word = str(); return chr(); }
 {scalar}        { _word = str(); return '$'; }
 
@@ -197,8 +197,8 @@ br      \h+ | (\h* {lf})+
 \\ e            { add(0x1b); }
 \\ N            { add(0x85); }
 \\ _            { add(0xa0); }
-\\ L            { add_unicode(0x2028); }
-\\ P            { add_unicode(0x2029); }
+\\ L            { addUnicode(0x2028); }
+\\ P            { addUnicode(0x2029); }
 \\ x {h2}       { add(strtoul(text() + 2, NULL, 16)); }
 \\ u {h4}       { add(strtoul(text() + 2, NULL, 16)); }
 \\ U {h8}       { add(strtoul(text() + 2, NULL, 16)); }
@@ -221,7 +221,7 @@ br      \h+ | (\h* {lf})+
 \h+ {lf}        { sp = size() - 1 - (*(matcher().end() - 2) == '\r'); }
 {lf}            { sp = 1; }
 {bl}            { add('\n', newlines() - 1); }
-.               { add_space(); add(chr()); }
+.               { addSpace(); add(chr()); }
 }
 
 %%

@@ -17,7 +17,7 @@
 
 #ifndef NDEBUG
 namespace astra::reflection {
-	std::string_view type_name(uint32_t id);
+	std::string_view typeName(uint32_t id);
 }
 #endif
 
@@ -105,13 +105,13 @@ namespace astra {
 		uint32_t _id;
 
 #ifndef NDEBUG
-		std::string _type_name = "unknown";
+		std::string _typeName = "unknown";
 #endif
 
 		explicit TypeId(uint32_t id)
 		  : _id(id) {
 #ifndef NDEBUG
-			_type_name = reflection::type_name(_id);
+			_typeName = reflection::typeName(_id);
 #endif
 		}
 	};

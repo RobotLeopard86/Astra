@@ -9,37 +9,37 @@ namespace astra {
 
 	struct Pointer {
 		template<typename T>
-		Pointer(std::shared_ptr<T>* value, bool is_const) {
-			new(_mem) StdSharedPtr<T>(value, is_const);
+		Pointer(std::shared_ptr<T>* value, bool isConst) {
+			new(_mem) StdSharedPtr<T>(value, isConst);
 		}
 
 		template<typename T>
-		Pointer(std::unique_ptr<T>* value, bool is_const) {
-			new(_mem) StdUniquePtr<T>(value, is_const);
+		Pointer(std::unique_ptr<T>* value, bool isConst) {
+			new(_mem) StdUniquePtr<T>(value, isConst);
 		}
 
 		Expected<None> assign(Var var) {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			impl()->unsafeAssign(ptr);
 		}
 
 		Var var() const {
 			return impl()->var();
 		}
 
-		bool is_null() const {
-			return impl()->is_null();
+		bool isNull() const {
+			return impl()->isNull();
 		}
 
 		void init() {
 			impl()->init();
 		}
 
-		Expected<Var> get_nested() const {
-			return impl()->get_nested();
+		Expected<Var> getNested() const {
+			return impl()->getNested();
 		}
 
 	  private:

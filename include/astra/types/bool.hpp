@@ -6,16 +6,16 @@
 namespace astra {
 
 	struct BoolActions {
-		static TypeInfo reflect(void* value, bool is_const) {
-			return {Bool(static_cast<bool*>(value), is_const)};
+		static TypeInfo reflect(void* value, bool isConst) {
+			return {Bool(static_cast<bool*>(value), isConst)};
 		}
 	};
 
 	template<>
 	inline TypeId TypeId::get(bool* /*unused*/) {
 		static TypeId id(TheGreatTable::record(Actions(&BoolActions::reflect,//
-			&CommonActions<bool>::type_name,								 //
-			&CommonActions<bool>::type_size,								 //
+			&CommonActions<bool>::typeName,									 //
+			&CommonActions<bool>::typeSize,									 //
 			&CommonActions<bool>::nop,										 //
 			&CommonActions<bool>::nop,										 //
 			&CommonActions<bool>::copy,										 //

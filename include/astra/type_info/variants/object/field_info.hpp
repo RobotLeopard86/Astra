@@ -34,30 +34,30 @@ namespace astra {
 		}
 
 		Var var() const {
-			if(is_static()) {
-				return {reinterpret_cast<void*>(_data->value()), _data->type(), _data->is_const()};
+			if(isStatic()) {
+				return {reinterpret_cast<void*>(_data->value()), _data->type(), _data->isConst()};
 			}
-			return {shift(_base, _data->value()), _data->type(), _data->is_const()};
+			return {shift(_base, _data->value()), _data->type(), _data->isConst()};
 		}
 
-		bool is_const() const {
-			return _data->is_const();
+		bool isConst() const {
+			return _data->isConst();
 		}
 
-		bool is_static() const {
-			return _data->is_static();
+		bool isStatic() const {
+			return _data->isStatic();
 		}
 
-		bool is_public() const {
-			return _data->is_public();
+		bool isPublic() const {
+			return _data->isPublic();
 		}
 
-		bool is_protected() const {
-			return _data->is_protected();
+		bool isProtected() const {
+			return _data->isProtected();
 		}
 
-		bool is_private() const {
-			return _data->is_private();
+		bool isPrivate() const {
+			return _data->isPrivate();
 		}
 
 	  private:

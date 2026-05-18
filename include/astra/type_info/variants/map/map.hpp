@@ -11,45 +11,45 @@ namespace astra {
 		Map() = delete;
 
 		template<typename KeyT, typename ValueT>
-		Map(std::map<KeyT, ValueT>* map, bool is_const) {
-			new(_mem) StdMap<KeyT, ValueT>(map, is_const);
+		Map(std::map<KeyT, ValueT>* map, bool isConst) {
+			new(_mem) StdMap<KeyT, ValueT>(map, isConst);
 		}
 
 		template<typename KeyT, typename ValueT>
-		Map(std::unordered_map<KeyT, ValueT>* map, bool is_const) {
-			new(_mem) StdUnorderedMap<KeyT, ValueT>(map, is_const);
+		Map(std::unordered_map<KeyT, ValueT>* map, bool isConst) {
+			new(_mem) StdUnorderedMap<KeyT, ValueT>(map, isConst);
 		}
 
 		Expected<None> assign(Var var) {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			impl()->unsafeAssign(ptr);
 		}
 
-		Var own_var() const {
-			return impl()->own_var();
+		Var ownVar() const {
+			return impl()->ownVar();
 		}
 
-		TypeId key_type() const {
-			return impl()->key_type();
+		TypeId keyType() const {
+			return impl()->keyType();
 		}
 
-		TypeId val_type() const {
-			return impl()->val_type();
+		TypeId valType() const {
+			return impl()->valType();
 		}
 
-		void for_each(std::function<void(Var, Var)> callback) const {
-			return impl()->for_each(callback);
+		void forEach(std::function<void(Var, Var)> callback) const {
+			return impl()->forEach(callback);
 		}
 
-		void for_each(std::function<void(Var, Var)> callback) {
-			return impl()->for_each(callback);
+		void forEach(std::function<void(Var, Var)> callback) {
+			return impl()->forEach(callback);
 		}
 
-		void unsafe_for_each(std::function<void(void*, void*)> callback) const {
-			return impl()->unsafe_for_each(callback);
+		void unsafeForEach(std::function<void(void*, void*)> callback) const {
+			return impl()->unsafeForEach(callback);
 		}
 
 		void clear() {

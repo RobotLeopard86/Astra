@@ -10,41 +10,41 @@ namespace astra {
 	struct EnumImpl final : public IEnum {
 		EnumImpl() = delete;
 
-		EnumImpl(T* value, bool is_const, const ConstexprMap<T, size_v>& all_constants)
-		  : _value(value), _is_const(is_const), _all_constants(all_constants) {
+		EnumImpl(T* value, bool isConst, const ConstexprMap<T, size_v>& allConstants)
+		  : _value(value), _isConst(isConst), _all_constants(allConstants) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_value);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_value = static_cast<T*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_value = static_cast<T*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
 		Var var() const override {
-			return Var(_value, TypeId::get<T>(), _is_const);
+			return Var(_value, TypeId::get<T>(), _isConst);
 		}
 
-		std::string_view to_string() const override {
-			return _all_constants.get_name(*_value).unwrap();
+		std::string_view toString() const override {
+			return _all_constants.getName(*_value).unwrap();
 		}
 
 		Expected<None> parse(std::string_view name) override {
-			if(_is_const) {
+			if(_isConst) {
 				return Error("Cannot assign anything to const enum");
 			}
-			auto ex = _all_constants.get_value(name);
+			auto ex = _all_constants.getValue(name);
 
 			return ex.match(
 				[this](T& v) -> Expected<None> {
@@ -56,7 +56,7 @@ namespace astra {
 
 	  private:
 		T* _value;
-		bool _is_const;
+		bool _isConst;
 		const ConstexprMap<T, size_v>& _all_constants;
 	};
 

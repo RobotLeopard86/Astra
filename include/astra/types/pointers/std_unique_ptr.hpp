@@ -11,8 +11,8 @@ namespace astra {
 	template<typename T>
 	struct TypeActions<std::unique_ptr<T>> {
 
-		static TypeInfo reflect(void* value, bool is_const) {
-			return {Pointer(static_cast<std::unique_ptr<T>*>(value), is_const)};
+		static TypeInfo reflect(void* value, bool isConst) {
+			return {Pointer(static_cast<std::unique_ptr<T>*>(value), isConst)};
 		}
 
 		static void copy(void* to, const void* from) {
@@ -25,8 +25,8 @@ namespace astra {
 	template<typename T>
 	TypeId TypeId::get(std::unique_ptr<T>* /*unused*/) {
 		static TypeId id(TheGreatTable::record(Actions(&TypeActions<std::unique_ptr<T>>::reflect,//
-			&CommonActions<std::unique_ptr<T>>::type_name,										 //
-			&CommonActions<std::unique_ptr<T>>::type_size,										 //
+			&CommonActions<std::unique_ptr<T>>::typeName,										 //
+			&CommonActions<std::unique_ptr<T>>::typeSize,										 //
 			&CommonActions<std::unique_ptr<T>>::construct,										 //
 			&CommonActions<std::unique_ptr<T>>::destroy,										 //
 			&TypeActions<std::unique_ptr<T>>::copy,												 //

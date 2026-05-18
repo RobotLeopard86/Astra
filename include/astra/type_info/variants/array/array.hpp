@@ -14,13 +14,13 @@ namespace astra {
 		Array() = delete;
 
 		template<typename T, size_t size_v>
-		Array(T (*array)[size_v], bool is_const) {
-			new(_mem) CArray<T, size_v>(array, is_const);
+		Array(T (*array)[size_v], bool isConst) {
+			new(_mem) CArray<T, size_v>(array, isConst);
 		}
 
 		template<typename T, size_t size_v>
-		Array(std::array<T, size_v>* array, bool is_const) {
-			new(_mem) StdArray<T, size_v>(array, is_const);
+		Array(std::array<T, size_v>* array, bool isConst) {
+			new(_mem) StdArray<T, size_v>(array, isConst);
 		}
 
 		~Array() {
@@ -31,16 +31,16 @@ namespace astra {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			return impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			return impl()->unsafeAssign(ptr);
 		}
 
-		Var own_var() const {
-			return impl()->own_var();
+		Var ownVar() const {
+			return impl()->ownVar();
 		}
 
-		TypeId nested_type() const {
-			return impl()->nested_type();
+		TypeId nestedType() const {
+			return impl()->nestedType();
 		}
 
 		Expected<Var> at(size_t idx) {
@@ -63,16 +63,16 @@ namespace astra {
 			return impl()->fill(filler);
 		}
 
-		void for_each(std::function<void(Var)> callback) const {
-			impl()->for_each(std::move(callback));
+		void forEach(std::function<void(Var)> callback) const {
+			impl()->forEach(std::move(callback));
 		}
 
-		void for_each(std::function<void(Var)> callback) {
-			impl()->for_each(std::move(callback));
+		void forEach(std::function<void(Var)> callback) {
+			impl()->forEach(std::move(callback));
 		}
 
-		void unsafe_for_each(std::function<void(void*)> callback) const {
-			impl()->unsafe_for_each(std::move(callback));
+		void unsafeForEach(std::function<void(void*)> callback) const {
+			impl()->unsafeForEach(std::move(callback));
 		}
 
 		size_t size() const {

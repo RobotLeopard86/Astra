@@ -30,7 +30,7 @@ namespace astra {
 			return _vector->at(_vector->size() - 1);
 		}
 
-		void step_back(size_t bytes) override {
+		void stepBack(size_t bytes) override {
 			_vector->resize(_vector->size() - bytes);
 			_i -= bytes;
 		}

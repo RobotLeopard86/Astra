@@ -12,50 +12,50 @@ namespace astra {
 
 	template<typename T>
 	struct Int : IInteger {
-		Int(T* value, bool is_const)
-		  : _value(value), _is_const(is_const) {
+		Int(T* value, bool isConst)
+		  : _value(value), _isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_value);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_value = static_cast<T*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_value = static_cast<T*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
 		Var var() const override {
-			return Var(_value, _is_const);
+			return Var(_value, _isConst);
 		}
 
 		size_t size() const override {
 			return sizeof(T);
 		}
 
-		bool is_signed() const override {
+		bool isSigned() const override {
 			return std::is_signed_v<T>;
 		}
 
-		int64_t as_signed() const override {
+		int64_t asSigned() const override {
 			return *_value;
 		}
 
-		uint64_t as_unsigned() const override {
+		uint64_t asUnsigned() const override {
 			return *_value;
 		}
 
-		Expected<None> set_signed(int64_t value) override {
-			if(_is_const) {
+		Expected<None> setSigned(int64_t value) override {
+			if(_isConst) {
 				return Error("Trying to set const value");
 			}
 
@@ -63,7 +63,7 @@ namespace astra {
 				return Error(astra::format("The value is too big to fit {} byte variable", sizeof(*_value)));
 			}
 
-			if(value < 0 && !is_signed()) {
+			if(value < 0 && !isSigned()) {
 				return Error("Cannot assign negative value to unsigned");
 			}
 
@@ -71,8 +71,8 @@ namespace astra {
 			return None();
 		}
 
-		Expected<None> set_unsigned(uint64_t value) override {
-			if(_is_const) {
+		Expected<None> setUnsigned(uint64_t value) override {
+			if(_isConst) {
 				return Error("Trying to set const value");
 			}
 
@@ -86,7 +86,7 @@ namespace astra {
 
 	  private:
 		T* _value;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

@@ -5,104 +5,104 @@
 #include "yaml.hpp"
 
 namespace astra::serialization {
-	struct convert {	//NOLINT namespace like name
-		struct to_json {//NOLINT namespace like name
+	struct convert {   //NOLINT namespace like name
+		struct toJson {//NOLINT namespace like name
 			template<Reflectable T>
-			static Expected<std::string> from_yaml_string(std::string_view str) {
-				Expected<T> yaml_out = yaml::from_string<T>(str);
-				if(yaml_out.is_error()) return Expected<std::string>(yaml_out.error());
-				T obj = yaml_out.unwrap();
-				return json::to_string(&obj);
+			static Expected<std::string> fromYamlString(std::string_view str) {
+				Expected<T> yamlOut = yaml::fromString<T>(str);
+				if(yamlOut.isError()) return Expected<std::string>(yamlOut.error());
+				T obj = yamlOut.unwrap();
+				return json::toString(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::string> from_yaml_stream(std::istream& stream) {
-				Expected<T> yaml_out = yaml::from_string<T>(stream);
-				if(yaml_out.is_error()) return Expected<std::string>(yaml_out.error());
-				T obj = yaml_out.unwrap();
-				return json::to_string(&obj);
+			static Expected<std::string> fromYamlStream(std::istream& stream) {
+				Expected<T> yamlOut = yaml::fromString<T>(stream);
+				if(yamlOut.isError()) return Expected<std::string>(yamlOut.error());
+				T obj = yamlOut.unwrap();
+				return json::toString(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::string> from_binary_vector(const std::vector<uint8_t>& vector) {
-				Expected<T> binary_out = binary::from_vector<T>(vector);
-				if(binary_out.is_error()) return Expected<std::string>(binary_out.error());
-				T obj = binary_out.unwrap();
-				return json::to_string(&obj);
+			static Expected<std::string> fromBinaryVector(const std::vector<uint8_t>& vector) {
+				Expected<T> binaryOut = binary::fromVector<T>(vector);
+				if(binaryOut.isError()) return Expected<std::string>(binaryOut.error());
+				T obj = binaryOut.unwrap();
+				return json::toString(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::string> from_binary_stream(std::istream& stream) {
-				Expected<T> binary_out = binary::from_vector<T>(stream);
-				if(binary_out.is_error()) return Expected<std::string>(binary_out.error());
-				T obj = binary_out.unwrap();
-				return json::to_string(&obj);
+			static Expected<std::string> fromBinaryStream(std::istream& stream) {
+				Expected<T> binaryOut = binary::fromVector<T>(stream);
+				if(binaryOut.isError()) return Expected<std::string>(binaryOut.error());
+				T obj = binaryOut.unwrap();
+				return json::toString(&obj);
 			}
 		};
-		struct to_yaml {//NOLINT namespace like name
+		struct toYaml {//NOLINT namespace like name
 			template<Reflectable T>
-			static Expected<std::string> from_json_string(std::string_view str) {
-				Expected<T> json_out = json::from_string<T>(str);
-				if(json_out.is_error()) return Expected<std::string>(json_out.error());
-				T obj = json_out.unwrap();
-				return yaml::to_string(&obj);
+			static Expected<std::string> fromJsonString(std::string_view str) {
+				Expected<T> jsonOut = json::fromString<T>(str);
+				if(jsonOut.isError()) return Expected<std::string>(jsonOut.error());
+				T obj = jsonOut.unwrap();
+				return yaml::toString(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::string> from_json_stream(std::istream& stream) {
-				Expected<T> json_out = json::from_string<T>(stream);
-				if(json_out.is_error()) return Expected<std::string>(json_out.error());
-				T obj = json_out.unwrap();
-				return yaml::to_string(&obj);
+			static Expected<std::string> fromJsonStream(std::istream& stream) {
+				Expected<T> jsonOut = json::fromString<T>(stream);
+				if(jsonOut.isError()) return Expected<std::string>(jsonOut.error());
+				T obj = jsonOut.unwrap();
+				return yaml::toString(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::string> from_binary_vector(const std::vector<uint8_t>& vector) {
-				Expected<T> binary_out = binary::from_vector<T>(vector);
-				if(binary_out.is_error()) return Expected<std::string>(binary_out.error());
-				T obj = binary_out.unwrap();
-				return yaml::to_string(&obj);
+			static Expected<std::string> fromBinaryVector(const std::vector<uint8_t>& vector) {
+				Expected<T> binaryOut = binary::fromVector<T>(vector);
+				if(binaryOut.isError()) return Expected<std::string>(binaryOut.error());
+				T obj = binaryOut.unwrap();
+				return yaml::toString(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::string> from_binary_stream(std::istream& stream) {
-				Expected<T> binary_out = binary::from_vector<T>(stream);
-				if(binary_out.is_error()) return Expected<std::string>(binary_out.error());
-				T obj = binary_out.unwrap();
-				return yaml::to_string(&obj);
+			static Expected<std::string> fromBinaryStream(std::istream& stream) {
+				Expected<T> binaryOut = binary::fromVector<T>(stream);
+				if(binaryOut.isError()) return Expected<std::string>(binaryOut.error());
+				T obj = binaryOut.unwrap();
+				return yaml::toString(&obj);
 			}
 		};
-		struct to_binary {//NOLINT namespace like name
+		struct toBinary {//NOLINT namespace like name
 			template<Reflectable T>
-			static Expected<std::vector<uint8_t>> from_json_string(std::string_view str) {
-				Expected<T> json_out = json::from_string<T>(str);
-				if(json_out.is_error()) return Expected<std::vector<uint8_t>>(json_out.error());
-				T obj = json_out.unwrap();
-				return binary::to_vector(&obj);
+			static Expected<std::vector<uint8_t>> fromJsonString(std::string_view str) {
+				Expected<T> jsonOut = json::fromString<T>(str);
+				if(jsonOut.isError()) return Expected<std::vector<uint8_t>>(jsonOut.error());
+				T obj = jsonOut.unwrap();
+				return binary::toVector(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::vector<uint8_t>> from_json_stream(std::istream& stream) {
-				Expected<T> json_out = json::from_string<T>(stream);
-				if(json_out.is_error()) return Expected<std::vector<uint8_t>>(json_out.error());
-				T obj = json_out.unwrap();
-				return binary::to_vector(&obj);
+			static Expected<std::vector<uint8_t>> fromJsonStream(std::istream& stream) {
+				Expected<T> jsonOut = json::fromString<T>(stream);
+				if(jsonOut.isError()) return Expected<std::vector<uint8_t>>(jsonOut.error());
+				T obj = jsonOut.unwrap();
+				return binary::toVector(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::vector<uint8_t>> from_yaml_string(std::string_view str) {
-				Expected<T> yaml_out = yaml::from_string<T>(str);
-				if(yaml_out.is_error()) return Expected<std::vector<uint8_t>>(yaml_out.error());
-				T obj = yaml_out.unwrap();
-				return binary::to_vector(&obj);
+			static Expected<std::vector<uint8_t>> fromYamlString(std::string_view str) {
+				Expected<T> yamlOut = yaml::fromString<T>(str);
+				if(yamlOut.isError()) return Expected<std::vector<uint8_t>>(yamlOut.error());
+				T obj = yamlOut.unwrap();
+				return binary::toVector(&obj);
 			}
 
 			template<Reflectable T>
-			static Expected<std::vector<uint8_t>> from_yaml_stream(std::istream& stream) {
-				Expected<T> yaml_out = yaml::from_string<T>(stream);
-				if(yaml_out.is_error()) return Expected<std::vector<uint8_t>>(yaml_out.error());
-				T obj = yaml_out.unwrap();
-				return binary::to_vector(&obj);
+			static Expected<std::vector<uint8_t>> fromYamlStream(std::istream& stream) {
+				Expected<T> yamlOut = yaml::fromString<T>(stream);
+				if(yamlOut.isError()) return Expected<std::vector<uint8_t>>(yamlOut.error());
+				T obj = yamlOut.unwrap();
+				return binary::toVector(&obj);
 			}
 		};
 	};

@@ -12,24 +12,24 @@ namespace astra {
 	struct Enum final {
 
 		template<typename T, size_t size>
-		Enum(T* value, bool is_const, const ConstexprMap<T, size>& all_constants) {
-			new(_mem) EnumImpl<T, size>(value, is_const, all_constants);
+		Enum(T* value, bool isConst, const ConstexprMap<T, size>& allConstants) {
+			new(_mem) EnumImpl<T, size>(value, isConst, allConstants);
 		}
 
 		Expected<None> assign(Var var) {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			impl()->unsafeAssign(ptr);
 		}
 
 		Var var() const {
 			return impl()->var();
 		}
 
-		std::string_view to_string() const {
-			return impl()->to_string();
+		std::string_view toString() const {
+			return impl()->toString();
 		}
 
 		Expected<None> parse(std::string_view name) {

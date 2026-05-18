@@ -26,7 +26,7 @@ namespace astra {
 			return _string->at(_string->size() - 1);
 		}
 
-		void step_back(size_t bytes) override {
+		void stepBack(size_t bytes) override {
 			_string->resize(_string->size() - bytes);
 		}
 

@@ -24,9 +24,9 @@ inline void append(IWriter* writer, char ch) {
 }
 
 template<typename SeqT>
-inline void serialize_sequence(const SeqT& seq, IWriter* writer);
+inline void serializeSequence(const SeqT& seq, IWriter* writer);
 
-std::string double_to_string(double value) {
+std::string doubleToString(double value) {
 	if(value == -std::numeric_limits<double>::infinity()) {
 		return "\"-inf\"";
 	}
@@ -36,41 +36,41 @@ std::string double_to_string(double value) {
 	if(std::isnan(value)) {
 		return "\"nan\"";
 	}
-	return to_string(value, 9);
+	return toString(value, 9);
 }
 
-void serialize_recursive(IWriter* writer, const TypeInfo& info) {
-	auto k = info.get_kind();
+void serializeRecursive(IWriter* writer, const TypeInfo& info) {
+	auto k = info.getKind();
 
 	switch(k) {
 		case TypeInfo::Kind::kBool:
-			append(writer, to_string(info.unsafe_get<Bool>().get()));
+			append(writer, toString(info.unsafeGet<Bool>().get()));
 			break;
 		case TypeInfo::Kind::kInteger: {
-			auto i = info.unsafe_get<Integer>();
-			if(i.is_signed()) {
-				append(writer, to_string(i.as_signed()));
+			auto i = info.unsafeGet<Integer>();
+			if(i.isSigned()) {
+				append(writer, toString(i.asSigned()));
 			} else {
-				append(writer, to_string(i.as_unsigned()));
+				append(writer, toString(i.asUnsigned()));
 			}
 		} break;
 		case TypeInfo::Kind::kFloating:
-			append(writer, double_to_string(info.unsafe_get<Floating>().get()));
+			append(writer, doubleToString(info.unsafeGet<Floating>().get()));
 			break;
 		case TypeInfo::Kind::kString:
 			append(writer, '"');
-			append(writer, info.unsafe_get<String>().get());
+			append(writer, info.unsafeGet<String>().get());
 			append(writer, '"');
 			break;
 		case TypeInfo::Kind::kEnum:
 			append(writer, '"');
-			append(writer, info.unsafe_get<Enum>().to_string());
+			append(writer, info.unsafeGet<Enum>().toString());
 			append(writer, '"');
 			break;
 		case TypeInfo::Kind::kObject: {
-			const auto& o = info.unsafe_get<Object>();
+			const auto& o = info.unsafeGet<Object>();
 
-			auto fields = o.get_fields();
+			auto fields = o.getFields();
 
 			if(fields.size() == 0) {
 				append(writer, "{}");
@@ -83,22 +83,22 @@ void serialize_recursive(IWriter* writer, const TypeInfo& info) {
 				append(writer, record.first);
 				append(writer, "\":");
 
-				auto field_info = reflection::reflect(record.second.var());
-				serialize_recursive(writer, field_info);
+				auto fieldInfo = reflection::reflect(record.second.var());
+				serializeRecursive(writer, fieldInfo);
 				append(writer, ',');
 			}
-			writer->step_back(1);
+			writer->stepBack(1);
 			append(writer, '}');
 
 		} break;
 		case TypeInfo::Kind::kArray:
-			serialize_sequence(info.unsafe_get<Array>(), writer);
+			serializeSequence(info.unsafeGet<Array>(), writer);
 			break;
 		case TypeInfo::Kind::kSequence:
-			serialize_sequence(info.unsafe_get<Sequence>(), writer);
+			serializeSequence(info.unsafeGet<Sequence>(), writer);
 			break;
 		case TypeInfo::Kind::kMap: {
-			const auto& m = info.unsafe_get<Map>();
+			const auto& m = info.unsafeGet<Map>();
 
 			if(m.size() == 0) {
 				append(writer, "[]");
@@ -106,67 +106,67 @@ void serialize_recursive(IWriter* writer, const TypeInfo& info) {
 			}
 			append(writer, '[');
 
-			auto key_info = reflection::reflect(Var(nullptr, m.key_type(), false));
-			auto val_info = reflection::reflect(Var(nullptr, m.val_type(), false));
-			m.unsafe_for_each([writer, &key_info, &val_info](void* key, void* val) {
+			auto keyInfo = reflection::reflect(Var(nullptr, m.keyType(), false));
+			auto valInfo = reflection::reflect(Var(nullptr, m.valType(), false));
+			m.unsafeForEach([writer, &keyInfo, &valInfo](void* key, void* val) {
 				append(writer, "{\"key\":");
-				key_info.unsafe_assign(key);
-				serialize_recursive(writer, key_info);
+				keyInfo.unsafeAssign(key);
+				serializeRecursive(writer, keyInfo);
 
 				append(writer, ',');
 
 				append(writer, "\"val\":");
-				val_info.unsafe_assign(val);
-				serialize_recursive(writer, val_info);
+				valInfo.unsafeAssign(val);
+				serializeRecursive(writer, valInfo);
 
 				append(writer, "},");
 			});
-			writer->step_back(1);
+			writer->stepBack(1);
 			append(writer, ']');
 		} break;
 		case TypeInfo::Kind::kPointer: {
-			auto p = info.unsafe_get<Pointer>();
-			p.get_nested().match_move(//
+			auto p = info.unsafeGet<Pointer>();
+			p.getNested().matchMove(//
 				[writer](const Error& /*err*/) { append(writer, "null"); },
 				[writer](Var var) {
 					auto info = reflection::reflect(var);
-					serialize_recursive(writer, info);
+					serializeRecursive(writer, info);
 				});
 		} break;
 	}
 }
 
 template<typename SeqT>
-inline void serialize_sequence(const SeqT& seq, IWriter* writer) {
+inline void serializeSequence(const SeqT& seq, IWriter* writer) {
 	if(seq.size() == 0) {
 		append(writer, "[]");
 		return;
 	}
 	append(writer, '[');
 
-	auto info = reflection::reflect(Var(nullptr, seq.nested_type(), false));
-	seq.unsafe_for_each([writer, &info](void* ptr) {
-		info.unsafe_assign(ptr);
-		serialize_recursive(writer, info);
+	auto info = reflection::reflect(Var(nullptr, seq.nestedType(), false));
+	seq.unsafeForEach([writer, &info](void* ptr) {
+		info.unsafeAssign(ptr);
+		serializeRecursive(writer, info);
 
 		append(writer, ',');
 	});
-	writer->step_back(1);
+	writer->stepBack(1);
 	append(writer, ']');
 }
 
 void json::serialize(std::string* str, Var var) {
-	StringWriter string_w(str);
+	StringWriter stringW(str);
 	auto info = reflection::reflect(var);
 
-	serialize_recursive(&string_w, info);
+	serializeRecursive(&stringW, info);
 }
 
 void json::serialize(std::ostream& stream, Var var) {
-	StreamWriter stream_w(stream);
+	StreamWriter streamW(stream);
 	auto info = reflection::reflect(var);
 
-	serialize_recursive(&stream_w, info);
+	serializeRecursive(&streamW, info);
 }
 
 Expected<None> json::deserialize(Var var, std::string_view str) {

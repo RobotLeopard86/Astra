@@ -7,8 +7,8 @@ namespace astra {
 
 	template<typename T>
 	struct SequenceActions {
-		static TypeInfo reflect(void* value, bool is_const) {
-			return TypeInfo(Sequence(static_cast<T*>(value), is_const));
+		static TypeInfo reflect(void* value, bool isConst) {
+			return TypeInfo(Sequence(static_cast<T*>(value), isConst));
 		}
 	};
 
@@ -16,8 +16,8 @@ namespace astra {
 	typename std::enable_if_t<is_sequence_v<T>, TypeId>//
 	TypeId::get(T* ptr) {
 		static TypeId id(TheGreatTable::record(Actions(&SequenceActions<T>::reflect,//
-			&CommonActions<T>::type_name,											//
-			&CommonActions<T>::type_size,											//
+			&CommonActions<T>::typeName,											//
+			&CommonActions<T>::typeSize,											//
 			&CommonActions<T>::construct,											//
 			&CommonActions<T>::destroy,												//
 			&CommonActions<T>::copy,												//

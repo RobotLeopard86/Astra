@@ -7,8 +7,8 @@
 namespace astra {
 
 	struct Fields {
-		Fields(const void* base, const std::map<std::string_view, FieldDesc>* map, Access access, bool include_readonly)//
-		  : _base(base), _map(map), _access(access), _include_readonly(include_readonly) {
+		Fields(const void* base, const std::map<std::string_view, FieldDesc>* map, Access access, bool includeReadonly)//
+		  : _base(base), _map(map), _access(access), _include_readonly(includeReadonly) {
 		}
 
 		size_t size() const {

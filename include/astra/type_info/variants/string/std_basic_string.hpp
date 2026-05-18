@@ -13,22 +13,22 @@ namespace astra {
 	struct StdBasicString : IString {
 		StdBasicString() = delete;
 
-		StdBasicString(std::basic_string<T>* str, bool is_const)
-		  : _var(str, is_const) {
+		StdBasicString(std::basic_string<T>* str, bool isConst)
+		  : _var(str, isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			if(var.type() != _var.type()) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(_var.type())));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(_var.type())));
 			}
 			_var = var;
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
-			_var.unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) override {
+			_var.unsafeAssign(ptr);
 		}
 
 		std::string_view get() const override {
@@ -36,10 +36,10 @@ namespace astra {
 		}
 
 		Expected<None> set(std::string_view value) override {
-			if(_var.is_const()) {
+			if(_var.isConst()) {
 				return Error("Trying to set const value");
 			}
-			*static_cast<std::string*>(_var.raw_mut()) = std::string(value);
+			*static_cast<std::string*>(_var.rawMut()) = std::string(value);
 			return None();
 		}
 

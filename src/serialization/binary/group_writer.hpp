@@ -26,65 +26,65 @@ namespace astra {
 			}
 		}
 
-		void write_null() {
-			write_one(static_cast<uint64_t>(kNull), false);
+		void writeNull() {
+			writeOne(static_cast<uint64_t>(kNull), false);
 		}
 
 		void write(bool value) {
-			write_one(static_cast<uint64_t>(value), false);
+			writeOne(static_cast<uint64_t>(value), false);
 		}
 
 		void write(size_t value) {
-			write_one(value, false);
+			writeOne(value, false);
 		}
 
 		void write(std::string_view str) {
 			//write string size to the group
-			write_one(str.size(), false);
+			writeOne(str.size(), false);
 
 			//write the group to the stream if it wasn't while writing size
 			if(_word != 0) {
-				flush_header();
+				flushHeader();
 			}
 
 			//write the string to the stream
 			_writer->write(str.data(), str.size());
 		}
 
-		void write(const void* ptr, size_t size, bool is_signed) {
+		void write(const void* ptr, size_t size, bool isSigned) {
 			uint64_t value = 0;
 
-			if(is_signed) {
+			if(isSigned) {
 				std::memcpy(&value, ptr, size);
 
-				auto aligned_zeroes = 64U - size * 8;
-				bool neg = ((value << aligned_zeroes) & 0x8000000000000000) != 0;
+				auto alignedZeroes = 64U - size * 8;
+				bool neg = ((value << alignedZeroes) & 0x8000000000000000) != 0;
 
 				if(neg) {
-					value <<= aligned_zeroes;
+					value <<= alignedZeroes;
 					value = ~value;
-					value >>= aligned_zeroes;
+					value >>= alignedZeroes;
 					value += 1;
 				}
 
-				write_one(value, neg);
+				writeOne(value, neg);
 			} else {
 				std::memcpy(&value, ptr, size);
-				write_one(value, false);
+				writeOne(value, false);
 			}
 		}
 
 		void write(double value) {
-			uint64_t u_value = 0;
+			uint64_t uValue = 0;
 
 			if(value >= -FLT_MAX && value <= FLT_MAX) {
-				float f_value = value;
-				std::memcpy(&u_value, &f_value, sizeof(f_value));
+				float fValue = value;
+				std::memcpy(&uValue, &fValue, sizeof(fValue));
 			} else {
-				std::memcpy(&u_value, &value, sizeof(value));
+				std::memcpy(&uValue, &value, sizeof(value));
 			}
 
-			write_one(u_value, false);
+			writeOne(uValue, false);
 		}
 
 	  private:
@@ -96,7 +96,7 @@ namespace astra {
 
 		unsigned int _word;
 
-		void write_one(uint64_t value, bool neg) {
+		void writeOne(uint64_t value, bool neg) {
 			//set sign bit
 			_group[0] |= (static_cast<uint8_t>(neg) << 3U);
 
@@ -125,23 +125,23 @@ namespace astra {
 			//get next word in the header, push one if needed
 			_word++;
 			if(_word > 1) {
-				flush_header();
+				flushHeader();
 			}
 		}
 
-		inline void flush_header() {
+		inline void flushHeader() {
 			_writer->write(&_group[0], _i);
 			_group[0] = 0;
 			_i = 1;
 			_word = 0;
 		}
 
-		inline bool is_negative() {
-			auto negative_bit = _group[0];
-			negative_bit >>= (4U * (1U - _word) + 3U);
-			negative_bit &= 0b00000001U;
+		inline bool isNegative() {
+			auto negativeBit = _group[0];
+			negativeBit >>= (4U * (1U - _word) + 3U);
+			negativeBit &= 0b00000001U;
 
-			return negative_bit == 1;
+			return negativeBit == 1;
 		}
 	};
 

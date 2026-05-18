@@ -77,14 +77,14 @@ namespace astra {
 			return match([=](auto&& v) { return v.assign(var); });
 		}
 
-		void unsafe_assign(void* ptr) {
-			match([=](auto&& m) { m.unsafe_assign(ptr); });
+		void unsafeAssign(void* ptr) {
+			match([=](auto&& m) { m.unsafeAssign(ptr); });
 		}
 
 		Var var() {
-			return match([](Array& a) -> Var { return a.own_var(); },//
-				[](Sequence& s) -> Var { return s.own_var(); },		 //
-				[](Map& m) -> Var { return m.own_var(); },			 //
+			return match([](Array& a) -> Var { return a.ownVar(); },//
+				[](Sequence& s) -> Var { return s.ownVar(); },		//
+				[](Map& m) -> Var { return m.ownVar(); },			//
 				[](auto&& v) { return v.var(); });
 		}
 
@@ -101,17 +101,17 @@ namespace astra {
 			kPointer,
 		};
 
-		[[nodiscard]] Kind get_kind() const {
-			return static_cast<Kind>(variant_idx());
+		[[nodiscard]] Kind getKind() const {
+			return static_cast<Kind>(variantIdx());
 		}
 
-		[[nodiscard]] std::string_view get_kind_str() const {
+		[[nodiscard]] std::string_view getKindStr() const {
 			return match([](auto&& v) { return Names<decltype(v)>::get(); });
 		}
 
 	  private:
 #ifndef NDEBUG
-		Kind _kind = get_kind();
+		Kind _kind = getKind();
 #endif
 	};
 

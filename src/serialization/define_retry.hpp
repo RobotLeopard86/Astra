@@ -10,7 +10,7 @@
 		auto __ex___ = x;                                                              \
 		static_assert(is_expected_v<decltype(__ex___)>,                                \
 			"__retry(x) macro is compatible only with Expected<T, ErrorT> structure"); \
-		if(__ex___.is_error()) {                                                       \
+		if(__ex___.isError()) {                                                        \
 			return __ex___.error();                                                    \
 		}                                                                              \
 	}

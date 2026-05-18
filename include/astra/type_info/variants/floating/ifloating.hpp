@@ -12,7 +12,7 @@ namespace astra {
 		virtual ~IFloating() = default;
 
 		virtual Expected<None> assign(Var var) = 0;
-		virtual void unsafe_assign(void* ptr) = 0;
+		virtual void unsafeAssign(void* ptr) = 0;
 		virtual Var var() = 0;
 		virtual size_t size() = 0;
 		virtual double get() const = 0;

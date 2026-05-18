@@ -13,16 +13,16 @@ namespace astra {
 		Integer() = delete;
 
 		template<typename T>
-		Integer(T* value, bool is_const) {
-			new(_mem) Int<T>(value, is_const);
+		Integer(T* value, bool isConst) {
+			new(_mem) Int<T>(value, isConst);
 		}
 
 		Expected<None> assign(Var var) {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			impl()->unsafeAssign(ptr);
 		}
 
 		Var var() const {
@@ -33,38 +33,38 @@ namespace astra {
 			return impl()->size();
 		}
 
-		bool is_signed() const {
-			return impl()->is_signed();
+		bool isSigned() const {
+			return impl()->isSigned();
 		}
 
-		int64_t as_signed() const {
-			return impl()->as_signed();
+		int64_t asSigned() const {
+			return impl()->asSigned();
 		}
 
-		uint64_t as_unsigned() const {
-			return impl()->as_unsigned();
+		uint64_t asUnsigned() const {
+			return impl()->asUnsigned();
 		}
 
 		template<typename T>
 		typename std::enable_if_t<std::is_integral_v<T> && std::is_signed_v<T>,//
 			Expected<None>>
 		set(T value) {
-			return impl()->set_signed(value);
+			return impl()->setSigned(value);
 		}
 
 		template<typename T>
 		typename std::enable_if_t<std::is_integral_v<T> && std::is_unsigned_v<T>,//
 			Expected<None>>
 		set(T value) {
-			return impl()->set_unsigned(value);
+			return impl()->setUnsigned(value);
 		}
 
-		Expected<None> set_signed(int64_t value) {
-			return impl()->set_signed(value);
+		Expected<None> setSigned(int64_t value) {
+			return impl()->setSigned(value);
 		}
 
-		Expected<None> set_unsigned(uint64_t value) {
-			return impl()->set_unsigned(value);
+		Expected<None> setUnsigned(uint64_t value) {
+			return impl()->setUnsigned(value);
 		}
 
 	  private:

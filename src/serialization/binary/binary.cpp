@@ -15,219 +15,219 @@
 using namespace astra::serialization;
 
 template<typename SeqT>
-inline void serialize_sequence(const SeqT& seq, GroupWriter* writer);
+inline void serializeSequence(const SeqT& seq, GroupWriter* writer);
 
-inline void serialize_recursive(GroupWriter* writer, const TypeInfo& info) {
-	auto k = info.get_kind();
+inline void serializeRecursive(GroupWriter* writer, const TypeInfo& info) {
+	auto k = info.getKind();
 
 	switch(k) {
 		case TypeInfo::Kind::kObject:
-			for(auto&& record : info.unsafe_get<Object>().get_fields()) {
+			for(auto&& record : info.unsafeGet<Object>().getFields()) {
 				//skip name in record.first;
-				auto field_info = reflection::reflect(record.second.var());
-				serialize_recursive(writer, field_info);
+				auto fieldInfo = reflection::reflect(record.second.var());
+				serializeRecursive(writer, fieldInfo);
 			}
 			break;
 		case TypeInfo::Kind::kBool:
-			writer->write(info.unsafe_get<Bool>().get());
+			writer->write(info.unsafeGet<Bool>().get());
 			break;
 		case TypeInfo::Kind::kInteger: {
-			auto i = info.unsafe_get<Integer>();
-			writer->write(i.var().raw(), i.size(), i.is_signed());
+			auto i = info.unsafeGet<Integer>();
+			writer->write(i.var().raw(), i.size(), i.isSigned());
 		} break;
 		case TypeInfo::Kind::kFloating:
-			writer->write(info.unsafe_get<Floating>().get());
+			writer->write(info.unsafeGet<Floating>().get());
 			break;
 		case TypeInfo::Kind::kString:
-			writer->write(info.unsafe_get<String>().get());
+			writer->write(info.unsafeGet<String>().get());
 			break;
 		case TypeInfo::Kind::kEnum:
-			writer->write(info.unsafe_get<Enum>().to_string());
+			writer->write(info.unsafeGet<Enum>().toString());
 			break;
 		case TypeInfo::Kind::kMap: {
-			auto m = info.unsafe_get<Map>();
+			auto m = info.unsafeGet<Map>();
 
 			writer->write(m.size());
 
-			auto key_info = reflection::reflect(Var(nullptr, m.key_type(), false));
-			auto val_info = reflection::reflect(Var(nullptr, m.val_type(), false));
-			m.unsafe_for_each([writer, &key_info, &val_info](void* key, void* val) {
-				key_info.unsafe_assign(key);
-				serialize_recursive(writer, key_info);
+			auto keyInfo = reflection::reflect(Var(nullptr, m.keyType(), false));
+			auto valInfo = reflection::reflect(Var(nullptr, m.valType(), false));
+			m.unsafeForEach([writer, &keyInfo, &valInfo](void* key, void* val) {
+				keyInfo.unsafeAssign(key);
+				serializeRecursive(writer, keyInfo);
 
-				val_info.unsafe_assign(val);
-				serialize_recursive(writer, val_info);
+				valInfo.unsafeAssign(val);
+				serializeRecursive(writer, valInfo);
 			});
 		} break;
 		case TypeInfo::Kind::kArray:
-			serialize_sequence(info.unsafe_get<Array>(), writer);
+			serializeSequence(info.unsafeGet<Array>(), writer);
 			break;
 		case TypeInfo::Kind::kSequence:
-			serialize_sequence(info.unsafe_get<Sequence>(), writer);
+			serializeSequence(info.unsafeGet<Sequence>(), writer);
 			break;
 		case TypeInfo::Kind::kPointer: {
-			auto p = info.unsafe_get<Pointer>();
-			p.get_nested().match_move(//
-				[writer](const Error& /*err*/) { writer->write_null(); },
+			auto p = info.unsafeGet<Pointer>();
+			p.getNested().matchMove(//
+				[writer](const Error& /*err*/) { writer->writeNull(); },
 				[writer](Var var) {
 					auto info = reflection::reflect(var);
-					serialize_recursive(writer, info);
+					serializeRecursive(writer, info);
 				});
 		} break;
 	}
 }
 
 template<typename SeqT>
-inline void serialize_sequence(const SeqT& seq, GroupWriter* writer) {
+inline void serializeSequence(const SeqT& seq, GroupWriter* writer) {
 	writer->write(seq.size());
 
-	auto info = reflection::reflect(Var(nullptr, seq.nested_type(), false));
-	seq.unsafe_for_each([writer, &info](void* ptr) {
-		info.unsafe_assign(ptr);
-		serialize_recursive(writer, info);
+	auto info = reflection::reflect(Var(nullptr, seq.nestedType(), false));
+	seq.unsafeForEach([writer, &info](void* ptr) {
+		info.unsafeAssign(ptr);
+		serializeRecursive(writer, info);
 	});
 }
 
 void binary::serialize(std::vector<uint8_t>* vector, Var var) {
-	VectorWriter vector_w(vector);
-	GroupWriter group_w(&vector_w);
+	VectorWriter vectorW(vector);
+	GroupWriter groupW(&vectorW);
 
 	auto info = reflection::reflect(var);
 
-	serialize_recursive(&group_w, info);
+	serializeRecursive(&groupW, info);
 }
 
 void binary::serialize(std::ostream& stream, Var var) {
-	StreamWriter stream_w(stream);
-	GroupWriter group_w(&stream_w);
+	StreamWriter streamW(stream);
+	GroupWriter groupW(&streamW);
 
 	auto info = reflection::reflect(var);
 
-	serialize_recursive(&group_w, info);
+	serializeRecursive(&groupW, info);
 }
 
-inline void deserialize_recursive(TypeInfo* info, const GroupReader& reader) {
-	auto k = info->get_kind();
+inline void deserializeRecursive(TypeInfo* info, const GroupReader& reader) {
+	auto k = info->getKind();
 
 	switch(k) {
 		case TypeInfo::Kind::kObject:
-			for(auto&& record : info->unsafe_get<Object>().get_fields()) {
+			for(auto&& record : info->unsafeGet<Object>().getFields()) {
 				//skip name in record.first;
-				auto field_info = reflection::reflect(record.second.var());
-				deserialize_recursive(&field_info, reader);
+				auto fieldInfo = reflection::reflect(record.second.var());
+				deserializeRecursive(&fieldInfo, reader);
 			}
 			break;
 		case TypeInfo::Kind::kBool:
-			info->unsafe_get<Bool>().set(reader.read_unsigned() == 1);
+			info->unsafeGet<Bool>().set(reader.readUnsigned() == 1);
 			break;
 		case TypeInfo::Kind::kInteger: {
-			auto i = info->unsafe_get<Integer>();
-			if(i.is_signed()) {
-				i.set_signed(reader.read_signeg());
+			auto i = info->unsafeGet<Integer>();
+			if(i.isSigned()) {
+				i.setSigned(reader.readSigneg());
 			} else {
-				i.set_unsigned(reader.read_unsigned());
+				i.setUnsigned(reader.readUnsigned());
 			}
 		} break;
 		case TypeInfo::Kind::kFloating:
-			info->unsafe_get<Floating>().set(reader.read_float());
+			info->unsafeGet<Floating>().set(reader.readFloat());
 			break;
 		case TypeInfo::Kind::kString:
-			info->unsafe_get<String>().set(reader.read_string());
+			info->unsafeGet<String>().set(reader.readString());
 			break;
 		case TypeInfo::Kind::kEnum:
-			info->unsafe_get<Enum>().parse(reader.read_string());
+			info->unsafeGet<Enum>().parse(reader.readString());
 			break;
 		case TypeInfo::Kind::kMap: {
-			auto m = info->unsafe_get<Map>();
+			auto m = info->unsafeGet<Map>();
 			m.clear();
 
-			auto key_info = reflection::reflect(Var(nullptr, m.key_type(), false));
-			auto val_info = reflection::reflect(Var(nullptr, m.val_type(), false));
+			auto keyInfo = reflection::reflect(Var(nullptr, m.keyType(), false));
+			auto valInfo = reflection::reflect(Var(nullptr, m.valType(), false));
 
-			auto n = reader.read_unsigned();
+			auto n = reader.readUnsigned();
 			for(auto i = 0; i < n; i++) {
-				Box key_box(m.key_type());//Box should be a new object for each iteration
-				key_info.unsafe_assign(key_box.var().raw_mut());
+				Box keyBox(m.keyType());//Box should be a new object for each iteration
+				keyInfo.unsafeAssign(keyBox.var().rawMut());
 
-				deserialize_recursive(&key_info, reader);
+				deserializeRecursive(&keyInfo, reader);
 
-				Box val_box(m.val_type());
-				val_info.unsafe_assign(val_box.var().raw_mut());
+				Box valBox(m.valType());
+				valInfo.unsafeAssign(valBox.var().rawMut());
 
-				deserialize_recursive(&val_info, reader);
+				deserializeRecursive(&valInfo, reader);
 
-				m.insert(key_box.var(), val_box.var());
+				m.insert(keyBox.var(), valBox.var());
 			}
 		} break;
 		case TypeInfo::Kind::kArray: {
-			auto a = info->unsafe_get<Array>();
-			auto n = reader.read_unsigned();
+			auto a = info->unsafeGet<Array>();
+			auto n = reader.readUnsigned();
 
 			size_t i = 0;
-			a.for_each([&reader, &i, n](Var entry) {
+			a.forEach([&reader, &i, n](Var entry) {
 				if(i >= n) {
 					return;
 				}
 				i++;
 
-				auto entry_info = reflection::reflect(entry);
-				deserialize_recursive(&entry_info, reader);
+				auto entryInfo = reflection::reflect(entry);
+				deserializeRecursive(&entryInfo, reader);
 			});
 		} break;
 		case TypeInfo::Kind::kSequence: {
-			auto s = info->unsafe_get<Sequence>();
+			auto s = info->unsafeGet<Sequence>();
 			s.clear();
 
-			auto entry_info = reflection::reflect(Var(nullptr, s.nested_type(), false));
+			auto entryInfo = reflection::reflect(Var(nullptr, s.nestedType(), false));
 
-			auto n = reader.read_unsigned();
+			auto n = reader.readUnsigned();
 			for(auto i = 0; i < n; i++) {
-				Box entry_box(s.nested_type());//Box should be a new object for each iteration
-				entry_info.unsafe_assign(entry_box.var().raw_mut());
+				Box entryBox(s.nestedType());//Box should be a new object for each iteration
+				entryInfo.unsafeAssign(entryBox.var().rawMut());
 
-				deserialize_recursive(&entry_info, reader);
+				deserializeRecursive(&entryInfo, reader);
 
-				s.push(entry_box.var());
+				s.push(entryBox.var());
 			}
 		} break;
 		case TypeInfo::Kind::kPointer: {
-			if(reader.is_null()) {
-				reader.read_unsigned();//skip a byte
+			if(reader.isNull()) {
+				reader.readUnsigned();//skip a byte
 				return;
 			}
-			auto p = info->unsafe_get<Pointer>();
-			p.get_nested().match_move(//
+			auto p = info->unsafeGet<Pointer>();
+			p.getNested().matchMove(//
 				[&reader, &p](const Error& /*err*/) {
 					p.init();
-					auto nested_info = reflection::reflect(p.var());
-					deserialize_recursive(&nested_info, reader);
+					auto nestedInfo = reflection::reflect(p.var());
+					deserializeRecursive(&nestedInfo, reader);
 				},
 				[&reader](Var var) {
-					auto nested_info = reflection::reflect(var);
-					deserialize_recursive(&nested_info, reader);
+					auto nestedInfo = reflection::reflect(var);
+					deserializeRecursive(&nestedInfo, reader);
 				});
 		} break;
 	}
 }
 
 Expected<None> binary::deserialize(Var var, const std::vector<uint8_t>& vector) {
-	VectorReader vector_r(vector);
-	GroupReader group_r(&vector_r);
+	VectorReader vectorR(vector);
+	GroupReader groupR(&vectorR);
 
 	auto info = reflection::reflect(var);
 
-	deserialize_recursive(&info, group_r);
+	deserializeRecursive(&info, groupR);
 
 	return None();
 }
 
 Expected<None> binary::deserialize(Var var, std::istream& stream) {
-	StreamReader stream_r(stream);
-	GroupReader group_r(&stream_r);
+	StreamReader streamR(stream);
+	GroupReader groupR(&streamR);
 
 	auto info = reflection::reflect(var);
 
-	deserialize_recursive(&info, group_r);
+	deserializeRecursive(&info, groupR);
 
 	return None();
 }

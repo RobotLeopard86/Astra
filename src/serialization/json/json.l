@@ -20,14 +20,14 @@
 
 %class{
  public:
-  LexerJson(const char* input, size_t input_size) : LexerJson(reflex::Input(input, input_size)){
+  LexerJson(const char* input, size_t inputSize) : LexerJson(reflex::Input(input, inputSize)){
   }
 
-  astra::Position get_position() {
+  astra::Position getPosition() {
     return astra::Position{columno(), lineno()};
   }
 
-  inline std::string& get_word() {
+  inline std::string& getWord() {
     return _word;
   }
 

@@ -19,15 +19,15 @@ namespace astra {
 		Expected<None> assign(Var var) override {
 			if(var.type() != _var.type()) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(_var.type())));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(_var.type())));
 			}
 			_var = var;
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
-			_var.unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) override {
+			_var.unsafeAssign(ptr);
 		}
 
 		std::string_view get() const override {
@@ -37,13 +37,13 @@ namespace astra {
 		Expected<None> set(std::string_view value) override {
 			return Error("Trying to set const value");
 			//keep it as possible implementation
-			//if (_var.is_const()) {
+			//if (_var.isConst()) {
 			//  return Error("Trying to set const value");
 			//}
 			//if (*value.end() != '\0') {
 			//  return Error("C string value should be null terminated");
 			//}
-			//*static_cast<const T**>(_var.raw_mut()) = value.data();
+			//*static_cast<const T**>(_var.rawMut()) = value.data();
 			//return None();
 		}
 

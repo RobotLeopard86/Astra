@@ -36,23 +36,23 @@ namespace astra {
 			return _type;
 		}
 
-		bool is_const() const {
+		bool isConst() const {
 			return (_acc & Access::kConst) != Access::kNone;
 		}
 
-		bool is_static() const {
+		bool isStatic() const {
 			return (_acc & Access::kStatic) != Access::kNone;
 		}
 
-		bool is_public() const {
+		bool isPublic() const {
 			return (_acc & Access::kPublic) != Access::kNone;
 		}
 
-		bool is_protected() const {
+		bool isProtected() const {
 			return (_acc & Access::kProtected) != Access::kNone;
 		}
 
-		bool is_private() const {
+		bool isPrivate() const {
 			return (_acc & Access::kPrivate) != Access::kNone;
 		}
 
@@ -60,7 +60,7 @@ namespace astra {
 			return _acc;
 		}
 
-		bool is_readonly() const {
+		bool isReadonly() const {
 			return _is_readonly;
 		}
 

@@ -33,7 +33,7 @@ namespace astra {
 		  : BASE(std::move(error)) {//NOLINT implicit constructor
 		}
 
-		bool is_error() {
+		bool isError() {
 			return BASE::template is<ErrorT>();
 		}
 
@@ -43,7 +43,7 @@ namespace astra {
 
 		///throw an exception if Expected contains ErrorT value
 		T unwrap() {
-			if(is_error()) {
+			if(isError()) {
 				throw std::runtime_error(error().what().data());
 			}
 			return std::get<T>(std::move(BASE::_content));

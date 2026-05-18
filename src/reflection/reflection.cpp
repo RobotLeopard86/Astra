@@ -12,7 +12,7 @@ using namespace astra;
 
 TypeInfo reflection::reflect(Var variable) {
 	return TheGreatTable::data()[variable.type().number()].reflect(const_cast<void*>(variable.raw()),
-		variable.is_const());
+		variable.isConst());
 }
 
 std::string reflection::sprint(const TypeInfo& info) {
@@ -33,38 +33,38 @@ void reflection::print(Var var) {
 	print(reflect(var));
 }
 
-std::string_view reflection::type_name(TypeId id) {
-	return TheGreatTable::data()[id.number()].type_name();
+std::string_view reflection::typeName(TypeId id) {
+	return TheGreatTable::data()[id.number()].typeName();
 }
 
 #ifndef NDEBUG
-std::string_view reflection::type_name(uint32_t id) {
-	return TheGreatTable::data()[id].type_name();
+std::string_view reflection::typeName(uint32_t id) {
+	return TheGreatTable::data()[id].typeName();
 }
 #endif
 
-size_t reflection::type_size(TypeId id) {
-	return TheGreatTable::data()[id.number()].type_size();
+size_t reflection::typeSize(TypeId id) {
+	return TheGreatTable::data()[id.number()].typeSize();
 }
 
 void reflection::construct(Var variable) {
-	return TheGreatTable::data()[variable.type().number()].construct(variable.raw_mut());
+	return TheGreatTable::data()[variable.type().number()].construct(variable.rawMut());
 }
 
 void reflection::destroy(Var variable) {
 	if(variable.raw() == nullptr) {
 		return;
 	}
-	TheGreatTable::data()[variable.type().number()].destroy(variable.raw_mut());
+	TheGreatTable::data()[variable.type().number()].destroy(variable.rawMut());
 }
 
 Expected<None> reflection::copy(Var to, Var from) {
-	if(to.is_const()) {
+	if(to.isConst()) {
 		return Error("Cannot assign to const value");
 	}
 	if(to.type() != from.type()) {
-		return Error(astra::format("Cannot copy {} to {}", type_name(from.type()), type_name(to.type())));
+		return Error(astra::format("Cannot copy {} to {}", typeName(from.type()), typeName(to.type())));
 	}
-	TheGreatTable::data()[to.type().number()].copy(to.raw_mut(), from.raw());
+	TheGreatTable::data()[to.type().number()].copy(to.rawMut(), from.raw());
 	return None();
 }

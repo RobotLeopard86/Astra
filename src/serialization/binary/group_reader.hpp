@@ -23,37 +23,37 @@ namespace astra {
 			_reader->read(&_header, 1);
 		}
 
-		int64_t read_signeg() const {
-			auto neg = is_negative();
-			auto value = read_one();
+		int64_t readSigneg() const {
+			auto neg = isNegative();
+			auto value = readOne();
 
 			return static_cast<int64_t>(neg ? -value : value);
 		}
 
-		uint64_t read_unsigned() const {
-			return read_one();
+		uint64_t readUnsigned() const {
+			return readOne();
 		}
 
-		double read_float() const {
-			auto u_value = read_one();
+		double readFloat() const {
+			auto uValue = readOne();
 
 			//check the first half for emptyness
-			if(reinterpret_cast<uint32_t*>(&u_value)[1] == 0) {
-				float f_value;
-				std::memcpy(&f_value, &u_value, sizeof(f_value));
-				return f_value;
+			if(reinterpret_cast<uint32_t*>(&uValue)[1] == 0) {
+				float fValue;
+				std::memcpy(&fValue, &uValue, sizeof(fValue));
+				return fValue;
 			}
 
 			double value;
-			std::memcpy(&value, &u_value, sizeof(value));
+			std::memcpy(&value, &uValue, sizeof(value));
 			return value;
 		}
 
-		std::string read_string() const {
+		std::string readString() const {
 
 			//get size from the reader
 			size_t size = 0;
-			read_data(&size);
+			readData(&size);
 
 			std::string str;
 			str.resize(size);
@@ -66,7 +66,7 @@ namespace astra {
 			return str;
 		}
 
-		bool is_null() const {
+		bool isNull() const {
 			uint32_t v = 0;
 			_reader->peek(&v, sizeof(v));
 			return v == kNull;
@@ -80,9 +80,9 @@ namespace astra {
 		mutable uint8_t _header;
 		mutable unsigned int _word;
 
-		uint64_t read_one() const {
+		uint64_t readOne() const {
 			uint64_t value = 0;
-			read_data(&value);
+			readData(&value);
 
 			//read next word in the header
 			_word++;
@@ -95,7 +95,7 @@ namespace astra {
 		}
 
 		//read data from reader, do not touch the header
-		inline void read_data(void* ptr) const {
+		inline void readData(void* ptr) const {
 			auto chunks = _header;
 			chunks >>= 4U * (1 - _word);
 			chunks &= 0b00000111U;
@@ -103,12 +103,12 @@ namespace astra {
 			_reader->read(ptr, chunks + 1);
 		}
 
-		inline bool is_negative() const {
-			auto negative_bit = _header;
-			negative_bit >>= (4U * (1U - _word) + 3U);
-			negative_bit &= 0b00000001U;
+		inline bool isNegative() const {
+			auto negativeBit = _header;
+			negativeBit >>= (4U * (1U - _word) + 3U);
+			negativeBit &= 0b00000001U;
 
-			return negative_bit == 1;
+			return negativeBit == 1;
 		}
 	};
 

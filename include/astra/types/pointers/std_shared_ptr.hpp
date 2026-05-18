@@ -14,16 +14,16 @@ namespace astra {
 	template<typename T>
 	struct TypeActions<std::shared_ptr<T>> {
 
-		static TypeInfo reflect(void* value, bool is_const) {
-			return {Pointer(static_cast<std::shared_ptr<T>*>(value), is_const)};
+		static TypeInfo reflect(void* value, bool isConst) {
+			return {Pointer(static_cast<std::shared_ptr<T>*>(value), isConst)};
 		}
 	};
 
 	template<typename T>
 	TypeId TypeId::get(std::shared_ptr<T>* /*unused*/) {
 		static TypeId id(TheGreatTable::record(Actions(&TypeActions<std::shared_ptr<T>>::reflect,//
-			&CommonActions<std::shared_ptr<T>>::type_name,										 //
-			&CommonActions<std::shared_ptr<T>>::type_size,										 //
+			&CommonActions<std::shared_ptr<T>>::typeName,										 //
+			&CommonActions<std::shared_ptr<T>>::typeSize,										 //
 			&CommonActions<std::shared_ptr<T>>::construct,										 //
 			&CommonActions<std::shared_ptr<T>>::destroy,										 //
 			&CommonActions<std::shared_ptr<T>>::copy,											 //

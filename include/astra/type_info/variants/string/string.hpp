@@ -14,17 +14,17 @@ namespace astra {
 		String() = delete;
 
 		template<typename T>
-		String(std::basic_string<T>* str, bool is_const) {
-			new(_mem) StdBasicString<T>(str, is_const);
+		String(std::basic_string<T>* str, bool isConst) {
+			new(_mem) StdBasicString<T>(str, isConst);
 		}
 
 		template<typename T>
-		String(std::basic_string_view<T>* str, bool is_const) {
+		String(std::basic_string_view<T>* str, bool isConst) {
 			new(_mem) StdBasicStringView<T>(str);
 		}
 
 		template<typename T>
-		String(const T** str, bool is_const) {
+		String(const T** str, bool isConst) {
 			new(_mem) CString<T>(str);
 		}
 
@@ -32,8 +32,8 @@ namespace astra {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			impl()->unsafeAssign(ptr);
 		}
 
 		std::string_view get() const {

@@ -12,11 +12,11 @@ namespace astra {
 	template<typename T, size_t size_v>
 	struct TypeActions<T[size_v]> {
 
-		static TypeInfo reflect(void* value, bool is_const) {
-			return TypeInfo(Array(static_cast<T(*)[size_v]>(value), is_const));
+		static TypeInfo reflect(void* value, bool isConst) {
+			return TypeInfo(Array(static_cast<T(*)[size_v]>(value), isConst));
 		}
 
-		static size_t type_size() {
+		static size_t typeSize() {
 			return sizeof(T[size_v]);
 		}
 
@@ -61,8 +61,8 @@ namespace astra {
 	template<typename T, size_t size_v>
 	TypeId TypeId::get(T (*)[size_v]) {
 		static TypeId id(TheGreatTable::record(Actions(&TypeActions<T[size_v]>::reflect,//
-			&CommonActions<T[size_v]>::type_name,										//
-			&TypeActions<T[size_v]>::type_size,											//
+			&CommonActions<T[size_v]>::typeName,										//
+			&TypeActions<T[size_v]>::typeSize,											//
 			&TypeActions<T[size_v]>::construct,											//
 			&TypeActions<T[size_v]>::destroy,											//
 			&TypeActions<T[size_v]>::copy,												//

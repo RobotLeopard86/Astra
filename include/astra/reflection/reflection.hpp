@@ -34,7 +34,7 @@ namespace astra::reflection {
 		print(reflect(pointer));
 	}
 
-	size_t type_size(TypeId id);
+	size_t typeSize(TypeId id);
 
 	void construct(Var variable);
 	void destroy(Var variable);

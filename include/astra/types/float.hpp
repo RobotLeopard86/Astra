@@ -7,8 +7,8 @@ namespace astra {
 
 	template<typename T>
 	struct FloatActions {
-		static TypeInfo reflect(void* value, bool is_const) {
-			return TypeInfo(Floating(static_cast<T*>(value), is_const));
+		static TypeInfo reflect(void* value, bool isConst) {
+			return TypeInfo(Floating(static_cast<T*>(value), isConst));
 		}
 	};
 
@@ -16,8 +16,8 @@ namespace astra {
 	typename std::enable_if_t<std::is_floating_point_v<T>, TypeId>//
 	TypeId::get(T* ptr) {
 		static TypeId id(TheGreatTable::record(Actions(&FloatActions<T>::reflect,//
-			&CommonActions<T>::type_name,										 //
-			&CommonActions<T>::type_size,										 //
+			&CommonActions<T>::typeName,										 //
+			&CommonActions<T>::typeSize,										 //
 			&CommonActions<T>::nop,												 //
 			&CommonActions<T>::nop,												 //
 			&CommonActions<T>::copy,											 //

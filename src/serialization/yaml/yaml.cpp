@@ -12,17 +12,17 @@
 using namespace astra::serialization;
 
 void yaml::serialize(std::string* str, Var var) {
-	StringWriter string_w(str);
+	StringWriter stringW(str);
 	auto info = reflection::reflect(var);
 
-	serialize_recursive(&string_w, info, 0);
+	serializeRecursive(&stringW, info, 0);
 }
 
 void yaml::serialize(std::ostream& stream, Var var) {
-	StreamWriter stream_w(stream);
+	StreamWriter streamW(stream);
 	auto info = reflection::reflect(var);
 
-	serialize_recursive(&stream_w, info, 0);
+	serializeRecursive(&streamW, info, 0);
 }
 
 Expected<None> yaml::deserialize(Var var, std::string_view str) {

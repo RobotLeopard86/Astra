@@ -18,8 +18,8 @@
 
 using namespace astra;
 
-ParserJson::ParserJson(const char* input, size_t input_size)//
-  : LexerJson(input, input_size) {
+ParserJson::ParserJson(const char* input, size_t inputSize)//
+  : LexerJson(input, inputSize) {
 }
 
 ParserJson::ParserJson(std::istream& stream)//
@@ -27,26 +27,26 @@ ParserJson::ParserJson(std::istream& stream)//
 }
 
 Expected<None> ParserJson::deserialize(TypeInfo* info) {
-	return parse_next(info);
+	return parseNext(info);
 }
 
 Expected<None> ParserJson::parse(TypeInfo* info, char token) {
-	if(get_word() == "null") {
+	if(getWord() == "null") {
 		//do nothing, just skip the field
 		return None();
 	}
 
 	if(info->is<Pointer>()) {
-		auto p = info->unsafe_get<Pointer>();
-		return p.get_nested().match_move(//
+		auto p = info->unsafeGet<Pointer>();
+		return p.getNested().matchMove(//
 			[this, &p, token](const Error& /*err*/) -> Expected<None> {
 				p.init();
-				auto nested_info = reflection::reflect(p.var());
-				return parse(&nested_info, token);
+				auto nestedInfo = reflection::reflect(p.var());
+				return parse(&nestedInfo, token);
 			},
 			[this, token](Var var) -> Expected<None> {
-				auto nested_info = reflection::reflect(var);
-				return parse(&nested_info, token);
+				auto nestedInfo = reflection::reflect(var);
+				return parse(&nestedInfo, token);
 			});
 	}
 
@@ -55,43 +55,43 @@ Expected<None> ParserJson::parse(TypeInfo* info, char token) {
     case 's': {
       return info->match(
           [this](Bool& b) -> Expected<None> {  //
-            return b.set(parse_bool(get_word()));
+            return b.set(parseBool(getWord()));
           },
           [this](Integer& i) -> Expected<None> {
-            auto w = get_word();
+            auto w = getWord();
 
-            if (w.front() == '-' || i.is_signed()) {
-              return i.set_signed(std::strtoll(w.data(), nullptr, 10));
+            if (w.front() == '-' || i.isSigned()) {
+              return i.setSigned(std::strtoll(w.data(), nullptr, 10));
             }
-            return i.set_unsigned(std::strtoull(w.data(), nullptr, 10));
+            return i.setUnsigned(std::strtoull(w.data(), nullptr, 10));
           },
           [this](Floating& f) -> Expected<None> {  //
-            return f.set(parse_double(get_word()));
+            return f.set(parseDouble(getWord()));
           },
           [this](auto&&) -> Expected<None> {  //
-            return error_match();
+            return errorMatch();
           });
     }
     case '$':
       return info->match(
           [this](String& s) -> Expected<None> {
-            return s.set(get_word());
+            return s.set(getWord());
           },
           [this](Enum& e) -> Expected<None> {
-            return e.parse(get_word());
+            return e.parse(getWord());
           },
           [this](Floating& f) -> Expected<None> {
-            auto ex = parse_double_special(get_word());
+            auto ex = parseDoubleSpecial(getWord());
             __retry(ex);
             return f.set(ex.unwrap());
           },
           [this](auto&&) -> Expected<None> {
-            return error_match();
+            return errorMatch();
           });
     case '[':
       return info->match(
           [this](Array& a) -> Expected<None> {
-            return parse_array(a.nested_type(), [&](size_t i, Var var) -> Expected<None> {
+            return parseArray(a.nestedType(), [&](size_t i, Var var) -> Expected<None> {
               if (i < a.size()) {
                 auto item = a.at(i).unwrap();
                 return reflection::copy(item, var);
@@ -101,30 +101,30 @@ Expected<None> ParserJson::parse(TypeInfo* info, char token) {
           },
           [this](Sequence& s) -> Expected<None> {
             s.clear();
-            return parse_array(s.nested_type(), [&](size_t, Var var) {
+            return parseArray(s.nestedType(), [&](size_t, Var var) {
               return s.push(var);
             });
           },
           [this](Map& m) -> Expected<None> {
-            return parse_map(m);
+            return parseMap(m);
           },
           [this](auto&&) -> Expected<None> {
-            return error_match();
+            return errorMatch();
           });
 		// clang-format on
 		case '{':
-			return parse_object(info);
+			return parseObject(info);
 		default:
-			return error_token(token);
+			return errorToken(token);
 	}
 }
 
-Expected<None> ParserJson::parse_next(TypeInfo* info) {
+Expected<None> ParserJson::parseNext(TypeInfo* info) {
 	next();
 	return parse(info, _token);
 }
 
-Expected<None> ParserJson::parse_array(TypeId nested_type, std::function<Expected<None>(size_t, Var)> add) {
+Expected<None> ParserJson::parseArray(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add) {
 	next();//skip '['
 	if(_token == ']') {
 		//an empty array
@@ -132,14 +132,14 @@ Expected<None> ParserJson::parse_array(TypeId nested_type, std::function<Expecte
 	}
 
 	//save few ns for each iteration of the loop
-	auto boxed_info = reflection::reflect(Var(nullptr, nested_type, false));
+	auto boxedInfo = reflection::reflect(Var(nullptr, nestedType, false));
 
 	for(size_t i = 0; /**/; ++i) {
-		Box box(nested_type);//Box should be a new object for each iteration
-		boxed_info.unsafe_assign(box.var().raw_mut());
+		Box box(nestedType);//Box should be a new object for each iteration
+		boxedInfo.unsafeAssign(box.var().rawMut());
 
-		auto ex = parse(&boxed_info, _token)
-					  .match_move([&, i](None&&) -> Expected<None> { return add(i, box.var()); },
+		auto ex = parse(&boxedInfo, _token)
+					  .matchMove([&, i](None&&) -> Expected<None> { return add(i, box.var()); },
 						  [](Error&& err) -> Expected<None> { return err; });
 		__retry(ex);
 
@@ -148,7 +148,7 @@ Expected<None> ParserJson::parse_array(TypeId nested_type, std::function<Expecte
 			return None();
 		}
 		if(_token != ',') {
-			return error_token(_token);
+			return errorToken(_token);
 		}
 
 		//get another one
@@ -158,7 +158,7 @@ Expected<None> ParserJson::parse_array(TypeId nested_type, std::function<Expecte
 	return None();
 }
 
-Expected<None> ParserJson::parse_object(TypeInfo* info) {
+Expected<None> ParserJson::parseObject(TypeInfo* info) {
 	next();//skip '{'
 	if(_token == '}') {
 		//an empty object
@@ -176,16 +176,16 @@ Expected<None> ParserJson::parse_object(TypeInfo* info) {
 			return error("Cannot reach a field value");
 		}
 
-		auto field = o.get_field(get_word()).unwrap().var();
-		auto field_info = reflection::reflect(field);
-		__retry(parse_next(&field_info));
+		auto field = o.getField(getWord()).unwrap().var();
+		auto fieldInfo = reflection::reflect(field);
+		__retry(parseNext(&fieldInfo));
 
 		next();
 		if(_token == '}') {
 			return None();
 		}
 		if(_token != ',') {
-			return error_token(_token);
+			return errorToken(_token);
 		}
 
 		next();
@@ -194,7 +194,7 @@ Expected<None> ParserJson::parse_object(TypeInfo* info) {
 	return error("Max depth level exceeded");
 }
 
-Expected<None> ParserJson::parse_map(Map& map) {
+Expected<None> ParserJson::parseMap(Map& map) {
 	map.clear();
 
 	next();//skip '['
@@ -208,10 +208,10 @@ Expected<None> ParserJson::parse_map(Map& map) {
 
 	if(_token == '$') {
 		//if particular tag found parse it
-		auto pos = get_word().find("!!map");
+		auto pos = getWord().find("!!map");
 		if(pos != std::string::npos) {
 
-			auto kv = parse_tag(get_word());
+			auto kv = parseTag(getWord());
 			__retry(kv);
 
 			auto pair = kv.unwrap();
@@ -221,7 +221,7 @@ Expected<None> ParserJson::parse_map(Map& map) {
 			//make step to get a new token
 			next();
 			if(_token != ',') {
-				return error_token(_token);
+				return errorToken(_token);
 			}
 			next();
 		} else {
@@ -230,19 +230,19 @@ Expected<None> ParserJson::parse_map(Map& map) {
 	}
 
 	else if(_token != '{') {
-		return error_token(_token);
+		return errorToken(_token);
 	}
 
-	auto key_info = reflection::reflect(Var(nullptr, map.key_type(), false));
-	auto val_info = reflection::reflect(Var(nullptr, map.val_type(), false));
+	auto keyInfo = reflection::reflect(Var(nullptr, map.keyType(), false));
+	auto valInfo = reflection::reflect(Var(nullptr, map.valType(), false));
 
 	//token '{' has already been read
 	while(true) {
-		Box key_box(map.key_type());//Box should be a new object for each iteration
-		key_info.unsafe_assign(key_box.var().raw_mut());
+		Box keyBox(map.keyType());//Box should be a new object for each iteration
+		keyInfo.unsafeAssign(keyBox.var().rawMut());
 
-		Box val_box(map.val_type());
-		val_info.unsafe_assign(val_box.var().raw_mut());
+		Box valBox(map.valType());
+		valInfo.unsafeAssign(valBox.var().rawMut());
 
 		//parse first field key or val
 		next();
@@ -255,13 +255,13 @@ Expected<None> ParserJson::parse_map(Map& map) {
 			return error("Cannot reach a field value");
 		}
 
-		if(get_word() == key) {
-			__retry(parse_next(&key_info));
-		} else if(get_word() == val) {
-			__retry(parse_next(&val_info));
+		if(getWord() == key) {
+			__retry(parseNext(&keyInfo));
+		} else if(getWord() == val) {
+			__retry(parseNext(&valInfo));
 		} else {
 			return Error(astra::format("Got an unexpected field '{}' while parse map; {}",//
-				get_word(), get_position().to_string()));
+				getWord(), getPosition().toString()));
 		}
 
 		next();
@@ -269,7 +269,7 @@ Expected<None> ParserJson::parse_map(Map& map) {
 			return error("Unexpected end of JSON object");
 		}
 		if(_token != ',') {
-			return error_token(_token);
+			return errorToken(_token);
 		}
 
 		//parse second field key or val
@@ -283,16 +283,16 @@ Expected<None> ParserJson::parse_map(Map& map) {
 			return error("Cannot reach a field value");
 		}
 
-		if(get_word() == key) {
-			__retry(parse_next(&key_info));
-		} else if(get_word() == val) {
-			__retry(parse_next(&val_info));
+		if(getWord() == key) {
+			__retry(parseNext(&keyInfo));
+		} else if(getWord() == val) {
+			__retry(parseNext(&valInfo));
 		} else {
 			return Error(astra::format("Got an unexpected field '{}' while parse map; {}",//
-				get_word(), get_position().to_string()));
+				getWord(), getPosition().toString()));
 		}
 
-		__retry(map.insert(key_box.var(), val_box.var()));
+		__retry(map.insert(keyBox.var(), valBox.var()));
 
 		next();
 		if(_token == '}') {
@@ -302,7 +302,7 @@ Expected<None> ParserJson::parse_map(Map& map) {
 			return None();
 		}
 		if(_token != ',') {
-			return error_token(_token);
+			return errorToken(_token);
 		}
 
 		//take next '{'
@@ -315,18 +315,18 @@ void ParserJson::next() {
 }
 
 Error ParserJson::error(const char* str) {
-	return Error(astra::format("{}; {}", str, get_position().to_string()));
+	return Error(astra::format("{}; {}", str, getPosition().toString()));
 }
 
-Error ParserJson::error_token(char token) {
-	return Error(astra::format("Unexpected token '{}'; {}", token, get_position().to_string()));
+Error ParserJson::errorToken(char token) {
+	return Error(astra::format("Unexpected token '{}'; {}", token, getPosition().toString()));
 }
 
-Error ParserJson::error_match() {
-	return Error(astra::format("Cannot match correct type; {}", get_position().to_string()));
+Error ParserJson::errorMatch() {
+	return Error(astra::format("Cannot match correct type; {}", getPosition().toString()));
 }
 
-Expected<std::pair<std::string, std::string>> ParserJson::parse_tag(std::string_view str) {
+Expected<std::pair<std::string, std::string>> ParserJson::parseTag(std::string_view str) {
 	auto pos1 = str.find('|');
 	if(pos1 == std::string::npos) {
 		return error("Cannot find '|' in the tag");
@@ -342,11 +342,11 @@ Expected<std::pair<std::string, std::string>> ParserJson::parse_tag(std::string_
 	return std::make_pair(std::move(key), std::move(val));
 }
 
-bool ParserJson::parse_bool(std::string_view str) {
+bool ParserJson::parseBool(std::string_view str) {
 	return str != "false";
 }
 
-Expected<double> ParserJson::parse_double_special(std::string_view str) {
+Expected<double> ParserJson::parseDoubleSpecial(std::string_view str) {
 	if(str == "-inf") {
 		return -std::numeric_limits<double>::infinity();
 	}
@@ -359,6 +359,6 @@ Expected<double> ParserJson::parse_double_special(std::string_view str) {
 	return Error(astra::format("Expected -inf, inf, nan but {} reached", str));
 }
 
-double ParserJson::parse_double(std::string_view str) {
+double ParserJson::parseDouble(std::string_view str) {
 	return std::strtod(&str[0], nullptr);
 }

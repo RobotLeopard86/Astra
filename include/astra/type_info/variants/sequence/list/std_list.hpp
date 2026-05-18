@@ -12,54 +12,54 @@ namespace astra {
 	struct StdList : public IList, public sequence::ErrHelper {
 		StdList() = delete;
 
-		StdList(std::list<T>* list, bool is_const)
+		StdList(std::list<T>* list, bool isConst)
 		  : _list(list),//
-			_is_const(is_const) {
+			_isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_list);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_list = static_cast<std::list<T>*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_list = static_cast<std::list<T>*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
-		Var own_var() const override {
-			return Var(_list, TypeId::get(_list), _is_const);
+		Var ownVar() const override {
+			return Var(_list, TypeId::get(_list), _isConst);
 		}
 
-		TypeId nested_type() const override {
+		TypeId nestedType() const override {
 			return TypeId::get<T>();
 		}
 
-		void for_each(std::function<void(Var)> callback) const override {
-			const auto nested_type = TypeId::get<T>();
+		void forEach(std::function<void(Var)> callback) const override {
+			const auto nestedType = TypeId::get<T>();
 
 			for(auto&& entry : *_list) {
-				callback(Var(&entry, nested_type, true));
+				callback(Var(&entry, nestedType, true));
 			}
 		}
 
-		void for_each(std::function<void(Var)> callback) override {
-			const auto nested_type = TypeId::get<T>();
+		void forEach(std::function<void(Var)> callback) override {
+			const auto nestedType = TypeId::get<T>();
 
 			for(auto&& entry : *_list) {
-				callback(Var(&entry, nested_type, _is_const));
+				callback(Var(&entry, nestedType, _isConst));
 			}
 		}
 
-		void unsafe_for_each(std::function<void(void*)> callback) const override {
+		void unsafeForEach(std::function<void(void*)> callback) const override {
 			for(auto&& entry : *_list) {
 				callback(&entry);
 			}
@@ -74,11 +74,11 @@ namespace astra {
 		}
 
 		Expected<None> push(Var value) override {
-			auto nested_type = TypeId::get<T>();
+			auto nestedType = TypeId::get<T>();
 
-			if(nested_type != value.type()) {
+			if(nestedType != value.type()) {
 				return error("Trying to set with type: {} to list<{}>",//
-					value.type(), nested_type);
+					value.type(), nestedType);
 			}
 			_list->push_back(*static_cast<const T*>(value.raw()));
 			return None();
@@ -88,11 +88,11 @@ namespace astra {
 			_list->pop_back();
 		}
 
-		void push_front(Var element) override {
+		void pushFront(Var element) override {
 			_list->push_front(*static_cast<const T*>(element.raw()));
 		}
 
-		void pop_front() override {
+		void popFront() override {
 			_list->pop_front();
 		}
 
@@ -100,19 +100,19 @@ namespace astra {
 			if(_list->empty()) {
 				return Error("The list is empty");
 			}
-			return Var(&_list->front(), TypeId::get<T>(), _is_const);
+			return Var(&_list->front(), TypeId::get<T>(), _isConst);
 		};
 
 		Expected<Var> back() override {
 			if(_list->empty()) {
 				return Error("The list is empty");
 			}
-			return Var(&_list->back(), TypeId::get<T>(), _is_const);
+			return Var(&_list->back(), TypeId::get<T>(), _isConst);
 		};
 
 	  private:
 		std::list<T>* _list;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

@@ -9,11 +9,11 @@ namespace astra {
 	///each reflectable type has to have a record in the table
 	struct TheGreatTable {
 		static const inline std::vector<Actions>& data() {
-			return data_guard();
+			return dataGuard();
 		}
 
 		static size_t record(Actions actions) {
-			auto& data = data_guard();
+			auto& data = dataGuard();
 
 			data.push_back(actions);
 			return data.size() - 1;
@@ -21,11 +21,11 @@ namespace astra {
 
 	  private:
 		//static initialization fiasco guard to guarantee the first place for UnknownActions
-		static std::vector<Actions>& data_guard() {
+		static std::vector<Actions>& dataGuard() {
 			//zero index for unknown type
 			static std::vector<Actions> data = {Actions(&UnknownActions::reflect,//
-				&UnknownActions::type_name,										 //
-				&UnknownActions::type_size,										 //
+				&UnknownActions::typeName,										 //
+				&UnknownActions::typeSize,										 //
 				&UnknownActions::construct,										 //
 				&UnknownActions::destroy,										 //
 				&UnknownActions::copy,											 //

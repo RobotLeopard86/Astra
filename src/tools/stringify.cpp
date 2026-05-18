@@ -5,19 +5,19 @@
 
 namespace astra {
 
-	std::string to_string(bool value) {
+	std::string toString(bool value) {
 		return value ? "true" : "false";
 	}
 
-	std::string to_string(int64_t value) {
+	std::string toString(int64_t value) {
 		return std::to_string(value);
 	}
 
-	std::string to_string(uint64_t value) {
+	std::string toString(uint64_t value) {
 		return std::to_string(value);
 	}
 
-	std::string to_string(double value, int precision) {
+	std::string toString(double value, int precision) {
 		std::stringstream stream;
 		stream << std::setiosflags(std::ios::fixed) << std::setprecision(precision) << value;
 

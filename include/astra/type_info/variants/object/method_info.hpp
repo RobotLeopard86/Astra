@@ -39,42 +39,42 @@ namespace astra {
 
 		template<typename... Args>
 		Expected<None> invoke(const Args&... args) const {
-			std::vector<Var> v_args;
-			fold_args(&v_args, args...);
+			std::vector<Var> vArgs;
+			foldArgs(&vArgs, args...);
 
-			return _data->invoke(Var(), _base, v_args);
+			return _data->invoke(Var(), _base, vArgs);
 		}
 
 		template<typename RetT, typename... Args>
 		Expected<RetT> invoke(const Args&... args) const {
-			std::vector<Var> v_args;
-			fold_args(&v_args, &args...);
+			std::vector<Var> vArgs;
+			foldArgs(&vArgs, &args...);
 
 			RetT ret;
-			return _data->invoke(Var(&ret), _base, v_args)
-				.match_move(										  //
+			return _data->invoke(Var(&ret), _base, vArgs)
+				.matchMove(											  //
 					[](Error&& err) -> Expected<RetT> { return err; },//
 					[&](auto&& _) -> Expected<RetT> { return ret; });
 		}
 
-		bool is_const() const {
-			return _data->is_const();
+		bool isConst() const {
+			return _data->isConst();
 		}
 
-		bool is_static() const {
-			return _data->is_static();
+		bool isStatic() const {
+			return _data->isStatic();
 		}
 
-		bool is_public() const {
-			return _data->is_public();
+		bool isPublic() const {
+			return _data->isPublic();
 		}
 
-		bool is_protected() const {
-			return _data->is_protected();
+		bool isProtected() const {
+			return _data->isProtected();
 		}
 
-		bool is_private() const {
-			return _data->is_private();
+		bool isPrivate() const {
+			return _data->isPrivate();
 		}
 
 	  private:
@@ -82,16 +82,16 @@ namespace astra {
 		const MethodDesc* _data;
 
 		template<typename ArgT, typename... Args>
-		void fold_args(std::vector<Var>* v_args, const ArgT* arg, const Args*... other) const {
-			v_args->push_back(Var(arg));
+		void fold_args(std::vector<Var>* vArgs, const ArgT* arg, const Args*... other) const {
+			vArgs->push_back(Var(arg));
 
-			fold_args(v_args, other...);
+			foldArgs(vArgs, other...);
 		}
 
 		template<typename ArgT>
-		void fold_args(std::vector<Var>* v_args, const ArgT* arg) const {
+		void fold_args(std::vector<Var>* vArgs, const ArgT* arg) const {
 
-			v_args->push_back(Var(arg));
+			vArgs->push_back(Var(arg));
 		}
 	};
 

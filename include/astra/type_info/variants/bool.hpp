@@ -13,26 +13,26 @@
 namespace astra {
 
 	struct Bool {
-		Bool(bool* value, bool is_const)
-		  : _value(value), _is_const(is_const) {
+		Bool(bool* value, bool isConst)
+		  : _value(value), _isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) {
 			auto t = TypeId::get<bool>();
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_value = const_cast<bool*>(static_cast<const bool*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) {
+		void unsafeAssign(void* ptr) {
 			_value = static_cast<bool*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
 		[[nodiscard]] bool get() const {
@@ -40,7 +40,7 @@ namespace astra {
 		}
 
 		Expected<None> set(bool value) {
-			if(_is_const) {
+			if(_isConst) {
 				return Error("Trying to set const value");
 			}
 			*_value = value;
@@ -48,12 +48,12 @@ namespace astra {
 		}
 
 		Var var() {
-			return Var(_value, _is_const);
+			return Var(_value, _isConst);
 		}
 
 	  private:
 		bool* _value;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

@@ -14,56 +14,56 @@ namespace astra {
 	struct StdQueue : public IQueue, public sequence::ErrHelper {
 		StdQueue() = delete;
 
-		StdQueue(std::queue<T>* queue, bool is_const)
+		StdQueue(std::queue<T>* queue, bool isConst)
 		  : _queue(queue),//
-			_is_const(is_const) {
+			_isConst(isConst) {
 		}
 
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_queue);
 			if(var.type() != t) {
 				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::type_name(var.type()),					   //
-					reflection::type_name(t)));
+					reflection::typeName(var.type()),					  //
+					reflection::typeName(t)));
 			}
 
 			_queue = static_cast<std::queue<T>*>(const_cast<void*>(var.raw()));
-			_is_const = var.is_const();
+			_isConst = var.isConst();
 			return None();
 		}
 
-		void unsafe_assign(void* ptr) override {
+		void unsafeAssign(void* ptr) override {
 			_queue = static_cast<std::queue<T>*>(ptr);
-			_is_const = false;
+			_isConst = false;
 		}
 
-		Var own_var() const override {
-			return Var(_queue, TypeId::get(_queue), _is_const);
+		Var ownVar() const override {
+			return Var(_queue, TypeId::get(_queue), _isConst);
 		}
 
-		TypeId nested_type() const override {
+		TypeId nestedType() const override {
 			return TypeId::get<T>();
 		}
 
-		void for_each(std::function<void(Var)> callback) const override {
-			const auto nested_type = TypeId::get<T>();
+		void forEach(std::function<void(Var)> callback) const override {
+			const auto nestedType = TypeId::get<T>();
 			const auto end = QueueIterator<T>::end(_queue);
 
 			for(auto it = QueueIterator<T>::begin(_queue); it != end; ++it) {
-				callback(Var(&(*it), nested_type, true));
+				callback(Var(&(*it), nestedType, true));
 			}
 		}
 
-		void for_each(std::function<void(Var)> callback) override {
-			const auto nested_type = TypeId::get<T>();
+		void forEach(std::function<void(Var)> callback) override {
+			const auto nestedType = TypeId::get<T>();
 			const auto end = QueueIterator<T>::end(_queue);
 
 			for(auto it = QueueIterator<T>::begin(_queue); it != end; ++it) {
-				callback(Var(&(*it), nested_type, _is_const));
+				callback(Var(&(*it), nestedType, _isConst));
 			}
 		}
 
-		void unsafe_for_each(std::function<void(void*)> callback) const override {
+		void unsafeForEach(std::function<void(void*)> callback) const override {
 			const auto end = QueueIterator<T>::end(_queue);
 
 			for(auto it = QueueIterator<T>::begin(_queue); it != end; ++it) {
@@ -82,11 +82,11 @@ namespace astra {
 		}
 
 		Expected<None> push(Var value) override {
-			auto nested_type = TypeId::get<T>();
+			auto nestedType = TypeId::get<T>();
 
-			if(nested_type != value.type()) {
+			if(nestedType != value.type()) {
 				return error("Trying to set with type: {} to queue<{}>",//
-					value.type(), nested_type);
+					value.type(), nestedType);
 			}
 			_queue->push(*static_cast<const T*>(value.raw()));
 			return None();
@@ -106,7 +106,7 @@ namespace astra {
 
 	  private:
 		std::queue<T>* _queue;
-		bool _is_const;
+		bool _isConst;
 	};
 
 }

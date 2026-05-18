@@ -15,38 +15,38 @@ namespace astra {
 		Sequence() = delete;
 
 		template<typename T>
-		Sequence(std::vector<T>* vector, bool is_const) {
-			new(_mem) StdVector<T>(vector, is_const);
+		Sequence(std::vector<T>* vector, bool isConst) {
+			new(_mem) StdVector<T>(vector, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::list<T>* list, bool is_const) {
-			new(_mem) StdList<T>(list, is_const);
+		Sequence(std::list<T>* list, bool isConst) {
+			new(_mem) StdList<T>(list, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::deque<T>* deque, bool is_const) {
-			new(_mem) StdDeque<T>(deque, is_const);
+		Sequence(std::deque<T>* deque, bool isConst) {
+			new(_mem) StdDeque<T>(deque, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::stack<T>* stack, bool is_const) {
-			new(_mem) StdStack<T>(stack, is_const);
+		Sequence(std::stack<T>* stack, bool isConst) {
+			new(_mem) StdStack<T>(stack, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::queue<T>* queue, bool is_const) {
-			new(_mem) StdQueue<T>(queue, is_const);
+		Sequence(std::queue<T>* queue, bool isConst) {
+			new(_mem) StdQueue<T>(queue, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::set<T>* set, bool is_const) {
-			new(_mem) StdSet<T>(set, is_const);
+		Sequence(std::set<T>* set, bool isConst) {
+			new(_mem) StdSet<T>(set, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::unordered_set<T>* set, bool is_const) {
-			new(_mem) StdUnorderedSet<T>(set, is_const);
+		Sequence(std::unordered_set<T>* set, bool isConst) {
+			new(_mem) StdUnorderedSet<T>(set, isConst);
 		}
 
 		~Sequence() {
@@ -57,24 +57,24 @@ namespace astra {
 			return impl()->assign(var);
 		}
 
-		void unsafe_assign(void* ptr) {
-			return impl()->unsafe_assign(ptr);
+		void unsafeAssign(void* ptr) {
+			return impl()->unsafeAssign(ptr);
 		}
 
-		Var own_var() const {
-			return impl()->own_var();
+		Var ownVar() const {
+			return impl()->ownVar();
 		}
 
-		TypeId nested_type() const {
-			return impl()->nested_type();
+		TypeId nestedType() const {
+			return impl()->nestedType();
 		}
 
-		void for_each(std::function<void(Var)> callback) const {
-			impl()->for_each(callback);
+		void forEach(std::function<void(Var)> callback) const {
+			impl()->forEach(callback);
 		}
 
-		void unsafe_for_each(std::function<void(void*)> callback) const {
-			impl()->unsafe_for_each(callback);
+		void unsafeForEach(std::function<void(void*)> callback) const {
+			impl()->unsafeForEach(callback);
 		}
 
 		void clear() {
