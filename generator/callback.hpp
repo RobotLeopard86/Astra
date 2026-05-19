@@ -21,8 +21,8 @@ struct JsonBuilder {
 	  : _ctx(ctx), _sm(sm), _opts(opts) {
 	}
 
-	void handle_class(const CXXRecordDecl* c);
-	void handle_enum(const EnumDecl* e);
+	void handleClass(const CXXRecordDecl* c);
+	void handleEnum(const EnumDecl* e);
 
   private:
 	Context* _ctx;
@@ -30,12 +30,12 @@ struct JsonBuilder {
 	const SourceManager* _sm;
 	const LangOptions& _opts;
 
-	void add_class(const CXXRecordDecl* c);
-	void add_enum(const EnumDecl* e);
-	void add_function(nlohmann::json* functions, const FunctionDecl* f, const std::string& className, bool inherited);
-	void add_field(nlohmann::json* fields, const ValueDecl* v, bool inherited);
+	void addClass(const CXXRecordDecl* c);
+	void addEnum(const EnumDecl* e);
+	void addFunction(nlohmann::json* functions, const FunctionDecl* f, const std::string& className, bool inherited);
+	void addField(nlohmann::json* fields, const ValueDecl* v, bool inherited);
 
-	inline std::string type_str(QualType type, bool removeCVref = false) const {
+	inline std::string typeStr(QualType type, bool removeCVref = false) const {
 		const PrintingPolicy pp(_opts);
 		SplitQualType split;
 		if(removeCVref) {
@@ -48,13 +48,13 @@ struct JsonBuilder {
 		return QualType::getAsString(split, pp);
 	}
 
-	std::string file_name(const NamedDecl* decl) const;
-	static void set_name(nlohmann::json* item, const NamedDecl* decl);
+	std::string fileName(const NamedDecl* decl) const;
+	static void setName(nlohmann::json* item, const NamedDecl* decl);
 
-	static inline nlohmann::json::array_t access_arr(const ValueDecl* decl) {
+	static inline nlohmann::json::array_t accessArr(const ValueDecl* decl) {
 		nlohmann::json::array_t acc;
 
-		acc.emplace_back(access_str(decl->getAccess()));
+		acc.emplace_back(accessStr(decl->getAccess()));
 
 		if(const auto* f = dyn_cast<FunctionDecl>(decl)) {
 			if(dyn_cast<FunctionType>(decl->getType())->isConst()) {
@@ -74,7 +74,7 @@ struct JsonBuilder {
 		return acc;
 	}
 
-	static inline std::string access_str(AccessSpecifier access) {
+	static inline std::string accessStr(AccessSpecifier access) {
 		switch(access) {
 			case clang::AS_public:
 				return "public";
@@ -98,10 +98,10 @@ class AstCallback : public MatchFinder::MatchCallback {
 		JsonBuilder builder(_ctx, result.SourceManager, result.Context->getLangOpts());
 
 		if(const auto* c = result.Nodes.getNodeAs<CXXRecordDecl>("c")) {
-			builder.handle_class(c);
+			builder.handleClass(c);
 
 		} else if(const auto* e = result.Nodes.getNodeAs<EnumDecl>("e")) {
-			builder.handle_enum(e);
+			builder.handleEnum(e);
 
 		} else {
 			throw std::runtime_error("Unrechable case");

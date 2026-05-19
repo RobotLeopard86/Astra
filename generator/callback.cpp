@@ -3,7 +3,18 @@
 #include "clang/AST/Type.h"
 #include "clang/AST/Attr.h"
 #include "clang/AST/Decl.h"
-#include "llvm/Support/Casting.h"
+#include "clang/Sema/Lookup.h"
+
+#include <clang/AST/ASTContext.h>
+#include <clang/AST/DeclTemplate.h>
+#include <clang/AST/DeclarationName.h>
+#include <clang/AST/TemplateBase.h>
+#include <clang/AST/TypeBase.h>
+#include <clang/Basic/IdentifierTable.h>
+#include <clang/Basic/LangOptions.h>
+#include <clang/Basic/SourceLocation.h>
+#include <clang/Sema/Ownership.h>
+#include <llvm/Support/Casting.h>
 
 #include <filesystem>
 #include <vector>
@@ -11,10 +22,10 @@
 using namespace clang;
 using namespace clang::ast_matchers;
 
-void JsonBuilder::handle_class(const CXXRecordDecl* c) {
+void JsonBuilder::handleClass(const CXXRecordDecl* c) {
 	bool ok = false;
 	for(clang::Attr* attr : c->getAttrs()) {
-		if(clang::AnnotateAttr* annAttr = llvm::dyn_cast<clang::AnnotateAttr>(attr)) {
+		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
 			llvm::StringRef annText = annAttr->getAnnotation();
 			if(annText.compare("astra.reflect") == 0) {
 				ok = true;
@@ -23,13 +34,40 @@ void JsonBuilder::handle_class(const CXXRecordDecl* c) {
 		}
 	}
 	if(!ok) return;
-	add_class(c);
+
+	clang::ASTContext& astCtx = c->getASTContext();
+	clang::IdentifierInfo& ii = astCtx.Idents.get("astragen_myconcept_check");
+	clang::ClassTemplateDecl* checkDecl = nullptr;
+	for(clang::NamedDecl* namedDecl : astCtx.getTranslationUnitDecl()->lookup(&ii)) {
+		if(clang::ClassTemplateDecl* ctd = dyn_cast<ClassTemplateDecl>(namedDecl)) {
+			checkDecl = ctd;
+			break;
+		}
+	}
+	if(checkDecl == nullptr) return;
+	llvm::SmallVector<clang::TemplateArgument, 1> templateArgs;
+	templateArgs.emplace_back(astCtx.getCanonicalTypeDeclType(c));
+	void* ip = nullptr;
+	clang::ClassTemplateSpecializationDecl* specDecl = checkDecl->findSpecialization(templateArgs, ip);
+	if(specDecl == nullptr) return;
+	for(clang::Decl* decl : specDecl->decls()) {
+		auto* varDecl = llvm::dyn_cast<clang::VarDecl>(decl);
+		if(!varDecl || varDecl->getName() != "value")
+			continue;
+		clang::Expr* init = varDecl->getInit();
+		if(!init) return;
+		clang::Expr::EvalResult eval;
+		if(!init->EvaluateAsConstantExpr(eval, astCtx)) return;
+		if(!eval.Val.getInt().getBoolValue()) return;
+	}
+
+	addClass(c);
 }
 
-void JsonBuilder::handle_enum(const EnumDecl* e) {
+void JsonBuilder::handleEnum(const EnumDecl* e) {
 	bool ok = false;
 	for(clang::Attr* attr : e->getAttrs()) {
-		if(clang::AnnotateAttr* annAttr = llvm::dyn_cast<clang::AnnotateAttr>(attr)) {
+		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
 			llvm::StringRef annText = annAttr->getAnnotation();
 			if(annText.compare("astra.reflect") == 0) {
 				ok = true;
@@ -39,10 +77,10 @@ void JsonBuilder::handle_enum(const EnumDecl* e) {
 	}
 	if(!ok) return;
 
-	add_enum(e);
+	addEnum(e);
 }
 
-void JsonBuilder::add_class(const CXXRecordDecl* c) {
+void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	auto name = c->getQualifiedNameAsString();
 
 	//check if this class is already handled
@@ -54,7 +92,7 @@ void JsonBuilder::add_class(const CXXRecordDecl* c) {
 
 	json["kind"] = 0;
 	json["name"] = name;
-	json["origin"] = std::filesystem::path(file_name(c)).filename();
+	json["origin"] = std::filesystem::path(fileName(c)).filename();
 
 	std::vector<const clang::CXXRecordDecl*> decls;
 
@@ -65,7 +103,7 @@ void JsonBuilder::add_class(const CXXRecordDecl* c) {
 		for(auto&& b : c->bases()) {
 			nlohmann::json item;
 
-			item["acc"] = access_str(b.getAccessSpecifier());
+			item["acc"] = accessStr(b.getAccessSpecifier());
 			item["name"] = b.getType()->getAsRecordDecl()->getQualifiedNameAsString();
 
 			parents.push_back(std::move(item));
@@ -78,17 +116,17 @@ void JsonBuilder::add_class(const CXXRecordDecl* c) {
 	auto fields = nlohmann::json::array();
 	auto func = nlohmann::json::array();
 
-	std::vector<std::string> func_names;
+	std::vector<std::string> funcNames;
 
 	//Process primary class members
 	for(auto&& d : c->getPrimaryContext()->decls()) {
 		if(const auto* f = dyn_cast<FieldDecl>(d)) {
-			add_field(&fields, f, false);
+			addField(&fields, f, false);
 		} else if(const auto* v = dyn_cast<VarDecl>(d)) {
-			add_field(&fields, v, false);
+			addField(&fields, v, false);
 		} else if(const auto* f = dyn_cast<FunctionDecl>(d)) {
-			add_function(&func, f, c->getNameAsString(), false);
-			func_names.push_back(f->getNameAsString());
+			addFunction(&func, f, c->getNameAsString(), false);
+			funcNames.push_back(f->getNameAsString());
 		} else if(const auto* nc = dyn_cast<CXXRecordDecl>(d)) {
 			if(!nc->isThisDeclarationADefinition() ||//
 				nc->hasAttr<clang::AnnotateAttr>()) {
@@ -96,14 +134,14 @@ void JsonBuilder::add_class(const CXXRecordDecl* c) {
 				//handle them further as root declarations
 				continue;
 			}
-			add_class(nc);
+			addClass(nc);
 		} else if(const auto* ne = dyn_cast<EnumDecl>(d)) {
 			if(ne->hasAttr<clang::AnnotateAttr>()) {
 				//skip nested enums with dedicated 'reflect' attribute,
 				//handle them further as root declarations
 				continue;
 			}
-			add_enum(ne);
+			addEnum(ne);
 		}
 	}
 
@@ -111,13 +149,13 @@ void JsonBuilder::add_class(const CXXRecordDecl* c) {
 	for(auto&& de : decls) {
 		for(auto&& d : de->getPrimaryContext()->decls()) {
 			if(const auto* f = dyn_cast<FieldDecl>(d)) {
-				add_field(&fields, f, true);
+				addField(&fields, f, true);
 			} else if(const auto* v = dyn_cast<VarDecl>(d)) {
-				add_field(&fields, v, true);
+				addField(&fields, v, true);
 			} else if(const auto* f = dyn_cast<FunctionDecl>(d)) {
-				if(std::find(func_names.begin(), func_names.end(), f->getNameAsString()) != func_names.end()) continue;
-				add_function(&func, f, de->getNameAsString(), true);
-				func_names.push_back(f->getNameAsString());
+				if(std::find(funcNames.begin(), funcNames.end(), f->getNameAsString()) != funcNames.end()) continue;
+				addFunction(&func, f, de->getNameAsString(), true);
+				funcNames.push_back(f->getNameAsString());
 			} else if(const auto* nc = dyn_cast<CXXRecordDecl>(d)) {
 				if(!nc->isThisDeclarationADefinition() ||//
 					nc->hasAttr<clang::AnnotateAttr>()) {
@@ -125,14 +163,14 @@ void JsonBuilder::add_class(const CXXRecordDecl* c) {
 					//handle them further as root declarations
 					continue;
 				}
-				add_class(nc);
+				addClass(nc);
 			} else if(const auto* ne = dyn_cast<EnumDecl>(d)) {
 				if(ne->hasAttr<clang::AnnotateAttr>()) {
 					//skip nested enums with dedicated 'reflect' attribute,
 					//handle them further as root declarations
 					continue;
 				}
-				add_enum(ne);
+				addEnum(ne);
 			}
 		}
 	}
@@ -143,7 +181,7 @@ void JsonBuilder::add_class(const CXXRecordDecl* c) {
 	_ctx->result.emplace(std::move(name), std::move(json));
 }
 
-void JsonBuilder::add_enum(const EnumDecl* e) {
+void JsonBuilder::addEnum(const EnumDecl* e) {
 	auto name = e->getQualifiedNameAsString();
 
 	//check if this enum is already handled
@@ -154,7 +192,7 @@ void JsonBuilder::add_enum(const EnumDecl* e) {
 	nlohmann::json json;
 	json["kind"] = 1;
 	json["name"] = name;
-	json["origin"] = std::filesystem::path(file_name(e)).filename();
+	json["origin"] = std::filesystem::path(fileName(e)).filename();
 
 	auto& arr = json["constants"];
 
@@ -163,13 +201,13 @@ void JsonBuilder::add_enum(const EnumDecl* e) {
 			continue;
 		}
 		auto& item = arr.emplace_back();
-		set_name(&item, c);
+		setName(&item, c);
 	}
 
 	_ctx->result.emplace(std::move(name), std::move(json));
 }
 
-void JsonBuilder::add_function(nlohmann::json* functions, const FunctionDecl* f, const std::string& class_name, bool inherited) {
+void JsonBuilder::addFunction(nlohmann::json* functions, const FunctionDecl* f, const std::string& className, bool inherited) {
 	if(f->hasAttr<clang::AnnotateAttr>()) {
 		return;
 	}
@@ -182,16 +220,16 @@ void JsonBuilder::add_function(nlohmann::json* functions, const FunctionDecl* f,
 
 	auto name = f->getNameAsString();
 
-	if(name == class_name ||								//constructor
-		(name.find(class_name, 1) == 1 && name[0] == '~') ||//destructor
+	if(name == className ||								   //constructor
+		(name.find(className, 1) == 1 && name[0] == '~') ||//destructor
 		name.find("operator") == 0) {
 		return;
 	}
 
 	auto& func = functions->emplace_back();
 
-	set_name(&func, f);
-	func["acc"] = access_arr(f);
+	setName(&func, f);
+	func["acc"] = accessArr(f);
 	auto ret = f->getDeclaredReturnType().getAsString();
 	if(ret.compare("_Bool") == 0)
 		func["return"] = "bool";
@@ -200,12 +238,12 @@ void JsonBuilder::add_function(nlohmann::json* functions, const FunctionDecl* f,
 
 	auto params = nlohmann::json::array();
 	for(auto&& p : f->parameters()) {
-		params.emplace_back(type_str(p->getType(), true));
+		params.emplace_back(typeStr(p->getType(), true));
 	}
 	func.emplace("params", std::move(params));
 }
 
-void JsonBuilder::add_field(nlohmann::json* fields, const ValueDecl* v, bool inherited) {
+void JsonBuilder::addField(nlohmann::json* fields, const ValueDecl* v, bool inherited) {
 	if(v->template hasAttr<clang::AnnotateAttr>()) {
 		return;
 	}
@@ -218,23 +256,23 @@ void JsonBuilder::add_field(nlohmann::json* fields, const ValueDecl* v, bool inh
 
 	auto& field = fields->emplace_back();
 
-	set_name(&field, v);
-	field["acc"] = access_arr(v);
-	field["type"] = type_str(v->getType());
+	setName(&field, v);
+	field["acc"] = accessArr(v);
+	field["type"] = typeStr(v->getType());
 }
 
-std::string JsonBuilder::file_name(const NamedDecl* decl) const {
+std::string JsonBuilder::fileName(const NamedDecl* decl) const {
 	llvm::StringRef llpath = _sm->getFilename(decl->getLocation());
 	std::filesystem::path path(llpath.begin(), llpath.end());
 	std::string rel = "../";
-	rel += std::filesystem::relative(path, _ctx->output_dir).string();
+	rel += std::filesystem::relative(path, _ctx->outputDir).string();
 #ifdef _WIN32
 	std::replace(rel.begin(), rel.end(), '\\', '/');
 #endif
 	return rel;
 }
 
-void JsonBuilder::set_name(nlohmann::json* item, const NamedDecl* decl) {
+void JsonBuilder::setName(nlohmann::json* item, const NamedDecl* decl) {
 	auto name = decl->getNameAsString();
 
 	(*item)["name"] = name;

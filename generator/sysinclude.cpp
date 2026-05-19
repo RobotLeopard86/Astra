@@ -64,18 +64,18 @@ inline std::string trim(const std::string& s) {
 
 std::set<std::string> gccLikeIncludeParser(const std::string& compiler_output) {
 	std::set<std::string> includes;
-	bool include_section = false;
+	bool includeSection = false;
 	std::istringstream iss(compiler_output);
 	std::string line;
 
 	//Read through the lines until we get the system include search path, then take them all until we get to the end of that
 	while(std::getline(iss, line)) {
 		if(line.find("#include <...> search starts here:") != std::string::npos) {
-			include_section = true;
+			includeSection = true;
 			continue;
 		}
 		if(line.find("End of search list.") != std::string::npos) break;
-		if(include_section) {
+		if(includeSection) {
 			//Remove whitespace and framework directory indicator
 			auto trimmed = trim(line);
 			if(auto pos = trimmed.find(" (framework directory)"); pos != std::string::npos) {
@@ -109,7 +109,7 @@ std::set<std::string> msvcIncludeParser(const std::string& compiler_output) {
 	return includes;
 }
 
-void Parser::find_sys_includes(const std::string& sample, const std::string& fallback_compiler, bool fallback_msvc) {
+void Parser::findSysIncludes(const std::string& sample, const std::string& fallbackCompiler, bool fallbackMSVC) {
 	std::string compiler = compDB->getCompileCommands(sample)[0].CommandLine[0];
 	enum class CompilerType {
 		GCCLike,
@@ -151,12 +151,12 @@ void Parser::find_sys_includes(const std::string& sample, const std::string& fal
 
 	//Fallback
 	if(ctp == CompilerType::Bad) {
-		if(fallback_compiler.empty()) {
+		if(fallbackCompiler.empty()) {
 			sysincludeFailFlag = "No fallback compiler provided and the compilation database compiler is unsupported for system include detection!";
 			return;
 		}
-		compiler = fallback_compiler;
-		ctp = fallback_msvc ? CompilerType::MSVC : CompilerType::GCCLike;
+		compiler = fallbackCompiler;
+		ctp = fallbackMSVC ? CompilerType::MSVC : CompilerType::GCCLike;
 	}
 
 	std::set<std::string> includes;
@@ -183,7 +183,7 @@ void Parser::find_sys_includes(const std::string& sample, const std::string& fal
 	} else if(ctp == CompilerType::MSVC) {
 #ifdef _WIN32
 		//Dummy source (should detect all header paths we might need)
-		const char* msvc_dummy_src = R"cpp(
+		const char* msvcDummySrc = R"cpp(
         #include <stdio.h>
         #include <type_traits>
         #include <Windows.h>
@@ -196,7 +196,7 @@ void Parser::find_sys_includes(const std::string& sample, const std::string& fal
 		path dummy_file = std::filesystem::temp_directory_path() / "_astrasysincchk.cpp";
 		{
 			std::ofstream ofstr(dummy_file);
-			ofstr << msvc_dummy_src;
+			ofstr << msvcDummySrc;
 			ofstr.close();
 		}
 

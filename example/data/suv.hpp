@@ -3,10 +3,12 @@
 #include "colors.hpp"
 #include "car.hpp"
 
+#include "astra/reflectable.hpp"
+
 #define SUV_REFINISH_FEE 1500
 
 namespace ExampleNamespace {
-	class [[astra::reflect("all")]] SUV : public Car {
+	class ASTRA_REFLECT SUV : public Car {
 	  public:
 		std::string nickname;
 		float trunkVolume;
@@ -15,6 +17,6 @@ namespace ExampleNamespace {
 			return Car::refinish(newColor) + SUV_REFINISH_FEE;
 		}
 
-		virtual astra::TypeId ASTRA__gettypeid() const override;
+		ASTRASETUP(SUV)
 	};
 }

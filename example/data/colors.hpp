@@ -1,6 +1,8 @@
 #pragma once
 
-enum class [[astra::reflect]] Color {
+#include "astra/reflectable.hpp"
+
+enum class ASTRA_REFLECT Color {
 	Red,
 	Orange,
 	Yellow,

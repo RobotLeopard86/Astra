@@ -2,19 +2,19 @@
 
 #include "colors.hpp"
 
-#include "astra/type_id.hpp"
-#include "astra/types/type_actions.hpp"
+#include "astra/reflectable.hpp"
 
 #include <string>
 
 #define REFINISH_COST 8000
 
-class [[astra::reflect("all")]] Car {
+class ASTRA_REFLECT Car : public AstraReflectBase {
   public:
 	std::string owner, brand;
 	unsigned int year;
-	[[astra::alias("insured")]] bool hasInsurance = false;
-	[[astra::ignore]] bool hasSatRadio = false;
+	ASTRA_ALIAS("insured")
+	bool hasInsurance = false;
+	ASTRA_IGNORE bool hasSatRadio = false;
 
 	virtual int refinish(Color newColor) {
 		color = newColor;
@@ -25,12 +25,10 @@ class [[astra::reflect("all")]] Car {
 		return color;
 	}
 
-	virtual astra::TypeId ASTRA__gettypeid() const;
-
 	virtual ~Car() {}
+
+	ASTRASETUP(Car)
 
   private:
 	Color color = Color::Green;
-
-	friend struct astra::TypeActions<Car>;
 };

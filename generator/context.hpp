@@ -1,16 +1,13 @@
 #pragma once
 
+#include "clang/Frontend/CompilerInstance.h"
+
 #include <string>
 #include <unordered_map>
 
 #include "nlohmann/json.hpp"
 
 struct Context {
-	std::string output_dir;
-
-	//clangTooling run analysis for each input file
-	//the files could intersect with each other
-	//so a class/enum definition could be analysed multiple times
-	//track them in this map
+	std::string outputDir;
 	std::unordered_map<std::string, nlohmann::json> result;
 };

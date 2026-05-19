@@ -54,9 +54,9 @@ int main(int argc, char* argv[]) {
 	};
 	app.add_option("input", input, "Input header files to the generator")->check(inputValidateFunc)->required();
 	std::string project;
-	app.add_option("--project-name,-p", project, "Name of the project")->transform([](const std::string& val) { return to_filename(val); })->required();
-	std::string fallbackCompiler;
-	bool fallbackIsMsvc;
+	app.add_option("--project-name,-p", project, "Name of the project")->transform([](const std::string& val) { return toFilename(val); })->required();
+	std::string fallbackCompiler = "";
+	bool fallbackIsMsvc = false;
 	const auto fallbackOptFunc = [&fallbackCompiler, &fallbackIsMsvc](const std::string& s) {
 		fallbackCompiler = s;
 		std::string lower = s;
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
 	Files files;
 	compDbPath = std::filesystem::canonical(compDbPath).string();
 	outDir = std::filesystem::canonical(outDir).string();
-	files.complete_files(&input);
+	files.completeFiles(&input);
 
 	//If the output directory doesn't exist, we need to make it, or if it exists we need to remove old Astra contents
 	std::filesystem::path out(outDir);
@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 	std::unique_ptr<jms::Spinner> spinner;
 	if(!quiet) {
 #ifdef _DEBUG
-		std::cout << "Warning: You are running a debug build. Source file parsing will be very slow." << std::endl;
+		std::cout << "Warning: You are running a debug build of Astra! Source file parsing will be very slow!" << std::endl;
 #endif
 		spinner = std::make_unique<jms::Spinner>("Parsing source files...", jms::dots);
 		spinner->start();
@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
 	//Parse source files
 	clock::time_point parseBegin = clock::now();
 	Parser parser(compDbPath, out.string());
-	parser.find_sys_includes(input[0], fallbackCompiler, fallbackIsMsvc);
+	parser.findSysIncludes(input[0], fallbackCompiler, fallbackIsMsvc);
 	if(!quiet && !sysincludeFailFlag.empty()) {
 		spinner->finish(jms::FinishedState::FAILURE, sysincludeFailFlag);
 		exit(1);
@@ -194,13 +194,13 @@ int main(int argc, char* argv[]) {
 	//Write file templates
 	int writeCount = (parsed.size() * 2) + 2;
 	counter = 0;
-	for(auto&& [object_name, json] : parsed) {
+	for(auto&& [objectName, json] : parsed) {
 		//Generate filenames
-		auto filenameUTF8 = to_filename(object_name);
+		auto filenameUTF8 = toFilename(objectName);
 		json["file_name"] = filenameUTF8;
 		filenameUTF8 += ".astra";
 #ifdef _WIN32
-		auto fileName = files.from_utf8(filenameUTF8.data(), filenameUTF8.size());
+		auto fileName = files.fromUTF8(filenameUTF8.data(), filenameUTF8.size());
 
 		auto hppFile = typesDir / (fileName + L".hpp");
 		auto cppFile = typesDir / (fileName + L".cpp");

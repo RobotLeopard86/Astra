@@ -16,88 +16,88 @@
 #endif
 
 Files::Files()
-  : root(cut_filename(executable_name())) {
+  : root(cutFilename(executableName())) {
 }
 
 #ifdef _WIN32
-std::string Files::to_utf8(const wchar_t* str, size_t size) {
-	int size_utf8 = WideCharToMultiByte(CP_UTF8,//
-		WC_ERR_INVALID_CHARS,					//
-		str,									//
-		static_cast<int>(size),					//
+std::string Files::toUTF8(const wchar_t* str, size_t size) {
+	int sizeUTF8 = WideCharToMultiByte(CP_UTF8,//
+		WC_ERR_INVALID_CHARS,				   //
+		str,								   //
+		staticCast<int>(size),				   //
 		nullptr, 0, nullptr, nullptr);
 
-	std::string str_utf8(size_utf8, '\0');
+	std::string str_UTF8(size_UTF8, '\0');
 	WideCharToMultiByte(CP_UTF8,//
 		WC_ERR_INVALID_CHARS,	//
 		str,					//
-		static_cast<int>(size), //
-		str_utf8.data(),		//
-		size_utf8,				//
+		staticCast<int>(size),	//
+		strUTF8.data(),			//
+		sizeUTF8,				//
 		nullptr, nullptr);
 
-	return str_utf8;
+	return strUTF8;
 }
 
-std::wstring Files::from_utf8(const char* str, size_t size) {
-	int size_w = MultiByteToWideChar(CP_UTF8,//
-		MB_ERR_INVALID_CHARS,				 //
-		str,								 //
-		static_cast<int>(size),				 //
+std::wstring Files::fromUTF8(const char* str, size_t size) {
+	int sizeW = MultiByteToWideChar(CP_UTF8,//
+		MB_ERR_INVALID_CHARS,				//
+		str,								//
+		staticCast<int>(size),				//
 		nullptr, 0);
 
 	std::wstring str_w(size_w, '\0');
 	MultiByteToWideChar(CP_UTF8,//
 		MB_ERR_INVALID_CHARS,	//
 		str,					//
-		static_cast<int>(size), //
-		str_w.data(),			//
-		size_w);
+		staticCast<int>(size),	//
+		strW.data(),			//
+		sizeW);
 
-	return str_w;
+	return strW;
 }
 #endif
 
-inline std::string Files::executable_name() {
+inline std::string Files::executableName() {
 #ifdef __linux__
-	auto raw_path = std::make_unique<char[]>(PATH_MAX);
+	auto rawPath = std::make_unique<char[]>(PATH_MAX);
 
-	auto size = readlink("/proc/self/exe", raw_path.get(), PATH_MAX);
+	auto size = readlink("/proc/self/exe", rawPath.get(), PATH_MAX);
 	if(size == -1) {
 		size = 0;
 	}
 
-	return std::string(raw_path.get(), size);
+	return std::string(rawPath.get(), size);
 #elif defined(__APPLE__)
 	//get size first
 	uint32_t size = 0;
 	auto code = _NSGetExecutablePath(nullptr, &size);
 
 	//get the path
-	auto raw_path = std::make_unique<char[]>(size);
-	code = _NSGetExecutablePath(raw_path.get(), &size);
+	auto rawPath = std::make_unique<char[]>(size);
+	code = _NSGetExecutablePath(rawPath.get(), &size);
 	if(code == -1) {
 		size = 0;
 	}
 
 	return std::string(raw_path.get(), size);
 #elif defined(_WIN32)
-	std::wstring str_raw(MAX_PATH, '\0');
-	//int size_raw = GetModuleFileNameW(nullptr, &str_raw[0], MAX_PATH);
+	std::wstring rawStr(MAX_PATH, '\0');
+	//int sizeRaw = GetModuleFileNameW(nullptr, &rawStr[0], MAX_PATH);
 
-	auto raw_path = std::make_unique<wchar_t[]>(MAX_PATH);
-	auto size = GetModuleFileNameW(nullptr, raw_path.get(), MAX_PATH);
+	auto rawPath = std::make_unique<wchar_t[]>(MAX_PATH);
+	auto size = GetModuleFileNameW(nullptr, rawPath.get(), MAX_PATH);
 
-	auto utf8_path = to_utf8(raw_path.get(), size);
+	auto pathUTF8 = toUTF8(rawPath.get(), size);
 
 	//use '/' even on Windows
-	std::replace(utf8_path.begin(), utf8_path.end(), '\\', '/');
+	std::replace(pathUTF8.begin(), pathUTF8.end(), '\\', '/');
 
-	return utf8_path;
+	return pathUTF8;
 #endif
 }
 
-void Files::complete_files(std::vector<std::string>* paths) {
+void Files::completeFiles(std::vector<std::string>* paths) {
 	auto old = *paths;
 	paths->clear();
 
@@ -105,18 +105,18 @@ void Files::complete_files(std::vector<std::string>* paths) {
 		path = std::filesystem::canonical(path).string();
 
 #ifdef _WIN32
-		std::filesystem::path fs_path(from_utf8(path.data(), path.size()));
+		std::filesystem::path fsPath(from_UTF8(path.data(), path.size()));
 #else
-		std::filesystem::path fs_path(path);
+		std::filesystem::path fsPath(path);
 #endif
 
-		if(std::filesystem::is_directory(fs_path)) {
-			for(auto&& file_path : std::filesystem::recursive_directory_iterator(fs_path)) {
+		if(std::filesystem::is_directory(fsPath)) {
+			for(auto&& filepath : std::filesystem::recursive_directory_iterator(fsPath)) {
 #ifdef _WIN32
-				auto w_str = file_path.path().wstring();
-				paths->push_back(to_utf8(w_str.data(), w_str.size()));
+				auto wStr = filePath.path().wstring();
+				paths->push_back(toUTF8(wStr.data(), wStr.size()));
 #else
-				paths->push_back(file_path.path().string());
+				paths->push_back(filepath.path().string());
 #endif
 			}
 		} else {
@@ -125,7 +125,7 @@ void Files::complete_files(std::vector<std::string>* paths) {
 	}
 }
 
-std::string Files::cut_filename(std::string str) {
+std::string Files::cutFilename(std::string str) {
 	std::string ret = str;
 	auto pos = ret.find_last_of(deliminator);
 
@@ -137,7 +137,7 @@ std::string Files::cut_filename(std::string str) {
 	return ret;
 }
 
-inline bool Files::is_absolute(const std::string& path) {
+inline bool Files::isAbsolute(const std::string& path) {
 #ifdef _WIN32
 	return path[1] == ':';//match 'C:\', 'D:\', etc
 #else

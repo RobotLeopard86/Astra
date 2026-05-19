@@ -1,6 +1,5 @@
 #include "parser.hpp"
 
-#include <cstddef>
 #include <stdexcept>
 
 #include "action.hpp"
@@ -10,10 +9,10 @@
 #include "clang/Tooling/CompilationDatabase.h"
 
 namespace {
-	std::unique_ptr<tooling::CompilationDatabase> load_compdb(std::string_view compdb_dir) {
+	std::unique_ptr<tooling::CompilationDatabase> loadCompdb(std::string_view compdbDir) {
 		std::string err;
 
-		auto source = StringRef(compdb_dir.data(), compdb_dir.size());
+		auto source = StringRef(compdbDir.data(), compdbDir.size());
 		auto compdb = tooling::CompilationDatabase::autoDetectFromDirectory(source, err);
 
 		if(compdb == nullptr) {
@@ -23,28 +22,28 @@ namespace {
 	}
 }
 
-Parser::Parser(std::string_view compdb_dir,//
-	std::string_view output_dir)		   //
-  : compDB(load_compdb(compdb_dir)) {
-	ctx.output_dir = output_dir;
+Parser::Parser(std::string_view compdbDir, std::string_view outputDir)
+  : compDB(loadCompdb(compdbDir)) {
+	ctx.outputDir = outputDir;
 }
 
-std::optional<std::unordered_map<std::string, nlohmann::json>> Parser::parse(const std::vector<std::string>& input_files) {
-	tooling::ClangTool tool(*compDB, input_files);
+std::optional<std::unordered_map<std::string, nlohmann::json>> Parser::parse(const std::vector<std::string>& inputFiles) {
+	tooling::ClangTool tool(*compDB, inputFiles);
 	tool.appendArgumentsAdjuster([this](const tooling::CommandLineArguments& args, StringRef) {
 		tooling::CommandLineArguments adjArgs;
 		adjArgs.push_back(args[0]);
+		adjArgs.push_back("-D_ASTRAGENERATE");
 		std::set<std::string> used;
-		for(const std::string& include_dir : sysincludes) {
-			if(used.contains(include_dir)) continue;
+		for(const std::string& includeDir : sysincludes) {
+			if(used.contains(includeDir)) continue;
 #ifdef _WIN32
 #define CPPSEARCH "c++\\"
 #else
 #define CPPSEARCH "c++/"
 #endif
-			if(include_dir.find(CPPSEARCH) != std::string::npos) {
-				adjArgs.push_back(std::string("-isystem") + include_dir);
-				used.insert(include_dir);
+			if(includeDir.find(CPPSEARCH) != std::string::npos) {
+				adjArgs.push_back(std::string("-isystem") + includeDir);
+				used.insert(includeDir);
 			}
 #undef CPPSEARCH
 		}
@@ -59,10 +58,10 @@ std::optional<std::unordered_map<std::string, nlohmann::json>> Parser::parse(con
 			adjArgs.push_back(std::string("-isystem") + *it);
 			used.insert(*it);
 		}
-		for(const std::string& include_dir : sysincludes) {
-			if(used.contains(include_dir)) continue;
-			adjArgs.push_back(std::string("-isystem") + include_dir);
-			used.insert(include_dir);
+		for(const std::string& includeDir : sysincludes) {
+			if(used.contains(includeDir)) continue;
+			adjArgs.push_back(std::string("-isystem") + includeDir);
+			used.insert(includeDir);
 		}
 		for(unsigned int i = 1; i < args.size(); i++) {
 			adjArgs.push_back(args[i]);
