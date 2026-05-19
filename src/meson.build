@@ -12,14 +12,14 @@ reflex_dep = reflex.get_variable('reflex_dep')
 # Generate lexer files
 json_lex = custom_target('lexer_json.yy.[cpph]', 
 	output: ['lexer_json.yy.h', 'lexer_json.yy.cpp'],
-	input: 'serialization' / 'json' / 'json.l',
+	input: 'json.l',
 	command: [reflex_exe, '@INPUT@', '--outfile=' + meson.current_build_dir() / 'lexer_json.yy.cpp', '--header-file=' + meson.current_build_dir() / 'lexer_json.yy.h'],
 	build_always_stale: false,
 	build_by_default: true
 )
 yaml_lex = custom_target('lexer_yaml.yy.[cpph]', 
 	output: ['lexer_yaml.yy.h', 'lexer_yaml.yy.cpp'],
-	input: 'serialization' / 'yaml' / 'yaml.l',
+	input: 'yaml.l',
 	command: [reflex_exe, '@INPUT@', '--outfile=' + meson.current_build_dir() / 'lexer_yaml.yy.cpp', '--header-file=' + meson.current_build_dir() / 'lexer_yaml.yy.h'],
 	build_always_stale: false,
 	build_by_default: true
@@ -27,17 +27,17 @@ yaml_lex = custom_target('lexer_yaml.yy.[cpph]',
 
 # Define sources
 astra_sources = [
+	'binary.cpp',
+	'box.cpp',
 	'err_helper.cpp',
-	'reflection' / 'reflection.cpp',
-	'variable' / 'box.cpp',
-	'variable' / 'var.cpp',
-	'tools' / 'stringify.cpp',
-	'serialization' / 'binary' / 'binary.cpp',
-	'serialization' / 'json' / 'json.cpp',
-	'serialization' / 'json' / 'parser_json.cpp',
+	'json.cpp',
+	'parser_json.cpp',
+	'parser_yaml.cpp',
+	'reflection.cpp',
+	'stringify.cpp',
+	'var.cpp',
+	'yaml.cpp',
 	json_lex,
-	'serialization' / 'yaml' / 'yaml.cpp',
-	'serialization' / 'yaml' / 'parser_yaml.cpp',
 	yaml_lex
 ]
 

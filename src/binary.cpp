@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-#include "../readers/stream_reader.hpp"
-#include "../readers/vector_reader.hpp"
-#include "../writers/stream_writer.hpp"
-#include "../writers/vector_writer.hpp"
+#include "stream_reader.hpp"
+#include "vector_reader.hpp"
+#include "stream_writer.hpp"
+#include "vector_writer.hpp"
 #include "astra/reflection/reflection.hpp"
 #include "astra/types/all_types.hpp"
 #include "astra/variable/box.hpp"

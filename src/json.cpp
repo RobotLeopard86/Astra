@@ -3,9 +3,9 @@
 #include <cmath>
 #include <string_view>
 
-#include "../writers/iwriter.hpp"
-#include "../writers/stream_writer.hpp"
-#include "../writers/string_writer.hpp"
+#include "iwriter.hpp"
+#include "stream_writer.hpp"
+#include "string_writer.hpp"
 #include "astra/error/error.hpp"
 #include "astra/reflection/reflection.hpp"
 #include "astra/tools/stringify.hpp"

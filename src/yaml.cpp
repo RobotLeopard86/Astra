@@ -2,8 +2,8 @@
 
 #include <ostream>
 
-#include "../writers/stream_writer.hpp"
-#include "../writers/string_writer.hpp"
+#include "stream_writer.hpp"
+#include "string_writer.hpp"
 #include "astra/reflection/reflection.hpp"
 #include "astra/types/all_types.hpp"
 #include "parser_yaml.hpp"

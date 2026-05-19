@@ -8,7 +8,7 @@
 #include <cstring>
 #include <string_view>
 
-#include "../writers/iwriter.hpp"
+#include "iwriter.hpp"
 
 namespace astra {
 

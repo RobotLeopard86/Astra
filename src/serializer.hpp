@@ -3,7 +3,7 @@
 #include <cmath>
 #include <string_view>
 
-#include "../writers/iwriter.hpp"
+#include "iwriter.hpp"
 #include "astra/error/error.hpp"
 #include "astra/reflection/reflection.hpp"
 #include "astra/tools/stringify.hpp"

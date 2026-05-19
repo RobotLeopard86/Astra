@@ -11,7 +11,7 @@
 #include <string_view>
 #include <vector>
 
-#include "../readers/ireader.hpp"
+#include "ireader.hpp"
 
 namespace astra {
 
