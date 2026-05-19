@@ -9,6 +9,16 @@ reflex = subproject('reflex', required: true, default_options: {
 reflex_exe = reflex.get_variable('reflex')
 reflex_dep = reflex.get_variable('reflex_dep')
 
+# yaml-cpp
+yaml_cpp_dep = subproject('yaml-cpp', required: true, default_options: {
+	'contrib': true,
+	'tools': false,
+	'tests': 'disabled'
+}).get_variable('yaml_cpp_dep')
+
+# Jaguar
+jaguar_dep = subproject('jaguar', required: true).get_variable('libjaguar_dep')
+
 # Generate lexer files
 json_lex = custom_target('lexer_json.yy.[cpph]', 
 	output: ['lexer_json.yy.h', 'lexer_json.yy.cpp'],
@@ -45,7 +55,7 @@ astra_sources = [
 includes = include_directories('..' / 'include')
 
 # Library
-libastra = library('astra', astra_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, reflex_dep], pic: true)
+libastra = library('astra', astra_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, reflex_dep, yaml_cpp_dep, jaguar_dep.as_static(recursive: true).as_link_whole()], pic: true)
 
 # Dependency
 astra_dep = declare_dependency(link_with: libastra, include_directories: includes)
