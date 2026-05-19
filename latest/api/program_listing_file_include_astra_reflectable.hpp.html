@@ -403,14 +403,44 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;concepts&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/type_id.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/type_actions.hpp&quot;</span><span class="c1">// IWYU pragma: keep</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_id.hpp&quot;</span><span class="c1">           // IWYU pragma: keep</span>
+
+<span class="cp">#ifdef _ASTRAGENERATE</span>
+<span class="cp">#define ASTRA_REFLECT [[clang::annotate(&quot;astra.reflect&quot;)]]</span>
+<span class="cp">#define ASTRA_IGNORE [[clang::annotate(&quot;astra.ignore&quot;)]]</span>
+<span class="cp">#define ASTRA_ALIAS(x) [[clang::annotate(&quot;astra.alias.&quot; x)]]</span>
+<span class="cp">#define ASTRASETUP(x)                                        \</span>
+<span class="cp">    friend struct astra::TypeActions&lt;x&gt;;                     \</span>
+<span class="cp">    virtual astra::TypeId ASTRA__gettypeid() const override; \</span>
+<span class="cp">    template struct astragen_reflectable_check&lt;x&gt;;</span>
+<span class="cp">#else</span>
+<span class="cp">#define ASTRA_REFLECT</span>
+<span class="cp">#define ASTRA_IGNORE</span>
+<span class="cp">#define ASTRA_ALIAS(x)</span>
+<span class="cp">#define ASTRASETUP(x)                    \</span>
+<span class="cp">    friend struct astra::TypeActions&lt;x&gt;; \</span>
+<span class="cp">    virtual astra::TypeId ASTRA__gettypeid() const override;</span>
+<span class="cp">#endif</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AstraReflectBase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">astra</span><span class="o">::</span><span class="n">TypeId</span><span class="w"> </span><span class="n">ASTRA__gettypeid</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">astra</span><span class="o">::</span><span class="n">TypeId</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="n">astra</span><span class="o">::</span><span class="n">None</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="k">concept</span><span class="w"> </span><span class="nc">Reflectable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_enum_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">std</span><span class="o">::</span><span class="n">is_class_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_class_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">default_initializable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">requires</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">ASTRA__gettypeid</span><span class="p">()</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">same_as</span><span class="o">&lt;</span><span class="n">TypeId</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="k">concept</span><span class="w"> </span><span class="nc">Reflectable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_enum_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">std</span><span class="o">::</span><span class="n">is_class_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_class_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">default_initializable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_base_of_v</span><span class="o">&lt;</span><span class="n">AstraReflectBase</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">);</span>
 <span class="p">}</span>
+
+<span class="cp">#ifdef _ASTRAGENERATE</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">astragen_reflectable_check</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astra</span><span class="o">::</span><span class="n">Reflectable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="cp">#endif</span>
 </pre></div>
 </div>
 </section>
