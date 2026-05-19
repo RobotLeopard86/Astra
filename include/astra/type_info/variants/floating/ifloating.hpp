@@ -14,7 +14,7 @@ namespace astra {
 		virtual Expected<None> assign(Var var) = 0;
 		virtual void unsafeAssign(void* ptr) = 0;
 		virtual Var var() = 0;
-		virtual size_t size() = 0;
+		virtual std::size_t size() = 0;
 		virtual double get() const = 0;
 		virtual Expected<None> set(double value) = 0;
 	};

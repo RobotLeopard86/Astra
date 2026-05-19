@@ -14,7 +14,7 @@ namespace astra {
 		  : _stream(stream) {
 		}
 
-		void write(const void* ptr, size_t bytes) override {
+		void write(const void* ptr, std::size_t bytes) override {
 			_stream.write(static_cast<const char*>(ptr), static_cast<std::streamsize>(bytes));
 		}
 
@@ -27,7 +27,7 @@ namespace astra {
 			return *static_cast<uint8_t*>(_stream.pword(pos));
 		}
 
-		void stepBack(size_t bytes) override {
+		void stepBack(std::size_t bytes) override {
 			std::streamsize pos = _stream.tellp();
 			_stream.seekp(pos - static_cast<std::streamsize>(bytes));
 		}

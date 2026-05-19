@@ -20,7 +20,7 @@
 
 %class{
  public:
-  LexerJson(const char* input, size_t inputSize) : LexerJson(reflex::Input(input, inputSize)){
+  LexerJson(const char* input, std::size_t inputSize) : LexerJson(reflex::Input(input, inputSize)){
   }
 
   astra::Position getPosition() {

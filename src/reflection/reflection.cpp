@@ -43,7 +43,7 @@ std::string_view reflection::typeName(uint32_t id) {
 }
 #endif
 
-size_t reflection::typeSize(TypeId id) {
+std::size_t reflection::typeSize(TypeId id) {
 	return TheGreatTable::data()[id.number()].typeSize();
 }
 

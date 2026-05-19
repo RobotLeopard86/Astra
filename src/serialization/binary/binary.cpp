@@ -163,7 +163,7 @@ inline void deserializeRecursive(TypeInfo* info, const GroupReader& reader) {
 			auto a = info->unsafeGet<Array>();
 			auto n = reader.readUnsigned();
 
-			size_t i = 0;
+			std::size_t i = 0;
 			a.forEach([&reader, &i, n](Var entry) {
 				if(i >= n) {
 					return;

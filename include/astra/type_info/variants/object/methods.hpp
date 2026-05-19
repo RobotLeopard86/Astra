@@ -11,7 +11,7 @@ namespace astra {
 		  : _base(base), _map(map), _acc(acc) {
 		}
 
-		size_t size() const {
+		std::size_t size() const {
 			return _map->size();
 		}
 

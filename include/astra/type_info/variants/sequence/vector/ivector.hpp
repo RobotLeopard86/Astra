@@ -12,8 +12,8 @@ namespace astra {
 		virtual void pop() = 0;
 		virtual Expected<Var> front() = 0;
 		virtual Expected<Var> back() = 0;
-		virtual Expected<Var> at(size_t idx) = 0;
-		virtual Expected<Var> operator[](size_t idx) = 0;
+		virtual Expected<Var> at(std::size_t idx) = 0;
+		virtual Expected<Var> operator[](std::size_t idx) = 0;
 	};
 
 }

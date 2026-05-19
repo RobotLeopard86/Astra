@@ -52,7 +52,7 @@ namespace astra {
 		std::string readString() const {
 
 			//get size from the reader
-			size_t size = 0;
+			std::size_t size = 0;
 			readData(&size);
 
 			std::string str;

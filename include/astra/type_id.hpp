@@ -68,10 +68,10 @@ namespace astra {
 		static typename std::enable_if_t<is_string_v<T>, TypeId>//
 		get(T* ptr);
 
-		template<typename T, size_t size>
+		template<typename T, std::size_t size>
 		static TypeId get(T (*array)[size]);
 
-		template<typename T, size_t size>
+		template<typename T, std::size_t size>
 		static TypeId get(std::array<T, size>* array);
 
 		template<typename T>

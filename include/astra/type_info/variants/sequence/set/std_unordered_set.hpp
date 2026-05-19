@@ -61,7 +61,7 @@ namespace astra {
 			_set->clear();
 		}
 
-		size_t size() const override {
+		std::size_t size() const override {
 			return _set->size();
 		}
 

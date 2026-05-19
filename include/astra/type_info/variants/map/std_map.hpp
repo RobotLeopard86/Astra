@@ -71,7 +71,7 @@ namespace astra {
 			_map->clear();
 		}
 
-		size_t size() const override {
+		std::size_t size() const override {
 			return _map->size();
 		}
 

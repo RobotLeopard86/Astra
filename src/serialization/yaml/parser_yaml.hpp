@@ -14,7 +14,7 @@ namespace astra {
 
 	class ParserYaml : rf_yaml::LexerYaml {
 	  public:
-		ParserYaml(const char* input, size_t inputSize);
+		ParserYaml(const char* input, std::size_t inputSize);
 		explicit ParserYaml(std::istream& stream);
 
 		Expected<None> deserialize(TypeInfo* info);
@@ -25,10 +25,10 @@ namespace astra {
 		Expected<None> parseInd(TypeInfo* info);
 
 		Expected<None> parseSeq(TypeInfo* info);
-		Expected<None> parseSeq(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add);
-		Expected<None> parseFlowSeq(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add);
+		Expected<None> parseSeq(TypeId nestedType, std::function<Expected<None>(std::size_t, Var)> add);
+		Expected<None> parseFlowSeq(TypeId nestedType, std::function<Expected<None>(std::size_t, Var)> add);
 
-		static inline Expected<None> addToArray(Array& a, size_t i, Var var);
+		static inline Expected<None> addToArray(Array& a, std::size_t i, Var var);
 
 		Expected<None> parseMap(Map& map);
 		Expected<None> parseMap(std::function<Expected<None>()> add);

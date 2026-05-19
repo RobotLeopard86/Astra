@@ -6,13 +6,13 @@
 struct ConstexprSort {
 	//Has optimized complexity
 	template<typename T>
-	static constexpr void sort(T* arr, size_t size) {
+	static constexpr void sort(T* arr, std::size_t size) {
 		sort(arr, size, [](T a, T b) { return a > b; });
 	}
 
 	//Has optimized complexity
 	template<typename T, typename LambdaT>
-	static constexpr void sort(T* arr, size_t size, LambdaT greater) {
+	static constexpr void sort(T* arr, std::size_t size, LambdaT greater) {
 		if(size > 32) {
 			quickSort(arr, size, greater);
 		} else {
@@ -22,13 +22,13 @@ struct ConstexprSort {
 
 	//Has complexity O(N^2)
 	template<typename T>
-	static constexpr void insertionSort(T* arr, size_t size) {
+	static constexpr void insertionSort(T* arr, std::size_t size) {
 		insertionSort(arr, size, [](T a, T b) { return a > b; });
 	}
 
 	//Has complexity O(N^2)
 	template<typename T, typename LambdaT>
-	static constexpr void insertionSort(T* arr, size_t size, LambdaT comp) {
+	static constexpr void insertionSort(T* arr, std::size_t size, LambdaT comp) {
 		for(auto i = 1; i < size; i++) {
 			auto key = arr[i];
 
@@ -43,19 +43,19 @@ struct ConstexprSort {
 
 	//Has complexity O(log(N))
 	template<typename T>
-	static constexpr void quickSort(T* arr, size_t size) {
+	static constexpr void quickSort(T* arr, std::size_t size) {
 		quickSort(arr, size, [](T a, T b) { return a > b; });
 	}
 
 	//Has complexity O(log(N))
 	template<typename T, typename LambdaT>
-	static constexpr void quickSort(T* arr, size_t size, LambdaT greater) {
+	static constexpr void quickSort(T* arr, std::size_t size, LambdaT greater) {
 		quickSortReq(arr, 0, size - 1, greater);
 	}
 
   private:
 	template<typename T, typename LambdaT>
-	static constexpr void quickSortReq(T* arr, size_t begin, size_t end, LambdaT greater) {
+	static constexpr void quickSortReq(T* arr, std::size_t begin, std::size_t end, LambdaT greater) {
 		if(begin >= end) {
 			return;
 		}
@@ -66,7 +66,7 @@ struct ConstexprSort {
 	}
 
 	template<typename T, typename LambdaT>
-	static constexpr size_t hoare(T* arr, size_t begin, size_t end, LambdaT greater) {
+	static constexpr std::size_t hoare(T* arr, std::size_t begin, std::size_t end, LambdaT greater) {
 		auto pivot = arr[(begin + end) / 2];
 
 		auto i = begin - 1;

@@ -8,7 +8,7 @@
 
 namespace astra {
 
-	template<typename T, size_t size_v>
+	template<typename T, std::size_t size_v>
 	struct StdArray final : public IArray {
 		StdArray() = delete;
 
@@ -62,7 +62,7 @@ namespace astra {
 			}
 		}
 
-		size_t size() const override {
+		std::size_t size() const override {
 			return size_v;
 		}
 
@@ -74,7 +74,7 @@ namespace astra {
 			return Var(&(*_array)[size_v - 1], TypeId::get<T>(), _isConst);
 		};
 
-		Expected<Var> at(size_t idx) override {
+		Expected<Var> at(std::size_t idx) override {
 			if(idx >= size_v) {
 				return Error(astra::format("Index: {} is out of array's size: {}", idx, size_v));
 			}
@@ -82,7 +82,7 @@ namespace astra {
 			return Var(&(*_array)[idx], TypeId::get<T>(), _isConst);
 		}
 
-		Expected<Var> operator[](size_t idx) override {
+		Expected<Var> operator[](std::size_t idx) override {
 			return at(idx);
 		}
 

@@ -14,7 +14,7 @@ namespace astra {
 			return name;
 		}
 
-		static size_t typeSize() {
+		static std::size_t typeSize() {
 			return sizeof(T);
 		}
 

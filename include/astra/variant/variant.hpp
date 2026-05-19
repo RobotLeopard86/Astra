@@ -44,7 +44,7 @@ namespace astra {
 			return std::holds_alternative<SomeT>(_content);
 		}
 
-		[[nodiscard]] inline size_t variantIdx() const {
+		[[nodiscard]] inline std::size_t variantIdx() const {
 			return _content.index();
 		}
 

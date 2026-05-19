@@ -29,7 +29,7 @@ namespace astra {
 			return impl()->var();
 		}
 
-		size_t size() const {
+		std::size_t size() const {
 			return impl()->size();
 		}
 

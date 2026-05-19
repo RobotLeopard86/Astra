@@ -69,7 +69,7 @@ namespace astra {
 			_deque->clear();
 		}
 
-		size_t size() const override {
+		std::size_t size() const override {
 			return _deque->size();
 		}
 

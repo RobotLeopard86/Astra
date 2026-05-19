@@ -61,12 +61,12 @@ namespace astra {
 		*str += arg.string();
 	}
 
-	[[maybe_unused]] static void format(std::string* result, std::string_view fmt, size_t i) {
+	[[maybe_unused]] static void format(std::string* result, std::string_view fmt, std::size_t i) {
 		*result += fmt.substr(i, fmt.size() - i);
 	}
 
 	template<typename T, typename... Ts>
-	static void format(std::string* result, std::string_view fmt, size_t i, T&& arg, Ts&&... args) {
+	static void format(std::string* result, std::string_view fmt, std::size_t i, T&& arg, Ts&&... args) {
 		auto pos = fmt.find('{', i);
 
 		if(pos == std::string::npos) {

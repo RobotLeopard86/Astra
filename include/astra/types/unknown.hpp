@@ -15,7 +15,7 @@ namespace astra {
 			return "unknown";
 		}
 
-		static size_t typeSize() {
+		static std::size_t typeSize() {
 			return 0;
 		}
 

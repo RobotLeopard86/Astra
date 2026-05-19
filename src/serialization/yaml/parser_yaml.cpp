@@ -14,8 +14,8 @@
 
 using namespace astra;
 
-ParserYaml::ParserYaml(const char* input, size_t inputSize)//
-  : LexerYaml(input, inputSize),						   //
+ParserYaml::ParserYaml(const char* input, std::size_t inputSize)//
+  : LexerYaml(input, inputSize),								//
 	_token(static_cast<char>(lex())) {
 }
 
@@ -95,10 +95,10 @@ Expected<None> ParserYaml::parse(TypeInfo* info) {
 		case '[':
 			ex = info->match(
 				[this](Array& a) -> Expected<None> {
-					return parseFlowSeq(a.nestedType(), [&](size_t i, Var var) { return addToArray(a, i, var); });
+					return parseFlowSeq(a.nestedType(), [&](std::size_t i, Var var) { return addToArray(a, i, var); });
 				},
 				[this](Sequence& s) -> Expected<None> {
-					return parseFlowSeq(s.nestedType(), [&](size_t, Var var) { return s.push(var); });
+					return parseFlowSeq(s.nestedType(), [&](std::size_t, Var var) { return s.push(var); });
 				},
 				[this](auto&&) -> Expected<None> { return errorMatch(); });
 			break;
@@ -187,21 +187,21 @@ Expected<None> ParserYaml::parseStr(TypeInfo* info) {
 Expected<None> ParserYaml::parseSeq(TypeInfo* info) {
 	return info->match(
 		[this](Array& a) -> Expected<None> {
-			return parseSeq(a.nestedType(), [&](size_t i, Var var) { return addToArray(a, i, var); });
+			return parseSeq(a.nestedType(), [&](std::size_t i, Var var) { return addToArray(a, i, var); });
 		},
 		[this](Sequence& s) -> Expected<None> {
 			s.clear();
-			return parseSeq(s.nestedType(), [&](size_t, Var var) { return s.push(var); });
+			return parseSeq(s.nestedType(), [&](std::size_t, Var var) { return s.push(var); });
 		},
 		[this](auto&& /*others*/) -> Expected<None> { return errorMatch(); });
 }
 
-Expected<None> ParserYaml::parseSeq(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add) {
+Expected<None> ParserYaml::parseSeq(TypeId nestedType, std::function<Expected<None>(std::size_t, Var)> add) {
 	if(_token == '[') {
 		return parseFlowSeq(nestedType, std::move(add));
 	}
 
-	size_t i = 0;
+	std::size_t i = 0;
 
 	auto indFirst = getBorder();
 
@@ -228,10 +228,10 @@ Expected<None> ParserYaml::parseSeq(TypeId nestedType, std::function<Expected<No
 }
 
 //parse "[ val, ... ]"
-Expected<None> ParserYaml::parseFlowSeq(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add) {
+Expected<None> ParserYaml::parseFlowSeq(TypeId nestedType, std::function<Expected<None>(std::size_t, Var)> add) {
 	next();//skip '[' itself
 
-	size_t i = 0;
+	std::size_t i = 0;
 
 	auto info = reflection::reflect(Var(nullptr, nestedType, false));
 	while(!isEnd(_token) && _token != 'S' && _token != ']') {
@@ -254,7 +254,7 @@ Expected<None> ParserYaml::parseFlowSeq(TypeId nestedType, std::function<Expecte
 	return None();
 }
 
-Expected<None> ParserYaml::addToArray(Array& a, size_t i, Var var) {
+Expected<None> ParserYaml::addToArray(Array& a, std::size_t i, Var var) {
 	if(i < a.size()) {
 		auto item = a.at(i).unwrap();
 		reflection::copy(item, var);

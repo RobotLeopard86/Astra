@@ -12,7 +12,7 @@ namespace astra {
 			return dataGuard();
 		}
 
-		static size_t record(Actions actions) {
+		static std::size_t record(Actions actions) {
 			auto& data = dataGuard();
 
 			data.push_back(actions);

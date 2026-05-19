@@ -29,7 +29,7 @@ namespace astra {
 		palloc_t* _alloc;
 
 		//max size of stack memory for dynamic allocation optimization
-		//static const size_t kMemSize = Sizeof<std::unordered_map<int, int>, std::map<int, int>>::max();
+		//static const std::size_t kMemSize = Sizeof<std::unordered_map<int, int>, std::map<int, int>>::max();
 		//std::array<uint8_t, kMemSize> _buff;
 	};
 

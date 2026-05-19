@@ -43,14 +43,14 @@
 
 %class{
  public:
-  LexerYaml(const char* input, size_t inputSize) : LexerYaml(reflex::Input(input, inputSize)){
+  LexerYaml(const char* input, std::size_t inputSize) : LexerYaml(reflex::Input(input, inputSize)){
   }
 
   astra::Position getPosition() {
     return astra::Position{columno(), lineno()};
   }
 
-  size_t getBorder() {
+  std::size_t getBorder() {
     return border();
   }
 
@@ -59,13 +59,13 @@
   }
 
   // count number of newlines matched
-  size_t newlines()
+  std::size_t newlines()
   {
     return chr() == '\r' ? size()/2 : size();
   }
 
   // parse the indent value given after a '|' or '>', if present
-  void parseIndent(size_t offset)
+  void parseIndent(std::size_t offset)
   {
     indent = strtoul(text() + offset, NULL, 10);
   }
@@ -76,7 +76,7 @@
   }
 
   // add one or n chars c to the string
-  void add(char c, size_t n = 1) {
+  void add(char c, std::size_t n = 1) {
     while (n-- > 0) {
       _word.push_back(c);
     }
@@ -116,7 +116,7 @@
   }
 
   unsigned long indent;            // block scalar indent value
-  size_t sp;                       // insert spaces in folded block scalar
+  std::size_t sp;                       // insert spaces in folded block scalar
   bool nl;                         // insert newline in folded block scalar
   enum { CLIP, STRIP, KEEP } mode; // chomp mode
 

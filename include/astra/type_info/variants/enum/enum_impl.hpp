@@ -4,9 +4,11 @@
 #include "astra/reflection/type_name.hpp"
 #include "ienum.hpp"
 
+#include <cstdint>
+
 namespace astra {
 
-	template<typename T, size_t size_v>
+	template<typename T, std::size_t size_v>
 	struct EnumImpl final : public IEnum {
 		EnumImpl() = delete;
 

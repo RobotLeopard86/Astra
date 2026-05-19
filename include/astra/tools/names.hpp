@@ -25,7 +25,7 @@ namespace astra {
 		}
 	};
 
-	template<typename T, size_t size_v>
+	template<typename T, std::size_t size_v>
 	struct Names<T[size_v]> {
 		static std::string_view get() {
 			static auto name = astra::format("{}[{}]", Names<T>::get(), size_v);
@@ -33,7 +33,7 @@ namespace astra {
 		}
 	};
 
-	template<typename T, size_t size_v>
+	template<typename T, std::size_t size_v>
 	struct Names<std::array<T, size_v>> {
 		static std::string_view get() {
 			static auto name = astra::format("std::varray<{}, {}>", Names<T>::get(), size_v);

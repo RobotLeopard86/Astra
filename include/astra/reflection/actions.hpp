@@ -8,7 +8,7 @@ namespace astra {
 	struct Actions {
 		constexpr Actions(TypeInfo (*reflect)(void*, bool),//
 			std::string_view (*getName)(),				   //
-			size_t (*size)(),							   //
+			std::size_t (*size)(),						   //
 			void (*construct)(void* p),					   //
 			void (*destroy)(void* p),					   //
 			void (*copy)(void*, const void*),			   //
@@ -29,7 +29,7 @@ namespace astra {
 
 		TypeInfo (*reflect)(void*, bool);
 		std::string_view (*typeName)();
-		size_t (*typeSize)();
+		std::size_t (*typeSize)();
 		void (*construct)(void* p);
 		void (*destroy)(void* p);
 		void (*copy)(void*, const void*);

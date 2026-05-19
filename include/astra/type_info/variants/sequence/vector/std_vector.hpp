@@ -68,7 +68,7 @@ namespace astra {
 			_vector->clear();
 		}
 
-		size_t size() const override {
+		std::size_t size() const override {
 			return _vector->size();
 		}
 
@@ -101,7 +101,7 @@ namespace astra {
 			return Var(&_vector->back(), TypeId::get<T>(), _isConst);
 		};
 
-		Expected<Var> at(size_t idx) override {
+		Expected<Var> at(std::size_t idx) override {
 			if(idx >= _vector->size()) {
 				return Error(astra::format("Index: {} is out of array's size: {}", idx, _vector->size()));
 			}
@@ -109,7 +109,7 @@ namespace astra {
 			return Var(&(*_vector)[idx], TypeId::get<T>(), _isConst);
 		}
 
-		Expected<Var> operator[](size_t idx) override {
+		Expected<Var> operator[](std::size_t idx) override {
 			return at(idx);
 		}
 

@@ -18,7 +18,7 @@
 
 using namespace astra;
 
-ParserJson::ParserJson(const char* input, size_t inputSize)//
+ParserJson::ParserJson(const char* input, std::size_t inputSize)//
   : LexerJson(input, inputSize) {
 }
 
@@ -91,7 +91,7 @@ Expected<None> ParserJson::parse(TypeInfo* info, char token) {
     case '[':
       return info->match(
           [this](Array& a) -> Expected<None> {
-            return parseArray(a.nestedType(), [&](size_t i, Var var) -> Expected<None> {
+            return parseArray(a.nestedType(), [&](std::size_t i, Var var) -> Expected<None> {
               if (i < a.size()) {
                 auto item = a.at(i).unwrap();
                 return reflection::copy(item, var);
@@ -101,7 +101,7 @@ Expected<None> ParserJson::parse(TypeInfo* info, char token) {
           },
           [this](Sequence& s) -> Expected<None> {
             s.clear();
-            return parseArray(s.nestedType(), [&](size_t, Var var) {
+            return parseArray(s.nestedType(), [&](std::size_t, Var var) {
               return s.push(var);
             });
           },
@@ -124,7 +124,7 @@ Expected<None> ParserJson::parseNext(TypeInfo* info) {
 	return parse(info, _token);
 }
 
-Expected<None> ParserJson::parseArray(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add) {
+Expected<None> ParserJson::parseArray(TypeId nestedType, std::function<Expected<None>(std::size_t, Var)> add) {
 	next();//skip '['
 	if(_token == ']') {
 		//an empty array
@@ -134,7 +134,7 @@ Expected<None> ParserJson::parseArray(TypeId nestedType, std::function<Expected<
 	//save few ns for each iteration of the loop
 	auto boxedInfo = reflection::reflect(Var(nullptr, nestedType, false));
 
-	for(size_t i = 0; /**/; ++i) {
+	for(std::size_t i = 0; /**/; ++i) {
 		Box box(nestedType);//Box should be a new object for each iteration
 		boxedInfo.unsafeAssign(box.var().rawMut());
 

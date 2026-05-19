@@ -13,12 +13,12 @@ namespace astra {
 	struct Array final {
 		Array() = delete;
 
-		template<typename T, size_t size_v>
+		template<typename T, std::size_t size_v>
 		Array(T (*array)[size_v], bool isConst) {
 			new(_mem) CArray<T, size_v>(array, isConst);
 		}
 
-		template<typename T, size_t size_v>
+		template<typename T, std::size_t size_v>
 		Array(std::array<T, size_v>* array, bool isConst) {
 			new(_mem) StdArray<T, size_v>(array, isConst);
 		}
@@ -43,11 +43,11 @@ namespace astra {
 			return impl()->nestedType();
 		}
 
-		Expected<Var> at(size_t idx) {
+		Expected<Var> at(std::size_t idx) {
 			return impl()->at(idx);
 		}
 
-		Expected<Var> operator[](size_t idx) {
+		Expected<Var> operator[](std::size_t idx) {
 			return impl()->operator[](idx);
 		}
 
@@ -75,7 +75,7 @@ namespace astra {
 			impl()->unsafeForEach(std::move(callback));
 		}
 
-		size_t size() const {
+		std::size_t size() const {
 			return impl()->size();
 		}
 

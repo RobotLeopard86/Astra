@@ -11,7 +11,7 @@ namespace astra {
 	///just a registry of types and value pointers
 	struct Enum final {
 
-		template<typename T, size_t size>
+		template<typename T, std::size_t size>
 		Enum(T* value, bool isConst, const ConstexprMap<T, size>& allConstants) {
 			new(_mem) EnumImpl<T, size>(value, isConst, allConstants);
 		}

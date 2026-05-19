@@ -17,7 +17,7 @@ namespace astra {
 	///for both value->name and name->value access
 	///
 	///initial compile time sorting has O(N^2) complexity
-	template<class T, size_t size>
+	template<class T, std::size_t size>
 	class ConstexprMap {
 	  public:
 		///a pair like struct with deleted default constructor
@@ -75,7 +75,7 @@ namespace astra {
 		std::array<Entry*, size> _value_ptr;
 		std::array<Entry*, size> _name_ptr;
 
-		constexpr Entry* searchByValue(T value, size_t begin, size_t end) const {
+		constexpr Entry* searchByValue(T value, std::size_t begin, std::size_t end) const {
 
 			while(begin < end) {
 
@@ -97,7 +97,7 @@ namespace astra {
 			return nullptr;
 		}
 
-		constexpr Entry* searchByName(std::string_view name, size_t begin, size_t end) const {
+		constexpr Entry* searchByName(std::string_view name, std::size_t begin, std::size_t end) const {
 
 			while(begin < end) {
 

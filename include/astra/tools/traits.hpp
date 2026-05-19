@@ -106,7 +106,7 @@ namespace astra {
 	template<typename T>
 	inline constexpr bool is_array_v = is_array<T>::value;//NOLINT std like name
 
-	template<typename T, size_t size>
+	template<typename T, std::size_t size>
 	struct is_array<std::array<T, size>> : std::true_type {};
 
 	template<class T>

@@ -14,7 +14,7 @@ namespace astra {
 		  : _string(string) {
 		}
 
-		void write(const void* ptr, size_t bytes) override {
+		void write(const void* ptr, std::size_t bytes) override {
 			_string->append(static_cast<const char*>(ptr), bytes);
 		}
 
@@ -26,7 +26,7 @@ namespace astra {
 			return _string->at(_string->size() - 1);
 		}
 
-		void stepBack(size_t bytes) override {
+		void stepBack(std::size_t bytes) override {
 			_string->resize(_string->size() - bytes);
 		}
 

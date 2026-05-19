@@ -14,7 +14,7 @@ namespace astra {
 
 	class ParserJson : rf_json::LexerJson {
 	  public:
-		ParserJson(const char* input, size_t inputSize);
+		ParserJson(const char* input, std::size_t inputSize);
 		explicit ParserJson(std::istream& stream);
 
 		Expected<None> deserialize(TypeInfo* info);
@@ -23,7 +23,7 @@ namespace astra {
 		Expected<None> parse(TypeInfo* info, char token);
 		Expected<None> parseNext(TypeInfo* info);
 
-		Expected<None> parseArray(TypeId nestedType, std::function<Expected<None>(size_t, Var)> add);
+		Expected<None> parseArray(TypeId nestedType, std::function<Expected<None>(std::size_t, Var)> add);
 		Expected<None> parseObject(TypeInfo* info);
 		Expected<None> parseMap(Map& map);
 

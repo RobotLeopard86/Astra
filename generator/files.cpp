@@ -20,7 +20,7 @@ Files::Files()
 }
 
 #ifdef _WIN32
-std::string Files::toUTF8(const wchar_t* str, size_t size) {
+std::string Files::toUTF8(const wchar_t* str, std::size_t size) {
 	int sizeUTF8 = WideCharToMultiByte(CP_UTF8,//
 		WC_ERR_INVALID_CHARS,				   //
 		str,								   //
@@ -39,7 +39,7 @@ std::string Files::toUTF8(const wchar_t* str, size_t size) {
 	return strUTF8;
 }
 
-std::wstring Files::fromUTF8(const char* str, size_t size) {
+std::wstring Files::fromUTF8(const char* str, std::size_t size) {
 	int sizeW = MultiByteToWideChar(CP_UTF8,//
 		MB_ERR_INVALID_CHARS,				//
 		str,								//

@@ -15,7 +15,7 @@ namespace astra {
 		  : _vector(vector), _i(0) {
 		}
 
-		void write(const void* ptr, size_t bytes) override {
+		void write(const void* ptr, std::size_t bytes) override {
 			_vector->resize(_vector->size() + bytes);
 			std::memcpy(&(*_vector)[_i], ptr, bytes);
 			_i += bytes;
@@ -30,14 +30,14 @@ namespace astra {
 			return _vector->at(_vector->size() - 1);
 		}
 
-		void stepBack(size_t bytes) override {
+		void stepBack(std::size_t bytes) override {
 			_vector->resize(_vector->size() - bytes);
 			_i -= bytes;
 		}
 
 	  private:
 		std::vector<uint8_t>* _vector;
-		size_t _i;
+		std::size_t _i;
 	};
 
 }

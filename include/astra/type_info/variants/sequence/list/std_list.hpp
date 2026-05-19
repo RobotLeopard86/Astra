@@ -69,7 +69,7 @@ namespace astra {
 			_list->clear();
 		}
 
-		size_t size() const override {
+		std::size_t size() const override {
 			return _list->size();
 		}
 

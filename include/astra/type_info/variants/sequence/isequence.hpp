@@ -16,7 +16,7 @@ namespace astra {
 		virtual void forEach(std::function<void(Var)> callback) const = 0;
 		virtual void unsafeForEach(std::function<void(void*)> callback) const = 0;
 		virtual void clear() = 0;
-		virtual size_t size() const = 0;
+		virtual std::size_t size() const = 0;
 		virtual Expected<None> push(Var value) = 0;
 	};
 

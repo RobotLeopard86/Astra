@@ -14,12 +14,12 @@ namespace astra {
 		  : _vector(vector), _i(0) {
 		}
 
-		void read(void* buff, size_t size) const override {
+		void read(void* buff, std::size_t size) const override {
 			std::memcpy(buff, &_vector[_i], size);
 			_i += size;
 		}
 
-		void peek(void* buff, size_t size) const override {
+		void peek(void* buff, std::size_t size) const override {
 			std::memcpy(buff, &_vector[_i], size);
 		}
 
@@ -29,7 +29,7 @@ namespace astra {
 
 	  private:
 		const std::vector<uint8_t>& _vector;
-		mutable size_t _i;
+		mutable std::size_t _i;
 	};
 
 }

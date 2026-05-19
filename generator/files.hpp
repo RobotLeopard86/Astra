@@ -8,8 +8,8 @@ class Files {
 	Files();
 
 #ifdef _WIN32
-	std::string toUTF8(const wchar_t* str, size_t size);
-	std::wstring fromUTF8(const char* str, size_t size);
+	std::string toUTF8(const wchar_t* str, std::size_t size);
+	std::wstring fromUTF8(const char* str, std::size_t size);
 #endif
 
 	const std::string root;

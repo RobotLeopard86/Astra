@@ -77,7 +77,7 @@ namespace astra {
 			}
 		}
 
-		size_t size() const override {
+		std::size_t size() const override {
 			return _queue->size();
 		}
 

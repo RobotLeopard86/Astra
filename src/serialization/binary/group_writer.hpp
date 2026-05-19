@@ -34,7 +34,7 @@ namespace astra {
 			writeOne(static_cast<uint64_t>(value), false);
 		}
 
-		void write(size_t value) {
+		void write(std::size_t value) {
 			writeOne(value, false);
 		}
 
@@ -51,7 +51,7 @@ namespace astra {
 			_writer->write(str.data(), str.size());
 		}
 
-		void write(const void* ptr, size_t size, bool isSigned) {
+		void write(const void* ptr, std::size_t size, bool isSigned) {
 			uint64_t value = 0;
 
 			if(isSigned) {
@@ -92,7 +92,7 @@ namespace astra {
 
 		IWriter* _writer;
 		std::array<uint8_t, 17> _group;
-		size_t _i;
+		std::size_t _i;
 
 		unsigned int _word;
 
