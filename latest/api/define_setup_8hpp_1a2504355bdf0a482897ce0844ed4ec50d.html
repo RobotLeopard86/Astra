@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Function astra::format(std::string *, std::string_view, size_t) &#8212; Astra Documentation</title>
+    <title>Define ASTRASETUP &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/function_format_8hpp_1a6e79a55e083bc4319aec978952b11d6b';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/define_setup_8hpp_1a2504355bdf0a482897ce0844ed4ec50d';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -55,8 +55,8 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Template Function astra::format(std::string *, std::string_view, size_t, T&amp;&amp;, Ts&amp;&amp;…)" href="function_format_8hpp_1a8883d43094b674342ebb274dba5252d1.html" />
-    <link rel="prev" title="Template Function astra::append(std::string *, T&amp;&amp;)" href="function_format_8hpp_1a02afc04446a7163a881b95001d9aa6f0.html" />
+    <link rel="next" title="Define BASE" href="define_expected_8hpp_1a79bcfb6bde984f42d1124b068a509af7.html" />
+    <link rel="prev" title="Define ASTRA_REFLECT" href="define_setup_8hpp_1ae59fe1ca3fc284faf09cd4a252dffe7a.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -661,6 +661,9 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classAstraReflectBase.html">Class AstraReflectBase</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html">Enum Access</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -684,11 +687,11 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1a02afc04446a7163a881b95001d9aa6f0.html">Template Function astra::append(std::string *, T&amp;&amp;)</a></li>
 </ul>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Function astra::format(std::string *, std::string_view, size_t)</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1a77f789b0ac4ccdfab65e01293896f994.html">Function astra::format(std::string *, std::string_view, std::size_t)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1a8883d43094b674342ebb274dba5252d1.html">Template Function astra::format(std::string *, std::string_view, size_t, T&amp;&amp;, Ts&amp;&amp;…)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1acbeb881a9ddf64bf7654cbc59d41251b.html">Template Function astra::format(std::string *, std::string_view, std::size_t, T&amp;&amp;, Ts&amp;&amp;…)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1ab7e7d29a95da2ff06cf43aca41d54f91.html">Template Function astra::format(std::string_view, Ts&amp;&amp;…)</a></li>
@@ -745,7 +748,7 @@
 <li class="toctree-l1"><a class="reference internal" href="function_type__id_8hpp_1afbb9f80797e4e2bf48fec64b9abba74e.html">Function astra::reflection::typeName(uint32_t)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a13ef11a5fc99376cf69ff0c1d69029f5.html">Function astra::reflection::typeSize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a731b4e54dcb36f69343c4ff2f383e7be.html">Function astra::reflection::typeSize</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1aa05f512eb7ef85cf398a92b6a9e8de1c.html">Function astra::toString(bool)</a></li>
@@ -782,6 +785,18 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a1f09d77b72dd349aae29c3dc3ec35bd9.html">Variable astra::is_string_v</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="define_setup_8hpp_1a08e8d7d79636d1badfc6d093444722f1.html">Define ASTRA_ALIAS</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="define_setup_8hpp_1a7dac5c63e25027ed77b092b16f63cd06.html">Define ASTRA_IGNORE</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="define_setup_8hpp_1ae59fe1ca3fc284faf09cd4a252dffe7a.html">Define ASTRA_REFLECT</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Define ASTRASETUP</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="define_expected_8hpp_1a79bcfb6bde984f42d1124b068a509af7.html">Define BASE</a></li>
@@ -840,7 +855,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Astra API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Function astra::format(std::string *, std::string_view, size_t)</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Define ASTRASETUP</span></li>
   </ul>
 </nav>
 </div>
@@ -857,16 +872,16 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="function-astra-format-std-string-std-string-view-size-t">
-<span id="exhale-function-format-8hpp-1a6e79a55e083bc4319aec978952b11d6b"></span><h1>Function astra::format(std::string *, std::string_view, size_t)<a class="headerlink" href="#function-astra-format-std-string-std-string-view-size-t" title="Link to this heading"><span/></a></h1>
+  <section id="define-astrasetup">
+<span id="exhale-define-setup-8hpp-1a2504355bdf0a482897ce0844ed4ec50d"></span><h1>Define ASTRASETUP<a class="headerlink" href="#define-astrasetup" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_tools_format.hpp.html#file-include-astra-tools-format-hpp"><span class="std std-ref">File format.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_setup.hpp.html#file-include-astra-setup-hpp"><span class="std std-ref">File setup.hpp</span></a></p></li>
 </ul>
-<section id="function-documentation">
-<h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Link to this heading"><span/></a></h2>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra6formatEPNSt6stringENSt11string_viewE6size_t">
-<span id="_CPPv3N5astra6formatEPNSt6stringENSt11string_viewE6size_t"></span><span id="_CPPv2N5astra6formatEPNSt6stringENSt11string_viewE6size_t"></span><span id="astra::format__ssP.std::string_view.s"></span><span class="target" id="format_8hpp_1a6e79a55e083bc4319aec978952b11d6b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">astra</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">format</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">result</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6formatEPNSt6stringENSt11string_viewE6size_t" title="Link to this definition"><span/></a><br /></dt>
+<section id="define-documentation">
+<h2>Define Documentation<a class="headerlink" href="#define-documentation" title="Link to this heading"><span/></a></h2>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ASTRASETUP">
+<span class="target" id="setup_8hpp_1a2504355bdf0a482897ce0844ed4ec50d"></span><span class="sig-name descname"><span class="n"><span class="pre">ASTRASETUP</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ASTRASETUP" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -883,20 +898,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="function_format_8hpp_1a02afc04446a7163a881b95001d9aa6f0.html"
+       href="define_setup_8hpp_1ae59fe1ca3fc284faf09cd4a252dffe7a.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Template Function astra::append(std::string *, T&amp;&amp;)</p>
+        <p class="prev-next-title">Define ASTRA_REFLECT</p>
       </div>
     </a>
     <a class="right-next"
-       href="function_format_8hpp_1a8883d43094b674342ebb274dba5252d1.html"
+       href="define_expected_8hpp_1a79bcfb6bde984f42d1124b068a509af7.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Template Function astra::format(std::string *, std::string_view, size_t, T&amp;&amp;, Ts&amp;&amp;…)</p>
+        <p class="prev-next-title">Define BASE</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -919,8 +934,8 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-documentation">Function Documentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6formatEPNSt6stringENSt11string_viewE6size_t"><code class="docutils literal notranslate"><span class="pre">format()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-documentation">Define Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c.ASTRASETUP"><code class="docutils literal notranslate"><span class="pre">ASTRASETUP</span></code></a></li>
 </ul>
 </li>
 </ul>
