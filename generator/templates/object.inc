@@ -1,5 +1,5 @@
 R"(
-#include "{{file_name}}.astra.hpp"
+#include "{{file_name}}"
 
 // clang-format off
 #include "astra/reflection/the_great_table.hpp"
@@ -45,7 +45,7 @@ struct TypeActions<{{name}}> {
     if (res.type() != TypeId::get<{{item.return}}>()) {
       return Error(astra::format("Return type expected: {{item.return}}, received: {}", reflection::typeName(res.type())));
     }
-    *reinterpret_cast<{{item.return}}*>(res.raw_mut()) = //
+    *reinterpret_cast<{{item.return}}*>(res.rawMut()) = //
     {% endif -%}
     std::invoke(&{{name}}::{{item.name}}{% if not ("kStatic" in item.acc) %}, static_cast<{{name}}*>(obj){% endif %}{% if length(item.params) != 0 %},{% else %});{% endif %}
       {% for i in range(length(item.params)) -%}

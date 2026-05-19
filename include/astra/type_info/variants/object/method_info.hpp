@@ -82,14 +82,14 @@ namespace astra {
 		const MethodDesc* _data;
 
 		template<typename ArgT, typename... Args>
-		void fold_args(std::vector<Var>* vArgs, const ArgT* arg, const Args*... other) const {
+		void foldArgs(std::vector<Var>* vArgs, const ArgT* arg, const Args*... other) const {
 			vArgs->push_back(Var(arg));
 
 			foldArgs(vArgs, other...);
 		}
 
 		template<typename ArgT>
-		void fold_args(std::vector<Var>* vArgs, const ArgT* arg) const {
+		void foldArgs(std::vector<Var>* vArgs, const ArgT* arg) const {
 
 			vArgs->push_back(Var(arg));
 		}

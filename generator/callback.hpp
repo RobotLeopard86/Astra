@@ -77,13 +77,13 @@ struct JsonBuilder {
 	static inline std::string accessStr(AccessSpecifier access) {
 		switch(access) {
 			case clang::AS_public:
-				return "public";
+				return "kPublic";
 			case clang::AS_protected:
-				return "protected";
+				return "kProtected";
 			case clang::AS_private:
-				return "private";
+				return "kPrivate";
 			default:
-				return "none";
+				return "kNone";
 		}
 	}
 };

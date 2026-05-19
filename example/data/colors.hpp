@@ -1,6 +1,6 @@
 #pragma once
 
-#include "astra/reflectable.hpp"
+#include "astra/setup.hpp"
 
 enum class ASTRA_REFLECT Color {
 	Red,

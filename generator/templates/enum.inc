@@ -1,5 +1,5 @@
 R"(
-#include "{{file_name}}.astra.hpp"
+#include "{{file_name}}"
 
 // clang-format off
 #include "astra/reflection/the_great_table.hpp"

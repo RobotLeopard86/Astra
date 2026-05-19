@@ -25,20 +25,20 @@ int main() {
 	//Let's turn the JSON into YAML
 
 	std::cout << "This can also be in YAML:\n---\n"
-			  << astra::serialization::convert::to_yaml::from_json_string<Car>(asJson).unwrap() << "\n---" << std::endl;
+			  << astra::serialization::convert::toYaml::fromJsonString<Car>(asJson).unwrap() << "\n---" << std::endl;
 
 	//Let's reflect it
 	astra::TypeInfo info = astra::reflection::reflect(&car);
 
 	//Let's see if the car is insured
-	auto insuredVar = info.get<astra::Object>().get_field("insured").unwrap().var();
-	bool insured = *(insuredVar.rt_cast<bool>().unwrap());
+	auto insuredVar = info.get<astra::Object>().getField("insured").unwrap().var();
+	bool insured = *(insuredVar.rtCast<bool>().unwrap());
 	std::cout << "According to reflection, car is " << (insured ? "" : "NOT ") << "insured" << std::endl;
 
 	//Give the car insurance now
 	astra::reflection::reflect(insuredVar).get<astra::Bool>().set(true);
 	std::cout << "THE INSURANCE WIZARD HATH SPOKEN! ABRA-CADRABA-INSURANCE!" << std::endl;
-	insured = *(insuredVar.rt_cast<bool>().unwrap());
+	insured = *(insuredVar.rtCast<bool>().unwrap());
 	std::cout << "According to reflection, car is " << (insured ? "" : "NOT ") << "insured" << std::endl;
 
 	//What color is the car?
@@ -56,14 +56,14 @@ int main() {
 
 	//Recolor the car via reflection
 	std::cout << "Anyways, let's recolor the car with reflection" << std::endl;
-	int cost = info.get<astra::Object>().get_method("refinish").unwrap().invoke<int>(Color::Yellow).unwrap();
+	int cost = info.get<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Yellow).unwrap();
 	carColor = car.whatColorAmI();
 	std::cout << "The car is " << astra::reflection::reflect(&carColor).get<astra::Enum>().toString() << std::endl;
 	std::cout << "Refinishing it cost $" << cost << " though :(" << std::endl;
 
 	//Direct private field access
 	std::cout << "Why not do it for free? Unleash the direct private field access!" << std::endl;
-	astra::reflection::reflect(info.get<astra::Object>().get_field("color").unwrap().var()).get<astra::Enum>().parse("White").unwrap();
+	astra::reflection::reflect(info.get<astra::Object>().getField("color").unwrap().var()).get<astra::Enum>().parse("White").unwrap();
 	carColor = car.whatColorAmI();
 	std::cout << "The car is " << astra::reflection::reflect(&carColor).get<astra::Enum>().toString() << std::endl;
 
@@ -76,18 +76,18 @@ int main() {
 	suv.nickname = "Macho Truck";
 	suv.refinish(Color::Red);
 	suv.owner = "Big Mack";
-	suv.trunkVolume = 4.5 * 3.1 * 2;
+	suv.trunkVolume = 4.5f * 3.1f * 2.0f;
 	std::cout << "I have an SUV now:\n"
 			  << astra::serialization::json::toString(&suv).unwrap() << std::endl;
 	auto suvInfo = astra::reflection::reflect(&suv);
 	std::cout << "Because an SUV is also a Car... I can do car stuff with it." << std::endl;
 	std::cout << "Let's refinish it via reflection!" << std::endl;
-	int suvCost = suvInfo.get<astra::Object>().get_method("refinish").unwrap().invoke<int>(Color::Blue).unwrap();
+	int suvCost = suvInfo.get<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Blue).unwrap();
 	Color suvColor = suv.whatColorAmI();
 	std::cout << "The SUV is " << astra::reflection::reflect(&suvColor).get<astra::Enum>().toString() << std::endl;
 	std::cout << "Refinishing it cost more: $" << suvCost << std::endl;
 	std::cout << "I also can do SUV-specific stuff, like checking the trunk volume" << std::endl;
-	std::cout << "(it's " << astra::reflection::reflect(suvInfo.get<astra::Object>().get_field("trunkVolume").unwrap().var()).get<astra::Floating>().get() << " cubic feet btw)" << std::endl;
+	std::cout << "(it's " << astra::reflection::reflect(suvInfo.get<astra::Object>().getField("trunkVolume").unwrap().var()).get<astra::Floating>().get() << " cubic feet btw)" << std::endl;
 
 	//Casting to base class
 	std::cout << "Let's cast the SUV back to a car." << std::endl;

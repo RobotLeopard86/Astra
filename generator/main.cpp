@@ -24,9 +24,14 @@
 #endif
 
 #define VERBOSE_LOG(...) \
-	if(!quiet) std::cout << __VA_ARGS__ << std::endl;
+	if(!quiet) std::cout << "\x1b[2K\r" << lastMsg.str() << __VA_ARGS__ << std::endl;
+
+#define ERROR(...) \
+	std::cerr << "\x1b[0m\x1b[1;91mERROR: \x1b[0m" << __VA_ARGS__ << std::endl
 
 #define clock std::chrono::steady_clock
+
+inline std::stringstream lastMsg;
 
 int main(int argc, char* argv[]) {
 	//Configure CLI
@@ -71,6 +76,16 @@ int main(int argc, char* argv[]) {
 	//Parse CLI arguments
 	CLI11_PARSE(app, argc, argv);
 
+	//Spinner to make the wait bearable
+	std::unique_ptr<jms::Spinner> spinner;
+	if(!quiet) {
+#ifdef _DEBUG
+		std::cout << "\x1b[1;93mWarning: \x1b[0mYou are running a debug build of Astra! Source file parsing may be very slow!" << std::endl;
+#endif
+		spinner = std::make_unique<jms::Spinner>("Generating reflection data...", jms::dots);
+		spinner->start();
+	}
+
 	//Correct paths
 	Files files;
 	compDbPath = std::filesystem::canonical(compDbPath).string();
@@ -85,17 +100,7 @@ int main(int argc, char* argv[]) {
 		std::filesystem::remove(out / (project + ".astra.cpp"));
 	}
 	std::filesystem::create_directories(out);
-	VERBOSE_LOG("Prepped output directory " << out)
-
-	//Spinner to make the wait bearable
-	std::unique_ptr<jms::Spinner> spinner;
-	if(!quiet) {
-#ifdef _DEBUG
-		std::cout << "Warning: You are running a debug build of Astra! Source file parsing will be very slow!" << std::endl;
-#endif
-		spinner = std::make_unique<jms::Spinner>("Parsing source files...", jms::dots);
-		spinner->start();
-	}
+	VERBOSE_LOG("Prepared output directory " << out);
 
 	//Parse source files
 	clock::time_point parseBegin = clock::now();
@@ -113,7 +118,10 @@ int main(int argc, char* argv[]) {
 		inAsVec[0] = in;
 		auto maybeFR = parser.parse(inAsVec);
 		if(!maybeFR.has_value()) {
-			std::cerr << "Errors encountered while parsing source files!" << std::endl;
+			ERROR("Failed to parse source files due to compilation errors!");
+			if(!quiet) {
+				spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
+			}
 			return -1;
 		}
 		auto fileResults = maybeFR.value();
@@ -134,27 +142,26 @@ int main(int argc, char* argv[]) {
 
 		//Merge maps
 		parsed.merge(fileResults);
-		VERBOSE_LOG("\x1b[2K\r(" << ++counter << "/" << input.size() << ") Parsed \"" << in << "\"")
+		VERBOSE_LOG("(" << ++counter << "/" << input.size() << ") Parsed \"" << in << "\"");
 	}
 	clock::time_point parseEnd = clock::now();
-	if(!quiet) {
-		std::stringstream ss;
-		ss << "Parsing source files completed in " << std::chrono::duration_cast<std::chrono::duration<float>>(parseEnd - parseBegin).count() << " seconds";
-		spinner->finish(jms::FinishedState::SUCCESS, ss.str());
-	}
+	VERBOSE_LOG("Parsing source files completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(parseEnd - parseBegin).count() * 10000) / 10000) << " seconds");
 
 	//Create template objects
 	inja::Environment inja;
 	inja::Template headerTemplate = inja.parse(templates::Header);
 	inja::Template enumTemplate = inja.parse(templates::Enum);
 	inja::Template objectTemplate = inja.parse(templates::Object);
-	VERBOSE_LOG("Loaded templates")
+	VERBOSE_LOG("Loaded templates");
 
 	//Write root files
 	clock::time_point writeBegin = clock::now();
 	std::ofstream rootHeader(out / (project + ".astra.hpp"));
 	if(!rootHeader.is_open()) {
-		std::cerr << "Failed to open root header file for writing!" << std::endl;
+		ERROR("Failed to open root header file for writing!");
+		if(!quiet) {
+			spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
+		}
 		return -1;
 	}
 	rootHeader << R"(
@@ -173,7 +180,10 @@ int main(int argc, char* argv[]) {
 )";
 	std::ofstream rootCpp(out / (project + ".astra.cpp"));
 	if(!rootCpp.is_open()) {
-		std::cerr << "Failed to open root implementation file for writing!" << std::endl;
+		ERROR("Failed to open root implementation file for writing!");
+		if(!quiet) {
+			spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
+		}
 		return -1;
 	}
 	rootCpp << R"(
@@ -188,7 +198,7 @@ int main(int argc, char* argv[]) {
 			<< (project + ".astra.hpp") << "\"\n\n";
 
 	//Create type reflection directory
-	std::filesystem::path typesDir = out / "astra_types";
+	std::filesystem::path typesDir = out / "astra_generated";
 	std::filesystem::create_directories(typesDir);
 
 	//Write file templates
@@ -197,7 +207,6 @@ int main(int argc, char* argv[]) {
 	for(auto&& [objectName, json] : parsed) {
 		//Generate filenames
 		auto filenameUTF8 = toFilename(objectName);
-		json["file_name"] = filenameUTF8;
 		filenameUTF8 += ".astra";
 #ifdef _WIN32
 		auto fileName = files.fromUTF8(filenameUTF8.data(), filenameUTF8.size());
@@ -210,15 +219,26 @@ int main(int argc, char* argv[]) {
 		auto cppFile = typesDir / (fileName + ".cpp");
 #endif
 
+		//Ensure directories are okay
+		json["file_name"] = hppFile.filename();
+		std::filesystem::create_directories(hppFile.parent_path());
+		std::filesystem::create_directories(cppFile.parent_path());
+
 		//Open file streams
 		std::ofstream hpp(hppFile);
 		if(!hpp.is_open()) {
-			std::cerr << "Failed to open type header file for writing!" << std::endl;
+			ERROR("Failed to open type header file for writing!");
+			if(!quiet) {
+				spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
+			}
 			return -1;
 		}
 		std::ofstream cpp(cppFile);
 		if(!cpp.is_open()) {
-			std::cerr << "Failed to open type implementation file for writing!" << std::endl;
+			ERROR("Failed to open type implementation file for writing!");
+			if(!quiet) {
+				spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
+			}
 			return -1;
 		}
 
@@ -255,7 +275,7 @@ int main(int argc, char* argv[]) {
 		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << cppFile.generic_string());
 
 		//Add includes to root files
-		const std::string includeStr = "#include \"astra_types/";
+		const std::string includeStr = "#include \"astra_generated/";
 		rootHeader << includeStr << filenameUTF8 << ".hpp\"\n";
 		rootCpp << includeStr << filenameUTF8 << ".cpp\"\n";
 	}
@@ -266,10 +286,12 @@ int main(int argc, char* argv[]) {
 	rootCpp.close();
 	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".astra.cpp"));
 	clock::time_point writeEnd = clock::now();
-	VERBOSE_LOG("File generation completed in " << std::chrono::duration_cast<std::chrono::duration<float>>(writeEnd - writeBegin).count() << " seconds")
+	VERBOSE_LOG("File generation completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(writeEnd - writeBegin).count() * 10000) / 10000) << " seconds");
 
 	//Write done message
-	VERBOSE_LOG("Done!")
+	if(!quiet) {
+		spinner->finish(jms::FinishedState::SUCCESS, "Generation successful!");
+	}
 
 	return 0;
 }

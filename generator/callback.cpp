@@ -4,39 +4,80 @@
 #include "clang/AST/Attr.h"
 #include "clang/AST/Decl.h"
 #include "clang/Sema/Lookup.h"
-
-#include <clang/AST/ASTContext.h>
-#include <clang/AST/DeclTemplate.h>
-#include <clang/AST/DeclarationName.h>
-#include <clang/AST/TemplateBase.h>
-#include <clang/AST/TypeBase.h>
-#include <clang/Basic/IdentifierTable.h>
-#include <clang/Basic/LangOptions.h>
-#include <clang/Basic/SourceLocation.h>
-#include <clang/Sema/Ownership.h>
-#include <llvm/Support/Casting.h>
+#include "clang/AST/ASTContext.h"
+#include "clang/AST/Attrs.inc"
+#include "clang/AST/DeclCXX.h"
+#include "clang/AST/DeclTemplate.h"
+#include "clang/AST/DeclarationName.h"
+#include "clang/AST/TemplateBase.h"
+#include "clang/AST/TypeBase.h"
+#include "clang/Basic/IdentifierTable.h"
+#include "clang/Basic/LangOptions.h"
+#include "clang/Basic/SourceLocation.h"
+#include "clang/Basic/Specifiers.h"
+#include "clang/Sema/Ownership.h"
+#include "llvm/Support/Casting.h"
 
 #include <filesystem>
+#include <stdexcept>
 #include <vector>
 
 using namespace clang;
 using namespace clang::ast_matchers;
 
-void JsonBuilder::handleClass(const CXXRecordDecl* c) {
-	bool ok = false;
-	for(clang::Attr* attr : c->getAttrs()) {
+bool hasReflectAttr(const clang::Decl* decl) {
+	for(clang::Attr* attr : decl->getAttrs()) {
 		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
 			llvm::StringRef annText = annAttr->getAnnotation();
 			if(annText.compare("astra.reflect") == 0) {
-				ok = true;
-				break;
+				return true;
 			}
 		}
 	}
-	if(!ok) return;
+	return false;
+}
+
+bool hasIgnoreAttr(const clang::Decl* decl) {
+	for(clang::Attr* attr : decl->getAttrs()) {
+		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
+			llvm::StringRef annText = annAttr->getAnnotation();
+			if(annText.compare("astra.ignore") == 0) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool hasAliasAttr(const clang::Decl* decl) {
+	for(clang::Attr* attr : decl->getAttrs()) {
+		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
+			llvm::StringRef annText = annAttr->getAnnotation();
+			if(annText.starts_with("astra.alias:")) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+std::string getAttrAlias(const clang::Decl* decl) {
+	for(clang::Attr* attr : decl->getAttrs()) {
+		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
+			llvm::StringRef annText = annAttr->getAnnotation();
+			if(annText.starts_with("astra.alias:")) {
+				return annText.substr(12).str();
+			}
+		}
+	}
+	throw std::runtime_error("This decl does not have an alias!");
+}
+
+void JsonBuilder::handleClass(const CXXRecordDecl* c) {
+	if(!hasReflectAttr(c)) return;
 
 	clang::ASTContext& astCtx = c->getASTContext();
-	clang::IdentifierInfo& ii = astCtx.Idents.get("astragen_myconcept_check");
+	clang::IdentifierInfo& ii = astCtx.Idents.get("astragen_reflectable_check");
 	clang::ClassTemplateDecl* checkDecl = nullptr;
 	for(clang::NamedDecl* namedDecl : astCtx.getTranslationUnitDecl()->lookup(&ii)) {
 		if(clang::ClassTemplateDecl* ctd = dyn_cast<ClassTemplateDecl>(namedDecl)) {
@@ -51,31 +92,22 @@ void JsonBuilder::handleClass(const CXXRecordDecl* c) {
 	clang::ClassTemplateSpecializationDecl* specDecl = checkDecl->findSpecialization(templateArgs, ip);
 	if(specDecl == nullptr) return;
 	for(clang::Decl* decl : specDecl->decls()) {
-		auto* varDecl = llvm::dyn_cast<clang::VarDecl>(decl);
-		if(!varDecl || varDecl->getName() != "value")
+		VarDecl* varDecl = llvm::dyn_cast<clang::VarDecl>(decl);
+		if(!varDecl || varDecl->getName().compare("value") != 0)
 			continue;
-		clang::Expr* init = varDecl->getInit();
-		if(!init) return;
-		clang::Expr::EvalResult eval;
-		if(!init->EvaluateAsConstantExpr(eval, astCtx)) return;
-		if(!eval.Val.getInt().getBoolValue()) return;
+		APValue* v = varDecl->getEvaluatedValue();
+		if(!v) return;
+		if(!v->getInt().getBoolValue())
+			return;
+		else
+			break;
 	}
 
 	addClass(c);
 }
 
 void JsonBuilder::handleEnum(const EnumDecl* e) {
-	bool ok = false;
-	for(clang::Attr* attr : e->getAttrs()) {
-		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
-			llvm::StringRef annText = annAttr->getAnnotation();
-			if(annText.compare("astra.reflect") == 0) {
-				ok = true;
-				break;
-			}
-		}
-	}
-	if(!ok) return;
+	if(!hasReflectAttr(e)) return;
 
 	addEnum(e);
 }
@@ -96,22 +128,19 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 
 	std::vector<const clang::CXXRecordDecl*> decls;
 
-	//if(_options.count(AstraReflectAttr::Option::Base) != 0) {
-	{
-		auto parents = nlohmann::json::array();
+	auto parents = nlohmann::json::array();
 
-		for(auto&& b : c->bases()) {
-			nlohmann::json item;
+	for(auto&& b : c->bases()) {
+		nlohmann::json item;
 
-			item["acc"] = accessStr(b.getAccessSpecifier());
-			item["name"] = b.getType()->getAsRecordDecl()->getQualifiedNameAsString();
+		item["acc"] = accessStr(b.getAccessSpecifier());
+		item["name"] = b.getType()->getAsRecordDecl()->getQualifiedNameAsString();
 
-			parents.push_back(std::move(item));
+		parents.push_back(std::move(item));
 
-			decls.push_back(b.getType()->getAsCXXRecordDecl());
-		}
-		json.emplace("parents", std::move(parents));
+		decls.push_back(b.getType()->getAsCXXRecordDecl());
 	}
+	json.emplace("parents", std::move(parents));
 
 	auto fields = nlohmann::json::array();
 	auto func = nlohmann::json::array();
@@ -128,15 +157,14 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 			addFunction(&func, f, c->getNameAsString(), false);
 			funcNames.push_back(f->getNameAsString());
 		} else if(const auto* nc = dyn_cast<CXXRecordDecl>(d)) {
-			if(!nc->isThisDeclarationADefinition() ||//
-				nc->hasAttr<clang::AnnotateAttr>()) {
+			if(!nc->isThisDeclarationADefinition() || hasReflectAttr(nc)) {
 				//skip nested classes with dedicated 'reflect' attribute,
 				//handle them further as root declarations
 				continue;
 			}
 			addClass(nc);
 		} else if(const auto* ne = dyn_cast<EnumDecl>(d)) {
-			if(ne->hasAttr<clang::AnnotateAttr>()) {
+			if(hasReflectAttr(ne)) {
 				//skip nested enums with dedicated 'reflect' attribute,
 				//handle them further as root declarations
 				continue;
@@ -157,15 +185,14 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 				addFunction(&func, f, de->getNameAsString(), true);
 				funcNames.push_back(f->getNameAsString());
 			} else if(const auto* nc = dyn_cast<CXXRecordDecl>(d)) {
-				if(!nc->isThisDeclarationADefinition() ||//
-					nc->hasAttr<clang::AnnotateAttr>()) {
+				if(!nc->isThisDeclarationADefinition() || hasReflectAttr(nc)) {
 					//skip nested classes with dedicated 'reflect' attribute,
 					//handle them further as root declarations
 					continue;
 				}
 				addClass(nc);
 			} else if(const auto* ne = dyn_cast<EnumDecl>(d)) {
-				if(ne->hasAttr<clang::AnnotateAttr>()) {
+				if(hasReflectAttr(ne)) {
 					//skip nested enums with dedicated 'reflect' attribute,
 					//handle them further as root declarations
 					continue;
@@ -197,7 +224,7 @@ void JsonBuilder::addEnum(const EnumDecl* e) {
 	auto& arr = json["constants"];
 
 	for(auto&& c : e->enumerators()) {
-		if(c->hasAttr<clang::AnnotateAttr>()) {
+		if(hasIgnoreAttr(c)) {
 			continue;
 		}
 		auto& item = arr.emplace_back();
@@ -212,11 +239,10 @@ void JsonBuilder::addFunction(nlohmann::json* functions, const FunctionDecl* f, 
 		return;
 	}
 
-	auto acc = f->getAccess();
-	/*if((acc != clang::AS_public && _options.count(AstraReflectAttr::Option::NonPublic) == 0) ||
-		_options.count(AstraReflectAttr::Option::Func) == 0 || (acc == clang::AS_private && inherited)) {
+	AccessSpecifier acc = f->getAccess();
+	if(acc == clang::AS_private && inherited) {
 		return;
-	}*/
+	}
 
 	auto name = f->getNameAsString();
 
@@ -244,15 +270,14 @@ void JsonBuilder::addFunction(nlohmann::json* functions, const FunctionDecl* f, 
 }
 
 void JsonBuilder::addField(nlohmann::json* fields, const ValueDecl* v, bool inherited) {
-	if(v->template hasAttr<clang::AnnotateAttr>()) {
+	if(hasIgnoreAttr(v)) {
 		return;
 	}
 
-	/*auto acc = v->getAccess();
-	if((acc != clang::AS_public && _options.count(AstraReflectAttr::Option::NonPublic) == 0) ||
-		_options.count(AstraReflectAttr::Option::Data) == 0 || (acc == clang::AS_private && inherited)) {
+	AccessSpecifier acc = v->getAccess();
+	if(acc == clang::AS_private && inherited) {
 		return;
-	}*/
+	}
 
 	auto& field = fields->emplace_back();
 
@@ -278,10 +303,9 @@ void JsonBuilder::setName(nlohmann::json* item, const NamedDecl* decl) {
 	(*item)["name"] = name;
 	(*item)["safe_name"] = name;
 
-	if(const auto* alias = decl->getAttr<clang::AnnotateAttr>()) {
-		(*item)["alias"] = alias->getAnnotation().str();
-
-		return;
+	if(hasAliasAttr(decl)) {
+		(*item)["alias"] = getAttrAlias(decl);
+	} else {
+		(*item)["alias"] = name;
 	}
-	(*item)["alias"] = name;
 }
