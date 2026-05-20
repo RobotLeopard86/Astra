@@ -37,7 +37,7 @@ namespace astra {
 		}
 
 		if(info->is<Pointer>()) {
-			auto p = info->unsafeGet<Pointer>();
+			auto p = info->asUnsafe<Pointer>();
 			return p.getNested().matchMove(//
 				[this, &p, token](const Error& /*err*/) -> Expected<None> {
 					p.init();
@@ -165,7 +165,7 @@ namespace astra {
 			return None();
 		}
 
-		auto o = info->get<Object>();
+		auto o = info->as<Object>();
 
 		while(true) {
 			if(_token != '$') {

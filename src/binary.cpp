@@ -22,30 +22,30 @@ namespace astra {
 
 		switch(k) {
 			case TypeInfo::Kind::kObject:
-				for(auto&& record : info.unsafeGet<Object>().getFields()) {
+				for(auto&& record : info.asUnsafe<Object>().getFields()) {
 					//skip name in record.first;
 					auto fieldInfo = reflect(record.second.var());
 					serializeRecursive(writer, fieldInfo);
 				}
 				break;
 			case TypeInfo::Kind::kBool:
-				writer->write(info.unsafeGet<Bool>().get());
+				writer->write(info.asUnsafe<Bool>().get());
 				break;
 			case TypeInfo::Kind::kInteger: {
-				auto i = info.unsafeGet<Integer>();
+				auto i = info.asUnsafe<Integer>();
 				writer->write(i.var().raw(), i.size(), i.isSigned());
 			} break;
 			case TypeInfo::Kind::kFloating:
-				writer->write(info.unsafeGet<Floating>().get());
+				writer->write(info.asUnsafe<Floating>().get());
 				break;
 			case TypeInfo::Kind::kString:
-				writer->write(info.unsafeGet<String>().get());
+				writer->write(info.asUnsafe<String>().get());
 				break;
 			case TypeInfo::Kind::kEnum:
-				writer->write(info.unsafeGet<Enum>().toString());
+				writer->write(info.asUnsafe<Enum>().toString());
 				break;
 			case TypeInfo::Kind::kMap: {
-				auto m = info.unsafeGet<Map>();
+				auto m = info.asUnsafe<Map>();
 
 				writer->write(m.size());
 
@@ -60,13 +60,13 @@ namespace astra {
 				});
 			} break;
 			case TypeInfo::Kind::kArray:
-				serializeSequence(info.unsafeGet<Array>(), writer);
+				serializeSequence(info.asUnsafe<Array>(), writer);
 				break;
 			case TypeInfo::Kind::kSequence:
-				serializeSequence(info.unsafeGet<Sequence>(), writer);
+				serializeSequence(info.asUnsafe<Sequence>(), writer);
 				break;
 			case TypeInfo::Kind::kPointer: {
-				auto p = info.unsafeGet<Pointer>();
+				auto p = info.asUnsafe<Pointer>();
 				p.getNested().matchMove(//
 					[writer](const Error& /*err*/) { writer->writeNull(); },
 					[writer](Var var) {
@@ -111,17 +111,17 @@ namespace astra {
 
 		switch(k) {
 			case TypeInfo::Kind::kObject:
-				for(auto&& record : info->unsafeGet<Object>().getFields()) {
+				for(auto&& record : info->asUnsafe<Object>().getFields()) {
 					//skip name in record.first;
 					auto fieldInfo = reflect(record.second.var());
 					deserializeRecursive(&fieldInfo, reader);
 				}
 				break;
 			case TypeInfo::Kind::kBool:
-				info->unsafeGet<Bool>().set(reader.readUnsigned() == 1);
+				info->asUnsafe<Bool>().set(reader.readUnsigned() == 1);
 				break;
 			case TypeInfo::Kind::kInteger: {
-				auto i = info->unsafeGet<Integer>();
+				auto i = info->asUnsafe<Integer>();
 				if(i.isSigned()) {
 					i.setSigned(reader.readSigneg());
 				} else {
@@ -129,16 +129,16 @@ namespace astra {
 				}
 			} break;
 			case TypeInfo::Kind::kFloating:
-				info->unsafeGet<Floating>().set(reader.readFloat());
+				info->asUnsafe<Floating>().set(reader.readFloat());
 				break;
 			case TypeInfo::Kind::kString:
-				info->unsafeGet<String>().set(reader.readString());
+				info->asUnsafe<String>().set(reader.readString());
 				break;
 			case TypeInfo::Kind::kEnum:
-				info->unsafeGet<Enum>().fromString(reader.readString());
+				info->asUnsafe<Enum>().fromString(reader.readString());
 				break;
 			case TypeInfo::Kind::kMap: {
-				auto m = info->unsafeGet<Map>();
+				auto m = info->asUnsafe<Map>();
 				m.clear();
 
 				auto keyInfo = reflect(Var(nullptr, m.keyType(), false));
@@ -160,7 +160,7 @@ namespace astra {
 				}
 			} break;
 			case TypeInfo::Kind::kArray: {
-				auto a = info->unsafeGet<Array>();
+				auto a = info->asUnsafe<Array>();
 				auto n = reader.readUnsigned();
 
 				std::size_t i = 0;
@@ -175,7 +175,7 @@ namespace astra {
 				});
 			} break;
 			case TypeInfo::Kind::kSequence: {
-				auto s = info->unsafeGet<Sequence>();
+				auto s = info->asUnsafe<Sequence>();
 				s.clear();
 
 				auto entryInfo = reflect(Var(nullptr, s.nestedType(), false));
@@ -195,7 +195,7 @@ namespace astra {
 					reader.readUnsigned();//skip a byte
 					return;
 				}
-				auto p = info->unsafeGet<Pointer>();
+				auto p = info->asUnsafe<Pointer>();
 				p.getNested().matchMove(//
 					[&reader, &p](const Error& /*err*/) {
 						p.init();

@@ -44,7 +44,7 @@ namespace astra {
 				case TypeInfo::Kind::kMap:
 					return true;
 				case TypeInfo::Kind::kPointer: {
-					auto p = info.unsafeGet<Pointer>();
+					auto p = info.asUnsafe<Pointer>();
 					return p.getNested().matchMove(//
 						[](const Error& /*err*/) { return false; },
 						[](Var var) {
@@ -78,10 +78,10 @@ namespace astra {
 
 			switch(k) {
 				case TypeInfo::Kind::kBool:
-					append(writer, toString(info.unsafeGet<Bool>().get()));
+					append(writer, toString(info.asUnsafe<Bool>().get()));
 					break;
 				case TypeInfo::Kind::kInteger: {
-					auto i = info.unsafeGet<Integer>();
+					auto i = info.asUnsafe<Integer>();
 					if(i.isSigned()) {
 						append(writer, toString(i.asSigned()));
 					} else {
@@ -89,16 +89,16 @@ namespace astra {
 					}
 				} break;
 				case TypeInfo::Kind::kFloating:
-					append(writer, doubleToString(info.unsafeGet<Floating>().get()));
+					append(writer, doubleToString(info.asUnsafe<Floating>().get()));
 					break;
 				case TypeInfo::Kind::kString:
-					append(writer, info.unsafeGet<String>().get());
+					append(writer, info.asUnsafe<String>().get());
 					break;
 				case TypeInfo::Kind::kEnum:
-					append(writer, info.unsafeGet<Enum>().toString());
+					append(writer, info.asUnsafe<Enum>().toString());
 					break;
 				case TypeInfo::Kind::kObject: {
-					const auto& o = info.unsafeGet<Object>();
+					const auto& o = info.asUnsafe<Object>();
 
 					bool isFirst = true;
 					for(auto&& record : o.getFields()) {
@@ -129,7 +129,7 @@ namespace astra {
 				}
 				case TypeInfo::Kind::kMap: {
 					//TODO clear this hell
-					const auto& m = info.unsafeGet<Map>();
+					const auto& m = info.asUnsafe<Map>();
 
 					if(m.size() == 0) {
 						append(writer, "{}\n");
@@ -200,13 +200,13 @@ namespace astra {
 					break;
 				}
 				case TypeInfo::Kind::kArray:
-					serializeSequence(info.unsafeGet<Array>(), writer, indent);
+					serializeSequence(info.asUnsafe<Array>(), writer, indent);
 					break;
 				case TypeInfo::Kind::kSequence:
-					serializeSequence(info.unsafeGet<Sequence>(), writer, indent);
+					serializeSequence(info.asUnsafe<Sequence>(), writer, indent);
 					break;
 				case TypeInfo::Kind::kPointer: {
-					auto p = info.unsafeGet<Pointer>();
+					auto p = info.asUnsafe<Pointer>();
 					p.getNested().matchMove(//
 						[writer](const Error& /*err*/) { append(writer, "null"); },
 						[writer, indent](Var var) {

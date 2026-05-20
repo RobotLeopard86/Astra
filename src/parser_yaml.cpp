@@ -71,7 +71,7 @@ namespace astra {
 		}
 
 		if(info->is<Pointer>()) {
-			auto p = info->unsafeGet<Pointer>();
+			auto p = info->asUnsafe<Pointer>();
 			return p.getNested().matchMove(//
 				[this, &p](const Error& /*err*/) -> Expected<None> {
 					p.init();

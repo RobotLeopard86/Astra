@@ -45,10 +45,10 @@ namespace astra {
 
 			switch(k) {
 				case TypeInfo::Kind::kBool:
-					append(writer, toString(info.unsafeGet<Bool>().get()));
+					append(writer, toString(info.asUnsafe<Bool>().get()));
 					break;
 				case TypeInfo::Kind::kInteger: {
-					auto i = info.unsafeGet<Integer>();
+					auto i = info.asUnsafe<Integer>();
 					if(i.isSigned()) {
 						append(writer, toString(i.asSigned()));
 					} else {
@@ -56,20 +56,20 @@ namespace astra {
 					}
 				} break;
 				case TypeInfo::Kind::kFloating:
-					append(writer, doubleToString(info.unsafeGet<Floating>().get()));
+					append(writer, doubleToString(info.asUnsafe<Floating>().get()));
 					break;
 				case TypeInfo::Kind::kString:
 					append(writer, '"');
-					append(writer, info.unsafeGet<String>().get());
+					append(writer, info.asUnsafe<String>().get());
 					append(writer, '"');
 					break;
 				case TypeInfo::Kind::kEnum:
 					append(writer, '"');
-					append(writer, info.unsafeGet<Enum>().toString());
+					append(writer, info.asUnsafe<Enum>().toString());
 					append(writer, '"');
 					break;
 				case TypeInfo::Kind::kObject: {
-					const auto& o = info.unsafeGet<Object>();
+					const auto& o = info.asUnsafe<Object>();
 
 					auto fields = o.getFields();
 
@@ -93,13 +93,13 @@ namespace astra {
 
 				} break;
 				case TypeInfo::Kind::kArray:
-					serializeSequence(info.unsafeGet<Array>(), writer);
+					serializeSequence(info.asUnsafe<Array>(), writer);
 					break;
 				case TypeInfo::Kind::kSequence:
-					serializeSequence(info.unsafeGet<Sequence>(), writer);
+					serializeSequence(info.asUnsafe<Sequence>(), writer);
 					break;
 				case TypeInfo::Kind::kMap: {
-					const auto& m = info.unsafeGet<Map>();
+					const auto& m = info.asUnsafe<Map>();
 
 					if(m.size() == 0) {
 						append(writer, "[]");
@@ -126,7 +126,7 @@ namespace astra {
 					append(writer, ']');
 				} break;
 				case TypeInfo::Kind::kPointer: {
-					auto p = info.unsafeGet<Pointer>();
+					auto p = info.asUnsafe<Pointer>();
 					p.getNested().matchMove(//
 						[writer](const Error& /*err*/) { append(writer, "null"); },
 						[writer](Var var) {

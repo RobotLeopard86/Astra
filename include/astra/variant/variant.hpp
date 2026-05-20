@@ -44,12 +44,12 @@ namespace astra {
 			return std::holds_alternative<SomeT>(_content);
 		}
 
-		[[nodiscard]] inline std::size_t variantIdx() const {
+		[[nodiscard]] inline std::size_t index() const {
 			return _content.index();
 		}
 
 		template<typename SomeT>
-		SomeT& get() {
+		SomeT& as() {
 			auto pointer = std::get_if<SomeT>(&_content);
 
 			if(pointer == nullptr) {
@@ -59,12 +59,12 @@ namespace astra {
 		}
 
 		template<typename SomeT>
-		inline const SomeT& unsafeGet() const {
+		inline const SomeT& asUnsafe() const {
 			return std::get<SomeT>(_content);
 		}
 
 		template<typename SomeT>
-		inline SomeT& unsafeGet() {
+		inline SomeT& asUnsafe() {
 			return std::get<SomeT>(_content);
 		}
 

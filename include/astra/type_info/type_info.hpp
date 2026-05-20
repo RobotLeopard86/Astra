@@ -102,7 +102,7 @@ namespace astra {
 		};
 
 		[[nodiscard]] Kind getKind() const {
-			return static_cast<Kind>(variantIdx());
+			return static_cast<Kind>(index());
 		}
 
 		[[nodiscard]] std::string_view getKindStr() const {

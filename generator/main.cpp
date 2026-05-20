@@ -145,7 +145,7 @@ int main(int argc, char* argv[]) {
 		VERBOSE_LOG("(" << ++counter << "/" << input.size() << ") Parsed \"" << in << "\"");
 	}
 	clock::time_point parseEnd = clock::now();
-	VERBOSE_LOG("Parsing source files completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(parseEnd - parseBegin).count() * 10000) / 10000) << " seconds");
+	VERBOSE_LOG("Source parsing completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(parseEnd - parseBegin).count() * 10000) / 10000) << " seconds");
 
 	//Create template objects
 	inja::Environment inja;

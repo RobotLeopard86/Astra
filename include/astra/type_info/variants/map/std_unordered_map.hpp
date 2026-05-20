@@ -78,12 +78,12 @@ namespace astra {
 		Expected<None> insert(Var key, Var value) override {
 			auto k = key.rtCast<KeyT>();
 			if(k.isError()) {
-				return k.template get<Error>();
+				return k.template as<Error>();
 			}
 
 			auto v = value.rtCast<ValueT>();
 			if(v.isError()) {
-				return v.template get<Error>();
+				return v.template as<Error>();
 			}
 
 			auto r = _map->insert(std::make_pair(*k.unwrap(), *v.unwrap()));

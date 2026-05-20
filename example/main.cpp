@@ -30,41 +30,41 @@ int main() {
 	astra::TypeInfo info = astra::reflect(&car);
 
 	//Let's see if the car is insured
-	auto insuredVar = info.get<astra::Object>().getField("insured").unwrap().var();
+	auto insuredVar = info.as<astra::Object>().getField("insured").unwrap().var();
 	bool insured = *(insuredVar.rtCast<bool>().unwrap());
 	std::cout << "According to reflection, car is " << (insured ? "" : "NOT ") << "insured" << std::endl;
 
 	//Give the car insurance now
-	astra::reflect(insuredVar).get<astra::Bool>().set(true);
+	astra::reflect(insuredVar).as<astra::Bool>().set(true);
 	std::cout << "THE INSURANCE WIZARD HATH SPOKEN! ABRA-CADRABA-INSURANCE!" << std::endl;
 	insured = *(insuredVar.rtCast<bool>().unwrap());
 	std::cout << "According to reflection, car is " << (insured ? "" : "NOT ") << "insured" << std::endl;
 
 	//What color is the car?
 	Color carColor = car.whatColorAmI();
-	std::cout << "The car is " << astra::reflect(&carColor).get<astra::Enum>().toString() << std::endl;
+	std::cout << "The car is " << astra::reflect(&carColor).as<astra::Enum>().toString() << std::endl;
 
 	//Let's recolor the car
 	car.refinish(Color::Black);
 	std::cout << "Imma recolor the car." << std::endl;
 	carColor = car.whatColorAmI();
-	std::cout << "The car is " << astra::reflect(&carColor).get<astra::Enum>().toString() << std::endl;
+	std::cout << "The car is " << astra::reflect(&carColor).as<astra::Enum>().toString() << std::endl;
 
 	//By the way, sat radio?
 	std::cout << "By the way, the car does " << (car.hasSatRadio ? "" : "NOT ") << "have satellite radio. Reflection just can't see it because we marked it as ignored." << std::endl;
 
 	//Recolor the car via reflection
 	std::cout << "Anyways, let's recolor the car with reflection" << std::endl;
-	int cost = info.get<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Yellow).unwrap();
+	int cost = info.as<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Yellow).unwrap();
 	carColor = car.whatColorAmI();
-	std::cout << "The car is " << astra::reflect(&carColor).get<astra::Enum>().toString() << std::endl;
+	std::cout << "The car is " << astra::reflect(&carColor).as<astra::Enum>().toString() << std::endl;
 	std::cout << "Refinishing it cost $" << cost << " though :(" << std::endl;
 
 	//Direct private field access
 	std::cout << "Why not do it for free? Unleash the direct private field access!" << std::endl;
-	astra::reflect(info.get<astra::Object>().getField("color").unwrap().var()).get<astra::Enum>().fromString("White").unwrap();
+	astra::reflect(info.as<astra::Object>().getField("color").unwrap().var()).as<astra::Enum>().fromString("White").unwrap();
 	carColor = car.whatColorAmI();
-	std::cout << "The car is " << astra::reflect(&carColor).get<astra::Enum>().toString() << std::endl;
+	std::cout << "The car is " << astra::reflect(&carColor).as<astra::Enum>().toString() << std::endl;
 
 	//SUV for base class testing
 	ExampleNamespace::SUV suv;
@@ -81,12 +81,12 @@ int main() {
 	auto suvInfo = astra::reflect(&suv);
 	std::cout << "Because an SUV is also a Car... I can do car stuff with it." << std::endl;
 	std::cout << "Let's refinish it via reflection!" << std::endl;
-	int suvCost = suvInfo.get<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Blue).unwrap();
+	int suvCost = suvInfo.as<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Blue).unwrap();
 	Color suvColor = suv.whatColorAmI();
-	std::cout << "The SUV is " << astra::reflect(&suvColor).get<astra::Enum>().toString() << std::endl;
+	std::cout << "The SUV is " << astra::reflect(&suvColor).as<astra::Enum>().toString() << std::endl;
 	std::cout << "Refinishing it cost more: $" << suvCost << std::endl;
 	std::cout << "I also can do SUV-specific stuff, like checking the trunk volume" << std::endl;
-	std::cout << "(it's " << astra::reflect(suvInfo.get<astra::Object>().getField("trunkVolume").unwrap().var()).get<astra::Floating>().get() << " cubic feet btw)" << std::endl;
+	std::cout << "(it's " << astra::reflect(suvInfo.as<astra::Object>().getField("trunkVolume").unwrap().var()).as<astra::Floating>().get() << " cubic feet btw)" << std::endl;
 
 	//Casting to base class
 	std::cout << "Let's cast the SUV back to a car." << std::endl;
