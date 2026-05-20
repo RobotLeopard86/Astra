@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Template Struct is_expected&lt; Expected&lt; T, ErrorT &gt; &gt; &#8212; Astra Documentation</title>
+    <title>Struct converters &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/structastra_1_1is__expected_3_01Expected_3_01T_00_01ErrorT_01_4_01_4';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/structastra_1_1converters';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -55,8 +55,8 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Template Struct is_map" href="structastra_1_1is__map.html" />
-    <link rel="prev" title="Template Struct is_expected" href="structastra_1_1is__expected.html" />
+    <link rel="next" title="Struct converters::toBinary" href="structastra_1_1converters_1_1toBinary.html" />
+    <link rel="prev" title="Struct ConstexprMap::Entry" href="structastra_1_1ConstexprMap_1_1Entry.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -381,8 +381,8 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1ConstexprMap_1_1Entry.html">Struct ConstexprMap::Entry</a></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters.html">Struct converters</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Struct converters</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters_1_1toBinary.html">Struct converters::toBinary</a></li>
@@ -465,8 +465,8 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__expected.html">Template Struct is_expected</a></li>
 </ul>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Template Struct is_expected&lt; Expected&lt; T, ErrorT &gt; &gt;</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__expected_3_01Expected_3_01T_00_01ErrorT_01_4_01_4.html">Template Struct is_expected&lt; Expected&lt; T, ErrorT &gt; &gt;</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__map.html">Template Struct is_map</a></li>
@@ -846,7 +846,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Astra API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Template Struct is_expected&lt; Expected&lt; T, ErrorT &gt; &gt;</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Struct converters</span></li>
   </ul>
 </nav>
 </div>
@@ -863,26 +863,112 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="template-struct-is-expected-expected-t-errort">
-<span id="exhale-struct-structastra-1-1is-expected-3-01expected-3-01t-00-01errort-01-4-01-4"></span><h1>Template Struct is_expected&lt; Expected&lt; T, ErrorT &gt; &gt;<a class="headerlink" href="#template-struct-is-expected-expected-t-errort" title="Link to this heading"><span/></a></h1>
+  <section id="struct-converters">
+<span id="exhale-struct-structastra-1-1converters"></span><h1>Struct converters<a class="headerlink" href="#struct-converters" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_tools_traits.hpp.html#file-include-astra-tools-traits-hpp"><span class="std std-ref">File traits.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_serialization_convert.hpp.html#file-include-astra-serialization-convert-hpp"><span class="std std-ref">File convert.hpp</span></a></p></li>
 </ul>
-<section id="inheritance-relationships">
-<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Link to this heading"><span/></a></h2>
-<section id="base-type">
-<h3>Base Type<a class="headerlink" href="#base-type" title="Link to this heading"><span/></a></h3>
+<section id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Link to this heading"><span/></a></h2>
+<section id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Link to this heading"><span/></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">std::true_type</span></code></p></li>
+<li><p><a class="reference internal" href="structastra_1_1converters_1_1toBinary.html#exhale-struct-structastra-1-1converters-1-1tobinary"><span class="std std-ref">Struct converters::toBinary</span></a></p></li>
+<li><p><a class="reference internal" href="structastra_1_1converters_1_1toJson.html#exhale-struct-structastra-1-1converters-1-1tojson"><span class="std std-ref">Struct converters::toJson</span></a></p></li>
+<li><p><a class="reference internal" href="structastra_1_1converters_1_1toYaml.html#exhale-struct-structastra-1-1converters-1-1toyaml"><span class="std std-ref">Struct converters::toYaml</span></a></p></li>
 </ul>
 </section>
 </section>
 <section id="struct-documentation">
 <h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Link to this heading"><span/></a></h2>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4I00EN5astra11is_expectedI8ExpectedI1T6ErrorTEEE">
-<span id="_CPPv3I00EN5astra11is_expectedI8ExpectedI1T6ErrorTEEE"></span><span id="_CPPv2I00EN5astra11is_expectedI8ExpectedI1T6ErrorTEEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ErrorT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1is__expected_3_01Expected_3_01T_00_01ErrorT_01_4_01_4"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_expected</span></span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN5astra11is_expectedI8ExpectedI1T6ErrorTEEE" title="astra::is_expected&lt;Expected&lt;T, ErrorT&gt;&gt;::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN5astra11is_expectedI8ExpectedI1T6ErrorTEEE" title="astra::is_expected&lt;Expected&lt;T, ErrorT&gt;&gt;::ErrorT"><span class="n"><span class="pre">ErrorT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">true_type</span></span><a class="headerlink" href="#_CPPv4I00EN5astra11is_expectedI8ExpectedI1T6ErrorTEEE" title="Link to this definition"><span/></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra10convertersE">
+<span id="_CPPv3N5astra10convertersE"></span><span id="_CPPv2N5astra10convertersE"></span><span id="astra::converters"></span><span class="target" id="structastra_1_1converters"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">converters</span></span></span><a class="headerlink" href="#_CPPv4N5astra10convertersE" title="Link to this definition"><span/></a><br /></dt>
+<dd><dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra10converters8toBinaryE">
+<span id="_CPPv3N5astra10converters8toBinaryE"></span><span id="_CPPv2N5astra10converters8toBinaryE"></span><span id="astra::converters::toBinary"></span><span class="target" id="structastra_1_1converters_1_1toBinary"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toBinary</span></span></span><a class="headerlink" href="#_CPPv4N5astra10converters8toBinaryE" title="Link to this definition"><span/></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStringE8ExpectedINSt6vectorI7uint8_tEEENSt11string_viewE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromJsonStringENSt11string_viewE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromJsonStringENSt11string_viewE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1aab57c768c7e3e784f6b672e10877597c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromJsonString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStringE8ExpectedINSt6vectorI7uint8_tEEENSt11string_viewE" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamE8ExpectedINSt6vectorI7uint8_tEEERNSt7istreamE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1a1afa547cb1372d20dce577ccc3c1b81b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromJsonStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamE8ExpectedINSt6vectorI7uint8_tEEERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStringE8ExpectedINSt6vectorI7uint8_tEEENSt11string_viewE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromYamlStringENSt11string_viewE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromYamlStringENSt11string_viewE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1acc594117b2caffa21a625c231e069122"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromYamlString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStringE8ExpectedINSt6vectorI7uint8_tEEENSt11string_viewE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamE8ExpectedINSt6vectorI7uint8_tEEERNSt7istreamE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1a80cba4f71f84363b7ce4a3146c91f3a4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromYamlStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamE8ExpectedINSt6vectorI7uint8_tEEERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra10converters6toJsonE">
+<span id="_CPPv3N5astra10converters6toJsonE"></span><span id="_CPPv2N5astra10converters6toJsonE"></span><span id="astra::converters::toJson"></span><span class="target" id="structastra_1_1converters_1_1toJson"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toJson</span></span></span><a class="headerlink" href="#_CPPv4N5astra10converters6toJsonE" title="Link to this definition"><span/></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toJson14fromYamlStringE8ExpectedINSt6stringEENSt11string_viewE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toJson14fromYamlStringENSt11string_viewE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toJson14fromYamlStringENSt11string_viewE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toJson_1ab6f153d4402c88d86af4a53f50ee88b9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromYamlString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson14fromYamlStringE8ExpectedINSt6stringEENSt11string_viewE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toJson14fromYamlStreamE8ExpectedINSt6stringEERNSt7istreamE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toJson14fromYamlStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toJson14fromYamlStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toJson_1a27db34c5db16f966824fce9323c985a3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromYamlStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson14fromYamlStreamE8ExpectedINSt6stringEERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toJson16fromBinaryVectorE8ExpectedINSt6stringEERKNSt6vectorI7uint8_tEE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toJson16fromBinaryVectorERKNSt6vectorI7uint8_tEE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toJson16fromBinaryVectorERKNSt6vectorI7uint8_tEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toJson_1aa5b4e475f2d74d172573210a06fea84a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromBinaryVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson16fromBinaryVectorE8ExpectedINSt6stringEERKNSt6vectorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toJson16fromBinaryStreamE8ExpectedINSt6stringEERNSt7istreamE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toJson16fromBinaryStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toJson16fromBinaryStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toJson_1aa540ea180a4142da70d314630cc3c438"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromBinaryStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson16fromBinaryStreamE8ExpectedINSt6stringEERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra10converters6toYamlE">
+<span id="_CPPv3N5astra10converters6toYamlE"></span><span id="_CPPv2N5astra10converters6toYamlE"></span><span id="astra::converters::toYaml"></span><span class="target" id="structastra_1_1converters_1_1toYaml"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toYaml</span></span></span><a class="headerlink" href="#_CPPv4N5astra10converters6toYamlE" title="Link to this definition"><span/></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toYaml14fromJsonStringE8ExpectedINSt6stringEENSt11string_viewE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toYaml14fromJsonStringENSt11string_viewE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toYaml14fromJsonStringENSt11string_viewE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toYaml_1a7e9e340d6af957797bef027c074331a8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromJsonString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml14fromJsonStringE8ExpectedINSt6stringEENSt11string_viewE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toYaml14fromJsonStreamE8ExpectedINSt6stringEERNSt7istreamE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toYaml14fromJsonStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toYaml14fromJsonStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toYaml_1a2cfc220edeb6513e260e6111ad78b002"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromJsonStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml14fromJsonStreamE8ExpectedINSt6stringEERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toYaml16fromBinaryVectorE8ExpectedINSt6stringEERKNSt6vectorI7uint8_tEE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toYaml16fromBinaryVectorERKNSt6vectorI7uint8_tEE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toYaml16fromBinaryVectorERKNSt6vectorI7uint8_tEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toYaml_1ae26e04e12008d52c70e39545f7336a17"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromBinaryVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml16fromBinaryVectorE8ExpectedINSt6stringEERKNSt6vectorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters6toYaml16fromBinaryStreamE8ExpectedINSt6stringEERNSt7istreamE">
+<span id="_CPPv3I_11ReflectableEN5astra10converters6toYaml16fromBinaryStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters6toYaml16fromBinaryStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toYaml_1adfec5fad9102829cd12c0e3f681d741e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Expected.html#_CPPv4I00EN5astra8ExpectedE" title="astra::Expected"><span class="n"><span class="pre">Expected</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromBinaryStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml16fromBinaryStreamE8ExpectedINSt6stringEERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 </section>
@@ -898,20 +984,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="structastra_1_1is__expected.html"
+       href="structastra_1_1ConstexprMap_1_1Entry.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Template Struct is_expected</p>
+        <p class="prev-next-title">Struct ConstexprMap::Entry</p>
       </div>
     </a>
     <a class="right-next"
-       href="structastra_1_1is__map.html"
+       href="structastra_1_1converters_1_1toBinary.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Template Struct is_map</p>
+        <p class="prev-next-title">Struct converters::toBinary</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -934,12 +1020,35 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-relationships">Inheritance Relationships</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-type">Base Type</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-relationships">Nested Relationships</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-types">Nested Types</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struct-documentation">Struct Documentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I00EN5astra11is_expectedI8ExpectedI1T6ErrorTEEE"><code class="docutils literal notranslate"><span class="pre">astra::is_expected&lt;</span> <span class="pre">Expected&lt;</span> <span class="pre">T,</span> <span class="pre">ErrorT</span> <span class="pre">&gt;</span> <span class="pre">&gt;</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra10convertersE"><code class="docutils literal notranslate"><span class="pre">astra::converters</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra10converters8toBinaryE"><code class="docutils literal notranslate"><span class="pre">astra::converters::toBinary</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStringE8ExpectedINSt6vectorI7uint8_tEEENSt11string_viewE"><code class="docutils literal notranslate"><span class="pre">fromJsonString()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamE8ExpectedINSt6vectorI7uint8_tEEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromJsonStream()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStringE8ExpectedINSt6vectorI7uint8_tEEENSt11string_viewE"><code class="docutils literal notranslate"><span class="pre">fromYamlString()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamE8ExpectedINSt6vectorI7uint8_tEEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromYamlStream()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra10converters6toJsonE"><code class="docutils literal notranslate"><span class="pre">astra::converters::toJson</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson14fromYamlStringE8ExpectedINSt6stringEENSt11string_viewE"><code class="docutils literal notranslate"><span class="pre">fromYamlString()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson14fromYamlStreamE8ExpectedINSt6stringEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromYamlStream()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson16fromBinaryVectorE8ExpectedINSt6stringEERKNSt6vectorI7uint8_tEE"><code class="docutils literal notranslate"><span class="pre">fromBinaryVector()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toJson16fromBinaryStreamE8ExpectedINSt6stringEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromBinaryStream()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra10converters6toYamlE"><code class="docutils literal notranslate"><span class="pre">astra::converters::toYaml</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml14fromJsonStringE8ExpectedINSt6stringEENSt11string_viewE"><code class="docutils literal notranslate"><span class="pre">fromJsonString()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml14fromJsonStreamE8ExpectedINSt6stringEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromJsonStream()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml16fromBinaryVectorE8ExpectedINSt6stringEERKNSt6vectorI7uint8_tEE"><code class="docutils literal notranslate"><span class="pre">fromBinaryVector()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters6toYaml16fromBinaryStreamE8ExpectedINSt6stringEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromBinaryStream()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

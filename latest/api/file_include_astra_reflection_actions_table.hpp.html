@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Program Listing for File the_great_table.hpp &#8212; Astra Documentation</title>
+    <title>File actions_table.hpp &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/program_listing_file_include_astra_reflection_the_great_table.hpp';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/file_include_astra_reflection_actions_table.hpp';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -234,6 +234,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -336,8 +340,8 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Program Listing for File the_great_table.hpp</a></li>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_include_astra_reflection_actions_table.hpp.html">Program Listing for File actions_table.hpp</a></li>
 </ul>
 </div>
 </nav></div>
@@ -378,7 +382,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Program Listing for File the_great_table.hpp</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">File actions_table.hpp</span></li>
   </ul>
 </nav>
 </div>
@@ -395,47 +399,62 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="program-listing-for-file-the-great-table-hpp">
-<span id="program-listing-file-include-astra-reflection-the-great-table-hpp"></span><h1>Program Listing for File the_great_table.hpp<a class="headerlink" href="#program-listing-for-file-the-great-table-hpp" title="Link to this heading"><span/></a></h1>
-<p>↰ <a class="reference internal" href="file_include_astra_reflection_the_great_table.hpp.html#file-include-astra-reflection-the-great-table-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/the_great_table.hpp</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;actions.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/types/unknown.hpp&quot;</span>
-
-<span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">TheGreatTable</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Actions</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">dataGuard</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">record</span><span class="p">(</span><span class="n">Actions</span><span class="w"> </span><span class="n">actions</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataGuard</span><span class="p">();</span>
-
-<span class="w">            </span><span class="n">data</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">actions</span><span class="p">);</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">      </span><span class="k">private</span><span class="o">:</span>
-<span class="w">        </span><span class="c1">//static initialization fiasco guard to guarantee the first place for UnknownActions</span>
-<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Actions</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dataGuard</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">//zero index for unknown type</span>
-<span class="w">            </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Actions</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">Actions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">UnknownActions</span><span class="o">::</span><span class="n">reflect</span><span class="p">,</span><span class="c1">//</span>
-<span class="w">                </span><span class="o">&amp;</span><span class="n">UnknownActions</span><span class="o">::</span><span class="n">typeName</span><span class="p">,</span><span class="w">                                       </span><span class="c1">//</span>
-<span class="w">                </span><span class="o">&amp;</span><span class="n">UnknownActions</span><span class="o">::</span><span class="n">typeSize</span><span class="p">,</span><span class="w">                                       </span><span class="c1">//</span>
-<span class="w">                </span><span class="o">&amp;</span><span class="n">UnknownActions</span><span class="o">::</span><span class="n">construct</span><span class="p">,</span><span class="w">                                      </span><span class="c1">//</span>
-<span class="w">                </span><span class="o">&amp;</span><span class="n">UnknownActions</span><span class="o">::</span><span class="n">destroy</span><span class="p">,</span><span class="w">                                        </span><span class="c1">//</span>
-<span class="w">                </span><span class="o">&amp;</span><span class="n">UnknownActions</span><span class="o">::</span><span class="n">copy</span><span class="p">,</span><span class="w">                                           </span><span class="c1">//</span>
-<span class="w">                </span><span class="o">&amp;</span><span class="n">UnknownActions</span><span class="o">::</span><span class="n">move</span><span class="p">)};</span>
-
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">};</span>
-
-<span class="p">}</span>
-</pre></div>
+  <section id="file-actions-table-hpp">
+<span id="file-include-astra-reflection-actions-table-hpp"></span><h1>File actions_table.hpp<a class="headerlink" href="#file-actions-table-hpp" title="Link to this heading"><span/></a></h1>
+<p>↰ <a class="reference internal" href="dir_include_astra_reflection.html#dir-include-astra-reflection"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection</span></code>)</p>
+<nav class="contents local" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-include-astra-reflection-actions-table-hpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/actions_table.hpp</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#included-by" id="id3">Included By</a></p></li>
+<li><p><a class="reference internal" href="#namespaces" id="id4">Namespaces</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id5">Classes</a></p></li>
+</ul>
+</nav>
+<section id="definition-include-astra-reflection-actions-table-hpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/actions_table.hpp</span></code>)<a class="headerlink" href="#definition-include-astra-reflection-actions-table-hpp" title="Link to this heading"><span/></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_include_astra_reflection_actions_table.hpp.html">Program Listing for File actions_table.hpp</a></li>
+</ul>
 </div>
+</section>
+<section id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Link to this heading"><span/></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">actions.hpp</span></code> (<a class="reference internal" href="file_include_astra_reflection_actions.hpp.html#file-include-astra-reflection-actions-hpp"><span class="std std-ref">File actions.hpp</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">astra/types/unknown.hpp</span></code> (<a class="reference internal" href="file_include_astra_types_unknown.hpp.html#file-include-astra-types-unknown-hpp"><span class="std std-ref">File unknown.hpp</span></a>)</p></li>
+</ul>
+</section>
+<section id="included-by">
+<h2>Included By<a class="headerlink" href="#included-by" title="Link to this heading"><span/></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="file_include_astra_types_array_c_array.hpp.html#file-include-astra-types-array-c-array-hpp"><span class="std std-ref">File c_array.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_array_std_array.hpp.html#file-include-astra-types-array-std-array-hpp"><span class="std std-ref">File std_array.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_bool.hpp.html#file-include-astra-types-bool-hpp"><span class="std std-ref">File bool.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_common_actions.hpp.html#file-include-astra-types-common-actions-hpp"><span class="std std-ref">File common_actions.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_float.hpp.html#file-include-astra-types-float-hpp"><span class="std std-ref">File float.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_integer.hpp.html#file-include-astra-types-integer-hpp"><span class="std std-ref">File integer.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_map.hpp.html#file-include-astra-types-map-hpp"><span class="std std-ref">File map.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_pointers_std_shared_ptr.hpp.html#file-include-astra-types-pointers-std-shared-ptr-hpp"><span class="std std-ref">File std_shared_ptr.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_pointers_std_unique_ptr.hpp.html#file-include-astra-types-pointers-std-unique-ptr-hpp"><span class="std std-ref">File std_unique_ptr.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_sequence.hpp.html#file-include-astra-types-sequence-hpp"><span class="std std-ref">File sequence.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_include_astra_types_string.hpp.html#file-include-astra-types-string-hpp"><span class="std std-ref">File string.hpp</span></a></p></li>
+</ul>
+</section>
+<section id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Link to this heading"><span/></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="namespace_astra.html#namespace-astra"><span class="std std-ref">Namespace astra</span></a></p></li>
+</ul>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"><span/></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="structastra_1_1ActionsTable.html#exhale-struct-structastra-1-1actionstable"><span class="std std-ref">Struct ActionsTable</span></a></p></li>
+</ul>
+</section>
 </section>
 
 
@@ -454,6 +473,28 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-include-astra-reflection-actions-table-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/astra/reflection/actions_table.hpp</span></code>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#includes">Includes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-by">Included By</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces">Namespaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

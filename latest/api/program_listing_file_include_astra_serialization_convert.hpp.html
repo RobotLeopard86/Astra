@@ -404,8 +404,8 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;json.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;yaml.hpp&quot;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="o">::</span><span class="nn">serialization</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">convert</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">//NOLINT namespace like name</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">converters</span><span class="w"> </span><span class="p">{</span><span class="c1">//NOLINT namespace like name</span>
 <span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">toJson</span><span class="w"> </span><span class="p">{</span><span class="c1">//NOLINT namespace like name</span>
 <span class="w">            </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Reflectable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
 <span class="w">            </span><span class="k">static</span><span class="w"> </span><span class="n">Expected</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fromYamlString</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

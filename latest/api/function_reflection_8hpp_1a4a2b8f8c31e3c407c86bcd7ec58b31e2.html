@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Template Function astra::reflection::sprint(const T *) &#8212; Astra Documentation</title>
+    <title>Function astra::typeSize &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/function_reflection_8hpp_1a087ae23098207e8d37627244aa7e513e';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/function_reflection_8hpp_1a4a2b8f8c31e3c407c86bcd7ec58b31e2';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -55,8 +55,8 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Function astra::reflection::typeName(TypeId)" href="function_type__name_8hpp_1adabaeab24618157af6e96fad6294e429.html" />
-    <link rel="prev" title="Function astra::reflection::sprint(Var)" href="function_reflection_8hpp_1a3471819ca862d07b14c907818fe8d81f.html" />
+    <link rel="next" title="Variable astra::defaultAlloc" href="variable_alloc_8hpp_1a871b68d3ba1f070c6acb572eaf6e7f94.html" />
+    <link rel="prev" title="Function astra::typeName" href="function_type__name_8hpp_1a90eda9061746f489d874dc07e2ff6339.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -346,19 +346,19 @@
 <li class="toctree-l1"><a class="reference internal" href="namespace_astra.html">Namespace astra</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__reflection.html">Namespace astra::reflection</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="namespace_astra__sequence.html">Namespace astra::sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__serialization.html">Namespace astra::serialization</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ActionsTable.html">Struct ActionsTable</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Array.html">Struct Array</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1binary.html">Struct binary</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Bool.html">Struct Bool</a></li>
@@ -380,6 +380,18 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1ConstexprMap_1_1Entry.html">Struct ConstexprMap::Entry</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters.html">Struct converters</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters_1_1toBinary.html">Struct converters::toBinary</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters_1_1toJson.html">Struct converters::toJson</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters_1_1toYaml.html">Struct converters::toYaml</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1CString.html">Template Struct CString</a></li>
@@ -496,6 +508,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IVector.html">Struct IVector</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1json.html">Struct json</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Map.html">Struct Map</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -530,27 +545,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1SequenceActions.html">Template Struct SequenceActions</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1serialization_1_1binary.html">Struct binary</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1serialization_1_1convert.html">Struct convert</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1serialization_1_1convert_1_1toBinary.html">Struct convert::toBinary</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1serialization_1_1convert_1_1toJson.html">Struct convert::toJson</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1serialization_1_1convert_1_1toYaml.html">Struct convert::toYaml</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1serialization_1_1json.html">Struct json</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1serialization_1_1yaml.html">Struct yaml</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof.html">Template Struct Sizeof</a></li>
@@ -610,9 +604,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1StringActions.html">Template Struct StringActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1TheGreatTable.html">Struct TheGreatTable</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1TightString.html">Struct TightString</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -632,6 +623,9 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Variant.html">Template Struct Variant</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1yaml.html">Struct yaml</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structConstexprSort.html">Struct ConstexprSort</a></li>
@@ -688,6 +682,15 @@
 <li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1a02afc04446a7163a881b95001d9aa6f0.html">Template Function astra::append(std::string *, T&amp;&amp;)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aef8cd61faa7c5c18dcdf09722f26f4b3.html">Function astra::construct</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a5a921662b0d2303f9b2008cab124a5e0.html">Function astra::copy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a2810b4e1f9322525ae6add1d4bc61730.html">Function astra::destroy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1a77f789b0ac4ccdfab65e01293896f994.html">Function astra::format(std::string *, std::string_view, std::size_t)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -706,49 +709,31 @@
 <li class="toctree-l1"><a class="reference internal" href="function_overloaded_8hpp_1aab8921fe63674c9f2b4d37fe09c9b4f2.html">Template Function astra::Overloaded</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a6a65ea1b8ca4ea4dd2675e212d8c69a3.html">Function astra::reflection::construct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a9b37232674257fdb602d050bd1ad72c1.html">Function astra::print(const TypeInfo&amp;)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1af27951de456e7378fc32a6c5c26761d5.html">Function astra::reflection::copy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1af1519901592ea6c930c56e9a70d1fad5.html">Function astra::print(Var)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a1009372c0eadab4d29312d05407a7b4e.html">Function astra::reflection::destroy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a9f6f38085af9ec269580bc783510c259.html">Template Function astra::print(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a49e30860157c1d1e9796204601586a72.html">Function astra::reflection::print(const TypeInfo&amp;)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a55c2d4b75265cb03d7f2406d9a64aff7.html">Function astra::reflect(Var)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a71025828af488b49a39b0df7da5bd10d.html">Function astra::reflection::print(Var)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aad262ca670e6430753354c6c4bf155ea.html">Template Function astra::reflect(T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a942c83267c47c753fe8f62414535699e.html">Template Function astra::reflection::print(const T *)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a6570da25f1d3fa9b105d8466378c571a.html">Template Function astra::reflect(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a23541d2521c4130aa052c29b27425bfc.html">Function astra::reflection::reflect(Var)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aba9955aee4c1ee81c9a08bd62770da23.html">Function astra::sprint(const TypeInfo&amp;)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1abfca05c58dd6c7f6fe9b5849d953a931.html">Template Function astra::reflection::reflect(T *)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1afac34343d445ee366e84aad653e4ec5e.html">Function astra::sprint(Var)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a62181548febea2c0ff23d382b954fa70.html">Template Function astra::reflection::reflect(const T *)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1abd6ffd25e2d39140df40cc45545e25eb.html">Function astra::reflection::sprint(const TypeInfo&amp;)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a3471819ca862d07b14c907818fe8d81f.html">Function astra::reflection::sprint(Var)</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Template Function astra::reflection::sprint(const T *)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1adabaeab24618157af6e96fad6294e429.html">Function astra::reflection::typeName(TypeId)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_type__id_8hpp_1afbb9f80797e4e2bf48fec64b9abba74e.html">Function astra::reflection::typeName(uint32_t)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a731b4e54dcb36f69343c4ff2f383e7be.html">Function astra::reflection::typeSize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aab25549a2bb25ef2c3dba2539367cdb9.html">Template Function astra::sprint(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1aa05f512eb7ef85cf398a92b6a9e8de1c.html">Function astra::toString(bool)</a></li>
@@ -761,6 +746,12 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1a084b3926b32ac7459acd122ae7f8ddee.html">Function astra::toString(double, int)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a90eda9061746f489d874dc07e2ff6339.html">Function astra::typeName</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Function astra::typeSize</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_alloc_8hpp_1a871b68d3ba1f070c6acb572eaf6e7f94.html">Variable astra::defaultAlloc</a></li>
@@ -855,7 +846,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Astra API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Template Function astra::reflection::sprint(const T *)</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Function astra::typeSize</span></li>
   </ul>
 </nav>
 </div>
@@ -872,16 +863,16 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="template-function-astra-reflection-sprint-const-t">
-<span id="exhale-function-reflection-8hpp-1a087ae23098207e8d37627244aa7e513e"></span><h1>Template Function astra::reflection::sprint(const T *)<a class="headerlink" href="#template-function-astra-reflection-sprint-const-t" title="Link to this heading"><span/></a></h1>
+  <section id="function-astra-typesize">
+<span id="exhale-function-reflection-8hpp-1a4a2b8f8c31e3c407c86bcd7ec58b31e2"></span><h1>Function astra::typeSize<a class="headerlink" href="#function-astra-typesize" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file_include_astra_reflection_reflection.hpp.html#file-include-astra-reflection-reflection-hpp"><span class="std std-ref">File reflection.hpp</span></a></p></li>
 </ul>
 <section id="function-documentation">
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Link to this heading"><span/></a></h2>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10reflection6sprintENSt6stringEPK1T">
-<span id="_CPPv3I_11ReflectableEN5astra10reflection6sprintEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra10reflection6sprintEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="reflection_8hpp_1a087ae23098207e8d37627244aa7e513e"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">astra</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">reflection</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">sprint</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra10reflection6sprintENSt6stringEPK1T" title="astra::reflection::sprint::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pointer</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra10reflection6sprintENSt6stringEPK1T" title="Link to this definition"><span/></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra8typeSizeE6TypeId">
+<span id="_CPPv3N5astra8typeSizeE6TypeId"></span><span id="_CPPv2N5astra8typeSizeE6TypeId"></span><span id="astra::typeSize__TypeId"></span><span class="target" id="reflection_8hpp_1a4a2b8f8c31e3c407c86bcd7ec58b31e2"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">astra</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">typeSize</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8typeSizeE6TypeId" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -898,20 +889,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="function_reflection_8hpp_1a3471819ca862d07b14c907818fe8d81f.html"
+       href="function_type__name_8hpp_1a90eda9061746f489d874dc07e2ff6339.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Function astra::reflection::sprint(Var)</p>
+        <p class="prev-next-title">Function astra::typeName</p>
       </div>
     </a>
     <a class="right-next"
-       href="function_type__name_8hpp_1adabaeab24618157af6e96fad6294e429.html"
+       href="variable_alloc_8hpp_1a871b68d3ba1f070c6acb572eaf6e7f94.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Function astra::reflection::typeName(TypeId)</p>
+        <p class="prev-next-title">Variable astra::defaultAlloc</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -935,7 +926,7 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-documentation">Function Documentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10reflection6sprintENSt6stringEPK1T"><code class="docutils literal notranslate"><span class="pre">sprint()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra8typeSizeE6TypeId"><code class="docutils literal notranslate"><span class="pre">typeSize()</span></code></a></li>
 </ul>
 </li>
 </ul>
