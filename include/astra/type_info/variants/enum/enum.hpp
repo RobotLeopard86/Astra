@@ -32,8 +32,8 @@ namespace astra {
 			return impl()->toString();
 		}
 
-		Expected<None> parse(std::string_view name) {
-			return impl()->parse(name);
+		Expected<None> fromString(std::string_view name) {
+			return impl()->fromString(name);
 		};
 
 	  private:

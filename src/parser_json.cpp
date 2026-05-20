@@ -78,7 +78,7 @@ Expected<None> ParserJson::parse(TypeInfo* info, char token) {
             return s.set(getWord());
           },
           [this](Enum& e) -> Expected<None> {
-            return e.parse(getWord());
+            return e.fromString(getWord());
           },
           [this](Floating& f) -> Expected<None> {
             auto ex = parseDoubleSpecial(getWord());

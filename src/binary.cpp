@@ -135,7 +135,7 @@ inline void deserializeRecursive(TypeInfo* info, const GroupReader& reader) {
 			info->unsafeGet<String>().set(reader.readString());
 			break;
 		case TypeInfo::Kind::kEnum:
-			info->unsafeGet<Enum>().parse(reader.readString());
+			info->unsafeGet<Enum>().fromString(reader.readString());
 			break;
 		case TypeInfo::Kind::kMap: {
 			auto m = info->unsafeGet<Map>();

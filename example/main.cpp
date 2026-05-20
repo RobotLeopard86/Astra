@@ -23,7 +23,6 @@ int main() {
 			  << asJson << std::endl;
 
 	//Let's turn the JSON into YAML
-
 	std::cout << "This can also be in YAML:\n---\n"
 			  << astra::serialization::convert::toYaml::fromJsonString<Car>(asJson).unwrap() << "\n---" << std::endl;
 
@@ -63,7 +62,7 @@ int main() {
 
 	//Direct private field access
 	std::cout << "Why not do it for free? Unleash the direct private field access!" << std::endl;
-	astra::reflection::reflect(info.get<astra::Object>().getField("color").unwrap().var()).get<astra::Enum>().parse("White").unwrap();
+	astra::reflection::reflect(info.get<astra::Object>().getField("color").unwrap().var()).get<astra::Enum>().fromString("White").unwrap();
 	carColor = car.whatColorAmI();
 	std::cout << "The car is " << astra::reflection::reflect(&carColor).get<astra::Enum>().toString() << std::endl;
 

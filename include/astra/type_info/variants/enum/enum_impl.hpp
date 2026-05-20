@@ -42,7 +42,7 @@ namespace astra {
 			return _all_constants.getName(*_value).unwrap();
 		}
 
-		Expected<None> parse(std::string_view name) override {
+		Expected<None> fromString(std::string_view name) override {
 			if(_isConst) {
 				return Error("Cannot assign anything to const enum");
 			}

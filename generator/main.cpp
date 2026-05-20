@@ -167,7 +167,7 @@ int main(int argc, char* argv[]) {
 	rootHeader << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Astra-generated reflection info file.   |
+|   Astra-generated reflection info file.    |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */
@@ -189,7 +189,7 @@ int main(int argc, char* argv[]) {
 	rootCpp << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Astra-generated reflection info file.   |
+|   Astra-generated reflection info file.    |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */
@@ -246,7 +246,7 @@ int main(int argc, char* argv[]) {
 		hpp << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Astra-generated reflection info file.   |
+|   Astra-generated reflection info file.    |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */
@@ -255,7 +255,7 @@ int main(int argc, char* argv[]) {
 		cpp << R"(
 /* ---------------------------------------- *\
 |                                            |
-|   Astra-generated reflection info file.   |
+|   Astra-generated reflection info file.    |
 |               DO NOT EDIT!                 |
 |                                            |
 \* ---------------------------------------- */

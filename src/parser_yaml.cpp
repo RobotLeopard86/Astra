@@ -167,7 +167,7 @@ Expected<None> ParserYaml::parseStr(TypeInfo* info) {
 			return ex;
 		},
 		[this](Enum& e) -> Expected<None> {
-			auto ex = e.parse(getWord());
+			auto ex = e.fromString(getWord());
 			next();//skip '$' token
 			return ex;
 		},
