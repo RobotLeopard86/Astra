@@ -6,7 +6,7 @@
 #include "astra/variable/var.hpp"
 #include "astra/reflectable.hpp"
 
-namespace astra::serialization {
+namespace astra {
 
 	struct json {//NOLINT namespace like name
 		template<Reflectable T>

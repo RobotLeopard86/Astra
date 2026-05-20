@@ -20,9 +20,9 @@ namespace astra {
 		Expected<None> assign(Var var) {
 			auto t = TypeId::get<bool>();
 			if(var.type() != t) {
-				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::typeName(var.type()),					  //
-					reflection::typeName(t)));
+				return Error(format("Cannot assign type: {} to {}",//
+					typeName(var.type()),						   //
+					typeName(t)));
 			}
 
 			_value = const_cast<bool*>(static_cast<const bool*>(var.raw()));

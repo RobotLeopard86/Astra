@@ -7,7 +7,7 @@ namespace astra {
 
 	///the main component of reflection system - big table with function pointers
 	///each reflectable type has to have a record in the table
-	struct TheGreatTable {
+	struct ActionsTable {
 		static const inline std::vector<Actions>& data() {
 			return dataGuard();
 		}

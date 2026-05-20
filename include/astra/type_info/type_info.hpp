@@ -110,7 +110,7 @@ namespace astra {
 		}
 
 	  private:
-#ifndef NDEBUG
+#ifdef _DEBUG
 		Kind _kind = getKind();
 #endif
 	};

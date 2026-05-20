@@ -4,56 +4,57 @@
 #include "astra/tools/format.hpp"
 #include "astra/types/all_types.hpp"
 
-using namespace astra;
+namespace astra {
 
-Var::Var()
-  : _value(nullptr), _type(), _isConst(true) {
-}
-
-Var::Var(void* value, TypeId type, bool isConst)
-  : _value(value), _type(type), _isConst(isConst) {
-}
-
-void Var::unsafeAssign(void* ptr) {
-	_value = ptr;
-}
-
-bool Var::operator==(const Var& other) const {
-	return _type == other._type && _value == other._value;
-}
-
-bool Var::operator!=(const Var& other) const {
-	return _type != other._type || _value != other._value;
-}
-
-void* Var::rawMut() const {
-	if(_isConst) {
-		return nullptr;
+	Var::Var()
+	  : _value(nullptr), _type(), _isConst(true) {
 	}
 
-	return _value;
-}
+	Var::Var(void* value, TypeId type, bool isConst)
+	  : _value(value), _type(type), _isConst(isConst) {
+	}
 
-const void* Var::raw() const {
-	return _value;
-}
+	void Var::unsafeAssign(void* ptr) {
+		_value = ptr;
+	}
 
-TypeId Var::type() const {
-	return _type;
-}
+	bool Var::operator==(const Var& other) const {
+		return _type == other._type && _value == other._value;
+	}
 
-bool Var::isConst() const {
-	return _isConst;
-}
+	bool Var::operator!=(const Var& other) const {
+		return _type != other._type || _value != other._value;
+	}
 
-void Var::dispose() {
-	_value = nullptr;
-	_type = TypeId();
-	_isConst = true;
-}
+	void* Var::rawMut() const {
+		if(_isConst) {
+			return nullptr;
+		}
 
-Error Var::error(TypeId type, TypeId desired_type) {
-	return Error(astra::format("Cannot cast {} to {}",//
-		reflection::typeName(type),					  //
-		reflection::typeName(desired_type)));
+		return _value;
+	}
+
+	const void* Var::raw() const {
+		return _value;
+	}
+
+	TypeId Var::type() const {
+		return _type;
+	}
+
+	bool Var::isConst() const {
+		return _isConst;
+	}
+
+	void Var::dispose() {
+		_value = nullptr;
+		_type = TypeId();
+		_isConst = true;
+	}
+
+	Error Var::error(TypeId type, TypeId desired_type) {
+		return Error(astra::format("Cannot cast {} to {}",//
+			typeName(type),								  //
+			typeName(desired_type)));
+	}
 }

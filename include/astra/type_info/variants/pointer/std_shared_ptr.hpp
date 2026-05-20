@@ -14,9 +14,9 @@ namespace astra {
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_value);
 			if(var.type() != t) {
-				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::typeName(var.type()),					  //
-					reflection::typeName(t)));
+				return Error(format("Cannot assign type: {} to {}",//
+					typeName(var.type()),						   //
+					typeName(t)));
 			}
 
 			_value = static_cast<std::shared_ptr<T>*>(const_cast<void*>(var.raw()));

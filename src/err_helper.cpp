@@ -5,11 +5,12 @@
 #include "astra/tools/format.hpp"
 #include "astra/types/all_types.hpp"
 
-using namespace astra;
-using namespace astra::sequence;
+namespace astra {
+	using namespace astra::sequence;
 
-Error ErrHelper::error(std::string_view message, TypeId type, TypeId nestedType) {
-	return Error(astra::format(message,//
-		reflection::typeName(type),	   //
-		reflection::typeName(nestedType)));
+	Error ErrHelper::error(std::string_view message, TypeId type, TypeId nestedType) {
+		return Error(astra::format(message,//
+			typeName(type),				   //
+			typeName(nestedType)));
+	}
 }

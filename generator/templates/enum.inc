@@ -2,7 +2,7 @@ R"(
 #include "{{file_name}}"
 
 // clang-format off
-#include "astra/reflection/the_great_table.hpp"
+#include "astra/reflection/actions_table.hpp"
 #include "astra/types/common_actions.hpp"
 #include "astra/types/type_actions.hpp"
 
@@ -24,7 +24,7 @@ struct TypeActions<{{name}}> {
 
 template <>
 TypeId TypeId::get({{name}}* /*unused*/) {
-  static TypeId id(TheGreatTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
+  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
                                                  &CommonActions<{{name}}>::typeName,  //
                                                  &CommonActions<{{name}}>::typeSize,  //
                                                  &CommonActions<{{name}}>::construct,  //

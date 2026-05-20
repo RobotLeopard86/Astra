@@ -56,7 +56,7 @@ namespace astra {
 			auto ptr = searchByName(name, 0, size);
 
 			if(ptr == nullptr) {
-				return Error(astra::format("Cannot find the constant '{}'", name));
+				return Error(format("Cannot find the constant '{}'", name));
 			}
 
 			return ptr->value;

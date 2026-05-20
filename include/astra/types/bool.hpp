@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common_actions.hpp"
-#include "astra/reflection/the_great_table.hpp"
+#include "astra/reflection/actions_table.hpp"
 
 namespace astra {
 
@@ -13,12 +13,12 @@ namespace astra {
 
 	template<>
 	inline TypeId TypeId::get(bool* /*unused*/) {
-		static TypeId id(TheGreatTable::record(Actions(&BoolActions::reflect,//
-			&CommonActions<bool>::typeName,									 //
-			&CommonActions<bool>::typeSize,									 //
-			&CommonActions<bool>::nop,										 //
-			&CommonActions<bool>::nop,										 //
-			&CommonActions<bool>::copy,										 //
+		static TypeId id(ActionsTable::record(Actions(&BoolActions::reflect,//
+			&CommonActions<bool>::typeName,									//
+			&CommonActions<bool>::typeSize,									//
+			&CommonActions<bool>::nop,										//
+			&CommonActions<bool>::nop,										//
+			&CommonActions<bool>::copy,										//
 			&CommonActions<bool>::move)));
 		return id;
 	}

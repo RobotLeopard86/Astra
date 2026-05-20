@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-#include "astra/reflection/the_great_table.hpp"
+#include "astra/reflection/actions_table.hpp"
 #include "astra/tools/names.hpp"
 
 namespace astra {

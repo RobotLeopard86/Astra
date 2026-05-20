@@ -18,9 +18,9 @@ namespace astra {
 
 		Expected<None> assign(Var var) override {
 			if(var.type() != _var.type()) {
-				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::typeName(var.type()),					  //
-					reflection::typeName(_var.type())));
+				return Error(format("Cannot assign type: {} to {}",//
+					typeName(var.type()),						   //
+					typeName(_var.type())));
 			}
 			_var = var;
 			return None();

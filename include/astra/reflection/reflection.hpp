@@ -4,18 +4,18 @@
 #include "astra/type_id.hpp"
 #include "astra/type_info/type_info.hpp"
 
-namespace astra::reflection {
+namespace astra {
 
 	TypeInfo reflect(Var variable);
 
 	template<Reflectable T>
 	TypeInfo reflect(T* pointer) {
-		return reflection::reflect(Var(pointer));
+		return reflect(Var(pointer));
 	}
 
 	template<Reflectable T>
 	TypeInfo reflect(const T* pointer) {
-		return reflection::reflect(Var(pointer));
+		return reflect(Var(pointer));
 	}
 
 	std::string sprint(const TypeInfo& info);

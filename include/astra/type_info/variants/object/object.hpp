@@ -27,9 +27,9 @@ namespace astra {
 
 		Expected<None> assign(Var var) {
 			if(var.type() != _var.type()) {
-				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::typeName(var.type()),					  //
-					reflection::typeName(_var.type())));
+				return Error(format("Cannot assign type: {} to {}",//
+					typeName(var.type()),						   //
+					typeName(_var.type())));
 			}
 			_var = var;
 
@@ -46,7 +46,7 @@ namespace astra {
 			if(it != _fields->end()) {
 				return FieldInfo(_var.raw(), &it->second);
 			}
-			return Error(astra::format("There is no field with name: '{}'", name));
+			return Error(format("There is no field with name: '{}'", name));
 		}
 
 		Fields getFields(Access access = Access::kPublic, bool includeReadonly = false) const {
@@ -62,12 +62,12 @@ namespace astra {
 					if(it->second.isConst()) {
 						return MethodInfo(_var.raw(), &it->second);
 					}
-					return Error(astra::format("Cannot call non const method '{}' on const object", name));
+					return Error(format("Cannot call non const method '{}' on const object", name));
 				}
 
 				return MethodInfo(_var.rawMut(), &it->second);
 			}
-			return Error(astra::format("There is no method with name: '{}'", name));
+			return Error(format("There is no method with name: '{}'", name));
 		}
 
 		Var var() {

@@ -2,7 +2,7 @@
 
 #include "astra/type_id.hpp"
 
-namespace astra::reflection {
+namespace astra {
 
 	std::string_view typeName(TypeId id);
 

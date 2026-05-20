@@ -4,8 +4,8 @@
 #include "json.hpp"
 #include "yaml.hpp"
 
-namespace astra::serialization {
-	struct convert {   //NOLINT namespace like name
+namespace astra {
+	struct converters {//NOLINT namespace like name
 		struct toJson {//NOLINT namespace like name
 			template<Reflectable T>
 			static Expected<std::string> fromYamlString(std::string_view str) {

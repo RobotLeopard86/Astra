@@ -15,8 +15,8 @@
 #include "astra/tools/names.hpp"
 #include "astra/tools/traits.hpp"
 
-#ifndef NDEBUG
-namespace astra::reflection {
+#ifdef _DEBUG
+namespace astra {
 	std::string_view typeName(uint32_t id);
 }
 #endif
@@ -104,14 +104,14 @@ namespace astra {
 	  private:
 		uint32_t _id;
 
-#ifndef NDEBUG
+#ifdef _DEBUG
 		std::string _typeName = "unknown";
 #endif
 
 		explicit TypeId(uint32_t id)
 		  : _id(id) {
-#ifndef NDEBUG
-			_typeName = reflection::typeName(_id);
+#ifdef _DEBUG
+			_typeName = typeName(_id);
 #endif
 		}
 	};

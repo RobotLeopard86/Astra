@@ -19,9 +19,9 @@ namespace astra {
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_array);
 			if(var.type() != t) {
-				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::typeName(var.type()),					  //
-					reflection::typeName(t)));
+				return Error(format("Cannot assign type: {} to {}",//
+					typeName(var.type()),						   //
+					typeName(t)));
 			}
 
 			_array = static_cast<std::array<T, size_v>*>(const_cast<void*>(var.raw()));
@@ -76,7 +76,7 @@ namespace astra {
 
 		Expected<Var> at(std::size_t idx) override {
 			if(idx >= size_v) {
-				return Error(astra::format("Index: {} is out of array's size: {}", idx, size_v));
+				return Error(format("Index: {} is out of array's size: {}", idx, size_v));
 			}
 
 			return Var(&(*_array)[idx], TypeId::get<T>(), _isConst);

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common_actions.hpp"
-#include "astra/reflection/the_great_table.hpp"
+#include "astra/reflection/actions_table.hpp"
 
 namespace astra {
 
@@ -15,12 +15,12 @@ namespace astra {
 	template<typename T>
 	typename std::enable_if_t<is_map_v<T>, TypeId>//
 	TypeId::get(T* ptr) {
-		static TypeId id(TheGreatTable::record(Actions(&MapActions<T>::reflect,//
-			&CommonActions<T>::typeName,									   //
-			&CommonActions<T>::typeSize,									   //
-			&CommonActions<T>::construct,									   //
-			&CommonActions<T>::destroy,										   //
-			&CommonActions<T>::copy,										   //
+		static TypeId id(ActionsTable::record(Actions(&MapActions<T>::reflect,//
+			&CommonActions<T>::typeName,									  //
+			&CommonActions<T>::typeSize,									  //
+			&CommonActions<T>::construct,									  //
+			&CommonActions<T>::destroy,										  //
+			&CommonActions<T>::copy,										  //
 			&CommonActions<T>::move)));
 		return id;
 	}

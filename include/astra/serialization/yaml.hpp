@@ -7,7 +7,7 @@
 #include "astra/variable/var.hpp"
 #include "astra/reflectable.hpp"
 
-namespace astra::serialization {
+namespace astra {
 
 	struct yaml {//NOLINT namespace like name
 		template<Reflectable T>

@@ -20,9 +20,9 @@ namespace astra {
 		Expected<None> assign(Var var) override {
 			auto t = TypeId::get(_list);
 			if(var.type() != t) {
-				return Error(astra::format("Cannot assign type: {} to {}",//
-					reflection::typeName(var.type()),					  //
-					reflection::typeName(t)));
+				return Error(format("Cannot assign type: {} to {}",//
+					typeName(var.type()),						   //
+					typeName(t)));
 			}
 
 			_list = static_cast<std::list<T>*>(const_cast<void*>(var.raw()));

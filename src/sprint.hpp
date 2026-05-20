@@ -24,7 +24,7 @@ namespace astra {
 					*result += record.first;
 					*result += ": ";
 
-					auto fieldInfo = reflection::reflect(record.second.var());
+					auto fieldInfo = reflect(record.second.var());
 					sprint(fieldInfo, result, indention + 2);
 
 					if(result->back() != '\n') {
@@ -55,7 +55,7 @@ namespace astra {
 
 				*result += "[";
 				m.forEach([result, indention](Var key, Var value) {
-					auto keyInfo = reflection::reflect(key);
+					auto keyInfo = reflect(key);
 					sprint(keyInfo, result, indention);
 
 					if(result->back() == '\n') {
@@ -64,7 +64,7 @@ namespace astra {
 
 					*result += ": ";
 
-					auto valueInfo = reflection::reflect(value);
+					auto valueInfo = reflect(value);
 					sprint(valueInfo, result, indention);
 
 					*result += ", ";
@@ -79,7 +79,7 @@ namespace astra {
 				nestedPtr.matchMove(//
 					[result](const Error& /*err*/) { *result += "nullptr"; },
 					[result, indention](Var var) {
-						auto info = reflection::reflect(var);
+						auto info = reflect(var);
 						sprint(info, result, indention);
 					});
 			});
@@ -94,7 +94,7 @@ namespace astra {
 
 		*result += "[";
 		sequence.forEach([result, indention](Var entry) {
-			auto entryInfo = reflection::reflect(entry);
+			auto entryInfo = reflect(entry);
 
 			sprint(entryInfo, result, indention);
 			*result += ", ";

@@ -4,67 +4,68 @@
 #include <iostream>
 #include <memory_resource>
 
-#include "astra/reflection/the_great_table.hpp"
+#include "astra/reflection/actions_table.hpp"
 #include "astra/types/all_types.hpp"
 #include "sprint.hpp"
 
-using namespace astra;
+namespace astra {
 
-TypeInfo reflection::reflect(Var variable) {
-	return TheGreatTable::data()[variable.type().number()].reflect(const_cast<void*>(variable.raw()),
-		variable.isConst());
-}
+	TypeInfo reflect(Var variable) {
+		return ActionsTable::data()[variable.type().number()].reflect(const_cast<void*>(variable.raw()),
+			variable.isConst());
+	}
 
-std::string reflection::sprint(const TypeInfo& info) {
-	std::string result;
-	sprint(info, &result, 0);
-	return result;
-}
+	std::string sprint(const TypeInfo& info) {
+		std::string result;
+		sprint(info, &result, 0);
+		return result;
+	}
 
-std::string reflection::sprint(Var var) {
-	return sprint(reflect(var));
-}
+	std::string sprint(Var var) {
+		return sprint(reflect(var));
+	}
 
-void reflection::print(const TypeInfo& info) {
-	std::cout << sprint(info) << std::flush;
-}
+	void print(const TypeInfo& info) {
+		std::cout << sprint(info) << std::flush;
+	}
 
-void reflection::print(Var var) {
-	print(reflect(var));
-}
+	void print(Var var) {
+		print(reflect(var));
+	}
 
-std::string_view reflection::typeName(TypeId id) {
-	return TheGreatTable::data()[id.number()].typeName();
-}
+	std::string_view typeName(TypeId id) {
+		return ActionsTable::data()[id.number()].typeName();
+	}
 
-#ifndef NDEBUG
-std::string_view reflection::typeName(uint32_t id) {
-	return TheGreatTable::data()[id].typeName();
-}
+#ifdef _DEBUG
+	std::string_view typeName(uint32_t id) {
+		return ActionsTable::data()[id].typeName();
+	}
 #endif
 
-std::size_t reflection::typeSize(TypeId id) {
-	return TheGreatTable::data()[id.number()].typeSize();
-}
-
-void reflection::construct(Var variable) {
-	return TheGreatTable::data()[variable.type().number()].construct(variable.rawMut());
-}
-
-void reflection::destroy(Var variable) {
-	if(variable.raw() == nullptr) {
-		return;
+	std::size_t typeSize(TypeId id) {
+		return ActionsTable::data()[id.number()].typeSize();
 	}
-	TheGreatTable::data()[variable.type().number()].destroy(variable.rawMut());
-}
 
-Expected<None> reflection::copy(Var to, Var from) {
-	if(to.isConst()) {
-		return Error("Cannot assign to const value");
+	void construct(Var variable) {
+		return ActionsTable::data()[variable.type().number()].construct(variable.rawMut());
 	}
-	if(to.type() != from.type()) {
-		return Error(astra::format("Cannot copy {} to {}", typeName(from.type()), typeName(to.type())));
+
+	void destroy(Var variable) {
+		if(variable.raw() == nullptr) {
+			return;
+		}
+		ActionsTable::data()[variable.type().number()].destroy(variable.rawMut());
 	}
-	TheGreatTable::data()[to.type().number()].copy(to.rawMut(), from.raw());
-	return None();
+
+	Expected<None> copy(Var to, Var from) {
+		if(to.isConst()) {
+			return Error("Cannot assign to const value");
+		}
+		if(to.type() != from.type()) {
+			return Error(astra::format("Cannot copy {} to {}", typeName(from.type()), typeName(to.type())));
+		}
+		ActionsTable::data()[to.type().number()].copy(to.rawMut(), from.raw());
+		return None();
+	}
 }

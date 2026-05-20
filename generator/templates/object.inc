@@ -2,7 +2,7 @@ R"(
 #include "{{file_name}}"
 
 // clang-format off
-#include "astra/reflection/the_great_table.hpp"
+#include "astra/reflection/actions_table.hpp"
 #include "astra/types/common_actions.hpp"
 #include "astra/types/type_actions.hpp"
 
@@ -35,7 +35,7 @@ struct TypeActions<{{name}}> {
 
     {% for type in item.params -%}
     if (args[{{loop.index}}].type() != TypeId::get<{{type}}>()) {
-      return Error(astra::format("Argument type expected: {{type}}, received: {}", reflection::typeName(args[{{loop.index}}].type())));
+      return Error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].type())));
     }
     const {{type}}& a{{loop.index}} = *static_cast<const {{type}}*>(args[{{loop.index}}].raw());
 
@@ -43,7 +43,7 @@ struct TypeActions<{{name}}> {
 
     {% if item.return != "void" -%}
     if (res.type() != TypeId::get<{{item.return}}>()) {
-      return Error(astra::format("Return type expected: {{item.return}}, received: {}", reflection::typeName(res.type())));
+      return Error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.type())));
     }
     *reinterpret_cast<{{item.return}}*>(res.rawMut()) = //
     {% endif -%}
@@ -59,7 +59,7 @@ struct TypeActions<{{name}}> {
 
 template <>
 TypeId TypeId::get({{name}}* /*unused*/) {
-  static TypeId id(TheGreatTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
+  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
                                                  &CommonActions<{{name}}>::typeName,  //
                                                  &CommonActions<{{name}}>::typeSize,  //
                                                  &CommonActions<{{name}}>::construct,  //
@@ -71,8 +71,8 @@ TypeId TypeId::get({{name}}* /*unused*/) {
 
 }
 
-TypeId {{name}}::ASTRA__gettypeid() const {
-	return TypeId::get<{{name}}>();
+astra::TypeId {{name}}::ASTRA__gettypeid() const {
+	return astra::TypeId::get<{{name}}>();
 }
 
 // clang-format on

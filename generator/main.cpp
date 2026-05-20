@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
 	std::unique_ptr<jms::Spinner> spinner;
 	if(!quiet) {
 #ifdef _DEBUG
-		std::cout << "\x1b[1;93mWarning: \x1b[0mYou are running a debug build of Astra! Source file parsing may be very slow!" << std::endl;
+		std::cout << "\x1b[1;93mWarning: \x1b[0mYou are running a debug build of Astra! Source file parsing can be very slow!" << std::endl;
 #endif
 		spinner = std::make_unique<jms::Spinner>("Generating reflection data...", jms::dots);
 		spinner->start();

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "./float.hpp"
-#include "./string.hpp"
+#include "float.hpp"
+#include "string.hpp"
 #include "array/c_array.hpp"
 #include "array/std_array.hpp"
 #include "bool.hpp"
