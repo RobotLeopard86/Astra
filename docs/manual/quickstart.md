@@ -1,5 +1,9 @@
 # Quickstart
 
+```{warning} **This page is not up-to-date!**.  
+Astra is currently undergoing heavy restructuring, and this guide has not yet been updated to reflect the new information. A new version will be published closer to release.
+```
+
 This guide assumes you are using Meson for your project (Astra's build system). If you aren't, you may need to use pre-compiled binaries or find some way to integrate Meson into your system.  
 
 1. Add Astra as a subproject  

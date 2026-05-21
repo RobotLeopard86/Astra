@@ -1,4 +1,4 @@
-project('astra', 'c', 'cpp', version: '1.0.0-ALPHA', meson_version: '>=1.2.0', license: 'Apache-2.0', default_options: ['cpp_std=c++20', 'default_library=static', 'b_vscrt=from_buildtype'])
+project('astra', 'c', 'cpp', version: '1.0.0-INDEV', meson_version: '>=1.2.0', license: 'Apache-2.0', default_options: ['cpp_std=c++20', 'default_library=static', 'b_vscrt=from_buildtype'])
 
 bt = get_option('buildtype')
 
@@ -9,7 +9,7 @@ endif
 
 # Set some Windows-specific options
 if host_machine.system() == 'windows'
-	add_project_arguments(['-D_DLL', '-D_MT'], language: 'cpp')
+	add_project_arguments(['-D_DLL', '-D_MT', '-DASTRA_BUILD'], language: 'cpp')
 	if bt == 'debug'
 		add_project_arguments('-D_ITERATOR_DEBUG_LEVEL=2', language: 'cpp')
 	endif
@@ -25,6 +25,7 @@ endif
 
 # Build library
 subdir('src')
+subdir('v0' / 'src')
 
 # Build generator if requested
 if generator

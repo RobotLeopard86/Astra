@@ -27,7 +27,7 @@ html_static_path = ["assets"]
 html_css_files = ["fonts.css"]
 
 breathe_projects = {
-    "Astra API Reference": "./.doxygen/xml"
+    "Astra API Reference (Out of Date)": "./.doxygen/xml"
 }
 breathe_default_project = "Astra API Reference"
 
@@ -40,8 +40,8 @@ exhale_args = {
     "exhaleExecutesDoxygen": True,
     "afterTitleDescription": "Welcome to the Astra API documentation. Here, you can find detailed information on Astra's public interface.",
     "exhaleDoxygenStdin": dedent('''
-									INPUT = ../include
-                                    EXCLUDE_SYMBOLS = std*,LJAPI,LJBUILD
+									INPUT = ../v0/include
+                                    EXCLUDE_SYMBOLS = std*,YAML*,nlohmann*,libjaguar*,LJ*,ASTRA_API,ASTRA_BUILD
 									HIDE_UNDOC_MEMBERS = YES
 									MAX_INITIALIZER_LINES = 0
 								 	INPUT_ENCODING = UTF-8

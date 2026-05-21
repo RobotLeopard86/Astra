@@ -24,7 +24,7 @@ class Action : public ASTFrontendAction {
   private:
 	MatchFinder _finder;
 	AstCallback _ast_callback;
-	Context* _ctx;
+	[[maybe_unused]] Context* _ctx;
 };
 
 class ActionFactory : public tooling::FrontendActionFactory {

@@ -1,5 +1,9 @@
 # Attributes
 
+```{warning} **This page is not up-to-date!**.  
+Astra is currently undergoing heavy restructuring, and this guide has not yet been updated to reflect the new information. A new version will be published closer to release.
+```
+
 Astra has 3 attributes available to customize the reflection experience.
 
 ## `[[astra::reflect]]`

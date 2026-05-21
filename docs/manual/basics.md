@@ -1,5 +1,9 @@
 # API Basics
 
+```{warning} **This page is not up-to-date!**.  
+Astra is currently undergoing heavy restructuring, and this guide has not yet been updated to reflect the new information. A new version will be published closer to release.
+```
+
 ## Serialization
 Astra has a built-in serialization and deserialization system. It lives in the `astra::serialization` namespace, and can be included from `astra/serialization/<format>.hpp`.  
 Each format can serialize either to a string (JSON/YAML), a byte vector (Binary), or an output stream (all). Deserialization supports the inverse.  
