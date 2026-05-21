@@ -27,7 +27,7 @@ html_static_path = ["assets"]
 html_css_files = ["fonts.css"]
 
 breathe_projects = {
-    "Astra API Reference (Out of Date)": "./.doxygen/xml"
+    "Astra API Reference": "./.doxygen/xml"
 }
 breathe_default_project = "Astra API Reference"
 
@@ -35,7 +35,7 @@ exhale_args = {
     "containmentFolder":     "./api",
     "rootFileName":          "index.rst",
     "doxygenStripFromPath":  "../",
-    "rootFileTitle":         "Astra API Reference",
+    "rootFileTitle":         "Astra API Reference (Out of Date)",
     "createTreeView":        True,
     "exhaleExecutesDoxygen": True,
     "afterTitleDescription": "Welcome to the Astra API documentation. Here, you can find detailed information on Astra's public interface.",
