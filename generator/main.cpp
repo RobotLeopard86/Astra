@@ -71,6 +71,8 @@ int main(int argc, char* argv[]) {
 	app.add_option_function<std::string>("--fallback-compiler,-C", fallbackOptFunc, "Fallback compiler to use for system include searching if the compiler in the database is not supported (if it isn't cl.exe, a GCC-like command line is assumed)");
 	bool quiet = false;
 	app.add_flag("--quiet,-q", quiet, "Suppress output");
+	bool useV1 = false;
+	app.add_flag("--v1", useV1, "Enable new V1 output generation templates");
 	app.set_version_flag("--version,-v", []() { return PROJECT_VER; }, "Display version and exit");
 
 	//Parse CLI arguments
@@ -149,9 +151,9 @@ int main(int argc, char* argv[]) {
 
 	//Create template objects
 	inja::Environment inja;
-	inja::Template headerTemplate = inja.parse(templates::Header);
-	inja::Template enumTemplate = inja.parse(templates::Enum);
-	inja::Template objectTemplate = inja.parse(templates::Object);
+	inja::Template headerTemplate = inja.parse(useV1 ? templates::Headerv1 : templates::Header);
+	inja::Template enumTemplate = inja.parse(useV1 ? templates::Enumv1 : templates::Enum);
+	inja::Template objectTemplate = inja.parse(useV1 ? templates::Objectv1 : templates::Object);
 	VERBOSE_LOG("Loaded templates");
 
 	//Write root files

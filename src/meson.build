@@ -20,7 +20,7 @@ astra_sources = [
 includes = include_directories('..' / 'include')
 
 # Library
-libastra = library('astra', astra_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, yaml_cpp_dep, jaguar_dep.as_static(recursive: true).as_link_whole()], pic: true)
+libastra = both_libraries('astra', astra_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, yaml_cpp_dep, jaguar_dep.as_static(recursive: true).as_link_whole()], pic: true)
 
 # Dependency
 astra_dep = declare_dependency(link_with: libastra, include_directories: includes)
