@@ -25,7 +25,6 @@ endif
 
 # Build library
 subdir('src')
-subdir('v0' / 'src')
 
 # Build generator if requested
 if generator

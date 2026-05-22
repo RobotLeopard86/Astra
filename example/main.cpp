@@ -18,26 +18,26 @@ int main() {
 	car.owner = "John Smith";
 
 	//Let's dump it to the console as JSON
-	std::string asJson = astra::json::toString(&car).unwrap();
+	std::string asJson = astra::json::toString(&car);
 	std::cout << "I have a car:\n"
 			  << asJson << std::endl;
 
 	//Let's turn the JSON into YAML
 	std::cout << "This can also be in YAML:\n---\n"
-			  << astra::converters::toYaml::fromJsonString<Car>(asJson).unwrap() << "\n---" << std::endl;
+			  << astra::converters::toYaml::fromJsonString<Car>(asJson) << "\n---" << std::endl;
 
 	//Let's reflect it
 	astra::TypeInfo info = astra::reflect(&car);
 
 	//Let's see if the car is insured
-	auto insuredVar = info.as<astra::Object>().getField("insured").unwrap().var();
-	bool insured = *(insuredVar.rtCast<bool>().unwrap());
+	auto insuredVar = info.as<astra::Object>().getField("insured").var();
+	bool insured = *(insuredVar.rtCast<bool>());
 	std::cout << "According to reflection, car is " << (insured ? "" : "NOT ") << "insured" << std::endl;
 
 	//Give the car insurance now
 	astra::reflect(insuredVar).as<astra::Bool>().set(true);
 	std::cout << "THE INSURANCE WIZARD HATH SPOKEN! ABRA-CADRABA-INSURANCE!" << std::endl;
-	insured = *(insuredVar.rtCast<bool>().unwrap());
+	insured = *(insuredVar.rtCast<bool>());
 	std::cout << "According to reflection, car is " << (insured ? "" : "NOT ") << "insured" << std::endl;
 
 	//What color is the car?
@@ -55,14 +55,14 @@ int main() {
 
 	//Recolor the car via reflection
 	std::cout << "Anyways, let's recolor the car with reflection" << std::endl;
-	int cost = info.as<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Yellow).unwrap();
+	int cost = info.as<astra::Object>().getMethod("refinish").invoke<int>(Color::Yellow);
 	carColor = car.whatColorAmI();
 	std::cout << "The car is " << astra::reflect(&carColor).as<astra::Enum>().toString() << std::endl;
 	std::cout << "Refinishing it cost $" << cost << " though :(" << std::endl;
 
 	//Direct private field access
 	std::cout << "Why not do it for free? Unleash the direct private field access!" << std::endl;
-	astra::reflect(info.as<astra::Object>().getField("color").unwrap().var()).as<astra::Enum>().fromString("White").unwrap();
+	astra::reflect(info.as<astra::Object>().getField("color").var()).as<astra::Enum>().fromString("White");
 	carColor = car.whatColorAmI();
 	std::cout << "The car is " << astra::reflect(&carColor).as<astra::Enum>().toString() << std::endl;
 
@@ -77,22 +77,22 @@ int main() {
 	suv.owner = "Big Mack";
 	suv.trunkVolume = 4.5f * 3.1f * 2.0f;
 	std::cout << "I have an SUV now:\n"
-			  << astra::json::toString(&suv).unwrap() << std::endl;
+			  << astra::json::toString(&suv) << std::endl;
 	auto suvInfo = astra::reflect(&suv);
 	std::cout << "Because an SUV is also a Car... I can do car stuff with it." << std::endl;
 	std::cout << "Let's refinish it via reflection!" << std::endl;
-	int suvCost = suvInfo.as<astra::Object>().getMethod("refinish").unwrap().invoke<int>(Color::Blue).unwrap();
+	int suvCost = suvInfo.as<astra::Object>().getMethod("refinish").invoke<int>(Color::Blue);
 	Color suvColor = suv.whatColorAmI();
 	std::cout << "The SUV is " << astra::reflect(&suvColor).as<astra::Enum>().toString() << std::endl;
 	std::cout << "Refinishing it cost more: $" << suvCost << std::endl;
 	std::cout << "I also can do SUV-specific stuff, like checking the trunk volume" << std::endl;
-	std::cout << "(it's " << astra::reflect(suvInfo.as<astra::Object>().getField("trunkVolume").unwrap().var()).as<astra::Floating>().get() << " cubic feet btw)" << std::endl;
+	std::cout << "(it's " << astra::reflect(suvInfo.as<astra::Object>().getField("trunkVolume").var()).as<astra::Floating>().get() << " cubic feet btw)" << std::endl;
 
 	//Casting to base class
 	std::cout << "Let's cast the SUV back to a car." << std::endl;
 	Car* suvAsCar = static_cast<Car*>(&suv);
 	std::cout << "Serializing the reflected Car pointer gives us:\n"
-			  << astra::json::toString(suvAsCar).unwrap() << std::endl;
+			  << astra::json::toString(suvAsCar) << std::endl;
 	std::cout << "As you can see, it still has the SUV information." << std::endl;
 
 	//Done
