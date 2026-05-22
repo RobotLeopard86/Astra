@@ -1,4 +1,4 @@
-#include "astra/serialization/binary.hpp"
+#include "astra/binary.hpp"
 
 #include <iostream>
 
@@ -6,9 +6,9 @@
 #include "vector_reader.hpp"
 #include "stream_writer.hpp"
 #include "vector_writer.hpp"
-#include "astra/reflection/reflection.hpp"
+#include "astra/reflection.hpp"
 #include "astra/types/all_types.hpp"
-#include "astra/variable/box.hpp"
+#include "astra/box.hpp"
 #include "group_reader.hpp"
 #include "group_writer.hpp"
 

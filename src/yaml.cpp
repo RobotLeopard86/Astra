@@ -1,4 +1,4 @@
-#include "astra/serialization/yaml.hpp"
+#include "astra/yaml.hpp"
 
 #include <ostream>
 #include <cmath>
@@ -8,11 +8,11 @@
 #include "stream_writer.hpp"
 #include "string_writer.hpp"
 #include "parser_yaml.hpp"
-#include "astra/error/error.hpp"
-#include "astra/reflection/reflection.hpp"
-#include "astra/tools/stringify.hpp"
-#include "astra/type_info/type_info.hpp"
-#include "astra/type_info/variants/integer/integer.hpp"
+
+#include "astra/reflection.hpp"
+#include "astra/stringify.hpp"
+#include "astra/type_info.hpp"
+#include "astra/type_info/integer/integer.hpp"
 #include "astra/types/all_types.hpp"
 
 namespace astra {

@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <string>
 
-#include "astra/tools/format.hpp"
+#include "astra/format.hpp"
 
 namespace astra {
 

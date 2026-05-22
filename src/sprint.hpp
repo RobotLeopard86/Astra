@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include "astra/reflection/reflection.hpp"
-#include "astra/tools/stringify.hpp"
-#include "astra/type_info/type_info.hpp"
+#include "astra/reflection.hpp"
+#include "astra/stringify.hpp"
+#include "astra/type_info.hpp"
 
 namespace astra {
 

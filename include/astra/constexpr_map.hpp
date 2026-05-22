@@ -4,7 +4,7 @@
 
 #include "constexpr_sort.hpp"
 
-#include "tools/format.hpp"
+#include "format.hpp"
 
 namespace astra {
 

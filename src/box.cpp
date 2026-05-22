@@ -1,9 +1,8 @@
-#include "astra/variable/box.hpp"
+#include "astra/box.hpp"
 
 #include <cstdint>
 
-#include "astra/alloc/alloc.hpp"
-#include "astra/reflection/reflection.hpp"
+#include "astra/reflection.hpp"
 #include "astra/types/all_types.hpp"
 
 namespace astra {

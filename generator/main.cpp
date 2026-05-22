@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
 
 #pragma once
 
-#include "astra/reflection/reflection.hpp"
+#include "astra/reflection.hpp"
 #include "astra/types/all_types.hpp"
 
 )";

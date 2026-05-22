@@ -1,7 +1,7 @@
-#include "astra/variable/var.hpp"
+#include "astra/var.hpp"
 
-#include "astra/reflection/reflection.hpp"
-#include "astra/tools/format.hpp"
+#include "astra/reflection.hpp"
+#include "astra/format.hpp"
 #include "astra/types/all_types.hpp"
 
 namespace astra {

@@ -12,8 +12,8 @@
 #include <unordered_set>
 #include <vector>
 
-#include "astra/tools/names.hpp"
-#include "astra/tools/traits.hpp"
+#include "astra/names.hpp"
+#include "astra/traits.hpp"
 
 #ifdef _DEBUG
 namespace astra {

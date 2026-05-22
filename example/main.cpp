@@ -4,9 +4,9 @@
 
 #include "example.astra.hpp"
 
-#include "astra/reflection/reflection.hpp"
-#include "astra/serialization/json.hpp"
-#include "astra/serialization/convert.hpp"
+#include "astra/reflection.hpp"
+#include "astra/json.hpp"
+#include "astra/serialized_convert.hpp"
 
 #include <iostream>
 

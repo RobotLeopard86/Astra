@@ -1,10 +1,10 @@
-#include "astra/reflection/reflection.hpp"
+#include "astra/reflection.hpp"
 
 #include <cstddef>
 #include <iostream>
 #include <memory_resource>
 
-#include "astra/reflection/actions_table.hpp"
+#include "astra/actions_table.hpp"
 #include "astra/types/all_types.hpp"
 #include "sprint.hpp"
 

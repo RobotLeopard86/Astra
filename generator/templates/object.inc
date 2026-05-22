@@ -2,7 +2,7 @@ R"(
 #include "{{file_name}}"
 
 // clang-format off
-#include "astra/reflection/actions_table.hpp"
+#include "astra/actions_table.hpp"
 #include "astra/types/common_actions.hpp"
 #include "astra/types/type_actions.hpp"
 

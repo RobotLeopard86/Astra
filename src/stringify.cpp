@@ -1,4 +1,4 @@
-#include "astra/tools/stringify.hpp"
+#include "astra/stringify.hpp"
 
 #include <iomanip>
 #include <sstream>

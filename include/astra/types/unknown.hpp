@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-#include "astra/type_info/type_info.hpp"
+#include "astra/type_info.hpp"
 
 namespace astra {
 

@@ -8,9 +8,9 @@
 
 
 
-#include "astra/reflection/reflection.hpp"
+#include "astra/reflection.hpp"
 #include "astra/types/all_types.hpp"
-#include "astra/variable/box.hpp"
+#include "astra/box.hpp"
 
 namespace astra {
 

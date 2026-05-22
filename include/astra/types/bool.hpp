@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common_actions.hpp"
-#include "astra/reflection/actions_table.hpp"
+#include "astra/actions_table.hpp"
 
 namespace astra {
 

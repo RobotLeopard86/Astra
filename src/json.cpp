@@ -1,4 +1,4 @@
-#include "astra/serialization/json.hpp"
+#include "astra/json.hpp"
 
 #include <cmath>
 #include <string_view>
@@ -6,10 +6,10 @@
 #include "iwriter.hpp"
 #include "stream_writer.hpp"
 #include "string_writer.hpp"
-#include "astra/error/error.hpp"
-#include "astra/reflection/reflection.hpp"
-#include "astra/tools/stringify.hpp"
-#include "astra/type_info/type_info.hpp"
+
+#include "astra/reflection.hpp"
+#include "astra/stringify.hpp"
+#include "astra/type_info.hpp"
 #include "astra/types/all_types.hpp"
 #include "parser_json.hpp"
 

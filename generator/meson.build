@@ -29,4 +29,4 @@ generator_sources = [
 ]
 
 # Executable
-astra_generator = executable('astra', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"'])
+astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"'])

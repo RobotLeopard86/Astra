@@ -3,9 +3,9 @@
 #include <istream>
 
 
-#include "astra/type_info/variants/array/array.hpp"
-#include "astra/type_info/variants/map/map.hpp"
-#include "astra/variable/var.hpp"
+#include "astra/type_info/array/array.hpp"
+#include "astra/type_info/map/map.hpp"
+#include "astra/var.hpp"
 #include "lexer_json.yy.h"
 
 namespace astra {

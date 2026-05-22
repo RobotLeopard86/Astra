@@ -2,8 +2,8 @@
 
 #include <cstddef>
 
-#include "astra/reflection/actions_table.hpp"
-#include "astra/tools/names.hpp"
+#include "astra/actions_table.hpp"
+#include "astra/names.hpp"
 
 namespace astra {
 
