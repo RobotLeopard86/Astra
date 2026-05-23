@@ -4,6 +4,7 @@
 
 #include "astra/sizeof.hpp"
 #include "var.hpp"
+#include "dll.hpp"
 
 namespace astra {
 
@@ -11,7 +12,7 @@ namespace astra {
 
 	static inline palloc_t defaultAlloc;
 
-	struct Box {
+	struct ASTRA_API Box {
 		Box(palloc_t* alloc = &defaultAlloc)
 		  : _alloc(alloc) {};
 

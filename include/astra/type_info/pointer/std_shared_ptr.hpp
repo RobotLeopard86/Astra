@@ -2,11 +2,12 @@
 
 #include "astra/type_name.hpp"
 #include "ipointer.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdSharedPtr : IPointer {
+	struct ASTRA_API StdSharedPtr : IPointer {
 		StdSharedPtr(std::shared_ptr<T>* value, bool isConst)
 		  : _value(value), _isConst(isConst) {
 		}

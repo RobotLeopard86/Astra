@@ -2,10 +2,11 @@
 
 #include "common_actions.hpp"
 #include "astra/actions_table.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct BoolActions {
+	struct ASTRA_API BoolActions {
 		static TypeInfo reflect(void* value, bool isConst) {
 			return {Bool(static_cast<bool*>(value), isConst)};
 		}

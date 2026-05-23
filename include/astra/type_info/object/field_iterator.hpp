@@ -4,12 +4,13 @@
 #include <map>
 #include <string_view>
 
+#include "astra/dll.hpp"
 #include "field_info.hpp"
 
 namespace astra {
 
 	///Skip iterator for fields collection, steps over items with unwanted properties
-	class FieldIterator {
+	class ASTRA_API FieldIterator {
 		using const_iterator = std::map<std::string_view, FieldDesc>::const_iterator;
 
 	  public:

@@ -2,10 +2,12 @@
 
 #include <stack>
 
+#include "astra/dll.hpp"
+
 namespace astra {
 
 	template<typename T>
-	struct StackIterator : public std::stack<T> {
+	struct ASTRA_API StackIterator : public std::stack<T> {
 		static decltype(auto) begin(std::stack<T>* stack) {
 			return (stack->*&StackIterator::c).begin();
 		}

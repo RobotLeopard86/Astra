@@ -6,6 +6,7 @@
 
 #include "astra/names.hpp"
 #include "astra/variant.hpp"
+#include "astra/dll.hpp"
 
 //all variants
 #include "type_info/array/array.hpp"
@@ -31,7 +32,7 @@ namespace astra {
 	///Sequence for arrays and containers with one generic parameter
 	///Map for associative container such as std::map
 	///Pointer for smart pointers
-	class TypeInfo : public BASE {
+	class ASTRA_API TypeInfo : public BASE {
 	  public:
 		TypeInfo(Bool value)
 		  : BASE(value) {

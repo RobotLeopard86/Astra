@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 
-struct ConstexprSort {
+struct ASTRA_API ConstexprSort {
 	//Has optimized complexity
 	template<typename T>
 	static constexpr void sort(T* arr, std::size_t size) {

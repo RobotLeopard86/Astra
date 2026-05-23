@@ -4,15 +4,16 @@
 
 #include "types/type_actions.hpp"// IWYU pragma: keep
 #include "type_id.hpp"
+#include "astra/dll.hpp"
 
-class AstraReflectBase {
+class ASTRA_API AstraReflectBase {
   public:
 	virtual astra::TypeId ASTRA__gettypeid() const = 0;
 };
 
 #ifdef _ASTRAGENERATE
 template<typename T>
-struct astragen_reflectable_check {
+struct ASTRA_API astragen_reflectable_check {
 	static constexpr bool value = std::is_enum_v<T> || (!std::is_class_v<T>) || (std::is_class_v<T> && std::default_initializable<T> && std::is_base_of_v<AstraReflectBase, T>);
 };
 #define ASTRA_REFLECT [[clang::annotate("astra.reflect")]]

@@ -4,10 +4,11 @@
 #include "ipointer.hpp"
 #include "std_shared_ptr.hpp"
 #include "std_unique_ptr.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct Pointer {
+	struct ASTRA_API Pointer {
 		template<typename T>
 		Pointer(std::shared_ptr<T>* value, bool isConst) {
 			new(_mem) StdSharedPtr<T>(value, isConst);

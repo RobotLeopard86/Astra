@@ -2,10 +2,11 @@
 
 #include "astra/type_info.hpp"
 #include "astra/var.hpp"
+#include "dll.hpp"
 
 namespace astra {
 
-	struct Actions {
+	struct ASTRA_API Actions {
 		constexpr Actions(TypeInfo (*reflect)(void*, bool),//
 			std::string_view (*getName)(),				   //
 			std::size_t (*size)(),						   //

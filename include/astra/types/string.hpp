@@ -2,11 +2,12 @@
 
 #include "common_actions.hpp"
 #include "astra/actions_table.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StringActions {
+	struct ASTRA_API StringActions {
 		static TypeInfo reflect(void* value, bool isConst) {
 			return TypeInfo(String(static_cast<T*>(value), isConst));
 		}

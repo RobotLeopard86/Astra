@@ -2,12 +2,13 @@
 
 #include "astra/type_name.hpp"
 #include "astra/format.hpp"
+#include "astra/dll.hpp"
 #include "iarray.hpp"
 
 namespace astra {
 
 	template<typename T, std::size_t size_v>
-	struct CArray final : public IArray {
+	struct ASTRA_API CArray final : public IArray {
 		CArray() = delete;
 
 		CArray(T (*array)[size_v], bool isConst)

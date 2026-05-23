@@ -1,9 +1,11 @@
 #pragma once
 
+#include "astra/dll.hpp"
+
 namespace astra {
 
-	//just a blank struct for further specialization
+	//just a blank struct ASTRA_API for further specialization
 	template<typename T, typename = void>
-	struct TypeActions {};
+	struct ASTRA_API TypeActions {};
 
 }

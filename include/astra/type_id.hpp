@@ -14,6 +14,7 @@
 
 #include "astra/names.hpp"
 #include "astra/traits.hpp"
+#include "dll.hpp"
 
 #ifdef _DEBUG
 namespace astra {
@@ -25,7 +26,7 @@ namespace astra {
 
 	///copyable value type with single int under the hood
 	///represent sequential type id
-	struct TypeId {
+	struct ASTRA_API TypeId {
 		TypeId()
 		  : _id(0) {
 		}

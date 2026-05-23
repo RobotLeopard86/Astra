@@ -2,10 +2,12 @@
 
 #include <queue>
 
+#include "astra/dll.hpp"
+
 namespace astra {
 
 	template<typename T>
-	struct QueueIterator : public std::queue<T> {
+	struct ASTRA_API QueueIterator : public std::queue<T> {
 		static decltype(auto) begin(std::queue<T>* queue) {
 			return (queue->*&QueueIterator::c).begin();
 		}

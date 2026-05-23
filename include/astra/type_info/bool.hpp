@@ -4,7 +4,7 @@
 #include <cctype>
 #include <string_view>
 
-
+#include "astra/dll.hpp"
 #include "astra/type_name.hpp"
 #include "astra/format.hpp"
 #include "astra/type_id.hpp"
@@ -12,7 +12,7 @@
 
 namespace astra {
 
-	struct Bool {
+	struct ASTRA_API Bool {
 		Bool(bool* value, bool isConst)
 		  : _value(value), _isConst(isConst) {
 		}

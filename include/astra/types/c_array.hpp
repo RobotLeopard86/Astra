@@ -6,11 +6,12 @@
 #include "astra/actions_table.hpp"
 #include "astra/types/common_actions.hpp"
 #include "astra/types/type_actions.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T, std::size_t size_v>
-	struct TypeActions<T[size_v]> {
+	struct ASTRA_API TypeActions<T[size_v]> {
 
 		static TypeInfo reflect(void* value, bool isConst) {
 			return TypeInfo(Array(static_cast<T(*)[size_v]>(value), isConst));

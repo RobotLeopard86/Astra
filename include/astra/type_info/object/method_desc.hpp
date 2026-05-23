@@ -6,10 +6,11 @@
 #include "astra/traits.hpp"
 #include "astra/type_id.hpp"
 #include "astra/var.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct MethodDesc {
+	struct ASTRA_API MethodDesc {
 		MethodDesc(void (*fn)(Var res, void* obj, const std::vector<Var>& args),//
 			Access acc)
 		  : _fn(fn), _acc(acc) {

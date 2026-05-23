@@ -1,9 +1,10 @@
 #pragma once
 
 #include "astra/type_id.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	std::string_view typeName(TypeId id);
+	ASTRA_API std::string_view typeName(TypeId id);
 
 }

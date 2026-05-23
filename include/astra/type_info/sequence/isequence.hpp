@@ -3,10 +3,11 @@
 #include <functional>
 
 #include "astra/var.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct ISequence {
+	struct ASTRA_API ISequence {
 		virtual ~ISequence() = default;
 
 		virtual void assign(Var var) = 0;

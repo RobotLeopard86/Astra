@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "dll.hpp"
 #include "astra/reflectable.hpp"
 #include "astra/type_id.hpp"
 
@@ -9,7 +9,7 @@ namespace astra {
 	///The abstraction from type and const modifier
 	///all types represented like a pointer + type id + const flag
 	///the same representation for each type
-	struct Var {
+	struct ASTRA_API Var {
 		Var();
 		Var(void* value, TypeId type, bool isConst);
 

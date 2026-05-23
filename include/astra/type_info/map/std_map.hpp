@@ -4,11 +4,12 @@
 
 #include "astra/type_name.hpp"
 #include "imap.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename KeyT, typename ValueT>
-	struct StdMap final : public IMap {
+	struct ASTRA_API StdMap final : public IMap {
 		StdMap() = delete;
 
 		StdMap(std::map<KeyT, ValueT>* map, bool isConst)

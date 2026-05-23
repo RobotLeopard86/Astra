@@ -3,6 +3,7 @@
 #include <memory>
 #include <utility>
 
+#include "astra/dll.hpp"
 #include "c_array.hpp"
 #include "astra/sizeof.hpp"
 #include "iarray.hpp"
@@ -10,7 +11,7 @@
 
 namespace astra {
 
-	struct Array final {
+	struct ASTRA_API Array final {
 		Array() = delete;
 
 		template<typename T, std::size_t size_v>

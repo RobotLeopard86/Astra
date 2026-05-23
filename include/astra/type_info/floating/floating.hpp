@@ -4,10 +4,11 @@
 
 #include "float.hpp"
 #include "ifloating.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct Floating final {
+	struct ASTRA_API Floating final {
 		Floating() = delete;
 
 		template<typename T>

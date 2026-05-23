@@ -1,6 +1,7 @@
 #pragma once
 
 #include "astra/sizeof.hpp"
+#include "astra/dll.hpp"
 #include "list/std_deque.hpp"
 #include "list/std_list.hpp"
 #include "queue/std_queue.hpp"
@@ -11,7 +12,7 @@
 
 namespace astra {
 
-	struct Sequence {
+	struct ASTRA_API Sequence {
 		Sequence() = delete;
 
 		template<typename T>

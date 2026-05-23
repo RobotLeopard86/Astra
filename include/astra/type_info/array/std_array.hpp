@@ -4,12 +4,13 @@
 
 #include "astra/type_name.hpp"
 #include "astra/format.hpp"
+#include "astra/dll.hpp"
 #include "iarray.hpp"
 
 namespace astra {
 
 	template<typename T, std::size_t size_v>
-	struct StdArray final : public IArray {
+	struct ASTRA_API StdArray final : public IArray {
 		StdArray() = delete;
 
 		StdArray(std::array<T, size_v>* array, bool isConst)

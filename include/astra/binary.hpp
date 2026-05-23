@@ -3,13 +3,13 @@
 #include <cstddef>
 #include <istream>
 
-
 #include "astra/var.hpp"
 #include "astra/reflectable.hpp"
+#include "dll.hpp"
 
 namespace astra {
 
-	struct binary {
+	struct ASTRA_API binary {
 		template<Reflectable T>
 		static T fromVector(const std::vector<uint8_t>& vector) {
 			T obj;

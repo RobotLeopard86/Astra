@@ -2,13 +2,13 @@
 
 #include <istream>
 
-
+#include "dll.hpp"
 #include "astra/var.hpp"
 #include "astra/reflectable.hpp"
 
 namespace astra {
 
-	struct json {
+	struct ASTRA_API json {
 		template<Reflectable T>
 		static T fromString(std::string_view str) {
 			T obj;

@@ -4,12 +4,13 @@
 
 #include "enum_impl.hpp"
 #include "ienum.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	///container of all field names matched to Var structs
 	///just a registry of types and value pointers
-	struct Enum final {
+	struct ASTRA_API Enum final {
 
 		template<typename T, std::size_t size>
 		Enum(T* value, bool isConst, const ConstexprMap<T, size>& allConstants) {

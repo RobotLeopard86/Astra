@@ -3,12 +3,12 @@
 #include <cstddef>
 #include <cstdint>
 
-
+#include "astra/dll.hpp"
 #include "astra/var.hpp"
 
 namespace astra {
 
-	struct IInteger {
+	struct ASTRA_API IInteger {
 		virtual ~IInteger() = default;
 
 		virtual void assign(Var var) = 0;

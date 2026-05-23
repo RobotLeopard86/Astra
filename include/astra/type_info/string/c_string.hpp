@@ -6,11 +6,12 @@
 #include "astra/format.hpp"
 #include "astra/variant.hpp"
 #include "istring.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct CString : IString {
+	struct ASTRA_API CString : IString {
 
 		CString(const T** str)
 		  : _var(str, true) {

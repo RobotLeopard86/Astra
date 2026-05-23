@@ -4,10 +4,11 @@
 #include "imap.hpp"
 #include "std_map.hpp"
 #include "std_unordered_map.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct Map final {
+	struct ASTRA_API Map final {
 		Map() = delete;
 
 		template<typename KeyT, typename ValueT>

@@ -3,8 +3,8 @@
 #include <array>
 
 #include "constexpr_sort.hpp"
-
 #include "format.hpp"
+#include "dll.hpp"
 
 namespace astra {
 
@@ -18,10 +18,10 @@ namespace astra {
 	///
 	///initial compile time sorting has O(N^2) complexity
 	template<class T, std::size_t size>
-	class ConstexprMap {
+	class ASTRA_API ConstexprMap {
 	  public:
-		///a pair like struct with deleted default constructor
-		struct Entry {
+		///a pair like struct ASTRA_API with deleted default constructor
+		struct ASTRA_API Entry {
 			constexpr Entry() = delete;
 			constexpr Entry(T value, std::string_view name)
 			  : value(value), name(name) {

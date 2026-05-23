@@ -5,14 +5,12 @@
 #include <variant>
 
 #include "overloaded.hpp"
+#include "dll.hpp"
 
 namespace astra {
 
-	//declaring a slightly more readable state of nothing
-	using None = std::monostate;
-
 	template<typename... T>
-	struct Variant {
+	struct ASTRA_API Variant {
 
 		template<typename SomeT, typename = std::enable_if_t<!std::is_same_v<SomeT, Variant>, void>>
 		Variant(const SomeT& value)

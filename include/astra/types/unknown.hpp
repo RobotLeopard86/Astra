@@ -3,10 +3,11 @@
 #include <cstddef>
 
 #include "astra/type_info.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct UnknownActions {
+	struct ASTRA_API UnknownActions {
 		static TypeInfo reflect(void* /*value*/, bool /*isConst*/) {
 			throw std::runtime_error("Cannot reflect a value with unknown type");
 		}
@@ -20,7 +21,7 @@ namespace astra {
 		}
 
 		static void construct(void* /*p*/) {
-			throw std::runtime_error("Cannot construct a value for unknown type");
+			throw std::runtime_error("Cannot construct ASTRA_API a value for unknown type");
 		}
 
 		static void destroy(void* /*p*/) {

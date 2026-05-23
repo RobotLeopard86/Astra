@@ -3,13 +3,14 @@
 #include <vector>
 
 #include "../err_helper.hpp"
+#include "astra/dll.hpp"
 #include "astra/type_name.hpp"
 #include "ivector.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdVector : public IVector, public sequence::ErrHelper {
+	struct ASTRA_API StdVector : public IVector, public sequence::ErrHelper {
 		StdVector() = delete;
 
 		StdVector(std::vector<T>* vector, bool isConst)

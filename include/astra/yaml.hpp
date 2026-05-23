@@ -3,13 +3,13 @@
 #include <istream>
 #include <string>
 
-
+#include "dll.hpp"
 #include "astra/var.hpp"
 #include "astra/reflectable.hpp"
 
 namespace astra {
 
-	struct yaml {
+	struct ASTRA_API yaml {
 		template<Reflectable T>
 		static T fromString(std::string_view str) {
 

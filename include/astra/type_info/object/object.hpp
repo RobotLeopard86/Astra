@@ -5,7 +5,7 @@
 #include <map>
 #include <utility>
 
-
+#include "astra/dll.hpp"
 #include "astra/type_name.hpp"
 #include "astra/format.hpp"
 #include "astra/var.hpp"
@@ -16,7 +16,7 @@ namespace astra {
 
 	///container of all field names matched to Var structs
 	///just a registry of types and value pointers
-	struct Object {
+	struct ASTRA_API Object {
 		Object(Var var,											//
 			const std::map<std::string_view, FieldDesc>* fields,//
 			const std::map<std::string_view, MethodDesc>* methods)

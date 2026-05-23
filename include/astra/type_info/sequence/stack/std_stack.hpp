@@ -5,12 +5,13 @@
 #include "../err_helper.hpp"
 #include "astra/type_name.hpp"
 #include "istack.hpp"
+#include "astra/dll.hpp"
 #include "stack_iterator.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdStack : public IStack, public sequence::ErrHelper {
+	struct ASTRA_API StdStack : public IStack, public sequence::ErrHelper {
 		StdStack() = delete;
 
 		StdStack(std::stack<T>* stack, bool isConst)

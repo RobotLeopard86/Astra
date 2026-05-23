@@ -2,11 +2,12 @@
 
 #include "astra/type_name.hpp"
 #include "ipointer.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdUniquePtr : IPointer {
+	struct ASTRA_API StdUniquePtr : IPointer {
 		StdUniquePtr(std::unique_ptr<T>* value, bool isConst)
 		  : _value(value), _isConst(isConst) {
 		}

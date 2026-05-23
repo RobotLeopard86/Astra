@@ -3,10 +3,11 @@
 #include <functional>
 
 #include "astra/var.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct IArray {
+	struct ASTRA_API IArray {
 		virtual ~IArray() = default;
 
 		virtual void assign(Var var) = 0;

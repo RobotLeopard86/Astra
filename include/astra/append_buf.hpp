@@ -2,9 +2,11 @@
 
 #include <streambuf>
 
+#include "astra/dll.hpp"
+
 namespace astra {
 
-	class AppendBuf : public std::streambuf {
+	class ASTRA_API AppendBuf : public std::streambuf {
 	  public:
 		explicit AppendBuf(std::string* str)
 		  : _buf(str) {

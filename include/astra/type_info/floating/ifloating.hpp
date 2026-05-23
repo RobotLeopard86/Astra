@@ -3,12 +3,12 @@
 #include <iomanip>
 #include <sstream>
 
-
+#include "astra/dll.hpp"
 #include "astra/var.hpp"
 
 namespace astra {
 
-	struct IFloating {
+	struct ASTRA_API IFloating {
 		virtual ~IFloating() = default;
 
 		virtual void assign(Var var) = 0;

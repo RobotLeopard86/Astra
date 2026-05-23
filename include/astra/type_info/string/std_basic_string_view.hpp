@@ -6,11 +6,12 @@
 #include "astra/format.hpp"
 #include "astra/variant.hpp"
 #include "istring.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdBasicStringView : IString {
+	struct ASTRA_API StdBasicStringView : IString {
 		StdBasicStringView() = delete;
 
 		StdBasicStringView(std::basic_string_view<T>* str)

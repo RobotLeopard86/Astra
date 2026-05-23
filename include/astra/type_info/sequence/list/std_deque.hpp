@@ -5,11 +5,12 @@
 #include "../err_helper.hpp"
 #include "astra/type_name.hpp"
 #include "ilist.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdDeque : public IList, public sequence::ErrHelper {
+	struct ASTRA_API StdDeque : public IList, public sequence::ErrHelper {
 		StdDeque() = delete;
 
 		StdDeque(std::deque<T>* deque, bool isConst)

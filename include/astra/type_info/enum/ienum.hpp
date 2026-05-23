@@ -1,10 +1,11 @@
 #pragma once
 
 #include "astra/var.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct IEnum {
+	struct ASTRA_API IEnum {
 		virtual ~IEnum() = default;
 
 		virtual void assign(Var var) = 0;

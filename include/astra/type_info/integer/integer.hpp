@@ -6,10 +6,11 @@
 
 #include "iinteger.hpp"
 #include "int.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct Integer {
+	struct ASTRA_API Integer {
 		Integer() = delete;
 
 		template<typename T>

@@ -1,10 +1,11 @@
 #pragma once
 
 #include "astra/var.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct IPointer {
+	struct ASTRA_API IPointer {
 		virtual ~IPointer() = default;
 
 		virtual void assign(Var var) = 0;

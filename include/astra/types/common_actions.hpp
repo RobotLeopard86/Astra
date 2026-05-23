@@ -4,11 +4,12 @@
 
 #include "astra/actions_table.hpp"
 #include "astra/names.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct CommonActions {
+	struct ASTRA_API CommonActions {
 		static std::string_view typeName() {
 			static auto name = Names<T>::get();
 			return name;

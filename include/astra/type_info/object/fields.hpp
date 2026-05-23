@@ -4,9 +4,11 @@
 
 #include "field_iterator.hpp"
 
+#include "astra/dll.hpp"
+
 namespace astra {
 
-	struct Fields {
+	struct ASTRA_API Fields {
 		Fields(const void* base, const std::map<std::string_view, FieldDesc>* map, Access access, bool includeReadonly)//
 		  : _base(base), _map(map), _access(access), _include_readonly(includeReadonly) {
 		}

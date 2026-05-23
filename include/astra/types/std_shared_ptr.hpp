@@ -7,12 +7,13 @@
 #include "astra/type_info.hpp"
 #include "astra/type_info/pointer/std_shared_ptr.hpp"
 #include "astra/types/common_actions.hpp"
+#include "astra/dll.hpp"
 #include "astra/types/type_actions.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct TypeActions<std::shared_ptr<T>> {
+	struct ASTRA_API TypeActions<std::shared_ptr<T>> {
 
 		static TypeInfo reflect(void* value, bool isConst) {
 			return {Pointer(static_cast<std::shared_ptr<T>*>(value), isConst)};

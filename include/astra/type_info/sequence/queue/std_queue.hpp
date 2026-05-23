@@ -7,11 +7,12 @@
 #include "astra/variant.hpp"
 #include "iqueue.hpp"
 #include "queue_iterator.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdQueue : public IQueue, public sequence::ErrHelper {
+	struct ASTRA_API StdQueue : public IQueue, public sequence::ErrHelper {
 		StdQueue() = delete;
 
 		StdQueue(std::queue<T>* queue, bool isConst)

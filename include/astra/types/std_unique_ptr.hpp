@@ -5,11 +5,12 @@
 #include "astra/actions_table.hpp"
 #include "astra/types/common_actions.hpp"
 #include "astra/types/type_actions.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct TypeActions<std::unique_ptr<T>> {
+	struct ASTRA_API TypeActions<std::unique_ptr<T>> {
 
 		static TypeInfo reflect(void* value, bool isConst) {
 			return {Pointer(static_cast<std::unique_ptr<T>*>(value), isConst)};

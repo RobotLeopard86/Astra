@@ -6,11 +6,13 @@
 
 #include "access.hpp"
 #include "astra/type_id.hpp"
+#include "astra/dll.hpp"
 #include "field_desc.hpp"
+#include "astra/var.hpp"
 
 namespace astra {
 
-	class FieldInfo {
+	class ASTRA_API FieldInfo {
 	  public:
 		FieldInfo(const void* base, const FieldDesc* data)
 		  : _base(base), _data(data) {

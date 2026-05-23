@@ -5,8 +5,8 @@
 #include "yaml.hpp"
 
 namespace astra {
-	struct converters {
-		struct toJson {
+	struct ASTRA_API converters {
+		struct ASTRA_API toJson {
 			template<Reflectable T>
 			static std::string fromYamlString(std::string_view str) {
 				T yamlOut;
@@ -55,7 +55,7 @@ namespace astra {
 				return json::toString(&obj);
 			}
 		};
-		struct toYaml {
+		struct ASTRA_API toYaml {
 			template<Reflectable T>
 			static std::string fromJsonString(std::string_view str) {
 				T jsonOut;
@@ -104,7 +104,7 @@ namespace astra {
 				return yaml::toString(&obj);
 			}
 		};
-		struct toBinary {
+		struct ASTRA_API toBinary {
 			template<Reflectable T>
 			static std::vector<uint8_t> fromJsonString(std::string_view str) {
 				T jsonOut;

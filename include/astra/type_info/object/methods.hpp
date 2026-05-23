@@ -3,10 +3,11 @@
 #include <cstddef>
 
 #include "method_iterator.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct Methods {
+	struct ASTRA_API Methods {
 		Methods(void* base, const std::map<std::string_view, MethodDesc>* map, Access acc)//
 		  : _base(base), _map(map), _acc(acc) {
 		}

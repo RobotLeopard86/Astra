@@ -5,11 +5,12 @@
 #include <string_view>
 
 #include "method_info.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	///Skip iterator for methods collection, steps over items with unwanted properties
-	class MethodIterator {
+	class ASTRA_API MethodIterator {
 		using const_iterator = std::map<std::string_view, MethodDesc>::const_iterator;
 		using item = std::pair<std::string_view, MethodInfo>;
 

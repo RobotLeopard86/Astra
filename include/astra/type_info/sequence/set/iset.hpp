@@ -1,10 +1,11 @@
 #pragma once
 
 #include "../isequence.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct ISet : public ISequence {
+	struct ASTRA_API ISet : public ISequence {
 		~ISet() override = default;
 
 		using ISequence::forEach;

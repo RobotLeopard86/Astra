@@ -5,11 +5,12 @@
 #include "../err_helper.hpp"
 #include "astra/type_name.hpp"
 #include "ilist.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdList : public IList, public sequence::ErrHelper {
+	struct ASTRA_API StdList : public IList, public sequence::ErrHelper {
 		StdList() = delete;
 
 		StdList(std::list<T>* list, bool isConst)

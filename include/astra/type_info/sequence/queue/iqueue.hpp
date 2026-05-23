@@ -2,9 +2,11 @@
 
 #include "../isequence.hpp"
 
+#include "astra/dll.hpp"
+
 namespace astra {
 
-	struct IQueue : public ISequence {
+	struct ASTRA_API IQueue : public ISequence {
 		~IQueue() override = default;
 
 		using ISequence::forEach;

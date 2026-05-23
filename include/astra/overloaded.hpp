@@ -4,7 +4,7 @@ namespace astra {
 
 	//a little helper for std::variant
 	template<typename... Ts>
-	struct Overloaded : Ts... {
+	struct ASTRA_API Overloaded : Ts... {
 		using Ts::operator()...;
 	};
 

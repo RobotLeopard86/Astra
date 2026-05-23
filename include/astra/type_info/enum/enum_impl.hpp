@@ -2,6 +2,7 @@
 
 #include "astra/constexpr_map.hpp"
 #include "astra/type_name.hpp"
+#include "astra/dll.hpp"
 #include "ienum.hpp"
 
 #include <cstdint>
@@ -9,7 +10,7 @@
 namespace astra {
 
 	template<typename T, std::size_t size_v>
-	struct EnumImpl final : public IEnum {
+	struct ASTRA_API EnumImpl final : public IEnum {
 		EnumImpl() = delete;
 
 		EnumImpl(T* value, bool isConst, const ConstexprMap<T, size_v>& allConstants)

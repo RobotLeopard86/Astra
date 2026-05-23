@@ -6,11 +6,11 @@
 #include "access.hpp"
 #include "astra/traits.hpp"
 #include "astra/type_id.hpp"
-#include "astra/var.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct FieldDesc {
+	struct ASTRA_API FieldDesc {
 
 		template<typename T, typename ClassT>
 		FieldDesc(T ClassT::* ptr, Access acc)

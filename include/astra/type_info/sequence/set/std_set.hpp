@@ -5,11 +5,12 @@
 #include "../err_helper.hpp"
 #include "astra/type_name.hpp"
 #include "iset.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct StdSet : public ISet, public sequence::ErrHelper {
+	struct ASTRA_API StdSet : public ISet, public sequence::ErrHelper {
 		StdSet() = delete;
 
 		StdSet(std::set<T>* set, bool isConst)

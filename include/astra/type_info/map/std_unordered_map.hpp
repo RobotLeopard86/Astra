@@ -3,12 +3,13 @@
 #include <unordered_map>
 
 #include "astra/type_name.hpp"
+#include "astra/dll.hpp"
 #include "imap.hpp"
 
 namespace astra {
 
 	template<typename KeyT, typename ValueT>
-	struct StdUnorderedMap final : public IMap {
+	struct ASTRA_API StdUnorderedMap final : public IMap {
 		StdUnorderedMap() = delete;
 
 		StdUnorderedMap(std::unordered_map<KeyT, ValueT>* map, bool isConst)

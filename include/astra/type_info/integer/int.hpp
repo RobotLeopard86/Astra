@@ -7,11 +7,12 @@
 #include "astra/type_name.hpp"
 #include "astra/format.hpp"
 #include "iinteger.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct Int : IInteger {
+	struct ASTRA_API Int : IInteger {
 		Int(T* value, bool isConst)
 		  : _value(value), _isConst(isConst) {
 		}

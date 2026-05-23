@@ -4,13 +4,13 @@
 #include <cstdint>
 #include <type_traits>
 
-
+#include "astra/dll.hpp"
 #include "astra/type_id.hpp"
 #include "method_desc.hpp"
 
 namespace astra {
 
-	class MethodInfo {
+	class ASTRA_API MethodInfo {
 	  public:
 		MethodInfo(const void* base, const MethodDesc* data)
 		  : _base(const_cast<void*>(base)), _data(data) {

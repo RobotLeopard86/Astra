@@ -7,10 +7,11 @@
 #include "istring.hpp"
 #include "std_basic_string.hpp"
 #include "std_basic_string_view.hpp"
+#include "astra/dll.hpp"
 
 namespace astra {
 
-	struct String final {
+	struct ASTRA_API String final {
 		String() = delete;
 
 		template<typename T>
