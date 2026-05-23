@@ -34,43 +34,43 @@ namespace astra {
 	class TypeInfo : public BASE {
 	  public:
 		TypeInfo(Bool value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Integer value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Floating value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(String value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Enum value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Object value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Array value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Sequence value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Map value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		TypeInfo(Pointer value)
-		  : BASE(value) {//NOLINT implicit constructor
+		  : BASE(value) {
 		}
 
 		void assign(Var var) {

@@ -16,12 +16,12 @@ namespace astra {
 
 		template<typename SomeT, typename = std::enable_if_t<!std::is_same_v<SomeT, Variant>, void>>
 		Variant(const SomeT& value)
-		  : _content(value) {//NOLINT implicit constructor
+		  : _content(value) {
 		}
 
 		template<typename SomeT, typename = std::enable_if_t<!std::is_same_v<SomeT, Variant>, void>>
 		Variant(SomeT&& value)
-		  : _content(std::move(value)) {//NOLINT implicit constructor
+		  : _content(std::move(value)) {
 		}
 
 		template<typename... FuncT>

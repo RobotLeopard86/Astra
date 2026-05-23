@@ -9,7 +9,7 @@
 
 namespace astra {
 
-	struct yaml {//NOLINT namespace like name
+	struct yaml {
 		template<Reflectable T>
 		static T fromString(std::string_view str) {
 

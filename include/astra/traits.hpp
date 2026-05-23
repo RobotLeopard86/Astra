@@ -21,7 +21,7 @@ namespace astra {
 	struct is_ref_type : std::false_type {};
 
 	template<typename T>
-	inline constexpr bool is_ref_type_v = is_ref_type<T>::value;//NOLINT std like name
+	inline constexpr bool is_ref_type_v = is_ref_type<T>::value;
 
 	template<typename T>
 	struct is_ref_type<std::basic_string_view<T>> : std::true_type {};
@@ -36,7 +36,7 @@ namespace astra {
 	struct is_string : std::false_type {};
 
 	template<typename T>
-	inline constexpr bool is_string_v = is_string<T>::value;//NOLINT std like name
+	inline constexpr bool is_string_v = is_string<T>::value;
 
 	template<typename T>
 	struct is_string<std::basic_string<T>> : std::true_type {};
@@ -54,7 +54,7 @@ namespace astra {
 	struct is_sequence : std::false_type {};
 
 	template<typename T>
-	inline constexpr bool is_sequence_v = is_sequence<T>::value;//NOLINT std like name
+	inline constexpr bool is_sequence_v = is_sequence<T>::value;
 
 	template<typename T>
 	struct is_sequence<std::vector<T>> : std::true_type {};
@@ -81,7 +81,7 @@ namespace astra {
 	struct is_map : std::false_type {};
 
 	template<typename T>
-	inline constexpr bool is_map_v = is_map<T>::value;//NOLINT std like name
+	inline constexpr bool is_map_v = is_map<T>::value;
 
 	template<typename KeyT, typename ValueT>
 	struct is_map<std::map<KeyT, ValueT>> : std::true_type {};
@@ -91,11 +91,11 @@ namespace astra {
 
 	template<typename T>
 	struct is_array {
-		static constexpr bool value = std::is_array_v<T>;//NOLINT std like name
+		static constexpr bool value = std::is_array_v<T>;
 	};
 
 	template<typename T>
-	inline constexpr bool is_array_v = is_array<T>::value;//NOLINT std like name
+	inline constexpr bool is_array_v = is_array<T>::value;
 
 	template<typename T, std::size_t size>
 	struct is_array<std::array<T, size>> : std::true_type {};
@@ -105,11 +105,11 @@ namespace astra {
 
 	template<typename T>
 	struct is_class {
-		static constexpr bool value =//NOLINT std like name
+		static constexpr bool value =
 			std::is_class_v<T> && !is_sequence_v<T> && !is_map_v<T> && !is_string_v<T>;
 	};
 
 	template<typename T>
-	inline constexpr bool is_class_v = is_class<T>::value;//NOLINT std like name
+	inline constexpr bool is_class_v = is_class<T>::value;
 
 }

@@ -9,7 +9,7 @@
 
 namespace astra {
 
-	struct binary {//NOLINT namespace like name
+	struct binary {
 		template<Reflectable T>
 		static T fromVector(const std::vector<uint8_t>& vector) {
 			T obj;

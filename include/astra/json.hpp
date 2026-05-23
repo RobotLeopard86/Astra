@@ -8,7 +8,7 @@
 
 namespace astra {
 
-	struct json {//NOLINT namespace like name
+	struct json {
 		template<Reflectable T>
 		static T fromString(std::string_view str) {
 			T obj;
