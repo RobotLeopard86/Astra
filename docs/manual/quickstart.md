@@ -1,10 +1,6 @@
 # Quickstart
 
-```{warning} **This page is not up-to-date!**.  
-Astra is currently undergoing heavy restructuring, and this guide has not yet been updated to reflect the new information. A new version will be published closer to release.
-```
-
-This guide assumes you are using Meson for your project (Astra's build system). If you aren't, you may need to use pre-compiled binaries or find some way to integrate Meson into your system.  
+This guide assumes you are using Meson for your project (Astra's build system). If you aren't, you may need to use pre-compiled binaries or some form of external project mechanism.
 
 1. Add Astra as a subproject  
     1. Set up a `astra.wrap` file in your `subprojects` directory. It should look something like this:
@@ -12,28 +8,28 @@ This guide assumes you are using Meson for your project (Astra's build system). 
 	[wrap-git]
 	url = https://github.com/RobotLeopard86/Astra
 	depth = 1
-	revision = <tag, branch, or commit to clone>
+	revision = <tag, branch, or commit hash to clone>
 	```
 	2. Add these lines to your `meson.build`:
 	```{code-block}meson
-	astra = subproject('astra', required: true, default_options: ['generator=true'])
+	astra = subproject('astra', required: true)
 	astra_generator = astra.get_variable('astra_generator')
 	astra_dep = astra.get_variable('astra_dep')
 	```  
 2. Configure reflection codegen
 	1. Create the custom target. It should look something like this:
 	```{code-block}meson
-	reflection = custom_target('example.astra.[cpphpp]', output: ['example.astra.hpp', 'example.astra.cpp'], input: ['some_header.hpp'], console: true, command: [astra_generator, '-c', meson.global_build_root(), '-o', meson.current_build_dir(), '-p', 'example', meson.current_source_dir()])
+	reflection = custom_target('example.astra.[cpphpp]', output: ['example.astra.hpp', 'example.astra.cpp'],
+		input: ['some_header.hpp'], console: true, command: [astra_generator, '-c', meson.global_build_root(), '-o', 
+		meson.current_build_dir(), '-p', 'example', meson.current_source_dir()])
 	```
-	2. Add the custom target to your target's sources
-	3. Add `astra_dep` to your target's dependencies
-	4. Not strictly necessary, but recommended: add `-Wno-unknown-attributes` (or equivalent flag) to your extra C++ arguments. This will silence warnings regarding the astra custom attributes
-3. Add reflection attributes
-	1. Note: for a class to be reflectable, it must satisfy the `astra::reflection::Reflectable` concept.
-	2. Add the `[[astra::reflect]]` attribute to your class (or enum), like this:
-	```{code-block}cpp
-	class [[astra::reflect]] SomeClass {...};
-	```
+	2. Add the custom target to your library/executable's sources
+	3. Add `astra_dep` to your library/executable's dependencies
+3. Setup reflection in code
+	1. Include the `astra/setup.hpp` header in order to gain access to the reflection macros
+	2. Mark a class as reflectable by adding the `ASTRA_REFLECT` macro before the class name and by making the class inherit from `AstraReflectBase`
+		1. Note: your class does not need to directly inherit from `AstraReflectBase` if it inherits from a class that already does
+	3. Add reflection configuration data by adding `ASTRASETUP(<your class name goes here>)` within a `public` section of your class
 4. Reflect!
-	1. Include `astra/reflection/reflection.hpp` and your generated reflection header
-	2. Use `astra::reflection::reflect(<pointer>)`
+	1. Include `astra/reflection.hpp` and your generated reflection header in the file where you want to do reflection
+	2. Use `astra::reflect(<pointer to reflectable object>)` to get an `astra::TypeInfo` object, which allows you to access reflection functionality.
