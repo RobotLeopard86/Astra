@@ -27,7 +27,7 @@ namespace astra {
 		template<Reflectable T>
 		static std::vector<uint8_t> toVector(const T* obj) {
 			std::vector<uint8_t> result;
-			serialize(&result, Var(obj));
+			serialize(result, Var(obj));
 			return result;
 		}
 
@@ -36,7 +36,7 @@ namespace astra {
 			serialize(stream, Var(obj));
 		}
 
-		static void serialize(std::vector<uint8_t>* vector, Var var);
+		static void serialize(std::vector<uint8_t>& vector, Var var);
 		static void serialize(std::ostream& stream, Var var);
 		static void deserialize(Var var, const std::vector<uint8_t>& vector);
 		static void deserialize(Var var, std::istream& stream);

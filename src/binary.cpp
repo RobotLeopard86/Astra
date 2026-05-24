@@ -2,19 +2,12 @@
 
 #include <iostream>
 
-#include "stream_reader.hpp"
-#include "vector_reader.hpp"
-#include "stream_writer.hpp"
-#include "vector_writer.hpp"
 #include "astra/reflection.hpp"
-#include "astra/types/all_types.hpp"
-#include "astra/box.hpp"
-#include "group_reader.hpp"
-#include "group_writer.hpp"
+#include "astra/types/all_types.hpp"// IWYU pragma: keep
 
 namespace astra {
 
-	template<typename SeqT>
+	/*template<typename SeqT>
 	inline void serializeSequence(const SeqT& seq, GroupWriter* writer);
 
 	inline void serializeRecursive(GroupWriter* writer, const TypeInfo& info) {
@@ -87,27 +80,9 @@ namespace astra {
 			info.unsafeAssign(ptr);
 			serializeRecursive(writer, info);
 		});
-	}
+	}*/
 
-	void binary::serialize(std::vector<uint8_t>* vector, Var var) {
-		VectorWriter vectorW(vector);
-		GroupWriter groupW(&vectorW);
-
-		auto info = reflect(var);
-
-		serializeRecursive(&groupW, info);
-	}
-
-	void binary::serialize(std::ostream& stream, Var var) {
-		StreamWriter streamW(stream);
-		GroupWriter groupW(&streamW);
-
-		auto info = reflect(var);
-
-		serializeRecursive(&groupW, info);
-	}
-
-	inline void deserializeRecursive(TypeInfo* info, const GroupReader& reader) {
+	/*inline void deserializeRecursive(TypeInfo* info, const GroupReader& reader) {
 		auto k = info->getKind();
 
 		switch(k) {
@@ -208,27 +183,23 @@ namespace astra {
 				}
 			} break;
 		}
+	}*/
+
+	void binary::serialize(std::vector<uint8_t>& vector, Var var) {
+		TypeInfo info = reflect(var);
+	}
+
+	void binary::serialize(std::ostream& stream, Var var) {
+		TypeInfo info = reflect(var);
 	}
 
 	void binary::deserialize(Var var, const std::vector<uint8_t>& vector) {
-		VectorReader vectorR(vector);
-		GroupReader groupR(&vectorR);
-
-		auto info = reflect(var);
-
-		deserializeRecursive(&info, groupR);
-
+		TypeInfo info = reflect(var);
 		return;
 	}
 
 	void binary::deserialize(Var var, std::istream& stream) {
-		StreamReader streamR(stream);
-		GroupReader groupR(&streamR);
-
-		auto info = reflect(var);
-
-		deserializeRecursive(&info, groupR);
-
+		TypeInfo info = reflect(var);
 		return;
 	}
 
