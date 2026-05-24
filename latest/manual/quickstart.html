@@ -404,12 +404,7 @@
                   
   <section id="quickstart">
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading"><span/></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><strong>This page is not up-to-date!</strong>.
-Astra is currently undergoing heavy restructuring, and this guide has not yet been updated to reflect the new information. A new version will be published closer to release.</p>
-</div>
-<p>This guide assumes you are using Meson for your project (Astra’s build system). If you aren’t, you may need to use pre-compiled binaries or find some way to integrate Meson into your system.</p>
+<p>This guide assumes you are using Meson for your project (Astra’s build system). If you aren’t, you may need to use pre-compiled binaries or some form of external project mechanism.</p>
 <ol class="arabic">
 <li><p>Add Astra as a subproject</p>
 <ol class="arabic simple">
@@ -418,13 +413,13 @@ Astra is currently undergoing heavy restructuring, and this guide has not yet be
 <div class="highlight-{code-block}ini notranslate"><div class="highlight"><pre><span></span>[wrap-git]
 url = https://github.com/RobotLeopard86/Astra
 depth = 1
-revision = &lt;tag, branch, or commit to clone&gt;
+revision = &lt;tag, branch, or commit hash to clone&gt;
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
 <li><p>Add these lines to your <code class="docutils literal notranslate"><span class="pre">meson.build</span></code>:</p></li>
 </ol>
-<div class="highlight-{code-block}meson notranslate"><div class="highlight"><pre><span></span>astra = subproject(&#39;astra&#39;, required: true, default_options: [&#39;generator=true&#39;])
+<div class="highlight-{code-block}meson notranslate"><div class="highlight"><pre><span></span>astra = subproject(&#39;astra&#39;, required: true)
 astra_generator = astra.get_variable(&#39;astra_generator&#39;)
 astra_dep = astra.get_variable(&#39;astra_dep&#39;)
 </pre></div>
@@ -434,28 +429,31 @@ astra_dep = astra.get_variable(&#39;astra_dep&#39;)
 <ol class="arabic simple">
 <li><p>Create the custom target. It should look something like this:</p></li>
 </ol>
-<div class="highlight-{code-block}meson notranslate"><div class="highlight"><pre><span></span>reflection = custom_target(&#39;example.astra.[cpphpp]&#39;, output: [&#39;example.astra.hpp&#39;, &#39;example.astra.cpp&#39;], input: [&#39;some_header.hpp&#39;], console: true, command: [astra_generator, &#39;-c&#39;, meson.global_build_root(), &#39;-o&#39;, meson.current_build_dir(), &#39;-p&#39;, &#39;example&#39;, meson.current_source_dir()])
+<div class="highlight-{code-block}meson notranslate"><div class="highlight"><pre><span></span>reflection = custom_target(&#39;example.astra.[cpphpp]&#39;, output: [&#39;example.astra.hpp&#39;, &#39;example.astra.cpp&#39;],
+	input: [&#39;some_header.hpp&#39;], console: true, command: [astra_generator, &#39;-c&#39;, meson.global_build_root(), &#39;-o&#39;, 
+	meson.current_build_dir(), &#39;-p&#39;, &#39;example&#39;, meson.current_source_dir()])
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Add the custom target to your target’s sources</p></li>
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">astra_dep</span></code> to your target’s dependencies</p></li>
-<li><p>Not strictly necessary, but recommended: add <code class="docutils literal notranslate"><span class="pre">-Wno-unknown-attributes</span></code> (or equivalent flag) to your extra C++ arguments. This will silence warnings regarding the astra custom attributes</p></li>
+<li><p>Add the custom target to your library/executable’s sources</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">astra_dep</span></code> to your library/executable’s dependencies</p></li>
 </ol>
 </li>
-<li><p>Add reflection attributes</p>
+<li><p>Setup reflection in code</p>
 <ol class="arabic simple">
-<li><p>Note: for a class to be reflectable, it must satisfy the <code class="docutils literal notranslate"><span class="pre">astra::reflection::Reflectable</span></code> concept.</p></li>
-<li><p>Add the <code class="docutils literal notranslate"><span class="pre">[[astra::reflect]]</span></code> attribute to your class (or enum), like this:</p></li>
+<li><p>Include the <code class="docutils literal notranslate"><span class="pre">astra/setup.hpp</span></code> header in order to gain access to the reflection macros</p></li>
+<li><p>Mark a class as reflectable by adding the <code class="docutils literal notranslate"><span class="pre">ASTRA_REFLECT</span></code> macro before the class name and by making the class inherit from <code class="docutils literal notranslate"><span class="pre">AstraReflectBase</span></code></p>
+<ol class="arabic simple">
+<li><p>Note: your class does not need to directly inherit from <code class="docutils literal notranslate"><span class="pre">AstraReflectBase</span></code> if it inherits from a class that already does</p></li>
 </ol>
-<div class="highlight-{code-block}cpp notranslate"><div class="highlight"><pre><span></span>class [[astra::reflect]] SomeClass {...};
-</pre></div>
-</div>
+</li>
+<li><p>Add reflection configuration data by adding <code class="docutils literal notranslate"><span class="pre">ASTRASETUP(&lt;your</span> <span class="pre">class</span> <span class="pre">name</span> <span class="pre">goes</span> <span class="pre">here&gt;)</span></code> within a <code class="docutils literal notranslate"><span class="pre">public</span></code> section of your class</p></li>
+</ol>
 </li>
 <li><p>Reflect!</p>
 <ol class="arabic simple">
-<li><p>Include <code class="docutils literal notranslate"><span class="pre">astra/reflection/reflection.hpp</span></code> and your generated reflection header</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">astra::reflection::reflect(&lt;pointer&gt;)</span></code></p></li>
+<li><p>Include <code class="docutils literal notranslate"><span class="pre">astra/reflection.hpp</span></code> and your generated reflection header in the file where you want to do reflection</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">astra::reflect(&lt;pointer</span> <span class="pre">to</span> <span class="pre">reflectable</span> <span class="pre">object&gt;)</span></code> to get an <code class="docutils literal notranslate"><span class="pre">astra::TypeInfo</span></code> object, which allows you to access reflection functionality.</p></li>
 </ol>
 </li>
 </ol>
