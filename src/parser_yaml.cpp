@@ -373,15 +373,15 @@ namespace astra {
 	}
 
 	void ParserYaml::error(const char* str) {
-		throw std::runtime_error(astra::format("{}; {}", str, getPosition().toString()));
+		throw std::runtime_error(::astra::format("{}; {}", str, getPosition().toString()));
 	}
 
 	void ParserYaml::errorToken(char token) {
-		throw std::runtime_error(astra::format("Unexpected token '{}'; {}", token, getPosition().toString()));
+		throw std::runtime_error(::astra::format("Unexpected token '{}'; {}", token, getPosition().toString()));
 	}
 
 	void ParserYaml::errorMatch() {
-		throw std::runtime_error(astra::format("Cannot match correct type; {}", getPosition().toString()));
+		throw std::runtime_error(::astra::format("Cannot match correct type; {}", getPosition().toString()));
 	}
 
 	bool ParserYaml::parseBool(std::string& str) {

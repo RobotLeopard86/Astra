@@ -47,7 +47,7 @@ struct TypeActions<{{name}}> {
     }
     *reinterpret_cast<{{item.return}}*>(res.rawMut()) = //
     {% endif -%}
-    std::invoke(&{{name}}::{{item.name}}{% if not ("kStatic" in item.acc) %}, static_cast<{{name}}*>(obj){% endif %}{% if length(item.params) != 0 %},{% else %});{% endif %}
+    std::invoke(&{{name}}::{{item.name}}{% if not ("Static" in item.acc) %}, static_cast<{{name}}*>(obj){% endif %}{% if length(item.params) != 0 %},{% else %});{% endif %}
       {% for i in range(length(item.params)) -%}
         a{{loop.index}}{% if not loop.is_last %},
       {% else %});{% endif -%}

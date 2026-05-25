@@ -17,7 +17,7 @@ namespace astra {
 				if(!result->empty()) {
 					*result += '\n';
 				}
-				for(auto&& record : o.getFields(Access::kAll, true)) {
+				for(auto&& record : o.getFields(Access::All, true)) {
 					//indent a row
 					*result += std::string(indention, ' ');
 					//add the field name and trailing whitespace

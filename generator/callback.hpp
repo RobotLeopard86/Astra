@@ -58,17 +58,17 @@ struct JsonBuilder {
 
 		if(const auto* f = dyn_cast<FunctionDecl>(decl)) {
 			if(dyn_cast<FunctionType>(decl->getType())->isConst()) {
-				acc.emplace_back("kConst");
+				acc.emplace_back("Const");
 			}
 			if(f->isStatic()) {
-				acc.emplace_back("kStatic");
+				acc.emplace_back("Static");
 			}
 		} else {
 			if(decl->getType().isConstQualified()) {
-				acc.emplace_back("kConst");
+				acc.emplace_back("Const");
 			}
 			if(isa<VarDecl>(decl)) {
-				acc.emplace_back("kStatic");
+				acc.emplace_back("Static");
 			}
 		}
 		return acc;
@@ -77,13 +77,13 @@ struct JsonBuilder {
 	static inline std::string accessStr(AccessSpecifier access) {
 		switch(access) {
 			case clang::AS_public:
-				return "kPublic";
+				return "Public";
 			case clang::AS_protected:
-				return "kProtected";
+				return "Protected";
 			case clang::AS_private:
-				return "kPrivate";
+				return "Private";
 			default:
-				return "kNone";
+				return "None";
 		}
 	}
 };
@@ -104,7 +104,7 @@ class AstCallback : public MatchFinder::MatchCallback {
 			builder.handleEnum(e);
 
 		} else {
-			throw std::runtime_error("Unrechable case");
+			throw std::runtime_error("Unreachable case!");
 		}
 	}
 

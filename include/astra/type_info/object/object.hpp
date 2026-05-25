@@ -27,8 +27,8 @@ namespace astra {
 
 		void assign(Var var) {
 			if(var.type() != _var.type()) {
-				throw std::runtime_error(format("Cannot assign type: {} to {}",//
-					typeName(var.type()),									   //
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
+					typeName(var.type()),												//
 					typeName(_var.type())));
 			}
 			_var = var;
@@ -46,10 +46,10 @@ namespace astra {
 			if(it != _fields->end()) {
 				return FieldInfo(_var.raw(), &it->second);
 			}
-			throw std::runtime_error(format("There is no field with name: '{}'", name));
+			throw std::runtime_error(::astra::format("There is no field with name: '{}'", name));
 		}
 
-		Fields getFields(Access access = Access::kPublic, bool includeReadonly = false) const {
+		Fields getFields(Access access = Access::Public, bool includeReadonly = false) const {
 			return Fields(_var.raw(), _fields, access, includeReadonly);
 		}
 
@@ -62,12 +62,12 @@ namespace astra {
 					if(it->second.isConst()) {
 						return MethodInfo(_var.raw(), &it->second);
 					}
-					throw std::runtime_error(format("Cannot call non const method '{}' on const object", name));
+					throw std::runtime_error(::astra::format("Cannot call non const method '{}' on const object", name));
 				}
 
 				return MethodInfo(_var.rawMut(), &it->second);
 			}
-			throw std::runtime_error(format("There is no method with name: '{}'", name));
+			throw std::runtime_error(::astra::format("There is no method with name: '{}'", name));
 		}
 
 		Var var() {

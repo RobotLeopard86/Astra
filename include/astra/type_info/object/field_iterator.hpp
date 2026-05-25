@@ -72,15 +72,15 @@ namespace astra {
 		}
 
 		inline bool rightAccess() {
-			return (_it->second.access() & _acc & (Access::kPublic | Access::kProtected | Access::kPrivate)) != Access::kNone;
+			return (_it->second.access() & _acc & (Access::Public | Access::Protected | Access::Private)) != Access::None;
 		}
 
 		//built from Karnaugh Map
 		inline bool rightStaticReadonly() {
 			bool nx0 = !_it->second.isReadonly();
-			bool nx1 = (_it->second.access() & Access::kStatic) == Access::kNone;
+			bool nx1 = (_it->second.access() & Access::Static) == Access::None;
 			bool x2 = _include_readonly;
-			bool x3 = (_acc & Access::kStatic) != Access::kNone;
+			bool x3 = (_acc & Access::Static) != Access::None;
 
 			return (nx0 || x2) && (nx1 || x3);
 		}

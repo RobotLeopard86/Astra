@@ -56,7 +56,7 @@ namespace astra {
 			auto ptr = searchByName(name, 0, size);
 
 			if(ptr == nullptr) {
-				throw std::runtime_error(format("Cannot find the constant '{}'", name));
+				throw std::runtime_error(::astra::format("Cannot find the constant '{}'", name));
 			}
 
 			return ptr->value;

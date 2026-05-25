@@ -68,7 +68,7 @@ namespace astra {
 		}
 
 		inline bool rightAccess() {
-			return (_it->second.access() & _acc & (Access::kPublic | Access::kProtected | Access::kPrivate)) != Access::kNone;
+			return (_it->second.access() & _acc & (Access::Public | Access::Protected | Access::Private)) != Access::None;
 		}
 	};
 

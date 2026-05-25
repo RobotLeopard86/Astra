@@ -21,23 +21,23 @@ namespace astra {
 		}
 
 		bool isConst() const {
-			return (_acc & Access::kConst) != Access::kNone;
+			return (_acc & Access::Const) != Access::None;
 		}
 
 		bool isStatic() const {
-			return (_acc & Access::kStatic) != Access::kNone;
+			return (_acc & Access::Static) != Access::None;
 		}
 
 		bool isPublic() const {
-			return (_acc & Access::kPublic) != Access::kNone;
+			return (_acc & Access::Public) != Access::None;
 		}
 
 		bool isProtected() const {
-			return (_acc & Access::kProtected) != Access::kNone;
+			return (_acc & Access::Protected) != Access::None;
 		}
 
 		bool isPrivate() const {
-			return (_acc & Access::kPrivate) != Access::kNone;
+			return (_acc & Access::Private) != Access::None;
 		}
 
 		Access access() const {

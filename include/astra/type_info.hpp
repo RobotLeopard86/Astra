@@ -90,16 +90,16 @@ namespace astra {
 		}
 
 		enum class Kind {
-			kBool,
-			kInteger,
-			kFloating,
-			kString,
-			kEnum,
-			kObject,
-			kArray,
-			kSequence,
-			kMap,
-			kPointer,
+			Bool,
+			Integer,
+			Floating,
+			String,
+			Enum,
+			Object,
+			Array,
+			Sequence,
+			Map,
+			Pointer,
 		};
 
 		[[nodiscard]] Kind getKind() const {

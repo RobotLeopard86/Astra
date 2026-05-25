@@ -21,8 +21,8 @@ namespace astra {
 		void assign(Var var) override {
 			auto t = TypeId::get(_list);
 			if(var.type() != t) {
-				throw std::runtime_error(format("Cannot assign type: {} to {}",//
-					typeName(var.type()),									   //
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
+					typeName(var.type()),												//
 					typeName(t)));
 			}
 

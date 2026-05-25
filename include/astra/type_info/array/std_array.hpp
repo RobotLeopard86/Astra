@@ -20,8 +20,8 @@ namespace astra {
 		void assign(Var var) override {
 			auto t = TypeId::get(_array);
 			if(var.type() != t) {
-				throw std::runtime_error(format("Cannot assign type: {} to {}",//
-					typeName(var.type()),									   //
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
+					typeName(var.type()),												//
 					typeName(t)));
 			}
 
@@ -77,7 +77,7 @@ namespace astra {
 
 		Var at(std::size_t idx) override {
 			if(idx >= size_v) {
-				throw std::runtime_error(format("Index: {} is out of array's size: {}", idx, size_v));
+				throw std::runtime_error(::astra::format("Index: {} is out of array's size: {}", idx, size_v));
 			}
 
 			return Var(&(*_array)[idx], TypeId::get<T>(), _isConst);

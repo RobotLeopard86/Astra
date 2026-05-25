@@ -63,7 +63,7 @@ namespace astra {
 			throw std::runtime_error("Cannot assign to const value");
 		}
 		if(to.type() != from.type()) {
-			throw std::runtime_error(astra::format("Cannot copy {} to {}", typeName(from.type()), typeName(to.type())));
+			throw std::runtime_error(::astra::format("Cannot copy {} to {}", typeName(from.type()), typeName(to.type())));
 		}
 		ActionsTable::data()[to.type().number()].copy(to.rawMut(), from.raw());
 		return;

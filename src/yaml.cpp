@@ -35,15 +35,15 @@ namespace astra {
 
 		inline bool isComplex(const TypeInfo& info) {
 			switch(info.getKind()) {
-				case TypeInfo::Kind::kObject:
+				case TypeInfo::Kind::Object:
 					[[fallthrough]];
-				case TypeInfo::Kind::kArray:
+				case TypeInfo::Kind::Array:
 					[[fallthrough]];
-				case TypeInfo::Kind::kSequence:
+				case TypeInfo::Kind::Sequence:
 					[[fallthrough]];
-				case TypeInfo::Kind::kMap:
+				case TypeInfo::Kind::Map:
 					return true;
-				case TypeInfo::Kind::kPointer: {
+				case TypeInfo::Kind::Pointer: {
 					auto p = info.asUnsafe<Pointer>();
 					try {
 						Var var = p.getNested();
@@ -78,10 +78,10 @@ namespace astra {
 			auto k = info.getKind();
 
 			switch(k) {
-				case TypeInfo::Kind::kBool:
+				case TypeInfo::Kind::Bool:
 					append(writer, toString(info.asUnsafe<Bool>().get()));
 					break;
-				case TypeInfo::Kind::kInteger: {
+				case TypeInfo::Kind::Integer: {
 					auto i = info.asUnsafe<Integer>();
 					if(i.isSigned()) {
 						append(writer, toString(i.asSigned()));
@@ -89,16 +89,16 @@ namespace astra {
 						append(writer, toString(i.asUnsigned()));
 					}
 				} break;
-				case TypeInfo::Kind::kFloating:
+				case TypeInfo::Kind::Floating:
 					append(writer, doubleToString(info.asUnsafe<Floating>().get()));
 					break;
-				case TypeInfo::Kind::kString:
+				case TypeInfo::Kind::String:
 					append(writer, info.asUnsafe<String>().get());
 					break;
-				case TypeInfo::Kind::kEnum:
+				case TypeInfo::Kind::Enum:
 					append(writer, info.asUnsafe<Enum>().toString());
 					break;
-				case TypeInfo::Kind::kObject: {
+				case TypeInfo::Kind::Object: {
 					const auto& o = info.asUnsafe<Object>();
 
 					bool isFirst = true;
@@ -128,7 +128,7 @@ namespace astra {
 					writer->stepBack(1);
 					break;
 				}
-				case TypeInfo::Kind::kMap: {
+				case TypeInfo::Kind::Map: {
 					//TODO clear this hell
 					const auto& m = info.asUnsafe<Map>();
 
@@ -200,13 +200,13 @@ namespace astra {
 					writer->stepBack(1);
 					break;
 				}
-				case TypeInfo::Kind::kArray:
+				case TypeInfo::Kind::Array:
 					serializeSequence(info.asUnsafe<Array>(), writer, indent);
 					break;
-				case TypeInfo::Kind::kSequence:
+				case TypeInfo::Kind::Sequence:
 					serializeSequence(info.asUnsafe<Sequence>(), writer, indent);
 					break;
-				case TypeInfo::Kind::kPointer: {
+				case TypeInfo::Kind::Pointer: {
 					auto p = info.asUnsafe<Pointer>();
 					try {
 						Var var = p.getNested();

@@ -20,8 +20,8 @@ namespace astra {
 		void assign(Var var) override {
 			auto t = TypeId::get(_value);
 			if(var.type() != t) {
-				throw std::runtime_error(format("Cannot assign type: {} to {}",//
-					typeName(var.type()),									   //
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
+					typeName(var.type()),												//
 					typeName(t)));
 			}
 
@@ -61,7 +61,7 @@ namespace astra {
 			}
 
 			if(std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value) {
-				throw std::runtime_error(format("The value is too big to fit {} byte variable", sizeof(*_value)));
+				throw std::runtime_error(::astra::format("The value is too big to fit {} byte variable", sizeof(*_value)));
 			}
 
 			if(value < 0 && !isSigned()) {
@@ -78,7 +78,7 @@ namespace astra {
 			}
 
 			if(std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value) {
-				throw std::runtime_error(format("The value is too big to fit {} byte variable", sizeof(*_value)));
+				throw std::runtime_error(::astra::format("The value is too big to fit {} byte variable", sizeof(*_value)));
 			}
 
 			*_value = value;

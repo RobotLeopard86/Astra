@@ -44,10 +44,10 @@ namespace astra {
 			auto k = info.getKind();
 
 			switch(k) {
-				case TypeInfo::Kind::kBool:
+				case TypeInfo::Kind::Bool:
 					append(writer, toString(info.asUnsafe<Bool>().get()));
 					break;
-				case TypeInfo::Kind::kInteger: {
+				case TypeInfo::Kind::Integer: {
 					auto i = info.asUnsafe<Integer>();
 					if(i.isSigned()) {
 						append(writer, toString(i.asSigned()));
@@ -55,20 +55,20 @@ namespace astra {
 						append(writer, toString(i.asUnsigned()));
 					}
 				} break;
-				case TypeInfo::Kind::kFloating:
+				case TypeInfo::Kind::Floating:
 					append(writer, doubleToString(info.asUnsafe<Floating>().get()));
 					break;
-				case TypeInfo::Kind::kString:
+				case TypeInfo::Kind::String:
 					append(writer, '"');
 					append(writer, info.asUnsafe<String>().get());
 					append(writer, '"');
 					break;
-				case TypeInfo::Kind::kEnum:
+				case TypeInfo::Kind::Enum:
 					append(writer, '"');
 					append(writer, info.asUnsafe<Enum>().toString());
 					append(writer, '"');
 					break;
-				case TypeInfo::Kind::kObject: {
+				case TypeInfo::Kind::Object: {
 					const auto& o = info.asUnsafe<Object>();
 
 					auto fields = o.getFields();
@@ -92,13 +92,13 @@ namespace astra {
 					append(writer, '}');
 
 				} break;
-				case TypeInfo::Kind::kArray:
+				case TypeInfo::Kind::Array:
 					serializeSequence(info.asUnsafe<Array>(), writer);
 					break;
-				case TypeInfo::Kind::kSequence:
+				case TypeInfo::Kind::Sequence:
 					serializeSequence(info.asUnsafe<Sequence>(), writer);
 					break;
-				case TypeInfo::Kind::kMap: {
+				case TypeInfo::Kind::Map: {
 					const auto& m = info.asUnsafe<Map>();
 
 					if(m.size() == 0) {
@@ -125,7 +125,7 @@ namespace astra {
 					writer->stepBack(1);
 					append(writer, ']');
 				} break;
-				case TypeInfo::Kind::kPointer: {
+				case TypeInfo::Kind::Pointer: {
 					auto p = info.asUnsafe<Pointer>();
 					try {
 						Var var = p.getNested();

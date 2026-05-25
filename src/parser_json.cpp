@@ -251,7 +251,7 @@ namespace astra {
 			} else if(getWord() == val) {
 				parseNext(&valInfo);
 			} else {
-				throw std::runtime_error(astra::format("Got an unexpected field '{}' while parse map; {}",//
+				throw std::runtime_error(::astra::format("Got an unexpected field '{}' while parse map; {}",//
 					getWord(), getPosition().toString()));
 			}
 
@@ -279,7 +279,7 @@ namespace astra {
 			} else if(getWord() == val) {
 				parseNext(&valInfo);
 			} else {
-				throw std::runtime_error(astra::format("Got an unexpected field '{}' while parse map; {}",//
+				throw std::runtime_error(::astra::format("Got an unexpected field '{}' while parse map; {}",//
 					getWord(), getPosition().toString()));
 			}
 
@@ -306,15 +306,15 @@ namespace astra {
 	}
 
 	void ParserJson::error(const char* str) {
-		throw std::runtime_error(astra::format("{}; {}", str, getPosition().toString()));
+		throw std::runtime_error(::astra::format("{}; {}", str, getPosition().toString()));
 	}
 
 	void ParserJson::errorToken(char token) {
-		throw std::runtime_error(astra::format("Unexpected token '{}'; {}", token, getPosition().toString()));
+		throw std::runtime_error(::astra::format("Unexpected token '{}'; {}", token, getPosition().toString()));
 	}
 
 	void ParserJson::errorMatch() {
-		throw std::runtime_error(astra::format("Cannot match correct type; {}", getPosition().toString()));
+		throw std::runtime_error(::astra::format("Cannot match correct type; {}", getPosition().toString()));
 	}
 
 	std::pair<std::string, std::string> ParserJson::parseTag(std::string_view str) {
@@ -347,7 +347,7 @@ namespace astra {
 		if(str == "nan") {
 			return std::nan("");
 		}
-		throw std::runtime_error(astra::format("Expected -inf, inf, nan but {} reached", str));
+		throw std::runtime_error(::astra::format("Expected -inf, inf, nan but {} reached", str));
 	}
 
 	double ParserJson::parseDouble(std::string_view str) {
