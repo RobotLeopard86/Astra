@@ -427,11 +427,11 @@
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">var</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">toString</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">toString</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">toString</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">fromString</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">fromString</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">fromString</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 <span class="w">        </span><span class="p">};</span>
 

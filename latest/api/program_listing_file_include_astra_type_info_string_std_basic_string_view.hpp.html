@@ -425,6 +425,7 @@
 <span class="w">                    </span><span class="n">typeName</span><span class="p">(</span><span class="n">_var</span><span class="p">.</span><span class="n">type</span><span class="p">())));</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="n">_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">var</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cachedVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">_var</span><span class="p">.</span><span class="n">raw</span><span class="p">());</span>
 <span class="w">            </span><span class="k">return</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
@@ -432,11 +433,11 @@
 <span class="w">            </span><span class="n">_var</span><span class="p">.</span><span class="n">unsafeAssign</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">_var</span><span class="p">.</span><span class="n">raw</span><span class="p">());</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">cachedVal</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Trying to set const value&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">//keep it as possible implementation</span>
 <span class="w">            </span><span class="c1">//if (_var.isConst()) {</span>
@@ -452,6 +453,7 @@
 
 <span class="w">      </span><span class="k">private</span><span class="o">:</span>
 <span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">_var</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">cachedVal</span><span class="p">;</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="p">}</span>
