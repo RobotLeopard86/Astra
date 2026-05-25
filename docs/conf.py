@@ -35,12 +35,12 @@ exhale_args = {
     "containmentFolder":     "./api",
     "rootFileName":          "index.rst",
     "doxygenStripFromPath":  "../",
-    "rootFileTitle":         "Astra API Reference (Out of Date)",
+    "rootFileTitle":         "Astra API Reference",
     "createTreeView":        True,
     "exhaleExecutesDoxygen": True,
     "afterTitleDescription": "Welcome to the Astra API documentation. Here, you can find detailed information on Astra's public interface.",
     "exhaleDoxygenStdin": dedent('''
-									INPUT = ../v0/include
+									INPUT = ../include
                                     EXCLUDE_SYMBOLS = std*,YAML*,nlohmann*,libjaguar*,LJ*,ASTRA_API,ASTRA_BUILD
 									HIDE_UNDOC_MEMBERS = YES
 									MAX_INITIALIZER_LINES = 0
