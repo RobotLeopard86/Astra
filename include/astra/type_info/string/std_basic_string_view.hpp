@@ -25,6 +25,7 @@ namespace astra {
 					typeName(_var.type())));
 			}
 			_var = var;
+			cachedVal = *static_cast<const std::string_view*>(_var.raw());
 			return;
 		}
 
@@ -32,11 +33,11 @@ namespace astra {
 			_var.unsafeAssign(ptr);
 		}
 
-		std::string_view get() const override {
-			return *static_cast<const std::string_view*>(_var.raw());
+		const std::string& get() const override {
+			return cachedVal;
 		}
 
-		void set(std::string_view value) override {
+		void set(const std::string&) override {
 			throw std::runtime_error("Trying to set const value");
 			//keep it as possible implementation
 			//if (_var.isConst()) {
@@ -52,6 +53,7 @@ namespace astra {
 
 	  private:
 		Var _var;
+		std::string cachedVal;
 	};
 
 }

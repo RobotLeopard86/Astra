@@ -1,7 +1,10 @@
-#include <sys/types.h>
+#pragma once
 
+#include <sys/types.h>
 #include <algorithm>
 #include <cstddef>
+
+#include "dll.hpp"
 
 struct ASTRA_API ConstexprSort {
 	//Has optimized complexity

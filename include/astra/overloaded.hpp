@@ -1,5 +1,7 @@
 #pragma once
 
+#include "dll.hpp"
+
 namespace astra {
 
 	//a little helper for std::variant

@@ -12,8 +12,8 @@ namespace astra {
 
 		virtual void assign(Var var) = 0;
 		virtual void unsafeAssign(void* ptr) = 0;
-		virtual std::string_view get() const = 0;
-		virtual void set(std::string_view value) = 0;
+		virtual const std::string& get() const = 0;
+		virtual void set(const std::string& value) = 0;
 		virtual Var var() const = 0;
 	};
 

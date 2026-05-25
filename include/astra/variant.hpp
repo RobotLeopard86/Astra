@@ -12,13 +12,13 @@ namespace astra {
 	template<typename... T>
 	struct ASTRA_API Variant {
 
-		template<typename SomeT, typename = std::enable_if_t<!std::is_same_v<SomeT, Variant>, void>>
-		Variant(const SomeT& value)
+		template<typename U, typename = std::enable_if_t<!std::is_same_v<U, Variant>, void>>
+		Variant(const U& value)
 		  : _content(value) {
 		}
 
-		template<typename SomeT, typename = std::enable_if_t<!std::is_same_v<SomeT, Variant>, void>>
-		Variant(SomeT&& value)
+		template<typename U, typename = std::enable_if_t<!std::is_same_v<U, Variant>, void>>
+		Variant(U&& value)
 		  : _content(std::move(value)) {
 		}
 
@@ -37,18 +37,18 @@ namespace astra {
 			return std::visit(Overloaded {functions...}, _content);
 		}
 
-		template<typename SomeT>
+		template<typename U>
 		[[nodiscard]] inline bool is() const {
-			return std::holds_alternative<SomeT>(_content);
+			return std::holds_alternative<U>(_content);
 		}
 
 		[[nodiscard]] inline std::size_t index() const {
 			return _content.index();
 		}
 
-		template<typename SomeT>
-		SomeT& as() {
-			auto pointer = std::get_if<SomeT>(&_content);
+		template<typename U>
+		U& as() {
+			auto pointer = std::get_if<U>(&_content);
 
 			if(pointer == nullptr) {
 				throw std::runtime_error("The instance of requested type doesn't exist");
@@ -56,14 +56,14 @@ namespace astra {
 			return *pointer;
 		}
 
-		template<typename SomeT>
-		inline const SomeT& asUnsafe() const {
-			return std::get<SomeT>(_content);
+		template<typename U>
+		inline const U& asUnsafe() const {
+			return std::get<U>(_content);
 		}
 
-		template<typename SomeT>
-		inline SomeT& asUnsafe() {
-			return std::get<SomeT>(_content);
+		template<typename U>
+		inline U& asUnsafe() {
+			return std::get<U>(_content);
 		}
 
 	  protected:

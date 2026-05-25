@@ -31,21 +31,12 @@ namespace astra {
 			_var.unsafeAssign(ptr);
 		}
 
-		std::string_view get() const override {
+		const std::string& get() const override {
 			return *static_cast<T* const*>(_var.raw());
 		}
 
-		void set(std::string_view value) override {
+		void set(const std::string&) override {
 			throw std::runtime_error("Trying to set const value");
-			//keep it as possible implementation
-			//if (_var.isConst()) {
-			//  throw std::runtime_error("Trying to set const value");
-			//}
-			//if (*value.end() != '\0') {
-			//  throw std::runtime_error("C string value should be null terminated");
-			//}
-			//*static_cast<const T**>(_var.rawMut()) = value.data();
-			//return;
 		}
 
 		Var var() const override {

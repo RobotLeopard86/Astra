@@ -39,11 +39,11 @@ namespace astra {
 			return Var(_value, TypeId::get<T>(), _isConst);
 		}
 
-		std::string_view toString() const override {
+		const std::string& toString() const override {
 			return _all_constants.getName(*_value);
 		}
 
-		void fromString(std::string_view name) override {
+		void fromString(const std::string& name) override {
 			if(_isConst) {
 				throw std::runtime_error("Cannot assign anything to const enum");
 			}

@@ -32,15 +32,15 @@ namespace astra {
 			_var.unsafeAssign(ptr);
 		}
 
-		std::string_view get() const override {
+		const std::string& get() const override {
 			return *static_cast<const std::string*>(_var.raw());
 		}
 
-		void set(std::string_view value) override {
+		void set(const std::string& value) override {
 			if(_var.isConst()) {
 				throw std::runtime_error("Trying to set const value");
 			}
-			*static_cast<std::string*>(_var.rawMut()) = std::string(value);
+			*static_cast<std::string*>(_var.rawMut()) = value;
 			return;
 		}
 

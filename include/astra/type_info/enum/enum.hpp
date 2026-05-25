@@ -29,11 +29,11 @@ namespace astra {
 			return impl()->var();
 		}
 
-		std::string_view toString() const {
+		const std::string& toString() const {
 			return impl()->toString();
 		}
 
-		void fromString(std::string_view name) {
+		void fromString(const std::string& name) {
 			return impl()->fromString(name);
 		};
 

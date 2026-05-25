@@ -37,11 +37,11 @@ namespace astra {
 			impl()->unsafeAssign(ptr);
 		}
 
-		std::string_view get() const {
+		const std::string& get() const {
 			return impl()->get();
 		}
 
-		void set(std::string_view value) {
+		void set(const std::string& value) {
 			return impl()->set(value);
 		}
 
