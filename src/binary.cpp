@@ -1,9 +1,12 @@
 #include "astra/binary.hpp"
 
 #include <iostream>
+#include <memory>
 
 #include "astra/reflection.hpp"
 #include "astra/types/all_types.hpp"// IWYU pragma: keep
+#include "bytestream.hpp"
+#include "libjaguar/Document.hpp"
 
 namespace astra {
 
@@ -186,21 +189,37 @@ namespace astra {
 	}*/
 
 	void binary::serialize(std::vector<uint8_t>& vector, Var var) {
-		TypeInfo info = reflect(var);
-	}
-
-	void binary::serialize(std::ostream& stream, Var var) {
-		TypeInfo info = reflect(var);
+		//Forward via stream
+		obytestream obs(vector);
+		serialize(obs, var);
 	}
 
 	void binary::deserialize(Var var, const std::vector<uint8_t>& vector) {
+		//Forward via stream
+		ibytestream ibs(const_cast<std::vector<uint8_t>&>(vector));
+		deserialize(var, ibs);
+	}
+
+	void binary::serialize(std::ostream& stream, Var var) {
+		//Setup Jaguar document
+		libjaguar::Document jdoc;
+
+		//Business logic...
 		TypeInfo info = reflect(var);
-		return;
+
+		//Export to stream
+		jdoc.ExportTo(stream);
 	}
 
 	void binary::deserialize(Var var, std::istream& stream) {
+		//Parse Jaguar document
+		std::unique_ptr<std::istream> ptr(&stream);
+		libjaguar::Document jdoc(std::move(ptr));
+		jdoc.MaterializeAll();
+		jdoc.ReleaseStream();
+
+		//Business logic...
 		TypeInfo info = reflect(var);
-		return;
 	}
 
 }
