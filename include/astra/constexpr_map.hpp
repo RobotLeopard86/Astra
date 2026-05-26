@@ -28,7 +28,7 @@ namespace astra {
 			}
 
 			T value;
-			std::string_view name;
+			std::string name;
 		};
 
 		constexpr ConstexprMap(std::array<Entry, size>&& array)
@@ -42,7 +42,7 @@ namespace astra {
 			sortNamePtr();
 		}
 
-		std::string_view getName(T value) const {
+		const std::string& getName(T value) const {
 			auto ptr = searchByValue(value, 0, size);
 
 			if(ptr == nullptr) {
@@ -52,7 +52,7 @@ namespace astra {
 			return ptr->name;
 		}
 
-		T getValue(std::string_view name) const {
+		T getValue(const std::string& name) const {
 			auto ptr = searchByName(name, 0, size);
 
 			if(ptr == nullptr) {

@@ -13,13 +13,13 @@
 namespace astra {
 
 	template<typename T>
-	ASTRA_API static typename std::enable_if_t<is_string_v<std::remove_reference_t<T>>, void>//
+	ASTRA_API static typename std::enable_if_t<is_string_v<std::remove_cvref_t<T>>, void>//
 	append(std::string* str, T&& arg) {
 		*str += arg;
 	}
 
 	template<typename T>
-	ASTRA_API static typename std::enable_if_t<std::is_array_v<std::remove_reference_t<T>> &&//
+	ASTRA_API static typename std::enable_if_t<std::is_array_v<std::remove_cvref_t<T>> &&//
 												   std::is_same_v<array_value_t<T>, const char>,
 		void>
 	append(std::string* str, T&& arg) {
@@ -27,16 +27,16 @@ namespace astra {
 	}
 
 	template<typename T>
-	ASTRA_API static typename std::enable_if_t<std::is_integral_v<std::remove_reference_t<T>> &&	   //
-												   !std::is_same_v<std::remove_reference_t<T>, bool> &&//
-												   !std::is_same_v<std::remove_reference_t<T>, char>,
+	ASTRA_API static typename std::enable_if_t<std::is_integral_v<std::remove_cvref_t<T>> &&	   //
+												   !std::is_same_v<std::remove_cvref_t<T>, bool> &&//
+												   !std::is_same_v<std::remove_cvref_t<T>, char>,
 		void>
 	append(std::string* str, T&& arg) {
 		*str += std::to_string(arg);
 	}
 
 	template<typename T>
-	ASTRA_API static typename std::enable_if_t<std::is_floating_point_v<std::remove_reference_t<T>>, void>//
+	ASTRA_API static typename std::enable_if_t<std::is_floating_point_v<std::remove_cvref_t<T>>, void>//
 	append(std::string* str, T&& arg) {
 		AppendBuf buf(str);
 		std::ostream stream(&buf);
@@ -45,19 +45,19 @@ namespace astra {
 	}
 
 	template<typename T>
-	static typename std::enable_if_t<std::is_same_v<std::remove_reference_t<T>, bool>, void>//
+	static typename std::enable_if_t<std::is_same_v<std::remove_cvref_t<T>, bool>, void>//
 		ASTRA_API append(std::string* str, T&& arg) {
 		*str += arg ? "true" : "false";
 	}
 
 	template<typename T>
-	ASTRA_API static typename std::enable_if_t<std::is_same_v<std::remove_reference_t<T>, char>, void>//
+	ASTRA_API static typename std::enable_if_t<std::is_same_v<std::remove_cvref_t<T>, char>, void>//
 	append(std::string* str, T&& arg) {
 		*str += arg;
 	}
 
 	template<typename T>
-	ASTRA_API static typename std::enable_if_t<std::is_same_v<std::remove_reference_t<T>, std::filesystem::path>, void>//
+	ASTRA_API static typename std::enable_if_t<std::is_same_v<std::remove_cvref_t<T>, std::filesystem::path>, void>//
 	append(std::string* str, T&& arg) {
 		*str += arg.string();
 	}
