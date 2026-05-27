@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstddef>
+#include <stdexcept>
+#include <type_traits>
 
 #include "astra/actions_table.hpp"
 #include "astra/names.hpp"
@@ -30,12 +32,28 @@ namespace astra {
 		static void nop(void* p) {
 		}
 
-		static void copy(void* to, const void* from) {
+		static void copy(void* to, const void* from)
+			requires std::is_copy_constructible_v<T> && std::is_copy_assignable_v<T>
+		{
 			*static_cast<T*>(to) = *static_cast<const T*>(from);
 		}
 
-		static void move(void* to, void* from) {
+		static void move(void* to, void* from)
+			requires std::is_copy_constructible_v<T> && std::is_copy_assignable_v<T>
+		{
 			*static_cast<T*>(to) = std::move(*static_cast<T*>(from));
+		}
+
+		static void copy(void* to, const void* from)
+			requires(!std::is_copy_constructible_v<T> || !std::is_copy_assignable_v<T>)
+		{
+			throw std::runtime_error("Cannot copy a non-copyable class!");
+		}
+
+		static void move(void* to, void* from)
+			requires(!std::is_copy_constructible_v<T> || !std::is_copy_assignable_v<T>)
+		{
+			throw std::runtime_error("Cannot move a non-movable class!");
 		}
 	};
 

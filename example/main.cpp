@@ -1,4 +1,5 @@
 #include "astra/binary.hpp"
+#include "complicatedtype.hpp"
 #include "data/car.hpp"
 #include "data/colors.hpp"
 #include "data/suv.hpp"
@@ -97,9 +98,24 @@ int main() {
 			  << astra::json::toString(suvAsCar) << std::endl;
 	std::cout << "As you can see, it still has the SUV information." << std::endl;
 
-	//Dump to bin
-	std::ofstream ofs("./suv.xj", std::ios::binary);
-	astra::binary::toStream(ofs, &suv);
+	//Write out the complicated type to binary
+	std::cout << "For my last magic trick, I will write a very complicated type to a binary file!" << std::endl;
+	ExampleNamespace::ComplicatedType complicated;
+	complicated.myString = "Lorem impsum sit dolor amet i do not know how to write lorem ipsum ahhhhhhh";
+	complicated.ptrToAnotherEnum = std::make_unique<ExampleNamespace::ComplicatedType::AnotherEnum>(ExampleNamespace::ComplicatedType::AnotherEnum::ArrozConPollo);
+	complicated.carrrrr = std::make_unique<std::shared_ptr<Car>>(std::make_shared<Car>());
+	(*complicated.carrrrr)->brand = "Toronto Motors";
+	(*complicated.carrrrr)->owner = "Lord Moldevort";
+	(*complicated.carrrrr)->hasInsurance = false;
+	(*complicated.carrrrr)->hasSatRadio = false;
+	(*complicated.carrrrr)->year = 1995;
+	(*complicated.carrrrr)->refinish(Color::Purple);
+	complicated.someMap[Color::Red] = {{1, 2, 3, 4, 5}};
+	complicated.someMap[Color::Orange] = {{10, 9, 8, 7, 6}};
+	complicated.someMap[Color::Green] = {{31, 41, 59, 26, 53}};
+	complicated.someMap[Color::Black] = {{1, 7, 7, 6, 0}};
+	std::ofstream ofs("./complicated.xj", std::ios::binary);
+	astra::binary::toStream(ofs, &complicated);
 	ofs.close();
 
 	//Done

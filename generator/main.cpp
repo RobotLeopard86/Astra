@@ -79,9 +79,6 @@ int main(int argc, char* argv[]) {
 	//Spinner to make the wait bearable
 	std::unique_ptr<jms::Spinner> spinner;
 	if(!quiet) {
-#ifdef _DEBUG
-		std::cout << "\x1b[1;93mWarning: \x1b[0mYou are running a debug build of Astra! Source file parsing can be very slow!" << std::endl;
-#endif
 		spinner = std::make_unique<jms::Spinner>("Generating reflection data...", jms::dots);
 		spinner->start();
 	}
@@ -95,7 +92,7 @@ int main(int argc, char* argv[]) {
 	//If the output directory doesn't exist, we need to make it, or if it exists we need to remove old Astra contents
 	std::filesystem::path out(outDir);
 	if(std::filesystem::exists(out)) {
-		if(std::filesystem::exists(out / "astra_types")) std::filesystem::remove_all(out / "astra_types");
+		if(std::filesystem::exists(out / "astra_generated")) std::filesystem::remove_all(out / "astra_generated");
 		std::filesystem::remove(out / (project + ".astra.hpp"));
 		std::filesystem::remove(out / (project + ".astra.cpp"));
 	}

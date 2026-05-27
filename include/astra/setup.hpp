@@ -19,11 +19,11 @@ struct ASTRA_API astragen_reflectable_check {
 #define ASTRA_REFLECT [[clang::annotate("astra.reflect")]]
 #define ASTRA_IGNORE [[clang::annotate("astra.ignore")]]
 #define ASTRA_ALIAS(x) [[clang::annotate("astra.alias:" x)]]
-#define ASTRASETUP(x)                                                     \
-	friend struct astra::TypeActions<x>;                                  \
-	ASTRA_IGNORE virtual astra::TypeId ASTRA__gettypeid() const override; \
-	ASTRA_IGNORE void forceRCInstantiate() {                              \
-		static_assert(astragen_reflectable_check<x>::value);              \
+#define ASTRASETUP(x)                                                                                                                       \
+	friend struct astra::TypeActions<x>;                                                                                                    \
+	ASTRA_IGNORE virtual astra::TypeId ASTRA__gettypeid() const override;                                                                   \
+	ASTRA_IGNORE void forceRCInstantiate() {                                                                                                \
+		static_assert(astragen_reflectable_check<x>::value, "Cannot reflect a type that does not meet the conditions for reflectability!"); \
 	}
 #else
 #define ASTRA_REFLECT
