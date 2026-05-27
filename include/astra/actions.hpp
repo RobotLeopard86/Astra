@@ -8,7 +8,7 @@ namespace astra {
 
 	struct ASTRA_API Actions {
 		constexpr Actions(TypeInfo (*reflect)(void*, bool),//
-			std::string_view (*getName)(),				   //
+			const std::string& (*getName)(),			   //
 			std::size_t (*size)(),						   //
 			void (*construct)(void* p),					   //
 			void (*destroy)(void* p),					   //
@@ -29,7 +29,7 @@ namespace astra {
 		//there is no reason to move the struct
 
 		TypeInfo (*reflect)(void*, bool);
-		std::string_view (*typeName)();
+		const std::string& (*typeName)();
 		std::size_t (*sizeOf)();
 		void (*construct)(void* p);
 		void (*destroy)(void* p);

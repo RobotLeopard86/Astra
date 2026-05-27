@@ -12,7 +12,7 @@ namespace astra {
 
 	template<typename T>
 	struct ASTRA_API CommonActions {
-		static std::string_view typeName() {
+		static const std::string& typeName() {
 			static auto name = Names<T>::get();
 			return name;
 		}
@@ -29,7 +29,7 @@ namespace astra {
 			static_cast<T*>(p)->~T();
 		}
 
-		static void nop(void* p) {
+		static void nop(void*) {
 		}
 
 		static void copy(void* to, const void* from)
@@ -44,13 +44,13 @@ namespace astra {
 			*static_cast<T*>(to) = std::move(*static_cast<T*>(from));
 		}
 
-		static void copy(void* to, const void* from)
+		static void copy(void*, const void*)
 			requires(!std::is_copy_constructible_v<T> || !std::is_copy_assignable_v<T>)
 		{
 			throw std::runtime_error("Cannot copy a non-copyable class!");
 		}
 
-		static void move(void* to, void* from)
+		static void move(void*, void*)
 			requires(!std::is_copy_constructible_v<T> || !std::is_copy_assignable_v<T>)
 		{
 			throw std::runtime_error("Cannot move a non-movable class!");

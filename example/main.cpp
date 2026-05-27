@@ -1,5 +1,4 @@
-#include "astra/binary.hpp"
-#include "complicatedtype.hpp"
+#include "data/complicatedtype.hpp"
 #include "data/car.hpp"
 #include "data/colors.hpp"
 #include "data/suv.hpp"
@@ -8,6 +7,7 @@
 
 #include "astra/reflection.hpp"
 #include "astra/json.hpp"
+#include "astra/binary.hpp"
 #include "astra/serialized_convert.hpp"
 
 #include <fstream>

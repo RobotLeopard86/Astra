@@ -106,7 +106,7 @@ namespace astra {
 			return static_cast<Kind>(index());
 		}
 
-		[[nodiscard]] std::string_view getKindStr() const {
+		[[nodiscard]] std::string getKindStr() const {
 			return match([](auto&& v) { return Names<decltype(v)>::get(); });
 		}
 

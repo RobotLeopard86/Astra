@@ -162,8 +162,8 @@ namespace astra {
 		}
 	}
 
-	void json::serialize(std::string* str, Var var) {
-		StringWriter stringW(str);
+	void json::serialize(std::string& str, Var var) {
+		StringWriter stringW(&str);
 		auto info = reflect(var);
 
 		json_impl::serializeRecursive(&stringW, info);

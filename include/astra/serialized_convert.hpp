@@ -8,7 +8,7 @@ namespace astra {
 	struct ASTRA_API converters {
 		struct ASTRA_API toJson {
 			template<Reflectable T>
-			static std::string fromYamlString(std::string_view str) {
+			static std::string fromYamlString(const std::string& str) {
 				T yamlOut;
 				try {
 					yamlOut = yaml::fromString<T>(str);
@@ -57,7 +57,7 @@ namespace astra {
 		};
 		struct ASTRA_API toYaml {
 			template<Reflectable T>
-			static std::string fromJsonString(std::string_view str) {
+			static std::string fromJsonString(const std::string& str) {
 				T jsonOut;
 				try {
 					jsonOut = json::fromString<T>(str);
@@ -106,7 +106,7 @@ namespace astra {
 		};
 		struct ASTRA_API toBinary {
 			template<Reflectable T>
-			static std::vector<uint8_t> fromJsonString(std::string_view str) {
+			static std::vector<uint8_t> fromJsonString(const std::string& str) {
 				T jsonOut;
 				try {
 					jsonOut = json::fromString<T>(str);
@@ -130,7 +130,7 @@ namespace astra {
 			}
 
 			template<Reflectable T>
-			static std::vector<uint8_t> fromYamlString(std::string_view str) {
+			static std::vector<uint8_t> fromYamlString(const std::string& str) {
 				T yamlOut;
 				try {
 					yamlOut = yaml::fromString<T>(str);

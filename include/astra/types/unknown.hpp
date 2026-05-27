@@ -12,8 +12,9 @@ namespace astra {
 			throw std::runtime_error("Cannot reflect a value with unknown type");
 		}
 
-		static std::string_view typeName() {
-			return "unknown";
+		static const std::string& typeName() {
+			static std::string name = "unknowntype";
+			return name;
 		}
 
 		static std::size_t sizeOf() {

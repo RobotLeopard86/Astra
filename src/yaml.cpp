@@ -249,8 +249,8 @@ namespace astra {
 		}
 	}
 
-	void yaml::serialize(std::string* str, Var var) {
-		StringWriter stringW(str);
+	void yaml::serialize(std::string& str, Var var) {
+		StringWriter stringW(&str);
 		auto info = reflect(var);
 
 		yaml_impl::serializeRecursive(&stringW, info, 0);

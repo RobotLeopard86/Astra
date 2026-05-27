@@ -11,85 +11,8 @@
 #include "astra/type_info/sequence/sequence.hpp"
 #include "astra/types/all_types.hpp"// IWYU pragma: keep
 #include "bytestream.hpp"
-#include "libjaguar/Document.hpp"
 
 namespace astra {
-
-	/*template<typename SeqT>
-	inline void serializeSequence(const SeqT& seq, GroupWriter* writer);
-
-	inline void serializeRecursive(GroupWriter* writer, const TypeInfo& info) {
-		auto k = info.getKind();
-
-		switch(k) {
-			case TypeInfo::Kind::kObject:
-				for(auto&& record : info.asUnsafe<Object>().getFields()) {
-					//skip name in record.first;
-					auto fieldInfo = reflect(record.second.var());
-					serializeRecursive(writer, fieldInfo);
-				}
-				break;
-			case TypeInfo::Kind::kBool:
-				writer->write(info.asUnsafe<Bool>().get());
-				break;
-			case TypeInfo::Kind::kInteger: {
-				auto i = info.asUnsafe<Integer>();
-				writer->write(i.var().raw(), i.size(), i.isSigned());
-			break; }
-			case TypeInfo::Kind::kFloating:
-				writer->write(info.asUnsafe<Floating>().get());
-				break;
-			case TypeInfo::Kind::kString:
-				writer->write(info.asUnsafe<String>().get());
-				break;
-			case TypeInfo::Kind::kEnum:
-				writer->write(info.asUnsafe<Enum>().toString());
-				break;
-			case TypeInfo::Kind::kMap: {
-				auto m = info.asUnsafe<Map>();
-
-				writer->write(m.size());
-
-				auto keyInfo = reflect(Var(nullptr, m.keyType(), false));
-				auto valInfo = reflect(Var(nullptr, m.valType(), false));
-				m.unsafeForEach([writer, &keyInfo, &valInfo](void* key, void* val) {
-					keyInfo.unsafeAssign(key);
-					serializeRecursive(writer, keyInfo);
-
-					valInfo.unsafeAssign(val);
-					serializeRecursive(writer, valInfo);
-				});
-			break; }
-			case TypeInfo::Kind::kArray:
-				serializeSequence(info.asUnsafe<Array>(), writer);
-				break;
-			case TypeInfo::Kind::kSequence:
-				serializeSequence(info.asUnsafe<Sequence>(), writer);
-				break;
-			case TypeInfo::Kind::kPointer: {
-				auto p = info.asUnsafe<Pointer>();
-				try {
-					Var var = p.getNested();
-					auto info = reflect(var);
-					serializeRecursive(writer, info);
-				} catch(...) {
-					writer->writeNull();
-				}
-			break; }
-		}
-	}
-
-	template<typename SeqT>
-	inline void serializeSequence(const SeqT& seq, GroupWriter* writer) {
-		writer->write(seq.size());
-
-		auto info = reflect(Var(nullptr, seq.nestedType(), false));
-		seq.unsafeForEach([writer, &info](void* ptr) {
-			info.unsafeAssign(ptr);
-			serializeRecursive(writer, info);
-		});
-	}*/
-
 	/*inline void deserializeRecursive(TypeInfo* info, const GroupReader& reader) {
 		auto k = info->getKind();
 
@@ -203,6 +126,24 @@ namespace astra {
 		//Forward via stream
 		ibytestream ibs(const_cast<std::vector<uint8_t>&>(vector));
 		deserialize(var, ibs);
+	}
+
+	void binary::serialize(std::ostream& stream, Var var) {
+		//Forward via Jaguar document
+		libjaguar::Document jdoc;
+		serialize(jdoc, var);
+
+		//Export to stream
+		jdoc.ExportTo(stream);
+	}
+
+	void binary::deserialize(Var var, std::istream& stream) {
+		//Forward via document
+		std::unique_ptr<std::istream> ptr(&stream);
+		libjaguar::Document doc(std::move(ptr));
+		doc.MaterializeAll();
+		doc.ReleaseStream();
+		deserialize(var, doc);
 	}
 
 	static void writeToDocument(libjaguar::Document& doc, const std::string& path, const TypeInfo& info) {
@@ -455,26 +396,12 @@ namespace astra {
 		}
 	}
 
-	void binary::serialize(std::ostream& stream, Var var) {
-		//Setup Jaguar document
-		libjaguar::Document jdoc;
-
-		//Business logic: serialize into document
-		writeToDocument(jdoc, "root", reflect(var));
-
-		//Export to stream
-		jdoc.ExportTo(stream);
+	void binary::serialize(libjaguar::Document& doc, Var var) {
+		writeToDocument(doc, "root", reflect(var));
 	}
 
-	void binary::deserialize(Var var, std::istream& stream) {
-		//Parse Jaguar document
-		std::unique_ptr<std::istream> ptr(&stream);
-		libjaguar::Document jdoc(std::move(ptr));
-		jdoc.MaterializeAll();
-		jdoc.ReleaseStream();
-
-		//Business logic...
-		TypeInfo info = reflect(var);
+	void binary::deserialize(Var var, libjaguar::Document& doc) {
+		//TODO: business logic
 	}
 
 }
