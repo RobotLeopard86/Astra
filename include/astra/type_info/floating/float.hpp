@@ -36,7 +36,7 @@ namespace astra {
 			return Var(_value, _isConst);
 		}
 
-		std::size_t size() override {
+		std::size_t size() const override {
 			return sizeof(T);
 		}
 

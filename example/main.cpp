@@ -1,3 +1,4 @@
+#include "astra/binary.hpp"
 #include "data/car.hpp"
 #include "data/colors.hpp"
 #include "data/suv.hpp"
@@ -8,6 +9,7 @@
 #include "astra/json.hpp"
 #include "astra/serialized_convert.hpp"
 
+#include <fstream>
 #include <iostream>
 
 int main() {
@@ -94,6 +96,11 @@ int main() {
 	std::cout << "Serializing the reflected Car pointer gives us:\n"
 			  << astra::json::toString(suvAsCar) << std::endl;
 	std::cout << "As you can see, it still has the SUV information." << std::endl;
+
+	//Dump to bin
+	std::ofstream ofs("./suv.xj", std::ios::binary);
+	astra::binary::toStream(ofs, &suv);
+	ofs.close();
 
 	//Done
 	std::cout << "Thanks for checking out the Astra demo!" << std::endl;

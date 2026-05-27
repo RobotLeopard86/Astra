@@ -6,6 +6,7 @@
 #include "astra/reflection.hpp"
 #include "astra/type_info.hpp"
 #include "astra/type_info/array/array.hpp"
+#include "astra/type_info/floating/floating.hpp"
 #include "astra/type_info/pointer/pointer.hpp"
 #include "astra/type_info/sequence/sequence.hpp"
 #include "astra/types/all_types.hpp"// IWYU pragma: keep
@@ -212,18 +213,47 @@ namespace astra {
 				break;
 			}
 			case TypeInfo::Kind::Integer: {
-				if(info.asUnsafe<Integer>().isSigned()) {
-					int64_t val = info.asUnsafe<Integer>().asSigned();
-					doc.SetOrCreateValue(path, val);
+				Integer intInfo = info.asUnsafe<Integer>();
+				if(intInfo.isSigned()) {
+					switch(intInfo.size()) {
+						case sizeof(int8_t):
+							doc.SetOrCreateValue<int8_t>(path, (int8_t)intInfo.asSigned());
+							break;
+						case sizeof(int16_t):
+							doc.SetOrCreateValue<int16_t>(path, (int16_t)intInfo.asSigned());
+							break;
+						case sizeof(int32_t):
+							doc.SetOrCreateValue<int32_t>(path, (int32_t)intInfo.asSigned());
+							break;
+						case sizeof(int64_t):
+							doc.SetOrCreateValue<int64_t>(path, intInfo.asSigned());
+							break;
+					}
 				} else {
-					uint64_t val = info.asUnsafe<Integer>().asUnsigned();
-					doc.SetOrCreateValue(path, val);
+					switch(intInfo.size()) {
+						case sizeof(uint8_t):
+							doc.SetOrCreateValue<uint8_t>(path, (uint8_t)intInfo.asUnsigned());
+							break;
+						case sizeof(uint16_t):
+							doc.SetOrCreateValue<uint16_t>(path, (uint16_t)intInfo.asUnsigned());
+							break;
+						case sizeof(uint32_t):
+							doc.SetOrCreateValue<uint32_t>(path, (uint32_t)intInfo.asUnsigned());
+							break;
+						case sizeof(uint64_t):
+							doc.SetOrCreateValue<uint64_t>(path, intInfo.asUnsigned());
+							break;
+					}
 				}
 				break;
 			}
 			case TypeInfo::Kind::Floating: {
-				double val = info.asUnsafe<Floating>().get();
-				doc.SetOrCreateValue(path, val);
+				Floating floatInfo = info.asUnsafe<Floating>();
+				if(floatInfo.size() == sizeof(float)) {
+					doc.SetOrCreateValue<float>(path, (float)floatInfo.get());
+				} else {
+					doc.SetOrCreateValue<double>(path, floatInfo.get());
+				}
 				break;
 			}
 			case TypeInfo::Kind::String: {
@@ -273,14 +303,44 @@ namespace astra {
 						doc.CreateValue<std::vector<bool>>(path);
 						break;
 					case TypeInfo::Kind::Integer:
-						if(info.asUnsafe<Integer>().isSigned()) {
-							doc.CreateValue<std::vector<int64_t>>(path);
+						if(auto intInfo = nestedInfo.asUnsafe<Integer>(); intInfo.isSigned()) {
+							switch(intInfo.size()) {
+								case sizeof(int8_t):
+									doc.CreateValue<std::vector<int8_t>>(path);
+									break;
+								case sizeof(int16_t):
+									doc.CreateValue<std::vector<int16_t>>(path);
+									break;
+								case sizeof(int32_t):
+									doc.CreateValue<std::vector<int32_t>>(path);
+									break;
+								case sizeof(int64_t):
+									doc.CreateValue<std::vector<int64_t>>(path);
+									break;
+							}
 						} else {
-							doc.CreateValue<std::vector<uint64_t>>(path);
+							switch(intInfo.size()) {
+								case sizeof(uint8_t):
+									doc.CreateValue<std::vector<uint8_t>>(path, true);
+									break;
+								case sizeof(uint16_t):
+									doc.CreateValue<std::vector<uint16_t>>(path);
+									break;
+								case sizeof(uint32_t):
+									doc.CreateValue<std::vector<uint32_t>>(path);
+									break;
+								case sizeof(uint64_t):
+									doc.CreateValue<std::vector<uint64_t>>(path);
+									break;
+							}
 						}
 						break;
 					case TypeInfo::Kind::Floating:
-						doc.CreateValue<std::vector<double>>(path);
+						if(nestedInfo.asUnsafe<Floating>().size() == sizeof(float)) {
+							doc.CreateValue<std::vector<float>>(path);
+						} else {
+							doc.CreateValue<std::vector<double>>(path);
+						}
 						break;
 					case TypeInfo::Kind::String:
 					case TypeInfo::Kind::Enum:
@@ -320,14 +380,44 @@ namespace astra {
 						doc.CreateValue<std::vector<bool>>(path);
 						break;
 					case TypeInfo::Kind::Integer:
-						if(info.asUnsafe<Integer>().isSigned()) {
-							doc.CreateValue<std::vector<int64_t>>(path);
+						if(auto intInfo = nestedInfo.asUnsafe<Integer>(); intInfo.isSigned()) {
+							switch(intInfo.size()) {
+								case sizeof(int8_t):
+									doc.CreateValue<std::vector<int8_t>>(path);
+									break;
+								case sizeof(int16_t):
+									doc.CreateValue<std::vector<int16_t>>(path);
+									break;
+								case sizeof(int32_t):
+									doc.CreateValue<std::vector<int32_t>>(path);
+									break;
+								case sizeof(int64_t):
+									doc.CreateValue<std::vector<int64_t>>(path);
+									break;
+							}
 						} else {
-							doc.CreateValue<std::vector<uint64_t>>(path);
+							switch(intInfo.size()) {
+								case sizeof(uint8_t):
+									doc.CreateValue<std::vector<uint8_t>>(path, true);
+									break;
+								case sizeof(uint16_t):
+									doc.CreateValue<std::vector<uint16_t>>(path);
+									break;
+								case sizeof(uint32_t):
+									doc.CreateValue<std::vector<uint32_t>>(path);
+									break;
+								case sizeof(uint64_t):
+									doc.CreateValue<std::vector<uint64_t>>(path);
+									break;
+							}
 						}
 						break;
 					case TypeInfo::Kind::Floating:
-						doc.CreateValue<std::vector<double>>(path);
+						if(nestedInfo.asUnsafe<Floating>().size() == sizeof(float)) {
+							doc.CreateValue<std::vector<float>>(path);
+						} else {
+							doc.CreateValue<std::vector<double>>(path);
+						}
 						break;
 					case TypeInfo::Kind::String:
 					case TypeInfo::Kind::Enum:
