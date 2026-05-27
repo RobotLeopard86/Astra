@@ -88,7 +88,8 @@ namespace astra {
 					} else {
 						append(writer, toString(i.asUnsigned()));
 					}
-				} break;
+					break;
+				}
 				case TypeInfo::Kind::Floating:
 					append(writer, doubleToString(info.asUnsafe<Floating>().get()));
 					break;
@@ -215,7 +216,8 @@ namespace astra {
 					} catch(...) {
 						append(writer, "null");
 					}
-				} break;
+					break;
+				}
 			}
 		}
 

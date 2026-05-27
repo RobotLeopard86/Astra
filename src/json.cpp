@@ -54,7 +54,8 @@ namespace astra {
 					} else {
 						append(writer, toString(i.asUnsigned()));
 					}
-				} break;
+					break;
+				}
 				case TypeInfo::Kind::Floating:
 					append(writer, doubleToString(info.asUnsafe<Floating>().get()));
 					break;
@@ -91,7 +92,8 @@ namespace astra {
 					writer->stepBack(1);
 					append(writer, '}');
 
-				} break;
+					break;
+				}
 				case TypeInfo::Kind::Array:
 					serializeSequence(info.asUnsafe<Array>(), writer);
 					break;
@@ -124,7 +126,8 @@ namespace astra {
 					});
 					writer->stepBack(1);
 					append(writer, ']');
-				} break;
+					break;
+				}
 				case TypeInfo::Kind::Pointer: {
 					auto p = info.asUnsafe<Pointer>();
 					try {
@@ -134,7 +137,8 @@ namespace astra {
 					} catch(...) {
 						append(writer, "null");
 					}
-				} break;
+					break;
+				}
 			}
 		}
 
