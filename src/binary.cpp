@@ -4,6 +4,10 @@
 #include <memory>
 
 #include "astra/reflection.hpp"
+#include "astra/type_info.hpp"
+#include "astra/type_info/array/array.hpp"
+#include "astra/type_info/pointer/pointer.hpp"
+#include "astra/type_info/sequence/sequence.hpp"
 #include "astra/types/all_types.hpp"// IWYU pragma: keep
 #include "bytestream.hpp"
 #include "libjaguar/Document.hpp"
@@ -30,7 +34,7 @@ namespace astra {
 			case TypeInfo::Kind::kInteger: {
 				auto i = info.asUnsafe<Integer>();
 				writer->write(i.var().raw(), i.size(), i.isSigned());
-			} break;
+			break; }
 			case TypeInfo::Kind::kFloating:
 				writer->write(info.asUnsafe<Floating>().get());
 				break;
@@ -54,7 +58,7 @@ namespace astra {
 					valInfo.unsafeAssign(val);
 					serializeRecursive(writer, valInfo);
 				});
-			} break;
+			break; }
 			case TypeInfo::Kind::kArray:
 				serializeSequence(info.asUnsafe<Array>(), writer);
 				break;
@@ -70,7 +74,7 @@ namespace astra {
 				} catch(...) {
 					writer->writeNull();
 				}
-			} break;
+			break; }
 		}
 	}
 
@@ -106,7 +110,7 @@ namespace astra {
 				} else {
 					i.setUnsigned(reader.readUnsigned());
 				}
-			} break;
+			break; }
 			case TypeInfo::Kind::kFloating:
 				info->asUnsafe<Floating>().set(reader.readFloat());
 				break;
@@ -137,7 +141,7 @@ namespace astra {
 
 					m.insert(keyBox.var(), valBox.var());
 				}
-			} break;
+			break; }
 			case TypeInfo::Kind::kArray: {
 				auto a = info->asUnsafe<Array>();
 				auto n = reader.readUnsigned();
@@ -152,7 +156,7 @@ namespace astra {
 					auto entryInfo = reflect(entry);
 					deserializeRecursive(&entryInfo, reader);
 				});
-			} break;
+			break; }
 			case TypeInfo::Kind::kSequence: {
 				auto s = info->asUnsafe<Sequence>();
 				s.clear();
@@ -168,7 +172,7 @@ namespace astra {
 
 					s.push(entryBox.var());
 				}
-			} break;
+			break; }
 			case TypeInfo::Kind::kPointer: {
 				if(reader.isNull()) {
 					reader.readUnsigned();//skip a byte
@@ -184,7 +188,7 @@ namespace astra {
 					TypeInfo nestedInfo = reflect(p.var());
 					deserializeRecursive(&nestedInfo, reader);
 				}
-			} break;
+			break; }
 		}
 	}*/
 
@@ -200,12 +204,173 @@ namespace astra {
 		deserialize(var, ibs);
 	}
 
+	static void writeToDocument(libjaguar::Document& doc, const std::string& path, const TypeInfo& info) {
+		switch(info.getKind()) {
+			case TypeInfo::Kind::Bool: {
+				bool val = info.asUnsafe<Bool>().get();
+				doc.SetOrCreateValue(path, val);
+				break;
+			}
+			case TypeInfo::Kind::Integer: {
+				if(info.asUnsafe<Integer>().isSigned()) {
+					int64_t val = info.asUnsafe<Integer>().asSigned();
+					doc.SetOrCreateValue(path, val);
+				} else {
+					uint64_t val = info.asUnsafe<Integer>().asUnsigned();
+					doc.SetOrCreateValue(path, val);
+				}
+				break;
+			}
+			case TypeInfo::Kind::Floating: {
+				double val = info.asUnsafe<Floating>().get();
+				doc.SetOrCreateValue(path, val);
+				break;
+			}
+			case TypeInfo::Kind::String: {
+				std::string val = info.asUnsafe<String>().get();
+				doc.SetOrCreateValue(path, val);
+				break;
+			}
+			case TypeInfo::Kind::Enum: {
+				std::string val = info.asUnsafe<Enum>().toString();
+				doc.SetOrCreateValue(path, val);
+				break;
+			}
+			case TypeInfo::Kind::Object: {
+				const auto& obj = info.asUnsafe<Object>();
+				doc.CreateValue<libjaguar::UnstructuredObjTag>(path);
+				for(const auto& record : obj.getFields()) {
+					std::string subpath = path + "." + std::string(record.first);
+					writeToDocument(doc, subpath, reflect(record.second.var()));
+				}
+				break;
+			}
+			case TypeInfo::Kind::Map: {
+				const auto& m = info.asUnsafe<Map>();
+				size_t idx = 0;
+				doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
+				m.forEach([&](Var key, Var val) {
+					std::string subpath = path + "[" + std::to_string(idx) + "]";
+					doc.CreateValue<libjaguar::UnstructuredObjTag>(subpath);
+					writeToDocument(doc, subpath + ".key", reflect(key));
+					writeToDocument(doc, subpath + ".val", reflect(val));
+					++idx;
+				});
+				break;
+			}
+			case TypeInfo::Kind::Array: {
+				const auto& arr = info.asUnsafe<Array>();
+				TypeInfo nestedInfo = reflect(Var(nullptr, arr.nestedType(), false));
+				while(nestedInfo.getKind() == TypeInfo::Kind::Pointer) {
+					try {
+						nestedInfo = reflect(nestedInfo.asUnsafe<Pointer>().getNested());
+					} catch(...) {
+						return;
+					}
+				}
+				switch(nestedInfo.getKind()) {
+					case TypeInfo::Kind::Bool:
+						doc.CreateValue<std::vector<bool>>(path);
+						break;
+					case TypeInfo::Kind::Integer:
+						if(info.asUnsafe<Integer>().isSigned()) {
+							doc.CreateValue<std::vector<int64_t>>(path);
+						} else {
+							doc.CreateValue<std::vector<uint64_t>>(path);
+						}
+						break;
+					case TypeInfo::Kind::Floating:
+						doc.CreateValue<std::vector<double>>(path);
+						break;
+					case TypeInfo::Kind::String:
+					case TypeInfo::Kind::Enum:
+						doc.CreateValue<std::vector<std::string>>(path);
+						break;
+					case TypeInfo::Kind::Array:
+					case TypeInfo::Kind::Sequence:
+					case TypeInfo::Kind::Map:
+					case TypeInfo::Kind::Object:
+						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
+						if(nestedInfo.getKind() == TypeInfo::Kind::Object || nestedInfo.getKind() == TypeInfo::Kind::Map) break;
+						writeToDocument(doc, path + ".payload", nestedInfo);
+						break;
+					default: return;
+				}
+				size_t idx = 0;
+				arr.unsafeForEach([&](void* ptr) {
+					TypeInfo nestedInfo = reflect(Var(nullptr, arr.nestedType(), false));
+					nestedInfo.unsafeAssign(ptr);
+					writeToDocument(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
+					++idx;
+				});
+				break;
+			}
+			case TypeInfo::Kind::Sequence: {
+				const auto& seq = info.asUnsafe<Sequence>();
+				TypeInfo nestedInfo = reflect(Var(nullptr, seq.nestedType(), false));
+				while(nestedInfo.getKind() == TypeInfo::Kind::Pointer) {
+					try {
+						nestedInfo = reflect(nestedInfo.asUnsafe<Pointer>().getNested());
+					} catch(...) {
+						return;
+					}
+				}
+				switch(nestedInfo.getKind()) {
+					case TypeInfo::Kind::Bool:
+						doc.CreateValue<std::vector<bool>>(path);
+						break;
+					case TypeInfo::Kind::Integer:
+						if(info.asUnsafe<Integer>().isSigned()) {
+							doc.CreateValue<std::vector<int64_t>>(path);
+						} else {
+							doc.CreateValue<std::vector<uint64_t>>(path);
+						}
+						break;
+					case TypeInfo::Kind::Floating:
+						doc.CreateValue<std::vector<double>>(path);
+						break;
+					case TypeInfo::Kind::String:
+					case TypeInfo::Kind::Enum:
+						doc.CreateValue<std::vector<std::string>>(path);
+						break;
+					case TypeInfo::Kind::Array:
+					case TypeInfo::Kind::Sequence:
+					case TypeInfo::Kind::Map:
+					case TypeInfo::Kind::Object:
+						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
+						if(nestedInfo.getKind() == TypeInfo::Kind::Object || nestedInfo.getKind() == TypeInfo::Kind::Map) break;
+						writeToDocument(doc, path + ".payload", nestedInfo);
+						break;
+					default: return;
+				}
+				size_t idx = 0;
+				seq.unsafeForEach([&](void* ptr) {
+					TypeInfo nestedInfo = reflect(Var(nullptr, seq.nestedType(), false));
+					nestedInfo.unsafeAssign(ptr);
+					writeToDocument(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
+					++idx;
+				});
+				break;
+			}
+			case TypeInfo::Kind::Pointer: {
+				const auto& p = info.asUnsafe<Pointer>();
+				try {
+					Var nested = p.getNested();
+					writeToDocument(doc, path, reflect(nested));
+				} catch(...) {
+					//Can't serialize nullptr
+				}
+				break;
+			}
+		}
+	}
+
 	void binary::serialize(std::ostream& stream, Var var) {
 		//Setup Jaguar document
 		libjaguar::Document jdoc;
 
-		//Business logic...
-		TypeInfo info = reflect(var);
+		//Business logic: serialize into document
+		writeToDocument(jdoc, "root", reflect(var));
 
 		//Export to stream
 		jdoc.ExportTo(stream);
