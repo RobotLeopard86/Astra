@@ -3,8 +3,8 @@
 #include <cstddef>
 #include <istream>
 
-#include "astra/var.hpp"
-#include "astra/reflectable.hpp"
+#include "var.hpp"
+#include "reflectable.hpp"
 #include "dll.hpp"
 
 namespace astra {

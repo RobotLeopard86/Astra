@@ -2,7 +2,7 @@
 
 #include <streambuf>
 
-#include "astra/dll.hpp"
+#include "dll.hpp"
 
 namespace astra {
 

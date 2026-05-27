@@ -4,7 +4,7 @@
 
 #include "types/type_actions.hpp"// IWYU pragma: keep
 #include "type_id.hpp"
-#include "astra/dll.hpp"
+#include "dll.hpp"
 
 class ASTRA_API AstraReflectBase {
   public:

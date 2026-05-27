@@ -1,8 +1,8 @@
 #pragma once
 
 #include "dll.hpp"
-#include "astra/reflectable.hpp"
-#include "astra/type_id.hpp"
+#include "reflectable.hpp"
+#include "type_id.hpp"
 
 namespace astra {
 

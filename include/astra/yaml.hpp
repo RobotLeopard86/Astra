@@ -4,8 +4,8 @@
 #include <string>
 
 #include "dll.hpp"
-#include "astra/var.hpp"
-#include "astra/reflectable.hpp"
+#include "var.hpp"
+#include "reflectable.hpp"
 
 namespace astra {
 

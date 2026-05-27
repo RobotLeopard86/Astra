@@ -6,10 +6,10 @@ yaml_cpp_dep = subproject('yaml-cpp', required: true, default_options: {
 	'contrib': true,
 	'tools': false,
 	'tests': 'disabled'
-}).get_variable('yaml_cpp_dep')
+}).get_variable('yaml_cpp_dep').as_link_whole()
 
 # Jaguar
-jaguar_dep = subproject('jaguar', required: true).get_variable('libjaguar_dep')
+jaguar_dep = subproject('jaguar', required: true).get_variable('libjaguar_dep').as_static(recursive: true).as_link_whole()
 
 # RE-flex
 reflex = subproject('reflex', required: true, default_options: {

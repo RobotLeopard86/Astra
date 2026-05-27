@@ -1,7 +1,7 @@
 #pragma once
 
-#include "astra/type_info.hpp"
-#include "astra/var.hpp"
+#include "type_info.hpp"
+#include "var.hpp"
 #include "dll.hpp"
 
 namespace astra {

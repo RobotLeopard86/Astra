@@ -2,7 +2,7 @@
 
 #include <memory_resource>
 
-#include "astra/sizeof.hpp"
+#include "sizeof.hpp"
 #include "var.hpp"
 #include "dll.hpp"
 
