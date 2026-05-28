@@ -25,6 +25,12 @@ namespace ExampleNamespace {
 
 		virtual ~ComplicatedType() {}
 
+		ComplicatedType() {}
+		ComplicatedType(const ComplicatedType&) = delete;
+		ComplicatedType& operator=(const ComplicatedType&) = delete;
+		ComplicatedType(ComplicatedType&&) = default;
+		ComplicatedType& operator=(ComplicatedType&&) = default;
+
 		ASTRASETUP(ComplicatedType)
 	};
 }

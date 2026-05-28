@@ -6,9 +6,8 @@
 #include <string_view>
 
 #include "astra/actions_table.hpp"
+#include "astra/box.hpp"
 #include "astra/type_info/list/list.hpp"
-#include "parser_yaml.hpp"
-
 #include "astra/reflection.hpp"
 #include "astra/stringify.hpp"
 #include "astra/type_info.hpp"
@@ -54,6 +53,7 @@ namespace astra {
 					nestedInfo.unsafeAssign(ptr);
 					serializeYamlRecursive(node[i++], nestedInfo, "");
 				});
+				break;
 			}
 			case TypeInfo::Kind::List: {
 				List list = info.asUnsafe<List>();
@@ -63,6 +63,7 @@ namespace astra {
 					nestedInfo.unsafeAssign(ptr);
 					serializeYamlRecursive(node[i++], nestedInfo, "");
 				});
+				break;
 			}
 			case TypeInfo::Kind::Map: {
 				Map map = info.asUnsafe<Map>();
@@ -72,6 +73,7 @@ namespace astra {
 					serializeYamlRecursive(subnode, reflect(key), "key");
 					serializeYamlRecursive(subnode, reflect(val), "val");
 				});
+				break;
 			}
 			case TypeInfo::Kind::Pointer: {
 				const auto& p = info.asUnsafe<Pointer>();

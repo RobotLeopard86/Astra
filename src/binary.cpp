@@ -2,7 +2,9 @@
 
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 
+#include "astra/box.hpp"
 #include "astra/reflection.hpp"
 #include "astra/type_info.hpp"
 #include "astra/type_info/array/array.hpp"
@@ -11,6 +13,8 @@
 #include "astra/type_info/list/list.hpp"
 #include "astra/types/all_types.hpp"// IWYU pragma: keep
 #include "bytestream.hpp"
+#include "libjaguar/Index.hpp"
+#include "libjaguar/TypeTags.hpp"
 
 namespace astra {
 	/*inline void deserializeBinaryRecursive(TypeInfo* info, const GroupReader& reader) {
@@ -116,7 +120,7 @@ namespace astra {
 		}
 	}*/
 
-	static void serializeBinaryRecursive(libjaguar::Document& doc, const std::string& path, const TypeInfo& info) {
+	void serializeBinaryRecursive(libjaguar::Document& doc, const std::string& path, const TypeInfo& info) {
 		switch(info.getKind()) {
 			case TypeInfo::Kind::Bool: {
 				bool val = info.asUnsafe<Bool>().get();
@@ -178,16 +182,16 @@ namespace astra {
 				break;
 			}
 			case TypeInfo::Kind::Object: {
-				const auto& obj = info.asUnsafe<Object>();
-				doc.CreateValue<libjaguar::UnstructuredObjTag>(path);
+				const Object& obj = info.asUnsafe<Object>();
+				if(!path.empty()) doc.CreateValue<libjaguar::UnstructuredObjTag>(path);
 				for(const auto& [name, contents] : obj.getFields()) {
-					std::string subpath = path + "." + std::string(name);
+					std::string subpath = (path.empty() ? "" : path + ".") + std::string(name);
 					serializeBinaryRecursive(doc, subpath, reflect(contents.var()));
 				}
 				break;
 			}
 			case TypeInfo::Kind::Map: {
-				const auto& m = info.asUnsafe<Map>();
+				const Map& m = info.asUnsafe<Map>();
 				size_t idx = 0;
 				doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 				m.forEach([&](Var key, Var val) {
@@ -199,7 +203,7 @@ namespace astra {
 				break;
 			}
 			case TypeInfo::Kind::Array: {
-				const auto& arr = info.asUnsafe<Array>();
+				const Array& arr = info.asUnsafe<Array>();
 				TypeInfo nestedInfo = reflect(Var(nullptr, arr.nestedType(), false));
 				while(nestedInfo.getKind() == TypeInfo::Kind::Pointer) {
 					try {
@@ -276,7 +280,7 @@ namespace astra {
 				break;
 			}
 			case TypeInfo::Kind::List: {
-				const auto& list = info.asUnsafe<List>();
+				const List& list = info.asUnsafe<List>();
 				TypeInfo nestedInfo = reflect(Var(nullptr, list.nestedType(), false));
 				while(nestedInfo.getKind() == TypeInfo::Kind::Pointer) {
 					try {
@@ -353,7 +357,7 @@ namespace astra {
 				break;
 			}
 			case TypeInfo::Kind::Pointer: {
-				const auto& p = info.asUnsafe<Pointer>();
+				const Pointer& p = info.asUnsafe<Pointer>();
 				try {
 					Var nested = p.getNested();
 					serializeBinaryRecursive(doc, path, reflect(nested));
@@ -365,12 +369,169 @@ namespace astra {
 		}
 	}
 
+	void deserializeBinaryRecursive(libjaguar::Document& doc, const std::string& path, TypeInfo& info) {
+		switch(info.getKind()) {
+			case TypeInfo::Kind::Bool:
+				info.asUnsafe<Bool>().set(doc.QueryValue<bool>(path));
+				break;
+			case TypeInfo::Kind::Integer: {
+				Integer intInfo = info.asUnsafe<Integer>();
+				if(intInfo.isSigned()) {
+					switch(intInfo.size()) {
+						case sizeof(int8_t):
+							intInfo.setSigned(doc.QueryValue<int8_t>(path));
+							intInfo.setSigned(doc.QueryValue<int8_t>(path));
+							break;
+						case sizeof(int16_t):
+							intInfo.setSigned(doc.QueryValue<int16_t>(path));
+							break;
+						case sizeof(int32_t):
+							intInfo.setSigned(doc.QueryValue<int32_t>(path));
+							break;
+						case sizeof(int64_t):
+							intInfo.setSigned(doc.QueryValue<int64_t>(path));
+							break;
+					}
+				} else {
+					switch(intInfo.size()) {
+						case sizeof(uint8_t):
+							intInfo.setUnsigned(doc.QueryValue<uint8_t>(path));
+							break;
+						case sizeof(uint16_t):
+							intInfo.setUnsigned(doc.QueryValue<uint16_t>(path));
+							break;
+						case sizeof(uint32_t):
+							intInfo.setUnsigned(doc.QueryValue<uint32_t>(path));
+							break;
+						case sizeof(uint64_t):
+							intInfo.setUnsigned(doc.QueryValue<uint64_t>(path));
+							break;
+					}
+				}
+				break;
+			}
+			case TypeInfo::Kind::Floating: {
+				Floating floatInfo = info.asUnsafe<Floating>();
+				if(floatInfo.size() == sizeof(float)) {
+					floatInfo.set(doc.QueryValue<float>(path));
+				} else {
+					floatInfo.set(doc.QueryValue<double>(path));
+				}
+				break;
+			}
+			case TypeInfo::Kind::String:
+				info.asUnsafe<String>().set(doc.QueryValue<std::string>(path));
+				break;
+			case TypeInfo::Kind::Enum:
+				info.asUnsafe<Enum>().fromString(doc.QueryValue<std::string>(path));
+				break;
+			case TypeInfo::Kind::Object: {
+				Object& obj = info.asUnsafe<Object>();
+				const libjaguar::ScopeEntry& scopeInfo = doc.QueryScopeInfo(path);
+				if(scopeInfo.list) throw std::runtime_error("Invalid object format!");
+				if(!scopeInfo.typeID.empty()) throw std::runtime_error("Invalid object format!");
+				for(const libjaguar::ValueEntry& ve : scopeInfo.subvalues) {
+					std::string subpath = (path.empty() ? "" : path + ".") + std::string(ve.name);
+					FieldInfo objField = obj.getField(ve.name);
+					TypeInfo fieldInfo = reflect(objField.var());
+					deserializeBinaryRecursive(doc, subpath, fieldInfo);
+				}
+				for(const libjaguar::ScopeEntry& se : scopeInfo.subscopes) {
+					std::string subpath = (path.empty() ? "" : path + ".") + std::string(se.name);
+					FieldInfo objField = obj.getField(se.name);
+					TypeInfo fieldInfo = reflect(objField.var());
+					deserializeBinaryRecursive(doc, subpath, fieldInfo);
+				}
+				break;
+			}
+			case TypeInfo::Kind::Array: {
+				Array& arr = info.asUnsafe<Array>();
+				const libjaguar::ScopeEntry& scopeInfo = doc.QueryScopeInfo(path);
+				if(!scopeInfo.list) throw std::runtime_error("Invalid list format!");
+				if(!scopeInfo.typeID.empty()) throw std::runtime_error("Invalid list format!");
+				TypeInfo nestedInfo = reflect(Var(nullptr, arr.nestedType(), false));
+				while(nestedInfo.getKind() == TypeInfo::Kind::Pointer) {
+					Pointer& ptr = nestedInfo.asUnsafe<Pointer>();
+					try {
+						nestedInfo = reflect(ptr.getNested());
+					} catch(...) {
+						ptr.init();
+						nestedInfo = reflect(ptr.var());
+					}
+				}
+				for(std::size_t i = 0; i < scopeInfo.subvalues.size() + scopeInfo.subscopes.size(); ++i) {
+					Box nested(arr.nestedType());
+					nestedInfo.assign(nested.var());
+					deserializeBinaryRecursive(doc, ::astra::format("{}[{}]", path, i), nestedInfo);
+					if(i >= arr.size()) throw std::runtime_error("Too many items in array!");
+					Var tgt = arr.at(i);
+					if(tgt.isConst()) throw std::runtime_error("Cannot deserialize into const array!");
+					ActionsTable::data()[tgt.type().number()].move(tgt.rawMut(), nested.var().rawMut());
+				}
+				break;
+			}
+			case TypeInfo::Kind::List: {
+				List& list = info.asUnsafe<List>();
+				list.clear();
+				const libjaguar::ScopeEntry& scopeInfo = doc.QueryScopeInfo(path);
+				if(!scopeInfo.list) throw std::runtime_error("Invalid list format!");
+				if(!scopeInfo.typeID.empty()) throw std::runtime_error("Invalid list format!");
+				TypeInfo nestedInfo = reflect(Var(nullptr, list.nestedType(), false));
+				while(nestedInfo.getKind() == TypeInfo::Kind::Pointer) {
+					Pointer& ptr = nestedInfo.asUnsafe<Pointer>();
+					try {
+						nestedInfo = reflect(ptr.getNested());
+					} catch(...) {
+						ptr.init();
+						nestedInfo = reflect(ptr.var());
+					}
+				}
+				for(std::size_t i = 0; i < scopeInfo.subvalues.size() + scopeInfo.subscopes.size(); ++i) {
+					Box nested(list.nestedType());
+					nestedInfo.assign(nested.var());
+					deserializeBinaryRecursive(doc, ::astra::format("{}[{}]", path, i), nestedInfo);
+					list.push(nested.var());
+				}
+				break;
+			}
+			case TypeInfo::Kind::Map: {
+				Map& m = info.asUnsafe<Map>();
+				m.clear();
+				const libjaguar::ScopeEntry& scopeInfo = doc.QueryScopeInfo(path);
+				if(!scopeInfo.list) throw std::runtime_error("Invalid map format!");
+				if(!scopeInfo.typeID.empty()) throw std::runtime_error("Invalid object format!");
+				if(scopeInfo.listElementType != libjaguar::TypeTag::UnstructuredObj) throw std::runtime_error("Invalid map format!");
+				for(std::size_t i = 0; i < scopeInfo.subscopes.size(); ++i) {
+					Box key(m.keyType()), val(m.valType());
+					TypeInfo keyInfo = reflect(key.var()), valInfo = reflect(val.var());
+					deserializeBinaryRecursive(doc, ::astra::format("{}[{}].key", path, i), keyInfo);
+					deserializeBinaryRecursive(doc, astra::format("{}[{}].val", path, i), valInfo);
+					m.insert(key.var(), val.var());
+				}
+				break;
+			}
+			case TypeInfo::Kind::Pointer: {
+				Pointer& p = info.asUnsafe<Pointer>();
+				try {
+					TypeInfo nestedInfo = reflect(p.getNested());
+					deserializeBinaryRecursive(doc, path, nestedInfo);
+				} catch(...) {
+					p.init();
+					TypeInfo okInfo = reflect(p.var());
+					deserializeBinaryRecursive(doc, path, okInfo);
+				}
+				break;
+			};
+		}
+	}
+
 	void binary::serialize(libjaguar::Document& doc, Var var) {
-		serializeBinaryRecursive(doc, "root", reflect(var));
+		serializeBinaryRecursive(doc, "", reflect(var));
 	}
 
 	void binary::deserialize(Var var, libjaguar::Document& doc) {
-		//TODO: business logic
+		TypeInfo info = reflect(var);
+		deserializeBinaryRecursive(doc, "", info);
 	}
 
 	void binary::serialize(std::vector<uint8_t>& vector, Var var) {

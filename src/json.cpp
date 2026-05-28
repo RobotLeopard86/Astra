@@ -51,6 +51,7 @@ namespace astra {
 					nestedInfo.unsafeAssign(ptr);
 					serializeJsonRecursive(json[i++], nestedInfo, "");
 				});
+				break;
 			}
 			case TypeInfo::Kind::List: {
 				List list = info.asUnsafe<List>();
@@ -60,6 +61,7 @@ namespace astra {
 					nestedInfo.unsafeAssign(ptr);
 					serializeJsonRecursive(json[i++], nestedInfo, "");
 				});
+				break;
 			}
 			case TypeInfo::Kind::Map: {
 				Map map = info.asUnsafe<Map>();
@@ -69,6 +71,7 @@ namespace astra {
 					serializeJsonRecursive(entry, reflect(key), "key");
 					serializeJsonRecursive(entry, reflect(val), "val");
 				});
+				break;
 			}
 			case TypeInfo::Kind::Pointer: {
 				const auto& p = info.asUnsafe<Pointer>();

@@ -118,6 +118,12 @@ int main() {
 	astra::binary::toStream(ofs, &complicated);
 	ofs.close();
 
+	//Get it back
+	std::cout << "And finally, let's get the complicated type back!" << std::endl;
+	std::ifstream ifs("./complicated.xj", std::ios::binary);
+	ExampleNamespace::ComplicatedType complicated2(astra::binary::fromStream<ExampleNamespace::ComplicatedType>(ifs));
+	std::cout << "In JSON, we can write it out as: " << astra::json::toString(&complicated2) << std::endl;
+
 	//Done
 	std::cout << "Thanks for checking out the Astra demo!" << std::endl;
 
