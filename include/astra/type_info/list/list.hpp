@@ -2,8 +2,8 @@
 
 #include "astra/sizeof.hpp"
 #include "astra/dll.hpp"
-#include "list/std_deque.hpp"
-#include "list/std_list.hpp"
+#include "doubleendedlist/std_deque.hpp"
+#include "doubleendedlist/std_list.hpp"
 #include "queue/std_queue.hpp"
 #include "set/std_set.hpp"
 #include "set/std_unordered_set.hpp"
