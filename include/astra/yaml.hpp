@@ -8,12 +8,13 @@
 #include "reflectable.hpp"
 
 #include "yaml-cpp/emitter.h"
+#include "yaml-cpp/emittermanip.h"
 #include "yaml-cpp/yaml.h"
 
 namespace astra {
 	struct ASTRA_API yaml {
 		template<Reflectable T>
-		static T fromNode(YAML::Node& node) {
+		static T fromNode(const YAML::Node& node) {
 			T obj;
 			deserialize(Var(&obj), node);
 			return obj;
@@ -34,6 +35,8 @@ namespace astra {
 		template<Reflectable T>
 		static YAML::Node toNode(const T* obj) {
 			YAML::Node node;
+			node["__astraforcemapcreate__"] = true;
+			node.remove("__astraforcemapcreate__");
 			serialize(node, Var(obj));
 			return node;
 		}
@@ -51,11 +54,7 @@ namespace astra {
 		}
 
 	  private:
-		static void serialize(std::string& str, Var var);
-		static void serialize(std::ostream& stream, Var var);
 		static void serialize(YAML::Node& node, Var var);
-		static void deserialize(Var var, std::string_view str);
-		static void deserialize(Var var, std::istream& stream);
-		static void deserialize(Var var, YAML::Node& node);
+		static void deserialize(Var var, const YAML::Node& node);
 	};
 }

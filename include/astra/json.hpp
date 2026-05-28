@@ -47,11 +47,7 @@ namespace astra {
 		}
 
 	  private:
-		static void serialize(std::string& str, Var var);
-		static void serialize(std::ostream& stream, Var var);
 		static void serialize(nlohmann::json& json, Var var);
-		static void deserialize(Var var, std::string_view str);
-		static void deserialize(Var var, std::istream& stream);
 		static void deserialize(Var var, const nlohmann::json& json);
 	};
 }

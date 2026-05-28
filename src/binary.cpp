@@ -13,7 +13,7 @@
 #include "bytestream.hpp"
 
 namespace astra {
-	/*inline void deserializeRecursive(TypeInfo* info, const GroupReader& reader) {
+	/*inline void deserializeBinaryRecursive(TypeInfo* info, const GroupReader& reader) {
 		auto k = info->getKind();
 
 		switch(k) {
@@ -21,7 +21,7 @@ namespace astra {
 				for(auto&& record : info->asUnsafe<Object>().getFields()) {
 					//skip name in record.first;
 					auto fieldInfo = reflect(record.second.var());
-					deserializeRecursive(&fieldInfo, reader);
+					deserializeBinaryRecursive(&fieldInfo, reader);
 				}
 				break;
 			case TypeInfo::Kind::kBool:
@@ -56,12 +56,12 @@ namespace astra {
 					Box keyBox(m.keyType());//Box should be a new object for each iteration
 					keyInfo.unsafeAssign(keyBox.var().rawMut());
 
-					deserializeRecursive(&keyInfo, reader);
+					deserializeBinaryRecursive(&keyInfo, reader);
 
 					Box valBox(m.valType());
 					valInfo.unsafeAssign(valBox.var().rawMut());
 
-					deserializeRecursive(&valInfo, reader);
+					deserializeBinaryRecursive(&valInfo, reader);
 
 					m.insert(keyBox.var(), valBox.var());
 				}
@@ -78,7 +78,7 @@ namespace astra {
 					i++;
 
 					auto entryInfo = reflect(entry);
-					deserializeRecursive(&entryInfo, reader);
+					deserializeBinaryRecursive(&entryInfo, reader);
 				});
 			break; }
 			case TypeInfo::Kind::kSequence: {
@@ -92,7 +92,7 @@ namespace astra {
 					Box entryBox(s.nestedType());//Box should be a new object for each iteration
 					entryInfo.unsafeAssign(entryBox.var().rawMut());
 
-					deserializeRecursive(&entryInfo, reader);
+					deserializeBinaryRecursive(&entryInfo, reader);
 
 					s.push(entryBox.var());
 				}
@@ -106,47 +106,17 @@ namespace astra {
 				try {
 					Var var = p.getNested();
 					TypeInfo nestedInfo = reflect(var);
-					deserializeRecursive(&nestedInfo, reader);
+					deserializeBinaryRecursive(&nestedInfo, reader);
 				} catch(...) {
 					p.init();
 					TypeInfo nestedInfo = reflect(p.var());
-					deserializeRecursive(&nestedInfo, reader);
+					deserializeBinaryRecursive(&nestedInfo, reader);
 				}
 			break; }
 		}
 	}*/
 
-	void binary::serialize(std::vector<uint8_t>& vector, Var var) {
-		//Forward via stream
-		obytestream obs(vector);
-		serialize(obs, var);
-	}
-
-	void binary::deserialize(Var var, const std::vector<uint8_t>& vector) {
-		//Forward via stream
-		ibytestream ibs(const_cast<std::vector<uint8_t>&>(vector));
-		deserialize(var, ibs);
-	}
-
-	void binary::serialize(std::ostream& stream, Var var) {
-		//Forward via Jaguar document
-		libjaguar::Document jdoc;
-		serialize(jdoc, var);
-
-		//Export to stream
-		jdoc.ExportTo(stream);
-	}
-
-	void binary::deserialize(Var var, std::istream& stream) {
-		//Forward via document
-		std::unique_ptr<std::istream> ptr(&stream);
-		libjaguar::Document doc(std::move(ptr));
-		doc.MaterializeAll();
-		doc.ReleaseStream();
-		deserialize(var, doc);
-	}
-
-	static void writeToDocument(libjaguar::Document& doc, const std::string& path, const TypeInfo& info) {
+	static void serializeBinaryRecursive(libjaguar::Document& doc, const std::string& path, const TypeInfo& info) {
 		switch(info.getKind()) {
 			case TypeInfo::Kind::Bool: {
 				bool val = info.asUnsafe<Bool>().get();
@@ -210,9 +180,9 @@ namespace astra {
 			case TypeInfo::Kind::Object: {
 				const auto& obj = info.asUnsafe<Object>();
 				doc.CreateValue<libjaguar::UnstructuredObjTag>(path);
-				for(const auto& record : obj.getFields()) {
-					std::string subpath = path + "." + std::string(record.first);
-					writeToDocument(doc, subpath, reflect(record.second.var()));
+				for(const auto& [name, contents] : obj.getFields()) {
+					std::string subpath = path + "." + std::string(name);
+					serializeBinaryRecursive(doc, subpath, reflect(contents.var()));
 				}
 				break;
 			}
@@ -221,11 +191,10 @@ namespace astra {
 				size_t idx = 0;
 				doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 				m.forEach([&](Var key, Var val) {
-					std::string subpath = path + "[" + std::to_string(idx) + "]";
+					std::string subpath = path + "[" + std::to_string(idx++) + "]";
 					doc.CreateValue<libjaguar::UnstructuredObjTag>(subpath);
-					writeToDocument(doc, subpath + ".key", reflect(key));
-					writeToDocument(doc, subpath + ".val", reflect(val));
-					++idx;
+					serializeBinaryRecursive(doc, subpath + ".key", reflect(key));
+					serializeBinaryRecursive(doc, subpath + ".val", reflect(val));
 				});
 				break;
 			}
@@ -293,7 +262,7 @@ namespace astra {
 					case TypeInfo::Kind::Object:
 						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 						if(nestedInfo.getKind() == TypeInfo::Kind::Object || nestedInfo.getKind() == TypeInfo::Kind::Map) break;
-						writeToDocument(doc, path + ".payload", nestedInfo);
+						serializeBinaryRecursive(doc, path + ".payload", nestedInfo);
 						break;
 					default: return;
 				}
@@ -301,7 +270,7 @@ namespace astra {
 				arr.unsafeForEach([&](void* ptr) {
 					TypeInfo nestedInfo = reflect(Var(nullptr, arr.nestedType(), false));
 					nestedInfo.unsafeAssign(ptr);
-					writeToDocument(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
+					serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
 					++idx;
 				});
 				break;
@@ -370,7 +339,7 @@ namespace astra {
 					case TypeInfo::Kind::Object:
 						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 						if(nestedInfo.getKind() == TypeInfo::Kind::Object || nestedInfo.getKind() == TypeInfo::Kind::Map) break;
-						writeToDocument(doc, path + ".payload", nestedInfo);
+						serializeBinaryRecursive(doc, path + ".payload", nestedInfo);
 						break;
 					default: return;
 				}
@@ -378,7 +347,7 @@ namespace astra {
 				seq.unsafeForEach([&](void* ptr) {
 					TypeInfo nestedInfo = reflect(Var(nullptr, seq.nestedType(), false));
 					nestedInfo.unsafeAssign(ptr);
-					writeToDocument(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
+					serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
 					++idx;
 				});
 				break;
@@ -387,7 +356,7 @@ namespace astra {
 				const auto& p = info.asUnsafe<Pointer>();
 				try {
 					Var nested = p.getNested();
-					writeToDocument(doc, path, reflect(nested));
+					serializeBinaryRecursive(doc, path, reflect(nested));
 				} catch(...) {
 					//Can't serialize nullptr
 				}
@@ -397,11 +366,40 @@ namespace astra {
 	}
 
 	void binary::serialize(libjaguar::Document& doc, Var var) {
-		writeToDocument(doc, "root", reflect(var));
+		serializeBinaryRecursive(doc, "root", reflect(var));
 	}
 
 	void binary::deserialize(Var var, libjaguar::Document& doc) {
 		//TODO: business logic
 	}
 
+	void binary::serialize(std::vector<uint8_t>& vector, Var var) {
+		//Forward via stream
+		obytestream obs(vector);
+		serialize(obs, var);
+	}
+
+	void binary::deserialize(Var var, const std::vector<uint8_t>& vector) {
+		//Forward via stream
+		ibytestream ibs(const_cast<std::vector<uint8_t>&>(vector));
+		deserialize(var, ibs);
+	}
+
+	void binary::serialize(std::ostream& stream, Var var) {
+		//Forward via Jaguar document
+		libjaguar::Document jdoc;
+		serialize(jdoc, var);
+
+		//Export to stream
+		jdoc.ExportTo(stream);
+	}
+
+	void binary::deserialize(Var var, std::istream& stream) {
+		//Forward via document
+		std::unique_ptr<std::istream> ptr(&stream);
+		libjaguar::Document doc(std::move(ptr));
+		doc.MaterializeAll();
+		doc.ReleaseStream();
+		deserialize(var, doc);
+	}
 }

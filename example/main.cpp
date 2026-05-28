@@ -21,13 +21,13 @@ int main() {
 	car.owner = "John Smith";
 
 	//Let's dump it to the console as JSON
-	std::string asJson = astra::json::toString(&car);
-	std::cout << "I have a car:\n"
-			  << asJson << std::endl;
+	std::string asYaml = astra::yaml::toString(&car);
+	std::cout << "I have a car:\n---\n"
+			  << asYaml << "\n---" << std::endl;
 
 	//Let's turn the JSON into YAML
-	std::cout << "This can also be in YAML:\n---\n"
-			  << astra::converters::toYaml::fromJsonString<Car>(asJson) << "\n---" << std::endl;
+	std::cout << "This can also be in JSON: "
+			  << astra::converters::toJson::fromYamlString<Car>(asYaml) << std::endl;
 
 	//Let's reflect it
 	astra::TypeInfo info = astra::reflect(&car);

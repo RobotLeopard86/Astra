@@ -16,8 +16,7 @@
 #include "astra/types/all_types.hpp"
 
 namespace astra {
-
-	namespace yaml_impl {
+	/*namespace yaml_impl {
 
 		inline void append(IWriter* writer, std::string_view str) {
 			writer->write(str.data(), str.size());
@@ -247,33 +246,81 @@ namespace astra {
 			});
 			writer->stepBack(1);
 		}
+	}*/
+
+	void serializeYamlRecursive(YAML::Node _node, const TypeInfo& info, const std::string& field) {
+		YAML::Node node = field.empty() ? _node : _node[field];
+		switch(info.getKind()) {
+			case TypeInfo::Kind::Bool:
+				node = info.asUnsafe<Bool>().get();
+				break;
+			case TypeInfo::Kind::Integer:
+				if(auto intInfo = info.asUnsafe<Integer>(); intInfo.isSigned()) {
+					node = intInfo.asSigned();
+				} else {
+					node = intInfo.asUnsigned();
+				}
+				break;
+			case TypeInfo::Kind::Floating:
+				node = info.asUnsafe<Floating>().get();
+				break;
+			case TypeInfo::Kind::String:
+				node = info.asUnsafe<String>().get();
+				break;
+			case TypeInfo::Kind::Enum:
+				node = info.asUnsafe<Enum>().toString();
+				break;
+			case TypeInfo::Kind::Object:
+				for(const auto& [name, contents] : info.asUnsafe<Object>().getFields()) {
+					serializeYamlRecursive(node, reflect(contents.var()), std::string(name));
+				}
+				break;
+			case TypeInfo::Kind::Array: {
+				Array arr = info.asUnsafe<Array>();
+				TypeInfo nestedInfo = reflect(Var(nullptr, arr.nestedType(), false));
+				std::size_t i = 0;
+				arr.unsafeForEach([&](void* ptr) {
+					nestedInfo.unsafeAssign(ptr);
+					serializeYamlRecursive(node[i++], nestedInfo, "");
+				});
+			}
+			case TypeInfo::Kind::Sequence: {
+				Sequence seq = info.asUnsafe<Sequence>();
+				TypeInfo nestedInfo = reflect(Var(nullptr, seq.nestedType(), false));
+				std::size_t i = 0;
+				seq.unsafeForEach([&](void* ptr) {
+					nestedInfo.unsafeAssign(ptr);
+					serializeYamlRecursive(node[i++], nestedInfo, "");
+				});
+			}
+			case TypeInfo::Kind::Map: {
+				Map map = info.asUnsafe<Map>();
+				std::size_t i = 0;
+				map.forEach([&](Var key, Var val) {
+					YAML::Node subnode = node[i++];
+					serializeYamlRecursive(subnode, reflect(key), "key");
+					serializeYamlRecursive(subnode, reflect(val), "val");
+				});
+			}
+			case TypeInfo::Kind::Pointer: {
+				const auto& p = info.asUnsafe<Pointer>();
+				try {
+					Var nested = p.getNested();
+					serializeYamlRecursive(node, reflect(nested), field);
+				} catch(...) {
+					//Can't serialize nullptr
+				}
+				break;
+			}
+		}
 	}
 
-	void yaml::serialize(std::string& str, Var var) {
-		StringWriter stringW(&str);
+	void yaml::serialize(YAML::Node& node, Var var) {
 		auto info = reflect(var);
-
-		yaml_impl::serializeRecursive(&stringW, info, 0);
+		serializeYamlRecursive(node, info, "");
 	}
 
-	void yaml::serialize(std::ostream& stream, Var var) {
-		StreamWriter streamW(stream);
-		auto info = reflect(var);
-
-		yaml_impl::serializeRecursive(&streamW, info, 0);
-	}
-
-	void yaml::deserialize(Var var, std::string_view str) {
-		ParserYaml parser(str.data(), str.size());
-		auto info = reflect(var);
-
-		return parser.deserialize(&info);
-	}
-
-	void yaml::deserialize(Var var, std::istream& stream) {
-		ParserYaml parser(stream);
-		auto info = reflect(var);
-
-		return parser.deserialize(&info);
+	void yaml::deserialize(Var var, const YAML::Node& node) {
+		//TODO: business logic
 	}
 }
