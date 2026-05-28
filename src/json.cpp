@@ -17,13 +17,17 @@ namespace astra {
 				break;
 			case TypeInfo::Kind::Integer:
 				if(auto intInfo = info.asUnsafe<Integer>(); intInfo.isSigned()) {
-					json = intInfo.asSigned();
+					json = ::astra::format("{};s{}", intInfo.asSigned(), intInfo.size() * 8);
 				} else {
-					json = intInfo.asUnsigned();
+					json = ::astra::format("{};u{}", intInfo.asSigned(), intInfo.size() * 8);
 				}
 				break;
 			case TypeInfo::Kind::Floating:
-				json = info.asUnsafe<Floating>().get();
+				if(auto floatInfo = info.asUnsafe<Floating>(); floatInfo.size() == sizeof(float)) {
+					json = ::astra::format("{}f", (float)floatInfo.get());
+				} else {
+					json = std::to_string(floatInfo.get());
+				}
 				break;
 			case TypeInfo::Kind::String:
 				json = info.asUnsafe<String>().get();

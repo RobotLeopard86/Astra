@@ -4,9 +4,6 @@
 #include <cmath>
 #include <string_view>
 
-#include "iwriter.hpp"
-#include "stream_writer.hpp"
-#include "string_writer.hpp"
 #include "parser_yaml.hpp"
 
 #include "astra/reflection.hpp"
@@ -16,238 +13,6 @@
 #include "astra/types/all_types.hpp"
 
 namespace astra {
-	/*namespace yaml_impl {
-
-		inline void append(IWriter* writer, std::string_view str) {
-			writer->write(str.data(), str.size());
-		}
-
-		inline void append(IWriter* writer, char ch) {
-			writer->write(ch);
-		}
-
-		inline void appendIndention(IWriter* writer, int num) {
-			for(auto i = 0; i < num; i++) {
-				writer->write(' ');
-			}
-		}
-
-		inline bool isComplex(const TypeInfo& info) {
-			switch(info.getKind()) {
-				case TypeInfo::Kind::Object:
-					[[fallthrough]];
-				case TypeInfo::Kind::Array:
-					[[fallthrough]];
-				case TypeInfo::Kind::Sequence:
-					[[fallthrough]];
-				case TypeInfo::Kind::Map:
-					return true;
-				case TypeInfo::Kind::Pointer: {
-					auto p = info.asUnsafe<Pointer>();
-					try {
-						Var var = p.getNested();
-						auto nestedInfo = reflect(var);
-						return isComplex(nestedInfo);
-					} catch(...) {
-						return false;
-					}
-				}
-				default:
-					return false;
-			}
-		}
-
-		template<typename SeqT>
-		inline void serializeSequence(const SeqT& seq, IWriter* writer, int indent);
-
-		std::string doubleToString(double value) {
-			if(value == -std::numeric_limits<double>::infinity()) {
-				return "!!float .-inf";
-			}
-			if(value == std::numeric_limits<double>::infinity()) {
-				return "!!float .inf";
-			}
-			if(std::isnan(value)) {
-				return "!!float .nan";
-			}
-			return toString(value, 9);
-		}
-
-		void serializeRecursive(IWriter* writer, const TypeInfo& info, int indent) {
-			auto k = info.getKind();
-
-			switch(k) {
-				case TypeInfo::Kind::Bool:
-					append(writer, toString(info.asUnsafe<Bool>().get()));
-					break;
-				case TypeInfo::Kind::Integer: {
-					auto i = info.asUnsafe<Integer>();
-					if(i.isSigned()) {
-						append(writer, toString(i.asSigned()));
-					} else {
-						append(writer, toString(i.asUnsigned()));
-					}
-					break;
-				}
-				case TypeInfo::Kind::Floating:
-					append(writer, doubleToString(info.asUnsafe<Floating>().get()));
-					break;
-				case TypeInfo::Kind::String:
-					append(writer, info.asUnsafe<String>().get());
-					break;
-				case TypeInfo::Kind::Enum:
-					append(writer, info.asUnsafe<Enum>().toString());
-					break;
-				case TypeInfo::Kind::Object: {
-					const auto& o = info.asUnsafe<Object>();
-
-					bool isFirst = true;
-					for(auto&& record : o.getFields()) {
-
-						if(!isFirst) {
-							appendIndention(writer, indent);
-						}
-						isFirst = false;
-
-						append(writer, record.first);
-
-						auto fieldInfo = reflect(record.second.var());
-
-						if(isComplex(fieldInfo)) {
-							append(writer, ":\n");
-							append(writer, std::string(indent + 2, ' '));
-							serializeRecursive(writer, fieldInfo, indent + 2);
-
-						} else {
-							append(writer, ": ");
-							serializeRecursive(writer, fieldInfo, indent + 2);
-						}
-
-						append(writer, '\n');
-					}
-					writer->stepBack(1);
-					break;
-				}
-				case TypeInfo::Kind::Map: {
-					//TODO clear this hell
-					const auto& m = info.asUnsafe<Map>();
-
-					if(m.size() == 0) {
-						append(writer, "{}\n");
-						return;
-					}
-
-					const auto serComplexKey = [](IWriter* writer, int indent, const TypeInfo& info) {
-						append(writer, "? ");
-						serializeRecursive(writer, info, indent + 2);
-						append(writer, "\n");
-						appendIndention(writer, indent);
-					};
-
-					const auto serNormalKey = [](IWriter* writer, int indent, const TypeInfo& info) {
-						serializeRecursive(writer, info, indent);
-					};
-
-					const auto serComplexVal = [](IWriter* writer, int indent, const TypeInfo& info) {
-						append(writer, ":\n");
-						append(writer, std::string(indent + 2, ' '));
-						serializeRecursive(writer, info, indent + 2);
-					};
-
-					const auto serNormalVal = [](IWriter* writer, int indent, const TypeInfo& info) {
-						append(writer, ": ");
-						serializeRecursive(writer, info, indent + 2);
-					};
-
-					auto keyInfo = reflect(Var(nullptr, m.keyType(), false));
-					auto valInfo = reflect(Var(nullptr, m.valType(), false));
-
-					bool isFirst = true;
-					m.unsafeForEach([writer,													//
-										indent,													//
-										&keyInfo, &valInfo,										//
-										&isFirst,												//
-										serComplexKey, serNormalKey, serComplexVal, serNormalVal//
-					](void* key, void* value) {
-						if(!isFirst) {
-							appendIndention(writer, indent);
-						}
-						isFirst = false;
-
-						keyInfo.unsafeAssign(key);
-						valInfo.unsafeAssign(value);
-
-						void (*serVal)(IWriter* writer, int indent, const TypeInfo& info);
-						void (*serKey)(IWriter* writer, int indent, const TypeInfo& info);
-
-						if(isComplex(keyInfo)) {
-							serKey = serComplexKey;
-							serVal = serNormalVal;
-						} else {
-							serKey = serNormalKey;
-							if(isComplex(valInfo)) {
-								serVal = serComplexVal;
-							} else {
-								serVal = serNormalVal;
-							}
-						}
-
-						serKey(writer, indent, keyInfo);
-						serVal(writer, indent, valInfo);
-
-						append(writer, '\n');
-					});
-					writer->stepBack(1);
-					break;
-				}
-				case TypeInfo::Kind::Array:
-					serializeSequence(info.asUnsafe<Array>(), writer, indent);
-					break;
-				case TypeInfo::Kind::Sequence:
-					serializeSequence(info.asUnsafe<Sequence>(), writer, indent);
-					break;
-				case TypeInfo::Kind::Pointer: {
-					auto p = info.asUnsafe<Pointer>();
-					try {
-						Var var = p.getNested();
-						auto info = reflect(var);
-						serializeRecursive(writer, info, indent);
-					} catch(...) {
-						append(writer, "null");
-					}
-					break;
-				}
-			}
-		}
-
-		template<typename SeqT>
-		inline void serializeSequence(const SeqT& seq, IWriter* writer, int indent) {
-			//TODO add possibility to write short sequences in one line
-			if(seq.size() == 0) {
-				append(writer, "[]\n");
-				return;
-			}
-
-			auto info = reflect(Var(nullptr, seq.nestedType(), false));
-
-			bool isFirst = true;
-			seq.unsafeForEach([writer, indent, &info, &isFirst](void* ptr) {
-				if(!isFirst) {
-					appendIndention(writer, indent);
-				}
-				isFirst = false;
-
-				append(writer, "- ");
-
-				info.unsafeAssign(ptr);
-				serializeRecursive(writer, info, indent + 2);
-
-				append(writer, '\n');
-			});
-			writer->stepBack(1);
-		}
-	}*/
-
 	void serializeYamlRecursive(YAML::Node _node, const TypeInfo& info, const std::string& field) {
 		YAML::Node node = field.empty() ? _node : _node[field];
 		switch(info.getKind()) {
@@ -256,14 +21,17 @@ namespace astra {
 				break;
 			case TypeInfo::Kind::Integer:
 				if(auto intInfo = info.asUnsafe<Integer>(); intInfo.isSigned()) {
-					node = intInfo.asSigned();
+					node = ::astra::format("{};s{}", intInfo.asSigned(), intInfo.size() * 8);
 				} else {
-					node = intInfo.asUnsigned();
+					node = ::astra::format("{};u{}", intInfo.asSigned(), intInfo.size() * 8);
 				}
 				break;
 			case TypeInfo::Kind::Floating:
-				node = info.asUnsafe<Floating>().get();
-				break;
+				if(auto floatInfo = info.asUnsafe<Floating>(); floatInfo.size() == sizeof(float)) {
+					node = ::astra::format("{}f", (float)floatInfo.get());
+				} else {
+					node = std::to_string(floatInfo.get());
+				}
 			case TypeInfo::Kind::String:
 				node = info.asUnsafe<String>().get();
 				break;
