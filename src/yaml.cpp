@@ -84,11 +84,14 @@ namespace astra {
 	}
 
 	void yaml::serialize(YAML::Node& node, Var var) {
-		auto info = reflect(var);
-		serializeYamlRecursive(node, info, "");
+		serializeYamlRecursive(node, reflect(var), "");
+	}
+
+	void deserializeYamlRecursive(YAML::Node _node, TypeInfo& info) {
 	}
 
 	void yaml::deserialize(Var var, const YAML::Node& node) {
-		//TODO: business logic
+		TypeInfo info = reflect(var);
+		deserializeYamlRecursive(node, info);
 	}
 }

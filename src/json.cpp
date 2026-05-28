@@ -81,11 +81,14 @@ namespace astra {
 	}
 
 	void json::serialize(nlohmann::json& json, Var var) {
-		auto info = reflect(var);
-		serializeJsonRecursive(json, info, "");
+		serializeJsonRecursive(json, reflect(var), "");
+	}
+
+	void deserializeJsonRecursive(const nlohmann::json& _json, TypeInfo& info) {
 	}
 
 	void json::deserialize(Var var, const nlohmann::json& json) {
-		//TODO: business logic
+		TypeInfo info = reflect(var);
+		deserializeJsonRecursive(json, info);
 	}
 }
