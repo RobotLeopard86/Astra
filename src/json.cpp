@@ -100,7 +100,7 @@ namespace astra {
 			case TypeInfo::Kind::Integer: {
 				if(!json.is_string()) throw std::runtime_error("Invalid integer format!");
 				std::string fullNum = json.get<std::string>();
-				std::string descriptor = fullNum.substr(0, fullNum.find_first_of(";")).substr(0, fullNum.find_first_of(";"));
+				std::string descriptor = fullNum.substr(0, fullNum.find_first_of(";"));
 				if(descriptor.compare(fullNum) == 0) throw std::runtime_error("Invalid integer format!");
 				std::string numStr = fullNum.substr(descriptor.size() + 1);
 				if(descriptor.size() < 2 || descriptor.size() > 3) throw std::runtime_error("Invalid integer format!");
@@ -118,7 +118,7 @@ namespace astra {
 				if(char last = fullNum[fullNum.size() - 1]; last == 'f') {
 					info.asUnsafe<Floating>().set(std::stof(fullNum.substr(0, fullNum.size() - 2)));
 				} else if(last >= '0' && last <= '9') {
-					info.asUnsafe<Floating>().set(std::stod(fullNum.substr(0, fullNum.size() - 2)));
+					info.asUnsafe<Floating>().set(std::stod(fullNum.substr(0, fullNum.size() - 1)));
 				} else
 					throw std::runtime_error("Invalid floating-point format!");
 				break;

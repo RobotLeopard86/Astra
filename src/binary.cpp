@@ -380,7 +380,6 @@ namespace astra {
 					switch(intInfo.size()) {
 						case sizeof(int8_t):
 							intInfo.setSigned(doc.QueryValue<int8_t>(path));
-							intInfo.setSigned(doc.QueryValue<int8_t>(path));
 							break;
 						case sizeof(int16_t):
 							intInfo.setSigned(doc.QueryValue<int16_t>(path));

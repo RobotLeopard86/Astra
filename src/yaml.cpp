@@ -1,7 +1,5 @@
 #include "astra/yaml.hpp"
 
-#include <ostream>
-#include <cmath>
 #include <stdexcept>
 #include <string_view>
 
@@ -9,10 +7,8 @@
 #include "astra/box.hpp"
 #include "astra/type_info/list/list.hpp"
 #include "astra/reflection.hpp"
-#include "astra/stringify.hpp"
 #include "astra/type_info.hpp"
 #include "astra/type_info/integer/integer.hpp"
-#include "astra/types/all_types.hpp"
 
 namespace astra {
 	void serializeYamlRecursive(YAML::Node _node, const TypeInfo& info, const std::string& field) {
@@ -34,6 +30,7 @@ namespace astra {
 				} else {
 					node = std::to_string(floatInfo.get());
 				}
+				break;
 			case TypeInfo::Kind::String:
 				node = info.asUnsafe<String>().get();
 				break;
@@ -102,7 +99,7 @@ namespace astra {
 			case TypeInfo::Kind::Integer: {
 				if(!node.IsScalar()) throw std::runtime_error("Invalid integer format!");
 				std::string fullNum = node.as<std::string>();
-				std::string descriptor = fullNum.substr(0, fullNum.find_first_of(";")).substr(0, fullNum.find_first_of(";"));
+				std::string descriptor = fullNum.substr(0, fullNum.find_first_of(";"));
 				if(descriptor.compare(fullNum) == 0) throw std::runtime_error("Invalid integer format!");
 				std::string numStr = fullNum.substr(descriptor.size() + 1);
 				if(descriptor.size() < 2 || descriptor.size() > 3) throw std::runtime_error("Invalid integer format!");
@@ -120,7 +117,7 @@ namespace astra {
 				if(char last = fullNum[fullNum.size() - 1]; last == 'f') {
 					info.asUnsafe<Floating>().set(std::stof(fullNum.substr(0, fullNum.size() - 2)));
 				} else if(last >= '0' && last <= '9') {
-					info.asUnsafe<Floating>().set(std::stod(fullNum.substr(0, fullNum.size() - 2)));
+					info.asUnsafe<Floating>().set(std::stod(fullNum.substr(0, fullNum.size() - 1)));
 				} else
 					throw std::runtime_error("Invalid floating-point format!");
 				break;
