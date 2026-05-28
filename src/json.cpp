@@ -17,9 +17,9 @@ namespace astra {
 				break;
 			case TypeInfo::Kind::Integer:
 				if(auto intInfo = info.asUnsafe<Integer>(); intInfo.isSigned()) {
-					json = ::astra::format("{};s{}", intInfo.asSigned(), intInfo.size() * 8);
+					json = ::astra::format("s{};{}", intInfo.size() * 8, intInfo.asSigned());
 				} else {
-					json = ::astra::format("{};u{}", intInfo.asSigned(), intInfo.size() * 8);
+					json = ::astra::format("u{};{}", intInfo.size() * 8, intInfo.asUnsigned());
 				}
 				break;
 			case TypeInfo::Kind::Floating:

@@ -8,7 +8,7 @@
 namespace astra {
 	using namespace astra::list;
 
-	void ErrHelper::error(std::string_view message, TypeId type, TypeId nestedType) {
+	void ErrHelper::error(const std::string& message, TypeId type, TypeId nestedType) {
 		throw std::runtime_error(::astra::format(message,//
 			typeName(type),								 //
 			typeName(nestedType)));

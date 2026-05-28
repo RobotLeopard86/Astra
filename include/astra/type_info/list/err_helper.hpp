@@ -13,7 +13,7 @@ namespace astra {
 		///move error formating functionality outside list template classes
 		class ASTRA_API ErrHelper {
 		  protected:
-			static void error(std::string_view message, TypeId type, TypeId nestedType);
+			static void error(const std::string& message, TypeId type, TypeId nestedType);
 		};
 
 	}

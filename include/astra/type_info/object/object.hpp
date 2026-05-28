@@ -40,7 +40,7 @@ namespace astra {
 			_var.unsafeAssign(ptr);
 		}
 
-		FieldInfo getField(std::string_view name) {
+		FieldInfo getField(const std::string& name) {
 			auto it = _fields->find(name);
 
 			if(it != _fields->end()) {
@@ -53,7 +53,7 @@ namespace astra {
 			return Fields(_var.raw(), _fields, access, includeReadonly);
 		}
 
-		MethodInfo getMethod(std::string_view name) {
+		MethodInfo getMethod(const std::string& name) {
 			auto it = _methods->find(name);
 
 			if(it != _methods->end()) {
