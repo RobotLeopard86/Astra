@@ -169,10 +169,11 @@ namespace astra {
 				break;
 			}
 			case TypeInfo::Kind::Map: {
-				if(!node.IsMap()) throw std::runtime_error("Invalid map format!");
+				if(!node.IsSequence()) throw std::runtime_error("Invalid map format!");
 				Map map = info.asUnsafe<Map>();
 				map.clear();
 				for(const YAML::Node& subnode : node) {
+					if(!subnode.IsMap()) throw std::runtime_error("Invalid map format!");
 					Box key(map.keyType()), val(map.valType());
 					TypeInfo keyInfo = reflect(key.var()), valInfo = reflect(val.var());
 					deserializeYamlRecursive(subnode, keyInfo, "key");
