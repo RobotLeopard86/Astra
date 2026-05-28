@@ -1,14 +1,14 @@
 #pragma once
 
-#include "../isequence.hpp"
+#include "../ilist.hpp"
 #include "astra/dll.hpp"
 
 namespace astra {
 
-	struct ASTRA_API IVector : public ISequence {
+	struct ASTRA_API IVector : public IList {
 		~IVector() override = default;
 
-		using ISequence::forEach;
+		using IList::forEach;
 		virtual void forEach(std::function<void(Var)> callback) = 0;
 		virtual void pop() = 0;
 		virtual Var front() = 0;

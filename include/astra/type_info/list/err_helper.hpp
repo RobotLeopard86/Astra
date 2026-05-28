@@ -8,9 +8,9 @@
 
 namespace astra {
 
-	namespace sequence {
+	namespace list {
 
-		///move error formating functionality outside sequence template classes
+		///move error formating functionality outside list template classes
 		class ASTRA_API ErrHelper {
 		  protected:
 			static void error(std::string_view message, TypeId type, TypeId nestedType);

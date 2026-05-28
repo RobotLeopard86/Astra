@@ -12,46 +12,46 @@
 
 namespace astra {
 
-	struct ASTRA_API Sequence {
-		Sequence() = delete;
+	struct ASTRA_API List {
+		List() = delete;
 
 		template<typename T>
-		Sequence(std::vector<T>* vector, bool isConst) {
+		List(std::vector<T>* vector, bool isConst) {
 			new(_mem) StdVector<T>(vector, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::list<T>* list, bool isConst) {
+		List(std::list<T>* list, bool isConst) {
 			new(_mem) StdList<T>(list, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::deque<T>* deque, bool isConst) {
+		List(std::deque<T>* deque, bool isConst) {
 			new(_mem) StdDeque<T>(deque, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::stack<T>* stack, bool isConst) {
+		List(std::stack<T>* stack, bool isConst) {
 			new(_mem) StdStack<T>(stack, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::queue<T>* queue, bool isConst) {
+		List(std::queue<T>* queue, bool isConst) {
 			new(_mem) StdQueue<T>(queue, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::set<T>* set, bool isConst) {
+		List(std::set<T>* set, bool isConst) {
 			new(_mem) StdSet<T>(set, isConst);
 		}
 
 		template<typename T>
-		Sequence(std::unordered_set<T>* set, bool isConst) {
+		List(std::unordered_set<T>* set, bool isConst) {
 			new(_mem) StdUnorderedSet<T>(set, isConst);
 		}
 
-		~Sequence() {
-			impl()->~ISequence();
+		~List() {
+			impl()->~IList();
 		}
 
 		void assign(Var var) {
@@ -94,12 +94,12 @@ namespace astra {
 		char _mem[Sizeof<StdVector<int>, StdList<int>, StdDeque<int>, StdStack<int>,//
 			StdQueue<int>, StdSet<int>, StdUnorderedSet<int>>::max()];
 
-		inline const ISequence* impl() const {
-			return reinterpret_cast<const ISequence*>(&_mem[0]);
+		inline const IList* impl() const {
+			return reinterpret_cast<const IList*>(&_mem[0]);
 		}
 
-		inline ISequence* impl() {
-			return reinterpret_cast<ISequence*>(&_mem[0]);
+		inline IList* impl() {
+			return reinterpret_cast<IList*>(&_mem[0]);
 		}
 	};
 

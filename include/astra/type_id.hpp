@@ -76,7 +76,7 @@ namespace astra {
 		static TypeId get(std::array<T, size>* array);
 
 		template<typename T>
-		static typename std::enable_if_t<is_sequence_v<T>, TypeId>//
+		static typename std::enable_if_t<is_list_v<T>, TypeId>//
 		get(T* ptr);
 
 		template<typename T>

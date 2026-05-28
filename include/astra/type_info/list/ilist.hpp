@@ -7,8 +7,8 @@
 
 namespace astra {
 
-	struct ASTRA_API ISequence {
-		virtual ~ISequence() = default;
+	struct ASTRA_API IList {
+		virtual ~IList() = default;
 
 		virtual void assign(Var var) = 0;
 		virtual void unsafeAssign(void* ptr) = 0;

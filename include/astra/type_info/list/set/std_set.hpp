@@ -1,6 +1,6 @@
 #pragma once
 
-#include <unordered_set>
+#include <set>
 
 #include "../err_helper.hpp"
 #include "astra/type_name.hpp"
@@ -10,10 +10,10 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdUnorderedSet : public ISet, public sequence::ErrHelper {
-		StdUnorderedSet() = delete;
+	struct ASTRA_API StdSet : public ISet, public list::ErrHelper {
+		StdSet() = delete;
 
-		StdUnorderedSet(std::unordered_set<T>* set, bool isConst)
+		StdSet(std::set<T>* set, bool isConst)
 		  : _set(set),//
 			_isConst(isConst) {
 		}
@@ -26,13 +26,13 @@ namespace astra {
 					typeName(t)));
 			}
 
-			_set = static_cast<std::unordered_set<T>*>(const_cast<void*>(var.raw()));
+			_set = static_cast<std::set<T>*>(const_cast<void*>(var.raw()));
 			_isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_set = static_cast<std::unordered_set<T>*>(ptr);
+			_set = static_cast<std::set<T>*>(ptr);
 			_isConst = false;
 		}
 
@@ -70,7 +70,7 @@ namespace astra {
 			auto nestedType = TypeId::get<T>();
 
 			if(nestedType != value.type()) {
-				error("Trying to set with type: {} to unordered_set<{}>",//
+				error("Trying to set with type: {} to set<{}>",//
 					value.type(), nestedType);
 			}
 			_set->insert(*static_cast<const T*>(value.raw()));
@@ -81,7 +81,7 @@ namespace astra {
 			auto nestedType = TypeId::get<T>();
 
 			if(nestedType != value.type()) {
-				error("Cannot remove value with type: {} from unordered_set<{}>",//
+				error("Cannot remove value with type: {} from set<{}>",//
 					value.type(), nestedType);
 			}
 			_set->erase(*static_cast<const T*>(value.raw()));
@@ -94,7 +94,7 @@ namespace astra {
 		}
 
 	  private:
-		std::unordered_set<T>* _set;
+		std::set<T>* _set;
 		bool _isConst;
 	};
 

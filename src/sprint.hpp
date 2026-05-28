@@ -9,7 +9,7 @@
 namespace astra {
 
 	template<typename T>
-	inline void printSequence(const T& sequence, std::string* result, int indention);
+	inline void printList(const T& list, std::string* result, int indention);
 
 	inline void sprint(const TypeInfo& info, std::string* result, int indention) {
 		info.match(
@@ -72,8 +72,8 @@ namespace astra {
 				result->resize(result->size() - 2);
 				*result += "]";
 			},
-			[result, indention](const Array& a) { printSequence(a, result, indention); },
-			[result, indention](const Sequence& s) { printSequence(s, result, indention); },
+			[result, indention](const Array& a) { printList(a, result, indention); },
+			[result, indention](const List& s) { printList(s, result, indention); },
 			[result, indention](const Pointer& p) {
 				try {
 					auto nestedPtr = p.getNested();
@@ -86,14 +86,14 @@ namespace astra {
 	}
 
 	template<typename T>
-	inline void printSequence(const T& sequence, std::string* result, int indention) {
-		if(sequence.size() == 0) {
+	inline void printList(const T& list, std::string* result, int indention) {
+		if(list.size() == 0) {
 			*result += "[]\n";
 			return;
 		}
 
 		*result += "[";
-		sequence.forEach([result, indention](Var entry) {
+		list.forEach([result, indention](Var entry) {
 			auto entryInfo = reflect(entry);
 
 			sprint(entryInfo, result, indention);

@@ -17,19 +17,19 @@
 #include "type_info/map/map.hpp"
 #include "type_info/object/object.hpp"
 #include "type_info/pointer/pointer.hpp"
-#include "type_info/sequence/sequence.hpp"
+#include "type_info/list/list.hpp"
 #include "type_info/string/string.hpp"
 
 namespace astra {
 
-#define BASE Variant<Bool, Integer, Floating, String, Enum, Object, Array, Sequence, Map, Pointer>
+#define BASE Variant<Bool, Integer, Floating, String, Enum, Object, Array, List, Map, Pointer>
 
 	///The sum type contains information about nature of stored value
 	///
 	///Primitive for int, float, std::string and others
 	///Object for structs and classes
 	///Array
-	///Sequence for arrays and containers with one generic parameter
+	///List for arrays and containers with one generic parameter
 	///Map for associative container such as std::map
 	///Pointer for smart pointers
 	class ASTRA_API TypeInfo : public BASE {
@@ -62,7 +62,7 @@ namespace astra {
 		  : BASE(value) {
 		}
 
-		TypeInfo(Sequence value)
+		TypeInfo(List value)
 		  : BASE(value) {
 		}
 
@@ -84,7 +84,7 @@ namespace astra {
 
 		Var var() {
 			return match([](Array& a) -> Var { return a.ownVar(); },//
-				[](Sequence& s) -> Var { return s.ownVar(); },		//
+				[](List& s) -> Var { return s.ownVar(); },			//
 				[](Map& m) -> Var { return m.ownVar(); },			//
 				[](auto&& v) { return v.var(); });
 		}
@@ -97,7 +97,7 @@ namespace astra {
 			Enum,
 			Object,
 			Array,
-			Sequence,
+			List,
 			Map,
 			Pointer,
 		};

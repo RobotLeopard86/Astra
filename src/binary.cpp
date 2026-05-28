@@ -8,7 +8,7 @@
 #include "astra/type_info/array/array.hpp"
 #include "astra/type_info/floating/floating.hpp"
 #include "astra/type_info/pointer/pointer.hpp"
-#include "astra/type_info/sequence/sequence.hpp"
+#include "astra/type_info/list/list.hpp"
 #include "astra/types/all_types.hpp"// IWYU pragma: keep
 #include "bytestream.hpp"
 
@@ -81,8 +81,8 @@ namespace astra {
 					deserializeBinaryRecursive(&entryInfo, reader);
 				});
 			break; }
-			case TypeInfo::Kind::kSequence: {
-				auto s = info->asUnsafe<Sequence>();
+			case TypeInfo::Kind::kList: {
+				auto s = info->asUnsafe<List>();
 				s.clear();
 
 				auto entryInfo = reflect(Var(nullptr, s.nestedType(), false));
@@ -257,7 +257,7 @@ namespace astra {
 						doc.CreateValue<std::vector<std::string>>(path);
 						break;
 					case TypeInfo::Kind::Array:
-					case TypeInfo::Kind::Sequence:
+					case TypeInfo::Kind::List:
 					case TypeInfo::Kind::Map:
 					case TypeInfo::Kind::Object:
 						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
@@ -275,9 +275,9 @@ namespace astra {
 				});
 				break;
 			}
-			case TypeInfo::Kind::Sequence: {
-				const auto& seq = info.asUnsafe<Sequence>();
-				TypeInfo nestedInfo = reflect(Var(nullptr, seq.nestedType(), false));
+			case TypeInfo::Kind::List: {
+				const auto& list = info.asUnsafe<List>();
+				TypeInfo nestedInfo = reflect(Var(nullptr, list.nestedType(), false));
 				while(nestedInfo.getKind() == TypeInfo::Kind::Pointer) {
 					try {
 						nestedInfo = reflect(nestedInfo.asUnsafe<Pointer>().getNested());
@@ -334,7 +334,7 @@ namespace astra {
 						doc.CreateValue<std::vector<std::string>>(path);
 						break;
 					case TypeInfo::Kind::Array:
-					case TypeInfo::Kind::Sequence:
+					case TypeInfo::Kind::List:
 					case TypeInfo::Kind::Map:
 					case TypeInfo::Kind::Object:
 						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
@@ -344,8 +344,8 @@ namespace astra {
 					default: return;
 				}
 				size_t idx = 0;
-				seq.unsafeForEach([&](void* ptr) {
-					TypeInfo nestedInfo = reflect(Var(nullptr, seq.nestedType(), false));
+				list.unsafeForEach([&](void* ptr) {
+					TypeInfo nestedInfo = reflect(Var(nullptr, list.nestedType(), false));
 					nestedInfo.unsafeAssign(ptr);
 					serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
 					++idx;

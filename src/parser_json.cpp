@@ -96,7 +96,7 @@ namespace astra {
               return;
             });
           },
-          [this](Sequence& s) -> void {
+          [this](List& s) -> void {
             s.clear();
             return parseArray(s.nestedType(), [&](std::size_t, Var var) {
               return s.push(var);

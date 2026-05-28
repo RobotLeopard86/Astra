@@ -94,7 +94,7 @@ namespace astra {
 					[this](Array& a) -> void {
 						return parseFlowSeq(a.nestedType(), [&](std::size_t i, Var var) { return addToArray(a, i, var); });
 					},
-					[this](Sequence& s) -> void {
+					[this](List& s) -> void {
 						return parseFlowSeq(s.nestedType(), [&](std::size_t, Var var) { return s.push(var); });
 					},
 					[this](auto&&) -> void { errorMatch(); });
@@ -176,7 +176,7 @@ namespace astra {
 			[this](Array& a) -> void {
 				return parseSeq(a.nestedType(), [&](std::size_t i, Var var) { return addToArray(a, i, var); });
 			},
-			[this](Sequence& s) -> void {
+			[this](List& s) -> void {
 				s.clear();
 				return parseSeq(s.nestedType(), [&](std::size_t, Var var) { return s.push(var); });
 			},

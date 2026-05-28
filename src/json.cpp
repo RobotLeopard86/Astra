@@ -4,7 +4,7 @@
 #include "astra/type_info.hpp"
 #include "astra/type_info/enum/enum.hpp"
 #include "astra/type_info/integer/integer.hpp"
-#include "astra/type_info/sequence/sequence.hpp"
+#include "astra/type_info/list/list.hpp"
 #include "astra/type_info/string/string.hpp"
 #include "nlohmann/json.hpp"
 
@@ -49,11 +49,11 @@ namespace astra {
 					serializeJsonRecursive(json[i++], nestedInfo, "");
 				});
 			}
-			case TypeInfo::Kind::Sequence: {
-				Sequence seq = info.asUnsafe<Sequence>();
-				TypeInfo nestedInfo = reflect(Var(nullptr, seq.nestedType(), false));
+			case TypeInfo::Kind::List: {
+				List list = info.asUnsafe<List>();
+				TypeInfo nestedInfo = reflect(Var(nullptr, list.nestedType(), false));
 				std::size_t i = 0;
-				seq.unsafeForEach([&](void* ptr) {
+				list.unsafeForEach([&](void* ptr) {
 					nestedInfo.unsafeAssign(ptr);
 					serializeJsonRecursive(json[i++], nestedInfo, "");
 				});
@@ -71,7 +71,7 @@ namespace astra {
 				const auto& p = info.asUnsafe<Pointer>();
 				try {
 					Var nested = p.getNested();
-					serializeJsonRecursive(json, reflect(nested), field);
+					serializeJsonRecursive(_json, reflect(nested), field);
 				} catch(...) {
 					//Can't serialize nullptr
 				}

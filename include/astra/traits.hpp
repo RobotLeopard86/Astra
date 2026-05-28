@@ -51,31 +51,31 @@ namespace astra {
 	struct ASTRA_API is_string<const wchar_t*> : std::true_type {};
 
 	template<typename T>
-	struct ASTRA_API is_sequence : std::false_type {};
+	struct ASTRA_API is_list : std::false_type {};
 
 	template<typename T>
-	inline constexpr bool is_sequence_v = is_sequence<T>::value;
+	inline constexpr bool is_list_v = is_list<T>::value;
 
 	template<typename T>
-	struct ASTRA_API is_sequence<std::vector<T>> : std::true_type {};
+	struct ASTRA_API is_list<std::vector<T>> : std::true_type {};
 
 	template<typename T>
-	struct ASTRA_API is_sequence<std::list<T>> : std::true_type {};
+	struct ASTRA_API is_list<std::list<T>> : std::true_type {};
 
 	template<typename T>
-	struct ASTRA_API is_sequence<std::deque<T>> : std::true_type {};
+	struct ASTRA_API is_list<std::deque<T>> : std::true_type {};
 
 	template<typename T>
-	struct ASTRA_API is_sequence<std::queue<T>> : std::true_type {};
+	struct ASTRA_API is_list<std::queue<T>> : std::true_type {};
 
 	template<typename T>
-	struct ASTRA_API is_sequence<std::stack<T>> : std::true_type {};
+	struct ASTRA_API is_list<std::stack<T>> : std::true_type {};
 
 	template<typename T>
-	struct ASTRA_API is_sequence<std::set<T>> : std::true_type {};
+	struct ASTRA_API is_list<std::set<T>> : std::true_type {};
 
 	template<typename T>
-	struct ASTRA_API is_sequence<std::unordered_set<T>> : std::true_type {};
+	struct ASTRA_API is_list<std::unordered_set<T>> : std::true_type {};
 
 	template<typename T>
 	struct ASTRA_API is_map : std::false_type {};
@@ -106,7 +106,7 @@ namespace astra {
 	template<typename T>
 	struct ASTRA_API is_class {
 		static constexpr bool value =
-			std::is_class_v<T> && !is_sequence_v<T> && !is_map_v<T> && !is_string_v<T>;
+			std::is_class_v<T> && !is_list_v<T> && !is_map_v<T> && !is_string_v<T>;
 	};
 
 	template<typename T>
