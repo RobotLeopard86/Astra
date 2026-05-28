@@ -27,7 +27,7 @@ int main() {
 
 	//Let's turn the JSON into YAML
 	std::cout << "This can also be in JSON: "
-			  << astra::converters::toJson::fromYamlString<Car>(asYaml) << std::endl;
+			  << astra::convert::toJson::fromYamlString<Car>(asYaml) << std::endl;
 
 	//Let's reflect it
 	astra::TypeInfo info = astra::reflect(&car);

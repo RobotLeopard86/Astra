@@ -1,6 +1,8 @@
 R"(
 #pragma once
 
+// IWYU pragma: private; include "{{project}}.astra.hpp"
+
 #include "astra/type_id.hpp"
 #include "astra/types/type_actions.hpp"
 

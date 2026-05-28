@@ -171,8 +171,8 @@ int main(int argc, char* argv[]) {
 
 #pragma once
 
-#include "astra/reflection.hpp"
-#include "astra/types/all_types.hpp"
+#include "astra/reflection.hpp" // IWYU pragma: export
+#include "astra/types/all_types.hpp" // IWYU pragma: export
 
 )";
 	std::ofstream rootCpp(out / (project + ".astra.cpp"));
@@ -218,6 +218,7 @@ int main(int argc, char* argv[]) {
 
 		//Ensure directories are okay
 		json["file_name"] = hppFile.filename();
+		json["project"] = project;
 		std::filesystem::create_directories(hppFile.parent_path());
 		std::filesystem::create_directories(cppFile.parent_path());
 
@@ -273,8 +274,8 @@ int main(int argc, char* argv[]) {
 
 		//Add includes to root files
 		const std::string includeStr = "#include \"astra_generated/";
-		rootHeader << includeStr << filenameUTF8 << ".hpp\"\n";
-		rootCpp << includeStr << filenameUTF8 << ".cpp\"\n";
+		rootHeader << includeStr << filenameUTF8 << ".hpp\" // IWYU pragma: export\n";
+		rootCpp << includeStr << filenameUTF8 << ".cpp\" // IWYU pragma: export\n";
 	}
 
 	//Close root files
