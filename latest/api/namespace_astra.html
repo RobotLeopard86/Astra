@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Namespace astra::sequence" href="namespace_astra__sequence.html" />
+    <link rel="next" title="Namespace astra::list" href="namespace_astra__list.html" />
     <link rel="prev" title="Astra API Reference" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -346,7 +346,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Namespace astra</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__sequence.html">Namespace astra::sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespace_astra__list.html">Namespace astra::list</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
@@ -418,6 +418,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IArray.html">Struct IArray</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html">Struct IDoubleEndedList</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IEnum.html">Struct IEnum</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -454,6 +457,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__class.html">Template Struct is_class</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__list.html">Template Struct is_list</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__map.html">Template Struct is_map</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -466,9 +472,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__ref__type_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_ref_type&lt; const wchar_t * &gt;</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__sequence.html">Template Struct is_sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string.html">Template Struct is_string</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -476,9 +479,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_string&lt; const wchar_t * &gt;</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISequence.html">Struct ISequence</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISet.html">Struct ISet</a></li>
@@ -494,6 +494,12 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1json.html">Struct json</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1List.html">Struct List</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ListActions.html">Template Struct ListActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Map.html">Struct Map</a></li>
@@ -524,12 +530,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1QueueIterator.html">Template Struct QueueIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sequence.html">Struct Sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1SequenceActions.html">Template Struct SequenceActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof.html">Template Struct Sizeof</a></li>
@@ -625,13 +625,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html">Class ErrHelper</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html">Class ErrHelper</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a></li>
@@ -745,13 +745,13 @@
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1adac536535e9db8a1262eaed8cff8f762.html">Variable astra::is_class_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html">Variable astra::is_list_v</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html">Variable astra::is_map_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html">Variable astra::is_ref_type_v</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html">Variable astra::is_sequence_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a1f09d77b72dd349aae29c3dc3ec35bd9.html">Variable astra::is_string_v</a></li>
@@ -852,7 +852,7 @@
 <section id="namespaces">
 <h2>Namespaces<a class="headerlink" href="#namespaces" title="Link to this heading"><span/></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="namespace_astra__sequence.html#namespace-astra-sequence"><span class="std std-ref">Namespace astra::sequence</span></a></p></li>
+<li><p><a class="reference internal" href="namespace_astra__list.html#namespace-astra-list"><span class="std std-ref">Namespace astra::list</span></a></p></li>
 </ul>
 </section>
 <section id="classes">
@@ -881,6 +881,7 @@
 <li><p><a class="reference internal" href="structastra_1_1FloatActions.html#exhale-struct-structastra-1-1floatactions"><span class="std std-ref">Template Struct FloatActions</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Floating.html#exhale-struct-structastra-1-1floating"><span class="std std-ref">Struct Floating</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1IArray.html#exhale-struct-structastra-1-1iarray"><span class="std std-ref">Struct IArray</span></a></p></li>
+<li><p><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#exhale-struct-structastra-1-1idoubleendedlist"><span class="std std-ref">Struct IDoubleEndedList</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1IEnum.html#exhale-struct-structastra-1-1ienum"><span class="std std-ref">Struct IEnum</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1IFloating.html#exhale-struct-structastra-1-1ifloating"><span class="std std-ref">Struct IFloating</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1IInteger.html#exhale-struct-structastra-1-1iinteger"><span class="std std-ref">Struct IInteger</span></a></p></li>
@@ -893,20 +894,21 @@
 <li><p><a class="reference internal" href="structastra_1_1IQueue.html#exhale-struct-structastra-1-1iqueue"><span class="std std-ref">Struct IQueue</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__array.html#exhale-struct-structastra-1-1is-array"><span class="std std-ref">Template Struct is_array</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__class.html#exhale-struct-structastra-1-1is-class"><span class="std std-ref">Template Struct is_class</span></a></p></li>
+<li><p><a class="reference internal" href="structastra_1_1is__list.html#exhale-struct-structastra-1-1is-list"><span class="std std-ref">Template Struct is_list</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__map.html#exhale-struct-structastra-1-1is-map"><span class="std std-ref">Template Struct is_map</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__ref__type.html#exhale-struct-structastra-1-1is-ref-type"><span class="std std-ref">Template Struct is_ref_type</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__ref__type_3_01const_01char_01_5_01_4.html#exhale-struct-structastra-1-1is-ref-type-3-01const-01char-01-5-01-4"><span class="std std-ref">Template Struct is_ref_type&lt; const char * &gt;</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__ref__type_3_01const_01wchar__t_01_5_01_4.html#exhale-struct-structastra-1-1is-ref-type-3-01const-01wchar-t-01-5-01-4"><span class="std std-ref">Template Struct is_ref_type&lt; const wchar_t * &gt;</span></a></p></li>
-<li><p><a class="reference internal" href="structastra_1_1is__sequence.html#exhale-struct-structastra-1-1is-sequence"><span class="std std-ref">Template Struct is_sequence</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__string.html#exhale-struct-structastra-1-1is-string"><span class="std std-ref">Template Struct is_string</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__string_3_01const_01char_01_5_01_4.html#exhale-struct-structastra-1-1is-string-3-01const-01char-01-5-01-4"><span class="std std-ref">Template Struct is_string&lt; const char * &gt;</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1is__string_3_01const_01wchar__t_01_5_01_4.html#exhale-struct-structastra-1-1is-string-3-01const-01wchar-t-01-5-01-4"><span class="std std-ref">Template Struct is_string&lt; const wchar_t * &gt;</span></a></p></li>
-<li><p><a class="reference internal" href="structastra_1_1ISequence.html#exhale-struct-structastra-1-1isequence"><span class="std std-ref">Struct ISequence</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1ISet.html#exhale-struct-structastra-1-1iset"><span class="std std-ref">Struct ISet</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1IStack.html#exhale-struct-structastra-1-1istack"><span class="std std-ref">Struct IStack</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1IString.html#exhale-struct-structastra-1-1istring"><span class="std std-ref">Struct IString</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1IVector.html#exhale-struct-structastra-1-1ivector"><span class="std std-ref">Struct IVector</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1json.html#exhale-struct-structastra-1-1json"><span class="std std-ref">Struct json</span></a></p></li>
+<li><p><a class="reference internal" href="structastra_1_1List.html#exhale-struct-structastra-1-1list"><span class="std std-ref">Struct List</span></a></p></li>
+<li><p><a class="reference internal" href="structastra_1_1ListActions.html#exhale-struct-structastra-1-1listactions"><span class="std std-ref">Template Struct ListActions</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Map.html#exhale-struct-structastra-1-1map"><span class="std std-ref">Struct Map</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1MapActions.html#exhale-struct-structastra-1-1mapactions"><span class="std std-ref">Template Struct MapActions</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1MethodDesc.html#exhale-struct-structastra-1-1methoddesc"><span class="std std-ref">Struct MethodDesc</span></a></p></li>
@@ -917,8 +919,6 @@
 <li><p><a class="reference internal" href="structastra_1_1Overloaded.html#exhale-struct-structastra-1-1overloaded"><span class="std std-ref">Template Struct Overloaded</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Pointer.html#exhale-struct-structastra-1-1pointer"><span class="std std-ref">Struct Pointer</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1QueueIterator.html#exhale-struct-structastra-1-1queueiterator"><span class="std std-ref">Template Struct QueueIterator</span></a></p></li>
-<li><p><a class="reference internal" href="structastra_1_1Sequence.html#exhale-struct-structastra-1-1sequence"><span class="std std-ref">Struct Sequence</span></a></p></li>
-<li><p><a class="reference internal" href="structastra_1_1SequenceActions.html#exhale-struct-structastra-1-1sequenceactions"><span class="std std-ref">Template Struct SequenceActions</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Sizeof.html#exhale-struct-structastra-1-1sizeof"><span class="std std-ref">Template Struct Sizeof</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Sizeof_3_01T_01_4.html#exhale-struct-structastra-1-1sizeof-3-01t-01-4"><span class="std std-ref">Template Struct Sizeof&lt; T &gt;</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1StackIterator.html#exhale-struct-structastra-1-1stackiterator"><span class="std std-ref">Template Struct StackIterator</span></a></p></li>
@@ -979,9 +979,9 @@
 <li><p><a class="reference internal" href="function_access_8hpp_1ae73436b3de35e85b751c17bdccae442b.html#exhale-function-access-8hpp-1ae73436b3de35e85b751c17bdccae442b"><span class="std std-ref">Function astra::operator&amp;</span></a></p></li>
 <li><p><a class="reference internal" href="function_access_8hpp_1a6cf11e74058cada7bbfaa7697595a915.html#exhale-function-access-8hpp-1a6cf11e74058cada7bbfaa7697595a915"><span class="std std-ref">Function astra::operator|</span></a></p></li>
 <li><p><a class="reference internal" href="function_overloaded_8hpp_1aab8921fe63674c9f2b4d37fe09c9b4f2.html#exhale-function-overloaded-8hpp-1aab8921fe63674c9f2b4d37fe09c9b4f2"><span class="std std-ref">Template Function astra::Overloaded</span></a></p></li>
+<li><p><a class="reference internal" href="function_reflection_8hpp_1a9b37232674257fdb602d050bd1ad72c1.html#exhale-function-reflection-8hpp-1a9b37232674257fdb602d050bd1ad72c1"><span class="std std-ref">Function astra::print(const TypeInfo&amp;)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1af1519901592ea6c930c56e9a70d1fad5.html#exhale-function-reflection-8hpp-1af1519901592ea6c930c56e9a70d1fad5"><span class="std std-ref">Function astra::print(Var)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a9f6f38085af9ec269580bc783510c259.html#exhale-function-reflection-8hpp-1a9f6f38085af9ec269580bc783510c259"><span class="std std-ref">Template Function astra::print(const T *)</span></a></p></li>
-<li><p><a class="reference internal" href="function_reflection_8hpp_1a9b37232674257fdb602d050bd1ad72c1.html#exhale-function-reflection-8hpp-1a9b37232674257fdb602d050bd1ad72c1"><span class="std std-ref">Function astra::print(const TypeInfo&amp;)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1aad262ca670e6430753354c6c4bf155ea.html#exhale-function-reflection-8hpp-1aad262ca670e6430753354c6c4bf155ea"><span class="std std-ref">Template Function astra::reflect(T *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a6570da25f1d3fa9b105d8466378c571a.html#exhale-function-reflection-8hpp-1a6570da25f1d3fa9b105d8466378c571a"><span class="std std-ref">Template Function astra::reflect(const T *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a55c2d4b75265cb03d7f2406d9a64aff7.html#exhale-function-reflection-8hpp-1a55c2d4b75265cb03d7f2406d9a64aff7"><span class="std std-ref">Function astra::reflect(Var)</span></a></p></li>
@@ -1009,9 +1009,9 @@
 <li><p><a class="reference internal" href="variable_box_8hpp_1a871b68d3ba1f070c6acb572eaf6e7f94.html#exhale-variable-box-8hpp-1a871b68d3ba1f070c6acb572eaf6e7f94"><span class="std std-ref">Variable astra::defaultAlloc</span></a></p></li>
 <li><p><a class="reference internal" href="variable_traits_8hpp_1a508e163ddf8272848b0ab507ef6c5881.html#exhale-variable-traits-8hpp-1a508e163ddf8272848b0ab507ef6c5881"><span class="std std-ref">Variable astra::is_array_v</span></a></p></li>
 <li><p><a class="reference internal" href="variable_traits_8hpp_1adac536535e9db8a1262eaed8cff8f762.html#exhale-variable-traits-8hpp-1adac536535e9db8a1262eaed8cff8f762"><span class="std std-ref">Variable astra::is_class_v</span></a></p></li>
+<li><p><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html#exhale-variable-traits-8hpp-1a92a952b23feadb16406eea4e67ab8974"><span class="std std-ref">Variable astra::is_list_v</span></a></p></li>
 <li><p><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html#exhale-variable-traits-8hpp-1aa75141b389d48fb877a2f0b7463b21ea"><span class="std std-ref">Variable astra::is_map_v</span></a></p></li>
 <li><p><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html#exhale-variable-traits-8hpp-1a0580cbc24b8e8a443f03af7a03f2328d"><span class="std std-ref">Variable astra::is_ref_type_v</span></a></p></li>
-<li><p><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html#exhale-variable-traits-8hpp-1a3c1fc020340f89042fb50a6fad0115b3"><span class="std std-ref">Variable astra::is_sequence_v</span></a></p></li>
 <li><p><a class="reference internal" href="variable_traits_8hpp_1a1f09d77b72dd349aae29c3dc3ec35bd9.html#exhale-variable-traits-8hpp-1a1f09d77b72dd349aae29c3dc3ec35bd9"><span class="std std-ref">Variable astra::is_string_v</span></a></p></li>
 </ul>
 </section>
@@ -1037,11 +1037,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="namespace_astra__sequence.html"
+       href="namespace_astra__list.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Namespace astra::sequence</p>
+        <p class="prev-next-title">Namespace astra::list</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -417,12 +417,12 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/map/map.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/object/object.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/pointer/pointer.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/sequence/sequence.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/list/list.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/string/string.hpp&quot;</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
-<span class="cp">#define BASE Variant&lt;Bool, Integer, Floating, String, Enum, Object, Array, Sequence, Map, Pointer&gt;</span>
+<span class="cp">#define BASE Variant&lt;Bool, Integer, Floating, String, Enum, Object, Array, List, Map, Pointer&gt;</span>
 
 <span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">TypeInfo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">BASE</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">public</span><span class="o">:</span>
@@ -454,7 +454,7 @@
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">BASE</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">TypeInfo</span><span class="p">(</span><span class="n">Sequence</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="w">        </span><span class="n">TypeInfo</span><span class="p">(</span><span class="n">List</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">BASE</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
 
@@ -476,7 +476,7 @@
 
 <span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">match</span><span class="p">([](</span><span class="n">Array</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Var</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">ownVar</span><span class="p">();</span><span class="w"> </span><span class="p">},</span><span class="c1">//</span>
-<span class="w">                </span><span class="p">[](</span><span class="n">Sequence</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Var</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ownVar</span><span class="p">();</span><span class="w"> </span><span class="p">},</span><span class="w">      </span><span class="c1">//</span>
+<span class="w">                </span><span class="p">[](</span><span class="n">List</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Var</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ownVar</span><span class="p">();</span><span class="w"> </span><span class="p">},</span><span class="w">          </span><span class="c1">//</span>
 <span class="w">                </span><span class="p">[](</span><span class="n">Map</span><span class="o">&amp;</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Var</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">ownVar</span><span class="p">();</span><span class="w"> </span><span class="p">},</span><span class="w">           </span><span class="c1">//</span>
 <span class="w">                </span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">var</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
 <span class="w">        </span><span class="p">}</span>
@@ -489,7 +489,7 @@
 <span class="w">            </span><span class="n">Enum</span><span class="p">,</span>
 <span class="w">            </span><span class="n">Object</span><span class="p">,</span>
 <span class="w">            </span><span class="n">Array</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Sequence</span><span class="p">,</span>
+<span class="w">            </span><span class="n">List</span><span class="p">,</span>
 <span class="w">            </span><span class="n">Map</span><span class="p">,</span>
 <span class="w">            </span><span class="n">Pointer</span><span class="p">,</span>
 <span class="w">        </span><span class="p">};</span>

@@ -346,7 +346,7 @@
 <li class="toctree-l1"><a class="reference internal" href="namespace_astra.html">Namespace astra</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__sequence.html">Namespace astra::sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespace_astra__list.html">Namespace astra::list</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
@@ -418,6 +418,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IArray.html">Struct IArray</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html">Struct IDoubleEndedList</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IEnum.html">Struct IEnum</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -454,6 +457,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__class.html">Template Struct is_class</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__list.html">Template Struct is_list</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__map.html">Template Struct is_map</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -466,9 +472,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__ref__type_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_ref_type&lt; const wchar_t * &gt;</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__sequence.html">Template Struct is_sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string.html">Template Struct is_string</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -476,9 +479,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_string&lt; const wchar_t * &gt;</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISequence.html">Struct ISequence</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISet.html">Struct ISet</a></li>
@@ -494,6 +494,12 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1json.html">Struct json</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1List.html">Struct List</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ListActions.html">Template Struct ListActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Map.html">Struct Map</a></li>
@@ -524,12 +530,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1QueueIterator.html">Template Struct QueueIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sequence.html">Struct Sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1SequenceActions.html">Template Struct SequenceActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof.html">Template Struct Sizeof</a></li>
@@ -625,13 +625,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html">Class ErrHelper</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html">Class ErrHelper</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a></li>
@@ -745,13 +745,13 @@
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1adac536535e9db8a1262eaed8cff8f762.html">Variable astra::is_class_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html">Variable astra::is_list_v</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html">Variable astra::is_map_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html">Variable astra::is_ref_type_v</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html">Variable astra::is_sequence_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a1f09d77b72dd349aae29c3dc3ec35bd9.html">Variable astra::is_string_v</a></li>
@@ -839,7 +839,7 @@
   <section id="template-struct-stdset">
 <span id="exhale-struct-structastra-1-1stdset"></span><h1>Template Struct StdSet<a class="headerlink" href="#template-struct-stdset" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_type_info_sequence_set_std_set.hpp.html#file-include-astra-type-info-sequence-set-std-set-hpp"><span class="std std-ref">File std_set.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_type_info_list_set_std_set.hpp.html#file-include-astra-type-info-list-set-std-set-hpp"><span class="std std-ref">File std_set.hpp</span></a></p></li>
 </ul>
 <section id="inheritance-relationships">
 <h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Link to this heading"><span/></a></h2>
@@ -847,7 +847,7 @@
 <h3>Base Types<a class="headerlink" href="#base-types" title="Link to this heading"><span/></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">astra::ISet</span></code> (<a class="reference internal" href="structastra_1_1ISet.html#exhale-struct-structastra-1-1iset"><span class="std std-ref">Struct ISet</span></a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">astra::sequence::ErrHelper</span></code> (<a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html#exhale-class-classastra-1-1sequence-1-1errhelper"><span class="std std-ref">Class ErrHelper</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">astra::list::ErrHelper</span></code> (<a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html#exhale-class-classastra-1-1list-1-1errhelper"><span class="std std-ref">Class ErrHelper</span></a>)</p></li>
 </ul>
 </section>
 </section>
@@ -855,7 +855,7 @@
 <h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Link to this heading"><span/></a></h2>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6StdSetE">
-<span id="_CPPv3I0EN5astra6StdSetE"></span><span id="_CPPv2I0EN5astra6StdSetE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1StdSet"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StdSet</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">astra</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structastra_1_1ISet.html#_CPPv4N5astra4ISetE" title="astra::ISet"><span class="n"><span class="pre">ISet</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">astra</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html#_CPPv4N5astra8sequence9ErrHelperE" title="astra::sequence::ErrHelper"><span class="n"><span class="pre">ErrHelper</span></span></a><a class="headerlink" href="#_CPPv4I0EN5astra6StdSetE" title="Link to this definition"><span/></a><br /></dt>
+<span id="_CPPv3I0EN5astra6StdSetE"></span><span id="_CPPv2I0EN5astra6StdSetE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1StdSet"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StdSet</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">astra</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structastra_1_1ISet.html#_CPPv4N5astra4ISetE" title="astra::ISet"><span class="n"><span class="pre">ISet</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">astra</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">list</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html#_CPPv4N5astra4list9ErrHelperE" title="astra::list::ErrHelper"><span class="n"><span class="pre">ErrHelper</span></span></a><a class="headerlink" href="#_CPPv4I0EN5astra6StdSetE" title="Link to this definition"><span/></a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">

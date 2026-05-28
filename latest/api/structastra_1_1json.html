@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Struct Map" href="structastra_1_1Map.html" />
+    <link rel="next" title="Struct List" href="structastra_1_1List.html" />
     <link rel="prev" title="Struct IVector" href="structastra_1_1IVector.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -346,7 +346,7 @@
 <li class="toctree-l1"><a class="reference internal" href="namespace_astra.html">Namespace astra</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__sequence.html">Namespace astra::sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespace_astra__list.html">Namespace astra::list</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
@@ -418,6 +418,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IArray.html">Struct IArray</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html">Struct IDoubleEndedList</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IEnum.html">Struct IEnum</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -454,6 +457,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__class.html">Template Struct is_class</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__list.html">Template Struct is_list</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__map.html">Template Struct is_map</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -466,9 +472,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__ref__type_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_ref_type&lt; const wchar_t * &gt;</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__sequence.html">Template Struct is_sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string.html">Template Struct is_string</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -476,9 +479,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_string&lt; const wchar_t * &gt;</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISequence.html">Struct ISequence</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISet.html">Struct ISet</a></li>
@@ -494,6 +494,12 @@
 </ul>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Struct json</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1List.html">Struct List</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ListActions.html">Template Struct ListActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Map.html">Struct Map</a></li>
@@ -524,12 +530,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1QueueIterator.html">Template Struct QueueIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sequence.html">Struct Sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1SequenceActions.html">Template Struct SequenceActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof.html">Template Struct Sizeof</a></li>
@@ -625,13 +625,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html">Class ErrHelper</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html">Class ErrHelper</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a></li>
@@ -745,13 +745,13 @@
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1adac536535e9db8a1262eaed8cff8f762.html">Variable astra::is_class_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html">Variable astra::is_list_v</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html">Variable astra::is_map_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html">Variable astra::is_ref_type_v</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html">Variable astra::is_sequence_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a1f09d77b72dd349aae29c3dc3ec35bd9.html">Variable astra::is_string_v</a></li>
@@ -904,11 +904,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="structastra_1_1Map.html"
+       href="structastra_1_1List.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Struct Map</p>
+        <p class="prev-next-title">Struct List</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -346,7 +346,7 @@
 <li class="toctree-l1"><a class="reference internal" href="namespace_astra.html">Namespace astra</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__sequence.html">Namespace astra::sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespace_astra__list.html">Namespace astra::list</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
@@ -418,6 +418,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IArray.html">Struct IArray</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html">Struct IDoubleEndedList</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IEnum.html">Struct IEnum</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -454,6 +457,9 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__class.html">Template Struct is_class</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__list.html">Template Struct is_list</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__map.html">Template Struct is_map</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -466,9 +472,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__ref__type_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_ref_type&lt; const wchar_t * &gt;</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__sequence.html">Template Struct is_sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string.html">Template Struct is_string</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -476,9 +479,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string_3_01const_01wchar__t_01_5_01_4.html">Template Struct is_string&lt; const wchar_t * &gt;</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISequence.html">Struct ISequence</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISet.html">Struct ISet</a></li>
@@ -494,6 +494,12 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1json.html">Struct json</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1List.html">Struct List</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ListActions.html">Template Struct ListActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Map.html">Struct Map</a></li>
@@ -524,12 +530,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1QueueIterator.html">Template Struct QueueIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sequence.html">Struct Sequence</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1SequenceActions.html">Template Struct SequenceActions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof.html">Template Struct Sizeof</a></li>
@@ -625,13 +625,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html">Class ErrHelper</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html">Class ErrHelper</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a></li>
@@ -745,13 +745,13 @@
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1adac536535e9db8a1262eaed8cff8f762.html">Variable astra::is_class_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html">Variable astra::is_list_v</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html">Variable astra::is_map_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html">Variable astra::is_ref_type_v</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html">Variable astra::is_sequence_v</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a1f09d77b72dd349aae29c3dc3ec35bd9.html">Variable astra::is_string_v</a></li>
@@ -855,8 +855,8 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__sequence.html">Namespace astra::sequence</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="namespace_astra__sequence.html#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespace_astra__list.html">Namespace astra::list</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_astra__list.html#classes">Classes</a></li>
 </ul>
 </li>
 </ul>
@@ -1367,6 +1367,32 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html">Struct IDoubleEndedList</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#base-type">Base Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#struct-documentation">Struct Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedListE"><code class="docutils literal notranslate"><span class="pre">astra::IDoubleEndedList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedListD0Ev"><code class="docutils literal notranslate"><span class="pre">~IDoubleEndedList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedList7forEachENSt8functionIFv3VarEEE"><code class="docutils literal notranslate"><span class="pre">forEach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedList3popEv"><code class="docutils literal notranslate"><span class="pre">pop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedList9pushFrontE3Var"><code class="docutils literal notranslate"><span class="pre">pushFront()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedList8popFrontEv"><code class="docutils literal notranslate"><span class="pre">popFront()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedList5frontEv"><code class="docutils literal notranslate"><span class="pre">front()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4N5astra16IDoubleEndedList4backEv"><code class="docutils literal notranslate"><span class="pre">back()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IDoubleEndedList.html#_CPPv4NK5astra16IDoubleEndedList7forEachENSt8functionIFv3VarEEE"><code class="docutils literal notranslate"><span class="pre">forEach()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IEnum.html">Struct IEnum</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structastra_1_1IEnum.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structastra_1_1IEnum.html#derived-type">Derived Type</a></li>
@@ -1443,20 +1469,21 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1IList.html">Struct IList</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structastra_1_1IList.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structastra_1_1IList.html#base-type">Base Type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="structastra_1_1IList.html#derived-types">Derived Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structastra_1_1IList.html#struct-documentation">Struct Documentation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IListE"><code class="docutils literal notranslate"><span class="pre">astra::IList</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IListD0Ev"><code class="docutils literal notranslate"><span class="pre">~IList()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList7forEachENSt8functionIFv3VarEEE"><code class="docutils literal notranslate"><span class="pre">forEach()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList3popEv"><code class="docutils literal notranslate"><span class="pre">pop()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList9pushFrontE3Var"><code class="docutils literal notranslate"><span class="pre">pushFront()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList8popFrontEv"><code class="docutils literal notranslate"><span class="pre">popFront()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList5frontEv"><code class="docutils literal notranslate"><span class="pre">front()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList4backEv"><code class="docutils literal notranslate"><span class="pre">back()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList6assignE3Var"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList12unsafeAssignEPv"><code class="docutils literal notranslate"><span class="pre">unsafeAssign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4NK5astra5IList6ownVarEv"><code class="docutils literal notranslate"><span class="pre">ownVar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4NK5astra5IList10nestedTypeEv"><code class="docutils literal notranslate"><span class="pre">nestedType()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4NK5astra5IList7forEachENSt8functionIFv3VarEEE"><code class="docutils literal notranslate"><span class="pre">forEach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4NK5astra5IList13unsafeForEachENSt8functionIFvPvEEE"><code class="docutils literal notranslate"><span class="pre">unsafeForEach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList5clearEv"><code class="docutils literal notranslate"><span class="pre">clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4NK5astra5IList4sizeEv"><code class="docutils literal notranslate"><span class="pre">size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1IList.html#_CPPv4N5astra5IList4pushE3Var"><code class="docutils literal notranslate"><span class="pre">push()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1640,6 +1667,21 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__list.html">Template Struct is_list</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structastra_1_1is__list.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structastra_1_1is__list.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="structastra_1_1is__list.html#struct-documentation">Struct Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structastra_1_1is__list.html#_CPPv4I0EN5astra7is_listE"><code class="docutils literal notranslate"><span class="pre">astra::is_list</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__map.html">Template Struct is_map</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structastra_1_1is__map.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structastra_1_1is__map.html#base-type">Base Type</a></li>
@@ -1700,21 +1742,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__sequence.html">Template Struct is_sequence</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structastra_1_1is__sequence.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structastra_1_1is__sequence.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structastra_1_1is__sequence.html#struct-documentation">Struct Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structastra_1_1is__sequence.html#_CPPv4I0EN5astra11is_sequenceE"><code class="docutils literal notranslate"><span class="pre">astra::is_sequence</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1is__string.html">Template Struct is_string</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structastra_1_1is__string.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structastra_1_1is__string.html#base-type">Base Type</a></li>
@@ -1752,33 +1779,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structastra_1_1is__string_3_01const_01wchar__t_01_5_01_4.html#struct-documentation">Struct Documentation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structastra_1_1is__string_3_01const_01wchar__t_01_5_01_4.html#_CPPv4IEN5astra9is_stringIPKwEE"><code class="docutils literal notranslate"><span class="pre">astra::is_string&lt;</span> <span class="pre">const</span> <span class="pre">wchar_t</span> <span class="pre">*</span> <span class="pre">&gt;</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ISequence.html">Struct ISequence</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structastra_1_1ISequence.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structastra_1_1ISequence.html#derived-types">Derived Types</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structastra_1_1ISequence.html#struct-documentation">Struct Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4N5astra9ISequenceE"><code class="docutils literal notranslate"><span class="pre">astra::ISequence</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4N5astra9ISequenceD0Ev"><code class="docutils literal notranslate"><span class="pre">~ISequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4N5astra9ISequence6assignE3Var"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4N5astra9ISequence12unsafeAssignEPv"><code class="docutils literal notranslate"><span class="pre">unsafeAssign()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4NK5astra9ISequence6ownVarEv"><code class="docutils literal notranslate"><span class="pre">ownVar()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4NK5astra9ISequence10nestedTypeEv"><code class="docutils literal notranslate"><span class="pre">nestedType()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4NK5astra9ISequence7forEachENSt8functionIFv3VarEEE"><code class="docutils literal notranslate"><span class="pre">forEach()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4NK5astra9ISequence13unsafeForEachENSt8functionIFvPvEEE"><code class="docutils literal notranslate"><span class="pre">unsafeForEach()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4N5astra9ISequence5clearEv"><code class="docutils literal notranslate"><span class="pre">clear()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4NK5astra9ISequence4sizeEv"><code class="docutils literal notranslate"><span class="pre">size()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ISequence.html#_CPPv4N5astra9ISequence4pushE3Var"><code class="docutils literal notranslate"><span class="pre">push()</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -1890,6 +1890,51 @@
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1json.html#_CPPv4I_11ReflectableEN5astra4json6toJSONEN8nlohmann4jsonEPK1T"><code class="docutils literal notranslate"><span class="pre">toJSON()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1json.html#_CPPv4I_11ReflectableEN5astra4json8toStringENSt6stringEPK1T"><code class="docutils literal notranslate"><span class="pre">toString()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1json.html#_CPPv4I_11ReflectableEN5astra4json8toStreamEvRNSt7ostreamEPK1T"><code class="docutils literal notranslate"><span class="pre">toStream()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1List.html">Struct List</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structastra_1_1List.html#struct-documentation">Struct Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structastra_1_1List.html#_CPPv4N5astra4ListE"><code class="docutils literal notranslate"><span class="pre">astra::List</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4N5astra4List4ListEv"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4I0EN5astra4List4ListEPNSt6vectorI1TEEb"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4I0EN5astra4List4ListEPNSt4listI1TEEb"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4I0EN5astra4List4ListEPNSt5dequeI1TEEb"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4I0EN5astra4List4ListEPNSt5stackI1TEEb"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4I0EN5astra4List4ListEPNSt5queueI1TEEb"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4I0EN5astra4List4ListEPNSt3setI1TEEb"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4I0EN5astra4List4ListEPNSt13unordered_setI1TEEb"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4N5astra4ListD0Ev"><code class="docutils literal notranslate"><span class="pre">~List()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4N5astra4List6assignE3Var"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4N5astra4List12unsafeAssignEPv"><code class="docutils literal notranslate"><span class="pre">unsafeAssign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4NK5astra4List6ownVarEv"><code class="docutils literal notranslate"><span class="pre">ownVar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4NK5astra4List10nestedTypeEv"><code class="docutils literal notranslate"><span class="pre">nestedType()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4NK5astra4List7forEachENSt8functionIFv3VarEEE"><code class="docutils literal notranslate"><span class="pre">forEach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4NK5astra4List13unsafeForEachENSt8functionIFvPvEEE"><code class="docutils literal notranslate"><span class="pre">unsafeForEach()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4N5astra4List5clearEv"><code class="docutils literal notranslate"><span class="pre">clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4NK5astra4List4sizeEv"><code class="docutils literal notranslate"><span class="pre">size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1List.html#_CPPv4N5astra4List4pushE3Var"><code class="docutils literal notranslate"><span class="pre">push()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ListActions.html">Template Struct ListActions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structastra_1_1ListActions.html#struct-documentation">Struct Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structastra_1_1ListActions.html#_CPPv4I0EN5astra11ListActionsE"><code class="docutils literal notranslate"><span class="pre">astra::ListActions</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1ListActions.html#_CPPv4N5astra11ListActions7reflectEPvb"><code class="docutils literal notranslate"><span class="pre">reflect()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -2073,51 +2118,6 @@
 <li class="toctree-l3"><a class="reference internal" href="structastra_1_1QueueIterator.html#_CPPv4I0EN5astra13QueueIteratorE"><code class="docutils literal notranslate"><span class="pre">astra::QueueIterator</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1QueueIterator.html#_CPPv4N5astra13QueueIterator5beginEPNSt5queueI1TEE"><code class="docutils literal notranslate"><span class="pre">begin()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1QueueIterator.html#_CPPv4N5astra13QueueIterator3endEPNSt5queueI1TEE"><code class="docutils literal notranslate"><span class="pre">end()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sequence.html">Struct Sequence</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structastra_1_1Sequence.html#struct-documentation">Struct Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4N5astra8SequenceE"><code class="docutils literal notranslate"><span class="pre">astra::Sequence</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4N5astra8Sequence8SequenceEv"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4I0EN5astra8Sequence8SequenceEPNSt6vectorI1TEEb"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4I0EN5astra8Sequence8SequenceEPNSt4listI1TEEb"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4I0EN5astra8Sequence8SequenceEPNSt5dequeI1TEEb"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4I0EN5astra8Sequence8SequenceEPNSt5stackI1TEEb"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4I0EN5astra8Sequence8SequenceEPNSt5queueI1TEEb"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4I0EN5astra8Sequence8SequenceEPNSt3setI1TEEb"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4I0EN5astra8Sequence8SequenceEPNSt13unordered_setI1TEEb"><code class="docutils literal notranslate"><span class="pre">Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4N5astra8SequenceD0Ev"><code class="docutils literal notranslate"><span class="pre">~Sequence()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4N5astra8Sequence6assignE3Var"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4N5astra8Sequence12unsafeAssignEPv"><code class="docutils literal notranslate"><span class="pre">unsafeAssign()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4NK5astra8Sequence6ownVarEv"><code class="docutils literal notranslate"><span class="pre">ownVar()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4NK5astra8Sequence10nestedTypeEv"><code class="docutils literal notranslate"><span class="pre">nestedType()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4NK5astra8Sequence7forEachENSt8functionIFv3VarEEE"><code class="docutils literal notranslate"><span class="pre">forEach()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4NK5astra8Sequence13unsafeForEachENSt8functionIFvPvEEE"><code class="docutils literal notranslate"><span class="pre">unsafeForEach()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4N5astra8Sequence5clearEv"><code class="docutils literal notranslate"><span class="pre">clear()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4NK5astra8Sequence4sizeEv"><code class="docutils literal notranslate"><span class="pre">size()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1Sequence.html#_CPPv4N5astra8Sequence4pushE3Var"><code class="docutils literal notranslate"><span class="pre">push()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1SequenceActions.html">Template Struct SequenceActions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structastra_1_1SequenceActions.html#struct-documentation">Struct Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structastra_1_1SequenceActions.html#_CPPv4I0EN5astra15SequenceActionsE"><code class="docutils literal notranslate"><span class="pre">astra::SequenceActions</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1SequenceActions.html#_CPPv4N5astra15SequenceActions7reflectEPvb"><code class="docutils literal notranslate"><span class="pre">reflect()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -2675,7 +2675,7 @@
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0EN5astra6TypeId3getENSt11enable_if_tI11is_string_vI1TE6TypeIdEEP1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA4size_1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T4sizeEE"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0EN5astra6TypeId3getENSt11enable_if_tI13is_sequence_vI1TE6TypeIdEEP1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0EN5astra6TypeId3getENSt11enable_if_tI9is_list_vI1TE6TypeIdEEP1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0EN5astra6TypeId3getENSt11enable_if_tI8is_map_vI1TE6TypeIdEEP1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10unique_ptrI1TEE"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10shared_ptrI1TEE"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
@@ -2889,6 +2889,24 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html">Class ErrHelper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html#class-documentation">Class Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html#_CPPv4N5astra4list9ErrHelperE"><code class="docutils literal notranslate"><span class="pre">astra::list::ErrHelper</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html#_CPPv4N5astra4list9ErrHelper5errorENSt11string_viewE6TypeId6TypeId"><code class="docutils literal notranslate"><span class="pre">error()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="classastra_1_1MethodInfo.html#class-documentation">Class Documentation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="classastra_1_1MethodInfo.html#_CPPv4N5astra10MethodInfoE"><code class="docutils literal notranslate"><span class="pre">astra::MethodInfo</span></code></a><ul>
@@ -2932,24 +2950,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html">Class ErrHelper</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html#derived-types">Derived Types</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html#class-documentation">Class Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html#_CPPv4N5astra8sequence9ErrHelperE"><code class="docutils literal notranslate"><span class="pre">astra::sequence::ErrHelper</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="classastra_1_1sequence_1_1ErrHelper.html#_CPPv4N5astra8sequence9ErrHelper5errorENSt11string_viewE6TypeId6TypeId"><code class="docutils literal notranslate"><span class="pre">error()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="classastra_1_1TypeInfo.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="classastra_1_1TypeInfo.html#base-type">Base Type</a></li>
@@ -2965,7 +2965,7 @@
 <li class="toctree-l5"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo4Kind4EnumE"><code class="docutils literal notranslate"><span class="pre">Enum</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo4Kind6ObjectE"><code class="docutils literal notranslate"><span class="pre">Object</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo4Kind5ArrayE"><code class="docutils literal notranslate"><span class="pre">Array</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo4Kind8SequenceE"><code class="docutils literal notranslate"><span class="pre">Sequence</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo4Kind4ListE"><code class="docutils literal notranslate"><span class="pre">List</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo4Kind3MapE"><code class="docutils literal notranslate"><span class="pre">Map</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo4Kind7PointerE"><code class="docutils literal notranslate"><span class="pre">Pointer</span></code></a></li>
 </ul>
@@ -2977,7 +2977,7 @@
 <li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo8TypeInfoE4Enum"><code class="docutils literal notranslate"><span class="pre">TypeInfo()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo8TypeInfoE6Object"><code class="docutils literal notranslate"><span class="pre">TypeInfo()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo8TypeInfoE5Array"><code class="docutils literal notranslate"><span class="pre">TypeInfo()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo8TypeInfoE8Sequence"><code class="docutils literal notranslate"><span class="pre">TypeInfo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo8TypeInfoE4List"><code class="docutils literal notranslate"><span class="pre">TypeInfo()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo8TypeInfoE3Map"><code class="docutils literal notranslate"><span class="pre">TypeInfo()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo8TypeInfoE7Pointer"><code class="docutils literal notranslate"><span class="pre">TypeInfo()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="classastra_1_1TypeInfo.html#_CPPv4N5astra8TypeInfo6assignE3Var"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
@@ -3388,6 +3388,17 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html">Variable astra::is_list_v</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html#variable-documentation">Variable Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="variable_traits_8hpp_1a92a952b23feadb16406eea4e67ab8974.html#_CPPv4I0EN5astra9is_list_vE"><code class="docutils literal notranslate"><span class="pre">is_list_v</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html">Variable astra::is_map_v</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html#variable-documentation">Variable Documentation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="variable_traits_8hpp_1aa75141b389d48fb877a2f0b7463b21ea.html#_CPPv4I0EN5astra8is_map_vE"><code class="docutils literal notranslate"><span class="pre">is_map_v</span></code></a></li>
@@ -3402,17 +3413,6 @@
 <li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html">Variable astra::is_ref_type_v</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html#variable-documentation">Variable Documentation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="variable_traits_8hpp_1a0580cbc24b8e8a443f03af7a03f2328d.html#_CPPv4I0EN5astra13is_ref_type_vE"><code class="docutils literal notranslate"><span class="pre">is_ref_type_v</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html">Variable astra::is_sequence_v</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html#variable-documentation">Variable Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="variable_traits_8hpp_1a3c1fc020340f89042fb50a6fad0115b3.html#_CPPv4I0EN5astra13is_sequence_vE"><code class="docutils literal notranslate"><span class="pre">is_sequence_v</span></code></a></li>
 </ul>
 </li>
 </ul>
