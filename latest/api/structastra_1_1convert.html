@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Struct converters::toBinary &#8212; Astra Documentation</title>
+    <title>Struct convert &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/structastra_1_1converters_1_1toBinary';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/structastra_1_1convert';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -55,8 +55,8 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Struct converters::toJson" href="structastra_1_1converters_1_1toJson.html" />
-    <link rel="prev" title="Struct converters" href="structastra_1_1converters.html" />
+    <link rel="next" title="Template Struct CString" href="structastra_1_1CString.html" />
+    <link rel="prev" title="Struct ConstexprMap::Entry" href="structastra_1_1ConstexprMap_1_1Entry.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -378,17 +378,8 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1ConstexprMap_1_1Entry.html">Struct ConstexprMap::Entry</a></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters.html">Struct converters</a></li>
-</ul>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Struct converters::toBinary</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters_1_1toJson.html">Struct converters::toJson</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1converters_1_1toYaml.html">Struct converters::toYaml</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Struct convert</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1CString.html">Template Struct CString</a></li>
@@ -819,7 +810,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Astra API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Struct converters::toBinary</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Struct convert</span></li>
   </ul>
 </nav>
 </div>
@@ -836,40 +827,106 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="struct-converters-tobinary">
-<span id="exhale-struct-structastra-1-1converters-1-1tobinary"></span><h1>Struct converters::toBinary<a class="headerlink" href="#struct-converters-tobinary" title="Link to this heading"><span/></a></h1>
+  <section id="struct-convert">
+<span id="exhale-struct-structastra-1-1convert"></span><h1>Struct convert<a class="headerlink" href="#struct-convert" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file_include_astra_serialized_convert.hpp.html#file-include-astra-serialized-convert-hpp"><span class="std std-ref">File serialized_convert.hpp</span></a></p></li>
 </ul>
-<section id="nested-relationships">
-<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Link to this heading"><span/></a></h2>
-<p>This struct is a nested type of <a class="reference internal" href="structastra_1_1converters.html#exhale-struct-structastra-1-1converters"><span class="std std-ref">Struct converters</span></a>.</p>
-</section>
 <section id="struct-documentation">
 <h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Link to this heading"><span/></a></h2>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra10converters8toBinaryE">
-<span id="_CPPv3N5astra10converters8toBinaryE"></span><span id="_CPPv2N5astra10converters8toBinaryE"></span><span id="astra::converters::toBinary"></span><span class="target" id="structastra_1_1converters_1_1toBinary"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toBinary</span></span></span><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convertE">
+<span id="_CPPv3N5astra7convertE"></span><span id="_CPPv2N5astra7convertE"></span><span id="astra::convert"></span><span class="target" id="structastra_1_1convert"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">convert</span></span></span><a class="headerlink" href="#_CPPv4N5astra7convertE" title="Link to this definition"><span/></a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStringENSt6vectorI7uint8_tEERKNSt6stringE">
-<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromJsonStringERKNSt6stringE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromJsonStringERKNSt6stringE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1ae47ad6899ee6779479a052ae8fe285f9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromJsonString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert10yamlToJsonERKN4YAML4NodeE">
+<span id="_CPPv3N5astra7convert10yamlToJsonERKN4YAML4NodeE"></span><span id="_CPPv2N5astra7convert10yamlToJsonERKN4YAML4NodeE"></span><span id="astra::convert::yamlToJson__YAML::NodeCR"></span><span class="target" id="structastra_1_1convert_1a0f3e096168f19414b2227fec0ff8b1af"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlToJson</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">node</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert10yamlToJsonERKN4YAML4NodeE" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamENSt6vectorI7uint8_tEERNSt7istreamE">
-<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1ac05616af98da74ca6463c300ffa2f21c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromJsonStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12binaryToJsonERN9libjaguar8DocumentE">
+<span id="_CPPv3N5astra7convert12binaryToJsonERN9libjaguar8DocumentE"></span><span id="_CPPv2N5astra7convert12binaryToJsonERN9libjaguar8DocumentE"></span><span id="astra::convert::binaryToJson__libjaguar::DocumentR"></span><span class="target" id="structastra_1_1convert_1a7e64f6d452be093ae24e530c3dc69f7f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryToJson</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">doc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12binaryToJsonERN9libjaguar8DocumentE" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStringENSt6vectorI7uint8_tEERKNSt6stringE">
-<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromYamlStringERKNSt6stringE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromYamlStringERKNSt6stringE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1af3687aaf0483eb19b0d7bc38ad195d5e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromYamlString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert10jsonToYamlERKN8nlohmann4jsonE">
+<span id="_CPPv3N5astra7convert10jsonToYamlERKN8nlohmann4jsonE"></span><span id="_CPPv2N5astra7convert10jsonToYamlERKN8nlohmann4jsonE"></span><span id="astra::convert::jsonToYaml__nlohmann::jsonCR"></span><span class="target" id="structastra_1_1convert_1a7ef3cda4e1832fb9d8a444cd9f352ecc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonToYaml</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">json</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert10jsonToYamlERKN8nlohmann4jsonE" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamENSt6vectorI7uint8_tEERNSt7istreamE">
-<span id="_CPPv3I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1converters_1_1toBinary_1a2617d2358c941a31c9767fd35c431ca7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromYamlStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12binaryToYamlERN9libjaguar8DocumentE">
+<span id="_CPPv3N5astra7convert12binaryToYamlERN9libjaguar8DocumentE"></span><span id="_CPPv2N5astra7convert12binaryToYamlERN9libjaguar8DocumentE"></span><span id="astra::convert::binaryToYaml__libjaguar::DocumentR"></span><span class="target" id="structastra_1_1convert_1ab00faac08ef5b53baad29195e41a2bd1"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryToYaml</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">doc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12binaryToYamlERN9libjaguar8DocumentE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE">
+<span id="_CPPv3N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE"></span><span id="_CPPv2N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE"></span><span id="astra::convert::jsonToBinary__nlohmann::jsonCR"></span><span class="target" id="structastra_1_1convert_1aaf0dc257e76b305276dd8eea0fe3effc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonToBinary</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">json</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12yamlToBinaryERKN4YAML4NodeE">
+<span id="_CPPv3N5astra7convert12yamlToBinaryERKN4YAML4NodeE"></span><span id="_CPPv2N5astra7convert12yamlToBinaryERKN4YAML4NodeE"></span><span id="astra::convert::yamlToBinary__YAML::NodeCR"></span><span class="target" id="structastra_1_1convert_1ac3437eb81620046a6ea7bbd20f5a64e8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlToBinary</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">node</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12yamlToBinaryERKN4YAML4NodeE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22yamlStringToJsonStringERKNSt6stringE">
+<span id="_CPPv3N5astra7convert22yamlStringToJsonStringERKNSt6stringE"></span><span id="_CPPv2N5astra7convert22yamlStringToJsonStringERKNSt6stringE"></span><span id="astra::convert::yamlStringToJsonString__ssCR"></span><span class="target" id="structastra_1_1convert_1af2b6c453cfebcddc99812ca6c59e6353"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStringToJsonString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22yamlStringToJsonStringERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22yamlStreamToJsonStringERNSt7istreamE">
+<span id="_CPPv3N5astra7convert22yamlStreamToJsonStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert22yamlStreamToJsonStringERNSt7istreamE"></span><span id="astra::convert::yamlStreamToJsonString__isR"></span><span class="target" id="structastra_1_1convert_1a7a0c30b6d30169efeb4f8ed082894c20"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStreamToJsonString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22yamlStreamToJsonStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE">
+<span id="_CPPv3N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE"></span><span id="_CPPv2N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE"></span><span id="astra::convert::binaryVecToJsonString__std::vector:uint8_t:CR"></span><span class="target" id="structastra_1_1convert_1aa058d78007ecf1ef543c2430c208b5c8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryVecToJsonString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert24binaryStreamToJsonStringERNSt7istreamE">
+<span id="_CPPv3N5astra7convert24binaryStreamToJsonStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert24binaryStreamToJsonStringERNSt7istreamE"></span><span id="astra::convert::binaryStreamToJsonString__isR"></span><span class="target" id="structastra_1_1convert_1a86c5acf314c4b9fd671e04cedbbdf934"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryStreamToJsonString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert24binaryStreamToJsonStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22jsonStringToYamlStringERKNSt6stringE">
+<span id="_CPPv3N5astra7convert22jsonStringToYamlStringERKNSt6stringE"></span><span id="_CPPv2N5astra7convert22jsonStringToYamlStringERKNSt6stringE"></span><span id="astra::convert::jsonStringToYamlString__ssCR"></span><span class="target" id="structastra_1_1convert_1a88ccc5bbe8f2a1997cb0e177e1a91be0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStringToYamlString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22jsonStringToYamlStringERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22jsonStreamToYamlStringERNSt7istreamE">
+<span id="_CPPv3N5astra7convert22jsonStreamToYamlStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert22jsonStreamToYamlStringERNSt7istreamE"></span><span id="astra::convert::jsonStreamToYamlString__isR"></span><span class="target" id="structastra_1_1convert_1a711b5a751ed3e160e11813de3c464d7f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStreamToYamlString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22jsonStreamToYamlStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE">
+<span id="_CPPv3N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE"></span><span id="_CPPv2N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE"></span><span id="astra::convert::binaryVecToYamlString__std::vector:uint8_t:CR"></span><span class="target" id="structastra_1_1convert_1a8c3fcb8ba655596b882f50b2e5d80925"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryVecToYamlString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert24binaryStreamToYamlStringERNSt7istreamE">
+<span id="_CPPv3N5astra7convert24binaryStreamToYamlStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert24binaryStreamToYamlStringERNSt7istreamE"></span><span id="astra::convert::binaryStreamToYamlString__isR"></span><span class="target" id="structastra_1_1convert_1a08dcce76f244f67ed288fc92d2bf36ee"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryStreamToYamlString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert24binaryStreamToYamlStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21jsonStringToBinaryVecERKNSt6stringE">
+<span id="_CPPv3N5astra7convert21jsonStringToBinaryVecERKNSt6stringE"></span><span id="_CPPv2N5astra7convert21jsonStringToBinaryVecERKNSt6stringE"></span><span id="astra::convert::jsonStringToBinaryVec__ssCR"></span><span class="target" id="structastra_1_1convert_1aec3563361b437242340ebae2f5603410"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStringToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21jsonStringToBinaryVecERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE">
+<span id="_CPPv3N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE"></span><span id="_CPPv2N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE"></span><span id="astra::convert::jsonStreamToBinaryVec__isR"></span><span class="target" id="structastra_1_1convert_1acbeb330d9e3a2d93b6b9055dca75fb4a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStreamToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21yamlStringToBinaryVecERKNSt6stringE">
+<span id="_CPPv3N5astra7convert21yamlStringToBinaryVecERKNSt6stringE"></span><span id="_CPPv2N5astra7convert21yamlStringToBinaryVecERKNSt6stringE"></span><span id="astra::convert::yamlStringToBinaryVec__ssCR"></span><span class="target" id="structastra_1_1convert_1a1fa8a51f8619bf0f6b91715fe6603b06"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStringToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21yamlStringToBinaryVecERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE">
+<span id="_CPPv3N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE"></span><span id="_CPPv2N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE"></span><span id="astra::convert::yamlStreamToBinaryVec__isR"></span><span class="target" id="structastra_1_1convert_1af2c8cbadc693137818f39b582e9b8e1a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStreamToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -889,20 +946,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="structastra_1_1converters.html"
+       href="structastra_1_1ConstexprMap_1_1Entry.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Struct converters</p>
+        <p class="prev-next-title">Struct ConstexprMap::Entry</p>
       </div>
     </a>
     <a class="right-next"
-       href="structastra_1_1converters_1_1toJson.html"
+       href="structastra_1_1CString.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Struct converters::toJson</p>
+        <p class="prev-next-title">Template Struct CString</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -925,13 +982,26 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-relationships">Nested Relationships</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struct-documentation">Struct Documentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra10converters8toBinaryE"><code class="docutils literal notranslate"><span class="pre">astra::converters::toBinary</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStringENSt6vectorI7uint8_tEERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">fromJsonString()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromJsonStreamENSt6vectorI7uint8_tEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromJsonStream()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStringENSt6vectorI7uint8_tEERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">fromYamlString()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra10converters8toBinary14fromYamlStreamENSt6vectorI7uint8_tEERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">fromYamlStream()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convertE"><code class="docutils literal notranslate"><span class="pre">astra::convert</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert10yamlToJsonERKN4YAML4NodeE"><code class="docutils literal notranslate"><span class="pre">yamlToJson()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert12binaryToJsonERN9libjaguar8DocumentE"><code class="docutils literal notranslate"><span class="pre">binaryToJson()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert10jsonToYamlERKN8nlohmann4jsonE"><code class="docutils literal notranslate"><span class="pre">jsonToYaml()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert12binaryToYamlERN9libjaguar8DocumentE"><code class="docutils literal notranslate"><span class="pre">binaryToYaml()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE"><code class="docutils literal notranslate"><span class="pre">jsonToBinary()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert12yamlToBinaryERKN4YAML4NodeE"><code class="docutils literal notranslate"><span class="pre">yamlToBinary()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert22yamlStringToJsonStringERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">yamlStringToJsonString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert22yamlStreamToJsonStringERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">yamlStreamToJsonString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE"><code class="docutils literal notranslate"><span class="pre">binaryVecToJsonString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert24binaryStreamToJsonStringERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">binaryStreamToJsonString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert22jsonStringToYamlStringERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">jsonStringToYamlString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert22jsonStreamToYamlStringERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">jsonStreamToYamlString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE"><code class="docutils literal notranslate"><span class="pre">binaryVecToYamlString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert24binaryStreamToYamlStringERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">binaryStreamToYamlString()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert21jsonStringToBinaryVecERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">jsonStringToBinaryVec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">jsonStreamToBinaryVec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert21yamlStringToBinaryVecERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">yamlStringToBinaryVec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE"><code class="docutils literal notranslate"><span class="pre">yamlStreamToBinaryVec()</span></code></a></li>
 </ul>
 </li>
 </ul>
