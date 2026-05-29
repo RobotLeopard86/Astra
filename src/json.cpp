@@ -33,10 +33,10 @@ namespace astra {
 				}
 				break;
 			case TypeInfo::Kind::String:
-				json = info.asUnsafe<String>().get();
+				json = ::astra::format("'{}'", info.asUnsafe<String>().get());
 				break;
 			case TypeInfo::Kind::Enum:
-				json = info.asUnsafe<Enum>().toString();
+				json = ::astra::format("'{}'", info.asUnsafe<Enum>().toString());
 				break;
 			case TypeInfo::Kind::Object:
 				for(const auto& [name, contents] : info.asUnsafe<Object>().getFields()) {
@@ -123,14 +123,20 @@ namespace astra {
 					throw std::runtime_error("Invalid floating-point format!");
 				break;
 			}
-			case TypeInfo::Kind::String:
+			case TypeInfo::Kind::String: {
 				if(!json.is_string()) throw std::runtime_error("Invalid string format!");
-				info.asUnsafe<String>().set(json.get<std::string>());
+				std::string value = json.get<std::string>();
+				if(value[0] != '\'' || value[value.size() - 1] != '\'') throw std::runtime_error("Invalid string format!");
+				info.asUnsafe<String>().set(value.substr(1, value.size() - 2));
 				break;
-			case TypeInfo::Kind::Enum:
+			}
+			case TypeInfo::Kind::Enum: {
 				if(!json.is_string()) throw std::runtime_error("Invalid enum format!");
-				info.asUnsafe<Enum>().fromString(json.get<std::string>());
+				std::string value = json.get<std::string>();
+				if(value[0] != '\'' || value[value.size() - 1] != '\'') throw std::runtime_error("Invalid enum format!");
+				info.asUnsafe<Enum>().fromString(value.substr(1, value.size() - 2));
 				break;
+			}
 			case TypeInfo::Kind::Object: {
 				if(!json.is_object()) throw std::runtime_error("Invalid object format!");
 				Object obj = info.asUnsafe<Object>();

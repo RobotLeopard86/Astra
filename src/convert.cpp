@@ -132,9 +132,9 @@ namespace astra {
 			switch(ve.type) {
 				case libjaguar::TypeTag::String:
 					if(!scope.list) {
-						json[ve.name] = doc.QueryValue<std::string>(effectivePath);
+						json[ve.name] = ::astra::format("'{}'", doc.QueryValue<std::string>(effectivePath));
 					} else {
-						json[std::stoul(ve.name)] = doc.QueryValue<std::string>(effectivePath);
+						json[std::stoul(ve.name)] = ::astra::format("'{}'", doc.QueryValue<std::string>(effectivePath));
 					}
 					break;
 				case libjaguar::TypeTag::ByteBuffer:
@@ -277,48 +277,59 @@ namespace astra {
 		}
 		if(json.is_string()) {
 			std::string str = json.get<std::string>();
-			if(str.size() > 4 && (str[0] == 's' || str[0] == 'u')) {
-				size_t semi = str.find(';');
-				if(semi != std::string::npos) {
-					std::string type = str.substr(0, semi);
-					std::string value = str.substr(semi + 1);
+			if(str[0] == '\'' && str[str.size() - 1] == '\'') {
+				doc.SetOrCreateValue<std::string>(path, str);
+				return;
+			}
+			std::string descriptor = str.substr(0, str.find_first_of(";"));
+			if(descriptor.compare(str) == 0) {
+				if(str[str.size() - 1] == 'f') {
 					try {
-						if(type == "s8") {
-							doc.SetOrCreateValue<int8_t>(path, (int8_t)std::stoi(value));
-							return;
-						} else if(type == "s16") {
-							doc.SetOrCreateValue<int16_t>(path, (int16_t)std::stoi(value));
-							return;
-						} else if(type == "s32") {
-							doc.SetOrCreateValue<int32_t>(path, (int32_t)std::stol(value));
-							return;
-						} else if(type == "s64") {
-							doc.SetOrCreateValue<int64_t>(path, (int64_t)std::stoll(value));
-							return;
-						} else if(type == "u8") {
-							doc.SetOrCreateValue<uint8_t>(path, (uint8_t)std::stoul(value));
-							return;
-						} else if(type == "u16") {
-							doc.SetOrCreateValue<uint16_t>(path, (uint16_t)std::stoul(value));
-							return;
-						} else if(type == "u32") {
-							doc.SetOrCreateValue<uint32_t>(path, (uint32_t)std::stoul(value));
-							return;
-						} else if(type == "u64") {
-							doc.SetOrCreateValue<uint64_t>(path, (uint64_t)std::stoull(value));
-							return;
-						}
+						doc.SetOrCreateValue<float>(path, std::stof(str.substr(0, str.size() - 1)));
+						return;
+					} catch(...) {}
+				} else {
+					try {
+						doc.SetOrCreateValue<double>(path, std::stod(str));
+						return;
 					} catch(...) {}
 				}
+			} else {
+				if(descriptor.size() < 2 || descriptor.size() > 3) throw std::runtime_error("Invalid integer format!");
+				if(!(descriptor.ends_with("8") || descriptor.ends_with("16") || descriptor.ends_with("32") || descriptor.ends_with(64))) throw std::runtime_error("Invalid integer format!");
+				std::string numStr = str.substr(descriptor.size() + 1);
+				if(descriptor.compare("s8;") == 0) {
+					int64_t val = std::stol(numStr);
+					if(val < INT8_MIN || val > INT8_MAX) throw std::runtime_error("Invalid integer!");
+					doc.SetOrCreateValue<int8_t>(path, val);
+				} else if(descriptor.compare("s16;") == 0) {
+					int64_t val = std::stol(numStr);
+					if(val < INT16_MIN || val > INT16_MAX) throw std::runtime_error("Invalid integer!");
+					doc.SetOrCreateValue<int16_t>(path, val);
+				} else if(descriptor.compare("s32;") == 0) {
+					int64_t val = std::stol(numStr);
+					if(val < INT32_MIN || val > INT32_MAX) throw std::runtime_error("Invalid integer!");
+					doc.SetOrCreateValue<int32_t>(path, val);
+				} else if(descriptor.compare("s64;") == 0) {
+					doc.SetOrCreateValue<int64_t>(path, std::stol(numStr));
+				} else if(descriptor.compare("u8;") == 0) {
+					uint64_t val = std::stol(numStr);
+					if(val > UINT8_MAX) throw std::runtime_error("Invalid integer!");
+					doc.SetOrCreateValue<uint8_t>(path, val);
+				} else if(descriptor.compare("u16;") == 0) {
+					uint64_t val = std::stol(numStr);
+					if(val > UINT16_MAX) throw std::runtime_error("Invalid integer!");
+					doc.SetOrCreateValue<uint16_t>(path, val);
+				} else if(descriptor.compare("u32;") == 0) {
+					uint64_t val = std::stol(numStr);
+					if(val > UINT32_MAX) throw std::runtime_error("Invalid integer!");
+					doc.SetOrCreateValue<uint32_t>(path, val);
+				} else if(descriptor.compare("u64;") == 0) {
+					doc.SetOrCreateValue<uint64_t>(path, std::stoul(numStr));
+				}
+				return;
 			}
-			if(!str.empty() && str.back() == 'f') {
-				try {
-					doc.SetOrCreateValue<float>(path, std::stof(str.substr(0, str.size() - 1)));
-					return;
-				} catch(...) {}
-			}
-			doc.SetOrCreateValue(path, str);
-			return;
+			throw std::runtime_error("Invalid string value!");
 		}
 		if(json.is_object()) {
 			if(!path.empty()) {
@@ -362,10 +373,12 @@ namespace astra {
 					doc.CreateValue<std::vector<uint32_t>>(path);
 				} else if(str.starts_with("u64;")) {
 					doc.CreateValue<std::vector<uint64_t>>(path);
-				} else if(!str.empty() && str.back() == 'f') {
+				} else if(!str.empty() && str[str.size() - 1] == 'f') {
 					doc.CreateValue<std::vector<float>>(path);
-				} else {
+				} else if(!str.empty() && str[0] == '\'' && str[str.size() - 1] == '\'') {
 					doc.CreateValue<std::vector<std::string>>(path);
+				} else {
+					doc.CreateValue<std::vector<double>>(path);
 				}
 			} else {
 				doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
