@@ -229,8 +229,17 @@ namespace astra {
 		for(const libjaguar::ScopeEntry& se : scope.subscopes) {
 			if(se.list) {
 				json[se.name] = json.array();
-				std::string subpath = (path.empty() ? "" : path + ".") + std::string(se.name);
-				binary2JsonRecursive(doc, json[se.name], subpath);
+				if(se.subscopes.size() < 1) continue;
+				if(se.subscopes[0].subscopes.size() == 1 && se.subscopes[0].subvalues.size() == 0 && se.subscopes[0].subscopes[0].name.compare("payload") == 0) {
+					for(std::size_t i = 0; i < se.subscopes.size(); ++i) {
+						std::string subpath = ::astra::format("{}.{}[{}].payload", path.empty() ? "" : path + ".", se.name, i);
+						if(subpath[0] == '.') subpath = subpath.substr(1);
+						binary2JsonRecursive(doc, json[se.name][i], subpath);
+					}
+				} else {
+					std::string subpath = (path.empty() ? "" : path + ".") + se.name;
+					binary2JsonRecursive(doc, json[se.name], subpath);
+				}
 			} else {
 				std::string effectivePath = (path.empty() ? se.name : ::astra::format(scope.list ? "{}[{}]" : "{}.{}", path, se.name));
 				if(scope.list) {
