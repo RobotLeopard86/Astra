@@ -7,6 +7,7 @@
 
 #include "astra/reflection.hpp"
 #include "astra/json.hpp"
+#include "astra/yaml.hpp"
 #include "astra/binary.hpp"
 #include "astra/serialized_convert.hpp"
 
@@ -27,7 +28,7 @@ int main() {
 
 	//Let's turn the JSON into YAML
 	std::cout << "This can also be in JSON: "
-			  << astra::convert::toJson::fromYamlString<Car>(asYaml) << std::endl;
+			  << astra::convert::yamlToJson(YAML::Load(asYaml)) << std::endl;
 
 	//Let's reflect it
 	astra::TypeInfo info = astra::reflect(&car);
@@ -114,6 +115,9 @@ int main() {
 	complicated.someMap[Color::Orange] = {{10, 9, 8, 7, 6}};
 	complicated.someMap[Color::Green] = {{31, 41, 59, 26, 53}};
 	complicated.someMap[Color::Black] = {{1, 7, 7, 6, 0}};
+	complicated.listOfLists.resize(2);
+	complicated.listOfLists[0] = std::array<bool, 3> {{true, false, true}};
+	complicated.listOfLists[0] = std::array<bool, 3> {{false, false, true}};
 	std::ofstream ofs("./complicated.xj", std::ios::binary);
 	astra::binary::toStream(ofs, &complicated);
 	ofs.close();
@@ -121,8 +125,7 @@ int main() {
 	//Get it back
 	std::cout << "And finally, let's get the complicated type back!" << std::endl;
 	std::ifstream ifs("./complicated.xj", std::ios::binary);
-	ExampleNamespace::ComplicatedType complicated2(astra::binary::fromStream<ExampleNamespace::ComplicatedType>(ifs));
-	std::cout << "In JSON, we can write it out as: " << astra::json::toString(&complicated2) << std::endl;
+	std::cout << "In JSON, we can write it out as: " << astra::convert::binaryStreamToJsonString(ifs) << std::endl;
 
 	//Done
 	std::cout << "Thanks for checking out the Astra demo!" << std::endl;

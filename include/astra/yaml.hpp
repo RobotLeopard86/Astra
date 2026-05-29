@@ -7,9 +7,7 @@
 #include "var.hpp"
 #include "reflectable.hpp"
 
-#include "yaml-cpp/emitter.h"
-#include "yaml-cpp/emittermanip.h"
-#include "yaml-cpp/yaml.h"
+#include "yaml-cpp/yaml.h"// IWYU pragma: keep
 
 namespace astra {
 	struct ASTRA_API yaml {

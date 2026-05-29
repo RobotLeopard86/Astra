@@ -15,6 +15,7 @@ jaguar_dep = subproject('jaguar', required: true).get_variable('libjaguar_dep').
 astra_sources = [
 	'binary.cpp',
 	'box.cpp',
+	'convert.cpp',
 	'err_helper.cpp',
 	'json.cpp',
 	'reflection.cpp',

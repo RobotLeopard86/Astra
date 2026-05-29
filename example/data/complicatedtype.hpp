@@ -12,6 +12,7 @@ namespace ExampleNamespace {
 	  public:
 		std::string myString;
 		std::map<Color, std::array<uint16_t, 5>> someMap;
+		std::vector<std::array<bool, 3>> listOfLists;
 
 		enum class ASTRA_REFLECT AnotherEnum {
 			Mantequilla,

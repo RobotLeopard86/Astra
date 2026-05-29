@@ -1,145 +1,30 @@
 #pragma once
 
-#include "binary.hpp"
-#include "json.hpp"
-#include "yaml.hpp"
+#include "nlohmann/json.hpp"
+#include "yaml-cpp/yaml.h"// IWYU pragma: keep
+#include "libjaguar/Document.hpp"
+
+#include "dll.hpp"
 
 namespace astra {
-	struct ASTRA_API converters {
-		struct ASTRA_API toJson {
-			template<Reflectable T>
-			static std::string fromYamlString(const std::string& str) {
-				T yamlOut;
-				try {
-					yamlOut = std::move(yaml::fromString<T>(str));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return json::toString(&yamlOut);
-			}
-
-			template<Reflectable T>
-			static std::string fromYamlStream(std::istream& stream) {
-				T yamlOut;
-				try {
-					yamlOut = std::move(yaml::fromString<T>(stream));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return json::toString(&yamlOut);
-			}
-
-			template<Reflectable T>
-			static std::string fromBinaryVector(const std::vector<uint8_t>& vector) {
-				T binaryOut;
-				try {
-					binaryOut = std::move(binary::fromVector<T>(vector));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return json::toString(&binaryOut);
-			}
-
-			template<Reflectable T>
-			static std::string fromBinaryStream(std::istream& stream) {
-				T binaryOut;
-				try {
-					binaryOut = std::move(binary::fromVector<T>(stream));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return json::toString(&binaryOut);
-			}
-		};
-		struct ASTRA_API toYaml {
-			template<Reflectable T>
-			static std::string fromJsonString(const std::string& str) {
-				T jsonOut;
-				try {
-					jsonOut = std::move(json::fromString<T>(str));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return yaml::toString(&jsonOut);
-			}
-
-			template<Reflectable T>
-			static std::string fromJsonStream(std::istream& stream) {
-				T jsonOut;
-				try {
-					jsonOut = std::move(json::fromString<T>(stream));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return yaml::toString(&jsonOut);
-			}
-
-			template<Reflectable T>
-			static std::string fromBinaryVector(const std::vector<uint8_t>& vector) {
-				T binaryOut;
-				try {
-					binaryOut = std::move(binary::fromVector<T>(vector));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return yaml::toString(binaryOut);
-			}
-
-			template<Reflectable T>
-			static std::string fromBinaryStream(std::istream& stream) {
-				T binaryOut;
-				try {
-					binaryOut = std::move(binary::fromVector<T>(stream));
-				} catch(const std::exception& e) {
-					return std::string(e.what());
-				}
-				return yaml::toString(&binaryOut);
-			}
-		};
-		struct ASTRA_API toBinary {
-			template<Reflectable T>
-			static std::vector<uint8_t> fromJsonString(const std::string& str) {
-				T jsonOut;
-				try {
-					jsonOut = std::move(json::fromString<T>(str));
-				} catch(const std::exception& e) {
-					return std::vector<uint8_t>(jsonOut.error());
-				}
-				return binary::toVector(&jsonOut);
-			}
-
-			template<Reflectable T>
-			static std::vector<uint8_t> fromJsonStream(std::istream& stream) {
-				T jsonOut;
-				try {
-					jsonOut = std::move(json::fromString<T>(stream));
-				} catch(const std::exception& e) {
-					return std::vector<uint8_t>(jsonOut.error());
-				}
-				return binary::toVector(&jsonOut);
-			}
-
-			template<Reflectable T>
-			static std::vector<uint8_t> fromYamlString(const std::string& str) {
-				T yamlOut;
-				try {
-					yamlOut = std::move(yaml::fromString<T>(str));
-				} catch(const std::exception& e) {
-					return std::vector<uint8_t>(yamlOut.error());
-				}
-				return binary::toVector(&yamlOut);
-			}
-
-			template<Reflectable T>
-			static std::vector<uint8_t> fromYamlStream(std::istream& stream) {
-				T yamlOut;
-				try {
-					yamlOut = std::move(yaml::fromString<T>(stream));
-				} catch(const std::exception& e) {
-					return std::vector<uint8_t>(yamlOut.error());
-				}
-				return binary::toVector(&yamlOut);
-			}
-		};
+	struct ASTRA_API convert {
+		static nlohmann::json yamlToJson(const YAML::Node& node);
+		static nlohmann::json binaryToJson(libjaguar::Document& doc);
+		static YAML::Node jsonToYaml(const nlohmann::json& json);
+		static YAML::Node binaryToYaml(libjaguar::Document& doc);
+		static libjaguar::Document jsonToBinary(const nlohmann::json& json);
+		static libjaguar::Document yamlToBinary(const YAML::Node& node);
+		static std::string yamlStringToJsonString(const std::string& str);
+		static std::string yamlStreamToJsonString(std::istream& stream);
+		static std::string binaryVecToJsonString(const std::vector<uint8_t>& vector);
+		static std::string binaryStreamToJsonString(std::istream& stream);
+		static std::string jsonStringToYamlString(const std::string& str);
+		static std::string jsonStreamToYamlString(std::istream& stream);
+		static std::string binaryVecToYamlString(const std::vector<uint8_t>& vector);
+		static std::string binaryStreamToYamlString(std::istream& stream);
+		static std::vector<uint8_t> jsonStringToBinaryVec(const std::string& str);
+		static std::vector<uint8_t> jsonStreamToBinaryVec(std::istream& stream);
+		static std::vector<uint8_t> yamlStringToBinaryVec(const std::string& str);
+		static std::vector<uint8_t> yamlStreamToBinaryVec(std::istream& stream);
 	};
 }

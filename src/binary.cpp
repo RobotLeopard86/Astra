@@ -266,15 +266,22 @@ namespace astra {
 					case TypeInfo::Kind::Object:
 						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 						if(nestedInfo.getKind() == TypeInfo::Kind::Object || nestedInfo.getKind() == TypeInfo::Kind::Map) break;
-						serializeBinaryRecursive(doc, path + ".payload", nestedInfo);
-						break;
+						{
+							size_t idx = 0;
+							arr.forEach([&](Var var) {
+								TypeInfo subinfo = reflect(var);
+								doc.CreateValue<libjaguar::UnstructuredObjTag>(path + "[" + std::to_string(idx) + "]");
+								serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "].payload", subinfo);
+								++idx;
+							});
+						}
+						return;
 					default: return;
 				}
 				size_t idx = 0;
-				arr.unsafeForEach([&](void* ptr) {
-					TypeInfo nestedInfo = reflect(Var(nullptr, arr.nestedType(), false));
-					nestedInfo.unsafeAssign(ptr);
-					serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
+				arr.forEach([&](Var var) {
+					TypeInfo subinfo = reflect(var);
+					serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "]", subinfo);
 					++idx;
 				});
 				break;
@@ -343,15 +350,22 @@ namespace astra {
 					case TypeInfo::Kind::Object:
 						doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 						if(nestedInfo.getKind() == TypeInfo::Kind::Object || nestedInfo.getKind() == TypeInfo::Kind::Map) break;
-						serializeBinaryRecursive(doc, path + ".payload", nestedInfo);
-						break;
+						{
+							size_t idx = 0;
+							list.forEach([&](Var var) {
+								TypeInfo subinfo = reflect(var);
+								doc.CreateValue<libjaguar::UnstructuredObjTag>(path + "[" + std::to_string(idx) + "]");
+								serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "].payload", subinfo);
+								++idx;
+							});
+						}
+						return;
 					default: return;
 				}
 				size_t idx = 0;
-				list.unsafeForEach([&](void* ptr) {
-					TypeInfo nestedInfo = reflect(Var(nullptr, list.nestedType(), false));
-					nestedInfo.unsafeAssign(ptr);
-					serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "]", nestedInfo);
+				list.forEach([&](Var var) {
+					TypeInfo subinfo = reflect(var);
+					serializeBinaryRecursive(doc, path + "[" + std::to_string(idx) + "]", subinfo);
 					++idx;
 				});
 				break;
@@ -461,7 +475,11 @@ namespace astra {
 				for(std::size_t i = 0; i < scopeInfo.subvalues.size() + scopeInfo.subscopes.size(); ++i) {
 					Box nested(arr.nestedType());
 					nestedInfo.assign(nested.var());
-					deserializeBinaryRecursive(doc, ::astra::format("{}[{}]", path, i), nestedInfo);
+					if(nestedInfo.getKind() == TypeInfo::Kind::Array || nestedInfo.getKind() == TypeInfo::Kind::Array) {
+						deserializeBinaryRecursive(doc, ::astra::format("{}[{}].payload", path, i), nestedInfo);
+					} else {
+						deserializeBinaryRecursive(doc, ::astra::format("{}[{}]", path, i), nestedInfo);
+					}
 					if(i >= arr.size()) throw std::runtime_error("Too many items in array!");
 					Var tgt = arr.at(i);
 					if(tgt.isConst()) throw std::runtime_error("Cannot deserialize into const array!");
@@ -488,7 +506,11 @@ namespace astra {
 				for(std::size_t i = 0; i < scopeInfo.subvalues.size() + scopeInfo.subscopes.size(); ++i) {
 					Box nested(list.nestedType());
 					nestedInfo.assign(nested.var());
-					deserializeBinaryRecursive(doc, ::astra::format("{}[{}]", path, i), nestedInfo);
+					if(nestedInfo.getKind() == TypeInfo::Kind::Array || nestedInfo.getKind() == TypeInfo::Kind::Array) {
+						deserializeBinaryRecursive(doc, ::astra::format("{}[{}].payload", path, i), nestedInfo);
+					} else {
+						deserializeBinaryRecursive(doc, ::astra::format("{}[{}]", path, i), nestedInfo);
+					}
 					list.push(nested.var());
 				}
 				break;
