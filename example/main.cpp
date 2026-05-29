@@ -13,6 +13,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <iterator>
 
 int main() {
 	//We have a car
@@ -28,7 +29,7 @@ int main() {
 
 	//Let's turn the JSON into YAML
 	std::cout << "This can also be in JSON: "
-			  << astra::convert::yamlToJson(YAML::Load(asYaml)) << std::endl;
+			  << astra::convert::yamlStringToJsonString(asYaml) << std::endl;
 
 	//Let's reflect it
 	astra::TypeInfo info = astra::reflect(&car);
@@ -125,7 +126,12 @@ int main() {
 	//Get it back
 	std::cout << "And finally, let's get the complicated type back!" << std::endl;
 	std::ifstream ifs("./complicated.xj", std::ios::binary);
-	std::cout << "In JSON, we can write it out as: " << astra::convert::binaryStreamToJsonString(ifs) << std::endl;
+	std::string complicatedJson = astra::convert::binaryStreamToJsonString(ifs);
+	std::cout << "In JSON, we can write it out as: " << complicatedJson << std::endl;
+	std::ofstream of2("./complicated2.xj", std::ios::binary);
+	std::vector<unsigned char> c = astra::convert::jsonStringToBinaryVec(complicatedJson);
+	std::ranges::copy(c, std::ostreambuf_iterator<char>(of2));
+	std::cout << "I turned it back to binary and put it in another file. Tee-hee!" << std::endl;
 
 	//Done
 	std::cout << "Thanks for checking out the Astra demo!" << std::endl;
