@@ -11,9 +11,9 @@ Key features include:
 * Automatic reflection info generation via code generator
 * Serialization/deserialization to:
 
-* JSON
-* YAML
-* Binary
+  * JSON
+  * YAML
+  * Binary
 
 * Cross-platform (generator runs on Windows, macOS, and Linux only)
 * Enum to/from string conversion

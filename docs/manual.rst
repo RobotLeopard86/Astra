@@ -12,5 +12,4 @@ Table of Contents:
 	:titlesonly:
 
 	manual/quickstart
-	manual/basics
-	manual/attributes
+	manual/configuration
