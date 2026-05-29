@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Attributes &#8212; Astra Documentation</title>
+    <title>Configuration &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'manual/attributes';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'manual/configuration';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -56,7 +56,7 @@
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Astra API Reference" href="../api/index.html" />
-    <link rel="prev" title="API Basics" href="basics.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -344,8 +344,7 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basics.html">API Basics</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Attributes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configuration</a></li>
 </ul>
 </div>
 </nav></div>
@@ -389,7 +388,7 @@
     
     <li class="breadcrumb-item"><a href="../manual.html" class="nav-link">Manual</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Attributes</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Configuration</span></li>
   </ul>
 </nav>
 </div>
@@ -406,60 +405,20 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="attributes">
-<h1>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"><span/></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><strong>This page is not up-to-date!</strong>.
-Astra is currently undergoing heavy restructuring, and this guide has not yet been updated to reflect the new information. A new version will be published closer to release.</p>
-</div>
-<p>Astra has 3 attributes available to customize the reflection experience.</p>
+  <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"><span/></a></h1>
+<p>Astra has three macros defined in the <code class="docutils literal notranslate"><span class="pre">setup.hpp</span></code> file that configure how the generator will reflect a given class (only <code class="docutils literal notranslate"><span class="pre">ASTRA_REFLECT</span></code> can be used with enums). When not generating reflection data, these macros evaluate to nothing and are thus ignored. The attributes are as follows:</p>
 <section id="astra-reflect">
-<h2><code class="docutils literal notranslate"><span class="pre">[[astra::reflect]]</span></code><a class="headerlink" href="#astra-reflect" title="Link to this heading"><span/></a></h2>
-<p>This attribute marks a <code class="docutils literal notranslate"><span class="pre">class</span></code> or <code class="docutils literal notranslate"><span class="pre">enum</span></code> as reflectable. However, it also supports some options:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">base</span></code> - Include methods and fields from superclass (provided it is reflectable)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> - Include fields</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">func</span></code> - Include methods</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nonPublic</span></code> - Include <code class="docutils literal notranslate"><span class="pre">private</span></code> and <code class="docutils literal notranslate"><span class="pre">protected</span></code> members</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> - All options combined</p></li>
-</ul>
-<p>If no argument is passed, then <code class="docutils literal notranslate"><span class="pre">data</span></code> is assumed. You can also specify multiple arguments like this:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="p">[[</span><span class="n">astra</span><span class="o">::</span><span class="n">reflect</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;func&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="n">SomeClass</span><span class="w"> </span><span class="p">{...};</span>
-</pre></div>
-</div>
-<p>Also, if using the <code class="docutils literal notranslate"><span class="pre">nonPublic</span></code> option (and by extension <code class="docutils literal notranslate"><span class="pre">all</span></code>, since <code class="docutils literal notranslate"><span class="pre">nonPublic</span></code> is included), you must additionally include the <code class="docutils literal notranslate"><span class="pre">astra/types/type_actions.hpp</span></code> header and add this line to a <code class="docutils literal notranslate"><span class="pre">private:</span></code> block in your class:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">friend</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">astra</span><span class="o">::</span><span class="n">TypeActions</span><span class="o">&lt;</span><span class="n">YourClassNameHere</span><span class="o">&gt;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Otherwise, you will get compile errors in the generated code telling you that the private fields referenced are inaccessible.</p>
-</section>
-<section id="astra-alias">
-<h2><code class="docutils literal notranslate"><span class="pre">[[astra::alias]]</span></code><a class="headerlink" href="#astra-alias" title="Link to this heading"><span/></a></h2>
-<p>This attribute lets you refer to something in reflection by a different name. For example:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="p">[[</span><span class="n">astra</span><span class="o">::</span><span class="n">reflect</span><span class="p">]]</span><span class="w"> </span><span class="n">Hippo</span><span class="w"> </span><span class="p">{</span>
-<span class="w">	</span><span class="p">[[</span><span class="n">astra</span><span class="o">::</span><span class="n">alias</span><span class="p">(</span><span class="s">&quot;hungry&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isHungry</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p>Now when using reflection, you call it <code class="docutils literal notranslate"><span class="pre">hungry</span></code> instead of <code class="docutils literal notranslate"><span class="pre">isHungry</span></code>.<br />
-This attribute works on:</p>
-<ul class="simple">
-<li><p>Non-static data members</p></li>
-<li><p>Methods</p></li>
-<li><p>Classes</p></li>
-</ul>
+<h2><code class="docutils literal notranslate"><span class="pre">ASTRA_REFLECT</span></code><a class="headerlink" href="#astra-reflect" title="Link to this heading"><span/></a></h2>
+<p>This attribute marks a class (or enum) as reflectable and will trigger the generator to generate reflection information for the class. If this macro is not found, the class will not be reflected even if it has other macros related to reflection.</p>
 </section>
 <section id="astra-ignore">
-<h2><code class="docutils literal notranslate"><span class="pre">[[astra::ignore]]</span></code><a class="headerlink" href="#astra-ignore" title="Link to this heading"><span/></a></h2>
-<p>This attribute lets you exclude a member in a reflectable class from reflection. For example:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="p">[[</span><span class="n">astra</span><span class="o">::</span><span class="n">reflect</span><span class="p">]]</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="p">{</span>
-<span class="w">	</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-<span class="w">	</span><span class="p">[[</span><span class="n">astra</span><span class="o">::</span><span class="n">ignore</span><span class="p">]]</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">creditScore</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p>In this example, you can use <code class="docutils literal notranslate"><span class="pre">name</span></code> in reflection, but not <code class="docutils literal notranslate"><span class="pre">creditScore</span></code>. In fact, trying to access <code class="docutils literal notranslate"><span class="pre">creditScore</span></code> will cause a runtime error and say that it wasn’t found. Be mindful of this.</p>
+<h2><code class="docutils literal notranslate"><span class="pre">ASTRA_IGNORE</span></code><a class="headerlink" href="#astra-ignore" title="Link to this heading"><span/></a></h2>
+<p>This attribute tells the generator to ignore a class member field or method; it will thus not be accessible via the reflection interface and will not be used in serialization or deserialization. Useful for hiding private fields.</p>
+</section>
+<section id="astra-alias">
+<h2><code class="docutils literal notranslate"><span class="pre">ASTRA_ALIAS(...)</span></code><a class="headerlink" href="#astra-alias" title="Link to this heading"><span/></a></h2>
+<p>This attribute tells the generator to rename a class member field or method in the reflection interface. It will thus not be accessible via its true name using the reflection or serialization APIs, only via the specified name. Place the alias name in quotes within the alias definition, like so: <code class="docutils literal notranslate"><span class="pre">ASTRA_ALIAS(&quot;my_alias&quot;)</span> <span class="pre">int</span> <span class="pre">someField;</span></code></p>
 </section>
 </section>
 
@@ -474,12 +433,12 @@ This attribute works on:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="basics.html"
+       href="quickstart.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">API Basics</p>
+        <p class="prev-next-title">Quickstart</p>
       </div>
     </a>
     <a class="right-next"
@@ -510,9 +469,9 @@ This attribute works on:</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astra-reflect"><code class="docutils literal notranslate"><span class="pre">[[astra::reflect]]</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astra-alias"><code class="docutils literal notranslate"><span class="pre">[[astra::alias]]</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astra-ignore"><code class="docutils literal notranslate"><span class="pre">[[astra::ignore]]</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astra-reflect"><code class="docutils literal notranslate"><span class="pre">ASTRA_REFLECT</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astra-ignore"><code class="docutils literal notranslate"><span class="pre">ASTRA_IGNORE</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astra-alias"><code class="docutils literal notranslate"><span class="pre">ASTRA_ALIAS(...)</span></code></a></li>
 </ul>
   </nav></div>
 
