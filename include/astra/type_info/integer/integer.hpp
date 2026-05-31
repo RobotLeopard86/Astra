@@ -47,16 +47,14 @@ namespace astra {
 		}
 
 		template<typename T>
-		typename std::enable_if_t<std::is_integral_v<T> && std::is_signed_v<T>,//
-			void>
-		set(T value) {
+			requires std::is_integral_v<T> && std::is_signed_v<T>
+		void set(T value) {
 			return impl()->setSigned(value);
 		}
 
 		template<typename T>
-		typename std::enable_if_t<std::is_integral_v<T> && std::is_unsigned_v<T>,//
-			void>
-		set(T value) {
+			requires std::is_integral_v<T> && std::is_unsigned_v<T>
+		void set(T value) {
 			return impl()->setUnsigned(value);
 		}
 

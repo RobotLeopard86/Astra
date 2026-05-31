@@ -14,8 +14,8 @@ namespace astra {
 	};
 
 	template<typename T>
-	typename std::enable_if_t<is_string_v<T>, TypeId>//
-	TypeId::get(T* ptr) {
+		requires is_string_v<T>
+	TypeId TypeId::get(T* ptr) {
 		static TypeId id(ActionsTable::record(Actions(&StringActions<T>::reflect,//
 			&CommonActions<T>::typeName,										 //
 			&CommonActions<T>::sizeOf,											 //

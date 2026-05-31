@@ -14,8 +14,8 @@ namespace astra {
 	};
 
 	template<typename T>
-	typename std::enable_if_t<std::is_floating_point_v<T>, TypeId>//
-	TypeId::get(T* ptr) {
+		requires std::is_floating_point_v<T>
+	TypeId TypeId::get(T* ptr) {
 		static TypeId id(ActionsTable::record(Actions(&FloatActions<T>::reflect,//
 			&CommonActions<T>::typeName,										//
 			&CommonActions<T>::sizeOf,											//
