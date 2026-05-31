@@ -278,7 +278,7 @@ namespace astra {
 		if(json.is_string()) {
 			std::string str = json.get<std::string>();
 			if(str[0] == '\'' && str[str.size() - 1] == '\'') {
-				doc.SetOrCreateValue<std::string>(path, str);
+				doc.SetOrCreateValue<std::string>(path, str.substr(1, str.size() - 2));
 				return;
 			}
 			std::string descriptor = str.substr(0, str.find_first_of(";"));
@@ -297,34 +297,35 @@ namespace astra {
 			} else {
 				if(descriptor.size() < 2 || descriptor.size() > 3) throw std::runtime_error("Invalid integer format!");
 				if(!(descriptor.ends_with("8") || descriptor.ends_with("16") || descriptor.ends_with("32") || descriptor.ends_with(64))) throw std::runtime_error("Invalid integer format!");
+				if(descriptor[0] != 's' && descriptor[0] != 'u') throw std::runtime_error("Invalid integer format!");
 				std::string numStr = str.substr(descriptor.size() + 1);
-				if(descriptor.compare("s8;") == 0) {
+				if(descriptor.compare("s8") == 0) {
 					int64_t val = std::stol(numStr);
 					if(val < INT8_MIN || val > INT8_MAX) throw std::runtime_error("Invalid integer!");
 					doc.SetOrCreateValue<int8_t>(path, val);
-				} else if(descriptor.compare("s16;") == 0) {
+				} else if(descriptor.compare("s16") == 0) {
 					int64_t val = std::stol(numStr);
 					if(val < INT16_MIN || val > INT16_MAX) throw std::runtime_error("Invalid integer!");
 					doc.SetOrCreateValue<int16_t>(path, val);
-				} else if(descriptor.compare("s32;") == 0) {
+				} else if(descriptor.compare("s32") == 0) {
 					int64_t val = std::stol(numStr);
 					if(val < INT32_MIN || val > INT32_MAX) throw std::runtime_error("Invalid integer!");
 					doc.SetOrCreateValue<int32_t>(path, val);
-				} else if(descriptor.compare("s64;") == 0) {
+				} else if(descriptor.compare("s64") == 0) {
 					doc.SetOrCreateValue<int64_t>(path, std::stol(numStr));
-				} else if(descriptor.compare("u8;") == 0) {
+				} else if(descriptor.compare("u8") == 0) {
 					uint64_t val = std::stol(numStr);
 					if(val > UINT8_MAX) throw std::runtime_error("Invalid integer!");
 					doc.SetOrCreateValue<uint8_t>(path, val);
-				} else if(descriptor.compare("u16;") == 0) {
+				} else if(descriptor.compare("u16") == 0) {
 					uint64_t val = std::stol(numStr);
 					if(val > UINT16_MAX) throw std::runtime_error("Invalid integer!");
 					doc.SetOrCreateValue<uint16_t>(path, val);
-				} else if(descriptor.compare("u32;") == 0) {
+				} else if(descriptor.compare("u32") == 0) {
 					uint64_t val = std::stol(numStr);
 					if(val > UINT32_MAX) throw std::runtime_error("Invalid integer!");
 					doc.SetOrCreateValue<uint32_t>(path, val);
-				} else if(descriptor.compare("u64;") == 0) {
+				} else if(descriptor.compare("u64") == 0) {
 					doc.SetOrCreateValue<uint64_t>(path, std::stoul(numStr));
 				}
 				return;
