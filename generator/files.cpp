@@ -80,7 +80,7 @@ inline std::string Files::executableName() {
 		size = 0;
 	}
 
-	return std::string(raw_path.get(), size);
+	return std::string(rawPath.get(), size);
 #elif defined(_WIN32)
 	std::wstring rawStr(MAX_PATH, '\0');
 	//int sizeRaw = GetModuleFileNameW(nullptr, &rawStr[0], MAX_PATH);

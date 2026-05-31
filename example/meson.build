@@ -10,4 +10,4 @@ executable('astra_example', sources: [
 	'data' / 'suv.hpp',
 	'data' / 'complicatedtype.hpp',
 	reflection
-], include_directories: include_directories('data'), dependencies: astra_dep, cpp_args: '-Wno-unknown-attributes')
+], include_directories: include_directories('data'), dependencies: astra_dep)
