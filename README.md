@@ -7,18 +7,18 @@
 > Looking for the old Silica library? [Click here](https://github.com/RobotLeopard86/Silica)
 
 ## About
-Astra is a codegen-based reflection and serialization library for C++, based in part on and inspired by [`easy_reflection_cpp`](https://github.com/chocolacula/easy_reflection_cpp). Astra relies on C++20 features.
+Astra is a codegen-based reflection and serialization library for C++, based on [`easy_reflection_cpp`](https://github.com/chocolacula/easy_reflection_cpp). Astra requires C++20 or newer.
 
 ## Features
-* Automatic reflection info generation via code generator
-* Serialization/Deserialization to:
+* Automatic reflection code generation
+* Serialization/deserialization to:
 	* JSON
 	* YAML
-	* Binary
+	* Binary (encoded using [Jaguar](https://github.com/RobotLeopard86/Jaguar))
 * Cross-platform
-	* Generator runs on Windows, macOS, and Linux only
-* Enum to/from string conversion
-* STL container support
+* Enum <-> string conversion
+* Support for many STL types
+* In-place serialized format conversion
 
 ## Documentation
 Documentation is built and deployed automatically to https://robotleopard86.github.io/Astra.  
@@ -35,7 +35,7 @@ You will need:
 All other dependencies will be downloaded at configure time.  
 
 > [!WARNING]  
-> There is a **known issue on macOS** that its `llvm` Homebrew package does not symlink the necessary LLVM files into their proper locations, causing lookup to fail. To fix this, **run `ln -s /opt/homebrew/opt/llvm/bin/llvm-config /opt/homebrew/bin/llvm-config` in your terminal before continuing.**
+> There is a **known issue on macOS** that its `llvm` Homebrew package does not symlink the necessary LLVM files into their proper locations, causing lookup to fail. To fix this, **run `ln -s /opt/homebrew/opt/llvm/bin/llvm-config /opt/homebrew/bin/llvm-config` to symlink the correct binary in your terminal before continuing.**
 
 Configure the build directory with `meson setup build --native-file native.ini`, then run `meson compile -C build` to build the library. You do not have to use the native file (which sets the compiler to Clang and the linker to LLD), but it is recommended.
 

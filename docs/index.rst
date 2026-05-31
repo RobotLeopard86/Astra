@@ -8,16 +8,17 @@ Astra uses a code generation-based approach that seamlessly integrates into your
 
 Key features include:
 
-* Automatic reflection info generation via code generator
+* Automatic reflection info generation
 * Serialization/deserialization to:
 
   * JSON
   * YAML
   * Binary
 
-* Cross-platform (generator runs on Windows, macOS, and Linux only)
-* Enum to/from string conversion
-* STL container support
+* Cross-platform
+* Enum <-> string conversion
+* Support for many STL types
+* In-place serialized format conversion
 
 .. toctree::
     :maxdepth: 1
