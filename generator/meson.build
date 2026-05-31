@@ -8,7 +8,7 @@ spinners_dep = subproject('spinners-plus-plus', required: true).get_variable('sp
 # LLVM/Clang dependencies
 cxx = meson.get_compiler('cpp')
 llvm_dep = dependency('llvm', version: '>=19.0.0', required: true)
-clang_dep = cxx.find_library('clang-cpp', required: true)
+clang_dep = cxx.find_library('clang-cpp', required: true, dirs: host_machine.system() == 'darwin' ? '/opt/homebrew/opt/llvm/lib' : [])
 
 deps = [cli11_dep, inja_dep, spinners_dep, llvm_dep, clang_dep]
 

@@ -34,6 +34,9 @@ You will need:
 
 All other dependencies will be downloaded at configure time.  
 
+> [!WARNING]  
+> There is a **known issue on macOS** that its `llvm` Homebrew package does not symlink the necessary LLVM files into their proper locations, causing lookup to fail. To fix this, **run `ln -s /opt/homebrew/opt/llvm/bin/llvm-config /opt/homebrew/bin/llvm-config` in your terminal before continuing.**
+
 Configure the build directory with `meson setup build --native-file native.ini`, then run `meson compile -C build` to build the library. You do not have to use the native file (which sets the compiler to Clang and the linker to LLD), but it is recommended.
 
 ## Licensing
