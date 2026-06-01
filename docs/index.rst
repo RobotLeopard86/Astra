@@ -24,5 +24,6 @@ Key features include:
     :maxdepth: 1
     :hidden:
 
-    manual
+    quickstart
+	configuration
     api/index
