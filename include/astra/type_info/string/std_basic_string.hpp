@@ -20,8 +20,8 @@ namespace astra {
 
 		void assign(Var var) override {
 			if(var.typeId() != inner.typeId()) {
-				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.typeId()),												//
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
+					typeName(var.typeId()),
 					typeName(inner.typeId())));
 			}
 			inner = var;

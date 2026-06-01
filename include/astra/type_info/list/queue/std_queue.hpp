@@ -16,15 +16,15 @@ namespace astra {
 		StdQueue() = delete;
 
 		StdQueue(std::queue<T>* queue, bool isConst)
-		  : queue(queue),//
+		  : queue(queue),
 			isConst(isConst) {
 		}
 
 		void assign(Var var) override {
 			auto t = TypeId::get(queue);
 			if(var.typeId() != t) {
-				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.typeId()),												//
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
+					typeName(var.typeId()),
 					typeName(t)));
 			}
 
@@ -86,7 +86,7 @@ namespace astra {
 			auto nestedType = TypeId::get<T>();
 
 			if(nestedType != value.typeId()) {
-				error("Trying to set with type: {} to queue<{}>",//
+				error("Trying to set with type: {} to queue<{}>",
 					value.typeId(), nestedType);
 			}
 			queue->push(*static_cast<const T*>(value.raw()));

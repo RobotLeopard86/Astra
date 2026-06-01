@@ -6,7 +6,6 @@
 #include <string>
 #include <type_traits>
 
-#include "append_buf.hpp"
 #include "traits.hpp"
 #include "dll.hpp"
 
@@ -33,8 +32,7 @@ namespace astra {
 	template<typename T>
 		requires std::is_floating_point_v<std::remove_cvref_t<T>>
 	ASTRA_API inline void append(std::string* str, T&& arg) {
-		AppendBuf buf(str);
-		std::ostream stream(&buf);
+		std::ostringstream stream(*str);
 		stream << std::setiosflags(std::ios::fixed) << std::setprecision(2);
 		stream << arg;
 	}

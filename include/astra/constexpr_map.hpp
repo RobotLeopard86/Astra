@@ -15,7 +15,6 @@ namespace astra {
 	///T values and names are sorted
 	///which could guarantee log(N) performance with binary search
 	///for both value->name and name->value access
-	///
 	///initial compile time sorting has O(N^2) complexity
 	template<class T, std::size_t size>
 	class ASTRA_API ConstexprMap {
@@ -120,11 +119,11 @@ namespace astra {
 		}
 
 		constexpr void sortValuePtr() {
-			ConstexprSort::sort(value_ptr.data(), value_ptr.size(),//
+			ConstexprSort::sort(value_ptr.data(), value_ptr.size(),
 				[](auto a, auto b) { return a->value > b->value; });
 		}
 		constexpr void sortNamePtr() {
-			ConstexprSort::sort(name_ptr.data(), name_ptr.size(),//
+			ConstexprSort::sort(name_ptr.data(), name_ptr.size(),
 				[](auto a, auto b) { return a->name > b->name; });
 		}
 	};

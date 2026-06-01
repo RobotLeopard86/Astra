@@ -15,13 +15,13 @@ namespace astra {
 
 	template<typename T>
 		requires std::is_integral_v<T>
-	TypeId TypeId::get(T* ptr) {
-		static TypeId id(ActionsTable::record(Actions(&IntActions<T>::reflect,//
-			&CommonActions<T>::typeName,									  //
-			&CommonActions<T>::sizeOf,										  //
-			&CommonActions<T>::nop,											  //
-			&CommonActions<T>::nop,											  //
-			&CommonActions<T>::copy,										  //
+	TypeId TypeId::get(T*) {
+		static TypeId id(ActionsTable::record(Actions(&IntActions<T>::reflect,
+			&CommonActions<T>::typeName,
+			&CommonActions<T>::sizeOf,
+			&CommonActions<T>::nop,
+			&CommonActions<T>::nop,
+			&CommonActions<T>::copy,
 			&CommonActions<T>::move)));
 		return id;
 	}

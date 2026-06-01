@@ -20,8 +20,8 @@ namespace astra {
 		void assign(Var var) {
 			auto t = TypeId::get<bool>();
 			if(var.typeId() != t) {
-				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.typeId()),												//
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
+					typeName(var.typeId()),
 					typeName(t)));
 			}
 

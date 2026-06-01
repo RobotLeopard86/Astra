@@ -14,14 +14,14 @@ namespace astra {
 		using const_iterator = std::map<std::string_view, FieldDesc>::const_iterator;
 
 	  public:
-		FieldIterator(const std::map<std::string_view, FieldDesc>* map,//
-			const void* base,										   //
-			Access acc,												   //
+		FieldIterator(const std::map<std::string_view, FieldDesc>* map,
+			const void* base,
+			Access acc,
 			bool includeReadonly)
-		  : it(map->begin()),//
-			end(map->cend()),//
-			base(base),		 //
-			acc(acc),		 //
+		  : it(map->begin()),
+			end(map->cend()),
+			base(base),
+			acc(acc),
 			include_readonly(includeReadonly) {
 			//start from a valid element
 			if(!isValid()) {
@@ -60,8 +60,8 @@ namespace astra {
 		const bool include_readonly;
 
 		bool isValid() {
-			return rightAccess() &&		   //
-				   rightStaticReadonly() &&//
+			return rightAccess() &&
+				   rightStaticReadonly() &&
 				   (base != nullptr || it->second.isStatic());
 		}
 

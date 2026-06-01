@@ -6,8 +6,8 @@ namespace astra {
 
 	///Represent common access modifiers kPublic, kProtected, kPrivate, etc.
 	///DO NOT edit they used as text by generator project
-	enum class Access : uint8_t {//
-								 // clang-format off
+	enum class Access : uint8_t {
+		// clang-format off
   None      = 0b00000,
   Public    = 0b00001,
   Protected = 0b00010,
@@ -15,7 +15,7 @@ namespace astra {
   Static    = 0b01000,
   Const     = 0b10000,
   All       = 0b11111,
-								 // clang-format on
+		// clang-format on
 	};
 
 	inline Access operator|(Access lhs, Access rhs) {

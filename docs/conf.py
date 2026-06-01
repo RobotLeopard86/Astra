@@ -41,7 +41,7 @@ exhale_args = {
     "afterTitleDescription": "Welcome to the Astra API documentation. Here, you can find detailed information on Astra's public interface.",
     "exhaleDoxygenStdin": dedent('''
 									INPUT = ../include
-                                    EXCLUDE_SYMBOLS = std*,YAML*,nlohmann*,libjaguar*,LJ*,ASTRA_*,ASTRASETUP
+                                    EXCLUDE_SYMBOLS = std*,YAML*,nlohmann*,libjaguar*,LJ*,ASTRA_*,ASTRASETUP,BASE
 									HIDE_UNDOC_MEMBERS = YES
 									MAX_INITIALIZER_LINES = 0
 								 	INPUT_ENCODING = UTF-8

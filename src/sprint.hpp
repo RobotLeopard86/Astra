@@ -32,7 +32,7 @@ namespace astra {
 					}
 				}
 			},
-			[result](const Bool& b) { *result += toString(b.get()); },//
+			[result](const Bool& b) { *result += toString(b.get()); },
 			[result](const Integer& i) {
 				if(i.isSigned()) {
 					*result += toString(i.asSigned());

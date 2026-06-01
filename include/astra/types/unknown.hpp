@@ -36,10 +36,6 @@ namespace astra {
 		static void move(void* /*to*/, void* /*from*/) {
 			throw std::runtime_error("Cannot move a value with unknown type");
 		}
-
-		//other types are self registering in The Great Table in the same place of a file
-		//but HelperUnknown is NOT a self registering class
-		//The Great Table put references to HelperUnknown methods itself
 	};
 
 }

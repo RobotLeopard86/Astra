@@ -8,7 +8,7 @@
 namespace astra {
 
 	struct ASTRA_API Methods {
-		Methods(void* base, const std::map<std::string_view, MethodDesc>* map, Access acc)//
+		Methods(void* base, const std::map<std::string_view, MethodDesc>* map, Access acc)
 		  : base(base), map(map), acc(acc) {
 		}
 

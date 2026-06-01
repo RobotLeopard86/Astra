@@ -21,13 +21,13 @@ namespace astra {
 	};
 
 	template<typename T>
-	TypeId TypeId::get(std::shared_ptr<T>* /*unused*/) {
-		static TypeId id(ActionsTable::record(Actions(&TypeActions<std::shared_ptr<T>>::reflect,//
-			&CommonActions<std::shared_ptr<T>>::typeName,										//
-			&CommonActions<std::shared_ptr<T>>::sizeOf,											//
-			&CommonActions<std::shared_ptr<T>>::construct,										//
-			&CommonActions<std::shared_ptr<T>>::destroy,										//
-			&CommonActions<std::shared_ptr<T>>::copy,											//
+	TypeId TypeId::get(std::shared_ptr<T>*) {
+		static TypeId id(ActionsTable::record(Actions(&TypeActions<std::shared_ptr<T>>::reflect,
+			&CommonActions<std::shared_ptr<T>>::typeName,
+			&CommonActions<std::shared_ptr<T>>::sizeOf,
+			&CommonActions<std::shared_ptr<T>>::construct,
+			&CommonActions<std::shared_ptr<T>>::destroy,
+			&CommonActions<std::shared_ptr<T>>::copy,
 			&CommonActions<std::shared_ptr<T>>::move)));
 		return id;
 	}

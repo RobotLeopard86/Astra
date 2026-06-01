@@ -83,9 +83,9 @@ namespace astra {
 		}
 
 		Var var() {
-			return match([](Array& a) -> Var { return a.ownVar(); },//
-				[](List& s) -> Var { return s.ownVar(); },			//
-				[](Map& m) -> Var { return m.ownVar(); },			//
+			return match([](Array& a) -> Var { return a.ownVar(); },
+				[](List& s) -> Var { return s.ownVar(); },
+				[](Map& m) -> Var { return m.ownVar(); },
 				[](auto&& v) { return v.var(); });
 		}
 

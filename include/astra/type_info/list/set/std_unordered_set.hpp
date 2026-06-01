@@ -14,15 +14,15 @@ namespace astra {
 		StdUnorderedSet() = delete;
 
 		StdUnorderedSet(std::unordered_set<T>* set, bool isConst)
-		  : set(set),//
+		  : set(set),
 			isConst(isConst) {
 		}
 
 		void assign(Var var) override {
 			auto t = TypeId::get(set);
 			if(var.typeId() != t) {
-				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.typeId()),												//
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
+					typeName(var.typeId()),
 					typeName(t)));
 			}
 
@@ -70,7 +70,7 @@ namespace astra {
 			auto nestedType = TypeId::get<T>();
 
 			if(nestedType != value.typeId()) {
-				error("Trying to set with type: {} to unordered_set<{}>",//
+				error("Trying to set with type: {} to unordered_set<{}>",
 					value.typeId(), nestedType);
 			}
 			set->insert(*static_cast<const T*>(value.raw()));
@@ -81,7 +81,7 @@ namespace astra {
 			auto nestedType = TypeId::get<T>();
 
 			if(nestedType != value.typeId()) {
-				error("Cannot remove value with type: {} from unordered_set<{}>",//
+				error("Cannot remove value with type: {} from unordered_set<{}>",
 					value.typeId(), nestedType);
 			}
 			set->erase(*static_cast<const T*>(value.raw()));

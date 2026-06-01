@@ -61,12 +61,12 @@ namespace astra {
 
 	template<typename T, std::size_t size_v>
 	TypeId TypeId::get(T (*)[size_v]) {
-		static TypeId id(ActionsTable::record(Actions(&TypeActions<T[size_v]>::reflect,//
-			&CommonActions<T[size_v]>::typeName,									   //
-			&TypeActions<T[size_v]>::sizeOf,										   //
-			&TypeActions<T[size_v]>::construct,										   //
-			&TypeActions<T[size_v]>::destroy,										   //
-			&TypeActions<T[size_v]>::copy,											   //
+		static TypeId id(ActionsTable::record(Actions(&TypeActions<T[size_v]>::reflect,
+			&CommonActions<T[size_v]>::typeName,
+			&TypeActions<T[size_v]>::sizeOf,
+			&TypeActions<T[size_v]>::construct,
+			&TypeActions<T[size_v]>::destroy,
+			&TypeActions<T[size_v]>::copy,
 			&TypeActions<T[size_v]>::move)));
 		return id;
 	}

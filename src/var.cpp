@@ -53,8 +53,8 @@ namespace astra {
 	}
 
 	void Var::error(TypeId type, TypeId desired_type) {
-		throw std::runtime_error(::astra::format("Cannot cast {} to {}",//
-			typeName(type),												//
+		throw std::runtime_error(::astra::format("Cannot cast {} to {}",
+			typeName(type),
 			typeName(desired_type)));
 	}
 }

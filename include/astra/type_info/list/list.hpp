@@ -91,7 +91,7 @@ namespace astra {
 		}
 
 	  private:
-		char mem[Sizeof<StdVector<int>, StdList<int>, StdDeque<int>, StdStack<int>,//
+		char mem[Sizeof<StdVector<int>, StdList<int>, StdDeque<int>, StdStack<int>,
 			StdQueue<int>, StdSet<int>, StdUnorderedSet<int>>::max()];
 
 		inline const IList* impl() const {

@@ -14,15 +14,15 @@ namespace astra {
 		StdDeque() = delete;
 
 		StdDeque(std::deque<T>* deque, bool isConst)
-		  : deque(deque),//
+		  : deque(deque),
 			isConst(isConst) {
 		}
 
 		void assign(Var var) override {
 			auto t = TypeId::get(deque);
 			if(var.typeId() != t) {
-				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.typeId()),												//
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
+					typeName(var.typeId()),
 					typeName(t)));
 			}
 
@@ -78,7 +78,7 @@ namespace astra {
 			auto nestedType = TypeId::get<T>();
 
 			if(nestedType != value.typeId()) {
-				error("Trying to set with type: {} to deque<{}>",//
+				error("Trying to set with type: {} to deque<{}>",
 					value.typeId(), nestedType);
 			}
 			deque->push_back(*static_cast<const T*>(value.raw()));

@@ -15,12 +15,12 @@ namespace astra {
 		using item = std::pair<std::string_view, MethodInfo>;
 
 	  public:
-		MethodIterator(const std::map<std::string_view, MethodDesc>* map,//
-			const void* base,											 //
+		MethodIterator(const std::map<std::string_view, MethodDesc>* map,
+			const void* base,
 			Access acc)
-		  : it(map->begin()),//
-			end(map->cend()),//
-			base(base),		 //
+		  : it(map->begin()),
+			end(map->cend()),
+			base(base),
 			acc(acc) {
 			//start from a valid element
 			if(!isValid()) {

@@ -13,13 +13,13 @@ namespace astra {
 	};
 
 	template<>
-	inline TypeId TypeId::get(bool* /*unused*/) {
-		static TypeId id(ActionsTable::record(Actions(&BoolActions::reflect,//
-			&CommonActions<bool>::typeName,									//
-			&CommonActions<bool>::sizeOf,									//
-			&CommonActions<bool>::nop,										//
-			&CommonActions<bool>::nop,										//
-			&CommonActions<bool>::copy,										//
+	inline TypeId TypeId::get(bool*) {
+		static TypeId id(ActionsTable::record(Actions(&BoolActions::reflect,
+			&CommonActions<bool>::typeName,
+			&CommonActions<bool>::sizeOf,
+			&CommonActions<bool>::nop,
+			&CommonActions<bool>::nop,
+			&CommonActions<bool>::copy,
 			&CommonActions<bool>::move)));
 		return id;
 	}

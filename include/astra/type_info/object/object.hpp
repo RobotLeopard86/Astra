@@ -17,18 +17,18 @@ namespace astra {
 	///container of all field names matched to Var structs
 	///just a registry of types and value pointers
 	struct ASTRA_API Object {
-		Object(Var var,											//
-			const std::map<std::string_view, FieldDesc>* fields,//
+		Object(Var var,
+			const std::map<std::string_view, FieldDesc>* fields,
 			const std::map<std::string_view, MethodDesc>* methods)
-		  : inner(var),	   //
-			fields(fields),//
+		  : inner(var),
+			fields(fields),
 			methods(methods) {
 		}
 
 		void assign(Var var) {
 			if(var.typeId() != inner.typeId()) {
-				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.typeId()),												//
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
+					typeName(var.typeId()),
 					typeName(inner.typeId())));
 			}
 			inner = var;

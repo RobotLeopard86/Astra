@@ -14,15 +14,15 @@ namespace astra {
 		StdVector() = delete;
 
 		StdVector(std::vector<T>* vector, bool isConst)
-		  : vector(vector),//
+		  : vector(vector),
 			isConst(isConst) {
 		}
 
 		void assign(Var var) override {
 			auto t = TypeId::get(vector);
 			if(var.typeId() != t) {
-				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.typeId()),												//
+				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
+					typeName(var.typeId()),
 					typeName(t)));
 			}
 
@@ -77,7 +77,7 @@ namespace astra {
 			auto nestedType = TypeId::get<T>();
 
 			if(nestedType != value.typeId()) {
-				error("Trying to set value to vector<{}>",//
+				error("Trying to set value to vector<{}>",
 					value.typeId(), nestedType);
 			}
 			vector->push_back(*static_cast<const T*>(value.raw()));

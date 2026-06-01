@@ -15,13 +15,13 @@ namespace astra {
 
 	template<typename T>
 		requires is_string_v<T>
-	TypeId TypeId::get(T* ptr) {
-		static TypeId id(ActionsTable::record(Actions(&StringActions<T>::reflect,//
-			&CommonActions<T>::typeName,										 //
-			&CommonActions<T>::sizeOf,											 //
-			&CommonActions<T>::construct,										 //
-			&CommonActions<T>::destroy,											 //
-			&CommonActions<T>::copy,											 //
+	TypeId TypeId::get(T*) {
+		static TypeId id(ActionsTable::record(Actions(&StringActions<T>::reflect,
+			&CommonActions<T>::typeName,
+			&CommonActions<T>::sizeOf,
+			&CommonActions<T>::construct,
+			&CommonActions<T>::destroy,
+			&CommonActions<T>::copy,
 			&CommonActions<T>::move)));
 		return id;
 	}
