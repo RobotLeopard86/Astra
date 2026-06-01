@@ -7,10 +7,10 @@
 #include "dll.hpp"
 
 namespace astra {
-
+	///@cond
 	using palloc_t = std::pmr::polymorphic_allocator<uint8_t>;
-
 	static inline palloc_t defaultAlloc;
+	///@endcond
 
 	struct ASTRA_API Box {
 		Box(palloc_t* alloc = &defaultAlloc)
@@ -31,10 +31,6 @@ namespace astra {
 	  private:
 		Var _var;
 		palloc_t* _alloc;
-
-		//max size of stack memory for dynamic allocation optimization
-		//static const std::size_t kMemSize = Sizeof<std::unordered_map<int, int>, std::map<int, int>>::max();
-		//std::array<uint8_t, kMemSize> _buff;
 	};
 
 }

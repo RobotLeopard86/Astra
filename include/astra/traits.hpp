@@ -15,6 +15,7 @@
 
 #include "dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
@@ -111,5 +112,5 @@ namespace astra {
 
 	template<typename T>
 	inline constexpr bool is_class_v = is_class<T>::value;
-
 }
+///@endcond
