@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="_static/astra_logo.png"/>
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Astra API Reference" href="api/index.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
     <link rel="prev" title="Astra Documentation" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -147,6 +147,13 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="#">
     Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration
   </a>
 </li>
 
@@ -265,6 +272,13 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="#">
     Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration
   </a>
 </li>
 
@@ -434,12 +448,13 @@ astra_dep = astra.get_variable(&#39;astra_dep&#39;)
 <li><p>Setup reflection in code</p>
 <ol class="arabic simple">
 <li><p>Include the <code class="docutils literal notranslate"><span class="pre">astra/setup.hpp</span></code> header in order to gain access to the reflection macros</p></li>
-<li><p>Mark a class as reflectable by adding the <code class="docutils literal notranslate"><span class="pre">ASTRA_REFLECT</span></code> macro before the class name and by making the class inherit from <code class="docutils literal notranslate"><span class="pre">AstraReflectBase</span></code></p>
+<li><p>Check that your enum/class conforms to the <code class="docutils literal notranslate"><span class="pre">astra::Reflectable</span></code> concept (must be either an enum, a primitive, or a default-initializable class)</p></li>
+<li><p>Mark an enum/class as reflectable by adding the <code class="docutils literal notranslate"><span class="pre">ASTRA_REFLECT</span></code> macro before the name and by making it inherit from <code class="docutils literal notranslate"><span class="pre">AstraReflectBase</span></code> it it’s a class</p>
 <ol class="arabic simple">
 <li><p>Note: your class does not need to directly inherit from <code class="docutils literal notranslate"><span class="pre">AstraReflectBase</span></code> if it inherits from a class that already does</p></li>
 </ol>
 </li>
-<li><p>Add reflection configuration data by adding <code class="docutils literal notranslate"><span class="pre">ASTRASETUP(&lt;your</span> <span class="pre">class</span> <span class="pre">name</span> <span class="pre">goes</span> <span class="pre">here&gt;)</span></code> within a <code class="docutils literal notranslate"><span class="pre">public</span></code> section of your class</p></li>
+<li><p>For classes: add reflection configuration data by adding <code class="docutils literal notranslate"><span class="pre">ASTRASETUP(&lt;your</span> <span class="pre">class</span> <span class="pre">name</span> <span class="pre">goes</span> <span class="pre">here&gt;)</span></code> within a <code class="docutils literal notranslate"><span class="pre">public</span></code> section of your class</p></li>
 </ol>
 </li>
 <li><p>Reflect!</p>
@@ -471,11 +486,11 @@ astra_dep = astra.get_variable(&#39;astra_dep&#39;)
       </div>
     </a>
     <a class="right-next"
-       href="api/index.html"
+       href="configuration.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Astra API Reference</p>
+        <p class="prev-next-title">Configuration</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
