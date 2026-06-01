@@ -2,15 +2,15 @@
 
 #include <limits>
 
+#include "ifloat.hpp"
 #include "astra/type_name.hpp"
-#include "ifloating.hpp"
 #include "astra/dll.hpp"
 
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API Float : IFloating {
-		Float(T* value, bool isConst)
+	struct ASTRA_API Floating : IFloat {
+		Floating(T* value, bool isConst)
 		  : value(value), isConst(isConst) {
 		}
 

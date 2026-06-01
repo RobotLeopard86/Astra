@@ -91,7 +91,7 @@ int main() {
 	std::cout << "The SUV is " << astra::reflect(&suvColor).as<astra::Enum>().toString() << std::endl;
 	std::cout << "Refinishing it cost more: $" << suvCost << std::endl;
 	std::cout << "I also can do SUV-specific stuff, like checking the trunk volume" << std::endl;
-	std::cout << "(it's " << astra::reflect(suvInfo.as<astra::Object>().getField("trunkVolume").var()).as<astra::Floating>().get() << " cubic feet btw)" << std::endl;
+	std::cout << "(it's " << astra::reflect(suvInfo.as<astra::Object>().getField("trunkVolume").var()).as<astra::Float>().get() << " cubic feet btw)" << std::endl;
 
 	//Casting to base class
 	std::cout << "Let's cast the SUV back to a car." << std::endl;

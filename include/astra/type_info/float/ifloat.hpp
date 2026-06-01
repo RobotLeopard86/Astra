@@ -8,8 +8,8 @@
 
 namespace astra {
 
-	struct ASTRA_API IFloating {
-		virtual ~IFloating() = default;
+	struct ASTRA_API IFloat {
+		virtual ~IFloat() = default;
 
 		virtual void assign(Var var) = 0;
 		virtual void unsafeAssign(void* ptr) = 0;

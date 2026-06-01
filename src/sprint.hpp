@@ -40,7 +40,7 @@ namespace astra {
 					*result += toString(i.asUnsigned());
 				}
 			},
-			[result](const Floating& f) { *result += toString(f.get(), 2); },
+			[result](const Float& f) { *result += toString(f.get(), 2); },
 			[result](const String& s) {
 				*result += "'";
 				*result += s.get();

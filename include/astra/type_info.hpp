@@ -12,7 +12,7 @@
 #include "type_info/array/array.hpp"
 #include "type_info/bool.hpp"
 #include "type_info/enum/enum.hpp"
-#include "type_info/floating/floating.hpp"
+#include "type_info/float/float.hpp"
 #include "type_info/integer/integer.hpp"
 #include "type_info/map/map.hpp"
 #include "type_info/object/object.hpp"
@@ -22,16 +22,11 @@
 
 namespace astra {
 
-#define BASE Variant<Bool, Integer, Floating, String, Enum, Object, Array, List, Map, Pointer>
+#define BASE Variant<Bool, Integer, Float, String, Enum, Object, Array, List, Map, Pointer>
 
-	///The sum type contains information about nature of stored value
-	///
-	///Primitive for int, float, std::string and others
-	///Object for structs and classes
-	///Array
-	///List for arrays and containers with one generic parameter
-	///Map for associative container such as std::map
-	///Pointer for smart pointers
+	/**
+	 * @brief Sum-type variant to hold various type info classes
+	 */
 	class ASTRA_API TypeInfo : public BASE {
 	  public:
 		TypeInfo(Bool value)
@@ -42,7 +37,7 @@ namespace astra {
 		  : BASE(value) {
 		}
 
-		TypeInfo(Floating value)
+		TypeInfo(Float value)
 		  : BASE(value) {
 		}
 
@@ -92,7 +87,7 @@ namespace astra {
 		enum class Kind {
 			Bool,
 			Integer,
-			Floating,
+			Float,
 			String,
 			Enum,
 			Object,

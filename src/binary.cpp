@@ -8,7 +8,7 @@
 #include "astra/reflection.hpp"
 #include "astra/type_info.hpp"
 #include "astra/type_info/array/array.hpp"
-#include "astra/type_info/floating/floating.hpp"
+#include "astra/type_info/float/float.hpp"
 #include "astra/type_info/pointer/pointer.hpp"
 #include "astra/type_info/list/list.hpp"
 #include "astra/types/all_types.hpp"// IWYU pragma: keep
@@ -59,8 +59,8 @@ namespace astra {
 				}
 				break;
 			}
-			case TypeInfo::Kind::Floating: {
-				Floating floatInfo = info.asUnsafe<Floating>();
+			case TypeInfo::Kind::Float: {
+				Float floatInfo = info.asUnsafe<Float>();
 				if(floatInfo.size() == sizeof(float)) {
 					doc.SetOrCreateValue<float>(path, (float)floatInfo.get());
 				} else {
@@ -146,8 +146,8 @@ namespace astra {
 							}
 						}
 						break;
-					case TypeInfo::Kind::Floating:
-						if(nestedInfo.asUnsafe<Floating>().size() == sizeof(float)) {
+					case TypeInfo::Kind::Float:
+						if(nestedInfo.asUnsafe<Float>().size() == sizeof(float)) {
 							doc.CreateValue<std::vector<float>>(path);
 						} else {
 							doc.CreateValue<std::vector<double>>(path);
@@ -230,8 +230,8 @@ namespace astra {
 							}
 						}
 						break;
-					case TypeInfo::Kind::Floating:
-						if(nestedInfo.asUnsafe<Floating>().size() == sizeof(float)) {
+					case TypeInfo::Kind::Float:
+						if(nestedInfo.asUnsafe<Float>().size() == sizeof(float)) {
 							doc.CreateValue<std::vector<float>>(path);
 						} else {
 							doc.CreateValue<std::vector<double>>(path);
@@ -320,8 +320,8 @@ namespace astra {
 				}
 				break;
 			}
-			case TypeInfo::Kind::Floating: {
-				Floating floatInfo = info.asUnsafe<Floating>();
+			case TypeInfo::Kind::Float: {
+				Float floatInfo = info.asUnsafe<Float>();
 				if(floatInfo.size() == sizeof(float)) {
 					floatInfo.set(doc.QueryValue<float>(path));
 				} else {

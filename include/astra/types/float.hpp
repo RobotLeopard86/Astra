@@ -9,7 +9,7 @@ namespace astra {
 	template<typename T>
 	struct ASTRA_API FloatActions {
 		static TypeInfo reflect(void* value, bool isConst) {
-			return TypeInfo(Floating(static_cast<T*>(value), isConst));
+			return TypeInfo(Float(static_cast<T*>(value), isConst));
 		}
 	};
 

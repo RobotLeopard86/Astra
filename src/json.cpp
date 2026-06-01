@@ -25,8 +25,8 @@ namespace astra {
 					json = ::astra::format("u{};{}", intInfo.size() * 8, intInfo.asUnsigned());
 				}
 				break;
-			case TypeInfo::Kind::Floating:
-				if(auto floatInfo = info.asUnsafe<Floating>(); floatInfo.size() == sizeof(float)) {
+			case TypeInfo::Kind::Float:
+				if(auto floatInfo = info.asUnsafe<Float>(); floatInfo.size() == sizeof(float)) {
 					json = ::astra::format("{}f", (float)floatInfo.get());
 				} else {
 					json = std::to_string(floatInfo.get());
@@ -112,13 +112,13 @@ namespace astra {
 				}
 				break;
 			}
-			case TypeInfo::Kind::Floating: {
+			case TypeInfo::Kind::Float: {
 				if(!json.is_string()) throw std::runtime_error("Invalid floating-point format!");
 				std::string fullNum = json.get<std::string>();
 				if(char last = fullNum[fullNum.size() - 1]; last == 'f') {
-					info.asUnsafe<Floating>().set(std::stof(fullNum.substr(0, fullNum.size() - 2)));
+					info.asUnsafe<Float>().set(std::stof(fullNum.substr(0, fullNum.size() - 2)));
 				} else if(last >= '0' && last <= '9') {
-					info.asUnsafe<Floating>().set(std::stod(fullNum.substr(0, fullNum.size() - 1)));
+					info.asUnsafe<Float>().set(std::stod(fullNum.substr(0, fullNum.size() - 1)));
 				} else
 					throw std::runtime_error("Invalid floating-point format!");
 				break;

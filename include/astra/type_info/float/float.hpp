@@ -2,18 +2,17 @@
 
 #include <memory>
 
-#include "float.hpp"
-#include "ifloating.hpp"
+#include "floating.hpp"
 #include "astra/dll.hpp"
 
 namespace astra {
 
-	struct ASTRA_API Floating final {
-		Floating() = delete;
+	struct ASTRA_API Float final {
+		Float() = delete;
 
 		template<typename T>
-		Floating(T* value, bool isConst) {
-			new(mem) Float<T>(value, isConst);
+		Float(T* value, bool isConst) {
+			new(mem) Floating<T>(value, isConst);
 		}
 
 		void assign(Var var) {
@@ -41,14 +40,14 @@ namespace astra {
 		}
 
 	  private:
-		char mem[sizeof(Float<double>)];
+		char mem[sizeof(Floating<double>)];
 
-		inline const IFloating* impl() const {
-			return reinterpret_cast<const IFloating*>(&mem[0]);
+		inline const IFloat* impl() const {
+			return reinterpret_cast<const IFloat*>(&mem[0]);
 		}
 
-		inline IFloating* impl() {
-			return reinterpret_cast<IFloating*>(&mem[0]);
+		inline IFloat* impl() {
+			return reinterpret_cast<IFloat*>(&mem[0]);
 		}
 	};
 
