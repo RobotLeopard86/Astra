@@ -421,7 +421,6 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dll.hpp&quot;</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
-
 <span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="o">&gt;</span>
 <span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">ConstexprMap</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">public</span><span class="o">:</span>
@@ -446,7 +445,7 @@
 <span class="w">            </span><span class="n">sortNamePtr</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">getName</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">getKey</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searchByValue</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
 
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -460,7 +459,7 @@
 <span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searchByName</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
 
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="o">::</span><span class="n">astra</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Cannot find the constant &#39;{}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">));</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="o">::</span><span class="n">astra</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Cannot find the key </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">));</span>
 <span class="w">            </span><span class="p">}</span>
 
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
@@ -479,17 +478,14 @@
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">&gt;</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">;</span>
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">&gt;</span><span class="w"> </span><span class="n">name_ptr</span><span class="p">;</span>
 
+<span class="w">        </span><span class="c1">//Binary search algorithm</span>
 <span class="w">        </span><span class="k">constexpr</span><span class="w"> </span><span class="n">Entry</span><span class="o">*</span><span class="w"> </span><span class="nf">searchByValue</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-
 <span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
 <span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">middleIdx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">middleVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">[</span><span class="n">middleIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
-
 <span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">middleVal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">[</span><span class="n">middleIdx</span><span class="p">];</span>
 <span class="w">                </span><span class="p">}</span>
-
 <span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">middleVal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">middleIdx</span><span class="p">;</span>
 <span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
@@ -497,21 +493,18 @@
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
 
-<span class="w">            </span><span class="c1">//nothing is found</span>
+<span class="w">            </span><span class="c1">//Fallback nullptr return</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
+<span class="w">        </span><span class="c1">//Binary search algorithm</span>
 <span class="w">        </span><span class="k">constexpr</span><span class="w"> </span><span class="n">Entry</span><span class="o">*</span><span class="w"> </span><span class="nf">searchByName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-
 <span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
 <span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">middleIdx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">middleVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name_ptr</span><span class="p">[</span><span class="n">middleIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
-
 <span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">middleVal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">name_ptr</span><span class="p">[</span><span class="n">middleIdx</span><span class="p">];</span>
 <span class="w">                </span><span class="p">}</span>
-
 <span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">middleVal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">middleIdx</span><span class="p">;</span>
 <span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
@@ -519,16 +512,16 @@
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
 
-<span class="w">            </span><span class="c1">//nothing is found</span>
+<span class="w">            </span><span class="c1">//Fallback nullptr return</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortValuePtr</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">ConstexprSort</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">value_ptr</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">ConstexprSort</span><span class="o">::</span><span class="n">sort</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">value_ptr</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
 <span class="w">                </span><span class="p">[](</span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortNamePtr</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">ConstexprSort</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">name_ptr</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">name_ptr</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">ConstexprSort</span><span class="o">::</span><span class="n">sort</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">name_ptr</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">name_ptr</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
 <span class="w">                </span><span class="p">[](</span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>

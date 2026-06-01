@@ -489,9 +489,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Names.html">Template Struct Names</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Names_3_01T_0fsize__v_0e_4.html">Template Struct Names&lt; T[size_v] &gt;</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Object.html">Struct Object</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -746,22 +743,20 @@
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3BoxE">
 <span id="_CPPv3N5astra3BoxE"></span><span id="_CPPv2N5astra3BoxE"></span><span id="astra::Box"></span><span class="target" id="structastra_1_1Box"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Box</span></span></span><a class="headerlink" href="#_CPPv4N5astra3BoxE" title="Link to this definition"><span/></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Wrapper for allocating objects by type ID and safely storing them type-erased. </p>
+<p><strong>This type is move-only!</strong></p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra3Box3BoxEP8palloc_t">
-<span id="_CPPv3N5astra3Box3BoxEP8palloc_t"></span><span id="_CPPv2N5astra3Box3BoxEP8palloc_t"></span><span id="astra::Box::Box__palloc_tP"></span><span class="target" id="structastra_1_1Box_1a08970da95a89515219958f12481743a8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Box</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">palloc_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">alloc</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">&amp;</span></span><span class="n"><span class="pre">defaultAlloc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Box3BoxEP8palloc_t" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra3Box3BoxERK3Box">
-<span id="_CPPv3N5astra3Box3BoxERK3Box"></span><span id="_CPPv2N5astra3Box3BoxERK3Box"></span><span id="astra::Box::Box__BoxCR"></span><span class="target" id="structastra_1_1Box_1a0c93a6922f0c527aef27228a4948c621"></span><span class="sig-name descname"><span class="n"><span class="pre">Box</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra3Box3BoxERK3Box" title="astra::Box::Box"><span class="n"><span class="pre">Box</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><a class="headerlink" href="#_CPPv4N5astra3Box3BoxERK3Box" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra3BoxaSERK3Box">
-<span id="_CPPv3N5astra3BoxaSERK3Box"></span><span id="_CPPv2N5astra3BoxaSERK3Box"></span><span id="astra::Box::assign-operator__BoxCR"></span><span class="target" id="structastra_1_1Box_1a8cf23075fadda91ea19b668cd6c3827b"></span><a class="reference internal" href="#_CPPv4N5astra3BoxE" title="astra::Box"><span class="n"><span class="pre">Box</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra3BoxE" title="astra::Box"><span class="n"><span class="pre">Box</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><a class="headerlink" href="#_CPPv4N5astra3BoxaSERK3Box" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra3Box3BoxEPNSt3pmr21polymorphic_allocatorI7uint8_tEE">
+<span id="_CPPv3N5astra3Box3BoxEPNSt3pmr21polymorphic_allocatorI7uint8_tEE"></span><span id="_CPPv2N5astra3Box3BoxEPNSt3pmr21polymorphic_allocatorI7uint8_tEE"></span><span id="astra::Box::Box__std::pmr::polymorphic_allocator:uint8_t:P"></span><span class="target" id="structastra_1_1Box_1ada9128f34e01e80337fca92e3eca4413"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Box</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pmr</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">polymorphic_allocator</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">alloc</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">&amp;</span></span><span class="n"><span class="pre">defaultAlloc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Box3BoxEPNSt3pmr21polymorphic_allocatorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Create an empty <a class="reference internal" href="#structastra_1_1Box"><span class="std std-ref">Box</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>alloc</strong> – Optional override for a custom allocator </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Box3BoxERR3Box">
@@ -774,24 +769,43 @@
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra3Box3BoxE6TypeIdP8palloc_t">
-<span id="_CPPv3N5astra3Box3BoxE6TypeIdP8palloc_t"></span><span id="_CPPv2N5astra3Box3BoxE6TypeIdP8palloc_t"></span><span id="astra::Box::Box__TypeId.palloc_tP"></span><span class="target" id="structastra_1_1Box_1a4a089b394293cfeedddd028a41e2466b"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Box</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span>, <span class="n"><span class="pre">palloc_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">alloc</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">&amp;</span></span><span class="n"><span class="pre">defaultAlloc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Box3BoxE6TypeIdP8palloc_t" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra3BoxD0Ev">
-<span id="_CPPv3N5astra3BoxD0Ev"></span><span id="_CPPv2N5astra3BoxD0Ev"></span><span id="astra::Box::~Box"></span><span class="target" id="structastra_1_1Box_1a7b2369bd782813ee9e63e2b1bae5a498"></span><span class="sig-name descname"><span class="n"><span class="pre">~Box</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3BoxD0Ev" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra3Box3BoxE6TypeIdPNSt3pmr21polymorphic_allocatorI7uint8_tEE">
+<span id="_CPPv3N5astra3Box3BoxE6TypeIdPNSt3pmr21polymorphic_allocatorI7uint8_tEE"></span><span id="_CPPv2N5astra3Box3BoxE6TypeIdPNSt3pmr21polymorphic_allocatorI7uint8_tEE"></span><span id="astra::Box::Box__TypeId.std::pmr::polymorphic_allocator:uint8_t:P"></span><span class="target" id="structastra_1_1Box_1ab88923426a282da140df5b88a70ec7c7"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Box</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pmr</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">polymorphic_allocator</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">alloc</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">&amp;</span></span><span class="n"><span class="pre">defaultAlloc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Box3BoxE6TypeIdPNSt3pmr21polymorphic_allocatorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Create a new <a class="reference internal" href="#structastra_1_1Box"><span class="std std-ref">Box</span></a> storing an object of a given <a class="reference internal" href="structastra_1_1TypeId.html#structastra_1_1TypeId"><span class="std std-ref">TypeId</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – <a class="reference internal" href="structastra_1_1TypeId.html#structastra_1_1TypeId"><span class="std std-ref">TypeId</span></a> for the type of object to store </p></li>
+<li><p><strong>alloc</strong> – Optional override for a custom allocator </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Box3varEv">
 <span id="_CPPv3N5astra3Box3varEv"></span><span id="_CPPv2N5astra3Box3varEv"></span><span id="astra::Box::var"></span><span class="target" id="structastra_1_1Box_1ab824005f2fb7f22c039698ebc0d34a49"></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Box3varEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access the contents of the <a class="reference internal" href="#structastra_1_1Box"><span class="std std-ref">Box</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> that manages the contained object </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Box5cloneEv">
 <span id="_CPPv3N5astra3Box5cloneEv"></span><span id="_CPPv2N5astra3Box5cloneEv"></span><span id="astra::Box::clone"></span><span class="target" id="structastra_1_1Box_1a5407000374b43669e99b9397d8565fe9"></span><a class="reference internal" href="#_CPPv4N5astra3BoxE" title="astra::Box"><span class="n"><span class="pre">Box</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clone</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Box5cloneEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Copy the contents of one <a class="reference internal" href="#structastra_1_1Box"><span class="std std-ref">Box</span></a> to another. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the contained type is not copy-constructible </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#structastra_1_1Box"><span class="std std-ref">Box</span></a> containing a clone of the stored object</p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -848,13 +862,10 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struct-documentation">Struct Documentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3BoxE"><code class="docutils literal notranslate"><span class="pre">astra::Box</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box3BoxEP8palloc_t"><code class="docutils literal notranslate"><span class="pre">Box()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box3BoxERK3Box"><code class="docutils literal notranslate"><span class="pre">Box()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3BoxaSERK3Box"><code class="docutils literal notranslate"><span class="pre">operator=()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box3BoxEPNSt3pmr21polymorphic_allocatorI7uint8_tEE"><code class="docutils literal notranslate"><span class="pre">Box()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box3BoxERR3Box"><code class="docutils literal notranslate"><span class="pre">Box()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3BoxaSERR3Box"><code class="docutils literal notranslate"><span class="pre">operator=()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box3BoxE6TypeIdP8palloc_t"><code class="docutils literal notranslate"><span class="pre">Box()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3BoxD0Ev"><code class="docutils literal notranslate"><span class="pre">~Box()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box3BoxE6TypeIdPNSt3pmr21polymorphic_allocatorI7uint8_tEE"><code class="docutils literal notranslate"><span class="pre">Box()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box3varEv"><code class="docutils literal notranslate"><span class="pre">var()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Box5cloneEv"><code class="docutils literal notranslate"><span class="pre">clone()</span></code></a></li>
 </ul>
