@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Namespace astra::list" href="namespace_astra__list.html" />
+    <link rel="next" title="Struct Actions" href="structastra_1_1Actions.html" />
     <link rel="prev" title="Astra API Reference" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -346,9 +346,6 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Namespace astra</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="namespace_astra__list.html">Namespace astra::list</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -586,7 +583,7 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1list_1_1ErrHelper.html">Class ErrHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1ListErrHelper.html">Class ListErrHelper</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
@@ -763,18 +760,11 @@
 <nav class="contents local" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#namespaces" id="id2">Namespaces</a></p></li>
-<li><p><a class="reference internal" href="#classes" id="id3">Classes</a></p></li>
-<li><p><a class="reference internal" href="#enums" id="id4">Enums</a></p></li>
-<li><p><a class="reference internal" href="#functions" id="id5">Functions</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id2">Classes</a></p></li>
+<li><p><a class="reference internal" href="#enums" id="id3">Enums</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
 </ul>
 </nav>
-<section id="namespaces">
-<h2>Namespaces<a class="headerlink" href="#namespaces" title="Link to this heading"><span/></a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="namespace_astra__list.html#namespace-astra-list"><span class="std std-ref">Namespace astra::list</span></a></p></li>
-</ul>
-</section>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"><span/></a></h2>
 <ul class="simple">
@@ -856,6 +846,7 @@
 <li><p><a class="reference internal" href="classastra_1_1ConstexprMap.html#exhale-class-classastra-1-1constexprmap"><span class="std std-ref">Template Class ConstexprMap</span></a></p></li>
 <li><p><a class="reference internal" href="classastra_1_1FieldInfo.html#exhale-class-classastra-1-1fieldinfo"><span class="std std-ref">Class FieldInfo</span></a></p></li>
 <li><p><a class="reference internal" href="classastra_1_1FieldIterator.html#exhale-class-classastra-1-1fielditerator"><span class="std std-ref">Class FieldIterator</span></a></p></li>
+<li><p><a class="reference internal" href="classastra_1_1ListErrHelper.html#exhale-class-classastra-1-1listerrhelper"><span class="std std-ref">Class ListErrHelper</span></a></p></li>
 <li><p><a class="reference internal" href="classastra_1_1MethodInfo.html#exhale-class-classastra-1-1methodinfo"><span class="std std-ref">Class MethodInfo</span></a></p></li>
 <li><p><a class="reference internal" href="classastra_1_1MethodIterator.html#exhale-class-classastra-1-1methoditerator"><span class="std std-ref">Class MethodIterator</span></a></p></li>
 <li><p><a class="reference internal" href="classastra_1_1TypeInfo.html#exhale-class-classastra-1-1typeinfo"><span class="std std-ref">Class TypeInfo</span></a></p></li>
@@ -887,8 +878,8 @@
 <li><p><a class="reference internal" href="function_access_8hpp_1a6cf11e74058cada7bbfaa7697595a915.html#exhale-function-access-8hpp-1a6cf11e74058cada7bbfaa7697595a915"><span class="std std-ref">Function astra::operator|</span></a></p></li>
 <li><p><a class="reference internal" href="function_overloaded_8hpp_1aab8921fe63674c9f2b4d37fe09c9b4f2.html#exhale-function-overloaded-8hpp-1aab8921fe63674c9f2b4d37fe09c9b4f2"><span class="std std-ref">Template Function astra::Overloaded</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a9b37232674257fdb602d050bd1ad72c1.html#exhale-function-reflection-8hpp-1a9b37232674257fdb602d050bd1ad72c1"><span class="std std-ref">Function astra::print(const TypeInfo&amp;)</span></a></p></li>
-<li><p><a class="reference internal" href="function_reflection_8hpp_1a9f6f38085af9ec269580bc783510c259.html#exhale-function-reflection-8hpp-1a9f6f38085af9ec269580bc783510c259"><span class="std std-ref">Template Function astra::print(const T *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1af1519901592ea6c930c56e9a70d1fad5.html#exhale-function-reflection-8hpp-1af1519901592ea6c930c56e9a70d1fad5"><span class="std std-ref">Function astra::print(Var)</span></a></p></li>
+<li><p><a class="reference internal" href="function_reflection_8hpp_1a9f6f38085af9ec269580bc783510c259.html#exhale-function-reflection-8hpp-1a9f6f38085af9ec269580bc783510c259"><span class="std std-ref">Template Function astra::print(const T *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a55c2d4b75265cb03d7f2406d9a64aff7.html#exhale-function-reflection-8hpp-1a55c2d4b75265cb03d7f2406d9a64aff7"><span class="std std-ref">Function astra::reflect(Var)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1aad262ca670e6430753354c6c4bf155ea.html#exhale-function-reflection-8hpp-1aad262ca670e6430753354c6c4bf155ea"><span class="std std-ref">Template Function astra::reflect(T *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a6570da25f1d3fa9b105d8466378c571a.html#exhale-function-reflection-8hpp-1a6570da25f1d3fa9b105d8466378c571a"><span class="std std-ref">Template Function astra::reflect(const T *)</span></a></p></li>
@@ -925,11 +916,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="namespace_astra__list.html"
+       href="structastra_1_1Actions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Namespace astra::list</p>
+        <p class="prev-next-title">Struct Actions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -952,7 +943,6 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces">Namespaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enums">Enums</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
