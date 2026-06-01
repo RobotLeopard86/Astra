@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/function_type__name_8hpp_1a1e7f2f476c30555355dba1e3c53ce56f';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/function_type__name_8hpp_1a6d3dad3555658fc9ae4b1378064af618';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Function astra::toString(double, int)" href="function_stringify_8hpp_1a084b3926b32ac7459acd122ae7f8ddee.html" />
+    <link rel="prev" title="Template Function astra::sprint(const T *)" href="function_reflection_8hpp_1aab25549a2bb25ef2c3dba2539367cdb9.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -503,9 +503,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof.html">Template Struct Sizeof</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof_3_01T_01_4.html">Template Struct Sizeof&lt; T &gt;</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1StackIterator.html">Template Struct StackIterator</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -658,18 +655,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aab25549a2bb25ef2c3dba2539367cdb9.html">Template Function astra::sprint(const T *)</a></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1aa05f512eb7ef85cf398a92b6a9e8de1c.html">Function astra::toString(bool)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1a98774da859e7f70d9e37123dedc06be3.html">Function astra::toString(int64_t)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1a8803c9c984525d04e0c0eb769aa4aacb.html">Function astra::toString(uint64_t)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1a084b3926b32ac7459acd122ae7f8ddee.html">Function astra::toString(double, int)</a></li>
-</ul>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Function astra::typeName</a></li>
 </ul>
@@ -733,7 +718,7 @@
                 <article class="bd-article">
                   
   <section id="function-astra-typename">
-<span id="exhale-function-type-name-8hpp-1a1e7f2f476c30555355dba1e3c53ce56f"></span><h1>Function astra::typeName<a class="headerlink" href="#function-astra-typename" title="Link to this heading"><span/></a></h1>
+<span id="exhale-function-type-name-8hpp-1a6d3dad3555658fc9ae4b1378064af618"></span><h1>Function astra::typeName<a class="headerlink" href="#function-astra-typename" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file_include_astra_type_name.hpp.html#file-include-astra-type-name-hpp"><span class="std std-ref">File type_name.hpp</span></a></p></li>
 </ul>
@@ -747,18 +732,18 @@ Error when parsing function declaration.
 If the function has no return type:
   Error in declarator or parameters-and-qualifiers
   Invalid C++ declaration: Expecting “(” in parameters-and-qualifiers. [error at 10]
-    ASTRA_API std::string_view typeName (TypeId id)
+    ASTRA_API const std::string &amp; typeName (TypeId id)
     ———-^
 If the function has a return type:
   Error in declarator or parameters-and-qualifiers
   If pointer to member declarator:
-    Invalid C++ declaration: Expected ‘::’ in pointer to member (function). [error at 27]
-      ASTRA_API std::string_view typeName (TypeId id)
-      —————————^
+    Invalid C++ declaration: Expected ‘::’ in pointer to member (function). [error at 28]
+      ASTRA_API const std::string &amp; typeName (TypeId id)
+      —————————-^
   If declarator-id:
-    Invalid C++ declaration: Expecting “(” in parameters-and-qualifiers. [error at 27]
-      ASTRA_API std::string_view typeName (TypeId id)
-      —————————^
+    Invalid C++ declaration: Expecting “(” in parameters-and-qualifiers. [error at 28]
+      ASTRA_API const std::string &amp; typeName (TypeId id)
+      —————————-^
 </p>
 </div>
 </section>
@@ -775,12 +760,12 @@ If the function has a return type:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="function_stringify_8hpp_1a084b3926b32ac7459acd122ae7f8ddee.html"
+       href="function_reflection_8hpp_1aab25549a2bb25ef2c3dba2539367cdb9.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Function astra::toString(double, int)</p>
+        <p class="prev-next-title">Template Function astra::sprint(const T *)</p>
       </div>
     </a>
 </div>

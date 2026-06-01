@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Template Struct Sizeof&lt; T &gt;" href="structastra_1_1Sizeof_3_01T_01_4.html" />
+    <link rel="next" title="Template Struct StackIterator" href="structastra_1_1StackIterator.html" />
     <link rel="prev" title="Template Struct QueueIterator" href="structastra_1_1QueueIterator.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -504,9 +504,6 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Template Struct Sizeof</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1Sizeof_3_01T_01_4.html">Template Struct Sizeof&lt; T &gt;</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1StackIterator.html">Template Struct StackIterator</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -660,19 +657,7 @@
 <li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aab25549a2bb25ef2c3dba2539367cdb9.html">Template Function astra::sprint(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1aa05f512eb7ef85cf398a92b6a9e8de1c.html">Function astra::toString(bool)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1a98774da859e7f70d9e37123dedc06be3.html">Function astra::toString(int64_t)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1a8803c9c984525d04e0c0eb769aa4aacb.html">Function astra::toString(uint64_t)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_stringify_8hpp_1a084b3926b32ac7459acd122ae7f8ddee.html">Function astra::toString(double, int)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a1e7f2f476c30555355dba1e3c53ce56f.html">Function astra::typeName</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a6d3dad3555658fc9ae4b1378064af618.html">Function astra::typeName</a></li>
 </ul>
 </div>
 </nav></div>
@@ -741,14 +726,26 @@
 <section id="struct-documentation">
 <h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Link to this heading"><span/></a></h2>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4I0DpEN5astra6SizeofE">
-<span id="_CPPv3I0DpEN5astra6SizeofE"></span><span id="_CPPv2I0DpEN5astra6SizeofE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1Sizeof"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Sizeof</span></span></span><a class="headerlink" href="#_CPPv4I0DpEN5astra6SizeofE" title="Link to this definition"><span/></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dt class="sig sig-object cpp" id="_CPPv4IDpEN5astra6SizeofE">
+<span id="_CPPv3IDpEN5astra6SizeofE"></span><span id="_CPPv2IDpEN5astra6SizeofE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Ts</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1Sizeof"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Sizeof</span></span></span><a class="headerlink" href="#_CPPv4IDpEN5astra6SizeofE" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Helper for finding the size of the largest type in Ts. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Ts</strong> – The types to compare </p>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Sizeof3maxEv">
-<span id="_CPPv3N5astra6Sizeof3maxEv"></span><span id="_CPPv2N5astra6Sizeof3maxEv"></span><span id="astra::Sizeof::maxCE"></span><span class="target" id="structastra_1_1Sizeof_1aac5b02a825685559a498e1e2d37e4df2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Sizeof3maxEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<span id="_CPPv3N5astra6Sizeof3maxEv"></span><span id="_CPPv2N5astra6Sizeof3maxEv"></span><span id="astra::Sizeof::maxCE"></span><span class="target" id="structastra_1_1Sizeof_1a0d00d844724c2330d46d79ac0675a735"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Sizeof3maxEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get the maximum size needed to hold any of the types in Ts. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The max size </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -776,11 +773,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="structastra_1_1Sizeof_3_01T_01_4.html"
+       href="structastra_1_1StackIterator.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Template Struct Sizeof&lt; T &gt;</p>
+        <p class="prev-next-title">Template Struct StackIterator</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -804,7 +801,7 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struct-documentation">Struct Documentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0DpEN5astra6SizeofE"><code class="docutils literal notranslate"><span class="pre">astra::Sizeof</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4IDpEN5astra6SizeofE"><code class="docutils literal notranslate"><span class="pre">astra::Sizeof</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6Sizeof3maxEv"><code class="docutils literal notranslate"><span class="pre">max()</span></code></a></li>
 </ul>
 </li>
