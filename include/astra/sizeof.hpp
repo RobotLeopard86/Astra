@@ -1,23 +1,25 @@
 #pragma once
 
 #include <cstddef>
+#include <algorithm>
 
 #include "dll.hpp"
 
 namespace astra {
-
-	template<typename T, typename... Args>
+	/**
+	 * @brief Helper for finding the size of the largest type in Ts
+	 *
+	 * @tparam Ts The types to compare
+	 */
+	template<typename... Ts>
 	struct ASTRA_API Sizeof {
+		/**
+		 * @brief Get the maximum size needed to hold any of the types in Ts
+		 *
+		 * @return The max size
+		 */
 		static constexpr std::size_t max() {
-			return sizeof(T) > Sizeof<Args...>::max() ? sizeof(T) : Sizeof<Args...>::max();
+			return std::max({sizeof(Ts)...});
 		}
 	};
-
-	template<typename T>
-	struct ASTRA_API Sizeof<T> {
-		static constexpr std::size_t max() {
-			return sizeof(T);
-		}
-	};
-
 }

@@ -27,7 +27,7 @@ namespace astra {
 			}
 
 			T value;		 ///<The contained value
-			std::string name;///<String key
+			std::string name;///<The associated string key
 		};
 
 		/**

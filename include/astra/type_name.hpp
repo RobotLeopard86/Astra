@@ -5,6 +5,13 @@
 
 namespace astra {
 
-	ASTRA_API std::string_view typeName(TypeId id);
+	/**
+	 * @brief Get the name of a type from its TypeId
+	 *
+	 * @param id The ID of the type whose name to get
+	 *
+	 * @return The name of the type
+	 */
+	ASTRA_API const std::string& typeName(TypeId id);
 
 }

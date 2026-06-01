@@ -3,8 +3,8 @@
 #include <string>
 
 #include "astra/reflection.hpp"
-#include "astra/stringify.hpp"
 #include "astra/type_info.hpp"
+#include "stringify.hpp"
 
 namespace astra {
 

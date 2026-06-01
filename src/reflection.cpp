@@ -33,7 +33,7 @@ namespace astra {
 		print(reflect(var));
 	}
 
-	std::string_view typeName(TypeId id) {
+	const std::string& typeName(TypeId id) {
 		return ActionsTable::data()[id.number()].typeName();
 	}
 

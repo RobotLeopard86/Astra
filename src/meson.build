@@ -22,7 +22,7 @@ astra_sources = [
 	'err_helper.cpp',
 	'json.cpp',
 	'reflection.cpp',
-	'stringify.cpp',
+	'stringify.hpp',
 	'var.cpp',
 	'yaml.cpp'
 ]
