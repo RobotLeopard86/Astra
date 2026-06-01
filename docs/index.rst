@@ -25,5 +25,5 @@ Key features include:
     :hidden:
 
     quickstart
-	configuration
+    configuration
     api/index
