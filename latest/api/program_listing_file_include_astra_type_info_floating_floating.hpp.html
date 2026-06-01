@@ -427,7 +427,7 @@
 
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="n">Floating</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isConst</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">new</span><span class="p">(</span><span class="n">_mem</span><span class="p">)</span><span class="w"> </span><span class="n">Float</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">isConst</span><span class="p">);</span>
+<span class="w">            </span><span class="k">new</span><span class="p">(</span><span class="n">mem</span><span class="p">)</span><span class="w"> </span><span class="n">Float</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">isConst</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">assign</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -455,14 +455,14 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">      </span><span class="k">private</span><span class="o">:</span>
-<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">_mem</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Float</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">)];</span>
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">mem</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Float</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">)];</span>
 
 <span class="w">        </span><span class="kr">inline</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IFloating</span><span class="o">*</span><span class="w"> </span><span class="nf">impl</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">IFloating</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">IFloating</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kr">inline</span><span class="w"> </span><span class="n">IFloating</span><span class="o">*</span><span class="w"> </span><span class="nf">impl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">IFloating</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">IFloating</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 

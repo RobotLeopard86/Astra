@@ -426,7 +426,7 @@
 
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">Box</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Box</span><span class="p">(</span><span class="n">palloc_t</span><span class="o">*</span><span class="w"> </span><span class="n">alloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">defaultAlloc</span><span class="p">)</span>
-<span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">_alloc</span><span class="p">(</span><span class="n">alloc</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">alloc</span><span class="p">(</span><span class="n">alloc</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">        </span><span class="n">Box</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Box</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
 <span class="w">        </span><span class="n">Box</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Box</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
@@ -441,8 +441,8 @@
 <span class="w">        </span><span class="n">Box</span><span class="w"> </span><span class="nf">clone</span><span class="p">();</span>
 
 <span class="w">      </span><span class="k">private</span><span class="o">:</span>
-<span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">_var</span><span class="p">;</span>
-<span class="w">        </span><span class="n">palloc_t</span><span class="o">*</span><span class="w"> </span><span class="n">_alloc</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">inner</span><span class="p">;</span>
+<span class="w">        </span><span class="n">palloc_t</span><span class="o">*</span><span class="w"> </span><span class="n">alloc</span><span class="p">;</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="p">}</span>
