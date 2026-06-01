@@ -16,7 +16,7 @@ namespace astra {
 			return (queue->*&QueueIterator::c).end();
 		}
 
-		template<typename SameT>
+		template<typename U>
 		friend struct StdQueue;
 	};
 

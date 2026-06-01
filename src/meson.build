@@ -11,6 +11,9 @@ yaml_cpp_dep = subproject('yaml-cpp', required: true, default_options: {
 # Jaguar
 jaguar_dep = subproject('jaguar', required: true).get_variable('libjaguar_dep').as_static(recursive: true).as_link_whole()
 
+# dbghelp.lib (Windows)
+dbghelp_dep = cxx.find_library('dbghelp.lib', required: host_machine.system() == 'windows')
+
 # Define sources
 astra_sources = [
 	'binary.cpp',
@@ -28,7 +31,7 @@ astra_sources = [
 includes = include_directories('..' / 'include')
 
 # Library
-libastra = library('astra', astra_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, yaml_cpp_dep, jaguar_dep], pic: true)
+libastra = library('astra', astra_sources, include_directories: [includes, include_directories('.')], dependencies: [nlohmann_json_dep, yaml_cpp_dep, jaguar_dep, dbghelp_dep], pic: true)
 
 # Dependency
 astra_dep = declare_dependency(link_with: libastra, include_directories: includes, dependencies: [nlohmann_json_dep, yaml_cpp_dep.partial_dependency(includes: true, compile_args: true), jaguar_dep.partial_dependency(includes: true, compile_args: true)])

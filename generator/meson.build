@@ -6,7 +6,6 @@ inja_dep = subproject('inja', required: true, default_options: {
 spinners_dep = subproject('spinners-plus-plus', required: true).get_variable('spinners_dep')
 
 # LLVM/Clang dependencies
-cxx = meson.get_compiler('cpp')
 llvm_dep = dependency('llvm', version: '>=19.0.0', required: true)
 clang_dep = cxx.find_library('clang-cpp', required: true, dirs: host_machine.system() == 'darwin' ? '/opt/homebrew/opt/llvm/lib' : [])
 

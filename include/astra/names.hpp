@@ -10,22 +10,42 @@
 
 #ifdef __GNUG__
 #include <cxxabi.h>
+#elif defined(_MSC_VER)
+#include <Windows.h>
+#define DBGHELP_TRANSLATE_TCHAR
+#include <dbghelp.h>
 #endif
 
 namespace astra {
-
+	/**
+	 * @brief Helper class to get type names
+	 *
+	 * @tparam T The type whose name to get
+	 */
 	template<typename T>
 	struct ASTRA_API Names {
+		/**
+		 * @brief Get the name of the type (will attempt to demangle if possible)
+		 *
+		 * @return The name of the type
+		 */
 		static std::string get() {
 #ifdef __GNUG__
-			int status = -4;
+			int status = 1;
 			return abi::__cxa_demangle(typeid(T).name(), NULL, NULL, &status);
+#elif defined(_MSC_VER)
+			std::string out;
+			out.reserve(2048);
+			DWORD result = UnDecorateSymbolName(typeid(T).name(), out.data(), out.size(), UNDNAME_COMPLETE);
+			out.shrink_to_fit();
+			return out;
 #else
 			return typeid(T).name();
 #endif
 		}
 	};
 
+	///@cond
 	template<typename T, std::size_t size_v>
 	struct ASTRA_API Names<T[size_v]> {
 		static std::string get() {
@@ -112,20 +132,20 @@ namespace astra {
 		}
 	};
 
-	template<typename KeyT, typename ValueT>
-	struct ASTRA_API Names<std::map<KeyT, ValueT>> {
+	template<typename K, typename V>
+	struct ASTRA_API Names<std::map<K, V>> {
 		static std::string get() {
-			static auto name = ::astra::format("std::map<{}, {}>", Names<KeyT>::get(), Names<ValueT>::get());
+			static auto name = ::astra::format("std::map<{}, {}>", Names<K>::get(), Names<V>::get());
 			return name;
 		}
 	};
 
-	template<typename KeyT, typename ValueT>
-	struct ASTRA_API Names<std::unordered_map<KeyT, ValueT>> {
+	template<typename K, typename V>
+	struct ASTRA_API Names<std::unordered_map<K, V>> {
 		static std::string get() {
-			static auto name = ::astra::format("std::unordered_map<{}, {}>", Names<KeyT>::get(), Names<ValueT>::get());
+			static auto name = ::astra::format("std::unordered_map<{}, {}>", Names<K>::get(), Names<V>::get());
 			return name;
 		}
 	};
-
+	///@endcond
 }

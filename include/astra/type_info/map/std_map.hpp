@@ -8,11 +8,11 @@
 
 namespace astra {
 
-	template<typename KeyT, typename ValueT>
+	template<typename K, typename V>
 	struct ASTRA_API StdMap final : public IMap {
 		StdMap() = delete;
 
-		StdMap(std::map<KeyT, ValueT>* map, bool isConst)
+		StdMap(std::map<K, V>* map, bool isConst)
 		  : map(map), isConst(isConst) {
 		}
 
@@ -24,13 +24,13 @@ namespace astra {
 					typeName(t)));
 			}
 
-			map = static_cast<std::map<KeyT, ValueT>*>(const_cast<void*>(var.raw()));
+			map = static_cast<std::map<K, V>*>(const_cast<void*>(var.raw()));
 			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			map = static_cast<std::map<KeyT, ValueT>*>(ptr);
+			map = static_cast<std::map<K, V>*>(ptr);
 			isConst = false;
 		}
 
@@ -39,15 +39,15 @@ namespace astra {
 		}
 
 		TypeId keyType() const override {
-			return TypeId::get<KeyT>();
+			return TypeId::get<K>();
 		}
 
 		TypeId valType() const override {
-			return TypeId::get<ValueT>();
+			return TypeId::get<V>();
 		}
 
 		void forEach(std::function<void(Var, Var)> callback) const override {
-			const auto valueType = TypeId::get<ValueT>();
+			const auto valueType = TypeId::get<V>();
 
 			for(auto&& pair : *map) {
 				callback(Var(&pair.first), Var(&pair.second, valueType, true));
@@ -55,7 +55,7 @@ namespace astra {
 		}
 
 		void forEach(std::function<void(Var, Var)> callback) override {
-			const auto valueType = TypeId::get<ValueT>();
+			const auto valueType = TypeId::get<V>();
 
 			for(auto&& pair : *map) {
 				callback(Var(&pair.first), Var(&pair.second, valueType, isConst));
@@ -64,7 +64,7 @@ namespace astra {
 
 		void unsafeForEach(std::function<void(void*, void*)> callback) const override {
 			for(auto&& pair : *map) {
-				callback(const_cast<KeyT*>(&pair.first), &pair.second);
+				callback(const_cast<K*>(&pair.first), &pair.second);
 			}
 		}
 
@@ -77,8 +77,8 @@ namespace astra {
 		}
 
 		void insert(Var key, Var value) override {
-			auto k = key.rtCast<KeyT>();
-			auto v = value.rtCast<ValueT>();
+			auto k = key.rtCast<K>();
+			auto v = value.rtCast<V>();
 			auto r = map->insert(std::make_pair(*k, *v));
 			if(r.second != true) {
 				throw std::runtime_error("The pair of key and value does already exist");
@@ -86,7 +86,7 @@ namespace astra {
 		}
 
 		void remove(Var key) override {
-			auto ptr = key.rtCast<KeyT>();
+			auto ptr = key.rtCast<K>();
 			auto n = map->erase(*ptr);
 			if(n == 0) {
 				throw std::runtime_error("The element doesn't exist");
@@ -94,7 +94,7 @@ namespace astra {
 		}
 
 	  private:
-		std::map<KeyT, ValueT>* map;
+		std::map<K, V>* map;
 		bool isConst;
 	};
 

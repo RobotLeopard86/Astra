@@ -16,7 +16,7 @@ namespace astra {
 			return (stack->*&StackIterator::c).end();
 		}
 
-		template<typename SameT>
+		template<typename U>
 		friend struct StdStack;
 	};
 

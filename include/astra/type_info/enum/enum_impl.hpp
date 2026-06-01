@@ -40,7 +40,7 @@ namespace astra {
 		}
 
 		const std::string& toString() const override {
-			return all_constants.getName(*value);
+			return all_constants.getKey(*value);
 		}
 
 		void fromString(const std::string& name) override {

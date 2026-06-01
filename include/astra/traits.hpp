@@ -84,11 +84,11 @@ namespace astra {
 	template<typename T>
 	inline constexpr bool is_map_v = is_map<T>::value;
 
-	template<typename KeyT, typename ValueT>
-	struct ASTRA_API is_map<std::map<KeyT, ValueT>> : std::true_type {};
+	template<typename K, typename V>
+	struct ASTRA_API is_map<std::map<K, V>> : std::true_type {};
 
-	template<typename KeyT, typename ValueT>
-	struct ASTRA_API is_map<std::unordered_map<KeyT, ValueT>> : std::true_type {};
+	template<typename K, typename V>
+	struct ASTRA_API is_map<std::unordered_map<K, V>> : std::true_type {};
 
 	template<typename T>
 	struct ASTRA_API is_array {

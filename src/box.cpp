@@ -1,13 +1,14 @@
 #include "astra/box.hpp"
 
 #include <cstdint>
+#include <memory_resource>
 
 #include "astra/reflection.hpp"
 #include "astra/types/all_types.hpp"
 
 namespace astra {
 
-	Box::Box(TypeId id, palloc_t* alloc)
+	Box::Box(TypeId id, std::pmr::polymorphic_allocator<uint8_t>* alloc)
 	  : alloc(alloc) {
 		inner = Var(alloc->allocate(sizeOf(id)), id, false);
 		construct(inner);

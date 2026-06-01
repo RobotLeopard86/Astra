@@ -11,14 +11,14 @@ namespace astra {
 	struct ASTRA_API Map final {
 		Map() = delete;
 
-		template<typename KeyT, typename ValueT>
-		Map(std::map<KeyT, ValueT>* map, bool isConst) {
-			new(mem) StdMap<KeyT, ValueT>(map, isConst);
+		template<typename K, typename V>
+		Map(std::map<K, V>* map, bool isConst) {
+			new(mem) StdMap<K, V>(map, isConst);
 		}
 
-		template<typename KeyT, typename ValueT>
-		Map(std::unordered_map<KeyT, ValueT>* map, bool isConst) {
-			new(mem) StdUnorderedMap<KeyT, ValueT>(map, isConst);
+		template<typename K, typename V>
+		Map(std::unordered_map<K, V>* map, bool isConst) {
+			new(mem) StdUnorderedMap<K, V>(map, isConst);
 		}
 
 		void assign(Var var) {

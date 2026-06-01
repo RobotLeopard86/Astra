@@ -4,7 +4,11 @@
 
 namespace astra {
 
-	//a little helper for std::variant
+	/**
+	 * @brief Helper to wrap multiple function objects and invoke them all
+	 *
+	 * @tparam Ts All function types to contain
+	 */
 	template<typename... Ts>
 	struct ASTRA_API Overloaded : Ts... {
 		using Ts::operator()...;

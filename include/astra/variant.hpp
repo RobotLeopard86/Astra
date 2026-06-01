@@ -22,18 +22,18 @@ namespace astra {
 		  : content(std::move(value)) {
 		}
 
-		template<typename... FuncT>
-		decltype(auto) match(FuncT... functions) {
+		template<typename... F>
+		decltype(auto) match(F... functions) {
 			return std::visit(Overloaded {functions...}, content);
 		}
 
-		template<typename... FuncT>
-		decltype(auto) matchMove(FuncT... functions) {
+		template<typename... F>
+		decltype(auto) matchMove(F... functions) {
 			return std::visit(Overloaded {functions...}, std::move(content));
 		}
 
-		template<typename... FuncT>
-		decltype(auto) match(FuncT... functions) const {
+		template<typename... F>
+		decltype(auto) match(F... functions) const {
 			return std::visit(Overloaded {functions...}, content);
 		}
 

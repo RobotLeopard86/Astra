@@ -45,12 +45,12 @@ namespace astra {
 			return data->invoke(Var(), base, vArgs);
 		}
 
-		template<typename RetT, typename... Args>
-		RetT invoke(const Args&... args) const {
+		template<typename R, typename... Args>
+		R invoke(const Args&... args) const {
 			std::vector<Var> vArgs;
 			foldArgs(&vArgs, &args...);
 
-			RetT ret;
+			R ret;
 			data->invoke(Var(&ret), base, vArgs);
 			return ret;
 		}
@@ -79,15 +79,15 @@ namespace astra {
 		void* base;
 		const MethodDesc* data;
 
-		template<typename ArgT, typename... Args>
-		void foldArgs(std::vector<Var>* vArgs, const ArgT* arg, const Args*... other) const {
+		template<typename A, typename... Args>
+		void foldArgs(std::vector<Var>* vArgs, const A* arg, const Args*... other) const {
 			vArgs->push_back(Var(arg));
 
 			foldArgs(vArgs, other...);
 		}
 
-		template<typename ArgT>
-		void foldArgs(std::vector<Var>* vArgs, const ArgT* arg) const {
+		template<typename A>
+		void foldArgs(std::vector<Var>* vArgs, const A* arg) const {
 
 			vArgs->push_back(Var(arg));
 		}
