@@ -6,19 +6,46 @@
 #include "dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Access the type info for a given variable
+	 *
+	 * @param variable The variable to reflect
+	 *
+	 * @return The variable's type info
+	 */
 	TypeInfo reflect(Var variable);
 
+	/**
+	 * @brief Access an object's type info
+	 *
+	 * @param pointer A pointer to the object to reflect
+	 *
+	 * @return The object's type info
+	 */
 	template<Reflectable T>
 	TypeInfo reflect(T* pointer) {
 		return reflect(Var(pointer));
 	}
 
+	/**
+	 * @brief Access an object's type info constly
+	 *
+	 * @param pointer A pointer to the object to reflect
+	 *
+	 * @return The object's type info, with write operations disabled
+	 */
 	template<Reflectable T>
 	TypeInfo reflect(const T* pointer) {
 		return reflect(Var(pointer));
 	}
 
+	/**
+	 * @brief Access an object's type info constly
+	 *
+	 * @param pointer A pointer to the object to reflect
+	 *
+	 * @return The object's type info, with write operations disabled
+	 */
 	std::string sprint(const TypeInfo& info);
 	std::string sprint(Var var);
 
