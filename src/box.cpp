@@ -8,41 +8,41 @@
 namespace astra {
 
 	Box::Box(TypeId id, palloc_t* alloc)
-	  : _alloc(alloc) {
-		_var = Var(_alloc->allocate(sizeOf(id)), id, false);
-		construct(_var);
+	  : alloc(alloc) {
+		inner = Var(alloc->allocate(sizeOf(id)), id, false);
+		construct(inner);
 	}
 
 	Box::Box(Box&& other) noexcept
-	  : _var(other._var), _alloc(other._alloc) {
+	  : inner(other.inner), alloc(other.alloc) {
 		//prevent resource deletion
-		other._var.dispose();
+		other.inner.dispose();
 	}
 
 	Box& Box::operator=(Box&& other) noexcept {
-		_var = other._var;
-		_alloc = other._alloc;
+		inner = other.inner;
+		alloc = other.alloc;
 
 		//prevent resource deletion
-		other._var.dispose();
+		other.inner.dispose();
 		return *this;
 	}
 
 	Box::~Box() {
-		destroy(_var);
+		destroy(inner);
 
-		auto* p = reinterpret_cast<uint8_t*>(_var.rawMut());
-		auto size = sizeOf(_var.type());
-		_alloc->deallocate(p, size);
+		auto* p = reinterpret_cast<uint8_t*>(inner.rawMut());
+		auto size = sizeOf(inner.typeId());
+		alloc->deallocate(p, size);
 	}
 
 	Var Box::var() {
-		return _var;
+		return inner;
 	}
 
 	Box Box::clone() {
-		Box newOne(_var.type());
-		copy(newOne.var(), var());
-		return newOne;
+		Box cloned(inner.typeId());
+		copy(cloned.var(), var());
+		return cloned;
 	}
 }

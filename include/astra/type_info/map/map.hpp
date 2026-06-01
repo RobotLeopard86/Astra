@@ -13,12 +13,12 @@ namespace astra {
 
 		template<typename KeyT, typename ValueT>
 		Map(std::map<KeyT, ValueT>* map, bool isConst) {
-			new(_mem) StdMap<KeyT, ValueT>(map, isConst);
+			new(mem) StdMap<KeyT, ValueT>(map, isConst);
 		}
 
 		template<typename KeyT, typename ValueT>
 		Map(std::unordered_map<KeyT, ValueT>* map, bool isConst) {
-			new(_mem) StdUnorderedMap<KeyT, ValueT>(map, isConst);
+			new(mem) StdUnorderedMap<KeyT, ValueT>(map, isConst);
 		}
 
 		void assign(Var var) {
@@ -70,14 +70,14 @@ namespace astra {
 		}
 
 	  private:
-		char _mem[Sizeof<StdMap<int, int>, StdUnorderedMap<int, int>>::max()];
+		char mem[Sizeof<StdMap<int, int>, StdUnorderedMap<int, int>>::max()];
 
 		inline const IMap* impl() const {
-			return reinterpret_cast<const IMap*>(&_mem[0]);
+			return reinterpret_cast<const IMap*>(&mem[0]);
 		}
 
 		inline IMap* impl() {
-			return reinterpret_cast<IMap*>(&_mem[0]);
+			return reinterpret_cast<IMap*>(&mem[0]);
 		}
 	};
 

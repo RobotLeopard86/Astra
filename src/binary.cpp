@@ -380,7 +380,7 @@ namespace astra {
 					if(i >= arr.size()) throw std::runtime_error("Too many items in array!");
 					Var tgt = arr.at(i);
 					if(tgt.isConst()) throw std::runtime_error("Cannot deserialize into const array!");
-					ActionsTable::data()[tgt.type().number()].move(tgt.rawMut(), nested.var().rawMut());
+					ActionsTable::data()[tgt.typeId().number()].move(tgt.rawMut(), nested.var().rawMut());
 				}
 				break;
 			}

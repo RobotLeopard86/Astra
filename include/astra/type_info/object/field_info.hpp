@@ -15,56 +15,56 @@ namespace astra {
 	class ASTRA_API FieldInfo {
 	  public:
 		FieldInfo(const void* base, const FieldDesc* data)
-		  : _base(base), _data(data) {
+		  : base(base), data(data) {
 		}
 
 		FieldInfo(const FieldInfo& other) {
 			if(this == &other) {
 				return;
 			}
-			_base = other._base;
-			_data = other._data;
+			base = other.base;
+			data = other.data;
 		}
 
 		FieldInfo& operator=(const FieldInfo& other) {
 			if(this == &other) {
 				return *this;
 			}
-			_base = other._base;
-			_data = other._data;
+			base = other.base;
+			data = other.data;
 			return *this;
 		}
 
 		Var var() const {
 			if(isStatic()) {
-				return {reinterpret_cast<void*>(_data->value()), _data->type(), _data->isConst()};
+				return {reinterpret_cast<void*>(data->value()), data->typeId(), data->isConst()};
 			}
-			return {shift(_base, _data->value()), _data->type(), _data->isConst()};
+			return {shift(base, data->value()), data->typeId(), data->isConst()};
 		}
 
 		bool isConst() const {
-			return _data->isConst();
+			return data->isConst();
 		}
 
 		bool isStatic() const {
-			return _data->isStatic();
+			return data->isStatic();
 		}
 
 		bool isPublic() const {
-			return _data->isPublic();
+			return data->isPublic();
 		}
 
 		bool isProtected() const {
-			return _data->isProtected();
+			return data->isProtected();
 		}
 
 		bool isPrivate() const {
-			return _data->isPrivate();
+			return data->isPrivate();
 		}
 
 	  private:
-		const void* _base;
-		const FieldDesc* _data;
+		const void* base;
+		const FieldDesc* data;
 
 		static void* shift(const void* base, uintptr_t offset) {
 			return reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(base) + offset);

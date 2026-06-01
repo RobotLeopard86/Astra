@@ -14,46 +14,46 @@ namespace astra {
 
 	struct ASTRA_API Bool {
 		Bool(bool* value, bool isConst)
-		  : _value(value), _isConst(isConst) {
+		  : value(value), isConst(isConst) {
 		}
 
 		void assign(Var var) {
 			auto t = TypeId::get<bool>();
-			if(var.type() != t) {
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_value = const_cast<bool*>(static_cast<const bool*>(var.raw()));
-			_isConst = var.isConst();
+			value = const_cast<bool*>(static_cast<const bool*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) {
-			_value = static_cast<bool*>(ptr);
-			_isConst = false;
+			value = static_cast<bool*>(ptr);
+			isConst = false;
 		}
 
 		[[nodiscard]] bool get() const {
-			return *_value;
+			return *value;
 		}
 
-		void set(bool value) {
-			if(_isConst) {
+		void set(bool val) {
+			if(isConst) {
 				throw std::runtime_error("Trying to set const value");
 			}
-			*_value = value;
+			*value = val;
 			return;
 		}
 
 		Var var() {
-			return Var(_value, _isConst);
+			return Var(value, isConst);
 		}
 
 	  private:
-		bool* _value;
-		bool _isConst;
+		bool* value;
+		bool isConst;
 	};
 
 }

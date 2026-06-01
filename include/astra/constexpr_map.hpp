@@ -32,10 +32,10 @@ namespace astra {
 		};
 
 		constexpr ConstexprMap(std::array<Entry, size>&& array)
-		  : _data(array), _value_ptr {}, _name_ptr {} {
-			for(auto i = 0; i < _data.size(); i++) {
-				_value_ptr[i] = &_data[i];
-				_name_ptr[i] = &_data[i];
+		  : data(array), value_ptr {}, name_ptr {} {
+			for(auto i = 0; i < data.size(); i++) {
+				value_ptr[i] = &data[i];
+				name_ptr[i] = &data[i];
 			}
 
 			sortValuePtr();
@@ -63,27 +63,27 @@ namespace astra {
 		}
 
 		[[nodiscard]] decltype(auto) begin() const {
-			return _data.begin();
+			return data.begin();
 		}
 
 		[[nodiscard]] decltype(auto) end() const {
-			return _data.end();
+			return data.end();
 		}
 
 	  private:
-		std::array<Entry, size> _data;
-		std::array<Entry*, size> _value_ptr;
-		std::array<Entry*, size> _name_ptr;
+		std::array<Entry, size> data;
+		std::array<Entry*, size> value_ptr;
+		std::array<Entry*, size> name_ptr;
 
 		constexpr Entry* searchByValue(T value, std::size_t begin, std::size_t end) const {
 
 			while(begin < end) {
 
 				auto middleIdx = (begin + end) / 2;
-				auto middleVal = _value_ptr[middleIdx]->value;
+				auto middleVal = value_ptr[middleIdx]->value;
 
 				if(value == middleVal) {
-					return _value_ptr[middleIdx];
+					return value_ptr[middleIdx];
 				}
 
 				if(value < middleVal) {
@@ -102,10 +102,10 @@ namespace astra {
 			while(begin < end) {
 
 				auto middleIdx = (begin + end) / 2;
-				auto middleVal = _name_ptr[middleIdx]->name;
+				auto middleVal = name_ptr[middleIdx]->name;
 
 				if(name == middleVal) {
-					return _name_ptr[middleIdx];
+					return name_ptr[middleIdx];
 				}
 
 				if(name < middleVal) {
@@ -120,11 +120,11 @@ namespace astra {
 		}
 
 		constexpr void sortValuePtr() {
-			ConstexprSort::sort(_value_ptr.data(), _value_ptr.size(),//
+			ConstexprSort::sort(value_ptr.data(), value_ptr.size(),//
 				[](auto a, auto b) { return a->value > b->value; });
 		}
 		constexpr void sortNamePtr() {
-			ConstexprSort::sort(_name_ptr.data(), _name_ptr.size(),//
+			ConstexprSort::sort(name_ptr.data(), name_ptr.size(),//
 				[](auto a, auto b) { return a->name > b->name; });
 		}
 	};

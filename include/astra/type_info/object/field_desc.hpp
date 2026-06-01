@@ -14,62 +14,62 @@ namespace astra {
 
 		template<typename T, typename ClassT>
 		FieldDesc(T ClassT::* ptr, Access acc)
-		  : _value(static_cast<uintptr_t>(delta(ptr))),
-			_type(TypeId::get<std::remove_const_t<T>>()),
-			_acc(acc),
-			_is_readonly(is_ref_type_v<T>) {
+		  : valueData(static_cast<uintptr_t>(delta(ptr))),
+			type(TypeId::get<std::remove_const_t<T>>()),
+			acc(acc),
+			areWeReadOnly(is_ref_type_v<T>) {
 		}
 
 		template<typename T>
 		FieldDesc(T* ptr, Access acc)
-		  : _value(reinterpret_cast<uintptr_t>(ptr)),
-			_type(TypeId::get<std::remove_const_t<T>>()),
-			_acc(acc),
-			_is_readonly(is_ref_type_v<T>) {
+		  : valueData(reinterpret_cast<uintptr_t>(ptr)),
+			type(TypeId::get<std::remove_const_t<T>>()),
+			acc(acc),
+			areWeReadOnly(is_ref_type_v<T>) {
 		}
 
 		uintptr_t value() const {
-			return _value;
+			return valueData;
 		}
 
-		TypeId type() const {
-			return _type;
+		TypeId typeId() const {
+			return type;
 		}
 
 		bool isConst() const {
-			return (_acc & Access::Const) != Access::None;
+			return (acc & Access::Const) != Access::None;
 		}
 
 		bool isStatic() const {
-			return (_acc & Access::Static) != Access::None;
+			return (acc & Access::Static) != Access::None;
 		}
 
 		bool isPublic() const {
-			return (_acc & Access::Public) != Access::None;
+			return (acc & Access::Public) != Access::None;
 		}
 
 		bool isProtected() const {
-			return (_acc & Access::Protected) != Access::None;
+			return (acc & Access::Protected) != Access::None;
 		}
 
 		bool isPrivate() const {
-			return (_acc & Access::Private) != Access::None;
+			return (acc & Access::Private) != Access::None;
 		}
 
 		Access access() const {
-			return _acc;
+			return acc;
 		}
 
-		bool isReadonly() const {
-			return _is_readonly;
+		bool isReadOnly() const {
+			return areWeReadOnly;
 		}
 
 	  private:
-		const uintptr_t _value;//pointer for static fields, offset for members
-		const TypeId _type;
+		const uintptr_t valueData;//pointer for static fields, offset for members
+		const TypeId type;
 
-		const Access _acc;
-		const bool _is_readonly;
+		const Access acc;
+		const bool areWeReadOnly;
 
 		template<class ClassT, typename T>
 		std::ptrdiff_t delta(T ClassT::* ptr) {

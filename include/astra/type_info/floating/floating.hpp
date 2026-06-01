@@ -13,7 +13,7 @@ namespace astra {
 
 		template<typename T>
 		Floating(T* value, bool isConst) {
-			new(_mem) Float<T>(value, isConst);
+			new(mem) Float<T>(value, isConst);
 		}
 
 		void assign(Var var) {
@@ -41,14 +41,14 @@ namespace astra {
 		}
 
 	  private:
-		char _mem[sizeof(Float<double>)];
+		char mem[sizeof(Float<double>)];
 
 		inline const IFloating* impl() const {
-			return reinterpret_cast<const IFloating*>(&_mem[0]);
+			return reinterpret_cast<const IFloating*>(&mem[0]);
 		}
 
 		inline IFloating* impl() {
-			return reinterpret_cast<IFloating*>(&_mem[0]);
+			return reinterpret_cast<IFloating*>(&mem[0]);
 		}
 	};
 

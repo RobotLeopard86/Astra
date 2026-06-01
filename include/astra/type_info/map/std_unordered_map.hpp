@@ -13,29 +13,29 @@ namespace astra {
 		StdUnorderedMap() = delete;
 
 		StdUnorderedMap(std::unordered_map<KeyT, ValueT>* map, bool isConst)
-		  : _map(map), _isConst(isConst) {
+		  : map(map), isConst(isConst) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_map);
-			if(var.type() != t) {
+			auto t = TypeId::get(map);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_map = static_cast<std::unordered_map<KeyT, ValueT>*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			map = static_cast<std::unordered_map<KeyT, ValueT>*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_map = static_cast<std::unordered_map<KeyT, ValueT>*>(ptr);
-			_isConst = false;
+			map = static_cast<std::unordered_map<KeyT, ValueT>*>(ptr);
+			isConst = false;
 		}
 
 		Var ownVar() const override {
-			return Var(_map, TypeId::get(_map), _isConst);
+			return Var(map, TypeId::get(map), isConst);
 		}
 
 		TypeId keyType() const override {
@@ -49,7 +49,7 @@ namespace astra {
 		void forEach(std::function<void(Var, Var)> callback) const override {
 			const auto valueType = TypeId::get<ValueT>();
 
-			for(auto&& pair : *_map) {
+			for(auto&& pair : *map) {
 				callback(Var(&pair.first), Var(&pair.second, valueType, true));
 			}
 		}
@@ -57,29 +57,29 @@ namespace astra {
 		void forEach(std::function<void(Var, Var)> callback) override {
 			const auto valueType = TypeId::get<ValueT>();
 
-			for(auto&& pair : *_map) {
-				callback(Var(&pair.first), Var(&pair.second, valueType, _isConst));
+			for(auto&& pair : *map) {
+				callback(Var(&pair.first), Var(&pair.second, valueType, isConst));
 			}
 		}
 
 		void unsafeForEach(std::function<void(void*, void*)> callback) const override {
-			for(auto&& pair : *_map) {
+			for(auto&& pair : *map) {
 				callback(const_cast<KeyT*>(&pair.first), &pair.second);
 			}
 		}
 
 		void clear() override {
-			_map->clear();
+			map->clear();
 		}
 
 		std::size_t size() const override {
-			return _map->size();
+			return map->size();
 		}
 
 		void insert(Var key, Var value) override {
 			auto k = key.rtCast<KeyT>();
 			auto v = value.rtCast<ValueT>();
-			auto r = _map->insert(std::make_pair(*k, *v));
+			auto r = map->insert(std::make_pair(*k, *v));
 
 			if(r.second != true) {
 				throw std::runtime_error("The pair of key and value does already exist");
@@ -90,15 +90,15 @@ namespace astra {
 
 		void remove(Var key) override {
 			auto ptr = key.rtCast<KeyT>();
-			auto n = _map->erase(*ptr);
+			auto n = map->erase(*ptr);
 			if(n == 0) {
 				throw std::runtime_error("The element doesn't exist");
 			}
 		}
 
 	  private:
-		std::unordered_map<KeyT, ValueT>* _map;
-		bool _isConst;
+		std::unordered_map<KeyT, ValueT>* map;
+		bool isConst;
 	};
 
 }

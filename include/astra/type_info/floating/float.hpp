@@ -11,29 +11,29 @@ namespace astra {
 	template<typename T>
 	struct ASTRA_API Float : IFloating {
 		Float(T* value, bool isConst)
-		  : _value(value), _isConst(isConst) {
+		  : value(value), isConst(isConst) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_value);
-			if(var.type() != t) {
+			auto t = TypeId::get(value);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_value = static_cast<T*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			value = static_cast<T*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_value = static_cast<T*>(ptr);
-			_isConst = false;
+			value = static_cast<T*>(ptr);
+			isConst = false;
 		}
 
 		Var var() override {
-			return Var(_value, _isConst);
+			return Var(value, isConst);
 		}
 
 		std::size_t size() const override {
@@ -41,25 +41,25 @@ namespace astra {
 		}
 
 		double get() const override {
-			return *_value;
+			return *value;
 		}
 
-		void set(double value) override {
-			if(_isConst) {
+		void set(double val) override {
+			if(isConst) {
 				throw std::runtime_error("Trying to set const value");
 			}
-			if(value != -std::numeric_limits<double>::infinity() && value != std::numeric_limits<double>::infinity() &&
-				(std::numeric_limits<T>::max() < value || -std::numeric_limits<T>::max() > value)) {
-				throw std::runtime_error("The value too big to set float variable");
+			if(val != -std::numeric_limits<double>::infinity() && val != std::numeric_limits<double>::infinity() &&
+				(std::numeric_limits<T>::max() < val || -std::numeric_limits<T>::max() > val)) {
+				throw std::runtime_error("The value too big to set floating-point variable");
 			}
 
-			*_value = value;
+			*value = val;
 			return;
 		}
 
 	  private:
-		T* _value;
-		bool _isConst;
+		T* value;
+		bool isConst;
 	};
 
 }

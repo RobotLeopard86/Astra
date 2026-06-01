@@ -15,23 +15,23 @@ namespace astra {
 
 		template<typename T>
 		explicit Var(const T* value)
-		  : _value(const_cast<T*>(value)), _type(TypeId::get<T>()), _isConst(true) {
+		  : value(const_cast<T*>(value)), type(TypeId::get<T>()), isThisVarConst(true) {
 		}
 
 		template<typename T>
 		explicit Var(T* value, bool isConst = false)
-		  : _value(value), _type(TypeId::get(value)), _isConst(isConst) {
+		  : value(value), type(TypeId::get(value)), isThisVarConst(isConst) {
 		}
 
 		template<Reflectable T>
 			requires(!std::is_enum_v<T> && std::is_class_v<T>)
 		explicit Var(const T* value)
-		  : _value(const_cast<T*>(value)), _type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), _isConst(true) {}
+		  : value(const_cast<T*>(value)), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), isThisVarConst(true) {}
 
 		template<Reflectable T>
 			requires(!std::is_enum_v<T> && std::is_class_v<T>)
 		explicit Var(T* value, bool isConst = false)
-		  : _value(value), _type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), _isConst(isConst) {}
+		  : value(value), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), isThisVarConst(isConst) {}
 
 		void unsafeAssign(void* ptr);
 
@@ -41,7 +41,7 @@ namespace astra {
 		void* rawMut() const;
 		const void* raw() const;
 
-		TypeId type() const;
+		TypeId typeId() const;
 
 		bool isConst() const;
 
@@ -56,17 +56,17 @@ namespace astra {
 
 			auto desiredType = TypeId::get<std::remove_const_t<T>>();
 
-			if(desiredType != _type) {
-				error(_type, desiredType);
+			if(desiredType != type) {
+				error(type, desiredType);
 			}
 
-			return static_cast<T*>(_value);
+			return static_cast<T*>(value);
 		}
 
 	  private:
-		void* _value;
-		TypeId _type;
-		bool _isConst;
+		void* value;
+		TypeId type;
+		bool isThisVarConst;
 
 		//include reflection header into .cpp file to avoid cyclic dependencies
 		static void error(TypeId type, TypeId desiredType);

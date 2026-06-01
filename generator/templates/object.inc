@@ -34,16 +34,16 @@ struct TypeActions<{{name}}> {
     }
 
     {% for type in item.params -%}
-    if (args[{{loop.index}}].type() != TypeId::get<{{type}}>()) {
-      throw std::runtime_error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].type())));
+    if (args[{{loop.index}}].typeId() != TypeId::get<{{type}}>()) {
+      throw std::runtime_error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].typeId())));
     }
     const {{type}}& a{{loop.index}} = *static_cast<const {{type}}*>(args[{{loop.index}}].raw());
 
     {% endfor -%}
 
     {% if item.return != "void" -%}
-    if (res.type() != TypeId::get<{{item.return}}>()) {
-      throw std::runtime_error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.type())));
+    if (res.typeId() != TypeId::get<{{item.return}}>()) {
+      throw std::runtime_error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.typeId())));
     }
     *reinterpret_cast<{{item.return}}*>(res.rawMut()) = //
     {% endif -%}

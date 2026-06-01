@@ -77,7 +77,7 @@ namespace astra {
 				const auto& p = info.asUnsafe<Pointer>();
 				try {
 					Var nested = p.getNested();
-					serializeJsonRecursive(_json, reflect(nested), field);
+					serializeJsonRecursive(json, reflect(nested), field);
 				} catch(...) {
 					//Can't serialize nullptr
 				}
@@ -158,7 +158,7 @@ namespace astra {
 					if(i >= arr.size()) throw std::runtime_error("Too many items in array!");
 					Var tgt = arr.at(i);
 					if(tgt.isConst()) throw std::runtime_error("Cannot deserialize into const array!");
-					ActionsTable::data()[tgt.type().number()].move(tgt.rawMut(), nested.var().rawMut());
+					ActionsTable::data()[tgt.typeId().number()].move(tgt.rawMut(), nested.var().rawMut());
 				}
 				break;
 			}
@@ -192,11 +192,11 @@ namespace astra {
 				Pointer& p = info.asUnsafe<Pointer>();
 				try {
 					TypeInfo nestedInfo = reflect(p.getNested());
-					deserializeJsonRecursive(_json, nestedInfo, field);
+					deserializeJsonRecursive(json, nestedInfo, field);
 				} catch(...) {
 					p.init();
 					TypeInfo okInfo = reflect(p.var());
-					deserializeJsonRecursive(_json, okInfo, field);
+					deserializeJsonRecursive(json, okInfo, field);
 				}
 				break;
 			};

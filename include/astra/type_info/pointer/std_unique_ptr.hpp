@@ -9,49 +9,49 @@ namespace astra {
 	template<typename T>
 	struct ASTRA_API StdUniquePtr : IPointer {
 		StdUniquePtr(std::unique_ptr<T>* value, bool isConst)
-		  : _value(value), _isConst(isConst) {
+		  : value(value), isConst(isConst) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_value);
-			if(var.type() != t) {
+			auto t = TypeId::get(value);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_value = static_cast<std::unique_ptr<T>*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			value = static_cast<std::unique_ptr<T>*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_value = static_cast<std::unique_ptr<T>*>(ptr);
-			_isConst = false;
+			value = static_cast<std::unique_ptr<T>*>(ptr);
+			isConst = false;
 		}
 
 		Var var() const override {
-			return Var(_value, _isConst);
+			return Var(value, isConst);
 		}
 
 		bool isNull() const override {
-			return _value->get() == nullptr;
+			return value->get() == nullptr;
 		}
 
 		void init() override {
-			*_value = std::make_unique<T>();
+			*value = std::make_unique<T>();
 		}
 
 		Var getNested() const override {
-			if(*_value == nullptr) {
+			if(*value == nullptr) {
 				throw std::runtime_error("Pointer is null");
 			}
-			return Var(_value->get(), std::is_const_v<T>);
+			return Var(value->get(), std::is_const_v<T>);
 		}
 
 	  private:
-		std::unique_ptr<T>* _value;
-		bool _isConst;
+		std::unique_ptr<T>* value;
+		bool isConst;
 	};
 
 }

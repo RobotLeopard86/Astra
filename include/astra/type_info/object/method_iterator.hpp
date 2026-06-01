@@ -18,10 +18,10 @@ namespace astra {
 		MethodIterator(const std::map<std::string_view, MethodDesc>* map,//
 			const void* base,											 //
 			Access acc)
-		  : _it(map->begin()),//
-			_end(map->cend()),//
-			_base(base),	  //
-			_acc(acc) {
+		  : it(map->begin()),//
+			end(map->cend()),//
+			base(base),		 //
+			acc(acc) {
 			//start from a valid element
 			if(!isValid()) {
 				nextValid();
@@ -40,35 +40,35 @@ namespace astra {
 		};
 
 		bool operator==(const const_iterator& other) const noexcept {
-			return _it != other;
+			return it != other;
 		};
 
 		bool operator!=(const const_iterator& other) const noexcept {
-			return _it != other;
+			return it != other;
 		};
 
 		auto operator*() const noexcept {
-			return std::make_pair(_it->first, MethodInfo(_base, &_it->second));
+			return std::make_pair(it->first, MethodInfo(base, &it->second));
 		};
 
 	  private:
-		const_iterator _it;
-		const const_iterator _end;
-		const void* _base;
-		const Access _acc;
+		const_iterator it;
+		const const_iterator end;
+		const void* base;
+		const Access acc;
 
 		bool isValid() {
-			return rightAccess() && (_base != nullptr || _it->second.isStatic());
+			return rightAccess() && (base != nullptr || it->second.isStatic());
 		}
 
 		void nextValid() {
 			do {
-				++_it;
-			} while(!isValid() && _it != _end);
+				++it;
+			} while(!isValid() && it != end);
 		}
 
 		inline bool rightAccess() {
-			return (_it->second.access() & _acc & (Access::Public | Access::Protected | Access::Private)) != Access::None;
+			return (it->second.access() & acc & (Access::Public | Access::Protected | Access::Private)) != Access::None;
 		}
 	};
 

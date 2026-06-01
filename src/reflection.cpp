@@ -11,7 +11,7 @@
 namespace astra {
 
 	TypeInfo reflect(Var variable) {
-		return ActionsTable::data()[variable.type().number()].reflect(const_cast<void*>(variable.raw()),
+		return ActionsTable::data()[variable.typeId().number()].reflect(const_cast<void*>(variable.raw()),
 			variable.isConst());
 	}
 
@@ -37,35 +37,29 @@ namespace astra {
 		return ActionsTable::data()[id.number()].typeName();
 	}
 
-#ifdef _DEBUG
-	std::string_view typeName(uint32_t id) {
-		return ActionsTable::data()[id].typeName();
-	}
-#endif
-
 	std::size_t sizeOf(TypeId id) {
 		return ActionsTable::data()[id.number()].sizeOf();
 	}
 
 	void construct(Var variable) {
-		return ActionsTable::data()[variable.type().number()].construct(variable.rawMut());
+		return ActionsTable::data()[variable.typeId().number()].construct(variable.rawMut());
 	}
 
 	void destroy(Var variable) {
 		if(variable.raw() == nullptr) {
 			return;
 		}
-		ActionsTable::data()[variable.type().number()].destroy(variable.rawMut());
+		ActionsTable::data()[variable.typeId().number()].destroy(variable.rawMut());
 	}
 
 	void copy(Var to, Var from) {
 		if(to.isConst()) {
 			throw std::runtime_error("Cannot assign to const value");
 		}
-		if(to.type() != from.type()) {
-			throw std::runtime_error(::astra::format("Cannot copy {} to {}", typeName(from.type()), typeName(to.type())));
+		if(to.typeId() != from.typeId()) {
+			throw std::runtime_error(::astra::format("Cannot copy {} to {}", typeName(from.typeId()), typeName(to.typeId())));
 		}
-		ActionsTable::data()[to.type().number()].copy(to.rawMut(), from.raw());
+		ActionsTable::data()[to.typeId().number()].copy(to.rawMut(), from.raw());
 		return;
 	}
 }

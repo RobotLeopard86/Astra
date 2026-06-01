@@ -11,12 +11,12 @@ namespace astra {
 	struct ASTRA_API Pointer {
 		template<typename T>
 		Pointer(std::shared_ptr<T>* value, bool isConst) {
-			new(_mem) StdSharedPtr<T>(value, isConst);
+			new(mem) StdSharedPtr<T>(value, isConst);
 		}
 
 		template<typename T>
 		Pointer(std::unique_ptr<T>* value, bool isConst) {
-			new(_mem) StdUniquePtr<T>(value, isConst);
+			new(mem) StdUniquePtr<T>(value, isConst);
 		}
 
 		void assign(Var var) {
@@ -44,14 +44,14 @@ namespace astra {
 		}
 
 	  private:
-		char _mem[Sizeof<StdUniquePtr<int>, StdSharedPtr<int>>::max()];
+		char mem[Sizeof<StdUniquePtr<int>, StdSharedPtr<int>>::max()];
 
 		inline const IPointer* impl() const {
-			return reinterpret_cast<const IPointer*>(&_mem[0]);
+			return reinterpret_cast<const IPointer*>(&mem[0]);
 		}
 
 		inline IPointer* impl() {
-			return reinterpret_cast<IPointer*>(&_mem[0]);
+			return reinterpret_cast<IPointer*>(&mem[0]);
 		}
 	};
 

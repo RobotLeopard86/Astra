@@ -17,37 +17,37 @@ namespace astra {
 
 		template<typename T>
 		List(std::vector<T>* vector, bool isConst) {
-			new(_mem) StdVector<T>(vector, isConst);
+			new(mem) StdVector<T>(vector, isConst);
 		}
 
 		template<typename T>
 		List(std::list<T>* list, bool isConst) {
-			new(_mem) StdList<T>(list, isConst);
+			new(mem) StdList<T>(list, isConst);
 		}
 
 		template<typename T>
 		List(std::deque<T>* deque, bool isConst) {
-			new(_mem) StdDeque<T>(deque, isConst);
+			new(mem) StdDeque<T>(deque, isConst);
 		}
 
 		template<typename T>
 		List(std::stack<T>* stack, bool isConst) {
-			new(_mem) StdStack<T>(stack, isConst);
+			new(mem) StdStack<T>(stack, isConst);
 		}
 
 		template<typename T>
 		List(std::queue<T>* queue, bool isConst) {
-			new(_mem) StdQueue<T>(queue, isConst);
+			new(mem) StdQueue<T>(queue, isConst);
 		}
 
 		template<typename T>
 		List(std::set<T>* set, bool isConst) {
-			new(_mem) StdSet<T>(set, isConst);
+			new(mem) StdSet<T>(set, isConst);
 		}
 
 		template<typename T>
 		List(std::unordered_set<T>* set, bool isConst) {
-			new(_mem) StdUnorderedSet<T>(set, isConst);
+			new(mem) StdUnorderedSet<T>(set, isConst);
 		}
 
 		~List() {
@@ -91,15 +91,15 @@ namespace astra {
 		}
 
 	  private:
-		char _mem[Sizeof<StdVector<int>, StdList<int>, StdDeque<int>, StdStack<int>,//
+		char mem[Sizeof<StdVector<int>, StdList<int>, StdDeque<int>, StdStack<int>,//
 			StdQueue<int>, StdSet<int>, StdUnorderedSet<int>>::max()];
 
 		inline const IList* impl() const {
-			return reinterpret_cast<const IList*>(&_mem[0]);
+			return reinterpret_cast<const IList*>(&mem[0]);
 		}
 
 		inline IList* impl() {
-			return reinterpret_cast<IList*>(&_mem[0]);
+			return reinterpret_cast<IList*>(&mem[0]);
 		}
 	};
 

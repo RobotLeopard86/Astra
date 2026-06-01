@@ -15,22 +15,23 @@ namespace astra {
 		StdBasicStringView() = delete;
 
 		StdBasicStringView(std::basic_string_view<T>* str)
-		  : _var(str, true) {
+		  : inner(str, true) {
 		}
 
 		void assign(Var var) override {
-			if(var.type() != _var.type()) {
+			if(var.typeId() != inner.typeId()) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
-					typeName(_var.type())));
+					typeName(var.typeId()),												//
+					typeName(inner.typeId())));
 			}
-			_var = var;
-			cachedVal = *static_cast<const std::string_view*>(_var.raw());
+			inner = var;
+			cachedVal = *static_cast<const std::string_view*>(inner.raw());
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_var.unsafeAssign(ptr);
+			inner.unsafeAssign(ptr);
+			cachedVal = *static_cast<const std::string_view*>(inner.raw());
 		}
 
 		const std::string& get() const override {
@@ -38,21 +39,15 @@ namespace astra {
 		}
 
 		void set(const std::string&) override {
-			throw std::runtime_error("Trying to set const value");
-			//keep it as possible implementation
-			//if (_var.isConst()) {
-			//  throw std::runtime_error("Trying to set const value");
-			//}
-			//*static_cast<std::string_view*>(_var.rawMut()) = value;
-			//return;
+			throw std::runtime_error("Trying to set read-only value");
 		}
 
 		Var var() const override {
-			return _var;
+			return inner;
 		}
 
 	  private:
-		Var _var;
+		Var inner;
 		std::string cachedVal;
 	};
 

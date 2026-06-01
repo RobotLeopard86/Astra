@@ -12,29 +12,29 @@ namespace astra {
 		CArray() = delete;
 
 		CArray(T (*array)[size_v], bool isConst)
-		  : _array(reinterpret_cast<T*>(array)), _isConst(isConst) {
+		  : array(reinterpret_cast<T*>(array)), isConst(isConst) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_array);
-			if(var.type() != t) {
+			auto t = TypeId::get(array);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_array = static_cast<T*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			array = static_cast<T*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_array = static_cast<T*>(ptr);
-			_isConst = false;
+			array = static_cast<T*>(ptr);
+			isConst = false;
 		}
 
 		Var ownVar() const override {
-			return Var(_array, TypeId::get<T[size_v]>(), _isConst);
+			return Var(array, TypeId::get<T[size_v]>(), isConst);
 		}
 
 		TypeId nestedType() const override {
@@ -45,7 +45,7 @@ namespace astra {
 			const auto nestedType = TypeId::get<T>();
 
 			for(auto i = 0; i < size_v; ++i) {
-				callback(Var(&(_array[i]), nestedType, true));
+				callback(Var(&(array[i]), nestedType, true));
 			}
 		}
 
@@ -53,13 +53,13 @@ namespace astra {
 			const auto nestedType = TypeId::get<T>();
 
 			for(auto i = 0; i < size_v; ++i) {
-				callback(Var(&(_array[i]), nestedType, _isConst));
+				callback(Var(&(array[i]), nestedType, isConst));
 			}
 		}
 
 		void unsafeForEach(std::function<void(void*)> callback) const override {
 			for(auto i = 0; i < size_v; ++i) {
-				callback(&(_array[i]));
+				callback(&(array[i]));
 			}
 		}
 
@@ -68,11 +68,11 @@ namespace astra {
 		}
 
 		Var front() override {
-			return Var(_array, TypeId::get<T>(), _isConst);
+			return Var(array, TypeId::get<T>(), isConst);
 		};
 
 		Var back() override {
-			return Var(&(_array[size_v - 1]), TypeId::get<T>(), _isConst);
+			return Var(&(array[size_v - 1]), TypeId::get<T>(), isConst);
 		};
 
 		Var at(std::size_t idx) override {
@@ -80,7 +80,7 @@ namespace astra {
 				throw std::runtime_error(::astra::format("Index: {} is out of array's size: {}", idx, size_v));
 			}
 
-			return Var(&(_array[idx]), TypeId::get<T>(), _isConst);
+			return Var(&(array[idx]), TypeId::get<T>(), isConst);
 		}
 
 		Var operator[](std::size_t idx) override {
@@ -90,13 +90,13 @@ namespace astra {
 		void fill(Var filler) override {
 			auto ptr = filler.rtCast<T>();
 			for(auto i = 0; i < size_v; i++) {
-				_array[i] = *ptr;
+				array[i] = *ptr;
 			}
 		}
 
 	  private:
-		T* _array;
-		bool _isConst;
+		T* array;
+		bool isConst;
 	};
 
 }

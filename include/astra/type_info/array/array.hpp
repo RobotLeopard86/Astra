@@ -16,12 +16,12 @@ namespace astra {
 
 		template<typename T, std::size_t size_v>
 		Array(T (*array)[size_v], bool isConst) {
-			new(_mem) CArray<T, size_v>(array, isConst);
+			new(mem) CArray<T, size_v>(array, isConst);
 		}
 
 		template<typename T, std::size_t size_v>
 		Array(std::array<T, size_v>* array, bool isConst) {
-			new(_mem) StdArray<T, size_v>(array, isConst);
+			new(mem) StdArray<T, size_v>(array, isConst);
 		}
 
 		~Array() {
@@ -81,14 +81,14 @@ namespace astra {
 		}
 
 	  private:
-		char _mem[Sizeof<CArray<int, 1>, StdArray<int, 1>>::max()];
+		char mem[Sizeof<CArray<int, 1>, StdArray<int, 1>>::max()];
 
 		inline const IArray* impl() const {
-			return reinterpret_cast<const IArray*>(&_mem[0]);
+			return reinterpret_cast<const IArray*>(&mem[0]);
 		}
 
 		inline IArray* impl() {
-			return reinterpret_cast<IArray*>(&_mem[0]);
+			return reinterpret_cast<IArray*>(&mem[0]);
 		}
 	};
 

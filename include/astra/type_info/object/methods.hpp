@@ -9,26 +9,26 @@ namespace astra {
 
 	struct ASTRA_API Methods {
 		Methods(void* base, const std::map<std::string_view, MethodDesc>* map, Access acc)//
-		  : _base(base), _map(map), _acc(acc) {
+		  : base(base), map(map), acc(acc) {
 		}
 
 		std::size_t size() const {
-			return _map->size();
+			return map->size();
 		}
 
 		MethodIterator begin() {
-			return {_map, _base, _acc};
+			return {map, base, acc};
 		}
 
 		//iterator type is not the same as begin
 		std::map<std::string_view, MethodDesc>::const_iterator end() {
-			return _map->end();
+			return map->end();
 		}
 
 	  private:
-		const void* _base;
-		const std::map<std::string_view, MethodDesc>* _map;
-		const Access _acc;
+		const void* base;
+		const std::map<std::string_view, MethodDesc>* map;
+		const Access acc;
 	};
 
 }

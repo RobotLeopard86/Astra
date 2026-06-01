@@ -76,7 +76,7 @@ namespace astra {
 				const auto& p = info.asUnsafe<Pointer>();
 				try {
 					TypeInfo nestedInfo = reflect(p.getNested());
-					serializeYamlRecursive(_node, nestedInfo, field);
+					serializeYamlRecursive(node, nestedInfo, field);
 				} catch(...) {
 					//Can't serialize nullptr
 				}
@@ -157,7 +157,7 @@ namespace astra {
 					if(i >= arr.size()) throw std::runtime_error("Too many items in array!");
 					Var tgt = arr.at(i);
 					if(tgt.isConst()) throw std::runtime_error("Cannot deserialize into const array!");
-					ActionsTable::data()[tgt.type().number()].move(tgt.rawMut(), nested.var().rawMut());
+					ActionsTable::data()[tgt.typeId().number()].move(tgt.rawMut(), nested.var().rawMut());
 				}
 				break;
 			}
@@ -191,11 +191,11 @@ namespace astra {
 				Pointer& p = info.asUnsafe<Pointer>();
 				try {
 					TypeInfo nestedInfo = reflect(p.getNested());
-					deserializeYamlRecursive(_node, nestedInfo, field);
+					deserializeYamlRecursive(node, nestedInfo, field);
 				} catch(...) {
 					p.init();
 					TypeInfo okInfo = reflect(p.var());
-					deserializeYamlRecursive(_node, okInfo, field);
+					deserializeYamlRecursive(node, okInfo, field);
 				}
 				break;
 			};

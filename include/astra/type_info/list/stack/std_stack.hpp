@@ -15,30 +15,30 @@ namespace astra {
 		StdStack() = delete;
 
 		StdStack(std::stack<T>* stack, bool isConst)
-		  : _stack(stack),//
-			_isConst(isConst) {
+		  : stack(stack),//
+			isConst(isConst) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_stack);
-			if(var.type() != t) {
+			auto t = TypeId::get(stack);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_stack = static_cast<std::stack<T>*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			stack = static_cast<std::stack<T>*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_stack = static_cast<std::stack<T>*>(ptr);
-			_isConst = false;
+			stack = static_cast<std::stack<T>*>(ptr);
+			isConst = false;
 		}
 
 		Var ownVar() const override {
-			return Var(_stack, TypeId::get(_stack), _isConst);
+			return Var(stack, TypeId::get(stack), isConst);
 		}
 
 		TypeId nestedType() const override {
@@ -47,64 +47,64 @@ namespace astra {
 
 		void forEach(std::function<void(Var)> callback) const override {
 			const auto nestedType = TypeId::get<T>();
-			const auto end = StackIterator<T>::end(_stack);
+			const auto end = StackIterator<T>::end(stack);
 
-			for(auto it = StackIterator<T>::begin(_stack); it != end; ++it) {
+			for(auto it = StackIterator<T>::begin(stack); it != end; ++it) {
 				callback(Var(&(*it), nestedType, true));
 			}
 		}
 
 		void forEach(std::function<void(Var)> callback) override {
 			const auto nestedType = TypeId::get<T>();
-			const auto end = StackIterator<T>::end(_stack);
+			const auto end = StackIterator<T>::end(stack);
 
-			for(auto it = StackIterator<T>::begin(_stack); it != end; ++it) {
-				callback(Var(&(*it), nestedType, _isConst));
+			for(auto it = StackIterator<T>::begin(stack); it != end; ++it) {
+				callback(Var(&(*it), nestedType, isConst));
 			}
 		}
 
 		void unsafeForEach(std::function<void(void*)> callback) const override {
-			for(auto it = StackIterator<T>::begin(_stack); it != StackIterator<T>::end(_stack); ++it) {
+			for(auto it = StackIterator<T>::begin(stack); it != StackIterator<T>::end(stack); ++it) {
 				callback(&(*it));
 			}
 		}
 
 		void clear() override {
-			while(!_stack->empty()) {
-				_stack->pop();
+			while(!stack->empty()) {
+				stack->pop();
 			}
 		}
 
 		std::size_t size() const override {
-			return _stack->size();
+			return stack->size();
 		}
 
 		void push(Var value) override {
 			auto nestedType = TypeId::get<T>();
 
-			if(nestedType != value.type()) {
+			if(nestedType != value.typeId()) {
 				error("Trying to set with type: {} to set<{}>",//
-					value.type(), nestedType);
+					value.typeId(), nestedType);
 			}
-			_stack->push(*static_cast<const T*>(value.raw()));
+			stack->push(*static_cast<const T*>(value.raw()));
 			return;
 		}
 
 		void pop() override {
-			_stack->pop();
+			stack->pop();
 		}
 
 		Var top() override {
-			if(_stack->empty()) {
+			if(stack->empty()) {
 				throw std::runtime_error("The stack is empty");
 			}
 
-			return Var(&_stack->top(), TypeId::get<T>(), _isConst);
+			return Var(&stack->top(), TypeId::get<T>(), isConst);
 		};
 
 	  private:
-		std::stack<T>* _stack;
-		bool _isConst;
+		std::stack<T>* stack;
+		bool isConst;
 	};
 
 }

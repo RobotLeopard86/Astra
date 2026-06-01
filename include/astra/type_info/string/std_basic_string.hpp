@@ -15,41 +15,41 @@ namespace astra {
 		StdBasicString() = delete;
 
 		StdBasicString(std::basic_string<T>* str, bool isConst)
-		  : _var(str, isConst) {
+		  : inner(str, isConst) {
 		}
 
 		void assign(Var var) override {
-			if(var.type() != _var.type()) {
+			if(var.typeId() != inner.typeId()) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
-					typeName(_var.type())));
+					typeName(var.typeId()),												//
+					typeName(inner.typeId())));
 			}
-			_var = var;
+			inner = var;
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_var.unsafeAssign(ptr);
+			inner.unsafeAssign(ptr);
 		}
 
 		const std::string& get() const override {
-			return *static_cast<const std::string*>(_var.raw());
+			return *static_cast<const std::string*>(inner.raw());
 		}
 
 		void set(const std::string& value) override {
-			if(_var.isConst()) {
+			if(inner.isConst()) {
 				throw std::runtime_error("Trying to set const value");
 			}
-			*static_cast<std::string*>(_var.rawMut()) = value;
+			*static_cast<std::string*>(inner.rawMut()) = value;
 			return;
 		}
 
 		Var var() const override {
-			return _var;
+			return inner;
 		}
 
 	  private:
-		Var _var;
+		Var inner;
 	};
 
 }

@@ -13,40 +13,40 @@ namespace astra {
 	struct ASTRA_API MethodDesc {
 		MethodDesc(void (*fn)(Var res, void* obj, const std::vector<Var>& args),//
 			Access acc)
-		  : _fn(fn), _acc(acc) {
+		  : fn(fn), acc(acc) {
 		}
 
 		void invoke(Var res, void* obj, const std::vector<Var>& args) const {
-			return _fn(res, obj, args);
+			return fn(res, obj, args);
 		}
 
 		bool isConst() const {
-			return (_acc & Access::Const) != Access::None;
+			return (acc & Access::Const) != Access::None;
 		}
 
 		bool isStatic() const {
-			return (_acc & Access::Static) != Access::None;
+			return (acc & Access::Static) != Access::None;
 		}
 
 		bool isPublic() const {
-			return (_acc & Access::Public) != Access::None;
+			return (acc & Access::Public) != Access::None;
 		}
 
 		bool isProtected() const {
-			return (_acc & Access::Protected) != Access::None;
+			return (acc & Access::Protected) != Access::None;
 		}
 
 		bool isPrivate() const {
-			return (_acc & Access::Private) != Access::None;
+			return (acc & Access::Private) != Access::None;
 		}
 
 		Access access() const {
-			return _acc;
+			return acc;
 		}
 
 	  private:
-		void (*const _fn)(Var res, void* obj, const std::vector<Var>& args);
-		const Access _acc;
+		void (*const fn)(Var res, void* obj, const std::vector<Var>& args);
+		const Access acc;
 	};
 
 }

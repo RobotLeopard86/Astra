@@ -14,41 +14,41 @@ namespace astra {
 
 		template<typename U, typename = std::enable_if_t<!std::is_same_v<U, Variant>, void>>
 		Variant(const U& value)
-		  : _content(value) {
+		  : content(value) {
 		}
 
 		template<typename U, typename = std::enable_if_t<!std::is_same_v<U, Variant>, void>>
 		Variant(U&& value)
-		  : _content(std::move(value)) {
+		  : content(std::move(value)) {
 		}
 
 		template<typename... FuncT>
 		decltype(auto) match(FuncT... functions) {
-			return std::visit(Overloaded {functions...}, _content);
+			return std::visit(Overloaded {functions...}, content);
 		}
 
 		template<typename... FuncT>
 		decltype(auto) matchMove(FuncT... functions) {
-			return std::visit(Overloaded {functions...}, std::move(_content));
+			return std::visit(Overloaded {functions...}, std::move(content));
 		}
 
 		template<typename... FuncT>
 		decltype(auto) match(FuncT... functions) const {
-			return std::visit(Overloaded {functions...}, _content);
+			return std::visit(Overloaded {functions...}, content);
 		}
 
 		template<typename U>
 		[[nodiscard]] inline bool is() const {
-			return std::holds_alternative<U>(_content);
+			return std::holds_alternative<U>(content);
 		}
 
 		[[nodiscard]] inline std::size_t index() const {
-			return _content.index();
+			return content.index();
 		}
 
 		template<typename U>
 		U& as() {
-			auto pointer = std::get_if<U>(&_content);
+			auto pointer = std::get_if<U>(&content);
 
 			if(pointer == nullptr) {
 				throw std::runtime_error("The instance of requested type doesn't exist");
@@ -58,16 +58,16 @@ namespace astra {
 
 		template<typename U>
 		inline const U& asUnsafe() const {
-			return std::get<U>(_content);
+			return std::get<U>(content);
 		}
 
 		template<typename U>
 		inline U& asUnsafe() {
-			return std::get<U>(_content);
+			return std::get<U>(content);
 		}
 
 	  protected:
-		std::variant<T...> _content;
+		std::variant<T...> content;
 	};
 
 }

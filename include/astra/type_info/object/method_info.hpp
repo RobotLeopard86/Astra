@@ -13,27 +13,27 @@ namespace astra {
 	class ASTRA_API MethodInfo {
 	  public:
 		MethodInfo(const void* base, const MethodDesc* data)
-		  : _base(const_cast<void*>(base)), _data(data) {
+		  : base(const_cast<void*>(base)), data(data) {
 		}
 
 		MethodInfo(void* base, const MethodDesc* data)
-		  : _base(base), _data(data) {
+		  : base(base), data(data) {
 		}
 
 		MethodInfo(const MethodInfo& other) {
 			if(this == &other) {
 				return;
 			}
-			_base = other._base;
-			_data = other._data;
+			base = other.base;
+			data = other.data;
 		}
 
 		MethodInfo& operator=(const MethodInfo& other) {
 			if(this == &other) {
 				return *this;
 			}
-			_base = other._base;
-			_data = other._data;
+			base = other.base;
+			data = other.data;
 			return *this;
 		}
 
@@ -42,7 +42,7 @@ namespace astra {
 			std::vector<Var> vArgs;
 			foldArgs(&vArgs, args...);
 
-			return _data->invoke(Var(), _base, vArgs);
+			return data->invoke(Var(), base, vArgs);
 		}
 
 		template<typename RetT, typename... Args>
@@ -51,33 +51,33 @@ namespace astra {
 			foldArgs(&vArgs, &args...);
 
 			RetT ret;
-			_data->invoke(Var(&ret), _base, vArgs);
+			data->invoke(Var(&ret), base, vArgs);
 			return ret;
 		}
 
 		bool isConst() const {
-			return _data->isConst();
+			return data->isConst();
 		}
 
 		bool isStatic() const {
-			return _data->isStatic();
+			return data->isStatic();
 		}
 
 		bool isPublic() const {
-			return _data->isPublic();
+			return data->isPublic();
 		}
 
 		bool isProtected() const {
-			return _data->isProtected();
+			return data->isProtected();
 		}
 
 		bool isPrivate() const {
-			return _data->isPrivate();
+			return data->isPrivate();
 		}
 
 	  private:
-		void* _base;
-		const MethodDesc* _data;
+		void* base;
+		const MethodDesc* data;
 
 		template<typename ArgT, typename... Args>
 		void foldArgs(std::vector<Var>* vArgs, const ArgT* arg, const Args*... other) const {

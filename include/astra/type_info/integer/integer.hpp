@@ -15,7 +15,7 @@ namespace astra {
 
 		template<typename T>
 		Integer(T* value, bool isConst) {
-			new(_mem) Int<T>(value, isConst);
+			new(mem) Int<T>(value, isConst);
 		}
 
 		void assign(Var var) {
@@ -67,14 +67,14 @@ namespace astra {
 		}
 
 	  private:
-		char _mem[sizeof(Int<int>)];
+		char mem[sizeof(Int<int>)];
 
 		inline const IInteger* impl() const {
-			return reinterpret_cast<const IInteger*>(&_mem[0]);
+			return reinterpret_cast<const IInteger*>(&mem[0]);
 		}
 
 		inline IInteger* impl() {
-			return reinterpret_cast<IInteger*>(&_mem[0]);
+			return reinterpret_cast<IInteger*>(&mem[0]);
 		}
 	};
 

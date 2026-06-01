@@ -18,11 +18,11 @@ namespace astra {
 			const void* base,										   //
 			Access acc,												   //
 			bool includeReadonly)
-		  : _it(map->begin()),//
-			_end(map->cend()),//
-			_base(base),	  //
-			_acc(acc),		  //
-			_include_readonly(includeReadonly) {
+		  : it(map->begin()),//
+			end(map->cend()),//
+			base(base),		 //
+			acc(acc),		 //
+			include_readonly(includeReadonly) {
 			//start from a valid element
 			if(!isValid()) {
 				nextValid();
@@ -41,46 +41,46 @@ namespace astra {
 		};
 
 		bool operator==(const const_iterator& other) const noexcept {
-			return _it != other;
+			return it != other;
 		};
 
 		bool operator!=(const const_iterator& other) const noexcept {
-			return _it != other;
+			return it != other;
 		};
 
 		auto operator*() const noexcept {
-			return std::make_pair(_it->first, FieldInfo(_base, &_it->second));
+			return std::make_pair(it->first, FieldInfo(base, &it->second));
 		};
 
 	  private:
-		const_iterator _it;
-		const const_iterator _end;
-		const void* _base;
-		const Access _acc;
-		const bool _include_readonly;
+		const_iterator it;
+		const const_iterator end;
+		const void* base;
+		const Access acc;
+		const bool include_readonly;
 
 		bool isValid() {
 			return rightAccess() &&		   //
 				   rightStaticReadonly() &&//
-				   (_base != nullptr || _it->second.isStatic());
+				   (base != nullptr || it->second.isStatic());
 		}
 
 		void nextValid() {
 			do {
-				++_it;
-			} while(_it != _end && !isValid());
+				++it;
+			} while(it != end && !isValid());
 		}
 
 		inline bool rightAccess() {
-			return (_it->second.access() & _acc & (Access::Public | Access::Protected | Access::Private)) != Access::None;
+			return (it->second.access() & acc & (Access::Public | Access::Protected | Access::Private)) != Access::None;
 		}
 
 		//built from Karnaugh Map
 		inline bool rightStaticReadonly() {
-			bool nx0 = !_it->second.isReadonly();
-			bool nx1 = (_it->second.access() & Access::Static) == Access::None;
-			bool x2 = _include_readonly;
-			bool x3 = (_acc & Access::Static) != Access::None;
+			bool nx0 = !it->second.isReadOnly();
+			bool nx1 = (it->second.access() & Access::Static) == Access::None;
+			bool x2 = include_readonly;
+			bool x3 = (acc & Access::Static) != Access::None;
 
 			return (nx0 || x2) && (nx1 || x3);
 		}

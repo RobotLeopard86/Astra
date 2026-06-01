@@ -109,11 +109,6 @@ namespace astra {
 		[[nodiscard]] std::string getKindStr() const {
 			return match([](auto&& v) { return Names<decltype(v)>::get(); });
 		}
-
-	  private:
-#ifdef _DEBUG
-		Kind _kind = getKind();
-#endif
 	};
 
 #undef BASE

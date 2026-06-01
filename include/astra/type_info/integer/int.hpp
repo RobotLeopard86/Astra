@@ -14,29 +14,29 @@ namespace astra {
 	template<typename T>
 	struct ASTRA_API Int : IInteger {
 		Int(T* value, bool isConst)
-		  : _value(value), _isConst(isConst) {
+		  : value(value), isConst(isConst) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_value);
-			if(var.type() != t) {
+			auto t = TypeId::get(value);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_value = static_cast<T*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			value = static_cast<T*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_value = static_cast<T*>(ptr);
-			_isConst = false;
+			value = static_cast<T*>(ptr);
+			isConst = false;
 		}
 
 		Var var() const override {
-			return Var(_value, _isConst);
+			return Var(value, isConst);
 		}
 
 		std::size_t size() const override {
@@ -48,46 +48,46 @@ namespace astra {
 		}
 
 		int64_t asSigned() const override {
-			return *_value;
+			return *value;
 		}
 
 		uint64_t asUnsigned() const override {
-			return *_value;
+			return *value;
 		}
 
-		void setSigned(int64_t value) override {
-			if(_isConst) {
+		void setSigned(int64_t val) override {
+			if(isConst) {
 				throw std::runtime_error("Trying to set const value");
 			}
 
-			if(std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value) {
-				throw std::runtime_error(::astra::format("The value is too big to fit {} byte variable", sizeof(*_value)));
+			if(std::numeric_limits<T>::max() < val || std::numeric_limits<T>::min() > val) {
+				throw std::runtime_error(::astra::format("The value is too big to fit {} byte variable", sizeof(*value)));
 			}
 
-			if(value < 0 && !isSigned()) {
+			if(val < 0 && !isSigned()) {
 				throw std::runtime_error("Cannot assign negative value to unsigned");
 			}
 
-			*_value = value;
+			*value = val;
 			return;
 		}
 
-		void setUnsigned(uint64_t value) override {
-			if(_isConst) {
+		void setUnsigned(uint64_t val) override {
+			if(isConst) {
 				throw std::runtime_error("Trying to set const value");
 			}
 
-			if(std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value) {
-				throw std::runtime_error(::astra::format("The value is too big to fit {} byte variable", sizeof(*_value)));
+			if(std::numeric_limits<T>::max() < val || std::numeric_limits<T>::min() > val) {
+				throw std::runtime_error(::astra::format("The value is too big to fit {} byte variable", sizeof(*value)));
 			}
 
-			*_value = value;
+			*value = val;
 			return;
 		}
 
 	  private:
-		T* _value;
-		bool _isConst;
+		T* value;
+		bool isConst;
 	};
 
 }

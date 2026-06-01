@@ -14,30 +14,30 @@ namespace astra {
 		StdDeque() = delete;
 
 		StdDeque(std::deque<T>* deque, bool isConst)
-		  : _deque(deque),//
-			_isConst(isConst) {
+		  : deque(deque),//
+			isConst(isConst) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_deque);
-			if(var.type() != t) {
+			auto t = TypeId::get(deque);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_deque = static_cast<std::deque<T>*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			deque = static_cast<std::deque<T>*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_deque = static_cast<std::deque<T>*>(ptr);
-			_isConst = false;
+			deque = static_cast<std::deque<T>*>(ptr);
+			isConst = false;
 		}
 
 		Var ownVar() const override {
-			return Var(_deque, TypeId::get(_deque), _isConst);
+			return Var(deque, TypeId::get(deque), isConst);
 		}
 
 		TypeId nestedType() const override {
@@ -47,7 +47,7 @@ namespace astra {
 		void forEach(std::function<void(Var)> callback) const override {
 			const auto nestedType = TypeId::get<T>();
 
-			for(auto&& entry : *_deque) {
+			for(auto&& entry : *deque) {
 				callback(Var(&entry, nestedType, true));
 			}
 		}
@@ -55,65 +55,65 @@ namespace astra {
 		void forEach(std::function<void(Var)> callback) override {
 			const auto nestedType = TypeId::get<T>();
 
-			for(auto&& entry : *_deque) {
-				callback(Var(&entry, nestedType, _isConst));
+			for(auto&& entry : *deque) {
+				callback(Var(&entry, nestedType, isConst));
 			}
 		}
 
 		void unsafeForEach(std::function<void(void*)> callback) const override {
-			for(auto&& entry : *_deque) {
+			for(auto&& entry : *deque) {
 				callback(&entry);
 			}
 		}
 
 		void clear() override {
-			_deque->clear();
+			deque->clear();
 		}
 
 		std::size_t size() const override {
-			return _deque->size();
+			return deque->size();
 		}
 
 		void push(Var value) override {
 			auto nestedType = TypeId::get<T>();
 
-			if(nestedType != value.type()) {
+			if(nestedType != value.typeId()) {
 				error("Trying to set with type: {} to deque<{}>",//
-					value.type(), nestedType);
+					value.typeId(), nestedType);
 			}
-			_deque->push_back(*static_cast<const T*>(value.raw()));
+			deque->push_back(*static_cast<const T*>(value.raw()));
 			return;
 		}
 
 		void pop() override {
-			_deque->pop_back();
+			deque->pop_back();
 		}
 
 		void pushFront(Var element) override {
-			_deque->push_front(*static_cast<const T*>(element.raw()));
+			deque->push_front(*static_cast<const T*>(element.raw()));
 		}
 
 		void popFront() override {
-			_deque->pop_front();
+			deque->pop_front();
 		}
 
 		Var front() override {
-			if(_deque->empty()) {
+			if(deque->empty()) {
 				throw std::runtime_error("The list is empty");
 			}
-			return Var(&_deque->front(), TypeId::get<T>(), _isConst);
+			return Var(&deque->front(), TypeId::get<T>(), isConst);
 		};
 
 		Var back() override {
-			if(_deque->empty()) {
+			if(deque->empty()) {
 				throw std::runtime_error("The list is empty");
 			}
-			return Var(&_deque->back(), TypeId::get<T>(), _isConst);
+			return Var(&deque->back(), TypeId::get<T>(), isConst);
 		};
 
 	  private:
-		std::deque<T>* _deque;
-		bool _isConst;
+		std::deque<T>* deque;
+		bool isConst;
 	};
 
 }

@@ -16,17 +16,17 @@ namespace astra {
 
 		template<typename T>
 		String(std::basic_string<T>* str, bool isConst) {
-			new(_mem) StdBasicString<T>(str, isConst);
+			new(mem) StdBasicString<T>(str, isConst);
 		}
 
 		template<typename T>
 		String(std::basic_string_view<T>* str, bool isConst) {
-			new(_mem) StdBasicStringView<T>(str);
+			new(mem) StdBasicStringView<T>(str);
 		}
 
 		template<typename T>
 		String(const T** str, bool isConst) {
-			new(_mem) CString<T>(str);
+			new(mem) CString<T>(str);
 		}
 
 		void assign(Var var) {
@@ -50,14 +50,14 @@ namespace astra {
 		}
 
 	  private:
-		char _mem[Sizeof<CString<char>, StdBasicString<char>, StdBasicStringView<char>>::max()];
+		char mem[Sizeof<CString<char>, StdBasicString<char>, StdBasicStringView<char>>::max()];
 
 		inline const IString* impl() const {
-			return reinterpret_cast<const IString*>(&_mem[0]);
+			return reinterpret_cast<const IString*>(&mem[0]);
 		}
 
 		inline IString* impl() {
-			return reinterpret_cast<IString*>(&_mem[0]);
+			return reinterpret_cast<IString*>(&mem[0]);
 		}
 	};
 

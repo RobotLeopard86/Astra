@@ -16,19 +16,13 @@
 #include "astra/traits.hpp"
 #include "dll.hpp"
 
-#ifdef _DEBUG
-namespace astra {
-	std::string_view typeName(uint32_t id);
-}
-#endif
-
 namespace astra {
 
 	///copyable value type with single int under the hood
 	///represent sequential type id
 	struct ASTRA_API TypeId {
 		TypeId()
-		  : _id(0) {
+		  : id(0) {
 		}
 
 		///proxy function for using with implicit type in TypeId::get<T>() way without argument
@@ -40,19 +34,19 @@ namespace astra {
 		///the main function of TypeId mechanism
 		template<typename T>
 			requires is_class_v<T>
-		static TypeId get(T* ptr) {
+		static TypeId get(T*) {
 			return TypeId(0);
 		}
 
 		template<typename T>
 			requires std::is_enum_v<T>
-		static TypeId get(T* ptr) {
+		static TypeId get(T*) {
 			return TypeId(0);
 		}
 
 		template<typename T>
 			requires std::is_void_v<T>
-		static TypeId get(T* ptr) {
+		static TypeId get(T*) {
 			return TypeId(0);
 		}
 
@@ -91,30 +85,22 @@ namespace astra {
 
 		//other methods
 		bool operator==(const TypeId& other) const {
-			return _id == other._id;
+			return id == other.id;
 		}
 
 		bool operator!=(const TypeId& other) const {
-			return _id != other._id;
+			return id != other.id;
 		}
 
 		uint32_t number() const {
-			return _id;
+			return id;
 		}
 
 	  private:
-		uint32_t _id;
-
-#ifdef _DEBUG
-		std::string _typeName = "unknown";
-#endif
+		uint32_t id;
 
 		explicit TypeId(uint32_t id)
-		  : _id(id) {
-#ifdef _DEBUG
-			_typeName = typeName(_id);
-#endif
-		}
+		  : id(id) {}
 	};
 
 }

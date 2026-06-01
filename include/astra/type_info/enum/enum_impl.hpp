@@ -14,47 +14,47 @@ namespace astra {
 		EnumImpl() = delete;
 
 		EnumImpl(T* value, bool isConst, const ConstexprMap<T, size_v>& allConstants)
-		  : _value(value), _isConst(isConst), _all_constants(allConstants) {
+		  : value(value), isConst(isConst), all_constants(allConstants) {
 		}
 
 		void assign(Var var) override {
-			auto t = TypeId::get(_value);
-			if(var.type() != t) {
+			auto t = TypeId::get(value);
+			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
+					typeName(var.typeId()),												//
 					typeName(t)));
 			}
 
-			_value = static_cast<T*>(const_cast<void*>(var.raw()));
-			_isConst = var.isConst();
+			value = static_cast<T*>(const_cast<void*>(var.raw()));
+			isConst = var.isConst();
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_value = static_cast<T*>(ptr);
-			_isConst = false;
+			value = static_cast<T*>(ptr);
+			isConst = false;
 		}
 
 		Var var() const override {
-			return Var(_value, TypeId::get<T>(), _isConst);
+			return Var(value, TypeId::get<T>(), isConst);
 		}
 
 		const std::string& toString() const override {
-			return _all_constants.getName(*_value);
+			return all_constants.getName(*value);
 		}
 
 		void fromString(const std::string& name) override {
-			if(_isConst) {
+			if(isConst) {
 				throw std::runtime_error("Cannot assign anything to const enum");
 			}
-			auto v = _all_constants.getValue(name);
-			*_value = v;
+			auto v = all_constants.getValue(name);
+			*value = v;
 		}
 
 	  private:
-		T* _value;
-		bool _isConst;
-		const ConstexprMap<T, size_v>& _all_constants;
+		T* value;
+		bool isConst;
+		const ConstexprMap<T, size_v>& all_constants;
 	};
 
 }

@@ -14,37 +14,40 @@ namespace astra {
 	struct ASTRA_API CString : IString {
 
 		CString(const T** str)
-		  : _var(str, true) {
+		  : inner(str, true) {
 		}
 
 		void assign(Var var) override {
-			if(var.type() != _var.type()) {
+			if(var.typeId() != inner.typeId()) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",//
-					typeName(var.type()),												//
-					typeName(_var.type())));
+					typeName(var.typeId()),												//
+					typeName(inner.typeId())));
 			}
-			_var = var;
+			inner = var;
+			cachedVal = static_cast<const char*>(inner.raw());
 			return;
 		}
 
 		void unsafeAssign(void* ptr) override {
-			_var.unsafeAssign(ptr);
+			inner.unsafeAssign(ptr);
+			cachedVal = *static_cast<const char*>(inner.raw());
 		}
 
 		const std::string& get() const override {
-			return *static_cast<T* const*>(_var.raw());
+			return cachedVal;
 		}
 
 		void set(const std::string&) override {
-			throw std::runtime_error("Trying to set const value");
+			throw std::runtime_error("Trying to set read-only value");
 		}
 
 		Var var() const override {
-			return _var;
+			return inner;
 		}
 
 	  private:
-		Var _var;
+		Var inner;
+		std::string cachedVal;
 	};
 
 }

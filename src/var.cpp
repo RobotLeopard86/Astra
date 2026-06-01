@@ -7,49 +7,49 @@
 namespace astra {
 
 	Var::Var()
-	  : _value(nullptr), _type(), _isConst(true) {
+	  : value(nullptr), type(), isThisVarConst(true) {
 	}
 
 	Var::Var(void* value, TypeId type, bool isConst)
-	  : _value(value), _type(type), _isConst(isConst) {
+	  : value(value), type(type), isThisVarConst(isConst) {
 	}
 
 	void Var::unsafeAssign(void* ptr) {
-		_value = ptr;
+		value = ptr;
 	}
 
 	bool Var::operator==(const Var& other) const {
-		return _type == other._type && _value == other._value;
+		return type == other.type && value == other.value;
 	}
 
 	bool Var::operator!=(const Var& other) const {
-		return _type != other._type || _value != other._value;
+		return type != other.type || value != other.value;
 	}
 
 	void* Var::rawMut() const {
-		if(_isConst) {
+		if(isThisVarConst) {
 			return nullptr;
 		}
 
-		return _value;
+		return value;
 	}
 
 	const void* Var::raw() const {
-		return _value;
+		return value;
 	}
 
-	TypeId Var::type() const {
-		return _type;
+	TypeId Var::typeId() const {
+		return type;
 	}
 
 	bool Var::isConst() const {
-		return _isConst;
+		return isThisVarConst;
 	}
 
 	void Var::dispose() {
-		_value = nullptr;
-		_type = TypeId();
-		_isConst = true;
+		value = nullptr;
+		type = TypeId();
+		isThisVarConst = true;
 	}
 
 	void Var::error(TypeId type, TypeId desired_type) {

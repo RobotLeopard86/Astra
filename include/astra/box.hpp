@@ -14,7 +14,7 @@ namespace astra {
 
 	struct ASTRA_API Box {
 		Box(palloc_t* alloc = &defaultAlloc)
-		  : _alloc(alloc) {};
+		  : alloc(alloc) {};
 
 		Box(const Box& other) = delete;
 		Box& operator=(const Box& other) = delete;
@@ -29,8 +29,8 @@ namespace astra {
 		Box clone();
 
 	  private:
-		Var _var;
-		palloc_t* _alloc;
+		Var inner;
+		palloc_t* alloc;
 	};
 
 }
