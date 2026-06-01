@@ -426,7 +426,7 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/array/array.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/bool.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/enum/enum.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/floating/floating.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/float/float.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/integer/integer.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/map/map.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/object/object.hpp&quot;</span>
@@ -436,7 +436,7 @@
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
-<span class="cp">#define BASE Variant&lt;Bool, Integer, Floating, String, Enum, Object, Array, List, Map, Pointer&gt;</span>
+<span class="cp">#define BASE Variant&lt;Bool, Integer, Float, String, Enum, Object, Array, List, Map, Pointer&gt;</span>
 
 <span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">TypeInfo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">BASE</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">public</span><span class="o">:</span>
@@ -448,7 +448,7 @@
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">BASE</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">TypeInfo</span><span class="p">(</span><span class="n">Floating</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="w">        </span><span class="n">TypeInfo</span><span class="p">(</span><span class="n">Float</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">BASE</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
 
@@ -498,7 +498,7 @@
 <span class="w">        </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Kind</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">Bool</span><span class="p">,</span>
 <span class="w">            </span><span class="n">Integer</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Floating</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Float</span><span class="p">,</span>
 <span class="w">            </span><span class="n">String</span><span class="p">,</span>
 <span class="w">            </span><span class="n">Enum</span><span class="p">,</span>
 <span class="w">            </span><span class="n">Object</span><span class="p">,</span>
