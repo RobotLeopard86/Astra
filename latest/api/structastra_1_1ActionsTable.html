@@ -585,9 +585,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structConstexprSort.html">Struct ConstexprSort</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1AppendBuf.html">Class AppendBuf</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1ConstexprMap.html">Template Class ConstexprMap</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -680,9 +677,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a1e7f2f476c30555355dba1e3c53ce56f.html">Function astra::typeName</a></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="define_type__info_8hpp_1a79bcfb6bde984f42d1124b068a509af7.html">Define BASE</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
@@ -752,17 +746,34 @@
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra12ActionsTableE">
 <span id="_CPPv3N5astra12ActionsTableE"></span><span id="_CPPv2N5astra12ActionsTableE"></span><span id="astra::ActionsTable"></span><span class="target" id="structastra_1_1ActionsTable"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ActionsTable</span></span></span><a class="headerlink" href="#_CPPv4N5astra12ActionsTableE" title="Link to this definition"><span/></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Centralized storage for reflected type actions. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra12ActionsTable4dataEv">
 <span id="_CPPv3N5astra12ActionsTable4dataEv"></span><span id="_CPPv2N5astra12ActionsTable4dataEv"></span><span id="astra::ActionsTable::data"></span><span class="target" id="structastra_1_1ActionsTable_1a4579d4852000cd40caedbf4951ca84fe"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structastra_1_1Actions.html#_CPPv4N5astra7ActionsE" title="astra::Actions"><span class="n"><span class="pre">Actions</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra12ActionsTable4dataEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access the stored data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The stored data array </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra12ActionsTable6recordE7Actions">
 <span id="_CPPv3N5astra12ActionsTable6recordE7Actions"></span><span id="_CPPv2N5astra12ActionsTable6recordE7Actions"></span><span id="astra::ActionsTable::record__Actions"></span><span class="target" id="structastra_1_1ActionsTable_1ab45499f44e6bbe2dadeedcf2374b9874"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">record</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Actions.html#_CPPv4N5astra7ActionsE" title="astra::Actions"><span class="n"><span class="pre">Actions</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">actions</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra12ActionsTable6recordE7Actions" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Record function entries for a new type in the table. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function should only be called by generated reflection code headers!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new type’s ID number </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>

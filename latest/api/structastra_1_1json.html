@@ -585,9 +585,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structConstexprSort.html">Struct ConstexprSort</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1AppendBuf.html">Class AppendBuf</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1ConstexprMap.html">Template Class ConstexprMap</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -680,9 +677,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a1e7f2f476c30555355dba1e3c53ce56f.html">Function astra::typeName</a></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="define_type__info_8hpp_1a79bcfb6bde984f42d1124b068a509af7.html">Define BASE</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
@@ -757,32 +751,104 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra4json8fromJsonE1TRKN8nlohmann4jsonE">
 <span id="_CPPv3I_11ReflectableEN5astra4json8fromJsonERKN8nlohmann4jsonE"></span><span id="_CPPv2I_11ReflectableEN5astra4json8fromJsonERKN8nlohmann4jsonE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1json_1adbe2fa41ad76c326cfe0ce472b7e3186"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra4json8fromJsonE1TRKN8nlohmann4jsonE" title="astra::json::fromJson::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromJson</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">json</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra4json8fromJsonE1TRKN8nlohmann4jsonE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Deserialize a T object from the JSON object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to deserialize to</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>json</strong> – The JSON object to deserialize from</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A T object storing the data from the document </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra4json10fromStringE1TRKNSt6stringE">
 <span id="_CPPv3I_11ReflectableEN5astra4json10fromStringERKNSt6stringE"></span><span id="_CPPv2I_11ReflectableEN5astra4json10fromStringERKNSt6stringE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1json_1a1903562242c7751c7621d0724b848cc1"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra4json10fromStringE1TRKNSt6stringE" title="astra::json::fromString::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra4json10fromStringE1TRKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Deserialize a T object from a JSON string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to deserialize to</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>str</strong> – A string storing JSON to deserialize from</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A T object storing the data from the JSON </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra4json10fromStreamE1TRNSt7istreamE">
 <span id="_CPPv3I_11ReflectableEN5astra4json10fromStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra4json10fromStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1json_1af5b1d8a1b9e4b1e97af3f898e3d0e989"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra4json10fromStreamE1TRNSt7istreamE" title="astra::json::fromStream::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra4json10fromStreamE1TRNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Deserialize a T object from a stream of JSON text. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to deserialize to</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>stream</strong> – A stream storing JSON to deserialize from</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A T object storing the data from the JSON </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra4json6toJSONEN8nlohmann4jsonEPK1T">
 <span id="_CPPv3I_11ReflectableEN5astra4json6toJSONEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra4json6toJSONEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1json_1a4d0544e9f827d2b4235b52a519708009"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toJSON</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra4json6toJSONEN8nlohmann4jsonEPK1T" title="astra::json::toJSON::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">obj</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra4json6toJSONEN8nlohmann4jsonEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Serialize a T object to a JSON object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to serialize from</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>obj</strong> – The object to serialize</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A JSON object containing the serialized data </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra4json8toStringENSt6stringEPK1T">
 <span id="_CPPv3I_11ReflectableEN5astra4json8toStringEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra4json8toStringEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1json_1abc82502b544525373d6bb59d20eea386"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra4json8toStringENSt6stringEPK1T" title="astra::json::toString::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">obj</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra4json8toStringENSt6stringEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Serialize a T object to a JSON string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to serialize from</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>obj</strong> – The object to serialize</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A vector containing the serialized data encoded in JSON </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra4json8toStreamEvRNSt7ostreamEPK1T">
 <span id="_CPPv3I_11ReflectableEN5astra4json8toStreamERNSt7ostreamEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra4json8toStreamERNSt7ostreamEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1json_1ad36f025b585a5e6d4dc01a64b087b171"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra4json8toStreamEvRNSt7ostreamEPK1T" title="astra::json::toStream::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">obj</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra4json8toStreamEvRNSt7ostreamEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Serialize a T object to a stream as JSON. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to serialize from</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>stream</strong> – The stream to write the serialized JSON to </p></li>
+<li><p><strong>obj</strong> – The object to serialize </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>

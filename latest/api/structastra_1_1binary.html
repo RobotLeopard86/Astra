@@ -585,9 +585,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structConstexprSort.html">Struct ConstexprSort</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1AppendBuf.html">Class AppendBuf</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1ConstexprMap.html">Template Class ConstexprMap</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -680,9 +677,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a1e7f2f476c30555355dba1e3c53ce56f.html">Function astra::typeName</a></li>
 </ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="define_type__info_8hpp_1a79bcfb6bde984f42d1124b068a509af7.html">Define BASE</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
@@ -757,32 +751,104 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra6binary12fromDocumentE1TRN9libjaguar8DocumentE">
 <span id="_CPPv3I_11ReflectableEN5astra6binary12fromDocumentERN9libjaguar8DocumentE"></span><span id="_CPPv2I_11ReflectableEN5astra6binary12fromDocumentERN9libjaguar8DocumentE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1binary_1ae42860b9946d661dde2882de0e502f80"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra6binary12fromDocumentE1TRN9libjaguar8DocumentE" title="astra::binary::fromDocument::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromDocument</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">doc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra6binary12fromDocumentE1TRN9libjaguar8DocumentE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Deserialize a T object from the Jaguar document. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to deserialize to</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>doc</strong> – The Jaguar document to deserialize from</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A T object storing the data from the document </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra6binary10fromVectorE1TRKNSt6vectorI7uint8_tEE">
 <span id="_CPPv3I_11ReflectableEN5astra6binary10fromVectorERKNSt6vectorI7uint8_tEE"></span><span id="_CPPv2I_11ReflectableEN5astra6binary10fromVectorERKNSt6vectorI7uint8_tEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1binary_1a3c7bd4bd2124872154b2f8ab7baa8371"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra6binary10fromVectorE1TRKNSt6vectorI7uint8_tEE" title="astra::binary::fromVector::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra6binary10fromVectorE1TRKNSt6vectorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Deserialize a T object from a vector of Jaguar data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to deserialize to</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>vector</strong> – A vector storing Jaguar data to deserialize from</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A T object storing the data from the vector </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra6binary10fromStreamE1TRNSt7istreamE">
 <span id="_CPPv3I_11ReflectableEN5astra6binary10fromStreamERNSt7istreamE"></span><span id="_CPPv2I_11ReflectableEN5astra6binary10fromStreamERNSt7istreamE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1binary_1aa53e694a1b2378b87e2c4ad1a05c7c61"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra6binary10fromStreamE1TRNSt7istreamE" title="astra::binary::fromStream::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fromStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra6binary10fromStreamE1TRNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Deserialize a T object from a stream of Jaguar data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to deserialize to</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>stream</strong> – A stream storing Jaguar data to deserialize from</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A T object storing the data from the stream </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra6binary10toDocumentEN9libjaguar8DocumentEPK1T">
 <span id="_CPPv3I_11ReflectableEN5astra6binary10toDocumentEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra6binary10toDocumentEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1binary_1a6cb7e7bde9a2ed729a29dc54121562b7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toDocument</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra6binary10toDocumentEN9libjaguar8DocumentEPK1T" title="astra::binary::toDocument::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">obj</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra6binary10toDocumentEN9libjaguar8DocumentEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Serialize a T object to a Jaguar document. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to serialize from</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>obj</strong> – The object to serialize</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A document containing the serialized data </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra6binary8toVectorENSt6vectorI7uint8_tEEPK1T">
 <span id="_CPPv3I_11ReflectableEN5astra6binary8toVectorEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra6binary8toVectorEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1binary_1a2ab894c9256dd116a2bff8ae327e0639"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra6binary8toVectorENSt6vectorI7uint8_tEEPK1T" title="astra::binary::toVector::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">obj</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra6binary8toVectorENSt6vectorI7uint8_tEEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Serialize a T object to a vector of Jaguar data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to serialize from</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>obj</strong> – The object to serialize</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A vector containing the serialized data encoded in Jaguar format </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra6binary8toStreamEvRNSt7ostreamEPK1T">
 <span id="_CPPv3I_11ReflectableEN5astra6binary8toStreamERNSt7ostreamEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra6binary8toStreamERNSt7ostreamEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1binary_1ab39ce7b59aae0f279c7e11b0fb40576d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toStream</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra6binary8toStreamEvRNSt7ostreamEPK1T" title="astra::binary::toStream::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">obj</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra6binary8toStreamEvRNSt7ostreamEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Serialize a T object to a stream as Jaguar data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The reflectable type to serialize from</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>stream</strong> – The stream to write the serialized Jaguar data to </p></li>
+<li><p><strong>obj</strong> – The object to serialize </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>

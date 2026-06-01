@@ -450,10 +450,6 @@
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*to*/</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*from*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot move a value with unknown type&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="c1">//other types are self registering in The Great Table in the same place of a file</span>
-<span class="w">        </span><span class="c1">//but HelperUnknown is NOT a self registering class</span>
-<span class="w">        </span><span class="c1">//The Great Table put references to HelperUnknown methods itself</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="p">}</span>
