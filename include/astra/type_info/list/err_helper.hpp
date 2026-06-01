@@ -7,14 +7,8 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
-	namespace list {
-
-		///move error formating functionality outside list template classes
-		class ASTRA_API ErrHelper {
-		  protected:
-			static void error(const std::string& message, TypeId type, TypeId nestedType);
-		};
-
-	}
+	class ASTRA_API ListErrHelper {
+	  protected:
+		static void error(const std::string& message, TypeId type, TypeId nestedType);
+	};
 }

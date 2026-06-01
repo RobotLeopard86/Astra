@@ -10,7 +10,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdList : public IDoubleEndedList, public list::ErrHelper {
+	struct ASTRA_API StdList : public IDoubleEndedList, public ListErrHelper {
 		StdList() = delete;
 
 		StdList(std::list<T>* list, bool isConst)

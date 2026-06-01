@@ -12,7 +12,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdQueue : public IQueue, public list::ErrHelper {
+	struct ASTRA_API StdQueue : public IQueue, public ListErrHelper {
 		StdQueue() = delete;
 
 		StdQueue(std::queue<T>* queue, bool isConst)

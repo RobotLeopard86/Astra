@@ -10,7 +10,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdVector : public IVector, public list::ErrHelper {
+	struct ASTRA_API StdVector : public IVector, public ListErrHelper {
 		StdVector() = delete;
 
 		StdVector(std::vector<T>* vector, bool isConst)

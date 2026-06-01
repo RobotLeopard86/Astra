@@ -10,7 +10,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdDeque : public IDoubleEndedList, public list::ErrHelper {
+	struct ASTRA_API StdDeque : public IDoubleEndedList, public ListErrHelper {
 		StdDeque() = delete;
 
 		StdDeque(std::deque<T>* deque, bool isConst)

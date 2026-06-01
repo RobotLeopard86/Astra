@@ -10,7 +10,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdSet : public ISet, public list::ErrHelper {
+	struct ASTRA_API StdSet : public ISet, public ListErrHelper {
 		StdSet() = delete;
 
 		StdSet(std::set<T>* set, bool isConst)

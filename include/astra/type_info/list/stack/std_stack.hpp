@@ -11,7 +11,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdStack : public IStack, public list::ErrHelper {
+	struct ASTRA_API StdStack : public IStack, public ListErrHelper {
 		StdStack() = delete;
 
 		StdStack(std::stack<T>* stack, bool isConst)

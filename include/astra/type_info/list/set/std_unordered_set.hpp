@@ -10,7 +10,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdUnorderedSet : public ISet, public list::ErrHelper {
+	struct ASTRA_API StdUnorderedSet : public ISet, public ListErrHelper {
 		StdUnorderedSet() = delete;
 
 		StdUnorderedSet(std::unordered_set<T>* set, bool isConst)
