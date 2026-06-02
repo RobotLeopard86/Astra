@@ -10,8 +10,8 @@
 
 namespace astra {
 
-	struct ASTRA_API FieldDesc {
-
+	class ASTRA_API FieldDesc {
+	  public:
 		template<typename T, typename ClassT>
 		FieldDesc(T ClassT::* ptr, Access acc)
 		  : valueData(static_cast<uintptr_t>(delta(ptr))),

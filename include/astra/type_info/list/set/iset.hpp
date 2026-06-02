@@ -3,9 +3,11 @@
 #include "../ilist.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API ISet : public IList {
+	class ASTRA_API ISet : public IList {
+	  public:
 		~ISet() override = default;
 
 		using IList::forEach;
@@ -14,3 +16,4 @@ namespace astra {
 	};
 
 }
+///@endcond

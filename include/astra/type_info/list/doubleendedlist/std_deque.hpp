@@ -7,10 +7,12 @@
 #include "idoubleendedlist.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdDeque : public IDoubleEndedList, public ListErrHelper {
+	class ASTRA_API StdDeque : public IDoubleEndedList, public ListErrHelper {
+	  public:
 		StdDeque() = delete;
 
 		StdDeque(std::deque<T>* deque, bool isConst)
@@ -129,3 +131,4 @@ namespace astra {
 	};
 
 }
+///@endcond

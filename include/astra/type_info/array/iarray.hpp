@@ -5,9 +5,11 @@
 #include "astra/var.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IArray {
+	class ASTRA_API IArray {
+	  public:
 		virtual ~IArray() = default;
 
 		/**
@@ -40,3 +42,4 @@ namespace astra {
 	};
 
 }
+///@endcond

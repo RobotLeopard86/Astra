@@ -7,10 +7,12 @@
 #include "iset.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdUnorderedSet : public ISet, public ListErrHelper {
+	class ASTRA_API StdUnorderedSet : public ISet, public ListErrHelper {
+	  public:
 		StdUnorderedSet() = delete;
 
 		StdUnorderedSet(std::unordered_set<T>* set, bool isConst)
@@ -110,3 +112,4 @@ namespace astra {
 	};
 
 }
+///@endcond

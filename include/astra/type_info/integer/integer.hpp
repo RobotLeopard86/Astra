@@ -10,7 +10,8 @@
 
 namespace astra {
 
-	struct ASTRA_API Integer {
+	class ASTRA_API Integer {
+	  public:
 		Integer() = delete;
 
 		template<typename T>
@@ -49,18 +50,42 @@ namespace astra {
 			return impl()->var();
 		}
 
+		/**
+		 * @brief Get the size in bytes of the held integer
+		 *
+		 * @return The size of the held integer
+		 */
 		std::size_t size() const {
 			return impl()->size();
 		}
 
+		/**
+		 * @brief Check if this object holds a signed or unsigned integer
+		 *
+		 * @return If the held integer is signed
+		 */
 		bool isSigned() const {
 			return impl()->isSigned();
 		}
 
+		/**
+		 * @brief Get the contained integer as a signed value
+		 *
+		 * @return The signed value
+		 *
+		 * @throws std::runtime_error If the integer holds an unsigned value
+		 */
 		int64_t asSigned() const {
 			return impl()->asSigned();
 		}
 
+		/**
+		 * @brief Get the contained integer as an unsigned value
+		 *
+		 * @return The unsigned value
+		 *
+		 * @throws std::runtime_error If the integer holds a signed value
+		 */
 		uint64_t asUnsigned() const {
 			return impl()->asUnsigned();
 		}

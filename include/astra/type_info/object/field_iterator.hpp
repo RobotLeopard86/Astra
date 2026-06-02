@@ -11,6 +11,7 @@ namespace astra {
 
 	///Skip iterator for fields collection, steps over items with unwanted properties
 	class ASTRA_API FieldIterator {
+	  public:
 		using const_iterator = std::map<std::string_view, FieldDesc>::const_iterator;
 
 	  public:

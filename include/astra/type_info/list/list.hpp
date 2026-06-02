@@ -12,7 +12,8 @@
 
 namespace astra {
 
-	struct ASTRA_API List {
+	class ASTRA_API List {
+	  public:
 		List() = delete;
 
 		template<typename T>

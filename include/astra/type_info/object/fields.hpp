@@ -8,7 +8,8 @@
 
 namespace astra {
 
-	struct ASTRA_API Fields {
+	class ASTRA_API Fields {
+	  public:
 		Fields(const void* base, const std::map<std::string_view, FieldDesc>* map, Access access, bool includeReadonly)
 		  : base(base), map(map), access(access), include_readonly(includeReadonly) {
 		}

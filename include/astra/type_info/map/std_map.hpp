@@ -7,10 +7,12 @@
 #include "imap.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename K, typename V>
-	struct ASTRA_API StdMap final : public IMap {
+	class ASTRA_API StdMap final : public IMap {
+	  public:
 		StdMap() = delete;
 
 		StdMap(std::map<K, V>* map, bool isConst)
@@ -112,4 +114,4 @@ namespace astra {
 		bool isConst;
 	};
 
-}
+}///@endcond

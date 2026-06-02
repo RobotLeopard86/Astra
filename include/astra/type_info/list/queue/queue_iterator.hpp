@@ -4,10 +4,12 @@
 
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API QueueIterator : public std::queue<T> {
+	class ASTRA_API QueueIterator : public std::queue<T> {
+	  public:
 		static decltype(auto) begin(std::queue<T>* queue) {
 			return (queue->*&QueueIterator::c).begin();
 		}
@@ -17,7 +19,8 @@ namespace astra {
 		}
 
 		template<typename U>
-		friend struct StdQueue;
+		friend class StdQueue;
 	};
 
 }
+///@endcond

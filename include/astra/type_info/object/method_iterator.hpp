@@ -11,6 +11,7 @@ namespace astra {
 
 	///Skip iterator for methods collection, steps over items with unwanted properties
 	class ASTRA_API MethodIterator {
+	  public:
 		using const_iterator = std::map<std::string_view, MethodDesc>::const_iterator;
 		using item = std::pair<std::string_view, MethodInfo>;
 

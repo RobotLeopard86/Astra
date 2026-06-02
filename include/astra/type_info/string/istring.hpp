@@ -5,9 +5,11 @@
 #include "astra/dll.hpp"
 #include "astra/var.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IString {
+	class ASTRA_API IString {
+	  public:
 		virtual ~IString() = default;
 
 		/**
@@ -44,3 +46,4 @@ namespace astra {
 	};
 
 }
+///@endcond

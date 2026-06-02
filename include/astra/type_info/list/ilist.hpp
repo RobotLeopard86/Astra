@@ -5,9 +5,11 @@
 #include "astra/var.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IList {
+	class ASTRA_API IList {
+	  public:
 		virtual ~IList() = default;
 
 		/**
@@ -36,3 +38,4 @@ namespace astra {
 	};
 
 }
+///@endcond

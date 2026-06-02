@@ -8,7 +8,8 @@
 
 namespace astra {
 
-	struct ASTRA_API Pointer {
+	class ASTRA_API Pointer {
+	  public:
 		template<typename T>
 		Pointer(std::shared_ptr<T>* value, bool isConst) {
 			new(mem) StdSharedPtr<T>(value, isConst);

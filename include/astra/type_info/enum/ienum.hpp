@@ -3,9 +3,11 @@
 #include "astra/var.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IEnum {
+	class ASTRA_API IEnum {
+	  public:
 		virtual ~IEnum() = default;
 
 		/**
@@ -35,3 +37,4 @@ namespace astra {
 	};
 
 }
+///@endcond

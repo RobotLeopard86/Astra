@@ -8,11 +8,12 @@
 #include "istring.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API CString : IString {
-
+	class ASTRA_API CString : IString {
+	  public:
 		CString(const T** str)
 		  : inner(str, true) {
 		}
@@ -75,4 +76,4 @@ namespace astra {
 		std::string cachedVal;
 	};
 
-}
+}///@endcond

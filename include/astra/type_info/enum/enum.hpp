@@ -10,8 +10,8 @@ namespace astra {
 
 	///container of all field names matched to Var structs
 	///just a registry of types and value pointers
-	struct ASTRA_API Enum final {
-
+	class ASTRA_API Enum final {
+	  public:
 		template<typename T, std::size_t size>
 		Enum(T* value, bool isConst, const ConstexprMap<T, size>& allConstants) {
 			new(mem) EnumImpl<T, size>(value, isConst, allConstants);
@@ -48,13 +48,23 @@ namespace astra {
 			return impl()->var();
 		}
 
+		/**
+		 * @brief Get the name of the current enumeration value
+		 *
+		 * @return The name of the current value
+		 */
 		const std::string& toString() const {
 			return impl()->toString();
 		}
 
+		/**
+		 * @brief Set the current enumeration value by name
+		 *
+		 * @param name The name of the value to store
+		 */
 		void fromString(const std::string& name) {
 			return impl()->fromString(name);
-		};
+		}
 
 	  private:
 		char mem[sizeof(EnumImpl<int, 0>)];

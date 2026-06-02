@@ -7,10 +7,12 @@
 
 #include <cstdint>
 
+///@cond
 namespace astra {
 
 	template<typename T, std::size_t size_v>
-	struct ASTRA_API EnumImpl final : public IEnum {
+	class ASTRA_API EnumImpl final : public IEnum {
+	  public:
 		EnumImpl() = delete;
 
 		EnumImpl(T* value, bool isConst, const ConstexprMap<T, size_v>& allConstants)
@@ -76,3 +78,4 @@ namespace astra {
 	};
 
 }
+///@endcond

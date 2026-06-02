@@ -8,10 +8,12 @@
 #include "astra/dll.hpp"
 #include "stack_iterator.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdStack : public IStack, public ListErrHelper {
+	class ASTRA_API StdStack : public IStack, public ListErrHelper {
+	  public:
 		StdStack() = delete;
 
 		StdStack(std::stack<T>* stack, bool isConst)
@@ -120,3 +122,4 @@ namespace astra {
 	};
 
 }
+///@endcond

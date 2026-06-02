@@ -8,10 +8,12 @@
 #include "astra/format.hpp"
 #include "ivector.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdVector : public IVector, public ListErrHelper {
+	class ASTRA_API StdVector : public IVector, public ListErrHelper {
+	  public:
 		StdVector() = delete;
 
 		StdVector(std::vector<T>* vector, bool isConst)
@@ -133,3 +135,4 @@ namespace astra {
 	};
 
 }
+///@endcond

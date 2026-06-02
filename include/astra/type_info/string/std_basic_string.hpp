@@ -8,10 +8,12 @@
 #include "istring.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdBasicString : IString {
+	class ASTRA_API StdBasicString : IString {
+	  public:
 		StdBasicString() = delete;
 
 		StdBasicString(std::basic_string<T>* str, bool isConst)
@@ -77,3 +79,4 @@ namespace astra {
 	};
 
 }
+///@endcond

@@ -7,10 +7,12 @@
 #include "astra/type_query.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API Floating : IFloat {
+	class ASTRA_API Floating : IFloat {
+	  public:
 		Floating(T* value, bool isConst)
 		  : value(value), isConst(isConst) {
 		}
@@ -87,4 +89,4 @@ namespace astra {
 		bool isConst;
 	};
 
-}
+}///@endcond

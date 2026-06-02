@@ -16,7 +16,8 @@ namespace astra {
 
 	///container of all field names matched to Var structs
 	///just a registry of types and value pointers
-	struct ASTRA_API Object {
+	class ASTRA_API Object {
+	  public:
 		Object(Var var,
 			const std::map<std::string_view, FieldDesc>* fields,
 			const std::map<std::string_view, MethodDesc>* methods)

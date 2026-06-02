@@ -8,10 +8,12 @@
 #include "istring.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdBasicStringView : IString {
+	class ASTRA_API StdBasicStringView : IString {
+	  public:
 		StdBasicStringView() = delete;
 
 		StdBasicStringView(std::basic_string_view<T>* str)
@@ -76,4 +78,4 @@ namespace astra {
 		std::string cachedVal;
 	};
 
-}
+}///@endcond

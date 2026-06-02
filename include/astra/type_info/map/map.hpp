@@ -8,7 +8,8 @@
 
 namespace astra {
 
-	struct ASTRA_API Map final {
+	class ASTRA_API Map final {
+	  public:
 		Map() = delete;
 
 		template<typename K, typename V>

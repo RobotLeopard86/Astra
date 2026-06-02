@@ -3,9 +3,11 @@
 #include "astra/var.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IPointer {
+	class ASTRA_API IPointer {
+	  public:
 		virtual ~IPointer() = default;
 
 		/**
@@ -36,3 +38,4 @@ namespace astra {
 	};
 
 }
+///@endcond

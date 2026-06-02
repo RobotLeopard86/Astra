@@ -4,9 +4,11 @@
 
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IQueue : public IList {
+	class ASTRA_API IQueue : public IList {
+	  public:
 		~IQueue() override = default;
 
 		using IList::forEach;
@@ -17,3 +19,4 @@ namespace astra {
 	};
 
 }
+///@endcond

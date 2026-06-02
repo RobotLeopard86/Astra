@@ -7,7 +7,8 @@
 
 namespace astra {
 
-	struct ASTRA_API Float final {
+	class ASTRA_API Float final {
+	  public:
 		Float() = delete;
 
 		template<typename T>
@@ -46,10 +47,20 @@ namespace astra {
 			return impl()->var();
 		}
 
+		/**
+		 * @brief Get the size in bytes of the held floating-point number
+		 *
+		 * @return The size of the held number
+		 */
 		std::size_t size() const {
 			return impl()->size();
 		}
 
+		/**
+		 * @brief Get the stored value
+		 *
+		 * @return The stored value
+		 */
 		double get() const {
 			return impl()->get();
 		}

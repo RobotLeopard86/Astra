@@ -6,10 +6,12 @@
 #include "astra/dll.hpp"
 #include "imap.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename K, typename V>
-	struct ASTRA_API StdUnorderedMap final : public IMap {
+	class ASTRA_API StdUnorderedMap final : public IMap {
+	  public:
 		StdUnorderedMap() = delete;
 
 		StdUnorderedMap(std::unordered_map<K, V>* map, bool isConst)
@@ -112,4 +114,4 @@ namespace astra {
 		bool isConst;
 	};
 
-}
+}///@endcond

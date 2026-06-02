@@ -14,6 +14,7 @@ namespace astra {
 
 	class ASTRA_API FieldInfo {
 	  public:
+	  public:
 		FieldInfo(const void* base, const FieldDesc* data)
 		  : base(base), data(data) {
 		}

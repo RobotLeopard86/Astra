@@ -9,10 +9,12 @@
 #include "iinteger.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API Int : IInteger {
+	class ASTRA_API Int : IInteger {
+	  public:
 		Int(T* value, bool isConst)
 		  : value(value), isConst(isConst) {
 		}
@@ -57,19 +59,25 @@ namespace astra {
 			return Var(value, isConst);
 		}
 
+
 		std::size_t size() const override {
 			return sizeof(T);
 		}
+
 
 		bool isSigned() const override {
 			return std::is_signed_v<T>;
 		}
 
+
 		int64_t asSigned() const override {
+			if(!isSigned()) throw std::runtime_error("Cannot get unsigned integer as signed!");
 			return *value;
 		}
 
+
 		uint64_t asUnsigned() const override {
+			if(isSigned()) throw std::runtime_error("Cannot get signed integer as unsigned!");
 			return *value;
 		}
 
@@ -107,3 +115,4 @@ namespace astra {
 	};
 
 }
+///@endcond

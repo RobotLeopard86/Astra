@@ -3,9 +3,11 @@
 #include "../ilist.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IDoubleEndedList : public IList {
+	class ASTRA_API IDoubleEndedList : public IList {
+	  public:
 		~IDoubleEndedList() override = default;
 
 		using IList::forEach;
@@ -18,3 +20,4 @@ namespace astra {
 	};
 
 }
+///@endcond

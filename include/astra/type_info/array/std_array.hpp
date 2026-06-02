@@ -7,10 +7,12 @@
 #include "astra/dll.hpp"
 #include "iarray.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T, std::size_t size_v>
-	struct ASTRA_API StdArray final : public IArray {
+	class ASTRA_API StdArray final : public IArray {
+	  public:
 		StdArray() = delete;
 
 		StdArray(std::array<T, size_v>* array, bool isConst)
@@ -111,3 +113,4 @@ namespace astra {
 	};
 
 }
+///@endcond

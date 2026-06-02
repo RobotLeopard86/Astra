@@ -4,10 +4,12 @@
 #include "ipointer.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdUniquePtr : IPointer {
+	class ASTRA_API StdUniquePtr : IPointer {
+	  public:
 		StdUniquePtr(std::unique_ptr<T>* value, bool isConst)
 		  : value(value), isConst(isConst) {
 		}
@@ -72,4 +74,4 @@ namespace astra {
 		bool isConst;
 	};
 
-}
+}///@endcond

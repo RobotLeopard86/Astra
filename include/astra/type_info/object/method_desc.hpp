@@ -10,7 +10,8 @@
 
 namespace astra {
 
-	struct ASTRA_API MethodDesc {
+	class ASTRA_API MethodDesc {
+	  public:
 		MethodDesc(void (*fn)(Var res, void* obj, const std::vector<Var>& args),
 			Access acc)
 		  : fn(fn), acc(acc) {

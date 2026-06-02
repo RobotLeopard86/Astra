@@ -5,9 +5,11 @@
 #include "astra/var.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
-	struct ASTRA_API IMap {
+	class ASTRA_API IMap {
+	  public:
 		virtual ~IMap() = default;
 
 		/**
@@ -39,3 +41,4 @@ namespace astra {
 	};
 
 }
+///@endcond

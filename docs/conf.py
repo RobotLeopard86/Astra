@@ -38,7 +38,8 @@ exhale_args = {
     "rootFileTitle":         "Astra API Reference",
     "createTreeView":        True,
     "exhaleExecutesDoxygen": True,
-    "afterTitleDescription": "Welcome to the Astra API documentation. Here, you can find detailed information on Astra's public interface.",
+    "afterTitleDescription": "Welcome to the Astra API documentation. Here, you can find detailed information on Astra's public interface.\n\
+		.. note:: Many classes that, while publicly accessible, are generally not used in the public-facing API and primarily serve as implementation are not documented here.",
     "exhaleDoxygenStdin": dedent('''
 									INPUT = ../include
                                     EXCLUDE_SYMBOLS = std*,YAML*,nlohmann*,libjaguar*,LJ*,ASTRA_*,ASTRASETUP,BASE

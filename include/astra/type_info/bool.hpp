@@ -11,9 +11,10 @@
 
 namespace astra {
 	/**
-	 * @brief Reflected boolean interface
+	 * @brief Reflection interface for a boolean
 	 */
-	struct ASTRA_API Bool {
+	class ASTRA_API Bool {
+	  public:
 		/**
 		 * @brief Create a new Bool
 		 *

@@ -7,10 +7,12 @@
 #include "idoubleendedlist.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API StdList : public IDoubleEndedList, public ListErrHelper {
+	class ASTRA_API StdList : public IDoubleEndedList, public ListErrHelper {
+	  public:
 		StdList() = delete;
 
 		StdList(std::list<T>* list, bool isConst)
@@ -129,3 +131,4 @@ namespace astra {
 	};
 
 }
+///@endcond

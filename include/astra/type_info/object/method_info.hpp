@@ -12,6 +12,7 @@ namespace astra {
 
 	class ASTRA_API MethodInfo {
 	  public:
+	  public:
 		MethodInfo(const void* base, const MethodDesc* data)
 		  : base(const_cast<void*>(base)), data(data) {
 		}

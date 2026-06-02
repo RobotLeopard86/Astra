@@ -11,7 +11,8 @@
 
 namespace astra {
 
-	struct ASTRA_API String final {
+	class ASTRA_API String final {
+	  public:
 		String() = delete;
 
 		template<typename T>
@@ -51,6 +52,11 @@ namespace astra {
 			impl()->unsafeAssign(ptr);
 		}
 
+		/**
+		 * @brief Get the stored value
+		 *
+		 * @return The stored value
+		 */
 		const std::string& get() const {
 			return impl()->get();
 		}
