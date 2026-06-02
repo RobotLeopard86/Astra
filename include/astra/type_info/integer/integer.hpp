@@ -1,15 +1,15 @@
 #pragma once
 
 #include <cstdint>
-#include <memory>
-#include <type_traits>
 
 #include "iinteger.hpp"
 #include "int.hpp"
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Reflection interface for an integer
+	 */
 	class ASTRA_API Integer {
 	  public:
 		Integer() = delete;
@@ -90,36 +90,26 @@ namespace astra {
 			return impl()->asUnsigned();
 		}
 
-		template<typename T>
-			requires std::is_integral_v<T> && std::is_signed_v<T>
 		/**
-		 * @brief Set the stored value
+		 * @brief Set the stored value (signed)
 		 *
-		 * @param val The new value
+		 * @param val The new signed value
 		 *
 		 * @throws std::runtime_error If write operations are disabled
+		 * @throws std::runtime_error If sizing and signedness do not match the stored type
 		 */
-		void set(T value) {
-			return impl()->setSigned(value);
-		}
-
-		template<typename T>
-			requires std::is_integral_v<T> && std::is_unsigned_v<T>
-		/**
-		 * @brief Set the stored value
-		 *
-		 * @param val The new value
-		 *
-		 * @throws std::runtime_error If write operations are disabled
-		 */
-		void set(T value) {
-			return impl()->setUnsigned(value);
-		}
-
 		void setSigned(int64_t value) {
 			return impl()->setSigned(value);
 		}
 
+		/**
+		 * @brief Set the stored value (unsigned)
+		 *
+		 * @param val The new unsigned value
+		 *
+		 * @throws std::runtime_error If write operations are disabled
+		 * @throws std::runtime_error If sizing and signedness do not match the stored type
+		 */
 		void setUnsigned(uint64_t value) {
 			return impl()->setUnsigned(value);
 		}

@@ -3,5 +3,3 @@ CompileFlags:
   Compiler: /usr/bin/clang++
 Diagnostics:
   UnusedIncludes: None
-Documentation:
-  CommentFormat: Doxygen

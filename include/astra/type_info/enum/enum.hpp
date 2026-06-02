@@ -7,14 +7,24 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
-	///container of all field names matched to Var structs
-	///just a registry of types and value pointers
+	/**
+	 * @brief Reflection interface for an enumeration
+	 */
 	class ASTRA_API Enum final {
 	  public:
-		template<typename T, std::size_t size>
-		Enum(T* value, bool isConst, const ConstexprMap<T, size>& allConstants) {
-			new(mem) EnumImpl<T, size>(value, isConst, allConstants);
+		/**
+		 * @brief Create a new enum from data and a values list
+		 *
+		 * @tparam T The enum type
+		 * @tparam size The size of the intializer array
+		 *
+		 * @param value The enum object to operate on
+		 * @param isConst If write operations should be disabled
+		 * @param allConstants A map of enum values to their string names
+		 */
+		template<typename T, std::size_t size_v>
+		Enum(T* value, bool isConst, const ConstexprMap<T, size_v>& allConstants) {
+			new(mem) EnumImpl<T, size_v>(value, isConst, allConstants);
 		}
 
 		/**

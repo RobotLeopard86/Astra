@@ -6,7 +6,9 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Reflection interface for a floating-point number
+	 */
 	class ASTRA_API Float final {
 	  public:
 		Float() = delete;

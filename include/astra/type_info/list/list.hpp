@@ -11,10 +11,17 @@
 #include "vector/std_vector.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Reflection interface for a resizable container
+	 */
 	class ASTRA_API List {
 	  public:
+		///@cond
 		List() = delete;
+		~List() {
+			impl()->~IList();
+		}
+		///@endcond
 
 		template<typename T>
 		List(std::vector<T>* vector, bool isConst) {
@@ -51,10 +58,6 @@ namespace astra {
 			new(mem) StdUnorderedSet<T>(set, isConst);
 		}
 
-		~List() {
-			impl()->~IList();
-		}
-
 		/**
 		 * @brief Assign the contents of a Var to this object
 		 *
@@ -77,30 +80,59 @@ namespace astra {
 			return impl()->unsafeAssign(ptr);
 		}
 
+		/**
+		 * @brief Access the contents of this object as a Var
+		 *
+		 * @return A Var holding the contents of this object, const state inherited
+		 */
 		Var ownVar() const {
 			return impl()->ownVar();
 		}
 
+		/**
+		 * @brief Get the TypeId of the elements in the list
+		 *
+		 * @return The contained element type ID
+		 */
 		TypeId nestedType() const {
 			return impl()->nestedType();
 		}
 
+		/**
+		 * @brief Execute a callback on every list element
+		 */
 		void forEach(std::function<void(Var)> callback) const {
 			impl()->forEach(callback);
 		}
 
+		/**
+		 * @brief Unsafely execute a callback on every list element
+		 */
 		void unsafeForEach(std::function<void(void*)> callback) const {
 			impl()->unsafeForEach(callback);
 		}
 
+		/**
+		 * @brief Clear the whole list
+		 */
 		void clear() {
 			impl()->clear();
 		}
 
+		/**
+		 * @brief Get the current number of elements in the list
+		 *
+		 * @return The number of list elements
+		 */
 		std::size_t size() const {
 			return impl()->size();
 		}
 
+		/**
+		 * @brief Push a new value into the list
+		 *
+		 * @param value The value to store
+		 */
 		void push(Var value) {
 			return impl()->push(value);
 		}
