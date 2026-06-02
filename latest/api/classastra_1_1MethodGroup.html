@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Class Methods &#8212; Astra Documentation</title>
+    <title>Class MethodGroup &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/classastra_1_1Methods';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/classastra_1_1MethodGroup';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -55,8 +55,8 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Class Object" href="classastra_1_1Object.html" />
-    <link rel="prev" title="Class MethodIterator" href="classastra_1_1MethodIterator.html" />
+    <link rel="next" title="Class MethodInfo" href="classastra_1_1MethodInfo.html" />
+    <link rel="prev" title="Class MethodDesc" href="classastra_1_1MethodDesc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -420,13 +420,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldDesc.html">Class FieldDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldGroup.html">Class FieldGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldInfo.html">Class FieldInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Fields.html">Class Fields</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Float.html">Class Float</a></li>
@@ -443,14 +443,14 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodDesc.html">Class MethodDesc</a></li>
 </ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Class MethodGroup</a></li>
+</ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Class Methods</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Object.html">Class Object</a></li>
@@ -542,7 +542,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Astra API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Class Methods</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Class MethodGroup</span></li>
   </ul>
 </nav>
 </div>
@@ -559,37 +559,81 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="class-methods">
-<span id="exhale-class-classastra-1-1methods"></span><h1>Class Methods<a class="headerlink" href="#class-methods" title="Link to this heading"><span/></a></h1>
+  <section id="class-methodgroup">
+<span id="exhale-class-classastra-1-1methodgroup"></span><h1>Class MethodGroup<a class="headerlink" href="#class-methodgroup" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_types_object_methods.hpp.html#file-include-astra-types-object-methods-hpp"><span class="std std-ref">File methods.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_types_object_method_group.hpp.html#file-include-astra-types-object-method-group-hpp"><span class="std std-ref">File method_group.hpp</span></a></p></li>
 </ul>
 <section id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"><span/></a></h2>
 <dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra7MethodsE">
-<span id="_CPPv3N5astra7MethodsE"></span><span id="_CPPv2N5astra7MethodsE"></span><span id="astra::Methods"></span><span class="target" id="classastra_1_1Methods"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Methods</span></span></span><a class="headerlink" href="#_CPPv4N5astra7MethodsE" title="Link to this definition"><span/></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra11MethodGroupE">
+<span id="_CPPv3N5astra11MethodGroupE"></span><span id="_CPPv2N5astra11MethodGroupE"></span><span id="astra::MethodGroup"></span><span class="target" id="classastra_1_1MethodGroup"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MethodGroup</span></span></span><a class="headerlink" href="#_CPPv4N5astra11MethodGroupE" title="Link to this definition"><span/></a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra7Methods7MethodsEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access">
-<span id="_CPPv3N5astra7Methods7MethodsEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"></span><span id="_CPPv2N5astra7Methods7MethodsEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"></span><span id="astra::Methods::Methods__voidP.std::map:std::string_view.MethodDesc:CP.Access"></span><span class="target" id="classastra_1_1Methods_1acf3e04edf69599df04a9085340072897"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Methods</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodDesc.html#_CPPv4N5astra10MethodDescE" title="astra::MethodDesc"><span class="n"><span class="pre">MethodDesc</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7Methods7MethodsEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra11MethodGroup11MethodGroupEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access">
+<span id="_CPPv3N5astra11MethodGroup11MethodGroupEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"></span><span id="_CPPv2N5astra11MethodGroup11MethodGroupEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"></span><span id="astra::MethodGroup::MethodGroup__voidP.std::map:std::string_view.MethodDesc:CP.Access"></span><span class="target" id="classastra_1_1MethodGroup_1afe4399a4793ee924d9f388a58f516dc4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MethodGroup</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodDesc.html#_CPPv4N5astra10MethodDescE" title="astra::MethodDesc"><span class="n"><span class="pre">MethodDesc</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra11MethodGroup11MethodGroupEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Create a new method group. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base</strong> – Mutable pointer to object </p></li>
+<li><p><strong>map</strong> – <a class="reference internal" href="classastra_1_1Map.html#classastra_1_1Map"><span class="std std-ref">Map</span></a> of method descriptions </p></li>
+<li><p><strong>acc</strong> – Access filter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra7Methods4sizeEv">
-<span id="_CPPv3NK5astra7Methods4sizeEv"></span><span id="_CPPv2NK5astra7Methods4sizeEv"></span><span id="astra::Methods::sizeC"></span><span class="target" id="classastra_1_1Methods_1a45b305dc776b87eab0c2a11d3d9c9cc0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra7Methods4sizeEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra11MethodGroup11MethodGroupEPKvPKNSt3mapINSt11string_viewE10MethodDescEE6Access">
+<span id="_CPPv3N5astra11MethodGroup11MethodGroupEPKvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"></span><span id="_CPPv2N5astra11MethodGroup11MethodGroupEPKvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"></span><span id="astra::MethodGroup::MethodGroup__voidCP.std::map:std::string_view.MethodDesc:CP.Access"></span><span class="target" id="classastra_1_1MethodGroup_1aac674a704a7b840097d96fc27fef02f0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MethodGroup</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodDesc.html#_CPPv4N5astra10MethodDescE" title="astra::MethodDesc"><span class="n"><span class="pre">MethodDesc</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra11MethodGroup11MethodGroupEPKvPKNSt3mapINSt11string_viewE10MethodDescEE6Access" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Create a new method group with const access. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base</strong> – Const pointer to object </p></li>
+<li><p><strong>map</strong> – <a class="reference internal" href="classastra_1_1Map.html#classastra_1_1Map"><span class="std std-ref">Map</span></a> of method descriptions </p></li>
+<li><p><strong>acc</strong> – Access filter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra7Methods5beginEv">
-<span id="_CPPv3N5astra7Methods5beginEv"></span><span id="_CPPv2N5astra7Methods5beginEv"></span><span id="astra::Methods::begin"></span><span class="target" id="classastra_1_1Methods_1a7cb92080189d2db231044076a2dacc5d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodIterator.html#_CPPv4N5astra14MethodIteratorE" title="astra::MethodIterator"><span class="n"><span class="pre">MethodIterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7Methods5beginEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra11MethodGroup4sizeEv">
+<span id="_CPPv3NK5astra11MethodGroup4sizeEv"></span><span id="_CPPv2NK5astra11MethodGroup4sizeEv"></span><span id="astra::MethodGroup::sizeC"></span><span class="target" id="classastra_1_1MethodGroup_1ab99897adf6adf54c41d46bddbf9be96a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra11MethodGroup4sizeEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get the number of methods in the group. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Group method count </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra7Methods3endEv">
-<span id="_CPPv3N5astra7Methods3endEv"></span><span id="_CPPv2N5astra7Methods3endEv"></span><span id="astra::Methods::end"></span><span class="target" id="classastra_1_1Methods_1aa79ea845df19a83ba3259679c83d4ede"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodDesc.html#_CPPv4N5astra10MethodDescE" title="astra::MethodDesc"><span class="n"><span class="pre">MethodDesc</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">const_iterator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7Methods3endEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra11MethodGroup5beginEv">
+<span id="_CPPv3N5astra11MethodGroup5beginEv"></span><span id="_CPPv2N5astra11MethodGroup5beginEv"></span><span id="astra::MethodGroup::begin"></span><span class="target" id="classastra_1_1MethodGroup_1ad26a169170e8e6e63d57d9914fa02e96"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodIterator.html#_CPPv4N5astra14MethodIteratorE" title="astra::MethodIterator"><span class="n"><span class="pre">MethodIterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra11MethodGroup5beginEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get an iterator starting at the first valid method. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The iterator </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra11MethodGroup3endEv">
+<span id="_CPPv3N5astra11MethodGroup3endEv"></span><span id="_CPPv2N5astra11MethodGroup3endEv"></span><span id="astra::MethodGroup::end"></span><span class="target" id="classastra_1_1MethodGroup_1ad5844f270b183f9069ee021dc9ffe82e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodDesc.html#_CPPv4N5astra10MethodDescE" title="astra::MethodDesc"><span class="n"><span class="pre">MethodDesc</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">const_iterator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra11MethodGroup3endEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get an iterator starting at the last possible method. </p>
+<p>The mismatch in iterator types between this and <a class="reference internal" href="#classastra_1_1MethodGroup_1ad26a169170e8e6e63d57d9914fa02e96"><span class="std std-ref">begin()</span></a> is intentional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The iterator </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -608,20 +652,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="classastra_1_1MethodIterator.html"
+       href="classastra_1_1MethodDesc.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Class MethodIterator</p>
+        <p class="prev-next-title">Class MethodDesc</p>
       </div>
     </a>
     <a class="right-next"
-       href="classastra_1_1Object.html"
+       href="classastra_1_1MethodInfo.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Class Object</p>
+        <p class="prev-next-title">Class MethodInfo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -645,11 +689,12 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-documentation">Class Documentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7MethodsE"><code class="docutils literal notranslate"><span class="pre">astra::Methods</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7Methods7MethodsEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"><code class="docutils literal notranslate"><span class="pre">Methods()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra7Methods4sizeEv"><code class="docutils literal notranslate"><span class="pre">size()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7Methods5beginEv"><code class="docutils literal notranslate"><span class="pre">begin()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7Methods3endEv"><code class="docutils literal notranslate"><span class="pre">end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra11MethodGroupE"><code class="docutils literal notranslate"><span class="pre">astra::MethodGroup</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra11MethodGroup11MethodGroupEPvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"><code class="docutils literal notranslate"><span class="pre">MethodGroup()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra11MethodGroup11MethodGroupEPKvPKNSt3mapINSt11string_viewE10MethodDescEE6Access"><code class="docutils literal notranslate"><span class="pre">MethodGroup()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra11MethodGroup4sizeEv"><code class="docutils literal notranslate"><span class="pre">size()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra11MethodGroup5beginEv"><code class="docutils literal notranslate"><span class="pre">begin()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra11MethodGroup3endEv"><code class="docutils literal notranslate"><span class="pre">end()</span></code></a></li>
 </ul>
 </li>
 </ul>

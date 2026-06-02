@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Class MethodInfo" href="classastra_1_1MethodInfo.html" />
+    <link rel="next" title="Class MethodGroup" href="classastra_1_1MethodGroup.html" />
     <link rel="prev" title="Class Map" href="classastra_1_1Map.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -420,13 +420,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldDesc.html">Class FieldDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldGroup.html">Class FieldGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldInfo.html">Class FieldInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Fields.html">Class Fields</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Float.html">Class Float</a></li>
@@ -444,13 +444,13 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Class MethodDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodGroup.html">Class MethodGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Methods.html">Class Methods</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Object.html">Class Object</a></li>
@@ -574,42 +574,97 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra10MethodDesc10MethodDescEPFv3VarPvRKNSt6vectorI3VarEEE6Access">
 <span id="_CPPv3N5astra10MethodDesc10MethodDescEPFv3VarPvRKNSt6vectorI3VarEEE6Access"></span><span id="_CPPv2N5astra10MethodDesc10MethodDescEPFv3VarPvRKNSt6vectorI3VarEEE6Access"></span><span class="target" id="classastra_1_1MethodDesc_1aed18488b162518b2c0eadb3048e3b525"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MethodDesc</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fn</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n"><span class="pre">res</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">)</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra10MethodDesc10MethodDescEPFv3VarPvRKNSt6vectorI3VarEEE6Access" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new method description. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn</strong> – A function to invoke, taking in a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to output the result to, an object to operate on, and the function’s arguments as Vars </p></li>
+<li><p><strong>acc</strong> – The method’s access rules </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc6invokeE3VarPvRKNSt6vectorI3VarEE">
 <span id="_CPPv3NK5astra10MethodDesc6invokeE3VarPvRKNSt6vectorI3VarEE"></span><span id="_CPPv2NK5astra10MethodDesc6invokeE3VarPvRKNSt6vectorI3VarEE"></span><span id="astra::MethodDesc::invoke__Var.voidP.std::vector:Var:CRC"></span><span class="target" id="classastra_1_1MethodDesc_1a5a4d0bb96f6035c5dafaa2dfe3d8beb1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invoke</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">res</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">obj</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc6invokeE3VarPvRKNSt6vectorI3VarEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc7isConstEv">
-<span id="_CPPv3NK5astra10MethodDesc7isConstEv"></span><span id="_CPPv2NK5astra10MethodDesc7isConstEv"></span><span id="astra::MethodDesc::isConstC"></span><span class="target" id="classastra_1_1MethodDesc_1a56bd56e57d652ced82370937dc5aecb3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isConst</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc7isConstEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc8isStaticEv">
-<span id="_CPPv3NK5astra10MethodDesc8isStaticEv"></span><span id="_CPPv2NK5astra10MethodDesc8isStaticEv"></span><span id="astra::MethodDesc::isStaticC"></span><span class="target" id="classastra_1_1MethodDesc_1a291cc9870c52a54922e478924e8bec44"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isStatic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc8isStaticEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc8isPublicEv">
-<span id="_CPPv3NK5astra10MethodDesc8isPublicEv"></span><span id="_CPPv2NK5astra10MethodDesc8isPublicEv"></span><span id="astra::MethodDesc::isPublicC"></span><span class="target" id="classastra_1_1MethodDesc_1ad3806db1433fe8b4050c81bf4734e2e1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPublic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc8isPublicEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc11isProtectedEv">
-<span id="_CPPv3NK5astra10MethodDesc11isProtectedEv"></span><span id="_CPPv2NK5astra10MethodDesc11isProtectedEv"></span><span id="astra::MethodDesc::isProtectedC"></span><span class="target" id="classastra_1_1MethodDesc_1a56e1bcd25854a6e30b351afa388a3e42"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isProtected</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc11isProtectedEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc9isPrivateEv">
-<span id="_CPPv3NK5astra10MethodDesc9isPrivateEv"></span><span id="_CPPv2NK5astra10MethodDesc9isPrivateEv"></span><span id="astra::MethodDesc::isPrivateC"></span><span class="target" id="classastra_1_1MethodDesc_1a1f0b14d6ce499850e23ef92500aaf389"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPrivate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc9isPrivateEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Invoke the stored method on a given object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>res</strong> – A <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to output the method result to </p></li>
+<li><p><strong>obj</strong> – The object to call the method on </p></li>
+<li><p><strong>args</strong> – The arguments to the method call, as Vars </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc6accessEv">
 <span id="_CPPv3NK5astra10MethodDesc6accessEv"></span><span id="_CPPv2NK5astra10MethodDesc6accessEv"></span><span id="astra::MethodDesc::accessC"></span><span class="target" id="classastra_1_1MethodDesc_1a55f2b4e1f56e47d69dc9dae0a4d3ecd0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">access</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc6accessEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the method’s access bitmask. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The method’s access </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc7isConstEv">
+<span id="_CPPv3NK5astra10MethodDesc7isConstEv"></span><span id="_CPPv2NK5astra10MethodDesc7isConstEv"></span><span id="astra::MethodDesc::isConstC"></span><span class="target" id="classastra_1_1MethodDesc_1a56bd56e57d652ced82370937dc5aecb3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isConst</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc7isConstEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the method is const or not (can be invoked on a const object) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the method is const </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc8isStaticEv">
+<span id="_CPPv3NK5astra10MethodDesc8isStaticEv"></span><span id="_CPPv2NK5astra10MethodDesc8isStaticEv"></span><span id="astra::MethodDesc::isStaticC"></span><span class="target" id="classastra_1_1MethodDesc_1a291cc9870c52a54922e478924e8bec44"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isStatic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc8isStaticEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the method is static or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the method is static </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc8isPublicEv">
+<span id="_CPPv3NK5astra10MethodDesc8isPublicEv"></span><span id="_CPPv2NK5astra10MethodDesc8isPublicEv"></span><span id="astra::MethodDesc::isPublicC"></span><span class="target" id="classastra_1_1MethodDesc_1ad3806db1433fe8b4050c81bf4734e2e1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPublic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc8isPublicEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the method is public or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the method is public </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc11isProtectedEv">
+<span id="_CPPv3NK5astra10MethodDesc11isProtectedEv"></span><span id="_CPPv2NK5astra10MethodDesc11isProtectedEv"></span><span id="astra::MethodDesc::isProtectedC"></span><span class="target" id="classastra_1_1MethodDesc_1a56e1bcd25854a6e30b351afa388a3e42"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isProtected</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc11isProtectedEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the method is protected or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the method is protected </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra10MethodDesc9isPrivateEv">
+<span id="_CPPv3NK5astra10MethodDesc9isPrivateEv"></span><span id="_CPPv2NK5astra10MethodDesc9isPrivateEv"></span><span id="astra::MethodDesc::isPrivateC"></span><span class="target" id="classastra_1_1MethodDesc_1a1f0b14d6ce499850e23ef92500aaf389"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPrivate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra10MethodDesc9isPrivateEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the method is private or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the method is private </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -637,11 +692,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="classastra_1_1MethodInfo.html"
+       href="classastra_1_1MethodGroup.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Class MethodInfo</p>
+        <p class="prev-next-title">Class MethodGroup</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -668,12 +723,12 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra10MethodDescE"><code class="docutils literal notranslate"><span class="pre">astra::MethodDesc</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra10MethodDesc10MethodDescEPFv3VarPvRKNSt6vectorI3VarEEE6Access"><code class="docutils literal notranslate"><span class="pre">MethodDesc()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc6invokeE3VarPvRKNSt6vectorI3VarEE"><code class="docutils literal notranslate"><span class="pre">invoke()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc6accessEv"><code class="docutils literal notranslate"><span class="pre">access()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc7isConstEv"><code class="docutils literal notranslate"><span class="pre">isConst()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc8isStaticEv"><code class="docutils literal notranslate"><span class="pre">isStatic()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc8isPublicEv"><code class="docutils literal notranslate"><span class="pre">isPublic()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc11isProtectedEv"><code class="docutils literal notranslate"><span class="pre">isProtected()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc9isPrivateEv"><code class="docutils literal notranslate"><span class="pre">isPrivate()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra10MethodDesc6accessEv"><code class="docutils literal notranslate"><span class="pre">access()</span></code></a></li>
 </ul>
 </li>
 </ul>

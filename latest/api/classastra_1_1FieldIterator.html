@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Class Fields" href="classastra_1_1Fields.html" />
+    <link rel="next" title="Class Float" href="classastra_1_1Float.html" />
     <link rel="prev" title="Class FieldInfo" href="classastra_1_1FieldInfo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -420,13 +420,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldDesc.html">Class FieldDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldGroup.html">Class FieldGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldInfo.html">Class FieldInfo</a></li>
 </ul>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Class FieldIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Fields.html">Class Fields</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Float.html">Class Float</a></li>
@@ -444,13 +444,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodDesc.html">Class MethodDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodGroup.html">Class MethodGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Methods.html">Class Methods</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Object.html">Class Object</a></li>
@@ -569,46 +569,47 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra13FieldIteratorE">
 <span id="_CPPv3N5astra13FieldIteratorE"></span><span id="_CPPv2N5astra13FieldIteratorE"></span><span id="astra::FieldIterator"></span><span class="target" id="classastra_1_1FieldIterator"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FieldIterator</span></span></span><a class="headerlink" href="#_CPPv4N5astra13FieldIteratorE" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>Skip iterator for fields collection, steps over items with unwanted properties. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra13FieldIterator14const_iteratorE">
-<span id="_CPPv3N5astra13FieldIterator14const_iteratorE"></span><span id="_CPPv2N5astra13FieldIterator14const_iteratorE"></span><span class="target" id="classastra_1_1FieldIterator_1ac2c5a2fefaf2865fa135cb65f4611318"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_iterator</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1FieldDesc.html#_CPPv4N5astra9FieldDescE" title="astra::FieldDesc"><span class="n"><span class="pre">FieldDesc</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">const_iterator</span></span><a class="headerlink" href="#_CPPv4N5astra13FieldIterator14const_iteratorE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-</div>
+<dd><p>Iterator for fields that takes access control into account. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra13FieldIterator13FieldIteratorEPKNSt3mapINSt11string_viewE9FieldDescEEPKv6Accessb">
 <span id="_CPPv3N5astra13FieldIterator13FieldIteratorEPKNSt3mapINSt11string_viewE9FieldDescEEPKv6Accessb"></span><span id="_CPPv2N5astra13FieldIterator13FieldIteratorEPKNSt3mapINSt11string_viewE9FieldDescEEPKv6Accessb"></span><span id="astra::FieldIterator::FieldIterator__std::map:std::string_view.FieldDesc:CP.voidCP.Access.b"></span><span class="target" id="classastra_1_1FieldIterator_1afcce03035eed0199314ff35bb082a6ea"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FieldIterator</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1FieldDesc.html#_CPPv4N5astra9FieldDescE" title="astra::FieldDesc"><span class="n"><span class="pre">FieldDesc</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">includeReadonly</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra13FieldIterator13FieldIteratorEPKNSt3mapINSt11string_viewE9FieldDescEEPKv6Accessb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new field iterator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map</strong> – Field map to iterate over </p></li>
+<li><p><strong>base</strong> – Base object to operate on </p></li>
+<li><p><strong>acc</strong> – Access filter for fields </p></li>
+<li><p><strong>includeReadonly</strong> – Whether or not to include read-only fields in the iteration </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra13FieldIteratorppEv">
 <span id="_CPPv3N5astra13FieldIteratorppEv"></span><span id="_CPPv2N5astra13FieldIteratorppEv"></span><span id="astra::FieldIterator::inc-operator"></span><span class="target" id="classastra_1_1FieldIterator_1a9480bc1121ef87a24f127b70c4f40b64"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra13FieldIteratorE" title="astra::FieldIterator"><span class="n"><span class="pre">FieldIterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">++</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N5astra13FieldIteratorppEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Prefix increment operator. </p>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra13FieldIteratorppEi">
 <span id="_CPPv3N5astra13FieldIteratorppEi"></span><span id="_CPPv2N5astra13FieldIteratorppEi"></span><span id="astra::FieldIterator::inc-operator__i"></span><span class="target" id="classastra_1_1FieldIterator_1a97ea5e927c4c365304bfa7c4c819ccc0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra13FieldIteratorE" title="astra::FieldIterator"><span class="n"><span class="pre">FieldIterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">++</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N5astra13FieldIteratorppEi" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra13FieldIteratoreqERK14const_iterator">
-<span id="_CPPv3NK5astra13FieldIteratoreqERK14const_iterator"></span><span id="_CPPv2NK5astra13FieldIteratoreqERK14const_iterator"></span><span id="astra::FieldIterator::eq-operator__const_iteratorCRC"></span><span class="target" id="classastra_1_1FieldIterator_1a677cc2c14f052725152cfb1d74c22e47"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra13FieldIterator14const_iteratorE" title="astra::FieldIterator::const_iterator"><span class="n"><span class="pre">const_iterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK5astra13FieldIteratoreqERK14const_iterator" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra13FieldIteratorneERK14const_iterator">
-<span id="_CPPv3NK5astra13FieldIteratorneERK14const_iterator"></span><span id="_CPPv2NK5astra13FieldIteratorneERK14const_iterator"></span><span id="astra::FieldIterator::neq-operator__const_iteratorCRC"></span><span class="target" id="classastra_1_1FieldIterator_1ae29813b443f659771d6cc9a4bd2abc54"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra13FieldIterator14const_iteratorE" title="astra::FieldIterator::const_iterator"><span class="n"><span class="pre">const_iterator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK5astra13FieldIteratorneERK14const_iterator" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Postfix increment operator. </p>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra13FieldIteratormlEv">
-<span id="_CPPv3NK5astra13FieldIteratormlEv"></span><span id="_CPPv2NK5astra13FieldIteratormlEv"></span><span id="astra::FieldIterator::mul-operatorC"></span><span class="target" id="classastra_1_1FieldIterator_1afc6ffb9b151a48d56d09f212008940c6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK5astra13FieldIteratormlEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<span id="_CPPv3NK5astra13FieldIteratormlEv"></span><span id="_CPPv2NK5astra13FieldIteratormlEv"></span><span id="astra::FieldIterator::mul-operatorC"></span><span class="target" id="classastra_1_1FieldIterator_1afb4a6fa7226f8ffd2a4b5a7daac9063b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1FieldInfo.html#_CPPv4N5astra9FieldInfoE" title="astra::FieldInfo"><span class="n"><span class="pre">FieldInfo</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK5astra13FieldIteratormlEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Access the current field. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pair of field name and info </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -636,11 +637,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="classastra_1_1Fields.html"
+       href="classastra_1_1Float.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Class Fields</p>
+        <p class="prev-next-title">Class Float</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -665,12 +666,9 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-documentation">Class Documentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra13FieldIteratorE"><code class="docutils literal notranslate"><span class="pre">astra::FieldIterator</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra13FieldIterator14const_iteratorE"><code class="docutils literal notranslate"><span class="pre">const_iterator</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra13FieldIterator13FieldIteratorEPKNSt3mapINSt11string_viewE9FieldDescEEPKv6Accessb"><code class="docutils literal notranslate"><span class="pre">FieldIterator()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra13FieldIteratorppEv"><code class="docutils literal notranslate"><span class="pre">operator++()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra13FieldIteratorppEi"><code class="docutils literal notranslate"><span class="pre">operator++()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra13FieldIteratoreqERK14const_iterator"><code class="docutils literal notranslate"><span class="pre">operator==()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra13FieldIteratorneERK14const_iterator"><code class="docutils literal notranslate"><span class="pre">operator!=()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra13FieldIteratormlEv"><code class="docutils literal notranslate"><span class="pre">operator*()</span></code></a></li>
 </ul>
 </li>

@@ -55,7 +55,7 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Class FieldInfo" href="classastra_1_1FieldInfo.html" />
+    <link rel="next" title="Class FieldGroup" href="classastra_1_1FieldGroup.html" />
     <link rel="prev" title="Class Enum" href="classastra_1_1Enum.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -420,13 +420,13 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Class FieldDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldGroup.html">Class FieldGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldInfo.html">Class FieldInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Fields.html">Class Fields</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Float.html">Class Float</a></li>
@@ -444,13 +444,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodDesc.html">Class MethodDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodGroup.html">Class MethodGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Methods.html">Class Methods</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Object.html">Class Object</a></li>
@@ -569,62 +569,144 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra9FieldDescE">
 <span id="_CPPv3N5astra9FieldDescE"></span><span id="_CPPv2N5astra9FieldDescE"></span><span id="astra::FieldDesc"></span><span class="target" id="classastra_1_1FieldDesc"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FieldDesc</span></span></span><a class="headerlink" href="#_CPPv4N5astra9FieldDescE" title="Link to this definition"><span/></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Description of a member field in an object. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I00EN5astra9FieldDesc9FieldDescEM6ClassT1T6Access">
-<span id="_CPPv3I00EN5astra9FieldDesc9FieldDescEM6ClassT1T6Access"></span><span id="_CPPv2I00EN5astra9FieldDesc9FieldDescEM6ClassT1T6Access"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ClassT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1FieldDesc_1a068c23dcfc095e27586cad2b5ea0d51d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FieldDesc</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM6ClassT1T6Access" title="astra::FieldDesc::FieldDesc::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM6ClassT1T6Access" title="astra::FieldDesc::FieldDesc::ClassT"><span class="n"><span class="pre">ClassT</span></span></a><span class="p"><span class="pre">::</span></span><span class="p"><span class="pre">*</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM6ClassT1T6Access" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4I00EN5astra9FieldDesc9FieldDescEM1C1T6Access">
+<span id="_CPPv3I00EN5astra9FieldDesc9FieldDescEM1C1T6Access"></span><span id="_CPPv2I00EN5astra9FieldDesc9FieldDescEM1C1T6Access"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">C</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1FieldDesc_1a1d93c31eaee6b13ba1014f0b5822147b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FieldDesc</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM1C1T6Access" title="astra::FieldDesc::FieldDesc::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM1C1T6Access" title="astra::FieldDesc::FieldDesc::C"><span class="n"><span class="pre">C</span></span></a><span class="p"><span class="pre">::</span></span><span class="p"><span class="pre">*</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ptr</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM1C1T6Access" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Create a new field description. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> – The type of the field </p></li>
+<li><p><strong>C</strong> – The type of the containing class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ptr</strong> – A pointer to the field </p></li>
+<li><p><strong>acc</strong> – The field’s access rules </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra9FieldDesc9FieldDescEP1T6Access">
 <span id="_CPPv3I0EN5astra9FieldDesc9FieldDescEP1T6Access"></span><span id="_CPPv2I0EN5astra9FieldDesc9FieldDescEP1T6Access"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1FieldDesc_1a2b3e5454cd428ecbaf554d991ab4e069"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FieldDesc</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra9FieldDesc9FieldDescEP1T6Access" title="astra::FieldDesc::FieldDesc::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span>, <a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra9FieldDesc9FieldDescEP1T6Access" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new field description. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of the field</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ptr</strong> – A pointer to the field </p></li>
+<li><p><strong>acc</strong> – The field’s access rules </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc5valueEv">
 <span id="_CPPv3NK5astra9FieldDesc5valueEv"></span><span id="_CPPv2NK5astra9FieldDesc5valueEv"></span><span id="astra::FieldDesc::valueC"></span><span class="target" id="classastra_1_1FieldDesc_1a905d0c0f452b073e7334dfe525807270"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">uintptr_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc5valueEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the field value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pointer to the field if it’s static or an offset into the class if it’s not </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc6typeIdEv">
 <span id="_CPPv3NK5astra9FieldDesc6typeIdEv"></span><span id="_CPPv2NK5astra9FieldDesc6typeIdEv"></span><span id="astra::FieldDesc::typeIdC"></span><span class="target" id="classastra_1_1FieldDesc_1a11c7e0e5dcd3a2b3e1625fd71220aec0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">typeId</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc6typeIdEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc7isConstEv">
-<span id="_CPPv3NK5astra9FieldDesc7isConstEv"></span><span id="_CPPv2NK5astra9FieldDesc7isConstEv"></span><span id="astra::FieldDesc::isConstC"></span><span class="target" id="classastra_1_1FieldDesc_1a73358d0fa9910c2debb6bad0f68e96c6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isConst</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc7isConstEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc8isStaticEv">
-<span id="_CPPv3NK5astra9FieldDesc8isStaticEv"></span><span id="_CPPv2NK5astra9FieldDesc8isStaticEv"></span><span id="astra::FieldDesc::isStaticC"></span><span class="target" id="classastra_1_1FieldDesc_1ad338b96ef55a0fdc6772e5f652256b8c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isStatic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc8isStaticEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc8isPublicEv">
-<span id="_CPPv3NK5astra9FieldDesc8isPublicEv"></span><span id="_CPPv2NK5astra9FieldDesc8isPublicEv"></span><span id="astra::FieldDesc::isPublicC"></span><span class="target" id="classastra_1_1FieldDesc_1a56e325f5ba2c02889e436738ac841a64"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPublic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc8isPublicEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc11isProtectedEv">
-<span id="_CPPv3NK5astra9FieldDesc11isProtectedEv"></span><span id="_CPPv2NK5astra9FieldDesc11isProtectedEv"></span><span id="astra::FieldDesc::isProtectedC"></span><span class="target" id="classastra_1_1FieldDesc_1a06ffb4fcdca04cd686c6b5c4c808cdcb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isProtected</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc11isProtectedEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc9isPrivateEv">
-<span id="_CPPv3NK5astra9FieldDesc9isPrivateEv"></span><span id="_CPPv2NK5astra9FieldDesc9isPrivateEv"></span><span id="astra::FieldDesc::isPrivateC"></span><span class="target" id="classastra_1_1FieldDesc_1a6467eb1d5766d94169e9b8f918728df7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPrivate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc9isPrivateEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the type ID of the field. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The field’s type ID </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc6accessEv">
 <span id="_CPPv3NK5astra9FieldDesc6accessEv"></span><span id="_CPPv2NK5astra9FieldDesc6accessEv"></span><span id="astra::FieldDesc::accessC"></span><span class="target" id="classastra_1_1FieldDesc_1a312b2de6d6e64218b0e4bdf7e7569856"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">access</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc6accessEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the field’s access bitmask. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The field’s access </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc7isConstEv">
+<span id="_CPPv3NK5astra9FieldDesc7isConstEv"></span><span id="_CPPv2NK5astra9FieldDesc7isConstEv"></span><span id="astra::FieldDesc::isConstC"></span><span class="target" id="classastra_1_1FieldDesc_1a73358d0fa9910c2debb6bad0f68e96c6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isConst</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc7isConstEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the field is const or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the field is const </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc8isStaticEv">
+<span id="_CPPv3NK5astra9FieldDesc8isStaticEv"></span><span id="_CPPv2NK5astra9FieldDesc8isStaticEv"></span><span id="astra::FieldDesc::isStaticC"></span><span class="target" id="classastra_1_1FieldDesc_1ad338b96ef55a0fdc6772e5f652256b8c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isStatic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc8isStaticEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the field is static or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the field is static </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc8isPublicEv">
+<span id="_CPPv3NK5astra9FieldDesc8isPublicEv"></span><span id="_CPPv2NK5astra9FieldDesc8isPublicEv"></span><span id="astra::FieldDesc::isPublicC"></span><span class="target" id="classastra_1_1FieldDesc_1a56e325f5ba2c02889e436738ac841a64"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPublic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc8isPublicEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the field is public or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the field is public </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc11isProtectedEv">
+<span id="_CPPv3NK5astra9FieldDesc11isProtectedEv"></span><span id="_CPPv2NK5astra9FieldDesc11isProtectedEv"></span><span id="astra::FieldDesc::isProtectedC"></span><span class="target" id="classastra_1_1FieldDesc_1a06ffb4fcdca04cd686c6b5c4c808cdcb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isProtected</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc11isProtectedEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the field is protected or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the field is protected </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc9isPrivateEv">
+<span id="_CPPv3NK5astra9FieldDesc9isPrivateEv"></span><span id="_CPPv2NK5astra9FieldDesc9isPrivateEv"></span><span id="astra::FieldDesc::isPrivateC"></span><span class="target" id="classastra_1_1FieldDesc_1a6467eb1d5766d94169e9b8f918728df7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isPrivate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc9isPrivateEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Check if the field is private or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the field is private </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra9FieldDesc10isReadOnlyEv">
 <span id="_CPPv3NK5astra9FieldDesc10isReadOnlyEv"></span><span id="_CPPv2NK5astra9FieldDesc10isReadOnlyEv"></span><span id="astra::FieldDesc::isReadOnlyC"></span><span class="target" id="classastra_1_1FieldDesc_1aaa54d4205a01f15cefc5fe61d77661be"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isReadOnly</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra9FieldDesc10isReadOnlyEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Check if the field is read-only or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the field is read-only </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -652,11 +734,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="classastra_1_1FieldInfo.html"
+       href="classastra_1_1FieldGroup.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Class FieldInfo</p>
+        <p class="prev-next-title">Class FieldGroup</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -681,16 +763,16 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-documentation">Class Documentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra9FieldDescE"><code class="docutils literal notranslate"><span class="pre">astra::FieldDesc</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM6ClassT1T6Access"><code class="docutils literal notranslate"><span class="pre">FieldDesc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I00EN5astra9FieldDesc9FieldDescEM1C1T6Access"><code class="docutils literal notranslate"><span class="pre">FieldDesc()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra9FieldDesc9FieldDescEP1T6Access"><code class="docutils literal notranslate"><span class="pre">FieldDesc()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc5valueEv"><code class="docutils literal notranslate"><span class="pre">value()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc6typeIdEv"><code class="docutils literal notranslate"><span class="pre">typeId()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc6accessEv"><code class="docutils literal notranslate"><span class="pre">access()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc7isConstEv"><code class="docutils literal notranslate"><span class="pre">isConst()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc8isStaticEv"><code class="docutils literal notranslate"><span class="pre">isStatic()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc8isPublicEv"><code class="docutils literal notranslate"><span class="pre">isPublic()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc11isProtectedEv"><code class="docutils literal notranslate"><span class="pre">isProtected()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc9isPrivateEv"><code class="docutils literal notranslate"><span class="pre">isPrivate()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc6accessEv"><code class="docutils literal notranslate"><span class="pre">access()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra9FieldDesc10isReadOnlyEv"><code class="docutils literal notranslate"><span class="pre">isReadOnly()</span></code></a></li>
 </ul>
 </li>

@@ -420,13 +420,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldDesc.html">Class FieldDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldGroup.html">Class FieldGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldInfo.html">Class FieldInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Fields.html">Class Fields</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Float.html">Class Float</a></li>
@@ -444,13 +444,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodDesc.html">Class MethodDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodGroup.html">Class MethodGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Methods.html">Class Methods</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Object.html">Class Object</a></li>
@@ -584,56 +584,67 @@
 <dl class="cpp enum-class">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4KindE">
 <span id="_CPPv3N5astra8TypeInfo4KindE"></span><span id="_CPPv2N5astra8TypeInfo4KindE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807c"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Kind</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4KindE" title="Link to this definition"><span/></a><br /></dt>
-<dd><p><em>Values:</em></p>
+<dd><p>Enumeration of data type contained in the variant. </p>
+<p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind4BoolE">
 <span id="_CPPv3N5astra8TypeInfo4Kind4BoolE"></span><span id="_CPPv2N5astra8TypeInfo4Kind4BoolE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807cac26f15e86e3de4c398a8273272aba034"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bool</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind4BoolE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Boolean. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind7IntegerE">
 <span id="_CPPv3N5astra8TypeInfo4Kind7IntegerE"></span><span id="_CPPv2N5astra8TypeInfo4Kind7IntegerE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807caa0faef0851b4294c06f2b94bb1cb2044"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Integer</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind7IntegerE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Signed or unsigned integer. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind5FloatE">
 <span id="_CPPv3N5astra8TypeInfo4Kind5FloatE"></span><span id="_CPPv2N5astra8TypeInfo4Kind5FloatE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807ca22ae0e2b89e5e3d477f988cc36d3272b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Float</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind5FloatE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Floating point number. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind6StringE">
 <span id="_CPPv3N5astra8TypeInfo4Kind6StringE"></span><span id="_CPPv2N5astra8TypeInfo4Kind6StringE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807ca27118326006d3829667a400ad23d5d98"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind6StringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p><a class="reference internal" href="classastra_1_1String.html#classastra_1_1String"><span class="std std-ref">String</span></a> (any kind) </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind4EnumE">
 <span id="_CPPv3N5astra8TypeInfo4Kind4EnumE"></span><span id="_CPPv2N5astra8TypeInfo4Kind4EnumE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807cacf20423ed48998082c20099488a0917c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Enum</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind4EnumE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Enumeration value. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind6ObjectE">
 <span id="_CPPv3N5astra8TypeInfo4Kind6ObjectE"></span><span id="_CPPv2N5astra8TypeInfo4Kind6ObjectE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807ca497031794414a552435f90151ac3b54b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Object</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind6ObjectE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Class or struct. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind5ArrayE">
 <span id="_CPPv3N5astra8TypeInfo4Kind5ArrayE"></span><span id="_CPPv2N5astra8TypeInfo4Kind5ArrayE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807ca4410ec34d9e6c1a68100ca0ce033fb17"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Array</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind5ArrayE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Fixed-size container. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind4ListE">
 <span id="_CPPv3N5astra8TypeInfo4Kind4ListE"></span><span id="_CPPv2N5astra8TypeInfo4Kind4ListE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807ca4ee29ca12c7d126654bd0e5275de6135"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind4ListE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Resizable container. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind3MapE">
 <span id="_CPPv3N5astra8TypeInfo4Kind3MapE"></span><span id="_CPPv2N5astra8TypeInfo4Kind3MapE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807ca46f3ea056caa3126b91f3f70beea068c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind3MapE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Key-value store. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo4Kind7PointerE">
 <span id="_CPPv3N5astra8TypeInfo4Kind7PointerE"></span><span id="_CPPv2N5astra8TypeInfo4Kind7PointerE"></span><span class="target" id="classastra_1_1TypeInfo_1aa8d56c76662e026fa6a9a3c4f06b807ca61cf8510205077b6f5491d38cd44c0f7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Pointer</span></span></span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo4Kind7PointerE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Smart pointer. </p>
+</dd></dl>
 
 </dd></dl>
 
@@ -643,77 +654,171 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE4Bool">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE4Bool"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE4Bool"></span><span id="astra::TypeInfo::TypeInfo__Bool"></span><span class="target" id="classastra_1_1TypeInfo_1a02262f10d8510543724f74f368c80762"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Bool.html#_CPPv4N5astra4BoolE" title="astra::Bool"><span class="n"><span class="pre">Bool</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE4Bool" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing a <a class="reference internal" href="classastra_1_1Bool.html#classastra_1_1Bool"><span class="std std-ref">Bool</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE7Integer">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE7Integer"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE7Integer"></span><span id="astra::TypeInfo::TypeInfo__Integer"></span><span class="target" id="classastra_1_1TypeInfo_1a572ba273214688c7598139f8a03464bc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Integer.html#_CPPv4N5astra7IntegerE" title="astra::Integer"><span class="n"><span class="pre">Integer</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE7Integer" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing a <a class="reference internal" href="classastra_1_1Integer.html#classastra_1_1Integer"><span class="std std-ref">Integer</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE5Float">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE5Float"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE5Float"></span><span id="astra::TypeInfo::TypeInfo__Float"></span><span class="target" id="classastra_1_1TypeInfo_1a763095f34cfc862a1b0767df708ac1d4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Float.html#_CPPv4N5astra5FloatE" title="astra::Float"><span class="n"><span class="pre">Float</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE5Float" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing a <a class="reference internal" href="classastra_1_1Float.html#classastra_1_1Float"><span class="std std-ref">Float</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE6String">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE6String"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE6String"></span><span id="astra::TypeInfo::TypeInfo__String"></span><span class="target" id="classastra_1_1TypeInfo_1a622bbfd2e1c2480bf66d2397760898d1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1String.html#_CPPv4N5astra6StringE" title="astra::String"><span class="n"><span class="pre">String</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE6String" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing a <a class="reference internal" href="classastra_1_1String.html#classastra_1_1String"><span class="std std-ref">String</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE4Enum">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE4Enum"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE4Enum"></span><span id="astra::TypeInfo::TypeInfo__Enum"></span><span class="target" id="classastra_1_1TypeInfo_1afabafff61feee980e7bd871efa6dcd7a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Enum.html#_CPPv4N5astra4EnumE" title="astra::Enum"><span class="n"><span class="pre">Enum</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE4Enum" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing an <a class="reference internal" href="classastra_1_1Enum.html#classastra_1_1Enum"><span class="std std-ref">Enum</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE6Object">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE6Object"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE6Object"></span><span id="astra::TypeInfo::TypeInfo__Object"></span><span class="target" id="classastra_1_1TypeInfo_1a751f5215b53642b916ec92bbf1cc696c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Object.html#_CPPv4N5astra6ObjectE" title="astra::Object"><span class="n"><span class="pre">Object</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE6Object" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing an <a class="reference internal" href="classastra_1_1Object.html#classastra_1_1Object"><span class="std std-ref">Object</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE5Array">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE5Array"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE5Array"></span><span id="astra::TypeInfo::TypeInfo__Array"></span><span class="target" id="classastra_1_1TypeInfo_1aadcb9f53ed93d062e0b82d63dd25a65b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Array.html#_CPPv4N5astra5ArrayE" title="astra::Array"><span class="n"><span class="pre">Array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE5Array" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing an <a class="reference internal" href="classastra_1_1Array.html#classastra_1_1Array"><span class="std std-ref">Array</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE4List">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE4List"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE4List"></span><span id="astra::TypeInfo::TypeInfo__List"></span><span class="target" id="classastra_1_1TypeInfo_1a46af2d47678635fcb3604beba291569b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1List.html#_CPPv4N5astra4ListE" title="astra::List"><span class="n"><span class="pre">List</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE4List" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing a <a class="reference internal" href="classastra_1_1List.html#classastra_1_1List"><span class="std std-ref">List</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE3Map">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE3Map"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE3Map"></span><span id="astra::TypeInfo::TypeInfo__Map"></span><span class="target" id="classastra_1_1TypeInfo_1a93d5ea01dc994785a80d5b6ab390afec"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Map.html#_CPPv4N5astra3MapE" title="astra::Map"><span class="n"><span class="pre">Map</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE3Map" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing a <a class="reference internal" href="classastra_1_1Map.html#classastra_1_1Map"><span class="std std-ref">Map</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo8TypeInfoE7Pointer">
 <span id="_CPPv3N5astra8TypeInfo8TypeInfoE7Pointer"></span><span id="_CPPv2N5astra8TypeInfo8TypeInfoE7Pointer"></span><span id="astra::TypeInfo::TypeInfo__Pointer"></span><span class="target" id="classastra_1_1TypeInfo_1a0f63d521d18fc401441f7302088bf150"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeInfo</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classastra_1_1Pointer.html#_CPPv4N5astra7PointerE" title="astra::Pointer"><span class="n"><span class="pre">Pointer</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo8TypeInfoE7Pointer" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new type info variant storing a <a class="reference internal" href="classastra_1_1Pointer.html#classastra_1_1Pointer"><span class="std std-ref">Pointer</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo6assignE3Var">
 <span id="_CPPv3N5astra8TypeInfo6assignE3Var"></span><span id="_CPPv2N5astra8TypeInfo6assignE3Var"></span><span id="astra::TypeInfo::assign__Var"></span><span class="target" id="classastra_1_1TypeInfo_1aa8056e285a9b2a4391a30423a4b35309"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assign</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">var</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo6assignE3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Replace the current value in the variant with a new one. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var</strong> – The new value to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo12unsafeAssignEPv">
 <span id="_CPPv3N5astra8TypeInfo12unsafeAssignEPv"></span><span id="_CPPv2N5astra8TypeInfo12unsafeAssignEPv"></span><span id="astra::TypeInfo::unsafeAssign__voidP"></span><span class="target" id="classastra_1_1TypeInfo_1a21571d8b0cdb3fa75f63e3a8d6bf8953"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsafeAssign</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo12unsafeAssignEPv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Unsafely replace the current value in the variant. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is for internal use only!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – A pointer to the new object to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra8TypeInfo3varEv">
 <span id="_CPPv3N5astra8TypeInfo3varEv"></span><span id="_CPPv2N5astra8TypeInfo3varEv"></span><span id="astra::TypeInfo::var"></span><span class="target" id="classastra_1_1TypeInfo_1a3fea8cc38cad1354572ae3ab5e3661a0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra8TypeInfo3varEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the contents of the type info variant as a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current value as <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra8TypeInfo7getKindEv">
 <span id="_CPPv3NK5astra8TypeInfo7getKindEv"></span><span id="_CPPv2NK5astra8TypeInfo7getKindEv"></span><span id="astra::TypeInfo::getKindC"></span><span class="target" id="classastra_1_1TypeInfo_1aa43fd7dca96de6bc7d533388ed3b5f80"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra8TypeInfo4KindE" title="astra::TypeInfo::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getKind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra8TypeInfo7getKindEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get what kind of value is stored in the variant. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type of value currently stored </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra8TypeInfo10getKindStrEv">
 <span id="_CPPv3NK5astra8TypeInfo10getKindStrEv"></span><span id="_CPPv2NK5astra8TypeInfo10getKindStrEv"></span><span id="astra::TypeInfo::getKindStrC"></span><span class="target" id="classastra_1_1TypeInfo_1a5b467a7dc197222ffe4632869f471275"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getKindStr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra8TypeInfo10getKindStrEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the name of the value kind currently stored in the variant. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Name of the currently-stored type </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>

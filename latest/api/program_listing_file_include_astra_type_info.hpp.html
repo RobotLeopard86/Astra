@@ -436,6 +436,19 @@
 
 <span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">TypeInfo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">BASE</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Kind</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Bool</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Integer</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Float</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Enum</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Object</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Array</span><span class="p">,</span>
+<span class="w">            </span><span class="n">List</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Map</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Pointer</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
 <span class="w">        </span><span class="n">TypeInfo</span><span class="p">(</span><span class="n">Bool</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">BASE</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
@@ -490,19 +503,6 @@
 <span class="w">                </span><span class="p">[](</span><span class="n">Map</span><span class="o">&amp;</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Var</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">ownVar</span><span class="p">();</span><span class="w"> </span><span class="p">},</span>
 <span class="w">                </span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">var</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
 <span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Kind</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Bool</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Integer</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Float</span><span class="p">,</span>
-<span class="w">            </span><span class="n">String</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Enum</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Object</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Array</span><span class="p">,</span>
-<span class="w">            </span><span class="n">List</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Map</span><span class="p">,</span>
-<span class="w">            </span><span class="n">Pointer</span><span class="p">,</span>
-<span class="w">        </span><span class="p">};</span>
 
 <span class="w">        </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">Kind</span><span class="w"> </span><span class="n">getKind</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Kind</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="p">());</span>

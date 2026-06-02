@@ -56,7 +56,7 @@
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Class Pointer" href="classastra_1_1Pointer.html" />
-    <link rel="prev" title="Class Methods" href="classastra_1_1Methods.html" />
+    <link rel="prev" title="Class MethodIterator" href="classastra_1_1MethodIterator.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -420,13 +420,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldDesc.html">Class FieldDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldGroup.html">Class FieldGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldInfo.html">Class FieldInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1FieldIterator.html">Class FieldIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Fields.html">Class Fields</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1Float.html">Class Float</a></li>
@@ -444,13 +444,13 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodDesc.html">Class MethodDesc</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodGroup.html">Class MethodGroup</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodInfo.html">Class MethodInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1MethodIterator.html">Class MethodIterator</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classastra_1_1Methods.html">Class Methods</a></li>
 </ul>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Class Object</a></li>
@@ -609,17 +609,98 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Object8getFieldERKNSt6stringE">
 <span id="_CPPv3N5astra6Object8getFieldERKNSt6stringE"></span><span id="_CPPv2N5astra6Object8getFieldERKNSt6stringE"></span><span id="astra::Object::getField__ssCR"></span><span class="target" id="classastra_1_1Object_1a1e3ef6935c55fa1d60528aa14b24d388"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1FieldInfo.html#_CPPv4N5astra9FieldInfoE" title="astra::FieldInfo"><span class="n"><span class="pre">FieldInfo</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getField</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Object8getFieldERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access a field by name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The name of the field to access</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If no field with the provided name exists in the object </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The <a class="reference internal" href="classastra_1_1FieldInfo.html#classastra_1_1FieldInfo"><span class="std std-ref">FieldInfo</span></a> for the requested field</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra6Object9getFieldsE6Accessb">
-<span id="_CPPv3NK5astra6Object9getFieldsE6Accessb"></span><span id="_CPPv2NK5astra6Object9getFieldsE6Accessb"></span><span id="astra::Object::getFields__Access.bC"></span><span class="target" id="classastra_1_1Object_1ace38ebd34da62be158b9236d20635b0d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1Fields.html#_CPPv4N5astra6FieldsE" title="astra::Fields"><span class="n"><span class="pre">Fields</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getFields</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">access</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6Access6PublicE" title="astra::Access::Public"><span class="n"><span class="pre">Public</span></span></a>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">includeReadonly</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra6Object9getFieldsE6Accessb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<span id="_CPPv3NK5astra6Object9getFieldsE6Accessb"></span><span id="_CPPv2NK5astra6Object9getFieldsE6Accessb"></span><span id="astra::Object::getFields__Access.bC"></span><span class="target" id="classastra_1_1Object_1a3c06908fb373db1caaa03f68920f9dcb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1FieldGroup.html#_CPPv4N5astra10FieldGroupE" title="astra::FieldGroup"><span class="n"><span class="pre">FieldGroup</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getFields</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">access</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6Access6PublicE" title="astra::Access::Public"><span class="n"><span class="pre">Public</span></span></a>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">includeReadonly</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra6Object9getFieldsE6Accessb" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get all fields in the object with the given access and read-only state that may be accessed on a const object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access</strong> – The access specifier for fields to query </p></li>
+<li><p><strong>includeReadonly</strong> – Whether or not to include read-only fields in the group</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The matching group of fields </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra6Object9getFieldsE6Accessb">
+<span id="_CPPv3N5astra6Object9getFieldsE6Accessb"></span><span id="_CPPv2N5astra6Object9getFieldsE6Accessb"></span><span id="astra::Object::getFields__Access.b"></span><span class="target" id="classastra_1_1Object_1afe884b0f09a846e41a1374418679be5c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1FieldGroup.html#_CPPv4N5astra10FieldGroupE" title="astra::FieldGroup"><span class="n"><span class="pre">FieldGroup</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getFields</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">access</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6Access6PublicE" title="astra::Access::Public"><span class="n"><span class="pre">Public</span></span></a>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">includeReadonly</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Object9getFieldsE6Accessb" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get all fields in the object with the given access and read-only state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access</strong> – The access specifier for fields to query </p></li>
+<li><p><strong>includeReadonly</strong> – Whether or not to include read-only fields in the group</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The matching group of fields </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Object9getMethodERKNSt6stringE">
 <span id="_CPPv3N5astra6Object9getMethodERKNSt6stringE"></span><span id="_CPPv2N5astra6Object9getMethodERKNSt6stringE"></span><span id="astra::Object::getMethod__ssCR"></span><span class="target" id="classastra_1_1Object_1af1f361c9ebe26ecccad935ee28127a85"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodInfo.html#_CPPv4N5astra10MethodInfoE" title="astra::MethodInfo"><span class="n"><span class="pre">MethodInfo</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMethod</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Object9getMethodERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access a method by name. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The name of the method to access</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If no method with the provided name exists in the object </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The <a class="reference internal" href="classastra_1_1MethodInfo.html#classastra_1_1MethodInfo"><span class="std std-ref">MethodInfo</span></a> for the requested method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5astra6Object10getMethodsE6Access">
+<span id="_CPPv3NK5astra6Object10getMethodsE6Access"></span><span id="_CPPv2NK5astra6Object10getMethodsE6Access"></span><span id="astra::Object::getMethods__AccessC"></span><span class="target" id="classastra_1_1Object_1a07de62b3d360ec367fa2561a17428cdb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodGroup.html#_CPPv4N5astra11MethodGroupE" title="astra::MethodGroup"><span class="n"><span class="pre">MethodGroup</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMethods</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">access</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6Access6PublicE" title="astra::Access::Public"><span class="n"><span class="pre">Public</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra6Object10getMethodsE6Access" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get all methods in the object with the given access flags that may be accessed on a const object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>access</strong> – The access specifier for methods to query</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The matching group of methods </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra6Object10getMethodsE6Access">
+<span id="_CPPv3N5astra6Object10getMethodsE6Access"></span><span id="_CPPv2N5astra6Object10getMethodsE6Access"></span><span id="astra::Object::getMethods__Access"></span><span class="target" id="classastra_1_1Object_1ac735cac9d99300fb82e7c8717878de72"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classastra_1_1MethodGroup.html#_CPPv4N5astra11MethodGroupE" title="astra::MethodGroup"><span class="n"><span class="pre">MethodGroup</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getMethods</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">access</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6AccessE" title="astra::Access"><span class="n"><span class="pre">Access</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html#_CPPv4N5astra6Access6PublicE" title="astra::Access::Public"><span class="n"><span class="pre">Public</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Object10getMethodsE6Access" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get all methods in the object with the given access flags. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>access</strong> – The access specifier for methods to query</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The matching group of methods </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Object3varEv">
@@ -649,12 +730,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="classastra_1_1Methods.html"
+       href="classastra_1_1MethodIterator.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Class Methods</p>
+        <p class="prev-next-title">Class MethodIterator</p>
       </div>
     </a>
     <a class="right-next"
@@ -692,7 +773,10 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6Object12unsafeAssignEPv"><code class="docutils literal notranslate"><span class="pre">unsafeAssign()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6Object8getFieldERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">getField()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra6Object9getFieldsE6Accessb"><code class="docutils literal notranslate"><span class="pre">getFields()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6Object9getFieldsE6Accessb"><code class="docutils literal notranslate"><span class="pre">getFields()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6Object9getMethodERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">getMethod()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra6Object10getMethodsE6Access"><code class="docutils literal notranslate"><span class="pre">getMethods()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6Object10getMethodsE6Access"><code class="docutils literal notranslate"><span class="pre">getMethods()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6Object3varEv"><code class="docutils literal notranslate"><span class="pre">var()</span></code></a></li>
 </ul>
 </li>
