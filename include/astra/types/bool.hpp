@@ -4,6 +4,7 @@
 #include "astra/actions_table.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 	struct ASTRA_API BoolActions {
 		static TypeInfo reflect(void* value, bool isConst) {
@@ -23,3 +24,4 @@ namespace astra {
 	}
 
 }
+///@endcond

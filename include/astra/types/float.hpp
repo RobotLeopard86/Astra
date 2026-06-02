@@ -4,6 +4,7 @@
 #include "astra/actions_table.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
@@ -26,3 +27,5 @@ namespace astra {
 		return id;
 	}
 }
+
+///@endcond

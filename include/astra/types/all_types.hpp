@@ -1,5 +1,6 @@
 #pragma once
 
+///@cond
 #include "float.hpp"		 // IWYU pragma: export
 #include "string.hpp"		 // IWYU pragma: export
 #include "c_array.hpp"		 // IWYU pragma: export
@@ -12,3 +13,4 @@
 #include "std_unique_ptr.hpp"// IWYU pragma: export
 #include "list.hpp"			 // IWYU pragma: export
 #include "unknown.hpp"		 // IWYU pragma: export
+///@endcond

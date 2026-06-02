@@ -2,6 +2,7 @@
 
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	//just a blank struct ASTRA_API for further specialization
@@ -9,3 +10,5 @@ namespace astra {
 	struct ASTRA_API TypeActions {};
 
 }
+
+///@endcond

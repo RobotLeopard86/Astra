@@ -5,6 +5,7 @@
 #include "astra/type_info.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	struct ASTRA_API UnknownActions {
@@ -39,3 +40,5 @@ namespace astra {
 	};
 
 }
+
+///@endcond

@@ -18,6 +18,7 @@ namespace astra {
 		// clang-format on
 	};
 
+	///@cond
 	inline Access operator|(Access lhs, Access rhs) {
 		return static_cast<Access>(static_cast<uint8_t>(lhs) | static_cast<uint8_t>(rhs));
 	}
@@ -25,5 +26,6 @@ namespace astra {
 	inline Access operator&(Access lhs, Access rhs) {
 		return static_cast<Access>(static_cast<uint8_t>(lhs) & static_cast<uint8_t>(rhs));
 	}
+	///@endcond
 
 }

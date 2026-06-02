@@ -7,6 +7,7 @@
 #include "astra/names.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
@@ -57,3 +58,5 @@ namespace astra {
 	};
 
 }
+
+///@endcond

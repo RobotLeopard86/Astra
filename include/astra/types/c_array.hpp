@@ -9,6 +9,7 @@
 #include "astra/types/type_actions.hpp"
 #include "astra/dll.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T, std::size_t size_v>
@@ -74,3 +75,5 @@ namespace astra {
 	}
 
 }
+
+///@endcond

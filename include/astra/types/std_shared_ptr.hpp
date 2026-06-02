@@ -8,6 +8,7 @@
 #include "astra/dll.hpp"
 #include "astra/types/type_actions.hpp"
 
+///@cond
 namespace astra {
 
 	template<typename T>
@@ -32,3 +33,5 @@ namespace astra {
 	}
 
 }
+
+///@endcond
