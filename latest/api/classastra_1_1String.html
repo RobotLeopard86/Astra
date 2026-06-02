@@ -562,7 +562,7 @@
   <section id="class-string">
 <span id="exhale-class-classastra-1-1string"></span><h1>Class String<a class="headerlink" href="#class-string" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_type_info_string_string.hpp.html#file-include-astra-type-info-string-string-hpp"><span class="std std-ref">File string.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_types_string_string.hpp.html#file-include-astra-types-string-string-hpp"><span class="std std-ref">File string.hpp</span></a></p></li>
 </ul>
 <section id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"><span/></a></h2>
@@ -579,17 +579,47 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6String6StringEPNSt12basic_stringI1TEEb">
 <span id="_CPPv3I0EN5astra6String6StringEPNSt12basic_stringI1TEEb"></span><span id="_CPPv2I0EN5astra6String6StringEPNSt12basic_stringI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1String_1a9e75c21a30416973877429e80754a196"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">basic_string</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra6String6StringEPNSt12basic_stringI1TEEb" title="astra::String::String::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">str</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6String6StringEPNSt12basic_stringI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new string from a <code class="docutils literal notranslate"><span class="pre">std::basic_string</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of characters forming the string (for <code class="docutils literal notranslate"><span class="pre">std::string</span></code>, T = <code class="docutils literal notranslate"><span class="pre">char</span></code>)</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>str</strong> – The string to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEEb">
-<span id="_CPPv3I0EN5astra6String6StringEPNSt17basic_string_viewI1TEEb"></span><span id="_CPPv2I0EN5astra6String6StringEPNSt17basic_string_viewI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1String_1adb2a32205fa02b3c59b5a4d8910a1c05"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">basic_string_view</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEEb" title="astra::String::String::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">str</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEE">
+<span id="_CPPv3I0EN5astra6String6StringEPNSt17basic_string_viewI1TEE"></span><span id="_CPPv2I0EN5astra6String6StringEPNSt17basic_string_viewI1TEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1String_1aa15d4c182303df0af56dd9a973adc71a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">basic_string_view</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEE" title="astra::String::String::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">view</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEE" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Create a new string from a <code class="docutils literal notranslate"><span class="pre">std::basic_string_view</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of characters forming the string (for <code class="docutils literal notranslate"><span class="pre">std::string_view</span></code>, T = <code class="docutils literal notranslate"><span class="pre">char</span></code>)</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>view</strong> – The string view to source data from </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6String6StringEPPK1Tb">
-<span id="_CPPv3I0EN5astra6String6StringEPPK1Tb"></span><span id="_CPPv2I0EN5astra6String6StringEPPK1Tb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1String_1a671cc03df8dbf5ff42eb4c31a6c085ea"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN5astra6String6StringEPPK1Tb" title="astra::String::String::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">str</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6String6StringEPPK1Tb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6String6StringEPPK1T">
+<span id="_CPPv3I0EN5astra6String6StringEPPK1T"></span><span id="_CPPv2I0EN5astra6String6StringEPPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1String_1a7fa70654ec91fffa623e7757e0fde692"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">String</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN5astra6String6StringEPPK1T" title="astra::String::String::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">strPtr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6String6StringEPPK1T" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Create a new string from a raw C string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of characters forming the string (will usually be <code class="docutils literal notranslate"><span class="pre">char</span></code>)</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>str</strong> – A pointer to the string to source data from </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6String6assignE3Var">
@@ -600,7 +630,7 @@
 <dd class="field-odd"><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p>
 </dd>
 <dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool </p>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a string </p>
 </dd>
 </dl>
 </dd></dl>
@@ -713,8 +743,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6StringE"><code class="docutils literal notranslate"><span class="pre">astra::String</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6String6StringEv"><code class="docutils literal notranslate"><span class="pre">String()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6String6StringEPNSt12basic_stringI1TEEb"><code class="docutils literal notranslate"><span class="pre">String()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEEb"><code class="docutils literal notranslate"><span class="pre">String()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6String6StringEPPK1Tb"><code class="docutils literal notranslate"><span class="pre">String()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6String6StringEPNSt17basic_string_viewI1TEE"><code class="docutils literal notranslate"><span class="pre">String()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6String6StringEPPK1T"><code class="docutils literal notranslate"><span class="pre">String()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6String6assignE3Var"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra6String12unsafeAssignEPv"><code class="docutils literal notranslate"><span class="pre">unsafeAssign()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra6String3getEv"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>

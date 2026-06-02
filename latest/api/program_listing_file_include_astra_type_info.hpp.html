@@ -419,16 +419,16 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/names.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/variant.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/dll.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/array/array.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/bool.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/enum/enum.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/float/float.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/integer/integer.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/map/map.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/object/object.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/pointer/pointer.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/list/list.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_info/string/string.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/array/array.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/bool.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/enum/enum.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/float/float.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/integer/integer.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/map/map.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/object/object.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/pointer/pointer.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/list/list.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;types/string/string.hpp&quot;</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
@@ -477,11 +477,11 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">assign</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">match</span><span class="p">([</span><span class="o">=</span><span class="p">](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">var</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
+<span class="w">            </span><span class="n">match</span><span class="p">([</span><span class="o">=</span><span class="p">](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">var</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unsafeAssign</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">match</span><span class="p">([</span><span class="o">=</span><span class="p">](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">unsafeAssign</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
+<span class="w">            </span><span class="n">match</span><span class="p">([</span><span class="o">=</span><span class="p">](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">unsafeAssign</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>

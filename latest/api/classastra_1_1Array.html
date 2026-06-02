@@ -562,7 +562,7 @@
   <section id="class-array">
 <span id="exhale-class-classastra-1-1array"></span><h1>Class Array<a class="headerlink" href="#class-array" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_type_info_array_array.hpp.html#file-include-astra-type-info-array-array-hpp"><span class="std std-ref">File array.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_types_array_array.hpp.html#file-include-astra-types-array-array-hpp"><span class="std std-ref">File array.hpp</span></a></p></li>
 </ul>
 <section id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"><span/></a></h2>
@@ -621,7 +621,7 @@
 <dd class="field-odd"><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p>
 </dd>
 <dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool </p>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a array </p>
 </dd>
 </dl>
 </dd></dl>
@@ -723,12 +723,22 @@
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra5Array7forEachENSt8functionIFv3VarEEE">
 <span id="_CPPv3NK5astra5Array7forEachENSt8functionIFv3VarEEE"></span><span id="_CPPv2NK5astra5Array7forEachENSt8functionIFv3VarEEE"></span><span class="target" id="classastra_1_1Array_1a19b2aec6e28615b67a20bc016f391558"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEach</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra5Array7forEachENSt8functionIFv3VarEEE" title="Link to this definition"><span/></a><br /></dt>
 <dd><p>Constly execute a callback on every array element. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra5Array7forEachENSt8functionIFv3VarEEE">
 <span id="_CPPv3N5astra5Array7forEachENSt8functionIFv3VarEEE"></span><span id="_CPPv2N5astra5Array7forEachENSt8functionIFv3VarEEE"></span><span class="target" id="classastra_1_1Array_1a5333654b2a4073a6000146fc87b66d68"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEach</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra5Array7forEachENSt8functionIFv3VarEEE" title="Link to this definition"><span/></a><br /></dt>
 <dd><p>Execute a callback on every array element. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
@@ -737,8 +747,13 @@
 <dd><p>Unsafely execute a callback on every array element. </p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This function is for internal use only! </p>
+<p>This function is for internal use only!</p>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">

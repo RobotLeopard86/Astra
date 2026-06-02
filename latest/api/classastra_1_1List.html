@@ -562,7 +562,7 @@
   <section id="class-list">
 <span id="exhale-class-classastra-1-1list"></span><h1>Class List<a class="headerlink" href="#class-list" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_type_info_list_list.hpp.html#file-include-astra-type-info-list-list-hpp"><span class="std std-ref">File list.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_types_list_list.hpp.html#file-include-astra-types-list-list-hpp"><span class="std std-ref">File list.hpp</span></a></p></li>
 </ul>
 <section id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"><span/></a></h2>
@@ -575,37 +575,121 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra4List4ListEPNSt6vectorI1TEEb">
 <span id="_CPPv3I0EN5astra4List4ListEPNSt6vectorI1TEEb"></span><span id="_CPPv2I0EN5astra4List4ListEPNSt6vectorI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1List_1a27bc9e18a37028197d6512d0e7effa7c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra4List4ListEPNSt6vectorI1TEEb" title="astra::List::List::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">vector</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra4List4ListEPNSt6vectorI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new list from a <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of each element</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>vector</strong> – The vector to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra4List4ListEPNSt4listI1TEEb">
 <span id="_CPPv3I0EN5astra4List4ListEPNSt4listI1TEEb"></span><span id="_CPPv2I0EN5astra4List4ListEPNSt4listI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1List_1a5224ebb625e166c9cc8a37080c764298"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra4List4ListEPNSt4listI1TEEb" title="astra::List::List::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">list</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra4List4ListEPNSt4listI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new list from a <code class="docutils literal notranslate"><span class="pre">std::list</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of each element</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>list</strong> – The list to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra4List4ListEPNSt5dequeI1TEEb">
 <span id="_CPPv3I0EN5astra4List4ListEPNSt5dequeI1TEEb"></span><span id="_CPPv2I0EN5astra4List4ListEPNSt5dequeI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1List_1ac564b82f6f68b3a3a053bc8e95c485e0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">deque</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra4List4ListEPNSt5dequeI1TEEb" title="astra::List::List::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">deque</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra4List4ListEPNSt5dequeI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new list from a <code class="docutils literal notranslate"><span class="pre">std::deque</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of each element</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>deque</strong> – The deque to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra4List4ListEPNSt5stackI1TEEb">
 <span id="_CPPv3I0EN5astra4List4ListEPNSt5stackI1TEEb"></span><span id="_CPPv2I0EN5astra4List4ListEPNSt5stackI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1List_1ae926b121d120da28371a4bb86044f10b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">stack</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra4List4ListEPNSt5stackI1TEEb" title="astra::List::List::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stack</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra4List4ListEPNSt5stackI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new list from a <code class="docutils literal notranslate"><span class="pre">std::stack</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of each element</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>stack</strong> – The stack to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra4List4ListEPNSt5queueI1TEEb">
 <span id="_CPPv3I0EN5astra4List4ListEPNSt5queueI1TEEb"></span><span id="_CPPv2I0EN5astra4List4ListEPNSt5queueI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1List_1ab55a02d9df6f0c5cdb6ca622ef255d74"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">queue</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra4List4ListEPNSt5queueI1TEEb" title="astra::List::List::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">queue</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra4List4ListEPNSt5queueI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new list from a <code class="docutils literal notranslate"><span class="pre">std::queue</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of each element</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>queue</strong> – The queue to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra4List4ListEPNSt3setI1TEEb">
 <span id="_CPPv3I0EN5astra4List4ListEPNSt3setI1TEEb"></span><span id="_CPPv2I0EN5astra4List4ListEPNSt3setI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1List_1abd4acecaff454bdae5bf49b0b804169f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra4List4ListEPNSt3setI1TEEb" title="astra::List::List::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">set</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra4List4ListEPNSt3setI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new list from a <code class="docutils literal notranslate"><span class="pre">std::set</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of each element</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>set</strong> – The set to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra4List4ListEPNSt13unordered_setI1TEEb">
 <span id="_CPPv3I0EN5astra4List4ListEPNSt13unordered_setI1TEEb"></span><span id="_CPPv2I0EN5astra4List4ListEPNSt13unordered_setI1TEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1List_1abd1319bdfe2431ddc85e93b9827d319f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">List</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_set</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra4List4ListEPNSt13unordered_setI1TEEb" title="astra::List::List::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">set</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra4List4ListEPNSt13unordered_setI1TEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new list from a <code class="docutils literal notranslate"><span class="pre">std::unordered_set</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of each element</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>set</strong> – The set to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra4List6assignE3Var">
@@ -616,7 +700,7 @@
 <dd class="field-odd"><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p>
 </dd>
 <dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool </p>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a list </p>
 </dd>
 </dl>
 </dd></dl>
@@ -662,12 +746,26 @@
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra4List7forEachENSt8functionIFv3VarEEE">
 <span id="_CPPv3NK5astra4List7forEachENSt8functionIFv3VarEEE"></span><span id="_CPPv2NK5astra4List7forEachENSt8functionIFv3VarEEE"></span><span class="target" id="classastra_1_1List_1a0c11858600b7c95d37da7640b4e408bf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEach</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra4List7forEachENSt8functionIFv3VarEEE" title="Link to this definition"><span/></a><br /></dt>
 <dd><p>Execute a callback on every list element. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra4List13unsafeForEachENSt8functionIFvPvEEE">
 <span id="_CPPv3NK5astra4List13unsafeForEachENSt8functionIFvPvEEE"></span><span id="_CPPv2NK5astra4List13unsafeForEachENSt8functionIFvPvEEE"></span><span class="target" id="classastra_1_1List_1a5e20bb1efc7b7282567db3f6416f8611"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsafeForEach</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra4List13unsafeForEachENSt8functionIFvPvEEE" title="Link to this definition"><span/></a><br /></dt>
 <dd><p>Unsafely execute a callback on every list element. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is for internal use only!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">

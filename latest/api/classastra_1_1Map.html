@@ -562,7 +562,7 @@
   <section id="class-map">
 <span id="exhale-class-classastra-1-1map"></span><h1>Class Map<a class="headerlink" href="#class-map" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_type_info_map_map.hpp.html#file-include-astra-type-info-map-map-hpp"><span class="std std-ref">File map.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_types_map_map.hpp.html#file-include-astra-types-map-map-hpp"><span class="std std-ref">File map.hpp</span></a></p></li>
 </ul>
 <section id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Link to this heading"><span/></a></h2>
@@ -572,19 +572,44 @@
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra3Map3MapEv">
-<span id="_CPPv3N5astra3Map3MapEv"></span><span id="_CPPv2N5astra3Map3MapEv"></span><span id="astra::Map::Map"></span><span class="target" id="classastra_1_1Map_1a014a21ca5514d807209f51568f0c816e"></span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><a class="headerlink" href="#_CPPv4N5astra3Map3MapEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I00EN5astra3Map3MapEPNSt3mapI1K1VEEb">
 <span id="_CPPv3I00EN5astra3Map3MapEPNSt3mapI1K1VEEb"></span><span id="_CPPv2I00EN5astra3Map3MapEPNSt3mapI1K1VEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">K</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">V</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1Map_1aa8008e661e007de2803bccad5a37cf0c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN5astra3Map3MapEPNSt3mapI1K1VEEb" title="astra::Map::Map::K"><span class="n"><span class="pre">K</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN5astra3Map3MapEPNSt3mapI1K1VEEb" title="astra::Map::Map::V"><span class="n"><span class="pre">V</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN5astra3Map3MapEPNSt3mapI1K1VEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new map from a <code class="docutils literal notranslate"><span class="pre">std::map</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The type of map keys </p></li>
+<li><p><strong>V</strong> – The type of map values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>map</strong> – The map to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I00EN5astra3Map3MapEPNSt13unordered_mapI1K1VEEb">
 <span id="_CPPv3I00EN5astra3Map3MapEPNSt13unordered_mapI1K1VEEb"></span><span id="_CPPv2I00EN5astra3Map3MapEPNSt13unordered_mapI1K1VEEb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">K</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">V</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1Map_1ae3d344febf278ff82968a7dc1f4e4dc6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Map</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN5astra3Map3MapEPNSt13unordered_mapI1K1VEEb" title="astra::Map::Map::K"><span class="n"><span class="pre">K</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN5astra3Map3MapEPNSt13unordered_mapI1K1VEEb" title="astra::Map::Map::V"><span class="n"><span class="pre">V</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN5astra3Map3MapEPNSt13unordered_mapI1K1VEEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new map from a <code class="docutils literal notranslate"><span class="pre">std::unordered_map</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The type of map keys </p></li>
+<li><p><strong>V</strong> – The type of map values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>map</strong> – The map to source data from </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Map6assignE3Var">
@@ -595,7 +620,7 @@
 <dd class="field-odd"><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p>
 </dd>
 <dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool </p>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a map </p>
 </dd>
 </dl>
 </dd></dl>
@@ -618,52 +643,114 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Map6ownVarEv">
 <span id="_CPPv3NK5astra3Map6ownVarEv"></span><span id="_CPPv2NK5astra3Map6ownVarEv"></span><span id="astra::Map::ownVarC"></span><span class="target" id="classastra_1_1Map_1a654617c9e6899a89b44854f313ffc6b9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ownVar</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Map6ownVarEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access the contents of this object as a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> holding the contents of this object, const state inherited </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Map7keyTypeEv">
 <span id="_CPPv3NK5astra3Map7keyTypeEv"></span><span id="_CPPv2NK5astra3Map7keyTypeEv"></span><span id="astra::Map::keyTypeC"></span><span class="target" id="classastra_1_1Map_1a536fdac9fffb726d26eef20476647429"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keyType</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Map7keyTypeEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the <a class="reference internal" href="structastra_1_1TypeId.html#structastra_1_1TypeId"><span class="std std-ref">TypeId</span></a> of the list keys. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The key type ID </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Map7valTypeEv">
 <span id="_CPPv3NK5astra3Map7valTypeEv"></span><span id="_CPPv2NK5astra3Map7valTypeEv"></span><span id="astra::Map::valTypeC"></span><span class="target" id="classastra_1_1Map_1a290626f7fe27e39fcfd4f1835896a065"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">valType</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Map7valTypeEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the <a class="reference internal" href="structastra_1_1TypeId.html#structastra_1_1TypeId"><span class="std std-ref">TypeId</span></a> of the list values. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value type ID </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Map7forEachENSt8functionIFv3Var3VarEEE">
 <span id="_CPPv3NK5astra3Map7forEachENSt8functionIFv3Var3VarEEE"></span><span id="_CPPv2NK5astra3Map7forEachENSt8functionIFv3Var3VarEEE"></span><span class="target" id="classastra_1_1Map_1a232e8c13c9e3ac92d4cf270d37d2456a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEach</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Map7forEachENSt8functionIFv3Var3VarEEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Constly execute a callback on every map entry. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Map7forEachENSt8functionIFv3Var3VarEEE">
 <span id="_CPPv3N5astra3Map7forEachENSt8functionIFv3Var3VarEEE"></span><span id="_CPPv2N5astra3Map7forEachENSt8functionIFv3Var3VarEEE"></span><span class="target" id="classastra_1_1Map_1abd33094cd08b4fbf1af57ff75f963785"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">forEach</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Map7forEachENSt8functionIFv3Var3VarEEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Execute a callback on every map entry. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Map13unsafeForEachENSt8functionIFvPvPvEEE">
 <span id="_CPPv3NK5astra3Map13unsafeForEachENSt8functionIFvPvPvEEE"></span><span id="_CPPv2NK5astra3Map13unsafeForEachENSt8functionIFvPvPvEEE"></span><span class="target" id="classastra_1_1Map_1a0678d7efb5049962f7707434c8f3de6a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsafeForEach</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Map13unsafeForEachENSt8functionIFvPvPvEEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Unsafely execute a callback on every map entry. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is for internal use only!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The callback to execute </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Map5clearEv">
 <span id="_CPPv3N5astra3Map5clearEv"></span><span id="_CPPv2N5astra3Map5clearEv"></span><span id="astra::Map::clear"></span><span class="target" id="classastra_1_1Map_1abddf7c8b8e3aad7cb484b71e76779e9b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Map5clearEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Clear the whole map. </p>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Map4sizeEv">
 <span id="_CPPv3NK5astra3Map4sizeEv"></span><span id="_CPPv2NK5astra3Map4sizeEv"></span><span id="astra::Map::sizeC"></span><span class="target" id="classastra_1_1Map_1aad8eee6e64a2b8476d23e9e88c56f06c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Map4sizeEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the current number of entries in the map. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of map entries </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Map6insertE3Var3Var">
 <span id="_CPPv3N5astra3Map6insertE3Var3Var"></span><span id="_CPPv2N5astra3Map6insertE3Var3Var"></span><span id="astra::Map::insert__Var.Var"></span><span class="target" id="classastra_1_1Map_1aae1653edc773d664d61173fba615f03d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Map6insertE3Var3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Place a new entry into the map. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – The key to identify the entry </p></li>
+<li><p><strong>value</strong> – The value to associate with the key </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Map6removeE3Var">
 <span id="_CPPv3N5astra3Map6removeE3Var"></span><span id="_CPPv2N5astra3Map6removeE3Var"></span><span id="astra::Map::remove__Var"></span><span class="target" id="classastra_1_1Map_1a3824d162926b61d6932cb0ed0c7716c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remove</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Map6removeE3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Remove an entry from the map. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – The key of the entry to remove </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -720,7 +807,6 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-documentation">Class Documentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3MapE"><code class="docutils literal notranslate"><span class="pre">astra::Map</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Map3MapEv"><code class="docutils literal notranslate"><span class="pre">Map()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I00EN5astra3Map3MapEPNSt3mapI1K1VEEb"><code class="docutils literal notranslate"><span class="pre">Map()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I00EN5astra3Map3MapEPNSt13unordered_mapI1K1VEEb"><code class="docutils literal notranslate"><span class="pre">Map()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Map6assignE3Var"><code class="docutils literal notranslate"><span class="pre">assign()</span></code></a></li>
