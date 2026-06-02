@@ -689,17 +689,42 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra5Float6assignE3Var">
 <span id="_CPPv3N5astra5Float6assignE3Var"></span><span id="_CPPv2N5astra5Float6assignE3Var"></span><span id="astra::Float::assign__Var"></span><span class="target" id="structastra_1_1Float_1a3233e83f90c5b244d2c412feda5fed98"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assign</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">var</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra5Float6assignE3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Assign the contents of a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to this object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra5Float12unsafeAssignEPv">
 <span id="_CPPv3N5astra5Float12unsafeAssignEPv"></span><span id="_CPPv2N5astra5Float12unsafeAssignEPv"></span><span id="astra::Float::unsafeAssign__voidP"></span><span class="target" id="structastra_1_1Float_1a6d0a681ebbf4a8ea99be8ac6b686dcd5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsafeAssign</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra5Float12unsafeAssignEPv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Unsafely assign a raw pointer to this object. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is for internal use only!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – The pointer to assign from </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra5Float3varEv">
 <span id="_CPPv3N5astra5Float3varEv"></span><span id="_CPPv2N5astra5Float3varEv"></span><span id="astra::Float::var"></span><span class="target" id="structastra_1_1Float_1addc984209e2140a1c5ae55f182f65871"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra5Float3varEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access the contents of this object as a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> holding the contents of this object, const state inherited </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra5Float4sizeEv">
@@ -714,7 +739,16 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra5Float3setEd">
 <span id="_CPPv3N5astra5Float3setEd"></span><span id="_CPPv2N5astra5Float3setEd"></span><span id="astra::Float::set__double"></span><span class="target" id="structastra_1_1Float_1a081130c0c9d24334736e69f7b0a69017"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra5Float3setEd" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Set the stored value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – The new value</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If write operations are disabled </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>

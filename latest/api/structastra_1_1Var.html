@@ -674,83 +674,160 @@
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3VarE">
 <span id="_CPPv3N5astra3VarE"></span><span id="_CPPv2N5astra3VarE"></span><span id="astra::Var"></span><span class="target" id="structastra_1_1Var"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Var</span></span></span><a class="headerlink" href="#_CPPv4N5astra3VarE" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>The abstraction from type and const modifier all types represented like a pointer + type id + const flag the same representation for each type </p>
+<dd><p>Type-agnostic storage mechanism wrapping value, type ID, and const-ness. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Var3VarEv">
 <span id="_CPPv3N5astra3Var3VarEv"></span><span id="_CPPv2N5astra3Var3VarEv"></span><span id="astra::Var::Var"></span><span class="target" id="structastra_1_1Var_1a0facef8a6a221fc5cbc15c0e91f60cc4"></span><span class="sig-name descname"><span class="n"><span class="pre">Var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Var3VarEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create an empty <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a>. </p>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Var3VarEPv6TypeIdb">
 <span id="_CPPv3N5astra3Var3VarEPv6TypeIdb"></span><span id="_CPPv2N5astra3Var3VarEPv6TypeIdb"></span><span id="astra::Var::Var__voidP.TypeId.b"></span><span class="target" id="structastra_1_1Var_1ace8263449dcd02f575285cf151c4618e"></span><span class="sig-name descname"><span class="n"><span class="pre">Var</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Var3VarEPv6TypeIdb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> holding some typed data. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not maintain ownership over the passed pointer; it is the caller’s responsibility to manage the pointer’s lifetime externally</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – The value to store (may be <code class="docutils literal notranslate"><span class="pre">nullptr</span></code>) </p></li>
+<li><p><strong>type</strong> – The type to associate with the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a></p></li>
+<li><p><strong>isConst</strong> – Whether or not the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> should be const and disallow write operations </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra3Var3VarEPK1T">
 <span id="_CPPv3I0EN5astra3Var3VarEPK1T"></span><span id="_CPPv2I0EN5astra3Var3VarEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1Var_1a05025df5bfabe3eed0d9b38995e893f3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Var</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN5astra3Var3VarEPK1T" title="astra::Var::Var::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra3Var3VarEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> holding an existing const object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not maintain ownership over the passed pointer; it is the caller’s responsibility to manage the pointer’s lifetime externally</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to store (may not be <code class="docutils literal notranslate"><span class="pre">nullptr</span></code>) </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra3Var3VarEP1Tb">
 <span id="_CPPv3I0EN5astra3Var3VarEP1Tb"></span><span id="_CPPv2I0EN5astra3Var3VarEP1Tb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1Var_1a1ee8438851c16ae51c6ff742e3983fc7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Var</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra3Var3VarEP1Tb" title="astra::Var::Var::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra3Var3VarEP1Tb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra3Var3VarEPK1T">
-<span id="_CPPv3I_11ReflectableEN5astra3Var3VarEPK1T"></span><span id="_CPPv2I_11ReflectableEN5astra3Var3VarEPK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1Var_1a022aacf43e920c6d42d18c770e48386a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Var</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra3Var3VarEPK1T" title="astra::Var::Var::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra3Var3VarEPK1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I_11ReflectableEN5astra3Var3VarEP1Tb">
-<span id="_CPPv3I_11ReflectableEN5astra3Var3VarEP1Tb"></span><span id="_CPPv2I_11ReflectableEN5astra3Var3VarEP1Tb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Reflectable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1Var_1a22919e67123e49efa9bbee24efe30390"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Var</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_11ReflectableEN5astra3Var3VarEP1Tb" title="astra::Var::Var::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_11ReflectableEN5astra3Var3VarEP1Tb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> holding an existing object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not maintain ownership over the passed pointer; it is the caller’s responsibility to manage the pointer’s lifetime externally</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – The value to store (may not be <code class="docutils literal notranslate"><span class="pre">nullptr</span></code>) </p></li>
+<li><p><strong>isConst</strong> – Whether or not the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> should be const and disallow write operations </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra3Var12unsafeAssignEPv">
 <span id="_CPPv3N5astra3Var12unsafeAssignEPv"></span><span id="_CPPv2N5astra3Var12unsafeAssignEPv"></span><span id="astra::Var::unsafeAssign__voidP"></span><span class="target" id="structastra_1_1Var_1a99486d3f8bb7d67dbac5faea0ee46c36"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsafeAssign</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Var12unsafeAssignEPv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Overwrite the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a>’s internal storage with the provided pointer. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>This function is designed for internal use only and can cause serious memory management issues if used incorrectly! Use with caution!</strong></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – The pointer to store </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra3VareqERK3Var">
-<span id="_CPPv3NK5astra3VareqERK3Var"></span><span id="_CPPv2NK5astra3VareqERK3Var"></span><span id="astra::Var::eq-operator__VarCRC"></span><span class="target" id="structastra_1_1Var_1aa078ab2921955b20873750a88db6b49c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3VareqERK3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra3VarneERK3Var">
-<span id="_CPPv3NK5astra3VarneERK3Var"></span><span id="_CPPv2NK5astra3VarneERK3Var"></span><span id="astra::Var::neq-operator__VarCRC"></span><span class="target" id="structastra_1_1Var_1a86bc5d574150922bf6e084d7dcc5fce1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3VarneERK3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5astra3Var6rawMutEv">
-<span id="_CPPv3NK5astra3Var6rawMutEv"></span><span id="_CPPv2NK5astra3Var6rawMutEv"></span><span id="astra::Var::rawMutC"></span><span class="target" id="structastra_1_1Var_1a7b5ee7d3db0c33aabf229b7b9a2389a2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">rawMut</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Var6rawMutEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra3Var6rawMutEv">
+<span id="_CPPv3N5astra3Var6rawMutEv"></span><span id="_CPPv2N5astra3Var6rawMutEv"></span><span id="astra::Var::rawMut"></span><span class="target" id="structastra_1_1Var_1a824c93d65baf14a66320ebb73b73b346"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">rawMut</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Var6rawMutEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get a mutable raw pointer to the contained object. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>This function is designed for internal use only and can cause serious memory management issues if used incorrectly! Use with caution!</strong></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The contained object, or <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> if the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> is const </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Var3rawEv">
 <span id="_CPPv3NK5astra3Var3rawEv"></span><span id="_CPPv2NK5astra3Var3rawEv"></span><span id="astra::Var::rawC"></span><span class="target" id="structastra_1_1Var_1adb4c83c3e1ed1a4cdc8c3f96ca6937bc"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">raw</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Var3rawEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get a const raw pointer to the contained object. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>This function is designed for internal use only and can cause serious memory management issues if used incorrectly! Use with caution!</strong></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The contained object </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Var6typeIdEv">
 <span id="_CPPv3NK5astra3Var6typeIdEv"></span><span id="_CPPv2NK5astra3Var6typeIdEv"></span><span id="astra::Var::typeIdC"></span><span class="target" id="structastra_1_1Var_1a132dad3cb1b4eea70f3aaaeca0c9cdc7"></span><a class="reference internal" href="structastra_1_1TypeId.html#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">typeId</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Var6typeIdEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the <a class="reference internal" href="structastra_1_1TypeId.html#structastra_1_1TypeId"><span class="std std-ref">TypeId</span></a> associated with the object in the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The associated type ID </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra3Var7isConstEv">
 <span id="_CPPv3NK5astra3Var7isConstEv"></span><span id="_CPPv2NK5astra3Var7isConstEv"></span><span id="astra::Var::isConstC"></span><span class="target" id="structastra_1_1Var_1a4f097f218d49c14421443055e1dc95ce"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">isConst</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra3Var7isConstEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Check whether or not the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> is const. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the var is const or not </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra3Var7disposeEv">
-<span id="_CPPv3N5astra3Var7disposeEv"></span><span id="_CPPv2N5astra3Var7disposeEv"></span><span id="astra::Var::dispose"></span><span class="target" id="structastra_1_1Var_1a61bbe78bb9c0fb437caf5c4090f7471d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dispose</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Var7disposeEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra3Var7releaseEv">
+<span id="_CPPv3N5astra3Var7releaseEv"></span><span id="_CPPv2N5astra3Var7releaseEv"></span><span id="astra::Var::release"></span><span class="target" id="structastra_1_1Var_1ae222d669896ebf55c03c2560e03735ca"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">release</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra3Var7releaseEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Release the pointer from the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> and clear state; resets to an empty var. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The previously-held pointer </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0ENK5astra3Var6rtCastEP1Tv">
 <span id="_CPPv3I0ENK5astra3Var6rtCastEv"></span><span id="_CPPv2I0ENK5astra3Var6rtCastEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1Var_1a89f372293c864439538cc87e280b1ca8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK5astra3Var6rtCastEP1Tv" title="astra::Var::rtCast::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">rtCast</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK5astra3Var6rtCastEP1Tv" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>runtime type check and cast </p>
+<dd><p>Safely access the contents of the <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> through a real type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type to return the contents as</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If this method is called on a const <a class="reference internal" href="#structastra_1_1Var"><span class="std std-ref">Var</span></a> with a non-const pointer return type </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The stored contents; will be a const pointer if T is const and a mutable pointer if T is mutable</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -812,16 +889,12 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Var3VarEPv6TypeIdb"><code class="docutils literal notranslate"><span class="pre">Var()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra3Var3VarEPK1T"><code class="docutils literal notranslate"><span class="pre">Var()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra3Var3VarEP1Tb"><code class="docutils literal notranslate"><span class="pre">Var()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra3Var3VarEPK1T"><code class="docutils literal notranslate"><span class="pre">Var()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I_11ReflectableEN5astra3Var3VarEP1Tb"><code class="docutils literal notranslate"><span class="pre">Var()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Var12unsafeAssignEPv"><code class="docutils literal notranslate"><span class="pre">unsafeAssign()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra3VareqERK3Var"><code class="docutils literal notranslate"><span class="pre">operator==()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra3VarneERK3Var"><code class="docutils literal notranslate"><span class="pre">operator!=()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra3Var6rawMutEv"><code class="docutils literal notranslate"><span class="pre">rawMut()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Var6rawMutEv"><code class="docutils literal notranslate"><span class="pre">rawMut()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra3Var3rawEv"><code class="docutils literal notranslate"><span class="pre">raw()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra3Var6typeIdEv"><code class="docutils literal notranslate"><span class="pre">typeId()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra3Var7isConstEv"><code class="docutils literal notranslate"><span class="pre">isConst()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Var7disposeEv"><code class="docutils literal notranslate"><span class="pre">dispose()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra3Var7releaseEv"><code class="docutils literal notranslate"><span class="pre">release()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0ENK5astra3Var6rtCastEP1Tv"><code class="docutils literal notranslate"><span class="pre">rtCast()</span></code></a></li>
 </ul>
 </li>

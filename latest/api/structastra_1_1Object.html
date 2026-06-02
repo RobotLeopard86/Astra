@@ -685,12 +685,31 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Object6assignE3Var">
 <span id="_CPPv3N5astra6Object6assignE3Var"></span><span id="_CPPv2N5astra6Object6assignE3Var"></span><span id="astra::Object::assign__Var"></span><span class="target" id="structastra_1_1Object_1a087738c182ccdf3a53094979e6d8fc71"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assign</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">var</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Object6assignE3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Assign the contents of a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to this object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Object12unsafeAssignEPv">
 <span id="_CPPv3N5astra6Object12unsafeAssignEPv"></span><span id="_CPPv2N5astra6Object12unsafeAssignEPv"></span><span id="astra::Object::unsafeAssign__voidP"></span><span class="target" id="structastra_1_1Object_1a28267c0cf387ec82cddf6011ba7b7446"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsafeAssign</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Object12unsafeAssignEPv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Unsafely assign a raw pointer to this object. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is for internal use only!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – The pointer to assign from </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Object8getFieldERKNSt6stringE">
@@ -710,7 +729,13 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6Object3varEv">
 <span id="_CPPv3N5astra6Object3varEv"></span><span id="_CPPv2N5astra6Object3varEv"></span><span id="astra::Object::var"></span><span class="target" id="structastra_1_1Object_1af14e694d1ca18fd0e3838e57c9655dd4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6Object3varEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access the contents of this object as a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> holding the contents of this object, const state inherited </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>

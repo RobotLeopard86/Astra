@@ -674,37 +674,95 @@
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra4BoolE">
 <span id="_CPPv3N5astra4BoolE"></span><span id="_CPPv2N5astra4BoolE"></span><span id="astra::Bool"></span><span class="target" id="structastra_1_1Bool"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bool</span></span></span><a class="headerlink" href="#_CPPv4N5astra4BoolE" title="Link to this definition"><span/></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Reflected boolean interface. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra4Bool4BoolEPbb">
 <span id="_CPPv3N5astra4Bool4BoolEPbb"></span><span id="_CPPv2N5astra4Bool4BoolEPbb"></span><span id="astra::Bool::Bool__bP.b"></span><span class="target" id="structastra_1_1Bool_1a8553bae455959c1b6db7aefcdfdf6f81"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Bool</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isConst</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra4Bool4BoolEPbb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a new <a class="reference internal" href="#structastra_1_1Bool"><span class="std std-ref">Bool</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – A pointer to the bool to hold (does not take ownership) </p></li>
+<li><p><strong>isConst</strong> – If write operations should be disabled </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra4Bool6assignE3Var">
 <span id="_CPPv3N5astra4Bool6assignE3Var"></span><span id="_CPPv2N5astra4Bool6assignE3Var"></span><span id="astra::Bool::assign__Var"></span><span class="target" id="structastra_1_1Bool_1a473f6b23cbf242a9094b45056515a5fd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assign</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">var</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra4Bool6assignE3Var" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Assign the contents of a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to this object. </p>
+<p>
+Assign the contents of a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to this object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p></li>
+<li><p><strong>var</strong> – The <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> to assign from</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool</p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If the source <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> does not contain a bool </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra4Bool12unsafeAssignEPv">
 <span id="_CPPv3N5astra4Bool12unsafeAssignEPv"></span><span id="_CPPv2N5astra4Bool12unsafeAssignEPv"></span><span id="astra::Bool::unsafeAssign__voidP"></span><span class="target" id="structastra_1_1Bool_1ad75f99322b4e2d5d6c7052a115977a27"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsafeAssign</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra4Bool12unsafeAssignEPv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Unsafely assign a raw pointer to this object. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is for internal use only!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – The pointer to assign from </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra4Bool3getEv">
 <span id="_CPPv3NK5astra4Bool3getEv"></span><span id="_CPPv2NK5astra4Bool3getEv"></span><span id="astra::Bool::getC"></span><span class="target" id="structastra_1_1Bool_1a70a05bb8260c14640cf65bd198f89c71"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra4Bool3getEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Get the stored value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The stored value </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra4Bool3setEb">
 <span id="_CPPv3N5astra4Bool3setEb"></span><span id="_CPPv2N5astra4Bool3setEb"></span><span id="astra::Bool::set__b"></span><span class="target" id="structastra_1_1Bool_1a4fba6159ca85253f06b2a628a5d43626"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra4Bool3setEb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Set the stored value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – The new value</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If write operations are disabled </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra4Bool3varEv">
 <span id="_CPPv3N5astra4Bool3varEv"></span><span id="_CPPv2N5astra4Bool3varEv"></span><span id="astra::Bool::var"></span><span class="target" id="structastra_1_1Bool_1afc2e555a4d0b14c5d422a37048d952e5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structastra_1_1Var.html#_CPPv4N5astra3VarE" title="astra::Var"><span class="n"><span class="pre">Var</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra4Bool3varEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Access the contents of this object as a <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="structastra_1_1Var.html#structastra_1_1Var"><span class="std std-ref">Var</span></a> holding the contents of this object, const state inherited </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>

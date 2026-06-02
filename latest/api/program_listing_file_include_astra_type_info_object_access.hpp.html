@@ -419,15 +419,13 @@
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Access</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// clang-format off</span>
-<span class="w">  </span><span class="n">None</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00000</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Public</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00001</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Protected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00010</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Private</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00100</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Static</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mb">0b01000</span><span class="p">,</span>
-<span class="w">  </span><span class="n">Const</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mb">0b10000</span><span class="p">,</span>
-<span class="w">  </span><span class="n">All</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mb">0b11111</span><span class="p">,</span>
-<span class="w">        </span><span class="c1">// clang-format on</span>
+<span class="w">        </span><span class="n">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00000</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Public</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00001</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Protected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00010</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Private</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b00100</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Static</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b01000</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b10000</span><span class="p">,</span>
+<span class="w">        </span><span class="n">All</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b11111</span><span class="p">,</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">Access</span><span class="w"> </span><span class="k">operator</span><span class="o">|</span><span class="p">(</span><span class="n">Access</span><span class="w"> </span><span class="n">lhs</span><span class="p">,</span><span class="w"> </span><span class="n">Access</span><span class="w"> </span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
