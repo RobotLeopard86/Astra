@@ -8,39 +8,48 @@
 #include "field_info.hpp"
 
 namespace astra {
-
-	///Skip iterator for fields collection, steps over items with unwanted properties
+	/**
+	 * @brief Iterator for fields that takes access control into account
+	 */
 	class ASTRA_API FieldIterator {
 	  public:
+		///@cond
 		using const_iterator = std::map<std::string_view, FieldDesc>::const_iterator;
+		///@endcond
 
-	  public:
-		FieldIterator(const std::map<std::string_view, FieldDesc>* map,
-			const void* base,
-			Access acc,
-			bool includeReadonly)
-		  : it(map->begin()),
-			end(map->cend()),
-			base(base),
-			acc(acc),
-			include_readonly(includeReadonly) {
-			//start from a valid element
+		/**
+		 * @brief Create a new field iterator
+		 *
+		 * @param map Field map to iterate over
+		 * @param base Base object to operate on
+		 * @param acc Access filter for fields
+		 * @param includeReadonly Whether or not to include read-only fields in the iteration
+		 */
+		FieldIterator(const std::map<std::string_view, FieldDesc>* map, const void* base, Access acc, bool includeReadonly)
+		  : it(map->begin()), end(map->cend()), base(base), acc(acc), include_readonly(includeReadonly) {
 			if(!isValid()) {
 				nextValid();
 			}
 		}
 
+		/**
+		 * @brief Prefix increment operator
+		 */
 		FieldIterator& operator++() noexcept {
 			nextValid();
 			return *this;
 		};
 
+		/**
+		 * @brief Postfix increment operator
+		 */
 		FieldIterator operator++(int) noexcept {
 			auto t = *this;
 			++(*this);
 			return t;
 		};
 
+		///@cond
 		bool operator==(const const_iterator& other) const noexcept {
 			return it != other;
 		};
@@ -48,8 +57,14 @@ namespace astra {
 		bool operator!=(const const_iterator& other) const noexcept {
 			return it != other;
 		};
+		///@endcond
 
-		auto operator*() const noexcept {
+		/**
+		 * @brief Access the current field
+		 *
+		 * @return A pair of field name and info
+		 */
+		std::pair<std::string_view, FieldInfo> operator*() const noexcept {
 			return std::make_pair(it->first, FieldInfo(base, &it->second));
 		};
 

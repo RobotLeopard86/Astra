@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <type_traits>
+#include <utility>
 
 #include "astra/dll.hpp"
 #include "astra/type_id.hpp"
@@ -12,15 +13,17 @@ namespace astra {
 
 	class ASTRA_API MethodInfo {
 	  public:
-	  public:
+		/**
+		 * @brief Create a new method info from an object pointer and method description
+		 *
+		 * @param base Pointer to the object instance (may be @c nullptr for static methods)
+		 * @param data The method description
+		 */
 		MethodInfo(const void* base, const MethodDesc* data)
 		  : base(const_cast<void*>(base)), data(data) {
 		}
 
-		MethodInfo(void* base, const MethodDesc* data)
-		  : base(base), data(data) {
-		}
-
+		///@cond
 		MethodInfo(const MethodInfo& other) {
 			if(this == &other) {
 				return;
@@ -38,6 +41,31 @@ namespace astra {
 			return *this;
 		}
 
+		MethodInfo(MethodInfo&& other) {
+			if(this == &other) {
+				return;
+			}
+			base = std::exchange(other.base, nullptr);
+			data = std::exchange(other.data, nullptr);
+		}
+
+		MethodInfo& operator=(MethodInfo&& other) {
+			if(this == &other) {
+				return *this;
+			}
+			base = std::exchange(other.base, nullptr);
+			data = std::exchange(other.data, nullptr);
+			return *this;
+		}
+		///@endcond
+
+		/**
+		 * @brief Invoke the method and ignore the return value if present
+		 *
+		 * @tparam Args Types of each method argument
+		 *
+		 * @param args The arguments to pass to the method
+		 */
 		template<typename... Args>
 		void invoke(const Args&... args) const {
 			std::vector<Var> vArgs;
@@ -46,6 +74,16 @@ namespace astra {
 			return data->invoke(Var(), base, vArgs);
 		}
 
+		/**
+		 * @brief Invoke the method and capture the return value
+		 *
+		 * @tparam R Return type of the function
+		 * @tparam Args Types of each method argument
+		 *
+		 * @param args The arguments to pass to the method
+		 *
+		 * @return The function return value
+		 */
 		template<typename R, typename... Args>
 		R invoke(const Args&... args) const {
 			std::vector<Var> vArgs;
@@ -56,22 +94,47 @@ namespace astra {
 			return ret;
 		}
 
+		/**
+		 * @brief Check if the method is const or not (can be invoked on a const object)
+		 *
+		 * @return If the method is const
+		 */
 		bool isConst() const {
 			return data->isConst();
 		}
 
+		/**
+		 * @brief Check if the method is static or not
+		 *
+		 * @return If the method is static
+		 */
 		bool isStatic() const {
 			return data->isStatic();
 		}
 
+		/**
+		 * @brief Check if the method is public or not
+		 *
+		 * @return If the method is public
+		 */
 		bool isPublic() const {
 			return data->isPublic();
 		}
 
+		/**
+		 * @brief Check if the method is protected or not
+		 *
+		 * @return If the method is protected
+		 */
 		bool isProtected() const {
 			return data->isProtected();
 		}
 
+		/**
+		 * @brief Check if the method is private or not
+		 *
+		 * @return If the method is private
+		 */
 		bool isPrivate() const {
 			return data->isPrivate();
 		}

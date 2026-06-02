@@ -45,7 +45,7 @@ namespace astra {
 		 *
 		 * @tparam T The type of characters forming the string (will usually be @c char)
 		 *
-		 * @param str A pointer to the string to source data from
+		 * @param strPtr A pointer to the string to source data from
 		 */
 		template<typename T>
 		String(const T** strPtr) {
@@ -86,7 +86,7 @@ namespace astra {
 		/**
 		 * @brief Set the stored value
 		 *
-		 * @param val The new value
+		 * @param value The new value
 		 *
 		 * @throws std::runtime_error If write operations are disabled
 		 */

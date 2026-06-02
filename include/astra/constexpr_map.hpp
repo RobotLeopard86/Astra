@@ -74,11 +74,11 @@ namespace astra {
 		 *
 		 * @throws std::runtime_error If no entry with the given key exists
 		 */
-		T getValue(const std::string& name) const {
-			auto ptr = searchByName(name, 0, size);
+		T getValue(const std::string& key) const {
+			auto ptr = searchByKey(key, 0, size);
 
 			if(ptr == nullptr) {
-				throw std::runtime_error(::astra::format("Cannot find the key \"{}\"", name));
+				throw std::runtime_error(::astra::format("Cannot find the key \"{}\"", key));
 			}
 
 			return ptr->value;
@@ -127,7 +127,7 @@ namespace astra {
 		}
 
 		//Binary search algorithm
-		constexpr Entry* searchByName(std::string_view name, std::size_t begin, std::size_t end) const {
+		constexpr Entry* searchByKey(std::string_view name, std::size_t begin, std::size_t end) const {
 			while(begin < end) {
 				auto middleIdx = (begin + end) / 2;
 				auto middleVal = name_ptr[middleIdx]->name;

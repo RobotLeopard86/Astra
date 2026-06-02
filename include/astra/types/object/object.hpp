@@ -9,8 +9,8 @@
 #include "astra/type_query.hpp"
 #include "astra/format.hpp"
 #include "astra/var.hpp"
-#include "fields.hpp"
-#include "methods.hpp"
+#include "field_group.hpp"
+#include "method_group.hpp"
 
 namespace astra {
 
@@ -53,6 +53,15 @@ namespace astra {
 			inner.unsafeAssign(ptr);
 		}
 
+		/**
+		 * @brief Access a field by name
+		 *
+		 * @param name The name of the field to access
+		 *
+		 * @return The FieldInfo for the requested field
+		 *
+		 * @throws std::runtime_error If no field with the provided name exists in the object
+		 */
 		FieldInfo getField(const std::string& name) {
 			auto it = fields->find(name);
 
@@ -62,10 +71,39 @@ namespace astra {
 			throw std::runtime_error(::astra::format("There is no field with name: '{}'", name));
 		}
 
-		Fields getFields(Access access = Access::Public, bool includeReadonly = false) const {
-			return Fields(inner.raw(), fields, access, includeReadonly);
+		/**
+		 * @brief Get all fields in the object with the given access and read-only state that may be accessed on a const object
+		 *
+		 * @param access The access specifier for fields to query
+		 * @param includeReadonly Whether or not to include read-only fields in the group
+		 *
+		 * @return The matching group of fields
+		 */
+		FieldGroup getFields(Access access = Access::Public, bool includeReadonly = true) const {
+			return FieldGroup(inner.raw(), fields, access, includeReadonly);
 		}
 
+		/**
+		 * @brief Get all fields in the object with the given access and read-only state
+		 *
+		 * @param access The access specifier for fields to query
+		 * @param includeReadonly Whether or not to include read-only fields in the group
+		 *
+		 * @return The matching group of fields
+		 */
+		FieldGroup getFields(Access access = Access::Public, bool includeReadonly = false) {
+			return FieldGroup(inner.rawMut(), fields, access, includeReadonly);
+		}
+
+		/**
+		 * @brief Access a method by name
+		 *
+		 * @param name The name of the method to access
+		 *
+		 * @return The MethodInfo for the requested method
+		 *
+		 * @throws std::runtime_error If no method with the provided name exists in the object
+		 */
 		MethodInfo getMethod(const std::string& name) {
 			auto it = methods->find(name);
 
@@ -81,6 +119,28 @@ namespace astra {
 				return MethodInfo(inner.rawMut(), &it->second);
 			}
 			throw std::runtime_error(::astra::format("There is no method with name: '{}'", name));
+		}
+
+		/**
+		 * @brief Get all methods in the object with the given access flags that may be accessed on a const object
+		 *
+		 * @param access The access specifier for methods to query
+		 *
+		 * @return The matching group of methods
+		 */
+		MethodGroup getMethods(Access access = Access::Public) const {
+			return MethodGroup(inner.raw(), methods, access);
+		}
+
+		/**
+		 * @brief Get all methods in the object with the given access flags
+		 *
+		 * @param access The access specifier for methods to query
+		 *
+		 * @return The matching group of methods
+		 */
+		MethodGroup getMethods(Access access = Access::Public) {
+			return MethodGroup(inner.rawMut(), methods, access);
 		}
 
 		/**

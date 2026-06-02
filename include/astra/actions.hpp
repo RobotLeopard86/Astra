@@ -16,7 +16,7 @@ namespace astra {
 		 * @param typeName Returns the name of the type
 		 * @param sizeOf Returns the size of the type
 		 * @param construct Invokes the constructor to create a new object of the type in the given pointer
-		 * @param destruct Invokes the destructor to clean up the object given by the pointer
+		 * @param destroy Invokes the destructor to clean up the object given by the pointer
 		 * @param copy Copies the object at the second pointer to the first pointer
 		 * @param move Moves the object at the second pointer to the first pointer
 		 */

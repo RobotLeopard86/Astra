@@ -4,21 +4,21 @@ This guide assumes you are using Meson for your project (Astra's build system). 
 
 1. Add Astra as a subproject  
     1. Set up a `astra.wrap` file in your `subprojects` directory. It should look something like this:
-	```{code-block}ini
+	```{code-block}
 	[wrap-git]
 	url = https://github.com/RobotLeopard86/Astra
 	depth = 1
 	revision = <tag, branch, or commit hash to clone>
 	```
 	2. Add these lines to your `meson.build`:
-	```{code-block}meson
+	```{code-block}
 	astra = subproject('astra', required: true)
 	astra_generator = astra.get_variable('astra_generator')
 	astra_dep = astra.get_variable('astra_dep')
 	```  
 2. Configure reflection codegen
 	1. Create the custom target. It should look something like this:
-	```{code-block}meson
+	```{code-block}
 	reflection = custom_target('example.astra.[cpphpp]', output: ['example.astra.hpp', 'example.astra.cpp'],
 		input: ['some_header.hpp'], console: true, command: [astra_generator, '-c', meson.global_build_root(), '-o', 
 		meson.current_build_dir(), '-p', 'example', meson.current_source_dir()])

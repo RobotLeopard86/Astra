@@ -70,7 +70,7 @@ namespace astra {
 		/**
 		 * @brief Set the stored value
 		 *
-		 * @param val The new value
+		 * @param value The new value
 		 *
 		 * @throws std::runtime_error If write operations are disabled
 		 */

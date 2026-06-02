@@ -93,7 +93,7 @@ namespace astra {
 		/**
 		 * @brief Set the stored value (signed)
 		 *
-		 * @param val The new signed value
+		 * @param value The new signed value
 		 *
 		 * @throws std::runtime_error If write operations are disabled
 		 * @throws std::runtime_error If sizing and signedness do not match the stored type
@@ -105,7 +105,7 @@ namespace astra {
 		/**
 		 * @brief Set the stored value (unsigned)
 		 *
-		 * @param val The new unsigned value
+		 * @param value The new unsigned value
 		 *
 		 * @throws std::runtime_error If write operations are disabled
 		 * @throws std::runtime_error If sizing and signedness do not match the stored type
