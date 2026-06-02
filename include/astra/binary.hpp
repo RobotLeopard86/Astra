@@ -9,6 +9,9 @@
 #include "libjaguar/Document.hpp"
 
 namespace astra {
+	/**
+	 * @brief Helper for serializing and deserializing objects to/from binary data (encoded as Jaguar data)
+	 */
 	struct ASTRA_API binary {
 		/**
 		 * @brief Deserialize a T object from the Jaguar document

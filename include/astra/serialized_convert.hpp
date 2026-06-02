@@ -7,6 +7,9 @@
 #include "dll.hpp"
 
 namespace astra {
+	/**
+	 * @brief Helper for performing in-place serialized format conversion
+	 */
 	struct ASTRA_API convert {
 		/**
 		 * @brief Convert a YAML node to a JSON object

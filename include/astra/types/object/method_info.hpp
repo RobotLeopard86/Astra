@@ -10,7 +10,9 @@
 #include "method_desc.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Representation of a concrete object method
+	 */
 	class ASTRA_API MethodInfo {
 	  public:
 		/**

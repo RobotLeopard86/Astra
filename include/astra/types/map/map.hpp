@@ -7,7 +7,9 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Reflection inteface for a key-value store
+	 */
 	class ASTRA_API Map final {
 	  public:
 		///@cond

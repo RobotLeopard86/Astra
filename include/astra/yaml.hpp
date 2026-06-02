@@ -10,6 +10,9 @@
 #include "yaml-cpp/yaml.h"// IWYU pragma: keep
 
 namespace astra {
+	/**
+	 * @brief Helper for serializing and deserializing objects to/from YAML
+	 */
 	struct ASTRA_API yaml {
 		/**
 		 * @brief Deserialize a T object from the YAML node

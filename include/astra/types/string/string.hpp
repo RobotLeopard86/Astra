@@ -10,10 +10,14 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Reflection interface for a string
+	 */
 	class ASTRA_API String final {
 	  public:
+		///@cond
 		String() = delete;
+		///@endcond
 
 		/**
 		 * @brief Create a new string from a @c std::basic_string

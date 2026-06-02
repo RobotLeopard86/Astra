@@ -8,8 +8,9 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
-	///Skip iterator for methods collection, steps over items with unwanted properties
+	/**
+	 * @brief Iterator for methods that takes access control into account
+	 */
 	class ASTRA_API MethodIterator {
 	  public:
 		using const_iterator = std::map<std::string_view, MethodDesc>::const_iterator;

@@ -1,4 +1,4 @@
-project('astra', 'c', 'cpp', version: '1.0.0-pre1', meson_version: '>=1.6.0', license: 'Apache-2.0', default_options: ['cpp_std=c++20', 'default_library=static', 'b_vscrt=from_buildtype'])
+project('astra', 'c', 'cpp', version: '1.0.0-rc1', meson_version: '>=1.6.0', license: 'Apache-2.0', default_options: ['cpp_std=c++20', 'default_library=static', 'b_vscrt=from_buildtype'])
 
 bt = get_option('buildtype')
 cxx = meson.get_compiler('cpp')

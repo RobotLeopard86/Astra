@@ -7,7 +7,9 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Reflection interface for a smart pointer
+	 */
 	class ASTRA_API Pointer {
 	  public:
 		/**

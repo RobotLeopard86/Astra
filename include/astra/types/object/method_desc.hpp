@@ -9,7 +9,9 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Description of a member method in an object
+	 */
 	class ASTRA_API MethodDesc {
 	  public:
 		/**

@@ -7,7 +7,9 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Group of fields for iteration
+	 */
 	class ASTRA_API FieldGroup {
 	  public:
 		/**

@@ -9,6 +9,9 @@
 #include "nlohmann/json.hpp"
 
 namespace astra {
+	/**
+	 * @brief Helper for serializing and deserializing objects to/from JSON
+	 */
 	struct ASTRA_API json {
 		/**
 		 * @brief Deserialize a T object from the JSON object

@@ -13,9 +13,9 @@
 #include "method_group.hpp"
 
 namespace astra {
-
-	///container of all field names matched to Var structs
-	///just a registry of types and value pointers
+	/**
+	 * @brief Reflection interface for a class or struct
+	 */
 	class ASTRA_API Object {
 	  public:
 		Object(Var var,

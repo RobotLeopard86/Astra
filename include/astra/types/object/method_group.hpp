@@ -6,7 +6,9 @@
 #include "astra/dll.hpp"
 
 namespace astra {
-
+	/**
+	 * @brief Group of methods for iteration
+	 */
 	class ASTRA_API MethodGroup {
 	  public:
 		/**
