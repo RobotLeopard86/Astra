@@ -6,7 +6,7 @@
 #include <utility>
 
 #include "astra/dll.hpp"
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/format.hpp"
 #include "astra/var.hpp"
 #include "fields.hpp"

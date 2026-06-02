@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/format.hpp"
 #include "astra/dll.hpp"
 #include "iarray.hpp"

@@ -4,7 +4,7 @@
 #include <cstring>
 #include <type_traits>
 
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/format.hpp"
 #include "iinteger.hpp"
 #include "astra/dll.hpp"

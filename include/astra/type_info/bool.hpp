@@ -1,11 +1,10 @@
 #pragma once
 
-#include <algorithm>
 #include <cctype>
 #include <string_view>
 
 #include "astra/dll.hpp"
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/format.hpp"
 #include "astra/type_id.hpp"
 #include "astra/var.hpp"

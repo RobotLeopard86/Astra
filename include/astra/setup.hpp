@@ -1,17 +1,17 @@
 #pragma once
 
-#include <type_traits>
-
 #include "types/type_actions.hpp"// IWYU pragma: keep
 #include "type_id.hpp"
 #include "dll.hpp"
 
+///@cond
 class ASTRA_API AstraReflectBase {
   public:
 	virtual astra::TypeId ASTRA__gettypeid() const = 0;
 };
 
 #ifdef _ASTRAGENERATE
+#include <type_traits>
 template<typename T>
 struct ASTRA_API astragen_reflectable_check {
 	static constexpr bool value = std::is_enum_v<T> || (!std::is_class_v<T>) || (std::is_class_v<T> && std::default_initializable<T> && std::is_base_of_v<AstraReflectBase, T>);
@@ -33,3 +33,4 @@ struct ASTRA_API astragen_reflectable_check {
 	friend struct astra::TypeActions<x>; \
 	virtual astra::TypeId ASTRA__gettypeid() const override;
 #endif
+///@endcond

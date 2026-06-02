@@ -24,14 +24,15 @@ namespace astra {
 	};
 
 	template<typename T>
-	TypeId TypeId::get(std::unique_ptr<T>*) {
-		static TypeId id(ActionsTable::record(Actions(&TypeActions<std::unique_ptr<T>>::reflect,
-			&CommonActions<std::unique_ptr<T>>::typeName,
-			&CommonActions<std::unique_ptr<T>>::sizeOf,
-			&CommonActions<std::unique_ptr<T>>::construct,
-			&CommonActions<std::unique_ptr<T>>::destroy,
-			&TypeActions<std::unique_ptr<T>>::copy,
-			&CommonActions<std::unique_ptr<T>>::move)));
+		requires is_unique_ptr_v<T>
+	TypeId TypeId::get() {
+		static TypeId id(ActionsTable::record(Actions(&TypeActions<T>::reflect,
+			&CommonActions<T>::typeName,
+			&CommonActions<T>::sizeOf,
+			&CommonActions<T>::construct,
+			&CommonActions<T>::destroy,
+			&CommonActions<T>::copy,
+			&CommonActions<T>::move)));
 		return id;
 	}
 

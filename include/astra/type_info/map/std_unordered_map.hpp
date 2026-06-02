@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/dll.hpp"
 #include "imap.hpp"
 

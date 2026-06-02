@@ -15,7 +15,7 @@ template <>
 struct TypeActions<{{name}}>;
 
 template <>
-TypeId TypeId::get({{name}}* /*unused*/);
+TypeId TypeId::get<{{name}}>();
 
 }
 )"

@@ -1,87 +1,106 @@
 #pragma once
 
-#include <array>
-#include <deque>
-#include <list>
-#include <map>
-#include <queue>
-#include <set>
-#include <stack>
-#include <string_view>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
-
-#include "astra/names.hpp"
 #include "astra/traits.hpp"
 #include "dll.hpp"
 
 namespace astra {
-
-	///copyable value type with single int under the hood
-	///represent sequential type id
+	/**
+	 * @brief Sequential type ID wrapper and lookup system
+	 */
 	struct ASTRA_API TypeId {
+		/**
+		 * @brief Create a default type ID (represents unknown type)
+		 */
 		TypeId()
 		  : id(0) {
 		}
 
-		///proxy function for using with implicit type in TypeId::get<T>() way without argument
+		/**
+		 * @brief Get the type ID for a given type
+		 *
+		 * @tparam T The type to lookup
+		 *
+		 * @return The type ID
+		 */
 		template<typename T>
 		static TypeId get() {
-			return get(static_cast<T*>(nullptr));
-		}
-
-		///the main function of TypeId mechanism
-		template<typename T>
-			requires is_class_v<T>
-		static TypeId get(T*) {
 			return TypeId(0);
 		}
 
+		/**
+		 * @brief Get the type ID for a given object
+		 *
+		 * @tparam T The type of the object (implicit)
+		 *
+		 * @return The type ID
+		 */
+		template<typename T>
+		static TypeId get(T*) {
+			return TypeId::get<T>();
+		}
+
+		///@cond
+		template<typename T>
+			requires(requires(T t) {
+				{ t.ASTRA__gettypeid() } -> std::same_as<TypeId>;
+			})
+		static TypeId get(T* ptr) {
+			return ptr->ASTRA__gettypeid();
+		}
+
+		template<>
+		TypeId get<bool>() {
+			return getBoolId();
+		}
+
+		template<typename T>
+			requires std::is_integral_v<T> && (!std::is_same_v<T, bool>)
+		static TypeId get();
+
+		template<typename T>
+			requires std::is_floating_point_v<T>
+		static TypeId get();
+
+		template<typename T>
+			requires is_string_v<T>
+		static TypeId get();
+
+		template<typename T>
+			requires is_array_v<T>
+		static TypeId get();
+
+		template<typename T>
+			requires is_std_array_v<T>
+		static TypeId get();
+
+		template<typename T>
+			requires is_list_v<T>
+		static TypeId get();
+
+		template<typename T>
+			requires is_map_v<T>
+		static TypeId get();
+
+		template<typename T>
+			requires is_shared_ptr_v<T>
+		static TypeId get();
+
+		template<typename T>
+			requires is_unique_ptr_v<T>
+		static TypeId get();
+
 		template<typename T>
 			requires std::is_enum_v<T>
-		static TypeId get(T*) {
+		static TypeId get() {
 			return TypeId(0);
 		}
 
 		template<typename T>
 			requires std::is_void_v<T>
-		static TypeId get(T*) {
+		static TypeId get() {
 			return TypeId(0);
 		}
-
-		///specializations defined in ./types
-		template<typename T>
-			requires std::is_integral_v<T>
-		static TypeId get(T* ptr);
-
-		template<typename T>
-			requires std::is_floating_point_v<T>
-		static TypeId get(T* ptr);
-
-		template<typename T>
-			requires is_string_v<T>
-		static TypeId get(T* ptr);
-
-		template<typename T, std::size_t size>
-		static TypeId get(T (*array)[size]);
-
-		template<typename T, std::size_t size>
-		static TypeId get(std::array<T, size>* array);
-
-		template<typename T>
-			requires is_list_v<T>
-		static TypeId get(T* ptr);
-
-		template<typename T>
-			requires is_map_v<T>
-		static TypeId get(T* ptr);
-
-		template<typename T>
-		static TypeId get(std::unique_ptr<T>* ptr);
-
-		template<typename T>
-		static TypeId get(std::shared_ptr<T>* ptr);
+		///@endcond
 
 		//other methods
 		bool operator==(const TypeId& other) const {
@@ -99,8 +118,9 @@ namespace astra {
 	  private:
 		uint32_t id;
 
+		static TypeId getBoolId();
+
 		explicit TypeId(uint32_t id)
 		  : id(id) {}
 	};
-
 }

@@ -98,9 +98,6 @@ namespace astra {
 	template<typename T>
 	inline constexpr bool is_array_v = is_array<T>::value;
 
-	template<typename T, std::size_t size>
-	struct ASTRA_API is_array<std::array<T, size>> : std::true_type {};
-
 	template<class T>
 	using array_value_t = std::remove_reference_t<decltype(std::declval<T>()[0])>;
 
@@ -112,5 +109,32 @@ namespace astra {
 
 	template<typename T>
 	inline constexpr bool is_class_v = is_class<T>::value;
+
+	template<typename T>
+	struct ASTRA_API is_std_array : std::false_type {};
+
+	template<typename T>
+	inline constexpr bool is_std_array_v = is_std_array<T>::value;
+
+	template<typename T, std::size_t size_v>
+	struct ASTRA_API is_std_array<std::array<T, size_v>> : std::true_type {};
+
+	template<typename T>
+	struct ASTRA_API is_shared_ptr : std::false_type {};
+
+	template<typename T>
+	inline constexpr bool is_shared_ptr_v = is_shared_ptr<T>::value;
+
+	template<typename T>
+	struct ASTRA_API is_shared_ptr<std::shared_ptr<T>> : std::true_type {};
+
+	template<typename T>
+	struct ASTRA_API is_unique_ptr : std::false_type {};
+
+	template<typename T>
+	inline constexpr bool is_unique_ptr_v = is_unique_ptr<T>::value;
+
+	template<typename T>
+	struct ASTRA_API is_unique_ptr<std::unique_ptr<T>> : std::true_type {};
 }
 ///@endcond

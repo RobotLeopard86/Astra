@@ -1,6 +1,6 @@
 #pragma once
 
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "ipointer.hpp"
 #include "astra/dll.hpp"
 

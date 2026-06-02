@@ -3,7 +3,7 @@
 #include <limits>
 
 #include "ifloat.hpp"
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/dll.hpp"
 
 namespace astra {

@@ -15,7 +15,7 @@ namespace astra {
 
 	template<typename T>
 		requires is_map_v<T>
-	TypeId TypeId::get(T*) {
+	TypeId TypeId::get() {
 		static TypeId id(ActionsTable::record(Actions(&MapActions<T>::reflect,
 			&CommonActions<T>::typeName,
 			&CommonActions<T>::sizeOf,
@@ -25,5 +25,4 @@ namespace astra {
 			&CommonActions<T>::move)));
 		return id;
 	}
-
 }

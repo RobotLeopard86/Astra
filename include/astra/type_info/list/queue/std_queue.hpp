@@ -3,7 +3,7 @@
 #include <queue>
 
 #include "../err_helper.hpp"
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/variant.hpp"
 #include "iqueue.hpp"
 #include "queue_iterator.hpp"

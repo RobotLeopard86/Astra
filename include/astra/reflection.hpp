@@ -1,7 +1,6 @@
 #pragma once
 
 #include "reflectable.hpp"
-#include "type_id.hpp"
 #include "type_info.hpp"
 #include "dll.hpp"
 
@@ -40,33 +39,30 @@ namespace astra {
 	}
 
 	/**
-	 * @brief Access an object's type info constly
+	 * @brief Invoke the constructor on a variable
 	 *
-	 * @param pointer A pointer to the object to reflect
-	 *
-	 * @return The object's type info, with write operations disabled
+	 * @param variable The variable to invoke the constructor on
 	 */
-	std::string sprint(const TypeInfo& info);
-	std::string sprint(Var var);
+	ASTRA_API void construct(Var variable);
 
-	template<Reflectable T>
-	std::string sprint(const T* pointer) {
-		return sprint(reflect(pointer));
-	}
+	/**
+	 * @brief Invoke the denstructor on a variable
+	 *
+	 * @param variable The variable to invoke the denstructor on
+	 */
+	ASTRA_API void destroy(Var variable);
 
-	void print(const TypeInfo& info);
-	void print(Var var);
+	/**
+	 * @brief Copy the contents of one variable to another
+	 *
+	 * @throws std::runtime_error If the contained type is not copy-constructible
+	 */
+	ASTRA_API void copy(Var to, Var from);
 
-	template<Reflectable T>
-	void print(const T* pointer) {
-		print(reflect(pointer));
-	}
-
-	std::size_t sizeOf(TypeId id);
-
-	void construct(Var variable);
-	void destroy(Var variable);
-
-	void copy(Var to, Var from);
-
+	/**
+	 * @brief Move the contents of one variable to another
+	 *
+	 * @throws std::runtime_error If the contained type is not move-constructible
+	 */
+	ASTRA_API void move(Var to, Var from);
 }

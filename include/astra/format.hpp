@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <string>
 #include <type_traits>
+#include <sstream>
 
 #include "traits.hpp"
 #include "dll.hpp"

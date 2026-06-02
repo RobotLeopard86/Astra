@@ -1,36 +1,15 @@
 #include "astra/reflection.hpp"
 
 #include <cstddef>
-#include <iostream>
-#include <memory_resource>
 
 #include "astra/actions_table.hpp"
-#include "astra/types/all_types.hpp"
-#include "sprint.hpp"
+#include "astra/types/all_types.hpp"// IWYU pragma: keep
 
 namespace astra {
 
 	TypeInfo reflect(Var variable) {
 		return ActionsTable::data()[variable.typeId().number()].reflect(const_cast<void*>(variable.raw()),
 			variable.isConst());
-	}
-
-	std::string sprint(const TypeInfo& info) {
-		std::string result;
-		sprint(info, &result, 0);
-		return result;
-	}
-
-	std::string sprint(Var var) {
-		return sprint(reflect(var));
-	}
-
-	void print(const TypeInfo& info) {
-		std::cout << sprint(info) << std::flush;
-	}
-
-	void print(Var var) {
-		print(reflect(var));
 	}
 
 	const std::string& typeName(TypeId id) {
@@ -60,6 +39,17 @@ namespace astra {
 			throw std::runtime_error(::astra::format("Cannot copy {} to {}", typeName(from.typeId()), typeName(to.typeId())));
 		}
 		ActionsTable::data()[to.typeId().number()].copy(to.rawMut(), from.raw());
+		return;
+	}
+
+	void move(Var to, Var from) {
+		if(to.isConst()) {
+			throw std::runtime_error("Cannot assign to const value");
+		}
+		if(to.typeId() != from.typeId()) {
+			throw std::runtime_error(::astra::format("Cannot move {} to {}", typeName(from.typeId()), typeName(to.typeId())));
+		}
+		ActionsTable::data()[to.typeId().number()].move(to.rawMut(), from.rawMut());
 		return;
 	}
 }

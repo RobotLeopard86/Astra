@@ -1,14 +1,10 @@
 #pragma once
 
 #include <string>
-#include <string_view>
-
 
 #include "astra/names.hpp"
 #include "astra/variant.hpp"
 #include "astra/dll.hpp"
-
-//all variants
 #include "type_info/array/array.hpp"
 #include "type_info/bool.hpp"
 #include "type_info/enum/enum.hpp"

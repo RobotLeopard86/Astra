@@ -57,7 +57,7 @@ struct TypeActions<{{name}}> {
 };
 
 template <>
-TypeId TypeId::get({{name}}* /*unused*/) {
+TypeId TypeId::get<{{name}}>() {
   static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
                                                  &CommonActions<{{name}}>::typeName,  //
                                                  &CommonActions<{{name}}>::sizeOf,  //

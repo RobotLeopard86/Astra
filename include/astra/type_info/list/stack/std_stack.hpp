@@ -3,7 +3,7 @@
 #include <stack>
 
 #include "../err_helper.hpp"
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "istack.hpp"
 #include "astra/dll.hpp"
 #include "stack_iterator.hpp"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "astra/constexpr_map.hpp"
-#include "astra/type_name.hpp"
+#include "astra/type_query.hpp"
 #include "astra/dll.hpp"
 #include "ienum.hpp"
 

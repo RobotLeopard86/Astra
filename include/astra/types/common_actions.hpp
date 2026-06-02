@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include <type_traits>
 
-#include "astra/actions_table.hpp"
 #include "astra/names.hpp"
 #include "astra/dll.hpp"
 

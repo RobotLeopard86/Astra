@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include "astra/actions_table.hpp"
+#include "astra/traits.hpp"
 #include "astra/types/common_actions.hpp"
 #include "astra/types/type_actions.hpp"
 #include "astra/dll.hpp"
@@ -59,15 +60,16 @@ namespace astra {
 		}
 	};
 
-	template<typename T, std::size_t size_v>
-	TypeId TypeId::get(T (*)[size_v]) {
-		static TypeId id(ActionsTable::record(Actions(&TypeActions<T[size_v]>::reflect,
-			&CommonActions<T[size_v]>::typeName,
-			&TypeActions<T[size_v]>::sizeOf,
-			&TypeActions<T[size_v]>::construct,
-			&TypeActions<T[size_v]>::destroy,
-			&TypeActions<T[size_v]>::copy,
-			&TypeActions<T[size_v]>::move)));
+	template<typename T>
+		requires is_array_v<T>
+	TypeId TypeId::get() {
+		static TypeId id(ActionsTable::record(Actions(&TypeActions<T>::reflect,
+			&CommonActions<T>::typeName,
+			&TypeActions<T>::sizeOf,
+			&TypeActions<T>::construct,
+			&TypeActions<T>::destroy,
+			&TypeActions<T>::copy,
+			&TypeActions<T>::move)));
 		return id;
 	}
 
