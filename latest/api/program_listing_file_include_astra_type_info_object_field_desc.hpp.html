@@ -424,8 +424,8 @@
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">FieldDesc</span><span class="w"> </span><span class="p">{</span>
-
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">FieldDesc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">public</span><span class="o">:</span>
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">ClassT</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="n">FieldDesc</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">ClassT</span><span class="o">::*</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">Access</span><span class="w"> </span><span class="n">acc</span><span class="p">)</span>
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">valueData</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uintptr_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">delta</span><span class="p">(</span><span class="n">ptr</span><span class="p">))),</span>
