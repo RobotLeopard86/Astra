@@ -569,7 +569,8 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7IntegerE">
 <span id="_CPPv3N5astra7IntegerE"></span><span id="_CPPv2N5astra7IntegerE"></span><span id="astra::Integer"></span><span class="target" id="classastra_1_1Integer"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Integer</span></span></span><a class="headerlink" href="#_CPPv4N5astra7IntegerE" title="Link to this definition"><span/></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Reflection interface for an integer. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7Integer7IntegerEv">
@@ -672,24 +673,38 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0EN5astra7Integer3setEv1T">
-<span id="_CPPv3I0EN5astra7Integer3setE1T"></span><span id="_CPPv2I0EN5astra7Integer3setE1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1Integer_1a0b9029443f2936f29e90cd4c3594c7c6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra7Integer3setEv1T" title="astra::Integer::set::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra7Integer3setEv1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classastra_1_1Integer_1a8a542dbbfe653165daf96f848ee7342f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra7Integer3setEv1T" title="astra::Integer::set::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7Integer9setSignedE7int64_t">
 <span id="_CPPv3N5astra7Integer9setSignedE7int64_t"></span><span id="_CPPv2N5astra7Integer9setSignedE7int64_t"></span><span id="astra::Integer::setSigned__int64_t"></span><span class="target" id="classastra_1_1Integer_1a3f28b128d0ba714515aa2848dd83ebe0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setSigned</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7Integer9setSignedE7int64_t" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Set the stored value (signed) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – The new signed value</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If write operations are disabled </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If sizing and signedness do not match the stored type </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7Integer11setUnsignedE8uint64_t">
 <span id="_CPPv3N5astra7Integer11setUnsignedE8uint64_t"></span><span id="_CPPv2N5astra7Integer11setUnsignedE8uint64_t"></span><span id="astra::Integer::setUnsigned__uint64_t"></span><span class="target" id="classastra_1_1Integer_1a8b5230abe3ea76617f23efb5de1b8019"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setUnsigned</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7Integer11setUnsignedE8uint64_t" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Set the stored value (unsigned) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – The new unsigned value</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If write operations are disabled </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – If sizing and signedness do not match the stored type </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -755,7 +770,6 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra7Integer8isSignedEv"><code class="docutils literal notranslate"><span class="pre">isSigned()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra7Integer8asSignedEv"><code class="docutils literal notranslate"><span class="pre">asSigned()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra7Integer10asUnsignedEv"><code class="docutils literal notranslate"><span class="pre">asUnsigned()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra7Integer3setEv1T"><code class="docutils literal notranslate"><span class="pre">set()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7Integer9setSignedE7int64_t"><code class="docutils literal notranslate"><span class="pre">setSigned()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra7Integer11setUnsignedE8uint64_t"><code class="docutils literal notranslate"><span class="pre">setUnsigned()</span></code></a></li>
 </ul>
