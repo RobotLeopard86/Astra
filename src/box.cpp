@@ -4,7 +4,7 @@
 #include <memory_resource>
 
 #include "astra/reflection.hpp"
-#include "astra/types/all_types.hpp"
+#include "astra/type_actions/all_types.hpp"
 
 namespace astra {
 

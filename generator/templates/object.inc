@@ -1,14 +1,13 @@
 R"(
 #include "{{file_name}}"
 
-// clang-format off
 #include "astra/actions_table.hpp"
-#include "astra/types/common_actions.hpp"
-#include "astra/types/type_actions.hpp"
+#include "astra/type_actions/common_actions.hpp"
+#include "astra/type_actions/type_actions.hpp"
 
 namespace astra {
 
-template <>
+template<>
 struct TypeActions<{{name}}> {
   static TypeInfo reflect(void* value, bool isConst) {
     auto* p = static_cast<{{name}}*>(value);
@@ -56,7 +55,7 @@ struct TypeActions<{{name}}> {
 {% endfor -%}
 };
 
-template <>
+template<>
 TypeId TypeId::get<{{name}}>() {
   static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
                                                  &CommonActions<{{name}}>::typeName,  //
@@ -73,6 +72,4 @@ TypeId TypeId::get<{{name}}>() {
 astra::TypeId {{name}}::ASTRA__gettypeid() const {
 	return astra::TypeId::get<{{name}}>();
 }
-
-// clang-format on
 )"

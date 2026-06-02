@@ -15,19 +15,41 @@ namespace astra {
 	  public:
 		String() = delete;
 
+		/**
+		 * @brief Create a new string from a @c std::basic_string
+		 *
+		 * @tparam T The type of characters forming the string (for @c std::string, T = @c char)
+		 *
+		 * @param str The string to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		String(std::basic_string<T>* str, bool isConst) {
 			new(mem) StdBasicString<T>(str, isConst);
 		}
 
+		/**
+		 * @brief Create a new string from a @c std::basic_string_view
+		 *
+		 * @tparam T The type of characters forming the string (for @c std::string_view, T = @c char)
+		 *
+		 * @param view The string view to source data from
+		 */
 		template<typename T>
-		String(std::basic_string_view<T>* str, bool isConst) {
-			new(mem) StdBasicStringView<T>(str);
+		String(std::basic_string_view<T>* view) {
+			new(mem) StdBasicStringView<T>(view);
 		}
 
+		/**
+		 * @brief Create a new string from a raw C string
+		 *
+		 * @tparam T The type of characters forming the string (will usually be @c char)
+		 *
+		 * @param str A pointer to the string to source data from
+		 */
 		template<typename T>
-		String(const T** str, bool isConst) {
-			new(mem) CString<T>(str);
+		String(const T** strPtr) {
+			new(mem) CString<T>(strPtr);
 		}
 
 		/**
@@ -35,7 +57,7 @@ namespace astra {
 		 *
 		 * @param var The Var to assign from
 		 *
-		 * @throws std::runtime_error If the source Var does not contain a bool
+		 * @throws std::runtime_error If the source Var does not contain a string
 		 */
 		void assign(Var var) {
 			return impl()->assign(var);

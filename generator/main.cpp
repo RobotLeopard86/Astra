@@ -172,7 +172,7 @@ int main(int argc, char* argv[]) {
 #pragma once
 
 #include "astra/reflection.hpp" // IWYU pragma: export
-#include "astra/types/all_types.hpp" // IWYU pragma: export
+#include "astra/type_actions/all_types.hpp" // IWYU pragma: export
 
 )";
 	std::ofstream rootCpp(out / (project + ".astra.cpp"));

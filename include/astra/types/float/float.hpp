@@ -23,7 +23,7 @@ namespace astra {
 		 *
 		 * @param var The Var to assign from
 		 *
-		 * @throws std::runtime_error If the source Var does not contain a bool
+		 * @throws std::runtime_error If the source Var does not contain a floating-point number
 		 */
 		void assign(Var var) {
 			return impl()->assign(var);

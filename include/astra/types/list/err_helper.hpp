@@ -11,4 +11,5 @@ namespace astra {
 	  protected:
 		static void error(const std::string& message, TypeId type, TypeId nestedType);
 	};
-}///@endcond
+}
+///@endcond

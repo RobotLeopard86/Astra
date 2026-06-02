@@ -3,6 +3,8 @@
 #include "astra/traits.hpp"
 #include "dll.hpp"
 
+#include <cstdint>
+
 namespace astra {
 	/**
 	 * @brief Sequential type ID wrapper and lookup system

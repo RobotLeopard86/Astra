@@ -23,36 +23,92 @@ namespace astra {
 		}
 		///@endcond
 
+		/**
+		 * @brief Create a new list from a @c std::vector
+		 *
+		 * @tparam T The type of each element
+		 *
+		 * @param vector The vector to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		List(std::vector<T>* vector, bool isConst) {
 			new(mem) StdVector<T>(vector, isConst);
 		}
 
+		/**
+		 * @brief Create a new list from a @c std::list
+		 *
+		 * @tparam T The type of each element
+		 *
+		 * @param list The list to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		List(std::list<T>* list, bool isConst) {
 			new(mem) StdList<T>(list, isConst);
 		}
 
+		/**
+		 * @brief Create a new list from a @c std::deque
+		 *
+		 * @tparam T The type of each element
+		 *
+		 * @param deque The deque to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		List(std::deque<T>* deque, bool isConst) {
 			new(mem) StdDeque<T>(deque, isConst);
 		}
 
+		/**
+		 * @brief Create a new list from a @c std::stack
+		 *
+		 * @tparam T The type of each element
+		 *
+		 * @param stack The stack to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		List(std::stack<T>* stack, bool isConst) {
 			new(mem) StdStack<T>(stack, isConst);
 		}
 
+		/**
+		 * @brief Create a new list from a @c std::queue
+		 *
+		 * @tparam T The type of each element
+		 *
+		 * @param queue The queue to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		List(std::queue<T>* queue, bool isConst) {
 			new(mem) StdQueue<T>(queue, isConst);
 		}
 
+		/**
+		 * @brief Create a new list from a @c std::set
+		 *
+		 * @tparam T The type of each element
+		 *
+		 * @param set The set to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		List(std::set<T>* set, bool isConst) {
 			new(mem) StdSet<T>(set, isConst);
 		}
 
+		/**
+		 * @brief Create a new list from a @c std::unordered_set
+		 *
+		 * @tparam T The type of each element
+		 *
+		 * @param set The set to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
 		List(std::unordered_set<T>* set, bool isConst) {
 			new(mem) StdUnorderedSet<T>(set, isConst);
@@ -63,7 +119,7 @@ namespace astra {
 		 *
 		 * @param var The Var to assign from
 		 *
-		 * @throws std::runtime_error If the source Var does not contain a bool
+		 * @throws std::runtime_error If the source Var does not contain a list
 		 */
 		void assign(Var var) {
 			return impl()->assign(var);
@@ -100,6 +156,8 @@ namespace astra {
 
 		/**
 		 * @brief Execute a callback on every list element
+		 *
+		 * @param callback The callback to execute
 		 */
 		void forEach(std::function<void(Var)> callback) const {
 			impl()->forEach(callback);
@@ -107,6 +165,10 @@ namespace astra {
 
 		/**
 		 * @brief Unsafely execute a callback on every list element
+		 *
+		 * @warning This function is for internal use only!
+		 *
+		 * @param callback The callback to execute
 		 */
 		void unsafeForEach(std::function<void(void*)> callback) const {
 			impl()->unsafeForEach(callback);

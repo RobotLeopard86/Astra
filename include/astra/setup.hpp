@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types/type_actions.hpp"// IWYU pragma: keep
+#include "type_actions/type_actions.hpp"// IWYU pragma: keep
 #include "type_id.hpp"
 #include "dll.hpp"
 

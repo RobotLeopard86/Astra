@@ -7,11 +7,11 @@
 #include "astra/box.hpp"
 #include "astra/reflection.hpp"
 #include "astra/type_info.hpp"
-#include "astra/type_info/array/array.hpp"
-#include "astra/type_info/float/float.hpp"
-#include "astra/type_info/pointer/pointer.hpp"
-#include "astra/type_info/list/list.hpp"
-#include "astra/types/all_types.hpp"// IWYU pragma: keep
+#include "astra/types/array/array.hpp"
+#include "astra/types/float/float.hpp"
+#include "astra/types/pointer/pointer.hpp"
+#include "astra/types/list/list.hpp"
+#include "astra/type_actions/all_types.hpp"// IWYU pragma: keep
 #include "bytestream.hpp"
 #include "libjaguar/Index.hpp"
 #include "libjaguar/TypeTags.hpp"

@@ -5,8 +5,8 @@
 
 #include "astra/actions_table.hpp"
 #include "astra/traits.hpp"
-#include "astra/types/common_actions.hpp"
-#include "astra/types/type_actions.hpp"
+#include "astra/type_actions/common_actions.hpp"
+#include "astra/type_actions/type_actions.hpp"
 #include "astra/dll.hpp"
 
 ///@cond

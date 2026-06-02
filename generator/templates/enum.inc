@@ -3,12 +3,12 @@ R"(
 
 // clang-format off
 #include "astra/actions_table.hpp"
-#include "astra/types/common_actions.hpp"
-#include "astra/types/type_actions.hpp"
+#include "astra/type_actions/common_actions.hpp"
+#include "astra/type_actions/type_actions.hpp"
 
 namespace astra {
 
-template <>
+template<>
 struct TypeActions<{{name}}> {
   static TypeInfo reflect(void* value, bool isConst) {
 
@@ -22,7 +22,7 @@ struct TypeActions<{{name}}> {
   }
 };
 
-template <>
+template<>
 TypeId TypeId::get<{{name}}>() {
   static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
                                                  &CommonActions<{{name}}>::typeName,  //

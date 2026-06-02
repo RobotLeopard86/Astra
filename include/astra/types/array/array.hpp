@@ -57,7 +57,7 @@ namespace astra {
 		 *
 		 * @param var The Var to assign from
 		 *
-		 * @throws std::runtime_error If the source Var does not contain a bool
+		 * @throws std::runtime_error If the source Var does not contain a array
 		 */
 		void assign(Var var) {
 			return impl()->assign(var);
@@ -141,6 +141,8 @@ namespace astra {
 
 		/**
 		 * @brief Constly execute a callback on every array element
+		 *
+		 * @param callback The callback to execute
 		 */
 		void forEach(std::function<void(Var)> callback) const {
 			impl()->forEach(std::move(callback));
@@ -148,6 +150,8 @@ namespace astra {
 
 		/**
 		 * @brief Execute a callback on every array element
+		 *
+		 * @param callback The callback to execute
 		 */
 		void forEach(std::function<void(Var)> callback) {
 			impl()->forEach(std::move(callback));
@@ -157,6 +161,8 @@ namespace astra {
 		 * @brief Unsafely execute a callback on every array element
 		 *
 		 * @warning This function is for internal use only!
+		 *
+		 * @param callback The callback to execute
 		 */
 		void unsafeForEach(std::function<void(void*)> callback) const {
 			impl()->unsafeForEach(std::move(callback));

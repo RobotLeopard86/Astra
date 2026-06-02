@@ -10,14 +10,30 @@ namespace astra {
 
 	class ASTRA_API Pointer {
 	  public:
+		/**
+		 * @brief Create a new pointer from a @c std::shared_ptr
+		 *
+		 * @tparam T The type of the contained object
+		 *
+		 * @param ptr The pointer to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
-		Pointer(std::shared_ptr<T>* value, bool isConst) {
-			new(mem) StdSharedPtr<T>(value, isConst);
+		Pointer(std::shared_ptr<T>* ptr, bool isConst) {
+			new(mem) StdSharedPtr<T>(ptr, isConst);
 		}
 
+		/**
+		 * @brief Create a new pointer from a @c std::unique_ptr
+		 *
+		 * @tparam T The type of the contained object
+		 *
+		 * @param ptr The pointer to source data from
+		 * @param isConst If write operations should be disabled
+		 */
 		template<typename T>
-		Pointer(std::unique_ptr<T>* value, bool isConst) {
-			new(mem) StdUniquePtr<T>(value, isConst);
+		Pointer(std::unique_ptr<T>* ptr, bool isConst) {
+			new(mem) StdUniquePtr<T>(ptr, isConst);
 		}
 
 		/**
@@ -51,14 +67,27 @@ namespace astra {
 			return impl()->var();
 		}
 
+		/**
+		 * @brief Check if the pointer has no stored value
+		 *
+		 * @return Whether or not the pointer is empty
+		 */
 		bool isNull() const {
 			return impl()->isNull();
 		}
 
+		/**
+		 * @brief Initialize the pointer with a fresh value
+		 */
 		void init() {
 			impl()->init();
 		}
 
+		/**
+		 * @brief Access the contents of the pointer as a Var
+		 *
+		 * @return A Var holding the contents of the pointer, const state inherited
+		 */
 		Var getNested() const {
 			return impl()->getNested();
 		}

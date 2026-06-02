@@ -4,10 +4,10 @@
 #include "astra/box.hpp"
 #include "astra/reflection.hpp"
 #include "astra/type_info.hpp"
-#include "astra/type_info/enum/enum.hpp"
-#include "astra/type_info/integer/integer.hpp"
-#include "astra/type_info/list/list.hpp"
-#include "astra/type_info/string/string.hpp"
+#include "astra/types/enum/enum.hpp"
+#include "astra/types/integer/integer.hpp"
+#include "astra/types/list/list.hpp"
+#include "astra/types/string/string.hpp"
 
 #include "nlohmann/json.hpp"
 

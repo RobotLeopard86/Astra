@@ -3,7 +3,7 @@
 #include <cstddef>
 
 #include "astra/actions_table.hpp"
-#include "astra/types/all_types.hpp"// IWYU pragma: keep
+#include "astra/type_actions/all_types.hpp"// IWYU pragma: keep
 
 namespace astra {
 

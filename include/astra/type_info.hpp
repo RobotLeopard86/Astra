@@ -5,16 +5,16 @@
 #include "astra/names.hpp"
 #include "astra/variant.hpp"
 #include "astra/dll.hpp"
-#include "type_info/array/array.hpp"
-#include "type_info/bool.hpp"
-#include "type_info/enum/enum.hpp"
-#include "type_info/float/float.hpp"
-#include "type_info/integer/integer.hpp"
-#include "type_info/map/map.hpp"
-#include "type_info/object/object.hpp"
-#include "type_info/pointer/pointer.hpp"
-#include "type_info/list/list.hpp"
-#include "type_info/string/string.hpp"
+#include "types/array/array.hpp"
+#include "types/bool.hpp"
+#include "types/enum/enum.hpp"
+#include "types/float/float.hpp"
+#include "types/integer/integer.hpp"
+#include "types/map/map.hpp"
+#include "types/object/object.hpp"
+#include "types/pointer/pointer.hpp"
+#include "types/list/list.hpp"
+#include "types/string/string.hpp"
 
 namespace astra {
 
@@ -66,11 +66,11 @@ namespace astra {
 		}
 
 		void assign(Var var) {
-			return match([=](auto&& v) { return v.assign(var); });
+			match([=](auto&& v) { return v.assign(var); });
 		}
 
 		void unsafeAssign(void* ptr) {
-			match([=](auto&& m) { m.unsafeAssign(ptr); });
+			match([=](auto&& v) { return v.unsafeAssign(ptr); });
 		}
 
 		Var var() {

@@ -39,18 +39,45 @@ namespace astra {
 		  : content(std::move(value)) {
 		}
 
-		template<typename... F>
-		decltype(auto) match(F... functions) {
+		/**
+		 * @brief Execute a callback function depending on the contained type
+		 *
+		 * @tparam Fs The function types
+		 *
+		 * @param functions The functions to execute
+		 *
+		 * @return The return value of the selected function
+		 */
+		template<typename... Fs>
+		decltype(auto) match(Fs... functions) {
 			return std::visit(Overloaded {functions...}, content);
 		}
 
-		template<typename... F>
-		decltype(auto) matchMove(F... functions) {
+		/**
+		 * @brief Execute a callback function depending on the contained type, moving the contained value as the parameter
+		 *
+		 * @tparam Fs The function types
+		 *
+		 * @param functions The functions to execute
+		 *
+		 * @return The return value of the selected function
+		 */
+		template<typename... Fs>
+		decltype(auto) matchMove(Fs... functions) {
 			return std::visit(Overloaded {functions...}, std::move(content));
 		}
 
-		template<typename... F>
-		decltype(auto) match(F... functions) const {
+		/**
+		 * @brief Constly execute a callback function depending on the contained type
+		 *
+		 * @tparam Fs The function types
+		 *
+		 * @param functions The functions to execute
+		 *
+		 * @return The return value of the selected function
+		 */
+		template<typename... Fs>
+		decltype(auto) match(Fs... functions) const {
 			return std::visit(Overloaded {functions...}, content);
 		}
 

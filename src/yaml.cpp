@@ -5,10 +5,10 @@
 
 #include "astra/actions_table.hpp"
 #include "astra/box.hpp"
-#include "astra/type_info/list/list.hpp"
+#include "astra/types/list/list.hpp"
 #include "astra/reflection.hpp"
 #include "astra/type_info.hpp"
-#include "astra/type_info/integer/integer.hpp"
+#include "astra/types/integer/integer.hpp"
 
 namespace astra {
 	void serializeYamlRecursive(YAML::Node _node, const TypeInfo& info, const std::string& field) {

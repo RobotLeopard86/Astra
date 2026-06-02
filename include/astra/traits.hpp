@@ -4,6 +4,7 @@
 #include <deque>
 #include <list>
 #include <map>
+#include <memory>
 #include <queue>
 #include <set>
 #include <stack>

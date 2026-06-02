@@ -1,26 +1,26 @@
 #pragma once
 
-#include <memory>
+#include <array>
 
 #include "astra/actions_table.hpp"
-#include "astra/type_info.hpp"
-#include "astra/types/common_actions.hpp"
+#include "astra/traits.hpp"
+#include "astra/type_actions/common_actions.hpp"
+#include "astra/type_actions/type_actions.hpp"
 #include "astra/dll.hpp"
-#include "astra/types/type_actions.hpp"
 
 ///@cond
 namespace astra {
 
-	template<typename T>
-	struct ASTRA_API TypeActions<std::shared_ptr<T>> {
+	template<typename T, std::size_t size_v>
+	struct ASTRA_API TypeActions<std::array<T, size_v>> {
 
 		static TypeInfo reflect(void* value, bool isConst) {
-			return {Pointer(static_cast<std::shared_ptr<T>*>(value), isConst)};
+			return TypeInfo(Array(static_cast<std::array<T, size_v>*>(value), isConst));
 		}
 	};
 
 	template<typename T>
-		requires is_shared_ptr_v<T>
+		requires is_std_array_v<T>
 	TypeId TypeId::get() {
 		static TypeId id(ActionsTable::record(Actions(&TypeActions<T>::reflect,
 			&CommonActions<T>::typeName,

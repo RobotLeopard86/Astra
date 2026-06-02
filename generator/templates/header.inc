@@ -4,17 +4,16 @@ R"(
 // IWYU pragma: private; include "{{project}}.astra.hpp"
 
 #include "astra/type_id.hpp"
-#include "astra/types/type_actions.hpp"
+#include "astra/type_actions/type_actions.hpp"
 
-// injected
 #include "{{origin}}"
 
 namespace astra {
 
-template <>
+template<>
 struct TypeActions<{{name}}>;
 
-template <>
+template<>
 TypeId TypeId::get<{{name}}>();
 
 }
