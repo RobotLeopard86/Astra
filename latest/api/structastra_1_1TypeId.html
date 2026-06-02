@@ -600,9 +600,6 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classAstraReflectBase.html">Class AstraReflectBase</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html">Enum Access</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -618,6 +615,9 @@
 <li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1ab7e7d29a95da2ff06cf43aca41d54f91.html">Template Function astra::format</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a67f4ab294419f8c113cc8e2072cbc5d4.html">Function astra::move</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_access_8hpp_1ae73436b3de35e85b751c17bdccae442b.html">Function astra::operator&amp;</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -625,15 +625,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_overloaded_8hpp_1aab8921fe63674c9f2b4d37fe09c9b4f2.html">Template Function astra::Overloaded</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a9b37232674257fdb602d050bd1ad72c1.html">Function astra::print(const TypeInfo&amp;)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1af1519901592ea6c930c56e9a70d1fad5.html">Function astra::print(Var)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a9f6f38085af9ec269580bc783510c259.html">Template Function astra::print(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a55c2d4b75265cb03d7f2406d9a64aff7.html">Function astra::reflect(Var)</a></li>
@@ -645,19 +636,10 @@
 <li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a6570da25f1d3fa9b105d8466378c571a.html">Template Function astra::reflect(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1afebd838c2236cd1c3bacd0cab3484315.html">Function astra::sizeOf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_type__query_8hpp_1afebd838c2236cd1c3bacd0cab3484315.html">Function astra::sizeOf</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aba9955aee4c1ee81c9a08bd62770da23.html">Function astra::sprint(const TypeInfo&amp;)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1afac34343d445ee366e84aad653e4ec5e.html">Function astra::sprint(Var)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aab25549a2bb25ef2c3dba2539367cdb9.html">Template Function astra::sprint(const T *)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a6d3dad3555658fc9ae4b1378064af618.html">Function astra::typeName</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_type__query_8hpp_1afa8c65247a6975c8d5af710bff06c9af.html">Function astra::typeName</a></li>
 </ul>
 </div>
 </nav></div>
@@ -728,13 +710,14 @@
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6TypeIdE">
 <span id="_CPPv3N5astra6TypeIdE"></span><span id="_CPPv2N5astra6TypeIdE"></span><span id="astra::TypeId"></span><span class="target" id="structastra_1_1TypeId"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeId</span></span></span><a class="headerlink" href="#_CPPv4N5astra6TypeIdE" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>copyable value type with single int under the hood represent sequential type id </p>
+<dd><p>Sequential type ID wrapper and lookup system. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra6TypeId6TypeIdEv">
 <span id="_CPPv3N5astra6TypeId6TypeIdEv"></span><span id="_CPPv2N5astra6TypeId6TypeIdEv"></span><span id="astra::TypeId::TypeId"></span><span class="target" id="structastra_1_1TypeId_1aa500b4adddb084abbd50c82dbe651739"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeId</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra6TypeId6TypeIdEv" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a default type ID (represents unknown type) </p>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK5astra6TypeIdeqERK6TypeId">
@@ -751,91 +734,36 @@
 <span id="_CPPv3NK5astra6TypeId6numberEv"></span><span id="_CPPv2NK5astra6TypeId6numberEv"></span><span id="astra::TypeId::numberC"></span><span class="target" id="structastra_1_1TypeId_1a45595b77713c0880a44af1cbd1530730"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">number</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5astra6TypeId6numberEv" title="Link to this definition"><span/></a><br /></dt>
 <dd></dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4IEN5astra6TypeId3getE6TypeIdPb">
-<span id="_CPPv3IEN5astra6TypeId3getEPb"></span><span id="_CPPv2IEN5astra6TypeId3getEPb"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a5988e042e02a6343c0147ca9fd65d4fb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IEN5astra6TypeId3getE6TypeIdPb" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA6size_v_1T">
-<span id="_CPPv3I0_NSt6size_tEEN5astra6TypeId3getEPA6size_v_1T"></span><span id="_CPPv2I0_NSt6size_tEEN5astra6TypeId3getEPAsize_v_1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size_v</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a9f8d436f401440d34caab1e48373e155"></span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA6size_v_1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA6size_v_1T" title="astra::TypeId::get::size_v"><span class="n"><span class="pre">size_v</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA6size_v_1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T6size_vEE">
-<span id="_CPPv3I0_NSt6size_tEEN5astra6TypeId3getEPNSt5arrayI1T6size_vEE"></span><span id="_CPPv2I0_NSt6size_tEEN5astra6TypeId3getEPNSt5arrayI1T6size_vEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size_v</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a132b16bbcb0323fd4c92a08f10545b5f"></span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T6size_vEE" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T6size_vEE" title="astra::TypeId::get::size_v"><span class="n"><span class="pre">size_v</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T6size_vEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6TypeId3getE6TypeIdv">
-<span id="_CPPv3I0EN5astra6TypeId3getEv"></span><span id="_CPPv2I0EN5astra6TypeId3getEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a4b9ac83dffa876296fa128b1adecadc5"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdv" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>proxy function for using with implicit type in <a class="reference internal" href="#structastra_1_1TypeId_1a4b9ac83dffa876296fa128b1adecadc5"><span class="std std-ref">TypeId::get&lt;T&gt;()</span></a> way without argument </p>
+<span id="_CPPv3I0EN5astra6TypeId3getEv"></span><span id="_CPPv2I0EN5astra6TypeId3getEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a35e0b478202314ba6c205cb138e9582a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get the type ID for a given type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type to lookup</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type ID </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T">
-<span id="_CPPv3I0EN5astra6TypeId3getEP1T"></span><span id="_CPPv2I0EN5astra6TypeId3getEP1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a8eff1e28d9bb85ff7407638f579fcf4f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>the main function of <a class="reference internal" href="#structastra_1_1TypeId"><span class="std std-ref">TypeId</span></a> mechanism </p>
+<span id="_CPPv3I0EN5astra6TypeId3getEP1T"></span><span id="_CPPv2I0EN5astra6TypeId3getEP1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1abc8dd08df1c1b2b4d0c83c6941223f1f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Get the type ID for a given object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The type of the object (implicit)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type ID </p>
+</dd>
+</dl>
 </dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a81b19d7546e1effae5406dd59ab36a70"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a709d8a7e474fd124419664e4f821d7e0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">*</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a0cd3d251c89c6c77a5b38f2c60f0e5c3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><br /></dt>
-<dd><p>specializations defined in ./types </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a3393764d3a612814fb411b4c8602024d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a7123cb2d7b3f09ed42d567618a6dc24a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA4size_1T">
-<span id="_CPPv3I0_NSt6size_tEEN5astra6TypeId3getEPA4size_1T"></span><span id="_CPPv2I0_NSt6size_tEEN5astra6TypeId3getEPAsize_1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a0768c159b40aa60c8dfa4c54711d612d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA4size_1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">array</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA4size_1T" title="astra::TypeId::get::size"><span class="n"><span class="pre">size</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA4size_1T" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T4sizeEE">
-<span id="_CPPv3I0_NSt6size_tEEN5astra6TypeId3getEPNSt5arrayI1T4sizeEE"></span><span id="_CPPv2I0_NSt6size_tEEN5astra6TypeId3getEPNSt5arrayI1T4sizeEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a3ed91dac7cdf72a1787849ecc3ff00bf"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T4sizeEE" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T4sizeEE" title="astra::TypeId::get::size"><span class="n"><span class="pre">size</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">array</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T4sizeEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1ad2f51ec18ecc5427178f17cc7e900a38"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1a25465598ecd319d7179fd1905f77a781"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10unique_ptrI1TEE">
-<span id="_CPPv3I0EN5astra6TypeId3getEPNSt10unique_ptrI1TEE"></span><span id="_CPPv2I0EN5astra6TypeId3getEPNSt10unique_ptrI1TEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1aac97be5772f5f81a077aa8dddcf24d41"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10unique_ptrI1TEE" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10unique_ptrI1TEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10shared_ptrI1TEE">
-<span id="_CPPv3I0EN5astra6TypeId3getEPNSt10shared_ptrI1TEE"></span><span id="_CPPv2I0EN5astra6TypeId3getEPNSt10shared_ptrI1TEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structastra_1_1TypeId_1af704b4d8172ca801a9b3ed003ea33290"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5astra6TypeIdE" title="astra::TypeId"><span class="n"><span class="pre">TypeId</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10shared_ptrI1TEE" title="astra::TypeId::get::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10shared_ptrI1TEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
 
 </div>
 </dd></dl>
@@ -896,15 +824,8 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra6TypeIdeqERK6TypeId"><code class="docutils literal notranslate"><span class="pre">operator==()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra6TypeIdneERK6TypeId"><code class="docutils literal notranslate"><span class="pre">operator!=()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4NK5astra6TypeId6numberEv"><code class="docutils literal notranslate"><span class="pre">number()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4IEN5astra6TypeId3getE6TypeIdPb"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA6size_v_1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T6size_vEE"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdv"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdP1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPA4size_1T"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0_NSt6size_tEEN5astra6TypeId3getE6TypeIdPNSt5arrayI1T4sizeEE"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10unique_ptrI1TEE"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4I0EN5astra6TypeId3getE6TypeIdPNSt10shared_ptrI1TEE"><code class="docutils literal notranslate"><span class="pre">get()</span></code></a></li>
 </ul>
 </li>
 </ul>

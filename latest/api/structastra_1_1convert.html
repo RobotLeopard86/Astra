@@ -600,9 +600,6 @@
 <li class="toctree-l1"><a class="reference internal" href="classastra_1_1TypeInfo.html">Class TypeInfo</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="classAstraReflectBase.html">Class AstraReflectBase</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="enum_access_8hpp_1a135151606a4be9c7d07be0eae51f2b95.html">Enum Access</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -618,6 +615,9 @@
 <li class="toctree-l1"><a class="reference internal" href="function_format_8hpp_1ab7e7d29a95da2ff06cf43aca41d54f91.html">Template Function astra::format</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a67f4ab294419f8c113cc8e2072cbc5d4.html">Function astra::move</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_access_8hpp_1ae73436b3de35e85b751c17bdccae442b.html">Function astra::operator&amp;</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -625,15 +625,6 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_overloaded_8hpp_1aab8921fe63674c9f2b4d37fe09c9b4f2.html">Template Function astra::Overloaded</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a9b37232674257fdb602d050bd1ad72c1.html">Function astra::print(const TypeInfo&amp;)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1af1519901592ea6c930c56e9a70d1fad5.html">Function astra::print(Var)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a9f6f38085af9ec269580bc783510c259.html">Template Function astra::print(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a55c2d4b75265cb03d7f2406d9a64aff7.html">Function astra::reflect(Var)</a></li>
@@ -645,19 +636,10 @@
 <li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1a6570da25f1d3fa9b105d8466378c571a.html">Template Function astra::reflect(const T *)</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1afebd838c2236cd1c3bacd0cab3484315.html">Function astra::sizeOf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_type__query_8hpp_1afebd838c2236cd1c3bacd0cab3484315.html">Function astra::sizeOf</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aba9955aee4c1ee81c9a08bd62770da23.html">Function astra::sprint(const TypeInfo&amp;)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1afac34343d445ee366e84aad653e4ec5e.html">Function astra::sprint(Var)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_reflection_8hpp_1aab25549a2bb25ef2c3dba2539367cdb9.html">Template Function astra::sprint(const T *)</a></li>
-</ul>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="function_type__name_8hpp_1a6d3dad3555658fc9ae4b1378064af618.html">Function astra::typeName</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function_type__query_8hpp_1afa8c65247a6975c8d5af710bff06c9af.html">Function astra::typeName</a></li>
 </ul>
 </div>
 </nav></div>
@@ -733,92 +715,254 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert10yamlToJsonERKN4YAML4NodeE">
 <span id="_CPPv3N5astra7convert10yamlToJsonERKN4YAML4NodeE"></span><span id="_CPPv2N5astra7convert10yamlToJsonERKN4YAML4NodeE"></span><span id="astra::convert::yamlToJson__YAML::NodeCR"></span><span class="target" id="structastra_1_1convert_1a0f3e096168f19414b2227fec0ff8b1af"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlToJson</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">node</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert10yamlToJsonERKN4YAML4NodeE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a YAML node to a JSON object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node</strong> – The node to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting JSON </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12binaryToJsonERN9libjaguar8DocumentE">
 <span id="_CPPv3N5astra7convert12binaryToJsonERN9libjaguar8DocumentE"></span><span id="_CPPv2N5astra7convert12binaryToJsonERN9libjaguar8DocumentE"></span><span id="astra::convert::binaryToJson__libjaguar::DocumentR"></span><span class="target" id="structastra_1_1convert_1a7e64f6d452be093ae24e530c3dc69f7f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryToJson</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">doc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12binaryToJsonERN9libjaguar8DocumentE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a Jaguar document to a JSON object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>doc</strong> – The document to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting JSON </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert10jsonToYamlERKN8nlohmann4jsonE">
 <span id="_CPPv3N5astra7convert10jsonToYamlERKN8nlohmann4jsonE"></span><span id="_CPPv2N5astra7convert10jsonToYamlERKN8nlohmann4jsonE"></span><span id="astra::convert::jsonToYaml__nlohmann::jsonCR"></span><span class="target" id="structastra_1_1convert_1a7ef3cda4e1832fb9d8a444cd9f352ecc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonToYaml</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">json</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert10jsonToYamlERKN8nlohmann4jsonE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a JSON object to a YAML node. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json</strong> – The JSON to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting node </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12binaryToYamlERN9libjaguar8DocumentE">
 <span id="_CPPv3N5astra7convert12binaryToYamlERN9libjaguar8DocumentE"></span><span id="_CPPv2N5astra7convert12binaryToYamlERN9libjaguar8DocumentE"></span><span id="astra::convert::binaryToYaml__libjaguar::DocumentR"></span><span class="target" id="structastra_1_1convert_1ab00faac08ef5b53baad29195e41a2bd1"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryToYaml</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">doc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12binaryToYamlERN9libjaguar8DocumentE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a Jaguar document to a YAML node. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>doc</strong> – The document to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting node </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE">
 <span id="_CPPv3N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE"></span><span id="_CPPv2N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE"></span><span id="astra::convert::jsonToBinary__nlohmann::jsonCR"></span><span class="target" id="structastra_1_1convert_1aaf0dc257e76b305276dd8eea0fe3effc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonToBinary</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">nlohmann</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">json</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">json</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12jsonToBinaryERKN8nlohmann4jsonE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a JSON object to a Jaguar document. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json</strong> – The JSON to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting document </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert12yamlToBinaryERKN4YAML4NodeE">
 <span id="_CPPv3N5astra7convert12yamlToBinaryERKN4YAML4NodeE"></span><span id="_CPPv2N5astra7convert12yamlToBinaryERKN4YAML4NodeE"></span><span id="astra::convert::yamlToBinary__YAML::NodeCR"></span><span class="target" id="structastra_1_1convert_1ac3437eb81620046a6ea7bbd20f5a64e8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">libjaguar</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Document</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlToBinary</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">YAML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">node</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert12yamlToBinaryERKN4YAML4NodeE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a YAML node to a Jaguar document. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node</strong> – The node to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting document </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22yamlStringToJsonStringERKNSt6stringE">
 <span id="_CPPv3N5astra7convert22yamlStringToJsonStringERKNSt6stringE"></span><span id="_CPPv2N5astra7convert22yamlStringToJsonStringERKNSt6stringE"></span><span id="astra::convert::yamlStringToJsonString__ssCR"></span><span class="target" id="structastra_1_1convert_1af2b6c453cfebcddc99812ca6c59e6353"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStringToJsonString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22yamlStringToJsonStringERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a YAML string to a JSON string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The YAML string to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting JSON string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22yamlStreamToJsonStringERNSt7istreamE">
 <span id="_CPPv3N5astra7convert22yamlStreamToJsonStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert22yamlStreamToJsonStringERNSt7istreamE"></span><span id="astra::convert::yamlStreamToJsonString__isR"></span><span class="target" id="structastra_1_1convert_1a7a0c30b6d30169efeb4f8ed082894c20"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStreamToJsonString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22yamlStreamToJsonStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a YAML stream to a JSON string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – The YAML stream to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting JSON string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE">
 <span id="_CPPv3N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE"></span><span id="_CPPv2N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE"></span><span id="astra::convert::binaryVecToJsonString__std::vector:uint8_t:CR"></span><span class="target" id="structastra_1_1convert_1aa058d78007ecf1ef543c2430c208b5c8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryVecToJsonString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21binaryVecToJsonStringERKNSt6vectorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a Jaguar binary vector to a JSON string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vector</strong> – The binary vector to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting JSON string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert24binaryStreamToJsonStringERNSt7istreamE">
 <span id="_CPPv3N5astra7convert24binaryStreamToJsonStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert24binaryStreamToJsonStringERNSt7istreamE"></span><span id="astra::convert::binaryStreamToJsonString__isR"></span><span class="target" id="structastra_1_1convert_1a86c5acf314c4b9fd671e04cedbbdf934"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryStreamToJsonString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert24binaryStreamToJsonStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a Jaguar binary stream to a JSON string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – The binary stream to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting JSON string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22jsonStringToYamlStringERKNSt6stringE">
 <span id="_CPPv3N5astra7convert22jsonStringToYamlStringERKNSt6stringE"></span><span id="_CPPv2N5astra7convert22jsonStringToYamlStringERKNSt6stringE"></span><span id="astra::convert::jsonStringToYamlString__ssCR"></span><span class="target" id="structastra_1_1convert_1a88ccc5bbe8f2a1997cb0e177e1a91be0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStringToYamlString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22jsonStringToYamlStringERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a JSON string to a YAML string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The JSON string to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting YAML string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert22jsonStreamToYamlStringERNSt7istreamE">
 <span id="_CPPv3N5astra7convert22jsonStreamToYamlStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert22jsonStreamToYamlStringERNSt7istreamE"></span><span id="astra::convert::jsonStreamToYamlString__isR"></span><span class="target" id="structastra_1_1convert_1a711b5a751ed3e160e11813de3c464d7f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStreamToYamlString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert22jsonStreamToYamlStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a JSON stream to a YAML string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – The JSON stream to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting YAML string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE">
 <span id="_CPPv3N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE"></span><span id="_CPPv2N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE"></span><span id="astra::convert::binaryVecToYamlString__std::vector:uint8_t:CR"></span><span class="target" id="structastra_1_1convert_1a8c3fcb8ba655596b882f50b2e5d80925"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryVecToYamlString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21binaryVecToYamlStringERKNSt6vectorI7uint8_tEE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a Jaguar binary vector to a YAML string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vector</strong> – The binary vector to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting YAML string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert24binaryStreamToYamlStringERNSt7istreamE">
 <span id="_CPPv3N5astra7convert24binaryStreamToYamlStringERNSt7istreamE"></span><span id="_CPPv2N5astra7convert24binaryStreamToYamlStringERNSt7istreamE"></span><span id="astra::convert::binaryStreamToYamlString__isR"></span><span class="target" id="structastra_1_1convert_1a08dcce76f244f67ed288fc92d2bf36ee"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binaryStreamToYamlString</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert24binaryStreamToYamlStringERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a Jaguar binary stream to a YAML string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – The binary stream to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting YAML string </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21jsonStringToBinaryVecERKNSt6stringE">
 <span id="_CPPv3N5astra7convert21jsonStringToBinaryVecERKNSt6stringE"></span><span id="_CPPv2N5astra7convert21jsonStringToBinaryVecERKNSt6stringE"></span><span id="astra::convert::jsonStringToBinaryVec__ssCR"></span><span class="target" id="structastra_1_1convert_1aec3563361b437242340ebae2f5603410"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStringToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21jsonStringToBinaryVecERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a JSON string to a Jaguar binary vector. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The JSON string to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting binary vector </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE">
 <span id="_CPPv3N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE"></span><span id="_CPPv2N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE"></span><span id="astra::convert::jsonStreamToBinaryVec__isR"></span><span class="target" id="structastra_1_1convert_1acbeb330d9e3a2d93b6b9055dca75fb4a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jsonStreamToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21jsonStreamToBinaryVecERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a JSON stream to a Jaguar binary vector. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – The JSON stream to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting binary vector </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21yamlStringToBinaryVecERKNSt6stringE">
 <span id="_CPPv3N5astra7convert21yamlStringToBinaryVecERKNSt6stringE"></span><span id="_CPPv2N5astra7convert21yamlStringToBinaryVecERKNSt6stringE"></span><span id="astra::convert::yamlStringToBinaryVec__ssCR"></span><span class="target" id="structastra_1_1convert_1a1fa8a51f8619bf0f6b91715fe6603b06"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStringToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21yamlStringToBinaryVecERKNSt6stringE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a YAML string to a Jaguar binary vector. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>str</strong> – The YAML string to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting binary vector </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE">
 <span id="_CPPv3N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE"></span><span id="_CPPv2N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE"></span><span id="astra::convert::yamlStreamToBinaryVec__isR"></span><span class="target" id="structastra_1_1convert_1af2c8cbadc693137818f39b582e9b8e1a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yamlStreamToBinaryVec</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra7convert21yamlStreamToBinaryVecERNSt7istreamE" title="Link to this definition"><span/></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Convert a YAML stream to a Jaguar binary vector. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – The YAML stream to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting binary vector </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </dd></dl>
