@@ -16,6 +16,13 @@ namespace astra {
 		  : map(map), isConst(isConst) {
 		}
 
+		/**
+		 * @brief Assign the contents of a Var to this object
+		 *
+		 * @param var The Var to assign from
+		 *
+		 * @throws std::runtime_error If the source Var does not contain a bool
+		 */
 		void assign(Var var) override {
 			auto t = TypeId::get(map);
 			if(var.typeId() != t) {
@@ -26,9 +33,15 @@ namespace astra {
 
 			map = static_cast<std::unordered_map<K, V>*>(const_cast<void*>(var.raw()));
 			isConst = var.isConst();
-			return;
 		}
 
+		/**
+		 * @brief Unsafely assign a raw pointer to this object
+		 *
+		 * @warning This function is for internal use only!
+		 *
+		 * @param ptr The pointer to assign from
+		 */
 		void unsafeAssign(void* ptr) override {
 			map = static_cast<std::unordered_map<K, V>*>(ptr);
 			isConst = false;
@@ -84,8 +97,6 @@ namespace astra {
 			if(r.second != true) {
 				throw std::runtime_error("The pair of key and value does already exist");
 			}
-
-			return;
 		}
 
 		void remove(Var key) override {

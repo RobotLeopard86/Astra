@@ -3,6 +3,7 @@
 #include <limits>
 
 #include "ifloat.hpp"
+#include "astra/format.hpp"
 #include "astra/type_query.hpp"
 #include "astra/dll.hpp"
 
@@ -14,6 +15,13 @@ namespace astra {
 		  : value(value), isConst(isConst) {
 		}
 
+		/**
+		 * @brief Assign the contents of a Var to this object
+		 *
+		 * @param var The Var to assign from
+		 *
+		 * @throws std::runtime_error If the source Var does not contain a bool
+		 */
 		void assign(Var var) override {
 			auto t = TypeId::get(value);
 			if(var.typeId() != t) {
@@ -24,14 +32,25 @@ namespace astra {
 
 			value = static_cast<T*>(const_cast<void*>(var.raw()));
 			isConst = var.isConst();
-			return;
 		}
 
+		/**
+		 * @brief Unsafely assign a raw pointer to this object
+		 *
+		 * @warning This function is for internal use only!
+		 *
+		 * @param ptr The pointer to assign from
+		 */
 		void unsafeAssign(void* ptr) override {
 			value = static_cast<T*>(ptr);
 			isConst = false;
 		}
 
+		/**
+		 * @brief Access the contents of this object as a Var
+		 *
+		 * @return A Var holding the contents of this object, const state inherited
+		 */
 		Var var() override {
 			return Var(value, isConst);
 		}
@@ -44,6 +63,13 @@ namespace astra {
 			return *value;
 		}
 
+		/**
+		 * @brief Set the stored value
+		 *
+		 * @param val The new value
+		 *
+		 * @throws std::runtime_error If write operations are disabled
+		 */
 		void set(double val) override {
 			if(isConst) {
 				throw std::runtime_error("Trying to set const value");
@@ -54,7 +80,6 @@ namespace astra {
 			}
 
 			*value = val;
-			return;
 		}
 
 	  private:

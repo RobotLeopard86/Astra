@@ -26,7 +26,6 @@ namespace astra {
 
 	void destroy(Var variable) {
 		if(variable.raw() == nullptr) {
-			return;
 		}
 		ActionsTable::data()[variable.typeId().number()].destroy(variable.rawMut());
 	}

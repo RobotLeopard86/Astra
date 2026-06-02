@@ -20,7 +20,7 @@ namespace astra {
 		 *
 		 * @note The Var does not maintain ownership over the passed pointer; it is the caller's responsibility to manage the pointer's lifetime externally
 		 *
-		 * @param value The value to store (<b>may be @c nullptr</b>)
+		 * @param value The value to store (may be @c nullptr)
 		 * @param type The type to associate with the Var
 		 * @param isConst Whether or not the Var should be const and disallow write operations
 		 */
@@ -31,11 +31,11 @@ namespace astra {
 		 *
 		 * @note The Var does not maintain ownership over the passed pointer; it is the caller's responsibility to manage the pointer's lifetime externally
 		 *
-		 * @param value The value to store (<b>may not be @c nullptr</b>)
+		 * @param value The value to store (may not be @c nullptr)
 		 */
 		template<typename T>
 		explicit Var(const T* value)
-		  : value(value == nullptr ? throw std::runtime_error("Cannot create Var with type deduction using a nullptr!") : const_cast<T*>(value)), type(TypeId::get<T>()), isThisVarConst(true) {
+		  : value(value == nullptr ? throw std::runtime_error("Cannot create Var with type deduction using a nullptr!") : const_cast<T*>(value)), type(TypeId::get<T>()), areWeConst(true) {
 		}
 
 		/**
@@ -43,24 +43,24 @@ namespace astra {
 		 *
 		 * @note The Var does not maintain ownership over the passed pointer; it is the caller's responsibility to manage the pointer's lifetime externally
 		 *
-		 * @param value The value to store (<b>may not be @c nullptr</b>)
+		 * @param value The value to store (may not be @c nullptr)
 		 * @param isConst Whether or not the Var should be const and disallow write operations
 		 */
 		template<typename T>
 		explicit Var(T* value, bool isConst = false)
-		  : value(value == nullptr ? throw std::runtime_error("Cannot create Var with type deduction using a nullptr!") : value), type(TypeId::get(value)), isThisVarConst(isConst) {
+		  : value(value == nullptr ? throw std::runtime_error("Cannot create Var with type deduction using a nullptr!") : value), type(TypeId::get(value)), areWeConst(isConst) {
 		}
 
 		///@cond
 		template<Reflectable T>
 			requires(!std::is_enum_v<T> && std::is_class_v<T>)
 		explicit Var(const T* value)
-		  : value(const_cast<T*>(value)), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), isThisVarConst(true) {}
+		  : value(const_cast<T*>(value)), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), areWeConst(true) {}
 
 		template<Reflectable T>
 			requires(!std::is_enum_v<T> && std::is_class_v<T>)
 		explicit Var(T* value, bool isConst = false)
-		  : value(value), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), isThisVarConst(isConst) {}
+		  : value(value), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), areWeConst(isConst) {}
 		///@endcond
 
 		/**
@@ -122,7 +122,7 @@ namespace astra {
 		 */
 		template<typename T>
 		T* rtCast() const {
-			if(!std::is_const_v<T> && isConst()) {
+			if(!std::is_const_v<T> && areWeConst) {
 				throw std::runtime_error("Cannot return mutable reference to const Var!");
 			}
 
@@ -142,7 +142,7 @@ namespace astra {
 	  private:
 		void* value;
 		TypeId type;
-		bool isThisVarConst;
+		bool areWeConst;
 
 		//include reflection header into .cpp file to avoid cyclic dependencies
 		static void error(TypeId type, TypeId desiredType);

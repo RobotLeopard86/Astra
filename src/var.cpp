@@ -7,11 +7,11 @@
 namespace astra {
 
 	Var::Var()
-	  : value(nullptr), type(), isThisVarConst(true) {
+	  : value(nullptr), type(), areWeConst(true) {
 	}
 
 	Var::Var(void* value, TypeId type, bool isConst)
-	  : value(value), type(type), isThisVarConst(isConst) {
+	  : value(value), type(type), areWeConst(isConst) {
 	}
 
 	void Var::unsafeAssign(void* ptr) {
@@ -27,7 +27,7 @@ namespace astra {
 	}
 
 	void* Var::rawMut() {
-		if(isThisVarConst) {
+		if(areWeConst) {
 			return nullptr;
 		}
 
@@ -43,14 +43,14 @@ namespace astra {
 	}
 
 	bool Var::isConst() const {
-		return isThisVarConst;
+		return areWeConst;
 	}
 
 	void* Var::release() {
 		void* val = value;
 		value = nullptr;
 		type = TypeId();
-		isThisVarConst = true;
+		areWeConst = true;
 		return val;
 	}
 

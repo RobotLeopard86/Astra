@@ -20,6 +20,13 @@ namespace astra {
 			isConst(isConst) {
 		}
 
+		/**
+		 * @brief Assign the contents of a Var to this object
+		 *
+		 * @param var The Var to assign from
+		 *
+		 * @throws std::runtime_error If the source Var does not contain a bool
+		 */
 		void assign(Var var) override {
 			auto t = TypeId::get(queue);
 			if(var.typeId() != t) {
@@ -30,9 +37,15 @@ namespace astra {
 
 			queue = static_cast<std::queue<T>*>(const_cast<void*>(var.raw()));
 			isConst = var.isConst();
-			return;
 		}
 
+		/**
+		 * @brief Unsafely assign a raw pointer to this object
+		 *
+		 * @warning This function is for internal use only!
+		 *
+		 * @param ptr The pointer to assign from
+		 */
 		void unsafeAssign(void* ptr) override {
 			queue = static_cast<std::queue<T>*>(ptr);
 			isConst = false;
@@ -90,7 +103,6 @@ namespace astra {
 					value.typeId(), nestedType);
 			}
 			queue->push(*static_cast<const T*>(value.raw()));
-			return;
 		}
 
 		void pop() override {

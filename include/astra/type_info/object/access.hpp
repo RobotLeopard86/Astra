@@ -4,18 +4,17 @@
 
 namespace astra {
 
-	///Represent common access modifiers kPublic, kProtected, kPrivate, etc.
-	///DO NOT edit they used as text by generator project
+	/**
+	 * @brief Flags for access modifiers on object members (works as bitmask)
+	 */
 	enum class Access : uint8_t {
-		// clang-format off
-  None      = 0b00000,
-  Public    = 0b00001,
-  Protected = 0b00010,
-  Private   = 0b00100,
-  Static    = 0b01000,
-  Const     = 0b10000,
-  All       = 0b11111,
-		// clang-format on
+		None = 0b00000,
+		Public = 0b00001,
+		Protected = 0b00010,
+		Private = 0b00100,
+		Static = 0b01000,
+		Const = 0b10000,
+		All = 0b11111,
 	};
 
 	///@cond

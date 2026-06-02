@@ -25,6 +25,13 @@ namespace astra {
 			methods(methods) {
 		}
 
+		/**
+		 * @brief Assign the contents of a Var to this object
+		 *
+		 * @param var The Var to assign from
+		 *
+		 * @throws std::runtime_error If the source Var does not contain a bool
+		 */
 		void assign(Var var) {
 			if(var.typeId() != inner.typeId()) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
@@ -32,10 +39,15 @@ namespace astra {
 					typeName(inner.typeId())));
 			}
 			inner = var;
-
-			return;
 		}
 
+		/**
+		 * @brief Unsafely assign a raw pointer to this object
+		 *
+		 * @warning This function is for internal use only!
+		 *
+		 * @param ptr The pointer to assign from
+		 */
 		void unsafeAssign(void* ptr) {
 			inner.unsafeAssign(ptr);
 		}
@@ -70,6 +82,11 @@ namespace astra {
 			throw std::runtime_error(::astra::format("There is no method with name: '{}'", name));
 		}
 
+		/**
+		 * @brief Access the contents of this object as a Var
+		 *
+		 * @return A Var holding the contents of this object, const state inherited
+		 */
 		Var var() {
 			return inner;
 		}

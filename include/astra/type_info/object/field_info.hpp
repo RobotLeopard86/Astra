@@ -35,6 +35,11 @@ namespace astra {
 			return *this;
 		}
 
+		/**
+		 * @brief Access the contents of this object as a Var
+		 *
+		 * @return A Var holding the contents of this object, const state inherited
+		 */
 		Var var() const {
 			if(isStatic()) {
 				return {reinterpret_cast<void*>(data->value()), data->typeId(), data->isConst()};

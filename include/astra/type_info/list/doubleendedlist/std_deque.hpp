@@ -18,6 +18,13 @@ namespace astra {
 			isConst(isConst) {
 		}
 
+		/**
+		 * @brief Assign the contents of a Var to this object
+		 *
+		 * @param var The Var to assign from
+		 *
+		 * @throws std::runtime_error If the source Var does not contain a bool
+		 */
 		void assign(Var var) override {
 			auto t = TypeId::get(deque);
 			if(var.typeId() != t) {
@@ -28,9 +35,15 @@ namespace astra {
 
 			deque = static_cast<std::deque<T>*>(const_cast<void*>(var.raw()));
 			isConst = var.isConst();
-			return;
 		}
 
+		/**
+		 * @brief Unsafely assign a raw pointer to this object
+		 *
+		 * @warning This function is for internal use only!
+		 *
+		 * @param ptr The pointer to assign from
+		 */
 		void unsafeAssign(void* ptr) override {
 			deque = static_cast<std::deque<T>*>(ptr);
 			isConst = false;
@@ -82,7 +95,6 @@ namespace astra {
 					value.typeId(), nestedType);
 			}
 			deque->push_back(*static_cast<const T*>(value.raw()));
-			return;
 		}
 
 		void pop() override {

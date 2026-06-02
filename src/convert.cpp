@@ -261,19 +261,15 @@ namespace astra {
 	void json2BinaryRecursive(libjaguar::Document& doc, const nlohmann::json& json, const std::string& path) {
 		if(json.is_boolean()) {
 			doc.SetOrCreateValue<bool>(path, json.get<bool>());
-			return;
 		}
 		if(json.is_number_integer()) {
 			doc.SetOrCreateValue<int64_t>(path, json.get<int64_t>());
-			return;
 		}
 		if(json.is_number_unsigned()) {
 			doc.SetOrCreateValue<uint64_t>(path, json.get<uint64_t>());
-			return;
 		}
 		if(json.is_number_float()) {
 			doc.SetOrCreateValue<double>(path, json.get<double>());
-			return;
 		}
 		if(json.is_string()) {
 			std::string str = json.get<std::string>();
@@ -340,7 +336,6 @@ namespace astra {
 				std::string subpath = (path.empty() ? "" : path + ".") + it.key();
 				json2BinaryRecursive(doc, it.value(), subpath);
 			}
-			return;
 		}
 		if(json.is_array()) {
 			if(json.empty()) {
@@ -393,7 +388,6 @@ namespace astra {
 					json2BinaryRecursive(doc, json[i], subpath);
 				}
 			}
-			return;
 		}
 	}
 
