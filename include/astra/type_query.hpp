@@ -2,6 +2,7 @@
 
 #include "dll.hpp"
 #include "type_id.hpp"
+#include "format.hpp"// IWYU pragma: keep
 
 #include <cstdint>
 #include <string>

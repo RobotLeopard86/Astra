@@ -1,5 +1,5 @@
 CompileFlags:
-  Add: [-std=c++20, -Wall, -Wextra, -DASTRA_API=]
+  Add: [-std=c++20, -Wall, -Wextra, -I../include]
   Compiler: /usr/bin/clang++
 Diagnostics:
   UnusedIncludes: None
