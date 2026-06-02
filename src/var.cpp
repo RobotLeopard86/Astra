@@ -26,7 +26,7 @@ namespace astra {
 		return type != other.type || value != other.value;
 	}
 
-	void* Var::rawMut() const {
+	void* Var::rawMut() {
 		if(isThisVarConst) {
 			return nullptr;
 		}
@@ -46,10 +46,12 @@ namespace astra {
 		return isThisVarConst;
 	}
 
-	void Var::dispose() {
+	void* Var::release() {
+		void* val = value;
 		value = nullptr;
 		type = TypeId();
 		isThisVarConst = true;
+		return val;
 	}
 
 	void Var::error(TypeId type, TypeId desired_type) {

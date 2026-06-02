@@ -39,6 +39,15 @@ namespace astra {
 			return TypeId::get<T>();
 		}
 
+		/**
+		 * @brief Get the stored type ID number
+		 *
+		 * @return The type ID number
+		 */
+		uint32_t number() const {
+			return id;
+		}
+
 		///@cond
 		template<typename T>
 			requires(requires(T t) {
@@ -100,9 +109,7 @@ namespace astra {
 		static TypeId get() {
 			return TypeId(0);
 		}
-		///@endcond
 
-		//other methods
 		bool operator==(const TypeId& other) const {
 			return id == other.id;
 		}
@@ -110,11 +117,7 @@ namespace astra {
 		bool operator!=(const TypeId& other) const {
 			return id != other.id;
 		}
-
-		uint32_t number() const {
-			return id;
-		}
-
+		///@endcond
 	  private:
 		uint32_t id;
 

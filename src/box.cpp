@@ -16,16 +16,13 @@ namespace astra {
 
 	Box::Box(Box&& other) noexcept
 	  : inner(other.inner), alloc(other.alloc) {
-		//prevent resource deletion
-		other.inner.dispose();
+		other.inner.release();
 	}
 
 	Box& Box::operator=(Box&& other) noexcept {
 		inner = other.inner;
 		alloc = other.alloc;
-
-		//prevent resource deletion
-		other.inner.dispose();
+		other.inner.release();
 		return *this;
 	}
 
