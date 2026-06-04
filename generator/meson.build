@@ -4,12 +4,17 @@ inja_dep = subproject('inja', required: true, default_options: {
 	'build_tests': false
 }).get_variable('inja_dep')
 spinners_dep = subproject('spinners-plus-plus', required: true).get_variable('spinners_dep')
+deps = [cli11_dep, inja_dep, spinners_dep]
 
 # LLVM/Clang dependencies
-llvm_dep = dependency('llvm', version: '>=19.0.0', required: true)
-clang_dep = cxx.find_library('clang-cpp', required: true, dirs: host_machine.system() == 'darwin' ? '/opt/homebrew/opt/llvm/lib' : [])
-
-deps = [cli11_dep, inja_dep, spinners_dep, llvm_dep, clang_dep]
+if host_machine.system() == 'windows'
+	llvm_win_sp = subproject('llvm-win-' + host_machine.cpu_family())
+	deps += llvm_win_sp.get_variable('llvm_dep')
+	deps += llvm_win_sp.get_variable('clang_cpp_dep')
+else
+	deps += dependency('llvm', version: '>=19.0.0', required: true)
+	deps += cxx.find_library('clang-cpp', required: true, dirs: host_machine.system() == 'darwin' ? '/opt/homebrew/opt/llvm/lib' : [])
+endif
 
 # Windows libraries
 if host_machine.system() == 'windows'

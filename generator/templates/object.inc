@@ -44,7 +44,7 @@ struct TypeActions<{{name}}> {
     if (res.typeId() != TypeId::get<{{item.return}}>()) {
       throw std::runtime_error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.typeId())));
     }
-    *reinterpret_cast<{{item.return}}*>(res.rawMut()) = //
+    *reinterpret_cast<{{item.return}}*>(res.rawMut()) = 
     {% endif -%}
     std::invoke(&{{name}}::{{item.name}}{% if not ("Static" in item.acc) %}, static_cast<{{name}}*>(obj){% endif %}{% if length(item.params) != 0 %},{% else %});{% endif %}
       {% for i in range(length(item.params)) -%}
@@ -57,12 +57,12 @@ struct TypeActions<{{name}}> {
 
 template<>
 TypeId TypeId::get<{{name}}>() {
-  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
-                                                 &CommonActions<{{name}}>::typeName,  //
-                                                 &CommonActions<{{name}}>::sizeOf,  //
-                                                 &CommonActions<{{name}}>::construct,  //
-                                                 &CommonActions<{{name}}>::destroy,    //
-                                                 &CommonActions<{{name}}>::copy,       //
+  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      
+                                                 &CommonActions<{{name}}>::typeName,  
+                                                 &CommonActions<{{name}}>::sizeOf,  
+                                                 &CommonActions<{{name}}>::construct,  
+                                                 &CommonActions<{{name}}>::destroy,    
+                                                 &CommonActions<{{name}}>::copy,       
                                                  &CommonActions<{{name}}>::move)));
   return id;
 }

@@ -24,12 +24,12 @@ struct TypeActions<{{name}}> {
 
 template<>
 TypeId TypeId::get<{{name}}>() {
-  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      //
-                                                 &CommonActions<{{name}}>::typeName,  //
-                                                 &CommonActions<{{name}}>::sizeOf,  //
-                                                 &CommonActions<{{name}}>::construct,  //
-                                                 &CommonActions<{{name}}>::destroy,    //
-                                                 &CommonActions<{{name}}>::copy,       //
+  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      
+                                                 &CommonActions<{{name}}>::typeName,  
+                                                 &CommonActions<{{name}}>::sizeOf,  
+                                                 &CommonActions<{{name}}>::construct,  
+                                                 &CommonActions<{{name}}>::destroy,    
+                                                 &CommonActions<{{name}}>::copy,       
                                                  &CommonActions<{{name}}>::move)));
   return id;
 }

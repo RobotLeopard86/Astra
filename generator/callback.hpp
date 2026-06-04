@@ -16,7 +16,7 @@ using namespace clang;
 using namespace clang::ast_matchers;
 
 struct JsonBuilder {
-	JsonBuilder(Context* ctx,//
+	JsonBuilder(Context* ctx,
 		const SourceManager* sm, const LangOptions& opts)
 	  : _ctx(ctx), _sm(sm), _opts(opts) {
 	}

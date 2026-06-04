@@ -11,7 +11,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API TypeActions<std::unique_ptr<T>> {
+	struct TypeActions<std::unique_ptr<T>> {
 
 		static TypeInfo reflect(void* value, bool isConst) {
 			return {Pointer(static_cast<std::unique_ptr<T>*>(value), isConst)};

@@ -12,7 +12,7 @@
 namespace astra {
 
 	template<typename T>
-	struct ASTRA_API TypeActions<std::shared_ptr<T>> {
+	struct TypeActions<std::shared_ptr<T>> {
 
 		static TypeInfo reflect(void* value, bool isConst) {
 			return {Pointer(static_cast<std::shared_ptr<T>*>(value), isConst)};

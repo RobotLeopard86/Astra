@@ -32,28 +32,20 @@ namespace astra {
 		static void nop(void*) {
 		}
 
-		static void copy(void* to, const void* from)
-			requires std::is_copy_constructible_v<T> && std::is_copy_assignable_v<T>
-		{
-			*static_cast<T*>(to) = *static_cast<const T*>(from);
+		static void copy(void* to, const void* from) {
+			if constexpr(std::is_copy_constructible_v<T> && std::is_copy_assignable_v<T>) {
+				*static_cast<T*>(to) = *static_cast<const T*>(from);
+			} else {
+				throw std::runtime_error("Cannot copy a non-copyable class!");
+			}
 		}
 
-		static void move(void* to, void* from)
-			requires std::is_copy_constructible_v<T> && std::is_copy_assignable_v<T>
-		{
-			*static_cast<T*>(to) = std::move(*static_cast<T*>(from));
-		}
-
-		static void copy(void*, const void*)
-			requires(!std::is_copy_constructible_v<T> || !std::is_copy_assignable_v<T>)
-		{
-			throw std::runtime_error("Cannot copy a non-copyable class!");
-		}
-
-		static void move(void*, void*)
-			requires(!std::is_copy_constructible_v<T> || !std::is_copy_assignable_v<T>)
-		{
-			throw std::runtime_error("Cannot move a non-movable class!");
+		static void move(void* to, void* from) {
+			if constexpr(std::is_move_constructible_v<T> && std::is_move_assignable_v<T>) {
+				*static_cast<T*>(to) = std::move(*static_cast<T*>(from));
+			} else {
+				throw std::runtime_error("Cannot move a non-movable class!");
+			}
 		}
 	};
 

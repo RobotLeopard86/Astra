@@ -21,37 +21,37 @@ Files::Files()
 
 #ifdef _WIN32
 std::string Files::toUTF8(const wchar_t* str, std::size_t size) {
-	int sizeUTF8 = WideCharToMultiByte(CP_UTF8,//
-		WC_ERR_INVALID_CHARS,				   //
-		str,								   //
-		staticCast<int>(size),				   //
+	int sizeUTF8 = WideCharToMultiByte(CP_UTF8,
+		WC_ERR_INVALID_CHARS,
+		str,
+		static_cast<int>(size),
 		nullptr, 0, nullptr, nullptr);
 
-	std::string str_UTF8(size_UTF8, '\0');
-	WideCharToMultiByte(CP_UTF8,//
-		WC_ERR_INVALID_CHARS,	//
-		str,					//
-		staticCast<int>(size),	//
-		strUTF8.data(),			//
-		sizeUTF8,				//
+	std::string strUTF8(size, '\0');
+	WideCharToMultiByte(CP_UTF8,
+		WC_ERR_INVALID_CHARS,
+		str,
+		static_cast<int>(size),
+		strUTF8.data(),
+		sizeUTF8,
 		nullptr, nullptr);
 
 	return strUTF8;
 }
 
 std::wstring Files::fromUTF8(const char* str, std::size_t size) {
-	int sizeW = MultiByteToWideChar(CP_UTF8,//
-		MB_ERR_INVALID_CHARS,				//
-		str,								//
-		staticCast<int>(size),				//
+	int sizeW = MultiByteToWideChar(CP_UTF8,
+		MB_ERR_INVALID_CHARS,
+		str,
+		static_cast<int>(size),
 		nullptr, 0);
 
-	std::wstring str_w(size_w, '\0');
-	MultiByteToWideChar(CP_UTF8,//
-		MB_ERR_INVALID_CHARS,	//
-		str,					//
-		staticCast<int>(size),	//
-		strW.data(),			//
+	std::wstring strW(size, '\0');
+	MultiByteToWideChar(CP_UTF8,
+		MB_ERR_INVALID_CHARS,
+		str,
+		static_cast<int>(size),
+		strW.data(),
 		sizeW);
 
 	return strW;
@@ -105,13 +105,13 @@ void Files::completeFiles(std::vector<std::string>* paths) {
 		path = std::filesystem::canonical(path).string();
 
 #ifdef _WIN32
-		std::filesystem::path fsPath(from_UTF8(path.data(), path.size()));
+		std::filesystem::path fsPath(fromUTF8(path.data(), path.size()));
 #else
 		std::filesystem::path fsPath(path);
 #endif
 
 		if(std::filesystem::is_directory(fsPath)) {
-			for(auto&& filepath : std::filesystem::recursive_directory_iterator(fsPath)) {
+			for(auto&& filePath : std::filesystem::recursive_directory_iterator(fsPath)) {
 #ifdef _WIN32
 				auto wStr = filePath.path().wstring();
 				paths->push_back(toUTF8(wStr.data(), wStr.size()));
