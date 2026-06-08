@@ -26,6 +26,7 @@ using namespace clang;
 using namespace clang::ast_matchers;
 
 bool hasReflectAttr(const clang::Decl* decl) {
+	if(!decl->hasAttrs()) return false;
 	for(clang::Attr* attr : decl->getAttrs()) {
 		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
 			llvm::StringRef annText = annAttr->getAnnotation();
@@ -38,6 +39,7 @@ bool hasReflectAttr(const clang::Decl* decl) {
 }
 
 bool hasIgnoreAttr(const clang::Decl* decl) {
+	if(!decl->hasAttrs()) return false;
 	for(clang::Attr* attr : decl->getAttrs()) {
 		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
 			llvm::StringRef annText = annAttr->getAnnotation();
@@ -50,6 +52,7 @@ bool hasIgnoreAttr(const clang::Decl* decl) {
 }
 
 bool hasAliasAttr(const clang::Decl* decl) {
+	if(!decl->hasAttrs()) return false;
 	for(clang::Attr* attr : decl->getAttrs()) {
 		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
 			llvm::StringRef annText = annAttr->getAnnotation();
@@ -62,6 +65,7 @@ bool hasAliasAttr(const clang::Decl* decl) {
 }
 
 std::string getAttrAlias(const clang::Decl* decl) {
+	if(!decl->hasAttrs()) return "";
 	for(clang::Attr* attr : decl->getAttrs()) {
 		if(clang::AnnotateAttr* annAttr = dyn_cast<clang::AnnotateAttr>(attr)) {
 			llvm::StringRef annText = annAttr->getAnnotation();

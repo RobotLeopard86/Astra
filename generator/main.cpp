@@ -79,6 +79,9 @@ int main(int argc, char* argv[]) {
 	//Spinner to make the wait bearable
 	std::unique_ptr<jms::Spinner> spinner;
 	if(!quiet) {
+#if defined(_WIN32) && defined(_DEBUG)
+		std::cout << "\x1b[0m\x1b[1;93mWARNING:\x1b[0m You are running a debug build of Astra, data generation may be very slow!" << std::endl;
+#endif
 		spinner = std::make_unique<jms::Spinner>("Generating reflection data...", jms::dots);
 		spinner->start();
 	}

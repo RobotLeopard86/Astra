@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <string>
 
 #include "constexpr_sort.hpp"
 #include "format.hpp"
@@ -26,8 +27,8 @@ namespace astra {
 			  : value(value), name(name) {
 			}
 
-			T value;		 ///<The contained value
-			std::string name;///<The associated string key
+			T value;			  ///<The contained value
+			std::string_view name;///<The associated string key
 		};
 
 		/**
@@ -55,14 +56,14 @@ namespace astra {
 		 *
 		 * @throws std::runtime_error If no entry with the given value exists
 		 */
-		const std::string& getKey(T value) const {
+		std::string getKey(T value) const {
 			auto ptr = searchByValue(value, 0, size);
 
 			if(ptr == nullptr) {
 				throw std::runtime_error("Cannot find an entry");
 			}
 
-			return ptr->name;
+			return std::string(ptr->name);
 		}
 
 		/**

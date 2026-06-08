@@ -1,0 +1,176 @@
+name: Build Windows LLVM binaries
+
+permissions: write-all
+
+on:
+  workflow_dispatch:
+
+env:
+  LLVM_LIBS: >-
+    LLVMAnalysis.lib
+    LLVMAsmParser.lib
+    LLVMBinaryFormat.lib
+    LLVMBitReader.lib
+    LLVMBitstreamReader.lib
+    LLVMCore.lib
+    LLVMDebugInfoCodeView.lib
+    LLVMDebugInfoDWARF.lib
+    LLVMDebugInfoDWARFLowLevel.lib
+    LLVMDebugInfoPDB.lib
+    LLVMDemangle.lib
+    LLVMDWARFCFIChecker.lib
+    LLVMFrontendAtomic.lib
+    LLVMFrontendDirective.lib
+    LLVMFrontendDriver.lib
+    LLVMFrontendHLSL.lib
+    LLVMFrontendOffloading.lib
+    LLVMFrontendOpenMP.lib
+    LLVMIRReader.lib
+    LLVMMC.lib
+    LLVMMCParser.lib
+    LLVMObject.lib
+    LLVMObjectYAML.lib
+    LLVMOption.lib
+    LLVMPlugins.lib
+    LLVMProfileData.lib
+    LLVMRemarks.lib
+    LLVMScalarOpts.lib
+    LLVMSupport.lib
+    LLVMTargetParser.lib
+    LLVMTextAPI.lib
+    LLVMTransformUtils.lib
+    LLVMWindowsDriver.lib
+    clangAnalysis.lib
+    clangAnalysisLifetimeSafety.lib
+    clangAPINotes.lib
+    clangAST.lib
+    clangASTMatchers.lib
+    clangBasic.lib
+    clangDriver.lib
+    clangEdit.lib
+    clangExtractAPI.lib
+    clangFrontend.lib
+    clangIndex.lib
+    clangLex.lib
+    clangOptions.lib
+    clangParse.lib
+    clangRewrite.lib
+    clangSema.lib
+    clangSerialization.lib
+    clangSupport.lib
+    clangTooling.lib
+    libclang.lib
+
+jobs:
+  llvm:
+    name: Build LLVM for (${{ matrix.arch }}, ${{ matrix.config }})
+    runs-on: ${{ matrix.runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x64
+            runs-on: windows-2025
+            config: Debug
+            crt: MultiThreadedDebugDLL
+            llvm: llvm
+          - arch: x64
+            runs-on: windows-2025
+            config: Release
+            crt: MultiThreadedDLL
+            llvm: llvm
+          - arch: arm64
+            runs-on: windows-11-arm
+            config: Debug
+            crt: MultiThreadedDebugDLL
+            llvm: llvm-arm64
+          - arch: arm64
+            runs-on: windows-11-arm
+            config: Release
+            crt: MultiThreadedDLL
+            llvm: llvm-arm64
+    steps:
+      - name: Set up VS environment
+        uses: egor-tensin/vs-shell@v2
+        with:
+          arch: x64
+      - name: Checkout LLVM
+        shell: pwsh
+        run: |
+          git clone --recursive https://github.com/llvm/llvm-project --depth 1 -b llvmorg-22.1.7
+      - name: Install build dependencies
+        uses: winpax/scoop-setup@v1.0.0
+        with:
+          apps: ${{ matrix.llvm }} cmake ninja python
+      - name: Configure LLVM
+        shell: pwsh
+        run: |
+          cd llvm-project
+          cmake -S llvm -B build-${{ matrix.arch }}-${{ matrix.config }} -G Ninja -DCMAKE_INSTALL_PREFIX=install.${{ matrix.arch }}-${{ matrix.config }} -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DLLVM_USE_LINKER=lld -DLLVM_TARGETS_TO_BUILD=host -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_MSVC_RUNTIME_LIBRARY=${{ matrix.crt }} -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DLLVM_OPTIMIZED_TABLEGEN=TRUE -DLLVM_BUILD_TOOLS=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_DIA_SDK=OFF -DLLVM_ENABLE_EH=TRUE -DLLVM_ENABLE_LTO=OFF -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_RUNTIMES="" -DLLVM_BUILD_EXAMPLES=OFF -DCMAKE_CXX_FLAGS='-D_CRT_SECURE_NO_WARNINGS -Wno-language-extension-token' -DLLVM_ENABLE_PLUGINS=OFF -DLLVM_BUILD_RUNTIMES=OFF -DLLVM_BUILD_RUNTIME=OFF -DLLVM_INCLUDE_RUNTIMES=OFF -DCLANG_INCLUDE_TESTS=OFF -DCLANG_ENABLE_STATIC_ANALYZER=FALSE -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON -DLLVM_BUILD_UTILS=ON -DLLVM_BUILD_DOCS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_RUNTIMES=OFF -DLLVM_INCLUDE_UTILS=ON -DLLVM_INCLUDE_BENCHMARKS=OFF -DCLANG_INCLUDE_DOCS=OFF -DCLANG_BUILD_TOOLS=OFF -DLIBCLANG_BUILD_STATIC=ON
+      - name: Build LLVM
+        shell: pwsh
+        run: |
+          cd llvm-project/build-${{ matrix.arch }}-${{ matrix.config }}
+          ninja install
+      - name: Upload binaries
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $arch     = "${{ matrix.arch }}"
+          $config   = "${{ matrix.config }}".ToLower()
+          $branch   = "llvm-$arch"
+          $installDir = "install-$arch-${{ matrix.config }}"
+          $libs     = "${{ env.LLVM_LIBS }}" -split '\s+' | Where-Object { $_ -ne '' }
+
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+          git clone `
+            --branch $branch `
+            --depth 1 `
+            "https://x-access-token:$env:GH_TOKEN@github.com/${{ github.repository }}.git" `
+            artifact-push
+
+          cd artifact-push
+          git lfs install
+
+          Remove-Item -Recurse -Force $config -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force "$config/include" | Out-Null
+          New-Item -ItemType Directory -Force "$config/lib"     | Out-Null
+
+          Copy-Item -Recurse -Force "..\$installDir\include\*" "$config\include\"
+
+          foreach ($lib in $libs) {
+            $src = "..\$installDir\lib\$lib"
+            if (Test-Path $src) {
+              Copy-Item -Force $src "$config\lib\"
+            } else {
+              Write-Warning "Library not found, skipping: $lib"
+            }
+          }
+
+          git add $config
+
+          git diff --cached --quiet && exit 0
+
+          git commit -m "llvm $arch/$config @ ${{ github.sha }}"
+
+          $maxRetries = 10
+          $success = $false
+          for ($i = 0; $i -lt $maxRetries; $i++) {
+            git push origin $branch && { $success = $true; break }
+            Write-Host "Push failed, rebasing and retrying ($($i + 1)/$maxRetries)..."
+            git fetch origin $branch
+            git rebase "origin/$branch"
+            if ($LASTEXITCODE -ne 0) {
+              Write-Error "Rebase failed — this shouldn't happen with non-overlapping directories"
+              exit 1
+            }
+            Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 8)
+          }
+
+          if (-not $success) {
+            Write-Error "Failed to push after $maxRetries attempts"
+            exit 1
+          }

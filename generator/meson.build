@@ -6,11 +6,16 @@ inja_dep = subproject('inja', required: true, default_options: {
 spinners_dep = subproject('spinners-plus-plus', required: true).get_variable('spinners_dep')
 deps = [cli11_dep, inja_dep, spinners_dep]
 
+# Validate cross-compilation
+generator_cross = get_option('generator')
+if meson.is_cross_build() and generator_cross and not ['windows', 'darwin', 'linux'].contains(host_machine.system())
+	error('Cannot cross-compile generator to unsupported platform!')
+endif
+
 # LLVM/Clang dependencies
 if host_machine.system() == 'windows'
 	llvm_win_sp = subproject('llvm-win-' + host_machine.cpu_family())
 	deps += llvm_win_sp.get_variable('llvm_dep')
-	deps += llvm_win_sp.get_variable('clang_cpp_dep')
 else
 	deps += dependency('llvm', version: '>=19.0.0', required: true)
 	deps += cxx.find_library('clang-cpp', required: true, dirs: host_machine.system() == 'darwin' ? '/opt/homebrew/opt/llvm/lib' : [])
@@ -33,4 +38,4 @@ generator_sources = [
 ]
 
 # Executable
-astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"'])
+astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"'], native: not (meson.is_cross_build() and generator_cross))

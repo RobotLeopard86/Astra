@@ -9,7 +9,7 @@ yaml_cpp_dep = subproject('yaml-cpp', required: true, default_options: {
 }).get_variable('yaml_cpp_dep').as_link_whole()
 
 # Jaguar
-jaguar_dep = subproject('jaguar', required: true).get_variable('libjaguar_dep').as_static(recursive: true).as_link_whole()
+jaguar_dep = subproject('jaguar', required: true, default_options: ['testing=false']).get_variable('libjaguar_static_dep').as_link_whole()
 
 # dbghelp.lib (Windows)
 dbghelp_dep = cxx.find_library('dbghelp.lib', required: host_machine.system() == 'windows')

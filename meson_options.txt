@@ -1,2 +1,3 @@
-option('generator', type: 'boolean', value: true, description: 'Whether to build the generator in addition to the Astra library.')
-option('example', type: 'boolean', value: false, description: 'Whether to build the example program. Requires the generator to be enabled.')
+option('generator', type: 'boolean', value: true, description: 'Whether or not to build the generator in addition to the Astra library.')
+option('generator_cross', type: 'boolean', value: false, description: 'For cross builds only: whether or not to cross-compile the generator to the host platform (host must be Windows, macOS, or Linux)')
+option('example', type: 'boolean', value: false, description: 'Whether or not to build the example program. Requires the generator to be enabled.')

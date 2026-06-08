@@ -1,0 +1,6 @@
+[wrap-file]
+directory = clang+llvm-22.1.7-x86_64-pc-windows-msvc
+source_url = https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.7/clang+llvm-22.1.7-x86_64-pc-windows-msvc.tar.xz
+source_filename = clang+llvm-22.1.7-x86_64-pc-windows-msvc.tar.xz
+source_hash = 3b568b5be1443d1a04c63261fa3a7aed16e126a8ed2196a1032aa8ed602144bd
+patch_directory = llvm

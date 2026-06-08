@@ -59,7 +59,7 @@ namespace astra {
 			return Var(value, TypeId::get<T>(), isConst);
 		}
 
-		const std::string& toString() const override {
+		std::string toString() const override {
 			return all_constants.getKey(*value);
 		}
 

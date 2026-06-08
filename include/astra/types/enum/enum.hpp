@@ -63,7 +63,7 @@ namespace astra {
 		 *
 		 * @return The name of the current value
 		 */
-		const std::string& toString() const {
+		std::string toString() const {
 			return impl()->toString();
 		}
 
