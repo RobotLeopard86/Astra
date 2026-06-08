@@ -415,6 +415,7 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
 <span class="cp">#ifdef _WIN32</span>
+<span class="cp">#define NOMINMAX</span>
 <span class="cp">#ifdef ASTRA_BUILD</span>
 <span class="cp">#define ASTRA_API __declspec(dllexport)</span>
 <span class="cp">#else</span>
