@@ -70,12 +70,12 @@ jobs:
       matrix:
         include:
           - arch: x64
-            runs-on: windows-2025
+            runs-on: windows-2025-vs2026
             config: Debug
             crt: MultiThreadedDebugDLL
             llvm: llvm
           - arch: x64
-            runs-on: windows-2025
+            runs-on: windows-2025-vs2026
             config: Release
             crt: MultiThreadedDLL
             llvm: llvm
@@ -83,30 +83,39 @@ jobs:
             runs-on: windows-11-arm
             config: Debug
             crt: MultiThreadedDebugDLL
-            llvm: llvm-arm64
+            llvm: https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/.github/scoop/llvm-arm64.json
           - arch: arm64
             runs-on: windows-11-arm
             config: Release
             crt: MultiThreadedDLL
-            llvm: llvm-arm64
+            llvm: https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/.github/scoop/llvm-arm64.json
     steps:
       - name: Set up VS environment
         uses: egor-tensin/vs-shell@v2
         with:
-          arch: x64
+          arch: ${{ matrix.arch }}
+      - name: Install build dependencies
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+          irm get.scoop.sh | iex
+          scoop install https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/.github/scoop/7zip.json
+          scoop install ${{ matrix.llvm }} cmake ninja python
       - name: Checkout LLVM
         shell: pwsh
         run: |
           git clone --recursive https://github.com/llvm/llvm-project --depth 1 -b llvmorg-22.1.7
-      - name: Install build dependencies
-        uses: winpax/scoop-setup@v1.0.0
-        with:
-          apps: ${{ matrix.llvm }} cmake ninja python
+      - name: Patch LLVM build files
+        shell: pwsh
+        run : |
+          cd llvm-project
+          echo "diff --git a/clang/tools/libclang/CMakeLists.txt b/clang/tools/libclang/CMakeLists.txt`nindex 19011c8a6..ba12cf2e7 100644`n--- a/clang/tools/libclang/CMakeLists.txt`n+++ b/clang/tools/libclang/CMakeLists.txt`n@@ -108,10 +108,6 @@ if (LLVM_EXPORTED_SYMBOL_FILE)`n                      DEPENDS `${LIBCLANG_VERSION_SCRIPT_FILE})`n endif()`n `n-if(LLVM_ENABLE_PIC OR ((WIN32 OR CYGWIN) AND NOT LIBCLANG_BUILD_STATIC))`n-  set(ENABLE_SHARED SHARED)`n-endif()`n-`n if(NOT LLVM_ENABLE_PIC OR LIBCLANG_BUILD_STATIC)`n   set(ENABLE_STATIC STATIC)`n endif()`n" > fixit.patch
+          git apply fixit.patch
       - name: Configure LLVM
         shell: pwsh
         run: |
           cd llvm-project
-          cmake -S llvm -B build-${{ matrix.arch }}-${{ matrix.config }} -G Ninja -DCMAKE_INSTALL_PREFIX=install.${{ matrix.arch }}-${{ matrix.config }} -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DLLVM_USE_LINKER=lld -DLLVM_TARGETS_TO_BUILD=host -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_MSVC_RUNTIME_LIBRARY=${{ matrix.crt }} -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DLLVM_OPTIMIZED_TABLEGEN=TRUE -DLLVM_BUILD_TOOLS=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_DIA_SDK=OFF -DLLVM_ENABLE_EH=TRUE -DLLVM_ENABLE_LTO=OFF -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_RUNTIMES="" -DLLVM_BUILD_EXAMPLES=OFF -DCMAKE_CXX_FLAGS='-D_CRT_SECURE_NO_WARNINGS -Wno-language-extension-token' -DLLVM_ENABLE_PLUGINS=OFF -DLLVM_BUILD_RUNTIMES=OFF -DLLVM_BUILD_RUNTIME=OFF -DLLVM_INCLUDE_RUNTIMES=OFF -DCLANG_INCLUDE_TESTS=OFF -DCLANG_ENABLE_STATIC_ANALYZER=FALSE -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON -DLLVM_BUILD_UTILS=ON -DLLVM_BUILD_DOCS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_RUNTIMES=OFF -DLLVM_INCLUDE_UTILS=ON -DLLVM_INCLUDE_BENCHMARKS=OFF -DCLANG_INCLUDE_DOCS=OFF -DCLANG_BUILD_TOOLS=OFF -DLIBCLANG_BUILD_STATIC=ON
+          cmake -S llvm -B build-${{ matrix.arch }}-${{ matrix.config }} -G Ninja -DCMAKE_INSTALL_PREFIX=install-${{ matrix.arch }}-${{ matrix.config }} -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DLLVM_USE_LINKER=lld -DLLVM_TARGETS_TO_BUILD=host -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_MSVC_RUNTIME_LIBRARY=${{ matrix.crt }} -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DLLVM_OPTIMIZED_TABLEGEN=TRUE -DLLVM_BUILD_TOOLS=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_DIA_SDK=OFF -DLLVM_ENABLE_EH=TRUE -DLLVM_ENABLE_LTO=OFF -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_RUNTIMES="" -DLLVM_BUILD_EXAMPLES=OFF -DCMAKE_CXX_FLAGS='-D_CRT_SECURE_NO_WARNINGS -Wno-language-extension-token' -DLLVM_ENABLE_PLUGINS=OFF -DLLVM_BUILD_RUNTIMES=OFF -DLLVM_BUILD_RUNTIME=OFF -DLLVM_INCLUDE_RUNTIMES=OFF -DCLANG_INCLUDE_TESTS=OFF -DCLANG_ENABLE_STATIC_ANALYZER=FALSE -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON -DLLVM_BUILD_UTILS=ON -DLLVM_BUILD_DOCS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_RUNTIMES=OFF -DLLVM_INCLUDE_UTILS=ON -DLLVM_INCLUDE_BENCHMARKS=OFF -DCLANG_INCLUDE_DOCS=OFF -DCLANG_BUILD_TOOLS=OFF -DLIBCLANG_BUILD_STATIC=ON
       - name: Build LLVM
         shell: pwsh
         run: |
@@ -120,11 +129,11 @@ jobs:
           $arch     = "${{ matrix.arch }}"
           $config   = "${{ matrix.config }}".ToLower()
           $branch   = "llvm-$arch"
-          $installDir = "install-$arch-${{ matrix.config }}"
+          $installDir = "llvm-project\install-$arch-${{ matrix.config }}"
           $libs     = "${{ env.LLVM_LIBS }}" -split '\s+' | Where-Object { $_ -ne '' }
 
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
           git clone `
             --branch $branch `
@@ -137,7 +146,7 @@ jobs:
 
           Remove-Item -Recurse -Force $config -ErrorAction SilentlyContinue
           New-Item -ItemType Directory -Force "$config/include" | Out-Null
-          New-Item -ItemType Directory -Force "$config/lib"     | Out-Null
+          New-Item -ItemType Directory -Force "$config/lib" | Out-Null
 
           Copy-Item -Recurse -Force "..\$installDir\include\*" "$config\include\"
 
@@ -150,27 +159,67 @@ jobs:
             }
           }
 
-          git add $config
+          git lfs track $config\lib\*.lib
+          git add .
 
-          git diff --cached --quiet && exit 0
+          Write-Host ""
+          Write-Host "===== LFS STATUS ====="
+          git lfs status
+
+          if ($sampleLib) {
+              Write-Host "Checking: $($sampleLib.FullName)"
+              git show ":$($sampleLib.FullName.Replace('\','/'))" 2>$null | Select-Object -First 10
+          }
+
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) { exit 0 }
 
           git commit -m "llvm $arch/$config @ ${{ github.sha }}"
 
           $maxRetries = 10
           $success = $false
+
           for ($i = 0; $i -lt $maxRetries; $i++) {
-            git push origin $branch && { $success = $true; break }
-            Write-Host "Push failed, rebasing and retrying ($($i + 1)/$maxRetries)..."
-            git fetch origin $branch
-            git rebase "origin/$branch"
-            if ($LASTEXITCODE -ne 0) {
-              Write-Error "Rebase failed — this shouldn't happen with non-overlapping directories"
-              exit 1
-            }
-            Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 8)
+
+              Write-Host ""
+              Write-Host "===== PUSH ATTEMPT $($i + 1) ====="
+
+              git push origin $branch
+
+              if ($LASTEXITCODE -eq 0) {
+                  $success = $true
+                  break
+              }
+
+              Write-Host ""
+              Write-Host "===== PUSH FAILED ====="
+
+              Write-Host "LOCAL HEAD:"
+              git rev-parse HEAD
+
+              Write-Host "REMOTE HEAD:"
+              git ls-remote origin "refs/heads/$branch"
+
+              Write-Host "Fetching and rebasing..."
+
+              git fetch origin $branch
+
+              if ($LASTEXITCODE -ne 0) {
+                  Write-Error "Fetch failed"
+                  exit 1
+              }
+
+              git rebase "origin/$branch"
+
+              if ($LASTEXITCODE -ne 0) {
+                  Write-Error "Rebase failed"
+                  exit 1
+              }
+
+              Start-Sleep -Seconds (Get-Random -Minimum 2 -Maximum 8)
           }
 
           if (-not $success) {
-            Write-Error "Failed to push after $maxRetries attempts"
+            Write-Error "Oh noes: failed to push after $maxRetries attempts!"
             exit 1
           }
