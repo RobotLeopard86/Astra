@@ -27,10 +27,11 @@ If you want to build it yourself, instructions are located in the `docs` directo
 ## Building
 You will need:  
 * Git
+* Git LFS
 * Meson
 * Ninja
 * CMake (optional)
-* LLVM development libraries for your system
+* LLVM development libraries for your system (macOS/Linux only)
 
 All other dependencies will be downloaded at configure time.  
 

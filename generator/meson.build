@@ -14,18 +14,14 @@ endif
 
 # LLVM/Clang dependencies
 if host_machine.system() == 'windows'
+	cxx = meson.get_compiler('cpp')
 	llvm_win_sp = subproject('llvm-win-' + host_machine.cpu_family())
 	deps += llvm_win_sp.get_variable('llvm_dep')
+	deps += cxx.find_library('Version', required: true)
+	deps += cxx.find_library('ntdll', required: true)
 else
 	deps += dependency('llvm', version: '>=19.0.0', required: true)
 	deps += cxx.find_library('clang-cpp', required: true, dirs: host_machine.system() == 'darwin' ? '/opt/homebrew/opt/llvm/lib' : [])
-endif
-
-# Windows libraries
-if host_machine.system() == 'windows'
-	cxx = meson.get_compiler('cpp')
-	deps += cxx.find_library('Version', required: true)
-	deps += cxx.find_library('ntdll', required: true)
 endif
 
 # Define sources
