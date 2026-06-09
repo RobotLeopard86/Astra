@@ -5,7 +5,7 @@ if host_machine.system() != 'windows'
 endif
 
 cxx = meson.get_compiler('cpp')
-llvm_dep = declare_dependency(include_directories: 'include' / get_option('buildtype'), dependencies: [
+llvm_dep = declare_dependency(include_directories: get_option('buildtype') / 'include', dependencies: [
     cxx.find_library('LLVMAnalysis', required: true, dirs: meson.current_source_dir() / get_option('buildtype') / 'lib'),
     cxx.find_library('LLVMAsmParser', required: true, dirs: meson.current_source_dir() / get_option('buildtype') / 'lib'),
     cxx.find_library('LLVMBinaryFormat', required: true, dirs: meson.current_source_dir() / get_option('buildtype') / 'lib'),
