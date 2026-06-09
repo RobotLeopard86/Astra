@@ -1,3 +1,4 @@
 release/lib/* filter=lfs diff=lfs merge=lfs -text
 debug/lib/* filter=lfs diff=lfs merge=lfs -text
 release/lib/*.lib filter=lfs diff=lfs merge=lfs -text
+debug/lib/*.lib filter=lfs diff=lfs merge=lfs -text
