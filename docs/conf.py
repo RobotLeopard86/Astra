@@ -74,6 +74,5 @@ html_theme_options = {
    "switcher": {
         "version_match": version,
         "json_url": "https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json"
-    },
-    "announcement": "Astra is undergoing heavy updates at the moment. Do not expect this documentation to remain stable."
+    }
 }
