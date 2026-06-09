@@ -116,7 +116,7 @@ void Files::completeFiles(std::vector<std::string>* paths) {
 				auto wStr = filePath.path().wstring();
 				paths->push_back(toUTF8(wStr.data(), wStr.size()));
 #else
-				paths->push_back(filepath.path().string());
+				paths->push_back(filePath.path().string());
 #endif
 			}
 		} else {
