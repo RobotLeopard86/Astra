@@ -34,4 +34,4 @@ generator_sources = [
 ]
 
 # Executable
-astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"'], native: not (meson.is_cross_build() and generator_cross))
+astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"'], native: not (meson.is_cross_build() and generator_cross), install: true)

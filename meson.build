@@ -36,3 +36,6 @@ endif
 if example
 	subdir('example')
 endif
+
+# Install headers
+install_subdir('include' / 'astra', install_dir: 'include')
