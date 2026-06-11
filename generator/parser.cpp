@@ -4,15 +4,14 @@
 
 #include "action.hpp"
 
-//clang
 #include "clang/Tooling/ArgumentsAdjusters.h"
 #include "clang/Tooling/CompilationDatabase.h"
 
 namespace {
-	std::unique_ptr<tooling::CompilationDatabase> loadCompdb(std::string_view compdbDir) {
+	std::unique_ptr<tooling::CompilationDatabase> loadCompdb(const std::string& compdbDir) {
 		std::string err;
 
-		auto source = StringRef(compdbDir.data(), compdbDir.size());
+		auto source = StringRef(compdbDir);
 		auto compdb = tooling::CompilationDatabase::autoDetectFromDirectory(source, err);
 
 		if(compdb == nullptr) {
@@ -22,8 +21,8 @@ namespace {
 	}
 }
 
-Parser::Parser(std::string_view compdbDir, std::string_view outputDir)
-  : compDB(loadCompdb(compdbDir)) {
+Parser::Parser(const std::string& compdbDir, const std::string& outputDir, const std::vector<std::string>& extraArgs)
+  : compDB(loadCompdb(compdbDir)), extraArgs(extraArgs) {
 	ctx.outputDir = outputDir;
 }
 
@@ -62,6 +61,9 @@ std::optional<std::unordered_map<std::string, nlohmann::json>> Parser::parse(con
 			if(used.contains(includeDir)) continue;
 			adjArgs.push_back(std::string("-isystem") + includeDir);
 			used.insert(includeDir);
+		}
+		for(const std::string& arg : extraArgs) {
+			adjArgs.push_back(arg);
 		}
 		for(unsigned int i = 1; i < args.size(); i++) {
 			adjArgs.push_back(args[i]);

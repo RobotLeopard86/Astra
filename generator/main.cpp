@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 	//Configure CLI
 	CLI::App app("Astra reflection info generator", std::filesystem::path(argv[0]).filename().string());
 	std::string compDbPath;
-	app.add_option("--compdb,-c", compDbPath, "Path to the compilation database directory")->check(CLI::ExistingDirectory)->required();
+	app.add_option("--compdb,-c", compDbPath, "Path to the directory containing compile_commands.json")->check(CLI::ExistingDirectory)->required();
 	std::string outDir;
 	const auto outDirValidateFunc = [](const std::string& opt) {
 		auto existDir = CLI::ExistingDirectory(opt);
@@ -57,9 +57,9 @@ int main(int argc, char* argv[]) {
 		}
 		return "Provided path does not exist or is not a directory or file";
 	};
-	app.add_option("input", input, "Input header files to the generator")->check(inputValidateFunc)->required();
+	app.add_option("-i", input, "Input header files to the generator")->check(inputValidateFunc)->required();
 	std::string project;
-	app.add_option("--project-name,-p", project, "Name of the project")->transform([](const std::string& val) { return toFilename(val); })->required();
+	app.add_option("--project-name,-n", project, "Name of the project")->transform([](const std::string& val) { return toFilename(val); })->required();
 	std::string fallbackCompiler = "";
 	bool fallbackIsMsvc = false;
 	const auto fallbackOptFunc = [&fallbackCompiler, &fallbackIsMsvc](const std::string& s) {
@@ -69,9 +69,12 @@ int main(int argc, char* argv[]) {
 		fallbackIsMsvc = lower.find("++") == std::string::npos && (lower.find("cl.exe") != std::string::npos || lower.find("cl") == 0);
 	};
 	app.add_option_function<std::string>("--fallback-compiler,-C", fallbackOptFunc, "Fallback compiler to use for system include searching if the compiler in the database is not supported (if it isn't cl.exe, a GCC-like command line is assumed)");
+	std::string includePrefix = "";
+	app.add_option("--include-prefix,-p", includePrefix, "Optional prefix to use for header inclusion (useful for <libname>/<header>.h formulations); do not include trailing slash");
 	bool quiet = false;
 	app.add_flag("--quiet,-q", quiet, "Suppress output");
 	app.set_version_flag("--version,-v", []() { return PROJECT_VER; }, "Display version and exit");
+	app.allow_extras();
 
 	//Parse CLI arguments
 	CLI11_PARSE(app, argc, argv);
@@ -104,7 +107,7 @@ int main(int argc, char* argv[]) {
 
 	//Parse source files
 	clock::time_point parseBegin = clock::now();
-	Parser parser(compDbPath, out.string());
+	Parser parser(compDbPath, out.string(), app.remaining(true));
 	parser.findSysIncludes(input[0], fallbackCompiler, fallbackIsMsvc);
 	if(!quiet && !sysincludeFailFlag.empty()) {
 		spinner->finish(jms::FinishedState::FAILURE, sysincludeFailFlag);
@@ -220,8 +223,15 @@ int main(int argc, char* argv[]) {
 #endif
 
 		//Ensure directories are okay
+		if(!includePrefix.empty()) json["origin"] = std::format("{}/{}", includePrefix, json["origin"].get<std::string>());
 		json["file_name"] = hppFile.filename();
 		json["project"] = project;
+		std::string typeName = json["name"].get<std::string>();
+		if(auto lastNS = typeName.find_last_of("::"); lastNS != std::string::npos) {
+			json["namespace"] = typeName.substr(0, lastNS - 1);
+		} else {
+			json["namespace"] = "";
+		}
 		std::filesystem::create_directories(hppFile.parent_path());
 		std::filesystem::create_directories(cppFile.parent_path());
 

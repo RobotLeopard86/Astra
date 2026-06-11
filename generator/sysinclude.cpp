@@ -62,10 +62,10 @@ inline std::string trim(const std::string& s) {
 	return s.substr(start, end - start + 1);
 }
 
-std::set<std::string> gccLikeIncludeParser(const std::string& compiler_output) {
+std::set<std::string> gccLikeIncludeParser(const std::string& compilerOutput) {
 	std::set<std::string> includes;
 	bool includeSection = false;
-	std::istringstream iss(compiler_output);
+	std::istringstream iss(compilerOutput);
 	std::string line;
 
 	//Read through the lines until we get the system include search path, then take them all until we get to the end of that

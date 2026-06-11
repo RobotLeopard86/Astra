@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string_view>
+#include <string>
 #include <vector>
 #include <optional>
 #include <set>
@@ -15,14 +15,15 @@ namespace clang {
 
 class Parser {
   public:
-	Parser(std::string_view compDBDir, std::string_view outputDir);
+	Parser(const std::string& compDBDir, const std::string& outputDir, const std::vector<std::string>& extraArgs);
 	~Parser();
 
 	std::optional<std::unordered_map<std::string, nlohmann::json>> parse(const std::vector<std::string>& input);
-	void findSysIncludes(const std::string& sample, const std::string& fallback_compiler, bool fallback_msvc);
+	void findSysIncludes(const std::string& sample, const std::string& fallbackCompiler, bool fallbackMSVC);
 
   private:
 	std::unique_ptr<clang::tooling::CompilationDatabase> compDB;
 	std::set<std::string> sysincludes;
+	std::vector<std::string> extraArgs;
 	Context ctx;
 };
