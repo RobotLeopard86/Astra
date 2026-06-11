@@ -5,7 +5,9 @@ R"(
 #include "astra/type_actions/common_actions.hpp"
 #include "astra/type_actions/type_actions.hpp"
 
-{%if namespace %}using namespace {{namespace}};{%endif%}
+{% if (namespace != "") -%}
+using namespace {{namespace}};
+{% endif -%}
 
 namespace astra {
 

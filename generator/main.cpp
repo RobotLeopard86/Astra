@@ -226,12 +226,6 @@ int main(int argc, char* argv[]) {
 		if(!includePrefix.empty()) json["origin"] = std::format("{}/{}", includePrefix, json["origin"].get<std::string>());
 		json["file_name"] = hppFile.filename();
 		json["project"] = project;
-		std::string typeName = json["name"].get<std::string>();
-		if(auto lastNS = typeName.find_last_of("::"); lastNS != std::string::npos) {
-			json["namespace"] = typeName.substr(0, lastNS - 1);
-		} else {
-			json["namespace"] = "";
-		}
 		std::filesystem::create_directories(hppFile.parent_path());
 		std::filesystem::create_directories(cppFile.parent_path());
 

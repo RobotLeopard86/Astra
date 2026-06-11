@@ -60,6 +60,38 @@ namespace astra {
 		}
 
 		/**
+		 * @brief Deserialize a JSON object into a Var
+		 *
+		 * @param json The JSON object to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromJsonIntoVar(const nlohmann::json& json, Var var) {
+			deserialize(var, json);
+		}
+
+		/**
+		 * @brief Deserialize a JSON string into a Var
+		 *
+		 * @param str A string storing JSON to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromStringIntoVar(const std::string& str, Var var) {
+			return fromJsonIntoVar(nlohmann::json::parse(str), var);
+		}
+
+		/**
+		 * @brief Deserialize a stream of JSON text into a Var
+		 *
+		 * @param stream A stream storing JSON to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromStreamIntoVar(std::istream& stream, Var var) {
+			nlohmann::json j;
+			stream >> j;
+			return fromJsonIntoVar(j, var);
+		}
+
+		/**
 		 * @brief Serialize a T object to a JSON object
 		 *
 		 * @tparam T The reflectable type to serialize from
@@ -100,6 +132,40 @@ namespace astra {
 		template<Reflectable T>
 		static void toStream(std::ostream& stream, const T* obj) {
 			stream << toJSON<T>(obj);
+		}
+
+		/**
+		 * @brief Serialize a Var to a JSON object
+		 *
+		 * @param var A Var holding the object to serialize
+		 *
+		 * @return A JSON object containing the serialized data
+		 */
+		static nlohmann::json toJSONFromVar(Var var) {
+			nlohmann::json j;
+			serialize(j, var);
+			return j;
+		}
+
+		/**
+		 * @brief Serialize a Var to a JSON string
+		 *
+		 * @param var A Var holding the object to serialize
+		 *
+		 * @return A vector containing the serialized data encoded in JSON
+		 */
+		static std::string toStringFromVar(Var var) {
+			return toJSONFromVar(var).dump();
+		}
+
+		/**
+		 * @brief Serialize a Var to a stream as JSON
+		 *
+		 * @param stream The stream to write the serialized JSON to
+		 * @param var A Var holding the object to serialize
+		 */
+		static void toStreamFromVar(std::ostream& stream, Var var) {
+			stream << toJSONFromVar(var);
 		}
 
 	  private:

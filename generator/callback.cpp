@@ -1,5 +1,6 @@
 #include "callback.hpp"
 
+#include "clang/AST/DeclBase.h"
 #include "clang/AST/Type.h"
 #include "clang/AST/Attr.h"
 #include "clang/AST/Decl.h"
@@ -80,6 +81,7 @@ std::string getAttrAlias(const clang::Decl* decl) {
 void JsonBuilder::handleClass(const CXXRecordDecl* c) {
 	if(!hasReflectAttr(c)) return;
 
+	//Check reflectability
 	clang::ASTContext& astCtx = c->getASTContext();
 	clang::IdentifierInfo& ii = astCtx.Idents.get("astragen_reflectable_check");
 	clang::ClassTemplateDecl* checkDecl = nullptr;
@@ -129,6 +131,30 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	json["kind"] = 0;
 	json["name"] = name;
 	json["origin"] = std::filesystem::path(fileName(c)).filename();
+
+	//Generate namespace identifier
+	if(const clang::NamespaceDecl* nsDecl = llvm::dyn_cast<clang::NamespaceDecl>(c->getDeclContext()->getEnclosingNamespaceContext())) {
+		std::vector<const clang::NamespaceDecl*> namespaces;
+		const clang::DeclContext* dc = nsDecl;
+		while(dc) {
+			if(const auto* ns = llvm::dyn_cast<clang::NamespaceDecl>(dc)) {
+				namespaces.push_back(ns);
+			}
+			dc = dc->getParent();
+		}
+		if(!namespaces.empty()) {
+			std::string qualifiedNS = "";
+			for(auto it = namespaces.rbegin(); it != namespaces.rend(); ++it) {
+				if(it != namespaces.rbegin()) qualifiedNS += "::";
+				qualifiedNS += (*it)->getNameAsString();
+			}
+			json["namespace"] = qualifiedNS;
+		} else {
+			json["namespace"] = "";
+		}
+	} else {
+		json["namespace"] = "";
+	}
 
 	std::vector<const clang::CXXRecordDecl*> decls;
 
@@ -224,6 +250,30 @@ void JsonBuilder::addEnum(const EnumDecl* e) {
 	json["kind"] = 1;
 	json["name"] = name;
 	json["origin"] = std::filesystem::path(fileName(e)).filename();
+
+	//Generate namespace identifier
+	if(const clang::NamespaceDecl* nsDecl = llvm::dyn_cast<clang::NamespaceDecl>(e->getDeclContext()->getEnclosingNamespaceContext())) {
+		std::vector<const clang::NamespaceDecl*> namespaces;
+		const clang::DeclContext* dc = nsDecl;
+		while(dc) {
+			if(const auto* ns = llvm::dyn_cast<clang::NamespaceDecl>(dc)) {
+				namespaces.push_back(ns);
+			}
+			dc = dc->getParent();
+		}
+		if(!namespaces.empty()) {
+			std::string qualifiedNS = "";
+			for(auto it = namespaces.rbegin(); it != namespaces.rend(); ++it) {
+				if(it != namespaces.rbegin()) qualifiedNS += "::";
+				qualifiedNS += (*it)->getNameAsString();
+			}
+			json["namespace"] = qualifiedNS;
+		} else {
+			json["namespace"] = "";
+		}
+	} else {
+		json["namespace"] = "";
+	}
 
 	auto& arr = json["constants"];
 

@@ -62,6 +62,40 @@ namespace astra {
 		}
 
 		/**
+		 * @brief Deserialize a Jaguar document into a Var
+		 *
+		 * @tparam T The reflectable type to deserialize to
+		 *
+		 * @param doc The Jaguar document to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromDocumentIntoVar(libjaguar::Document& doc, Var var) {
+			deserialize(var, doc);
+		}
+
+		/**
+		 * @brief Deserialize a vector of Jaguar data into a Var
+		 *
+		 * @tparam T The reflectable type to deserialize to
+		 *
+		 * @param vector A vector storing Jaguar data to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromVectorIntoVar(const std::vector<uint8_t>& vector, Var var) {
+			deserialize(var, vector);
+		}
+
+		/**
+		 * @brief Deserialize a stream of Jaguar data into a Var
+		 *
+		 * @param stream A stream storing Jaguar data to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromStreamIntoVar(std::istream& stream, Var var) {
+			deserialize(var, stream);
+		}
+
+		/**
 		 * @brief Serialize a T object to a Jaguar document
 		 *
 		 * @tparam T The reflectable type to serialize from
@@ -104,6 +138,42 @@ namespace astra {
 		template<Reflectable T>
 		static void toStream(std::ostream& stream, const T* obj) {
 			toDocument<T>(obj).ExportTo(stream);
+		}
+
+		/**
+		 * @brief Serialize a Var to a Jaguar document
+		 *
+		 * @param var A Var holding the object to serialize
+		 *
+		 * @return A document containing the serialized data
+		 */
+		static libjaguar::Document toDocumentFromVar(Var var) {
+			libjaguar::Document doc;
+			serialize(doc, var);
+			return doc;
+		}
+
+		/**
+		 * @brief Serialize a Var to a vector of Jaguar data
+		 *
+		 * @param var A Var holding the object to serialize
+		 *
+		 * @return A vector containing the serialized data encoded in Jaguar format
+		 */
+		static std::vector<uint8_t> toVectorFromVar(Var var) {
+			std::vector<uint8_t> result;
+			serialize(result, var);
+			return result;
+		}
+
+		/**
+		 * @brief Serialize a Var to a stream as Jaguar data
+		 *
+		 * @param stream The stream to write the serialized Jaguar data to
+		 * @param var A Var holding the object to serialize
+		 */
+		static void toStreamFromVar(std::ostream& stream, Var var) {
+			toDocumentFromVar(var).ExportTo(stream);
 		}
 
 	  private:

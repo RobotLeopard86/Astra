@@ -61,6 +61,38 @@ namespace astra {
 		}
 
 		/**
+		 * @brief Deserialize a YAML node into a Var
+		 *
+		 * @param node The YAML node to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromNodeIntoVar(const YAML::Node& json, Var var) {
+			deserialize(var, json);
+		}
+
+		/**
+		 * @brief Deserialize a YAML string into a Var
+		 *
+		 * @param str A string storing YAML to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromStringIntoVar(const std::string& str, Var var) {
+			YAML::Node node = YAML::Load(str);
+			return fromNodeIntoVar(node, var);
+		}
+
+		/**
+		 * @brief Deserialize a stream of YAML text into a Var
+		 *
+		 * @param stream A stream storing YAML to deserialize from
+		 * @param var The Var to write into
+		 */
+		static void fromStreamIntoVar(std::istream& stream, Var var) {
+			YAML::Node node = YAML::Load(stream);
+			return fromNodeIntoVar(node, var);
+		}
+
+		/**
 		 * @brief Serialize a T object to a YAML node
 		 *
 		 * @tparam T The reflectable type to serialize from
@@ -105,6 +137,44 @@ namespace astra {
 		template<Reflectable T>
 		static void toStream(std::ostream& stream, const T* obj) {
 			stream << toString<T>(obj);
+		}
+
+		/**
+		 * @brief Serialize a Var to a YAML node
+		 *
+		 * @param var A Var holding the object to serialize
+		 *
+		 * @return A YAML node containing the serialized data
+		 */
+		static YAML::Node toNodeFromVar(Var var) {
+			YAML::Node node;
+			node["__astraforcemapcreate__"] = true;
+			node.remove("__astraforcemapcreate__");
+			serialize(node, var);
+			return node;
+		}
+
+		/**
+		 * @brief Serialize a Var to a YAML string
+		 *
+		 * @param var A Var holding the object to serialize
+		 *
+		 * @return A vector containing the serialized data encoded in YAML
+		 */
+		static std::string toStringFromVar(Var var) {
+			YAML::Emitter em;
+			em << toNodeFromVar(var);
+			return em.c_str();
+		}
+
+		/**
+		 * @brief Serialize a Var to a stream as YAML
+		 *
+		 * @param stream The stream to write the serialized YAML to
+		 * @param var A Var holding the object to serialize
+		 */
+		static void toStreamFromVar(std::ostream& stream, Var var) {
+			stream << toNodeFromVar(var);
 		}
 
 	  private:
