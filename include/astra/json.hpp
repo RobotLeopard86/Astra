@@ -16,29 +16,40 @@ namespace astra {
 		/**
 		 * @brief Deserialize a T object from the JSON object
 		 *
-		 * @tparam T The reflectable type to deserialize to
+		 * @tparam T The serializable type to deserialize to
 		 *
 		 * @param json The JSON object to deserialize from
 		 *
 		 * @return A T object storing the data from the document
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static T fromJson(const nlohmann::json& json) {
 			T obj;
 			deserialize(Var(&obj), json);
 			return obj;
 		}
 
+		///@cond
+		template<Serializable T>
+			requires(!is_reflectable_v<T>)
+		static T fromJson(const nlohmann::json& json) {
+			using S = typename T::Serialized;
+			S obj;
+			deserialize(Var(&obj), json);
+			return T {obj};
+		}
+		///@endcond
+
 		/**
 		 * @brief Deserialize a T object from a JSON string
 		 *
-		 * @tparam T The reflectable type to deserialize to
+		 * @tparam T The serializable type to deserialize to
 		 *
 		 * @param str A string storing JSON to deserialize from
 		 *
 		 * @return A T object storing the data from the JSON
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static T fromString(const std::string& str) {
 			return fromJson<T>(nlohmann::json::parse(str));
 		}
@@ -46,13 +57,13 @@ namespace astra {
 		/**
 		 * @brief Deserialize a T object from a stream of JSON text
 		 *
-		 * @tparam T The reflectable type to deserialize to
+		 * @tparam T The serializable type to deserialize to
 		 *
 		 * @param stream A stream storing JSON to deserialize from
 		 *
 		 * @return A T object storing the data from the JSON
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static T fromStream(std::istream& stream) {
 			nlohmann::json j;
 			stream >> j;
@@ -94,29 +105,41 @@ namespace astra {
 		/**
 		 * @brief Serialize a T object to a JSON object
 		 *
-		 * @tparam T The reflectable type to serialize from
+		 * @tparam T The serializable type to serialize from
 		 *
 		 * @param obj The object to serialize
 		 *
 		 * @return A JSON object containing the serialized data
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static nlohmann::json toJSON(const T* obj) {
 			nlohmann::json j;
 			serialize(j, Var(obj));
 			return j;
 		}
 
+		///@cond
+		template<Serializable T>
+			requires(!is_reflectable_v<T>)
+		static nlohmann::json toJSON(const T* obj) {
+			using S = typename T::Serialized;
+			nlohmann::json j;
+			S sub = obj->ASTRA__getserialized();
+			serialize(j, Var(&sub));
+			return j;
+		}
+		///@endcond
+
 		/**
 		 * @brief Serialize a T object to a JSON string
 		 *
-		 * @tparam T The reflectable type to serialize from
+		 * @tparam T The serializable type to serialize from
 		 *
 		 * @param obj The object to serialize
 		 *
 		 * @return A vector containing the serialized data encoded in JSON
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static std::string toString(const T* obj) {
 			return toJSON<T>(obj).dump();
 		}
@@ -124,12 +147,12 @@ namespace astra {
 		/**
 		 * @brief Serialize a T object to a stream as JSON
 		 *
-		 * @tparam T The reflectable type to serialize from
+		 * @tparam T The serializable type to serialize from
 		 *
 		 * @param stream The stream to write the serialized JSON to
 		 * @param obj The object to serialize
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static void toStream(std::ostream& stream, const T* obj) {
 			stream << toJSON<T>(obj);
 		}

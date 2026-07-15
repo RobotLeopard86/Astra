@@ -1,6 +1,6 @@
 #pragma once
 
-#include "astra/traits.hpp"
+#include "traits.hpp"
 #include "dll.hpp"
 
 #include <cstdint>

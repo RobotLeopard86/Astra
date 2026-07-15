@@ -17,29 +17,40 @@ namespace astra {
 		/**
 		 * @brief Deserialize a T object from the YAML node
 		 *
-		 * @tparam T The reflectable type to deserialize to
+		 * @tparam T The serializable type to deserialize to
 		 *
 		 * @param node The YAML node to deserialize from
 		 *
 		 * @return A T object storing the data from the document
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static T fromNode(const YAML::Node& node) {
 			T obj;
 			deserialize(Var(&obj), node);
 			return obj;
 		}
 
+		///@cond
+		template<Serializable T>
+			requires(!is_reflectable_v<T>)
+		static T fromNode(const YAML::Node& node) {
+			using S = typename T::Serialized;
+			S obj;
+			deserialize(Var(&obj), node);
+			return T {obj};
+		}
+		///@endcond
+
 		/**
 		 * @brief Deserialize a T object from a YAML string
 		 *
-		 * @tparam T The reflectable type to deserialize to
+		 * @tparam T The serializable type to deserialize to
 		 *
 		 * @param str A string storing YAML to deserialize from
 		 *
 		 * @return A T object storing the data from the YAML
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static T fromString(const std::string& str) {
 			YAML::Node node = YAML::Load(str);
 			return fromNode<T>(node);
@@ -48,13 +59,13 @@ namespace astra {
 		/**
 		 * @brief Deserialize a T object from a stream of YAML text
 		 *
-		 * @tparam T The reflectable type to deserialize to
+		 * @tparam T The serializable type to deserialize to
 		 *
 		 * @param stream A stream storing YAML to deserialize from
 		 *
 		 * @return A T object storing the data from the YAML
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static T fromStream(std::istream& stream) {
 			YAML::Node node = YAML::Load(stream);
 			return fromNode<T>(node);
@@ -95,13 +106,13 @@ namespace astra {
 		/**
 		 * @brief Serialize a T object to a YAML node
 		 *
-		 * @tparam T The reflectable type to serialize from
+		 * @tparam T The serializable type to serialize from
 		 *
 		 * @param obj The object to serialize
 		 *
 		 * @return A YAML node containing the serialized data
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static YAML::Node toNode(const T* obj) {
 			YAML::Node node;
 			node["__astraforcemapcreate__"] = true;
@@ -110,16 +121,30 @@ namespace astra {
 			return node;
 		}
 
+		///@cond
+		template<Serializable T>
+			requires(!is_reflectable_v<T>)
+		static YAML::Node toNode(const T* obj) {
+			using S = typename T::Serialized;
+			YAML::Node node;
+			node["__astraforcemapcreate__"] = true;
+			node.remove("__astraforcemapcreate__");
+			S sub = obj->ASTRA__getserialized();
+			serialize(node, Var(&sub));
+			return node;
+		}
+		///@endcond
+
 		/**
 		 * @brief Serialize a T object to a YAML string
 		 *
-		 * @tparam T The reflectable type to serialize from
+		 * @tparam T The serializable type to serialize from
 		 *
 		 * @param obj The object to serialize
 		 *
 		 * @return A vector containing the serialized data encoded in YAML
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static std::string toString(const T* obj) {
 			YAML::Emitter em;
 			em << toNode<T>(obj);
@@ -129,12 +154,12 @@ namespace astra {
 		/**
 		 * @brief Serialize a T object to a stream as YAML
 		 *
-		 * @tparam T The reflectable type to serialize from
+		 * @tparam T The serializable type to serialize from
 		 *
 		 * @param stream The stream to write the serialized YAML to
 		 * @param obj The object to serialize
 		 */
-		template<Reflectable T>
+		template<Serializable T>
 		static void toStream(std::ostream& stream, const T* obj) {
 			stream << toString<T>(obj);
 		}

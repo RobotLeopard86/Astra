@@ -80,41 +80,11 @@ std::string getAttrAlias(const clang::Decl* decl) {
 
 void JsonBuilder::handleClass(const CXXRecordDecl* c) {
 	if(!hasReflectAttr(c)) return;
-
-	//Check reflectability
-	clang::ASTContext& astCtx = c->getASTContext();
-	clang::IdentifierInfo& ii = astCtx.Idents.get("astragen_reflectable_check");
-	clang::ClassTemplateDecl* checkDecl = nullptr;
-	for(clang::NamedDecl* namedDecl : astCtx.getTranslationUnitDecl()->lookup(&ii)) {
-		if(clang::ClassTemplateDecl* ctd = dyn_cast<ClassTemplateDecl>(namedDecl)) {
-			checkDecl = ctd;
-			break;
-		}
-	}
-	if(checkDecl == nullptr) return;
-	llvm::SmallVector<clang::TemplateArgument, 1> templateArgs;
-	templateArgs.emplace_back(astCtx.getCanonicalTypeDeclType(c));
-	void* ip = nullptr;
-	clang::ClassTemplateSpecializationDecl* specDecl = checkDecl->findSpecialization(templateArgs, ip);
-	if(specDecl == nullptr) return;
-	for(clang::Decl* decl : specDecl->decls()) {
-		VarDecl* varDecl = llvm::dyn_cast<clang::VarDecl>(decl);
-		if(!varDecl || varDecl->getName().compare("value") != 0)
-			continue;
-		APValue* v = varDecl->getEvaluatedValue();
-		if(!v) return;
-		if(!v->getInt().getBoolValue())
-			return;
-		else
-			break;
-	}
-
 	addClass(c);
 }
 
 void JsonBuilder::handleEnum(const EnumDecl* e) {
 	if(!hasReflectAttr(e)) return;
-
 	addEnum(e);
 }
 
