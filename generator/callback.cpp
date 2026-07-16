@@ -101,9 +101,9 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 		llvm::raw_string_ostream oss(name);
 		oss << "<";
 		const TemplateArgumentList& args = spec->getTemplateArgs();
+		bool first = true;
 		for(const TemplateArgument& ta : args.asArray()) {
 			//Comma formatting
-			static bool first = true;
 			if(!first) {
 				oss << ", ";
 			} else {
