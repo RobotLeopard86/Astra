@@ -33,7 +33,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static T fromJson(const nlohmann::json& json) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), json);
 			return T {obj};
@@ -122,7 +122,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static nlohmann::json toJSON(const T* obj) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			nlohmann::json j;
 			S sub = obj->ASTRA__getserialized();
 			serialize(j, Var(&sub));

@@ -19,7 +19,9 @@
 #include "clang/Sema/Ownership.h"
 #include "llvm/Support/Casting.h"
 
+#include <clang/AST/PrettyPrinter.h>
 #include <filesystem>
+#include <llvm/Support/raw_ostream.h>
 #include <stdexcept>
 #include <vector>
 
@@ -93,15 +95,34 @@ void JsonBuilder::handleEnum(const EnumDecl* e) {
 }
 
 void JsonBuilder::addClass(const CXXRecordDecl* c) {
-	auto name = c->getQualifiedNameAsString();
+	//Get qualified name
+	std::string name = c->getQualifiedNameAsString();
+	if(const ClassTemplateSpecializationDecl* spec = llvm::dyn_cast<ClassTemplateSpecializationDecl>(c)) {
+		llvm::raw_string_ostream oss(name);
+		oss << "<";
+		const TemplateArgumentList& args = spec->getTemplateArgs();
+		for(const TemplateArgument& ta : args.asArray()) {
+			//Comma formatting
+			static bool first = true;
+			if(!first) {
+				oss << ", ";
+			} else {
+				first = false;
+			}
 
-	//check if this class is already handled
+			//Add argument
+			ta.print(PrintingPolicy {options}, oss, true);
+		}
+		oss << ">";
+	}
+
+	//Check if this class is already handled
 	if(context->result.count(name) != 0) {
 		return;
 	}
 
+	//Basic properties
 	nlohmann::json json;
-
 	json["kind"] = 0;
 	json["name"] = name;
 	json["origin"] = std::filesystem::path(fileName(c)).filename();

@@ -3,7 +3,7 @@
 #include <cctype>
 #include <string>
 
-//Returns filename in snakeCase
+//Returns filename in snake_case
 inline std::string toFilename(const std::string& str) {
 	std::string name;
 
@@ -17,6 +17,8 @@ inline std::string toFilename(const std::string& str) {
 			if(c == ':') {
 				name += '/';
 				i++;
+			} else if(c == '<' || c == '>') {
+				name += '_';
 			} else {
 				name += c;
 			}

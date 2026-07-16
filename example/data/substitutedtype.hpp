@@ -1,24 +1,28 @@
 #pragma once
 
+#include "astra/serialized_substitute.hpp"
 #include "astra/setup.hpp"
 
 #include <cmath>
 #include <string>
 #include <format>
 
+class SubstitutedType;
+
+template<>
+struct ASTRA_REFLECT astra::SerializedSubstitute<SubstitutedType> : public AstraReflectBase {
+	int base;
+	ASTRASETUP(SerializedSubstitute)
+	virtual ~SerializedSubstitute() {}
+};
+
 class SubstitutedType {
   public:
 	std::string someData;
 	int computed;
 
-	struct ASTRA_REFLECT Serialized : public AstraReflectBase {
-		int base;
-		ASTRASETUP(Serialized)
-		virtual ~Serialized() {}
-	};
-
 	SubstitutedType() {}
-	SubstitutedType(Serialized s) {
+	SubstitutedType(astra::SerializedSubstitute<SubstitutedType> s) {
 		someData = std::format("I have {} dogs", s.base);
 		computed = std::pow(2, s.base);
 	}
@@ -28,8 +32,8 @@ class SubstitutedType {
 	SubstitutedType& operator=(const SubstitutedType&) = default;
 	SubstitutedType& operator=(SubstitutedType&&) = default;
 
-	Serialized ASTRA__getserialized() const noexcept {
-		Serialized s = {};
+	astra::SerializedSubstitute<SubstitutedType> ASTRA__getserialized() const noexcept {
+		astra::SerializedSubstitute<SubstitutedType> s = {};
 		s.base = std::ceil(std::log2(computed));
 		return s;
 	}

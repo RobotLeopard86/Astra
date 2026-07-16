@@ -33,7 +33,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static T fromDocument(libjaguar::Document& doc) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), doc);
 			return T {obj};
@@ -60,7 +60,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static T fromVector(const std::vector<uint8_t>& vector) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), vector);
 			return T {obj};
@@ -87,7 +87,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static T fromStream(std::istream& stream) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), stream);
 			return T {obj};
@@ -144,7 +144,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static libjaguar::Document toDocument(const T* obj) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			libjaguar::Document doc;
 			S sub = obj->ASTRA__getserialized();
 			serialize(doc, Var(&sub));
@@ -172,7 +172,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static std::vector<uint8_t> toVector(const T* obj) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			std::vector<uint8_t> result;
 			S sub = obj->ASTRA__getserialized();
 			serialize(result, Var(&sub));

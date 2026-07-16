@@ -34,7 +34,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static T fromNode(const YAML::Node& node) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), node);
 			return T {obj};
@@ -125,7 +125,7 @@ namespace astra {
 		template<Serializable T>
 			requires(!is_reflectable_v<T>)
 		static YAML::Node toNode(const T* obj) {
-			using S = typename T::Serialized;
+			using S = SerializedSubstitute<T>;
 			YAML::Node node;
 			node["__astraforcemapcreate__"] = true;
 			node.remove("__astraforcemapcreate__");
