@@ -79,11 +79,15 @@ std::string getAttrAlias(const clang::Decl* decl) {
 }
 
 void JsonBuilder::handleClass(const CXXRecordDecl* c) {
+	if(srcMgr->isInSystemHeader(c->getLocation())) return;
+	if(!srcMgr->isInMainFile(c->getLocation())) return;
 	if(!hasReflectAttr(c)) return;
 	addClass(c);
 }
 
 void JsonBuilder::handleEnum(const EnumDecl* e) {
+	if(srcMgr->isInSystemHeader(e->getLocation())) return;
+	if(!srcMgr->isInMainFile(e->getLocation())) return;
 	if(!hasReflectAttr(e)) return;
 	addEnum(e);
 }
@@ -92,7 +96,7 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	auto name = c->getQualifiedNameAsString();
 
 	//check if this class is already handled
-	if(_ctx->result.count(name) != 0) {
+	if(context->result.count(name) != 0) {
 		return;
 	}
 
@@ -205,14 +209,14 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	json.emplace("fields", std::move(fields));
 	json.emplace("methods", std::move(func));
 
-	_ctx->result.emplace(std::move(name), std::move(json));
+	context->result.emplace(std::move(name), std::move(json));
 }
 
 void JsonBuilder::addEnum(const EnumDecl* e) {
 	auto name = e->getQualifiedNameAsString();
 
 	//check if this enum is already handled
-	if(_ctx->result.find(name) != _ctx->result.end()) {
+	if(context->result.find(name) != context->result.end()) {
 		return;
 	}
 
@@ -255,7 +259,7 @@ void JsonBuilder::addEnum(const EnumDecl* e) {
 		setName(&item, c);
 	}
 
-	_ctx->result.emplace(std::move(name), std::move(json));
+	context->result.emplace(std::move(name), std::move(json));
 }
 
 void JsonBuilder::addFunction(nlohmann::json* functions, const FunctionDecl* f, const std::string& className, bool inherited) {
@@ -311,10 +315,10 @@ void JsonBuilder::addField(nlohmann::json* fields, const ValueDecl* v, bool inhe
 }
 
 std::string JsonBuilder::fileName(const NamedDecl* decl) const {
-	llvm::StringRef llpath = _sm->getFilename(decl->getLocation());
+	llvm::StringRef llpath = srcMgr->getFilename(decl->getLocation());
 	std::filesystem::path path(llpath.begin(), llpath.end());
 	std::string rel = "../";
-	rel += std::filesystem::relative(path, _ctx->outputDir).string();
+	rel += std::filesystem::relative(path, context->outputDir).string();
 #ifdef _WIN32
 	std::replace(rel.begin(), rel.end(), '\\', '/');
 #endif

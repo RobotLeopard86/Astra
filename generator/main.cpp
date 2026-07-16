@@ -48,16 +48,6 @@ int main(int argc, char* argv[]) {
 		return "Provided path exists but is not a directory";
 	};
 	app.add_option("--output,-o", outDir, "Path to the directory to output generated code to")->check(outDirValidateFunc)->required();
-	std::vector<std::string> input;
-	const auto inputValidateFunc = [](const std::string& opt) {
-		auto existDir = CLI::ExistingDirectory(opt);
-		auto existFile = CLI::ExistingFile(opt);
-		if(existDir.empty() || existFile.empty()) {
-			return "";
-		}
-		return "Provided path does not exist or is not a directory or file";
-	};
-	app.add_option("-i", input, "Input header files to the generator")->check(inputValidateFunc)->required();
 	std::string project;
 	app.add_option("--project-name,-n", project, "Name of the project")->transform([](const std::string& val) { return toFilename(val); })->required();
 	std::string fallbackCompiler = "";
@@ -74,7 +64,16 @@ int main(int argc, char* argv[]) {
 	bool quiet = false;
 	app.add_flag("--quiet,-q", quiet, "Suppress output");
 	app.set_version_flag("--version,-v", []() { return PROJECT_VER; }, "Display version and exit");
-	app.allow_extras();
+	std::vector<std::string> input;
+	const auto inputValidateFunc = [](const std::string& opt) {
+		auto existDir = CLI::ExistingDirectory(opt);
+		auto existFile = CLI::ExistingFile(opt);
+		if(existDir.empty() || existFile.empty()) {
+			return "";
+		}
+		return "Provided path does not exist or is not a directory or file";
+	};
+	app.add_option("input", input, "Input header files to the generator")->check(inputValidateFunc)->required();
 
 	//Parse CLI arguments
 	CLI11_PARSE(app, argc, argv);
@@ -107,7 +106,7 @@ int main(int argc, char* argv[]) {
 
 	//Parse source files
 	clock::time_point parseBegin = clock::now();
-	Parser parser(compDbPath, out.string(), app.remaining(true));
+	Parser parser(compDbPath, out.string());
 	parser.findSysIncludes(input[0], fallbackCompiler, fallbackIsMsvc);
 	if(!quiet && !sysincludeFailFlag.empty()) {
 		spinner->finish(jms::FinishedState::FAILURE, sysincludeFailFlag);

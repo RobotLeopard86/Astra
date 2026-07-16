@@ -15,7 +15,7 @@ namespace clang {
 
 class Parser {
   public:
-	Parser(const std::string& compDBDir, const std::string& outputDir, const std::vector<std::string>& extraArgs);
+	Parser(const std::string& compDBDir, const std::string& outputDir);
 	~Parser();
 
 	std::optional<std::unordered_map<std::string, nlohmann::json>> parse(const std::vector<std::string>& input);
@@ -24,6 +24,5 @@ class Parser {
   private:
 	std::unique_ptr<clang::tooling::CompilationDatabase> compDB;
 	std::set<std::string> sysincludes;
-	std::vector<std::string> extraArgs;
 	Context ctx;
 };

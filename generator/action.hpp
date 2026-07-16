@@ -8,35 +8,35 @@
 class Action : public ASTFrontendAction {
   public:
 	explicit Action(Context* ctx)
-	  : _ast_callback(ctx), _ctx(ctx) {
+	  : astCallback(ctx), context(ctx) {
 		static const auto classMatcher = cxxRecordDecl(isDefinition(), unless(isExpansionInSystemHeader())).bind("c");
-		_finder.addMatcher(classMatcher, &_ast_callback);
+		finder.addMatcher(classMatcher, &astCallback);
 
 		static const auto enumMatcher = enumDecl(unless(isExpansionInSystemHeader())).bind("e");
-		_finder.addMatcher(enumMatcher, &_ast_callback);
+		finder.addMatcher(enumMatcher, &astCallback);
 	}
 
 	std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance& /*compiler*/, StringRef /*in_file*/) override {
 		//forward work to match finder
-		return _finder.newASTConsumer();
+		return finder.newASTConsumer();
 	}
 
   private:
-	MatchFinder _finder;
-	AstCallback _ast_callback;
-	[[maybe_unused]] Context* _ctx;
+	MatchFinder finder;
+	AstCallback astCallback;
+	[[maybe_unused]] Context* context;
 };
 
 class ActionFactory : public tooling::FrontendActionFactory {
   public:
 	explicit ActionFactory(Context* ctx)
-	  : _ctx(ctx) {
+	  : context(ctx) {
 	}
 
 	std::unique_ptr<FrontendAction> create() override {
-		return std::make_unique<Action>(_ctx);
+		return std::make_unique<Action>(context);
 	}
 
   private:
-	Context* _ctx;
+	Context* context;
 };

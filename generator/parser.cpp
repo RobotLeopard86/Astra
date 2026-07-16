@@ -21,8 +21,8 @@ namespace {
 	}
 }
 
-Parser::Parser(const std::string& compdbDir, const std::string& outputDir, const std::vector<std::string>& extraArgs)
-  : compDB(loadCompdb(compdbDir)), extraArgs(extraArgs) {
+Parser::Parser(const std::string& compdbDir, const std::string& outputDir)
+  : compDB(loadCompdb(compdbDir)) {
 	ctx.outputDir = outputDir;
 }
 
@@ -61,9 +61,6 @@ std::optional<std::unordered_map<std::string, nlohmann::json>> Parser::parse(con
 			if(used.contains(includeDir)) continue;
 			adjArgs.push_back(std::string("-isystem") + includeDir);
 			used.insert(includeDir);
-		}
-		for(const std::string& arg : extraArgs) {
-			adjArgs.push_back(arg);
 		}
 		for(unsigned int i = 1; i < args.size(); i++) {
 			adjArgs.push_back(args[i]);

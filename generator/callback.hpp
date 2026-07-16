@@ -18,17 +18,17 @@ using namespace clang::ast_matchers;
 struct JsonBuilder {
 	JsonBuilder(Context* ctx,
 		const SourceManager* sm, const LangOptions& opts)
-	  : _ctx(ctx), _sm(sm), _opts(opts) {
+	  : context(ctx), srcMgr(sm), options(opts) {
 	}
 
 	void handleClass(const CXXRecordDecl* c);
 	void handleEnum(const EnumDecl* e);
 
   private:
-	Context* _ctx;
+	Context* context;
 
-	const SourceManager* _sm;
-	const LangOptions& _opts;
+	const SourceManager* srcMgr;
+	const LangOptions& options;
 
 	void addClass(const CXXRecordDecl* c);
 	void addEnum(const EnumDecl* e);
@@ -36,7 +36,7 @@ struct JsonBuilder {
 	void addField(nlohmann::json* fields, const ValueDecl* v, bool inherited);
 
 	inline std::string typeStr(QualType type, bool removeCVref = false) const {
-		const PrintingPolicy pp(_opts);
+		const PrintingPolicy pp(options);
 		SplitQualType split;
 		if(removeCVref) {
 			type = type.getNonReferenceType();
@@ -91,11 +91,11 @@ struct JsonBuilder {
 class AstCallback : public MatchFinder::MatchCallback {
   public:
 	explicit AstCallback(Context* ctx)
-	  : _ctx(ctx) {
+	  : context(ctx) {
 	}
 
 	void run(const MatchFinder::MatchResult& result) final {
-		JsonBuilder builder(_ctx, result.SourceManager, result.Context->getLangOpts());
+		JsonBuilder builder(context, result.SourceManager, result.Context->getLangOpts());
 
 		if(const auto* c = result.Nodes.getNodeAs<CXXRecordDecl>("c")) {
 			builder.handleClass(c);
@@ -109,5 +109,5 @@ class AstCallback : public MatchFinder::MatchCallback {
 	}
 
   private:
-	Context* _ctx;
+	Context* context;
 };
