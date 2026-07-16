@@ -435,7 +435,7 @@
 <span class="w">            </span><span class="k">using</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SerializedSubstitute</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="w">            </span><span class="n">S</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
 <span class="w">            </span><span class="n">deserialize</span><span class="p">(</span><span class="n">Var</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="p">),</span><span class="w"> </span><span class="n">node</span><span class="p">);</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">{</span><span class="n">obj</span><span class="p">};</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">deserialize</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
@@ -480,7 +480,8 @@
 <span class="w">            </span><span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">            </span><span class="n">node</span><span class="p">[</span><span class="s">&quot;__astraforcemapcreate__&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="w">            </span><span class="n">node</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;__astraforcemapcreate__&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">S</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ASTRA__getserialized</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Invalid object pointer!&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">S</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="o">*</span><span class="n">obj</span><span class="p">);</span>
 <span class="w">            </span><span class="n">serialize</span><span class="p">(</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">Var</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sub</span><span class="p">));</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
