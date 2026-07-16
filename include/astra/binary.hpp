@@ -36,7 +36,7 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), doc);
-			return T {obj};
+			return obj.deserialize();
 		}
 		///@endcond
 
@@ -63,7 +63,7 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), vector);
-			return T {obj};
+			return obj.deserialize();
 		}
 		///@endcond
 
@@ -90,7 +90,7 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), stream);
-			return T {obj};
+			return obj.deserialize();
 		}
 		///@endcond
 
@@ -146,7 +146,8 @@ namespace astra {
 		static libjaguar::Document toDocument(const T* obj) {
 			using S = SerializedSubstitute<T>;
 			libjaguar::Document doc;
-			S sub = obj->ASTRA__getserialized();
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			S sub(*obj);
 			serialize(doc, Var(&sub));
 			return doc;
 		}
@@ -174,7 +175,8 @@ namespace astra {
 		static std::vector<uint8_t> toVector(const T* obj) {
 			using S = SerializedSubstitute<T>;
 			std::vector<uint8_t> result;
-			S sub = obj->ASTRA__getserialized();
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			S sub(*obj);
 			serialize(result, Var(&sub));
 			return result;
 		}

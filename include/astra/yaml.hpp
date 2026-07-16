@@ -37,7 +37,7 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), node);
-			return T {obj};
+			return obj.deserialize();
 		}
 		///@endcond
 
@@ -129,7 +129,8 @@ namespace astra {
 			YAML::Node node;
 			node["__astraforcemapcreate__"] = true;
 			node.remove("__astraforcemapcreate__");
-			S sub = obj->ASTRA__getserialized();
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			S sub(*obj);
 			serialize(node, Var(&sub));
 			return node;
 		}

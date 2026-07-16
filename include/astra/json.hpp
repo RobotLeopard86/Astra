@@ -1,6 +1,7 @@
 #pragma once
 
 #include <istream>
+#include <stdexcept>
 
 #include "dll.hpp"
 #include "var.hpp"
@@ -36,7 +37,7 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), json);
-			return T {obj};
+			return obj.deserialize();
 		}
 		///@endcond
 
@@ -124,7 +125,8 @@ namespace astra {
 		static nlohmann::json toJSON(const T* obj) {
 			using S = SerializedSubstitute<T>;
 			nlohmann::json j;
-			S sub = obj->ASTRA__getserialized();
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			S sub(*obj);
 			serialize(j, Var(&sub));
 			return j;
 		}

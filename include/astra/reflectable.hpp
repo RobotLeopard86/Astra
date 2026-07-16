@@ -35,12 +35,12 @@ namespace astra {
 	constexpr inline bool is_reflectable_v = is_reflectable<T>::value;
 
 	template<typename T>
-	concept can_get_serializable = has_serialized_v<T> && requires(const T& obj) {
-		{ obj.ASTRA__getserialized() } noexcept -> std::same_as<astra::SerializedSubstitute<T>>;
+	concept serializable_ok = std::constructible_from<SerializedSubstitute<T>, const T&> && requires(const SerializedSubstitute<T>& obj) {
+		{ obj.deserialize() } -> std::same_as<T>;
 	};
 
 	template<typename T>
-		requires is_reflectable_v<T> || (std::is_class_v<T> && has_serialized_v<T> && is_reflectable_v<SerializedSubstitute<T>> && std::constructible_from<T, SerializedSubstitute<T>> && can_get_serializable<T>)
+		requires is_reflectable_v<T> || (std::is_class_v<T> && has_serialized_v<T> && is_reflectable_v<SerializedSubstitute<T>> && serializable_ok<T>)
 	struct is_serializable<T> : public std::true_type {};
 
 	template<typename T>

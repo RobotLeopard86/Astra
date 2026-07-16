@@ -15,11 +15,11 @@ class ASTRA_API AstraReflectBase {
 #define ASTRA_REFLECT [[clang::annotate("astra.reflect")]]
 #define ASTRA_IGNORE [[clang::annotate("astra.ignore")]]
 #define ASTRA_ALIAS(x) [[clang::annotate("astra.alias:" x)]]
-#define ASTRASETUP(x)                                                                                                             \
-	friend struct astra::TypeActions<x>;                                                                                          \
-	ASTRA_IGNORE virtual astra::TypeId ASTRA__gettypeid() const override;                                                         \
-	ASTRA_IGNORE void ASTRA__checkreflectability() {                                                                              \
-		static_assert(astra::is_reflectable_v<x>, "Cannot reflect a type that does not meet the conditions for reflectability!"); \
+#define ASTRASETUP(x)                                                                                                                                  \
+	friend struct astra::TypeActions<x>;                                                                                                               \
+	ASTRA_IGNORE virtual astra::TypeId ASTRA__gettypeid() const override;                                                                              \
+	ASTRA_IGNORE void ASTRA__checkreflectability() {                                                                                                   \
+		static_assert(astra::is_reflectable_v<x>, "Cannot generate reflection data for a type that does not meet the conditions for reflectability!"); \
 	}
 #else
 #define ASTRA_REFLECT
