@@ -475,7 +475,7 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">      </span><span class="k">private</span><span class="o">:</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">valueData</span><span class="p">;</span><span class="c1">//Pointer for static fields, offset for members</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">valueData</span><span class="p">;</span>
 <span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">TypeId</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">Access</span><span class="w"> </span><span class="n">acc</span><span class="p">;</span>
@@ -483,8 +483,8 @@
 
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="kt">ptrdiff_t</span><span class="w"> </span><span class="n">delta</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">C</span><span class="o">::*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">constexpr</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">dummy</span><span class="w"> </span><span class="p">{};</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">uintptr_t</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">dummy</span><span class="p">.</span><span class="o">*</span><span class="n">ptr</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">uintptr_t</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dummy</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">//Using NULL intentionally, DO NOT sub for nullptr</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">ptrdiff_t</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">C</span><span class="w"> </span><span class="k">const</span><span class="o">*&gt;</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span><span class="o">-&gt;*</span><span class="n">ptr</span><span class="p">));</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="p">}</span>
