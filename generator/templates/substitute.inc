@@ -15,11 +15,7 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
         : {% for field in fields %}
           {{field.safe_name}}(
             {% if field.is_pointer %}
-                original.{{field.safe_name}} ? *original.{{field.safe_name}} : {{field.type}}() 
-            {% else if field.is_vector %}
-                // Conversion for vectors would typically require a loop/transform
-                // For simplicity in this template, we assume member-wise assignment is handled
-                original.{{field.safe_name}}
+                original.{{field.safe_name}} ? {{field.deref_expr}} : {{field.type}}()
             {% else %}
                 original.{{field.safe_name}}
             {% endif %}
@@ -31,12 +27,22 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
         {{original_type}} res;
         {% for field in fields %}
         {% if field.is_pointer %}
-            res.{{field.safe_name}} = std::make_unique<typename decltype({{field.safe_name}})::value_type>(
-                {{field.safe_name}}.deserialize()
-            );
-        {% else if field.is_vector %}
+            res.{{field.safe_name}} = {{field.rewrap_expr}};
+        {% else if field.container_kind == "vector" %}
             for(const auto& item : {{field.safe_name}}) {
                 res.{{field.safe_name}}.push_back(item.deserialize());
+            }
+        {% else if field.container_kind == "set" %}
+            for(const auto& item : {{field.safe_name}}) {
+                res.{{field.safe_name}}.insert(item.deserialize());
+            }
+        {% else if field.container_kind == "map" %}
+            for(const auto& [k, v] : {{field.safe_name}}) {
+                res.{{field.safe_name}}[k.deserialize()] = v.deserialize();
+            }
+        {% else if field.container_kind == "array" %}
+            for(size_t i = 0; i < {{field.safe_name}}.size(); ++i) {
+                res.{{field.safe_name}}[i] = {{field.safe_name}}[i].deserialize();
             }
         {% else %}
             res.{{field.safe_name}} = {% if field.is_substitute_type %}
