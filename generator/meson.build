@@ -30,7 +30,8 @@ generator_sources = [
 	'files.cpp',
 	'parser.cpp',
 	'sysinclude.cpp',
-	'callback.cpp'
+	'callback.cpp',
+	'subgen.cpp'
 ]
 
 # Executable

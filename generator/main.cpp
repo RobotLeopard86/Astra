@@ -33,6 +33,8 @@
 
 inline std::stringstream lastMsg;
 
+extern void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results);
+
 int main(int argc, char* argv[]) {
 	//Configure CLI
 	CLI::App app("Astra reflection info generator", std::filesystem::path(argv[0]).filename().string());
@@ -140,6 +142,7 @@ int main(int argc, char* argv[]) {
 #endif
 				json["origin"] = rel;
 			}
+			json["is_substitute"] = false;
 		}
 
 		//Merge maps
@@ -149,11 +152,16 @@ int main(int argc, char* argv[]) {
 	clock::time_point parseEnd = clock::now();
 	VERBOSE_LOG("Source parsing completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(parseEnd - parseBegin).count() * 10000) / 10000) << " seconds");
 
+	//Serialized substitute generation
+	generateSubstitutes(parsed);
+	VERBOSE_LOG("Generated serialization data");
+
 	//Create template objects
 	inja::Environment inja;
 	inja::Template headerTemplate = inja.parse(templates::Header);
 	inja::Template enumTemplate = inja.parse(templates::Enum);
 	inja::Template objectTemplate = inja.parse(templates::Object);
+	inja::Template subTemplate = inja.parse(templates::Substitute);
 	VERBOSE_LOG("Loaded templates");
 
 	//Write root files
@@ -266,10 +274,15 @@ int main(int argc, char* argv[]) {
 
 )";
 
-		//Render templates
+		//Render header file
 		inja.render_to(hpp, headerTemplate, json);
+		if(json["is_substitute"].get<bool>()) {
+			inja.render_to(hpp, subTemplate, json);
+		}
 		hpp.close();
 		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << hppFile.generic_string());
+
+		//Render implementation file
 		if(json["kind"].get<int>() == 0) {
 			inja.render_to(cpp, objectTemplate, json);
 		} else {
