@@ -427,6 +427,7 @@
 <span class="cp">#define ASTRA_ALIAS(x) [[clang::annotate(&quot;astra.alias:&quot; x)]]</span>
 <span class="cp">#define ASTRASETUP(x)                                                                                                                                  \</span>
 <span class="cp">    friend struct astra::TypeActions&lt;x&gt;;                                                                                                               \</span>
+<span class="cp">    friend struct astra::SerializedSubstitute&lt;x&gt;;                                                                                                      \</span>
 <span class="cp">    ASTRA_IGNORE virtual astra::TypeId ASTRA__gettypeid() const override;                                                                              \</span>
 <span class="cp">    ASTRA_IGNORE void ASTRA__checkreflectability() {                                                                                                   \</span>
 <span class="cp">        static_assert(astra::is_reflectable_v&lt;x&gt;, &quot;Cannot generate reflection data for a type that does not meet the conditions for reflectability!&quot;); \</span>
@@ -435,8 +436,9 @@
 <span class="cp">#define ASTRA_REFLECT</span>
 <span class="cp">#define ASTRA_IGNORE</span>
 <span class="cp">#define ASTRA_ALIAS(x)</span>
-<span class="cp">#define ASTRASETUP(x)                    \</span>
-<span class="cp">    friend struct astra::TypeActions&lt;x&gt;; \</span>
+<span class="cp">#define ASTRASETUP(x)                             \</span>
+<span class="cp">    friend struct astra::TypeActions&lt;x&gt;;          \</span>
+<span class="cp">    friend struct astra::SerializedSubstitute&lt;x&gt;; \</span>
 <span class="cp">    virtual astra::TypeId ASTRA__gettypeid() const override;</span>
 <span class="cp">#endif</span>
 </pre></div>
