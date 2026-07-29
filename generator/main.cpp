@@ -275,9 +275,15 @@ int main(int argc, char* argv[]) {
 )";
 
 		//Render header file
+
 		inja.render_to(hpp, headerTemplate, json);
 		if(json["is_substitute"].get<bool>()) {
-			inja.render_to(hpp, subTemplate, json);
+			std::stringstream hppContents;
+			inja.render_to(hppContents, subTemplate, json);
+			std::string line;
+			while(std::getline(hppContents, line)) {
+				if(!std::all_of(line.begin(), line.end(), [](unsigned char c) { return std::isspace(c); })) hpp << line << "\n";
+			}
 		}
 		hpp.close();
 		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << hppFile.generic_string());

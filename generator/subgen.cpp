@@ -45,11 +45,30 @@ UnwrapResult unwrapAndTrack(std::string type) {
 }
 
 //Build the re-wrap expression for deserialize(): handles std::make_... and raw new
-std::string generateReWrap(const UnwrapResult& unwrap, const std::string& memberName) {
+std::string generateReWrap(const UnwrapResult& unwrap, const std::string& memberName, const std::string& typeName, const std::vector<std::string>& reflectableTypes) {
 	if(unwrap.wrappers.empty()) return memberName + ".deserialize()";
 
 	std::string currentExpr = memberName + ".deserialize()";
 	std::string currentType = unwrap.rawType;
+
+	if(currentType.find("::") == std::string::npos && currentType.find("std::") == std::string::npos) {
+		std::string baseType = typeName;
+	try_again_rw:
+		std::string qualified = baseType + "::" + currentType;
+		for(const auto& rt : reflectableTypes) {
+			if(rt.compare(qualified) == 0) {
+				currentType = qualified;
+				break;
+			}
+		}
+		if(currentType.compare(qualified) != 0) {
+			std::size_t lastScope = baseType.find_last_of("::");
+			if(lastScope != std::string::npos) {
+				baseType = baseType.substr(0, lastScope);
+				goto try_again_rw;
+			}
+		}
+	}
 
 	for(auto it = unwrap.wrappers.rbegin(); it != unwrap.wrappers.rend(); ++it) {
 		std::string wrapper = *it;
@@ -144,11 +163,20 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 
 			//2. Qualify nested types post-unwrapping
 			if(rawType.find("::") == std::string::npos && rawType.find("std::") == std::string::npos) {
-				std::string qualified = typeName + "::" + rawType;
+				std::string baseType = typeName;
+			try_again_gs:
+				std::string qualified = baseType + "::" + rawType;
 				for(const auto& rt : reflectableTypes) {
-					if(rt == qualified) {
+					if(rt.compare(qualified) == 0) {
 						rawType = qualified;
 						break;
+					}
+				}
+				if(rawType.compare(qualified) != 0) {
+					std::size_t lastScope = baseType.find_last_of("::");
+					if(lastScope != std::string::npos) {
+						baseType = baseType.substr(0, lastScope);
+						goto try_again_gs;
 					}
 				}
 			}
@@ -171,8 +199,8 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			}
 
 			field["original_type"] = originalType;
-			field["rewrap_expr"] = generateReWrap(unwrap, field["safe_name"]);
-			field["deref_expr"] = generateDeref(unwrap, field["safe_name"]);
+			field["rewrap_expr"] = generateReWrap(unwrap, field["name"], typeName, reflectableTypes);
+			field["deref_expr"] = generateDeref(unwrap, field["name"]);
 			field["is_substitute_type"] = (field["type"].get<std::string>().find("astra::SerializedSubstitute") != std::string::npos);
 			field["is_pointer"] = !unwrap.wrappers.empty();
 

@@ -350,7 +350,6 @@ void JsonBuilder::setName(nlohmann::json* item, const NamedDecl* decl) {
 	auto name = decl->getNameAsString();
 
 	(*item)["name"] = name;
-	(*item)["safe_name"] = name;
 
 	if(hasAliasAttr(decl)) {
 		(*item)["alias"] = getAttrAlias(decl);
