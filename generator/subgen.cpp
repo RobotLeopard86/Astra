@@ -1,3 +1,5 @@
+#include <format>
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -9,186 +11,327 @@
 
 #include "to_filename.hpp"
 
-struct UnwrapResult {
-	std::string rawType;
-	std::vector<std::string> wrappers;//"unique", "shared", or "raw"
-};
-
 struct Converter {
-	std::string name;
-	std::string originalType;
-	std::string substitutedType;
-	std::string kind;//"basic", "pointer", "vector", "set", "map_key", "map_val"
-	std::string rewrap_expr;
-	std::string deref_expr;
-	bool is_substitute = false;
+	std::string original; //Original type name
+	std::string stlMapped;//Replaced type for STLConvert operation type
+	enum class Operation {
+		Direct,		 //Copy identical objects
+		Substitution,//Original object <-> astra::SerializedSubstitute
+		UniquePtr,	 //Original wrapped in unique_ptr
+		SharedPtr,	 //Original wrapped in shared_ptr
+		RawPtr,		 //Original wrapped in raw pointer
+		STLConvert,	 //Original is an STL type mapped to a different one
+		List,		 //Original is a list/array
+		Map			 //Original is a map
+	} op;
+	enum class ListInsertionType {
+		Push,
+		PushBack,
+		Insert,
+		Assign
+	} listInsertion;
 };
 
-UnwrapResult unwrapAndTrack(std::string type) {
-	UnwrapResult res;
-	std::regex ptrRegex(R"(std::(unique|shared)_ptr\s*<\s*(.*)\s*>)");
-	std::smatch match;
-	while(std::regex_search(type, match, ptrRegex)) {
-		res.wrappers.push_back(match[1].str());
-		type = match[2].str();
-	}
-	while(!type.empty() && type.back() == '*') {
-		res.wrappers.push_back("raw");
-		type.pop_back();
-		while(!type.empty() && (std::isspace(type.back()) ||
-								   (type.size() >= 5 && type.substr(type.size() - 5) == "const") ||
-								   (type.size() >= 9 && type.substr(type.size() - 9) == "volatile"))) {
-			if(type.size() >= 5 && type.substr(type.size() - 5) == "const")
-				type.erase(type.size() - 5);
-			else if(type.size() >= 9 && type.substr(type.size() - 9) == "volatile")
-				type.erase(type.size() - 9);
-			else
-				type.pop_back();
-		}
-	}
-	res.rawType = type;
-	return res;
-}
+struct ConverterChainNode {
+	ConverterChainNode* prev;
+	Converter* self;
+	ConverterChainNode* next1;
+	ConverterChainNode* next2;
+};
 
-std::string generateReWrap(const UnwrapResult& unwrap, const std::string& memberName, const std::string& typeName, const std::vector<std::string>& reflectableTypes) {
-	if(unwrap.wrappers.empty()) return memberName + ".deserialize()";
-
-	std::string currentExpr = memberName + ".deserialize()";
-	std::string currentType = unwrap.rawType;
-
-	if(currentType.find("::") == std::string::npos && currentType.find("std::") == std::string::npos) {
-		std::string baseType = typeName;
-	try_again_rw:
-		std::string qualified = baseType + "::" + currentType;
+std::string tryQualifyType(const std::string& source, const std::string& holder, const std::vector<std::string>& reflectableTypes) {
+	std::string work = source;
+	if(source.find("::") == std::string::npos && !source.starts_with("std::")) {
+		std::string qualified = holder + "::" + source;
 		for(const auto& rt : reflectableTypes) {
 			if(rt.compare(qualified) == 0) {
-				currentType = qualified;
+				work = qualified;
 				break;
 			}
 		}
-		if(currentType.compare(qualified) != 0) {
-			std::size_t lastScope = baseType.find_last_of("::");
-			if(lastScope != std::string::npos) {
-				baseType = baseType.substr(0, lastScope);
-				goto try_again_rw;
+		if(source.compare(qualified) != 0) {
+			std::size_t lastScope = holder.find_last_of("::");
+			if(lastScope != std::string::npos) return tryQualifyType(source, holder.substr(0, lastScope), reflectableTypes);
+		}
+	}
+	return work;
+}
+
+std::string stripQualifiers(std::string type) {
+	while(!type.empty() && (std::isspace(type.back()) || (type.size() >= 5 && type.substr(type.size() - 5) == "const") || (type.size() >= 9 && type.substr(type.size() - 9) == "volatile"))) {
+		if(type.size() >= 5 && type.substr(type.size() - 5).compare("const") == 0)
+			type.erase(type.size() - 5);
+		else if(type.size() >= 9 && type.substr(type.size() - 9).compare("volatile") == 0)
+			type.erase(type.size() - 9);
+		else
+			type.pop_back();
+	}
+	return type;
+}
+
+ConverterChainNode* createConverterChain(const std::string& source, std::set<std::string>& substitutes, std::deque<Converter>& converters, const std::vector<std::string>& reflectableTypes, const std::vector<std::string>& reflectableClasses, ConverterChainNode* prev) {
+	//1. Smart Pointers
+	if(source.starts_with("std::unique_ptr<") || source.starts_with("std::shared_ptr<")) {
+		bool isUnique = source.starts_with("std::unique_ptr<");
+		size_t start = source.find('<');
+		size_t end = source.find_last_of('>');
+		std::string inner = source.substr(start + 1, end - start - 1);
+
+		Converter c;
+		c.original = source;
+		c.op = isUnique ? Converter::Operation::UniquePtr : Converter::Operation::SharedPtr;
+		converters.push_back(c);
+
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		node->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, node);
+		return node;
+	}
+
+	//2. Raw Pointers
+	if(!source.empty() && source.back() == '*') {
+		std::string inner = source;
+		inner.pop_back();
+		inner = stripQualifiers(inner);
+
+		Converter c;
+		c.original = source;
+		c.op = Converter::Operation::RawPtr;
+		converters.push_back(c);
+
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		node->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, node);
+		return node;
+	}
+
+	//3. Containers
+	if(source.starts_with("std::") && source.find('<') != std::string::npos) {
+		size_t start = source.find('<');
+		size_t end = source.find_last_of('>');
+		std::string prefix = source.substr(0, start + 1);
+		std::string inner = source.substr(start + 1, end - start - 1);
+
+		//Maps
+		if(prefix == "std::map<" || prefix == "std::unordered_map<") {
+			std::vector<std::string> args;
+			int depth = 0;
+			std::string current;
+			for(char c : inner) {
+				if(c == '<') depth++;
+				if(c == '>') depth--;
+				if(c == ',' && depth == 0) {
+					args.push_back(current);
+					current.clear();
+				} else
+					current += c;
+			}
+			args.push_back(current.substr(1));
+			if(args.size() == 2) {
+				Converter c;
+				c.original = source;
+				c.op = Converter::Operation::Map;
+				converters.push_back(c);
+				ConverterChainNode* node = new ConverterChainNode();
+				node->self = &converters[converters.size() - 1];
+				node->prev = prev;
+				node->next1 = createConverterChain(args[0], substitutes, converters, reflectableTypes, reflectableClasses, node);
+				node->next2 = createConverterChain(args[1], substitutes, converters, reflectableTypes, reflectableClasses, node);
+				return node;
 			}
 		}
-	}
 
-	for(auto it = unwrap.wrappers.rbegin(); it != unwrap.wrappers.rend(); ++it) {
-		std::string wrapper = *it;
-		if(wrapper == "unique") {
-			currentExpr = "std::make_unique<" + currentType + ">(" + currentExpr + ")";
-		} else if(wrapper == "shared") {
-			currentExpr = "std::make_shared<" + currentType + ">(" + currentExpr + ")";
-		} else {//raw
-			currentExpr = "new " + currentType + "(" + currentExpr + ")";
+		//Lists / Arrays
+		bool isRandomAccess = (prefix == "std::vector<" || prefix == "std::array<");
+
+		//If non-random access, we need an STLConvert step to std::vector first
+		if(!isRandomAccess) {
+			Converter conv;
+			conv.original = source;
+			conv.op = Converter::Operation::STLConvert;
+			conv.stlMapped = "std::vector<" + inner + ">";
+			converters.push_back(conv);
+
+			ConverterChainNode* node = new ConverterChainNode();
+			node->prev = prev;
+			node->self = &converters[converters.size() - 1];
+
+			//Now add the List operation for the vector
+			Converter listC;
+			listC.original = "std::vector<" + inner + ">";
+			listC.op = Converter::Operation::List;
+			listC.listInsertion = (prefix.compare("std::set<") == 0) ? ((prefix.compare("std::queue<") == 0 || prefix.compare("std::stack<") == 0) ? Converter::ListInsertionType::Push : Converter::ListInsertionType::PushBack) : Converter::ListInsertionType::Insert;
+			converters.push_back(listC);
+
+			ConverterChainNode* listNode = new ConverterChainNode();
+			listNode->prev = node;
+			listNode->self = &converters[converters.size() - 1];
+			listNode->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, listNode);
+
+			node->next1 = listNode;
+			return node;
+		} else {
+			Converter c;
+			c.original = source;
+			c.op = Converter::Operation::List;
+			c.listInsertion = (prefix == "std::array<") ? Converter::ListInsertionType::Assign : Converter::ListInsertionType::PushBack;
+			converters.push_back(c);
+
+			ConverterChainNode* node = new ConverterChainNode();
+			node->prev = prev;
+			node->self = &converters[converters.size() - 1];
+			node->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, node);
+			return node;
 		}
-		currentType = "std::" + wrapper + (wrapper == "raw" ? "" : "_ptr") + "<" + currentType + ">";
 	}
-	return currentExpr;
+
+	//4. Base Type Flowchart
+	if(source == "std::string" || source == "std::string_view" || source == "const char*") {
+		Converter c;
+		c.original = source;
+		c.op = Converter::Operation::STLConvert;
+		c.stlMapped = "std::string";
+		converters.push_back(c);
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		return node;
+	}
+
+	if(source == "std::byte") {
+		Converter c;
+		c.original = source;
+		c.op = Converter::Operation::STLConvert;
+		c.stlMapped = "unsigned char";
+		converters.push_back(c);
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		return node;
+	}
+
+	if(source == "std::size_t") {
+		Converter c;
+		c.original = source;
+		c.op = Converter::Operation::STLConvert;
+		c.stlMapped = "uint64_t";
+		converters.push_back(c);
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		return node;
+	}
+
+	bool isReflectable = false;
+	for(const auto& rt : reflectableTypes) {
+		if(rt == source) {
+			isReflectable = true;
+			break;
+		}
+	}
+	if(!isReflectable) {
+		Converter c;
+		c.original = source;
+		c.op = Converter::Operation::Direct;
+		converters.push_back(c);
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		return node;
+	}
+
+	bool isClass = false;
+	for(const auto& rc : reflectableClasses) {
+		if(rc == source) {
+			isClass = true;
+			break;
+		}
+	}
+
+	if(isClass) {
+		Converter c;
+		c.original = source;
+		c.op = Converter::Operation::Substitution;
+		converters.push_back(c);
+		substitutes.insert("astra::SerializedSubstitute<" + source + ">");
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		return node;
+	}
+
+	Converter c;
+	c.original = source;
+	c.op = Converter::Operation::Direct;
+	converters.push_back(c);
+	ConverterChainNode* node = new ConverterChainNode();
+	node->prev = prev;
+	node->self = &converters[converters.size() - 1];
+	return node;
 }
 
-std::string generateDeref(const UnwrapResult& unwrap, const std::string& memberName) {
-	if(unwrap.wrappers.empty()) return "original." + memberName;
-	std::string expr = "original." + memberName;
-	for(size_t i = 0; i < unwrap.wrappers.size(); ++i) expr = "*" + expr;
-	return expr;
-}
-
-std::string transformType(const std::string& type, const std::vector<std::string>& reflectableTypes, std::set<std::string>& headers) {
-	if(type.find('<') == std::string::npos) {
-		for(const auto& rt : reflectableTypes) {
-			if(type.compare(rt) == 0) {
-				headers.insert(rt);
-				return "astra::SerializedSubstitute<" + rt + ">";
+#define continue_if_next(result)                  \
+	if(auto r = result; node->next1)              \
+		return getSerializedType(r, node->next1); \
+	else                                          \
+		return r;
+std::string getSerializedType(const std::string& source, ConverterChainNode* node) {
+	switch(node->self->op) {
+		case Converter::Operation::Direct:
+			return source;
+		case Converter::Operation::Substitution:
+			continue_if_next(std::format("astra::SerializedSubstitute<{}>", source));
+		case Converter::Operation::UniquePtr:
+			continue_if_next(source.substr(strlen("std::unique_ptr") + 1, source.size() - strlen("std::unique_ptr") - 2));
+		case Converter::Operation::SharedPtr:
+			continue_if_next(source.substr(strlen("std::shared_ptr") + 1, source.size() - strlen("std::shared_ptr") - 2));
+		case Converter::Operation::RawPtr:
+			continue_if_next(source.substr(0, source.size() - 1));
+		case Converter::Operation::STLConvert:
+			continue_if_next(node->self->stlMapped);
+		case Converter::Operation::List:
+			continue_if_next(source.substr(source.find_first_of('<') + 1, source.find_last_of('>') - (source.find_first_of('<') + 1)));
+		case Converter::Operation::Map: {
+			std::string mtype = source.starts_with("std::unordered") ? "std::unordered_map" : "std::map";
+			unsigned int brackets = 0;
+			unsigned int i;
+			for(i = mtype.size() + 1; i < source.size(); ++i) {
+				if(source[i] == '<')
+					++brackets;
+				else if(source[i] == '>')
+					--brackets;
+				else if(source[i] == ',' && brackets == 0)
+					break;
 			}
+			std::string a1 = source.substr(mtype.size() + 1, i - (mtype.size() + 1));
+			std::string a2 = source.substr(i + 2, source.find_last_of('>') - (i + 2));
+			if(!node->next1 || !node->next2) throw std::runtime_error("Invalid map node!");
+			return std::format("{}<{}, {}>", mtype, getSerializedType(a1, node->next1), getSerializedType(a2, node->next2));
 		}
-		return type;
+		default: return source;
 	}
-	size_t start = type.find('<'), end = type.find_last_of('>');
-	std::string prefix = type.substr(0, start + 1), inner = type.substr(start + 1, end - start - 1), suffix = type.substr(end + 1);
-	if(prefix == "std::map<" || prefix == "std::unordered_map<") {
-		std::vector<std::string> args;
-		int depth = 0;
-		std::string current;
-		for(char c : inner) {
-			if(c == '<') depth++;
-			if(c == '>') depth--;
-			if(c == ',' && depth == 0) {
-				args.push_back(current);
-				current.clear();
-			} else
-				current += c;
-		}
-		args.push_back(current);
-		if(args.size() == 2) return prefix + transformType(args[0], reflectableTypes, headers) + ", " + transformType(args[1], reflectableTypes, headers) + ">" + suffix;
-	}
-	return prefix + transformType(inner, reflectableTypes, headers) + ">" + suffix;
+}
+#undef continue_if_next
+
+void describeConverterChain(nlohmann::json& json, ConverterChainNode* node) {
 }
 
-void resolveConverters(const std::string& name, const std::string& type, const std::vector<std::string>& reflectableTypes, std::set<std::string>& headers, std::vector<Converter>& converters) {
-	UnwrapResult unwrap = unwrapAndTrack(type);
-	std::string raw = unwrap.rawType;
-
-	//Qualify raw type if necessary
-	//Note: this requires a reference to the current class name, omitted here for brevity in helper but integrated in main loop
-
-	std::string subT = transformType(raw, reflectableTypes, headers);
-
-	Converter conv;
-	conv.name = name;
-	conv.originalType = type;
-	conv.substitutedType = subT;
-	conv.is_substitute = (subT.find("astra::SerializedSubstitute") != std::string::npos);
-
-	if(!unwrap.wrappers.empty()) {
-		conv.kind = "pointer";
-		conv.rewrap_expr = generateReWrap(unwrap, name, type, reflectableTypes);
-		conv.deref_expr = generateDeref(unwrap, name);
-	} else if(type.find("std::vector<") == 0 || type.find("std::deque<") == 0 || type.find("std::list<") == 0 || type.find("std::stack<") == 0 || type.find("std::queue<") == 0) {
-		conv.kind = "vector";
-		size_t start = type.find('<'), end = type.find_last_of('>');
-		std::string inner = type.substr(start + 1, end - start - 1);
-		resolveConverters(name + "_item", inner, reflectableTypes, headers, converters);
-	} else if(type.find("std::set<") == 0) {
-		conv.kind = "set";
-		size_t start = type.find('<'), end = type.find_last_of('>');
-		std::string inner = type.substr(start + 1, end - start - 1);
-		resolveConverters(name + "_item", inner, reflectableTypes, headers, converters);
-	} else if(type.find("std::map<") == 0 || type.find("std::unordered_map<") == 0) {
-		conv.kind = "map";
-		size_t start = type.find('<'), end = type.find_last_of('>');
-		std::string inner = type.substr(start + 1, end - start - 1);
-		std::vector<std::string> args;
-		int depth = 0;
-		std::string curr;
-		for(char c : inner) {
-			if(c == '<') depth++;
-			if(c == '>') depth--;
-			if(c == ',' && depth == 0) {
-				args.push_back(curr);
-				curr.clear();
-			} else
-				curr += c;
-		}
-		args.push_back(curr);
-		if(args.size() == 2) {
-			resolveConverters(name + "_key", args[0], reflectableTypes, headers, converters);
-			resolveConverters(name + "_val", args[1], reflectableTypes, headers, converters);
-		}
-	} else if(type.find("std::array<") == 0) {
-		conv.kind = "array";
-		size_t start = type.find('<'), end = type.find_last_of('>');
-		std::string inner = type.substr(start + 1, end - start - 1);
-		resolveConverters(name + "_item", inner, reflectableTypes, headers, converters);
-	} else {
-		conv.kind = "basic";
+void destroyConverterChain(ConverterChainNode* node) {
+	if(node->next1) {
+		destroyConverterChain(node->next1);
+		node->next1 = nullptr;
 	}
-	converters.push_back(conv);
+	if(node->next2) {
+		destroyConverterChain(node->next2);
+		node->next2 = nullptr;
+	}
+	delete node;
 }
 
 void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results) {
+	//Separate into reflectable classes and enums + classes
 	std::vector<std::string> reflectableTypes;
 	std::vector<std::string> reflectableClasses;
 	for(auto const& [name, data] : results) {
@@ -198,80 +341,56 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 		}
 	}
 
-	for(const auto& typeName : reflectableClasses) {
-		std::string subName = "astra::SerializedSubstitute<" + typeName + ">";
+	//Generate substitutes for classes
+	for(const std::string& clazz : reflectableClasses) {
+		//Check that we haven't seen this class before
+		std::string subName = "astra::SerializedSubstitute<" + clazz + ">";
 		if(results.count(subName)) continue;
 
-		const auto& originalData = results[typeName];
-		nlohmann::json subJson;
-		subJson["kind"] = 0;
-		subJson["name"] = subName;
-		subJson["is_substitute"] = true;
-		subJson["original_type"] = typeName;
-		subJson["origin"] = originalData["origin"];
-		subJson["namespace"] = "astra";
+		//Get original class info and set up substitute info
+		const nlohmann::json& original = results[clazz];
+		nlohmann::json& substitute = results[subName];
+		substitute["kind"] = 0;
+		substitute["name"] = subName;
+		substitute["is_substitute"] = true;
+		substitute["original_type"] = clazz;
+		substitute["origin"] = original["origin"];
+		substitute["namespace"] = "astra";
+		substitute["methods"] = nlohmann::json::array();
+		substitute["fields"] = nlohmann::json::array();
 
-		std::vector<Converter> converters;
-		std::set<std::string> headers;
-		auto fields = originalData["fields"];
-		for(auto& field : fields) {
-			std::string originalType = field["type"];
+		//Process fields
+		std::set<std::string> substitutes;
+		for(const nlohmann::json& field : original["fields"]) {
+			//Get field type
+			std::string originalType = tryQualifyType(field["type"], clazz, reflectableTypes);
 
-			//Handle qualification before recursion
-			if(originalType.find("::") == std::string::npos && originalType.find("std::") == std::string::npos) {
-				std::string baseType = typeName;
-			try_again_gs:
-				std::string qualified = baseType + "::" + originalType;
-				for(const auto& rt : reflectableTypes) {
-					if(rt.compare(qualified) == 0) {
-						originalType = qualified;
-						break;
-					}
-				}
-				if(originalType.compare(qualified) != 0) {
-					std::size_t lastScope = baseType.find_last_of("::");
-					if(lastScope != std::string::npos) {
-						baseType = baseType.substr(0, lastScope);
-						goto try_again_gs;
-					}
-				}
-			}
+			//Generate converter for field
+			std::deque<Converter> converterObjs;
+			ConverterChainNode* cvt = createConverterChain(originalType, substitutes, converterObjs, reflectableTypes, reflectableClasses, nullptr);
 
-			resolveConverters(field["name"], originalType, reflectableTypes, headers, converters);
+			//Set up field object
+			nlohmann::json fieldDesc = nlohmann::json::object();
+			fieldDesc["name"] = field["name"];
+			fieldDesc["acc"] = nlohmann::json::array({std::string("Public")});
+			fieldDesc["type"] = getSerializedType(originalType, cvt);
 
-			//The la-val field in the substitute is the flattened version
-			UnwrapResult unwrap = unwrapAndTrack(originalType);
-			field["type"] = transformType(unwrap.rawType, reflectableTypes, headers);
+			//Add converter information
+			fieldDesc["cvt"] = nlohmann::json::array();
+			nlohmann::json& cvtDesc = fieldDesc["cvt"];
+			describeConverterChain(cvtDesc, cvt);
 
-			//If it was a container, ensure it remains a container (transformed)
-			if(unwrap.wrappers.empty() && originalType.find("std::") == 0 && originalType.find('<') != std::string::npos) {
-				field["type"] = transformType(originalType, reflectableTypes, headers);
-			}
+			//Add field to list
+			substitute["fields"].push_back(fieldDesc);
 
-			field["original_type"] = originalType;
-			field["is_substitute_type"] = (field["type"].get<std::string>().find("astra::SerializedSubstitute") != std::string::npos);
+			//Clean up converter chain
+			destroyConverterChain(cvt);
 		}
 
-		nlohmann::json convJson = nlohmann::json::array();
-		for(const auto& c : converters) {
-			nlohmann::json j;
-			j["name"] = c.name;
-			j["originalType"] = c.originalType;
-			j["substitutedType"] = c.substitutedType;
-			j["kind"] = c.kind;
-			j["rewrap_expr"] = c.rewrap_expr;
-			j["deref_expr"] = c.deref_expr;
-			j["is_substitute"] = c.is_substitute;
-			convJson.push_back(j);
+		//Generate headers list
+		substitute["headers"] = nlohmann::json::array();
+		for(const auto& sub : substitute) {
+			substitute["headers"].push_back(toFilename(sub));
 		}
-
-		subJson["headers"] = nlohmann::json::array();
-		for(const auto& rt : headers) {
-			subJson["headers"].push_back(toFilename(rt));
-		}
-		subJson["converters"] = std::move(convJson);
-		subJson["fields"] = std::move(fields);
-		subJson["methods"] = nlohmann::json::array();
-		results[subName] = std::move(subJson);
 	}
 }

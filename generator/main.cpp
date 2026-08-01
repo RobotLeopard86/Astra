@@ -1,3 +1,4 @@
+#include "inja/function_storage.hpp"
 #include "templates.hpp"
 
 #include "files.hpp"
@@ -156,8 +157,19 @@ int main(int argc, char* argv[]) {
 	generateSubstitutes(parsed);
 	VERBOSE_LOG("Generated serialization data");
 
-	//Create template objects
+	//Set up inja
 	inja::Environment inja;
+	inja.add_callback("reverse", 1, [](inja::Arguments& args) {
+		const nlohmann::json* src = args[0];
+		nlohmann::json dest;
+		for(auto it = src->rbegin(); it != src->rend(); ++it) {
+			dest.push_back(*it);
+		}
+		return dest;
+	});
+	VERBOSE_LOG("Codegen ready");
+
+	//Create template objects
 	inja::Template headerTemplate = inja.parse(templates::Header);
 	inja::Template enumTemplate = inja.parse(templates::Enum);
 	inja::Template objectTemplate = inja.parse(templates::Object);
@@ -275,7 +287,6 @@ int main(int argc, char* argv[]) {
 )";
 
 		//Render header file
-
 		inja.render_to(hpp, headerTemplate, json);
 		if(json["is_substitute"].get<bool>()) {
 			std::stringstream hppContents;
