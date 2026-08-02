@@ -5,9 +5,9 @@ R"(
 #include "astra/type_actions/common_actions.hpp"
 #include "astra/type_actions/type_actions.hpp"
 
-{% if (namespace != "") -%}
+{% if (namespace != "") %}
 using namespace {{namespace}};
-{% endif -%}
+{% endif %}
 
 namespace astra {
 
@@ -17,16 +17,16 @@ struct TypeActions<{{name}}> {
     auto* p = static_cast<{{name}}*>(value);
 
     static std::map<std::string_view, FieldDesc> fields {% if length(fields) != 0 %}{
-      {% else %}{};{% endif -%}
-      {% for item in fields -%}
+      {% else %}{};{% endif %}
+      {% for item in fields %}
         {"{{item.alias}}", FieldDesc(&{{name}}::{{item.name}}, Access::{{join(item.acc," | Access::")}})},
-    {% if not loop.is_last %}  {% else %}};{% endif -%}
+    {% if not loop.is_last %}  {% else %}};{% endif %}
       {% endfor %}
     static std::map<std::string_view, MethodDesc> methods {% if length(methods) != 0 %}{
-      {% else %}{};{% endif -%}
-      {% for item in methods -%}
+      {% else %}{};{% endif %}
+      {% for item in methods %}
         {"{{item.alias}}", MethodDesc(&invoke_{{item.name}}, Access::{{join(item.acc," | Access::")}})},
-    {% if not loop.is_last %}  {% else %}};{% endif -%}
+    {% if not loop.is_last %}  {% else %}};{% endif %}
       {% endfor %}
     return Object(Var(p, isConst), &fields, &methods);
   }
@@ -36,27 +36,27 @@ struct TypeActions<{{name}}> {
       throw std::runtime_error("Number of arguments is not the same as in the callable");
     }
 
-    {% for type in item.params -%}
+    {% for type in item.params %}
     if (args[{{loop.index}}].typeId() != TypeId::get<{{type}}>()) {
       throw std::runtime_error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].typeId())));
     }
     const {{type}}& a{{loop.index}} = *static_cast<const {{type}}*>(args[{{loop.index}}].raw());
 
-    {% endfor -%}
+    {% endfor %}
 
-    {% if item.return != "void" -%}
+    {% if item.return != "void" %}
     if (res.typeId() != TypeId::get<{{item.return}}>()) {
       throw std::runtime_error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.typeId())));
     }
     *reinterpret_cast<{{item.return}}*>(res.rawMut()) = 
-    {% endif -%}
+    {% endif %}
     std::invoke(&{{name}}::{{item.name}}{% if not ("Static" in item.acc) %}, static_cast<{{name}}*>(obj){% endif %}{% if length(item.params) != 0 %},{% else %});{% endif %}
-      {% for i in range(length(item.params)) -%}
+      {% for i in range(length(item.params)) %}
         a{{loop.index}}{% if not loop.is_last %},
-      {% else %});{% endif -%}
+      {% else %});{% endif %}
       {% endfor %}
   }
-{% endfor -%}
+{% endfor %}
 };
 
 template<>

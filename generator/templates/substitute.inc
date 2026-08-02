@@ -17,76 +17,56 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
     SerializedSubstitute& operator=(SerializedSubstitute&&) = default;
 //
     struct cvt {
-        {% for conv in converters %}
-        static {{conv.originalType}} de_{{conv.name}}({{conv.substitutedType}} s) {
-            {% if conv.kind == "pointer" %}
-                return {{conv.rewrap_expr}};
-            {% else if conv.kind == "vector" %}
-                decltype({{conv.originalType}}) out;
-                for(const auto& item : s) {
-                    out.push_back(cvt::de_{{conv.name}}_item(item));
-                }
-                return out;
-            {% else if conv.kind == "set" %}
-                decltype({{conv.originalType}}) out;
-                for(const auto& item : s) {
-                    out.insert(cvt::de_{{conv.name}}_item(item));
-                }
-                return out;
-            {% else if conv.kind == "map" %}
-                decltype({{conv.originalType}}) out;
-                for(const auto& [k, v] : s) {
-                    out[cvt::de_{{conv.name}}_key(k)] = cvt::de_{{conv.name}}_val(v);
-                }
-                return out;
-            {% else if conv.kind == "array" %}
-                decltype({{conv.originalType}}) out;
-                for(size_t i = 0; i < s.size(); ++i) {
-                    out[i] = cvt::de_{{conv.name}}_item(s[i]);
-                }
-                return out;
-            {% else %}
-                {% if conv.is_substitute %}
-                    return s.deserialize();
-                {% else %}
-                    return s;
-                {% endif %}
+        {% for cvt in converters %}
+        static {{ first(cvt.steps).original_type }} de_{{cvt.fn_name}}(auto s0) {
+            {% for step in reverse(cvt.steps) %}
+            // {{ step.op }}
+            {% if loop.is_last %} return {% else %} auto s{{ loop.index1 }} = {% endif %}
+            {% if step.op == "direct" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "sub" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "unique" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "shared" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "raw" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "stlcvt" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "list" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "map" %}
+                s{{ loop.index1 - 1}};
             {% endif %}
+            {% endfor %}
         }
 //
-        static {{conv.substitutedType}} en_{{conv.name}}(const {{conv.originalType}}& t) {
-            {% if conv.kind == "pointer" %}
-                return t ? astra::SerializedSubstitute<{{conv.substitutedType}}>(*t) : {{conv.substitutedType}}();
-            {% else if conv.kind == "vector" %}
-                {{conv.substitutedType}} out;
-                for(const auto& item : t) {
-                    out.push_back(cvt::en_{{conv.name}}_item(item));
-                }
-                return out;
-            {% else if conv.kind == "set" %}
-                {{conv.substitutedType}} out;
-                for(const auto& item : t) {
-                    out.insert(cvt::en_{{conv.name}}_item(item));
-                }
-                return out;
-            {% else if conv.kind == "map" %}
-                {{conv.substitutedType}} out;
-                for(const auto& [k, v] : t) {
-                    out[cvt::en_{{conv.name}}_key(k)] = cvt::en_{{conv.name}}_val(v);
-                }
-                return out;
-            {% else if conv.kind == "array" %}
-                {{conv.substitutedType}} out;
-                for(size_t i = 0; i < t.size(); ++i) {
-                    out[i] = cvt::en_{{conv.name}}_item(t[i]);
-                }
-                return out;
-            {% else %}
-                return astra::SerializedSubstitute<{{conv.substitutedType}}>(t);
+        static auto en_{{cvt.fn_name}}({{ first(cvt.steps).original_type }} s0) {
+            {% for step in reverse(cvt.steps) %}
+            // {{ step.op }}
+            {% if loop.is_last %} return {% else %} auto s{{ loop.index1 }} = {% endif %}
+            {% if step.op == "direct" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "sub" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "unique" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "shared" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "raw" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "stlcvt" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "list" %}
+                s{{ loop.index1 - 1}};
+            {% else if step.op == "map" %}
+                s{{ loop.index1 - 1}};
             {% endif %}
+            {% endfor %}
         }
         {% endfor %}
-    };
+    }
 //
     SerializedSubstitute(const {{original_type}}& original)
         : {% for field in fields %}
@@ -104,5 +84,4 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
 //
     ASTRASETUP(SerializedSubstitute)
     virtual ~SerializedSubstitute() {}
-};
 )"

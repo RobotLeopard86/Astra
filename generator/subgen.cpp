@@ -58,7 +58,7 @@ std::string tryQualifyType(const std::string& source, const std::string& holder,
 }
 
 std::string stripQualifiers(std::string type) {
-	while(!type.empty() && (std::isspace(type.back()) || (type.size() >= 5 && type.substr(type.size() - 5) == "const") || (type.size() >= 9 && type.substr(type.size() - 9) == "volatile"))) {
+	while(!type.empty() && (std::isspace(type.back()) || (type.size() >= 5 && type.substr(type.size() - 5).compare("const") == 0) || (type.size() >= 9 && type.substr(type.size() - 9).compare("volatile") == 0))) {
 		if(type.size() >= 5 && type.substr(type.size() - 5).compare("const") == 0)
 			type.erase(type.size() - 5);
 		else if(type.size() >= 9 && type.substr(type.size() - 9).compare("volatile") == 0)
@@ -70,18 +70,21 @@ std::string stripQualifiers(std::string type) {
 }
 
 ConverterChainNode* createConverterChain(const std::string& source, std::set<std::string>& substitutes, std::deque<Converter>& converters, const std::vector<std::string>& reflectableTypes, const std::vector<std::string>& reflectableClasses, ConverterChainNode* prev) {
-	//1. Smart Pointers
+	//Check for smart pointers
 	if(source.starts_with("std::unique_ptr<") || source.starts_with("std::shared_ptr<")) {
+		//Gather template arguments
 		bool isUnique = source.starts_with("std::unique_ptr<");
 		size_t start = source.find('<');
 		size_t end = source.find_last_of('>');
 		std::string inner = source.substr(start + 1, end - start - 1);
 
+		//Set up converter
 		Converter c;
 		c.original = source;
 		c.op = isUnique ? Converter::Operation::UniquePtr : Converter::Operation::SharedPtr;
 		converters.push_back(c);
 
+		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
@@ -89,17 +92,20 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		return node;
 	}
 
-	//2. Raw Pointers
-	if(!source.empty() && source.back() == '*') {
+	//Check for raw pointers
+	if(!source.empty() && source.back() == '*' && source.compare("const char*") != 0) {
+		//Find underlying type
 		std::string inner = source;
 		inner.pop_back();
 		inner = stripQualifiers(inner);
 
+		//Set up converter
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::RawPtr;
 		converters.push_back(c);
 
+		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
@@ -107,15 +113,17 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		return node;
 	}
 
-	//3. Containers
+	//Check for STL containers
 	if(source.starts_with("std::") && source.find('<') != std::string::npos) {
+		//Gather template arguments
 		size_t start = source.find('<');
 		size_t end = source.find_last_of('>');
 		std::string prefix = source.substr(0, start + 1);
 		std::string inner = source.substr(start + 1, end - start - 1);
 
-		//Maps
-		if(prefix == "std::map<" || prefix == "std::unordered_map<") {
+		//Is this a map?
+		if(prefix.compare("std::map<") == 0 || prefix.compare("std::unordered_map<") == 0) {
+			//Split key and value
 			std::vector<std::string> args;
 			int depth = 0;
 			std::string current;
@@ -129,11 +137,16 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 					current += c;
 			}
 			args.push_back(current.substr(1));
+
+			//Check for 2 args (otherwise we're bugged)
 			if(args.size() == 2) {
+				//Set up converter
 				Converter c;
 				c.original = source;
 				c.op = Converter::Operation::Map;
 				converters.push_back(c);
+
+				//Make and return node
 				ConverterChainNode* node = new ConverterChainNode();
 				node->self = &converters[converters.size() - 1];
 				node->prev = prev;
@@ -143,42 +156,47 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			}
 		}
 
-		//Lists / Arrays
-		bool isRandomAccess = (prefix == "std::vector<" || prefix == "std::array<");
-
-		//If non-random access, we need an STLConvert step to std::vector first
+		//Lists and arrays otherwise (random access is for narrowing STL containers to easy-to-serialize types)
+		bool isRandomAccess = (prefix.compare("std::vector<") == 0 || prefix.compare("std::array<") == 0);
 		if(!isRandomAccess) {
+			//Set up converter to go from some STL type to a vector
 			Converter conv;
 			conv.original = source;
 			conv.op = Converter::Operation::STLConvert;
 			conv.stlMapped = "std::vector<" + inner + ">";
+			conv.listInsertion = (prefix.compare("std::set<") == 0) ? ((prefix.compare("std::queue<") == 0 || prefix.compare("std::stack<") == 0) ? Converter::ListInsertionType::Push : Converter::ListInsertionType::PushBack) : Converter::ListInsertionType::Insert;
 			converters.push_back(conv);
 
+			//Make node
 			ConverterChainNode* node = new ConverterChainNode();
 			node->prev = prev;
 			node->self = &converters[converters.size() - 1];
 
-			//Now add the List operation for the vector
+			//Set up converter for unpacking the vector into elements
 			Converter listC;
 			listC.original = "std::vector<" + inner + ">";
 			listC.op = Converter::Operation::List;
-			listC.listInsertion = (prefix.compare("std::set<") == 0) ? ((prefix.compare("std::queue<") == 0 || prefix.compare("std::stack<") == 0) ? Converter::ListInsertionType::Push : Converter::ListInsertionType::PushBack) : Converter::ListInsertionType::Insert;
+			listC.listInsertion = Converter::ListInsertionType::PushBack;
 			converters.push_back(listC);
 
+			//Make the unpacking node
 			ConverterChainNode* listNode = new ConverterChainNode();
 			listNode->prev = node;
 			listNode->self = &converters[converters.size() - 1];
 			listNode->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, listNode);
 
+			//Attach nodes and return
 			node->next1 = listNode;
 			return node;
 		} else {
+			//We're a vector or array, just do the unpacking
 			Converter c;
 			c.original = source;
 			c.op = Converter::Operation::List;
-			c.listInsertion = (prefix == "std::array<") ? Converter::ListInsertionType::Assign : Converter::ListInsertionType::PushBack;
+			c.listInsertion = (prefix.compare("std::array<") == 0) ? Converter::ListInsertionType::Assign : Converter::ListInsertionType::PushBack;
 			converters.push_back(c);
 
+			//Make and return node
 			ConverterChainNode* node = new ConverterChainNode();
 			node->prev = prev;
 			node->self = &converters[converters.size() - 1];
@@ -187,43 +205,53 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		}
 	}
 
-	//4. Base Type Flowchart
-	if(source == "std::string" || source == "std::string_view" || source == "const char*") {
+	//String substitution
+	if(source.compare("std::string") == 0 || source.compare("std::string_view") == 0 || source.compare("const char*") == 0) {
+		//Set up converter
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::STLConvert;
 		c.stlMapped = "std::string";
 		converters.push_back(c);
+
+		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
 		return node;
 	}
 
-	if(source == "std::byte") {
+	//Replace STL integer aliases
+	if(source.compare("std::byte") == 0) {
+		//Set up converter
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::STLConvert;
 		c.stlMapped = "unsigned char";
 		converters.push_back(c);
+
+		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
 		return node;
 	}
-
-	if(source == "std::size_t") {
+	if(source.compare("std::size_t") == 0) {
+		//Set up converter
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::STLConvert;
 		c.stlMapped = "uint64_t";
 		converters.push_back(c);
+
+		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
 		return node;
 	}
 
+	//Check for reflectable type
 	bool isReflectable = false;
 	for(const auto& rt : reflectableTypes) {
 		if(rt == source) {
@@ -232,16 +260,21 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		}
 	}
 	if(!isReflectable) {
+		//Not reflectable, write type directly
+		//This shouldn't happen often because if your class has non-reflectable types, you should make an explicit substitute
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::Direct;
 		converters.push_back(c);
+
+		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
 		return node;
 	}
 
+	//Check for class (only classes can have autogenerated substitutes)
 	bool isClass = false;
 	for(const auto& rc : reflectableClasses) {
 		if(rc == source) {
@@ -249,23 +282,30 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			break;
 		}
 	}
-
 	if(isClass) {
+		//Set up converter
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::Substitution;
 		converters.push_back(c);
+
+		//Log in substitutes list for header inclusion
 		substitutes.insert("astra::SerializedSubstitute<" + source + ">");
+
+		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
 		return node;
 	}
 
+	//This should be for enums only; write directly
 	Converter c;
 	c.original = source;
 	c.op = Converter::Operation::Direct;
 	converters.push_back(c);
+
+	//Make and return node
 	ConverterChainNode* node = new ConverterChainNode();
 	node->prev = prev;
 	node->self = &converters[converters.size() - 1];
@@ -291,8 +331,12 @@ std::string getSerializedType(const std::string& source, ConverterChainNode* nod
 			continue_if_next(source.substr(0, source.size() - 1));
 		case Converter::Operation::STLConvert:
 			continue_if_next(node->self->stlMapped);
-		case Converter::Operation::List:
-			continue_if_next(source.substr(source.find_first_of('<') + 1, source.find_last_of('>') - (source.find_first_of('<') + 1)));
+		case Converter::Operation::List: {
+			std::string ltype = source.substr(0, source.find_first_of('<'));
+			std::string inner = source.substr(source.find_first_of('<') + 1, source.find_last_of('>') - (source.find_first_of('<') + 1));
+			if(!node->next1) throw std::runtime_error("Invalid list node!");
+			return std::format("{}<{}>", ltype, getSerializedType(inner, node->next1));
+		}
 		case Converter::Operation::Map: {
 			std::string mtype = source.starts_with("std::unordered") ? "std::unordered_map" : "std::map";
 			unsigned int brackets = 0;
@@ -315,10 +359,96 @@ std::string getSerializedType(const std::string& source, ConverterChainNode* nod
 }
 #undef continue_if_next
 
-void describeConverterChain(nlohmann::json& json, ConverterChainNode* node) {
+void describeConverterChain(nlohmann::json& json, nlohmann::json& current, ConverterChainNode* node) {
+	//Add current step
+	nlohmann::json& step = current["steps"].emplace_back(nlohmann::json::object());
+	step["original_type"] = node->self->original;
+	switch(node->self->op) {
+		case Converter::Operation::Direct:
+			step["op"] = "direct";
+			break;
+		case Converter::Operation::Substitution:
+			step["op"] = "sub";
+			break;
+		case Converter::Operation::UniquePtr:
+			step["op"] = "unique";
+			break;
+		case Converter::Operation::SharedPtr:
+			step["op"] = "shared";
+			break;
+		case Converter::Operation::RawPtr:
+			step["op"] = "raw";
+			break;
+		case Converter::Operation::STLConvert:
+			step["op"] = "stlcvt";
+			step["mapped"] = node->self->stlMapped;
+			switch(node->self->listInsertion) {
+				case Converter::ListInsertionType::Push:
+					step["insertion"] = node->self->listInsertion;
+					break;
+				case Converter::ListInsertionType::PushBack:
+					step["insertion"] = node->self->listInsertion;
+					break;
+				case Converter::ListInsertionType::Insert:
+					step["insertion"] = node->self->listInsertion;
+					break;
+				case Converter::ListInsertionType::Assign:
+					step["insertion"] = node->self->listInsertion;
+					break;
+			}
+			break;
+		case Converter::Operation::List:
+			step["op"] = "list";
+			switch(node->self->listInsertion) {
+				case Converter::ListInsertionType::Push:
+					step["insertion"] = node->self->listInsertion;
+					break;
+				case Converter::ListInsertionType::PushBack:
+					step["insertion"] = node->self->listInsertion;
+					break;
+				case Converter::ListInsertionType::Insert:
+					step["insertion"] = node->self->listInsertion;
+					break;
+				case Converter::ListInsertionType::Assign:
+					step["insertion"] = node->self->listInsertion;
+					break;
+			}
+			step["item_cvt"] = current["fn_name"].get<std::string>() + "_item";
+			{
+				nlohmann::json& itemCvt = json.emplace_back(nlohmann::json::object());
+				itemCvt["fn_name"] = step["item_cvt"];
+				itemCvt["steps"] = nlohmann::json::array();
+				if(!node->next1) throw std::runtime_error("Invalid list node!");
+				describeConverterChain(json, itemCvt, node->next1);
+			}
+			return;
+		case Converter::Operation::Map:
+			step["op"] = "map";
+			step["key_cvt"] = current["fn_name"].get<std::string>() + "_key";
+			step["val_cvt"] = current["fn_name"].get<std::string>() + "_val";
+			{
+				nlohmann::json& kcvt = json.emplace_back(nlohmann::json::object());
+				kcvt["fn_name"] = step["key_cvt"];
+				kcvt["steps"] = nlohmann::json::array();
+				if(!node->next1) throw std::runtime_error("Invalid map node!");
+				describeConverterChain(json, kcvt, node->next1);
+			}
+			{
+				nlohmann::json& vcvt = json.emplace_back(nlohmann::json::object());
+				vcvt["fn_name"] = step["val_cvt"];
+				vcvt["steps"] = nlohmann::json::array();
+				if(!node->next2) throw std::runtime_error("Invalid map node!");
+				describeConverterChain(json, vcvt, node->next2);
+			}
+			return;
+	}
+
+	//Continue with next step
+	if(node->next1) describeConverterChain(json, current, node->next1);
 }
 
 void destroyConverterChain(ConverterChainNode* node) {
+	//Destroy children recursively first
 	if(node->next1) {
 		destroyConverterChain(node->next1);
 		node->next1 = nullptr;
@@ -358,6 +488,7 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 		substitute["namespace"] = "astra";
 		substitute["methods"] = nlohmann::json::array();
 		substitute["fields"] = nlohmann::json::array();
+		substitute["converters"] = nlohmann::json::array();
 
 		//Process fields
 		std::set<std::string> substitutes;
@@ -376,9 +507,10 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			fieldDesc["type"] = getSerializedType(originalType, cvt);
 
 			//Add converter information
-			fieldDesc["cvt"] = nlohmann::json::array();
-			nlohmann::json& cvtDesc = fieldDesc["cvt"];
-			describeConverterChain(cvtDesc, cvt);
+			nlohmann::json& cvtJson = substitute["converters"].emplace_back(nlohmann::json::object());
+			cvtJson["fn_name"] = field["name"];
+			cvtJson["steps"] = nlohmann::json::array();
+			describeConverterChain(substitute["converters"], cvtJson, cvt);
 
 			//Add field to list
 			substitute["fields"].push_back(fieldDesc);
@@ -389,7 +521,7 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 
 		//Generate headers list
 		substitute["headers"] = nlohmann::json::array();
-		for(const auto& sub : substitute) {
+		for(const auto& sub : substitutes) {
 			substitute["headers"].push_back(toFilename(sub));
 		}
 	}
