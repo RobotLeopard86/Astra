@@ -12,8 +12,8 @@
 #include "to_filename.hpp"
 
 struct Converter {
-	std::string original; //Original type name
-	std::string stlMapped;//Replaced type for STLConvert operation type
+	std::string original;	//Original type name
+	std::string transformed;//Output type name after conversion
 	enum class Operation {
 		Direct,		 //Copy identical objects
 		Substitution,//Original object <-> astra::SerializedSubstitute
@@ -69,6 +69,53 @@ std::string stripQualifiers(std::string type) {
 	return type;
 }
 
+#define continue_if_next(result)                  \
+	if(auto r = result; node->next1)              \
+		return getSerializedType(r, node->next1); \
+	else                                          \
+		return r;
+std::string getSerializedType(const std::string& source, ConverterChainNode* node) {
+	switch(node->self->op) {
+		case Converter::Operation::Direct:
+			return source;
+		case Converter::Operation::Substitution:
+			continue_if_next(std::format("astra::SerializedSubstitute<{}>", source));
+		case Converter::Operation::UniquePtr:
+			continue_if_next(source.substr(strlen("std::unique_ptr") + 1, source.size() - strlen("std::unique_ptr") - 2));
+		case Converter::Operation::SharedPtr:
+			continue_if_next(source.substr(strlen("std::shared_ptr") + 1, source.size() - strlen("std::shared_ptr") - 2));
+		case Converter::Operation::RawPtr:
+			continue_if_next(source.substr(0, source.size() - 1));
+		case Converter::Operation::STLConvert:
+			continue_if_next(node->self->transformed);
+		case Converter::Operation::List: {
+			std::string ltype = source.substr(0, source.find_first_of('<'));
+			std::string inner = source.substr(source.find_first_of('<') + 1, source.find_last_of('>') - (source.find_first_of('<') + 1));
+			if(!node->next1) throw std::runtime_error("Invalid list node!");
+			return std::format("{}<{}>", ltype, getSerializedType(inner, node->next1));
+		}
+		case Converter::Operation::Map: {
+			std::string mtype = source.starts_with("std::unordered") ? "std::unordered_map" : "std::map";
+			unsigned int brackets = 0;
+			unsigned int i;
+			for(i = mtype.size() + 1; i < source.size(); ++i) {
+				if(source[i] == '<')
+					++brackets;
+				else if(source[i] == '>')
+					--brackets;
+				else if(source[i] == ',' && brackets == 0)
+					break;
+			}
+			std::string a1 = source.substr(mtype.size() + 1, i - (mtype.size() + 1));
+			std::string a2 = source.substr(i + 2, source.find_last_of('>') - (i + 2));
+			if(!node->next1 || !node->next2) throw std::runtime_error("Invalid map node!");
+			return std::format("{}<{}, {}>", mtype, getSerializedType(a1, node->next1), getSerializedType(a2, node->next2));
+		}
+		default: return source;
+	}
+}
+#undef continue_if_next
+
 ConverterChainNode* createConverterChain(const std::string& source, std::set<std::string>& substitutes, std::deque<Converter>& converters, const std::vector<std::string>& reflectableTypes, const std::vector<std::string>& reflectableClasses, ConverterChainNode* prev) {
 	//Check for smart pointers
 	if(source.starts_with("std::unique_ptr<") || source.starts_with("std::shared_ptr<")) {
@@ -81,6 +128,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		//Set up converter
 		Converter c;
 		c.original = source;
+		c.transformed = inner;
 		c.op = isUnique ? Converter::Operation::UniquePtr : Converter::Operation::SharedPtr;
 		converters.push_back(c);
 
@@ -102,6 +150,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		//Set up converter
 		Converter c;
 		c.original = source;
+		c.transformed = inner;
 		c.op = Converter::Operation::RawPtr;
 		converters.push_back(c);
 
@@ -152,6 +201,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 				node->prev = prev;
 				node->next1 = createConverterChain(args[0], substitutes, converters, reflectableTypes, reflectableClasses, node);
 				node->next2 = createConverterChain(args[1], substitutes, converters, reflectableTypes, reflectableClasses, node);
+				converters[converters.size() - 1].transformed = prefix + getSerializedType(args[0], node->next1) + ", " + getSerializedType(args[1], node->next2) + ">";
 				return node;
 			}
 		}
@@ -163,7 +213,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			Converter conv;
 			conv.original = source;
 			conv.op = Converter::Operation::STLConvert;
-			conv.stlMapped = "std::vector<" + inner + ">";
+			conv.transformed = "std::vector<" + inner + ">";
 			conv.listInsertion = (prefix.compare("std::set<") == 0) ? ((prefix.compare("std::queue<") == 0 || prefix.compare("std::stack<") == 0) ? Converter::ListInsertionType::Push : Converter::ListInsertionType::PushBack) : Converter::ListInsertionType::Insert;
 			converters.push_back(conv);
 
@@ -175,6 +225,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			//Set up converter for unpacking the vector into elements
 			Converter listC;
 			listC.original = "std::vector<" + inner + ">";
+			listC.transformed = inner;
 			listC.op = Converter::Operation::List;
 			listC.listInsertion = Converter::ListInsertionType::PushBack;
 			converters.push_back(listC);
@@ -192,6 +243,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			//We're a vector or array, just do the unpacking
 			Converter c;
 			c.original = source;
+			c.transformed = inner;
 			c.op = Converter::Operation::List;
 			c.listInsertion = (prefix.compare("std::array<") == 0) ? Converter::ListInsertionType::Assign : Converter::ListInsertionType::PushBack;
 			converters.push_back(c);
@@ -211,7 +263,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::STLConvert;
-		c.stlMapped = "std::string";
+		c.transformed = "std::string";
 		converters.push_back(c);
 
 		//Make and return node
@@ -227,7 +279,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::STLConvert;
-		c.stlMapped = "unsigned char";
+		c.transformed = "unsigned char";
 		converters.push_back(c);
 
 		//Make and return node
@@ -241,7 +293,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::STLConvert;
-		c.stlMapped = "uint64_t";
+		c.transformed = "uint64_t";
 		converters.push_back(c);
 
 		//Make and return node
@@ -264,6 +316,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		//This shouldn't happen often because if your class has non-reflectable types, you should make an explicit substitute
 		Converter c;
 		c.original = source;
+		c.transformed = source;
 		c.op = Converter::Operation::Direct;
 		converters.push_back(c);
 
@@ -286,11 +339,12 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		//Set up converter
 		Converter c;
 		c.original = source;
+		c.transformed = "astra::SerializedSubstitute<" + source + ">";
 		c.op = Converter::Operation::Substitution;
 		converters.push_back(c);
 
 		//Log in substitutes list for header inclusion
-		substitutes.insert("astra::SerializedSubstitute<" + source + ">");
+		substitutes.insert(c.transformed);
 
 		//Make and return node
 		ConverterChainNode* node = new ConverterChainNode();
@@ -302,6 +356,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 	//This should be for enums only; write directly
 	Converter c;
 	c.original = source;
+	c.transformed = source;
 	c.op = Converter::Operation::Direct;
 	converters.push_back(c);
 
@@ -312,57 +367,11 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 	return node;
 }
 
-#define continue_if_next(result)                  \
-	if(auto r = result; node->next1)              \
-		return getSerializedType(r, node->next1); \
-	else                                          \
-		return r;
-std::string getSerializedType(const std::string& source, ConverterChainNode* node) {
-	switch(node->self->op) {
-		case Converter::Operation::Direct:
-			return source;
-		case Converter::Operation::Substitution:
-			continue_if_next(std::format("astra::SerializedSubstitute<{}>", source));
-		case Converter::Operation::UniquePtr:
-			continue_if_next(source.substr(strlen("std::unique_ptr") + 1, source.size() - strlen("std::unique_ptr") - 2));
-		case Converter::Operation::SharedPtr:
-			continue_if_next(source.substr(strlen("std::shared_ptr") + 1, source.size() - strlen("std::shared_ptr") - 2));
-		case Converter::Operation::RawPtr:
-			continue_if_next(source.substr(0, source.size() - 1));
-		case Converter::Operation::STLConvert:
-			continue_if_next(node->self->stlMapped);
-		case Converter::Operation::List: {
-			std::string ltype = source.substr(0, source.find_first_of('<'));
-			std::string inner = source.substr(source.find_first_of('<') + 1, source.find_last_of('>') - (source.find_first_of('<') + 1));
-			if(!node->next1) throw std::runtime_error("Invalid list node!");
-			return std::format("{}<{}>", ltype, getSerializedType(inner, node->next1));
-		}
-		case Converter::Operation::Map: {
-			std::string mtype = source.starts_with("std::unordered") ? "std::unordered_map" : "std::map";
-			unsigned int brackets = 0;
-			unsigned int i;
-			for(i = mtype.size() + 1; i < source.size(); ++i) {
-				if(source[i] == '<')
-					++brackets;
-				else if(source[i] == '>')
-					--brackets;
-				else if(source[i] == ',' && brackets == 0)
-					break;
-			}
-			std::string a1 = source.substr(mtype.size() + 1, i - (mtype.size() + 1));
-			std::string a2 = source.substr(i + 2, source.find_last_of('>') - (i + 2));
-			if(!node->next1 || !node->next2) throw std::runtime_error("Invalid map node!");
-			return std::format("{}<{}, {}>", mtype, getSerializedType(a1, node->next1), getSerializedType(a2, node->next2));
-		}
-		default: return source;
-	}
-}
-#undef continue_if_next
-
 void describeConverterChain(nlohmann::json& json, nlohmann::json& current, ConverterChainNode* node) {
 	//Add current step
 	nlohmann::json& step = current["steps"].emplace_back(nlohmann::json::object());
 	step["original_type"] = node->self->original;
+	step["serialized_type"] = node->self->transformed;
 	switch(node->self->op) {
 		case Converter::Operation::Direct:
 			step["op"] = "direct";
@@ -381,19 +390,19 @@ void describeConverterChain(nlohmann::json& json, nlohmann::json& current, Conve
 			break;
 		case Converter::Operation::STLConvert:
 			step["op"] = "stlcvt";
-			step["mapped"] = node->self->stlMapped;
+			step["mapped"] = node->self->transformed;
 			switch(node->self->listInsertion) {
 				case Converter::ListInsertionType::Push:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "push";
 					break;
 				case Converter::ListInsertionType::PushBack:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "push_back";
 					break;
 				case Converter::ListInsertionType::Insert:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "insert";
 					break;
 				case Converter::ListInsertionType::Assign:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "assign";
 					break;
 			}
 			break;
@@ -401,24 +410,26 @@ void describeConverterChain(nlohmann::json& json, nlohmann::json& current, Conve
 			step["op"] = "list";
 			switch(node->self->listInsertion) {
 				case Converter::ListInsertionType::Push:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "push";
 					break;
 				case Converter::ListInsertionType::PushBack:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "push_back";
 					break;
 				case Converter::ListInsertionType::Insert:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "insert";
 					break;
 				case Converter::ListInsertionType::Assign:
-					step["insertion"] = node->self->listInsertion;
+					step["insertion"] = "assign";
 					break;
 			}
 			step["item_cvt"] = current["fn_name"].get<std::string>() + "_item";
+			current["serialized_type"] = node->self->transformed;
 			{
+				if(!node->next1) throw std::runtime_error("Invalid list node!");
 				nlohmann::json& itemCvt = json.emplace_back(nlohmann::json::object());
 				itemCvt["fn_name"] = step["item_cvt"];
+				itemCvt["original_type"] = node->next1->self->original;
 				itemCvt["steps"] = nlohmann::json::array();
-				if(!node->next1) throw std::runtime_error("Invalid list node!");
 				describeConverterChain(json, itemCvt, node->next1);
 			}
 			return;
@@ -426,25 +437,31 @@ void describeConverterChain(nlohmann::json& json, nlohmann::json& current, Conve
 			step["op"] = "map";
 			step["key_cvt"] = current["fn_name"].get<std::string>() + "_key";
 			step["val_cvt"] = current["fn_name"].get<std::string>() + "_val";
+			current["serialized_type"] = node->self->transformed;
 			{
+				if(!node->next1) throw std::runtime_error("Invalid map node!");
 				nlohmann::json& kcvt = json.emplace_back(nlohmann::json::object());
 				kcvt["fn_name"] = step["key_cvt"];
+				kcvt["original_type"] = node->next1->self->original;
 				kcvt["steps"] = nlohmann::json::array();
-				if(!node->next1) throw std::runtime_error("Invalid map node!");
 				describeConverterChain(json, kcvt, node->next1);
 			}
 			{
+				if(!node->next2) throw std::runtime_error("Invalid map node!");
 				nlohmann::json& vcvt = json.emplace_back(nlohmann::json::object());
 				vcvt["fn_name"] = step["val_cvt"];
+				vcvt["original_type"] = node->next2->self->original;
 				vcvt["steps"] = nlohmann::json::array();
-				if(!node->next2) throw std::runtime_error("Invalid map node!");
 				describeConverterChain(json, vcvt, node->next2);
 			}
 			return;
 	}
 
 	//Continue with next step
-	if(node->next1) describeConverterChain(json, current, node->next1);
+	if(node->next1)
+		describeConverterChain(json, current, node->next1);
+	else
+		current["serialized_type"] = node->self->transformed;
 }
 
 void destroyConverterChain(ConverterChainNode* node) {
@@ -503,12 +520,14 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			//Set up field object
 			nlohmann::json fieldDesc = nlohmann::json::object();
 			fieldDesc["name"] = field["name"];
+			fieldDesc["alias"] = field["name"];
 			fieldDesc["acc"] = nlohmann::json::array({std::string("Public")});
 			fieldDesc["type"] = getSerializedType(originalType, cvt);
 
 			//Add converter information
 			nlohmann::json& cvtJson = substitute["converters"].emplace_back(nlohmann::json::object());
 			cvtJson["fn_name"] = field["name"];
+			cvtJson["original_type"] = cvt->self->original;
 			cvtJson["steps"] = nlohmann::json::array();
 			describeConverterChain(substitute["converters"], cvtJson, cvt);
 
