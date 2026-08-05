@@ -34,13 +34,14 @@
 
 inline std::stringstream lastMsg;
 
-extern void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results);
+extern void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results, const std::unordered_map<std::string, nlohmann::json>& inherited);
 
 int main(int argc, char* argv[]) {
 	//Configure CLI
 	CLI::App app("Astra reflection info generator", std::filesystem::path(argv[0]).filename().string());
 	std::string compDbPath;
 	app.add_option("--compdb,-c", compDbPath, "Path to the directory containing compile_commands.json")->check(CLI::ExistingDirectory)->required();
+
 	std::string outDir;
 	const auto outDirValidateFunc = [](const std::string& opt) {
 		auto existDir = CLI::ExistingDirectory(opt);
@@ -51,8 +52,13 @@ int main(int argc, char* argv[]) {
 		return "Provided path exists but is not a directory";
 	};
 	app.add_option("--output,-o", outDir, "Path to the directory to output generated code to")->check(outDirValidateFunc)->required();
+
 	std::string project;
 	app.add_option("--project-name,-n", project, "Name of the project")->transform([](const std::string& val) { return toFilename(val); })->required();
+
+	std::vector<std::string> inheritedSummaries;
+	app.add_option("--inherit-summary,-s", inheritedSummaries, "Summary files from other generations to include in this generation")->check(CLI::ExistingFile);
+
 	std::string fallbackCompiler = "";
 	bool fallbackIsMsvc = false;
 	const auto fallbackOptFunc = [&fallbackCompiler, &fallbackIsMsvc](const std::string& s) {
@@ -62,11 +68,15 @@ int main(int argc, char* argv[]) {
 		fallbackIsMsvc = lower.find("++") == std::string::npos && (lower.find("cl.exe") != std::string::npos || lower.find("cl") == 0);
 	};
 	app.add_option_function<std::string>("--fallback-compiler,-C", fallbackOptFunc, "Fallback compiler to use for system include searching if the compiler in the database is not supported (if it isn't cl.exe, a GCC-like command line is assumed)");
+
 	std::string includePrefix = "";
 	app.add_option("--include-prefix,-p", includePrefix, "Optional prefix to use for header inclusion (useful for <libname>/<header>.h formulations); do not include trailing slash");
+
 	bool quiet = false;
 	app.add_flag("--quiet,-q", quiet, "Suppress output");
+
 	app.set_version_flag("--version,-v", []() { return PROJECT_VER; }, "Display version and exit");
+
 	std::vector<std::string> input;
 	const auto inputValidateFunc = [](const std::string& opt) {
 		auto existDir = CLI::ExistingDirectory(opt);
@@ -153,8 +163,28 @@ int main(int argc, char* argv[]) {
 	clock::time_point parseEnd = clock::now();
 	VERBOSE_LOG("Source parsing completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(parseEnd - parseBegin).count() * 10000) / 10000) << " seconds");
 
+	//Load inherited summaries
+	std::unordered_map<std::string, nlohmann::json> inheritedData;
+	for(const std::string& summaryFile : inheritedSummaries) {
+		//Open file stream
+		std::ifstream inStream(summaryFile);
+		if(!inStream.is_open()) {
+			ERROR("Failed to open inherited summary file!");
+			if(!quiet) {
+				spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
+			}
+			return -1;
+		}
+
+		//Add to data map
+		nlohmann::json root = nlohmann::json::parse(inStream);
+		for(auto it = root.begin(); it != root.end(); ++it) {
+			inheritedData[it.key()] = it.value();
+		}
+	}
+
 	//Serialized substitute generation
-	generateSubstitutes(parsed);
+	generateSubstitutes(parsed, inheritedData);
 	VERBOSE_LOG("Generated serialization data");
 
 	//Set up inja
@@ -184,6 +214,8 @@ int main(int argc, char* argv[]) {
 
 	//Write root files
 	clock::time_point writeBegin = clock::now();
+	int writeCount = (parsed.size() * 2) + 3;//.hpp and .cpp for all parsed types, plus root files
+	counter = 0;
 	std::ofstream rootHeader(out / (project + ".astra.hpp"));
 	if(!rootHeader.is_open()) {
 		ERROR("Failed to open root header file for writing!");
@@ -206,6 +238,9 @@ int main(int argc, char* argv[]) {
 #include "astra/type_actions/all_types.hpp" // IWYU pragma: export
 
 )";
+	for(const std::string& summaryFile : inheritedSummaries) {
+		rootHeader << "#include \"" << std::filesystem::relative(summaryFile, out / (project + ".astra.hpp")) << "\" // IWYU pragma: export";
+	}
 	std::ofstream rootCpp(out / (project + ".astra.cpp"));
 	if(!rootCpp.is_open()) {
 		ERROR("Failed to open root implementation file for writing!");
@@ -225,13 +260,27 @@ int main(int argc, char* argv[]) {
 #include ")"
 			<< (project + ".astra.hpp") << "\"\n\n";
 
+	std::ofstream rootSummary(out / (project + ".astra.json"));
+	if(!rootSummary.is_open()) {
+		ERROR("Failed to open root summary file for writing!");
+		if(!quiet) {
+			spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
+		}
+		return -1;
+	}
+	nlohmann::json jsonSum(parsed);
+	for(const auto& [_, json] : inheritedData) {
+		jsonSum.merge_patch(json);
+	}
+	rootSummary << jsonSum.dump(1, '\t', true);
+	rootSummary.close();
+	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".astra.json"));
+
 	//Create type reflection directory
 	std::filesystem::path typesDir = out / "astra_generated";
 	std::filesystem::create_directories(typesDir);
 
 	//Write file templates
-	int writeCount = (parsed.size() * 2) + 2;
-	counter = 0;
 	for(auto&& [objectName, json] : parsed) {
 		//Generate filenames
 		auto filenameUTF8 = toFilename(objectName);

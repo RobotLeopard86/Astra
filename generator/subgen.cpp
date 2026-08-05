@@ -548,11 +548,21 @@ void destroyConverterChain(ConverterChainNode* node) {
 	delete node;
 }
 
-void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results) {
+void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results, const std::unordered_map<std::string, nlohmann::json>& inherited) {
 	//Separate into reflectable classes and enums + classes
 	std::vector<std::string> reflectableTypes;
 	std::vector<std::string> reflectableClasses;
+	std::vector<std::string> classesToGenerate;
 	for(auto const& [name, data] : results) {
+		if(data.contains("kind") && name.find("astra::SerializedSubstitute") == std::string::npos) {
+			reflectableTypes.push_back(name);
+			if(data["kind"] == 0) {
+				reflectableClasses.push_back(name);
+				classesToGenerate.push_back(name);
+			}
+		}
+	}
+	for(auto const& [name, data] : inherited) {
 		if(data.contains("kind") && name.find("astra::SerializedSubstitute") == std::string::npos) {
 			reflectableTypes.push_back(name);
 			if(data["kind"] == 0) reflectableClasses.push_back(name);
@@ -560,7 +570,7 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 	}
 
 	//Generate substitutes for classes
-	for(const std::string& clazz : reflectableClasses) {
+	for(const std::string& clazz : classesToGenerate) {
 		//Check that we haven't seen this class before
 		std::string subName = "astra::SerializedSubstitute<" + clazz + ">";
 		if(results.count(subName)) continue;
