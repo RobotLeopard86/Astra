@@ -413,6 +413,7 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;istream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dll.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;var.hpp&quot;</span>
@@ -424,16 +425,16 @@
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">fromJson</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="o">&amp;</span><span class="w"> </span><span class="n">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">T</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
+<span class="w">            </span><span class="k">using</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SerializedSubstitute</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">S</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
 <span class="w">            </span><span class="n">deserialize</span><span class="p">(</span><span class="n">Var</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="p">),</span><span class="w"> </span><span class="n">json</span><span class="p">);</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">deserialize</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
-<span class="w">            </span><span class="k">requires</span><span class="p">(</span><span class="o">!</span><span class="n">is_reflectable_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">requires</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_enum_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">fromJson</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="o">&amp;</span><span class="w"> </span><span class="n">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">using</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SerializedSubstitute</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="w">            </span><span class="n">S</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
+<span class="w">            </span><span class="n">T</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
 <span class="w">            </span><span class="n">deserialize</span><span class="p">(</span><span class="n">Var</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="p">),</span><span class="w"> </span><span class="n">json</span><span class="p">);</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">deserialize</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
@@ -465,15 +466,7 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
-<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">toJSON</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
-<span class="w">            </span><span class="n">serialize</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">Var</span><span class="p">(</span><span class="n">obj</span><span class="p">));</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
-<span class="w">            </span><span class="k">requires</span><span class="p">(</span><span class="o">!</span><span class="n">is_reflectable_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">toJSON</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">toJson</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">using</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SerializedSubstitute</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="w">            </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Invalid object pointer!&quot;</span><span class="p">);</span>
@@ -483,27 +476,36 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="k">requires</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_enum_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">toJson</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Invalid object pointer!&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">serialize</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">Var</span><span class="p">(</span><span class="n">obj</span><span class="p">));</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">toString</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">toJSON</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">).</span><span class="n">dump</span><span class="p">();</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">toJson</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">).</span><span class="n">dump</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="n">Serializable</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">toStream</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">stream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">toJSON</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">toJson</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">toJSONFromVar</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">toJsonFromVar</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">nlohmann</span><span class="o">::</span><span class="n">json</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
 <span class="w">            </span><span class="n">serialize</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">);</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">toStringFromVar</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">toJSONFromVar</span><span class="p">(</span><span class="n">var</span><span class="p">).</span><span class="n">dump</span><span class="p">();</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">toJsonFromVar</span><span class="p">(</span><span class="n">var</span><span class="p">).</span><span class="n">dump</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">toStreamFromVar</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">stream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">toJSONFromVar</span><span class="p">(</span><span class="n">var</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stream</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">toJsonFromVar</span><span class="p">(</span><span class="n">var</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">      </span><span class="k">private</span><span class="o">:</span>
