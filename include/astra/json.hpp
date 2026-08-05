@@ -2,6 +2,7 @@
 
 #include <istream>
 #include <stdexcept>
+#include <type_traits>
 
 #include "dll.hpp"
 #include "var.hpp"
@@ -25,17 +26,17 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static T fromJson(const nlohmann::json& json) {
-			T obj;
+			using S = SerializedSubstitute<T>;
+			S obj;
 			deserialize(Var(&obj), json);
-			return obj;
+			return obj.deserialize();
 		}
 
 		///@cond
 		template<Serializable T>
-			requires(!is_reflectable_v<T>)
+			requires std::is_enum_v<T>
 		static T fromJson(const nlohmann::json& json) {
-			using S = SerializedSubstitute<T>;
-			S obj;
+			T obj;
 			deserialize(Var(&obj), json);
 			return obj.deserialize();
 		}
@@ -113,21 +114,22 @@ namespace astra {
 		 * @return A JSON object containing the serialized data
 		 */
 		template<Serializable T>
-		static nlohmann::json toJSON(const T* obj) {
-			nlohmann::json j;
-			serialize(j, Var(obj));
-			return j;
-		}
-
-		///@cond
-		template<Serializable T>
-			requires(!is_reflectable_v<T>)
-		static nlohmann::json toJSON(const T* obj) {
+		static nlohmann::json toJson(const T* obj) {
 			using S = SerializedSubstitute<T>;
 			nlohmann::json j;
 			if(!obj) throw std::runtime_error("Invalid object pointer!");
 			S sub(*obj);
 			serialize(j, Var(&sub));
+			return j;
+		}
+
+		///@cond
+		template<Serializable T>
+			requires std::is_enum_v<T>
+		static nlohmann::json toJson(const T* obj) {
+			nlohmann::json j;
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			serialize(j, Var(obj));
 			return j;
 		}
 		///@endcond
@@ -143,7 +145,7 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static std::string toString(const T* obj) {
-			return toJSON<T>(obj).dump();
+			return toJson<T>(obj).dump();
 		}
 
 		/**
@@ -156,7 +158,7 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static void toStream(std::ostream& stream, const T* obj) {
-			stream << toJSON<T>(obj);
+			stream << toJson<T>(obj);
 		}
 
 		/**
@@ -166,7 +168,7 @@ namespace astra {
 		 *
 		 * @return A JSON object containing the serialized data
 		 */
-		static nlohmann::json toJSONFromVar(Var var) {
+		static nlohmann::json toJsonFromVar(Var var) {
 			nlohmann::json j;
 			serialize(j, var);
 			return j;
@@ -180,7 +182,7 @@ namespace astra {
 		 * @return A vector containing the serialized data encoded in JSON
 		 */
 		static std::string toStringFromVar(Var var) {
-			return toJSONFromVar(var).dump();
+			return toJsonFromVar(var).dump();
 		}
 
 		/**
@@ -190,7 +192,7 @@ namespace astra {
 		 * @param var A Var holding the object to serialize
 		 */
 		static void toStreamFromVar(std::ostream& stream, Var var) {
-			stream << toJSONFromVar(var);
+			stream << toJsonFromVar(var);
 		}
 
 	  private:

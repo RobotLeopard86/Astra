@@ -11,7 +11,7 @@ namespace ExampleNamespace {
 	class ASTRA_REFLECT ComplicatedType : public AstraReflectBase {
 	  public:
 		std::string myString;
-		std::map<Color, std::array<uint16_t, 5>> someMap;
+		std::map<Color, std::shared_ptr<std::array<uint16_t, 5>>> someMap;
 		std::vector<std::array<bool, 3>> listOfLists;
 
 		enum class ASTRA_REFLECT AnotherEnum {
@@ -23,6 +23,7 @@ namespace ExampleNamespace {
 
 		std::unique_ptr<AnotherEnum> ptrToAnotherEnum;
 		std::unique_ptr<std::shared_ptr<Car>> carrrrr;
+		std::stack<int> wackyStack;
 
 		virtual ~ComplicatedType() {}
 

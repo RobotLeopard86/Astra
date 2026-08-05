@@ -24,17 +24,17 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static T fromDocument(libjaguar::Document& doc) {
-			T obj;
+			using S = SerializedSubstitute<T>;
+			S obj;
 			deserialize(Var(&obj), doc);
-			return obj;
+			return obj.deserialize();
 		}
 
 		///@cond
 		template<Serializable T>
-			requires(!is_reflectable_v<T>)
+			requires std::is_enum_v<T>
 		static T fromDocument(libjaguar::Document& doc) {
-			using S = SerializedSubstitute<T>;
-			S obj;
+			T obj;
 			deserialize(Var(&obj), doc);
 			return obj.deserialize();
 		}
@@ -51,17 +51,17 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static T fromVector(const std::vector<uint8_t>& vector) {
-			T obj;
+			using S = SerializedSubstitute<T>;
+			S obj;
 			deserialize(Var(&obj), vector);
-			return obj;
+			return obj.deserialize();
 		}
 
 		///@cond
 		template<Serializable T>
-			requires(!is_reflectable_v<T>)
+			requires std::is_enum_v<T>
 		static T fromVector(const std::vector<uint8_t>& vector) {
-			using S = SerializedSubstitute<T>;
-			S obj;
+			T obj;
 			deserialize(Var(&obj), vector);
 			return obj.deserialize();
 		}
@@ -78,17 +78,17 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static T fromStream(std::istream& stream) {
-			T obj;
+			using S = SerializedSubstitute<T>;
+			S obj;
 			deserialize(Var(&obj), stream);
-			return obj;
+			return obj.deserialize();
 		}
 
 		///@cond
 		template<Serializable T>
-			requires(!is_reflectable_v<T>)
+			requires std::is_enum_v<T>
 		static T fromStream(std::istream& stream) {
-			using S = SerializedSubstitute<T>;
-			S obj;
+			T obj;
 			deserialize(Var(&obj), stream);
 			return obj.deserialize();
 		}
@@ -135,20 +135,21 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static libjaguar::Document toDocument(const T* obj) {
-			libjaguar::Document doc;
-			serialize(doc, Var(obj));
-			return doc;
-		}
-
-		///@cond
-		template<Serializable T>
-			requires(!is_reflectable_v<T>)
-		static libjaguar::Document toDocument(const T* obj) {
 			using S = SerializedSubstitute<T>;
 			libjaguar::Document doc;
 			if(!obj) throw std::runtime_error("Invalid object pointer!");
 			S sub(*obj);
 			serialize(doc, Var(&sub));
+			return doc;
+		}
+
+		///@cond
+		template<Serializable T>
+			requires std::is_enum_v<T>
+		static libjaguar::Document toDocument(const T* obj) {
+			libjaguar::Document doc;
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			serialize(doc, Var(obj));
 			return doc;
 		}
 		///@endcond
@@ -164,20 +165,21 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static std::vector<uint8_t> toVector(const T* obj) {
-			std::vector<uint8_t> result;
-			serialize(result, Var(obj));
-			return result;
-		}
-
-		///@cond
-		template<Serializable T>
-			requires(!is_reflectable_v<T>)
-		static std::vector<uint8_t> toVector(const T* obj) {
 			using S = SerializedSubstitute<T>;
 			std::vector<uint8_t> result;
 			if(!obj) throw std::runtime_error("Invalid object pointer!");
 			S sub(*obj);
 			serialize(result, Var(&sub));
+			return result;
+		}
+
+		///@cond
+		template<Serializable T>
+			requires std::is_enum_v<T>
+		static std::vector<uint8_t> toVector(const T* obj) {
+			std::vector<uint8_t> result;
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			serialize(result, Var(obj));
 			return result;
 		}
 		///@endcond

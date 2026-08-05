@@ -24,12 +24,6 @@ struct Converter {
 		List,		 //Original is a list/array
 		Map			 //Original is a map
 	} op;
-	enum class ListInsertionType {
-		Push,
-		PushBack,
-		Insert,
-		Assign
-	} listInsertion;
 };
 
 struct ConverterChainNode {
@@ -39,7 +33,87 @@ struct ConverterChainNode {
 	ConverterChainNode* next2;
 };
 
+std::vector<std::string_view> splitType(std::string_view typeName) {
+	//Some setup
+	std::vector<std::string_view> tokens;
+	std::size_t begin = 0;
+	auto emitText = [&](std::size_t end) {
+		if(begin != end)
+			tokens.emplace_back(typeName.substr(begin, end - begin));
+	};
+
+	//Scan the whole type name string
+	for(std::size_t i = 0; i < typeName.size();) {
+		switch(typeName[i]) {
+			//Open template
+			case '<':
+				emitText(i);
+				tokens.emplace_back(typeName.substr(i, 1));
+				begin = ++i;
+				break;
+
+			//Template argument separation
+			case ',': {
+				//Whitespace control
+				emitText(i);
+				std::size_t end = i + 1;
+				while(end < typeName.size() &&
+					  std::isspace(static_cast<unsigned char>(typeName[end]))) {
+					++end;
+				}
+
+				//Add token
+				tokens.emplace_back(typeName.substr(i, end - i));
+				begin = i = end;
+				break;
+			}
+
+			//Close template
+			case '>': {
+				//Include all the closing angle brackets in one substring
+				emitText(i);
+				std::size_t end = i + 1;
+				while(end < typeName.size() && typeName[end] == '>')
+					++end;
+
+				//Add token
+				tokens.emplace_back(typeName.substr(i, end - i));
+				begin = i = end;
+				break;
+			}
+
+			default:
+				++i;
+				break;
+		}
+	}
+
+	//Finish up and return
+	emitText(typeName.size());
+	return tokens;
+}
+
 std::string tryQualifyType(const std::string& source, const std::string& holder, const std::vector<std::string>& reflectableTypes) {
+	//Gather template arguments
+	std::vector<std::string_view> components = splitType(source);
+
+	//If there are template arguments, then we need to process each one individually and then reconstitute the type
+	if(components.size() > 1) {
+		//We leave components that are just template bits alone and transform the rest
+		auto transformed = components | std::views::transform([&holder, &reflectableTypes](std::string_view component) {
+			std::string asStr(component);
+			if(asStr.find_first_not_of("<> ,") == std::string::npos)
+				return asStr;
+			else
+				return tryQualifyType(asStr, holder, reflectableTypes);
+		}) | std::views::join |
+						   std::views::common;
+
+		//Return joined string
+		return std::string(transformed.begin(), transformed.end());
+	}
+
+	//Go through all the reflectable types and compare them against an attempted qualification of the type name
 	std::string work = source;
 	if(source.find("::") == std::string::npos && !source.starts_with("std::")) {
 		std::string qualified = holder + "::" + source;
@@ -49,7 +123,9 @@ std::string tryQualifyType(const std::string& source, const std::string& holder,
 				break;
 			}
 		}
-		if(source.compare(qualified) != 0) {
+
+		//If we didn't find it, try going a scope up
+		if(work.compare(qualified) != 0) {
 			std::size_t lastScope = holder.find_last_of("::");
 			if(lastScope != std::string::npos) return tryQualifyType(source, holder.substr(0, lastScope), reflectableTypes);
 		}
@@ -121,8 +197,8 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 	if(source.starts_with("std::unique_ptr<") || source.starts_with("std::shared_ptr<")) {
 		//Gather template arguments
 		bool isUnique = source.starts_with("std::unique_ptr<");
-		size_t start = source.find('<');
-		size_t end = source.find_last_of('>');
+		std::size_t start = source.find('<');
+		std::size_t end = source.find_last_of('>');
 		std::string inner = source.substr(start + 1, end - start - 1);
 
 		//Set up converter
@@ -165,8 +241,8 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 	//Check for STL containers
 	if(source.starts_with("std::") && source.find('<') != std::string::npos) {
 		//Gather template arguments
-		size_t start = source.find('<');
-		size_t end = source.find_last_of('>');
+		std::size_t start = source.find('<');
+		std::size_t end = source.find_last_of('>');
 		std::string prefix = source.substr(0, start + 1);
 		std::string inner = source.substr(start + 1, end - start - 1);
 
@@ -194,6 +270,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 				c.original = source;
 				c.op = Converter::Operation::Map;
 				converters.push_back(c);
+				std::size_t cvtIndex = converters.size() - 1;
 
 				//Make and return node
 				ConverterChainNode* node = new ConverterChainNode();
@@ -201,20 +278,19 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 				node->prev = prev;
 				node->next1 = createConverterChain(args[0], substitutes, converters, reflectableTypes, reflectableClasses, node);
 				node->next2 = createConverterChain(args[1], substitutes, converters, reflectableTypes, reflectableClasses, node);
-				converters[converters.size() - 1].transformed = prefix + getSerializedType(args[0], node->next1) + ", " + getSerializedType(args[1], node->next2) + ">";
+				converters[cvtIndex].transformed = prefix + getSerializedType(args[0], node->next1) + ", " + getSerializedType(args[1], node->next2) + ">";
 				return node;
 			}
 		}
 
 		//Lists and arrays otherwise (random access is for narrowing STL containers to easy-to-serialize types)
-		bool isRandomAccess = (prefix.compare("std::vector<") == 0 || prefix.compare("std::array<") == 0);
+		bool isRandomAccess = (prefix.compare("std::vector<") == 0 || prefix.compare("std::deque<") == 0 || prefix.compare("std::array<") == 0);
 		if(!isRandomAccess) {
 			//Set up converter to go from some STL type to a vector
 			Converter conv;
 			conv.original = source;
 			conv.op = Converter::Operation::STLConvert;
 			conv.transformed = "std::vector<" + inner + ">";
-			conv.listInsertion = (prefix.compare("std::set<") == 0) ? ((prefix.compare("std::queue<") == 0 || prefix.compare("std::stack<") == 0) ? Converter::ListInsertionType::Push : Converter::ListInsertionType::PushBack) : Converter::ListInsertionType::Insert;
 			converters.push_back(conv);
 
 			//Make node
@@ -225,45 +301,65 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			//Set up converter for unpacking the vector into elements
 			Converter listC;
 			listC.original = "std::vector<" + inner + ">";
-			listC.transformed = inner;
 			listC.op = Converter::Operation::List;
-			listC.listInsertion = Converter::ListInsertionType::PushBack;
 			converters.push_back(listC);
+			std::size_t cvtIndex = converters.size() - 1;
 
 			//Make the unpacking node
 			ConverterChainNode* listNode = new ConverterChainNode();
 			listNode->prev = node;
 			listNode->self = &converters[converters.size() - 1];
 			listNode->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, listNode);
+			converters[cvtIndex].transformed = "std::vector<" + getSerializedType(inner, listNode->next1) + ">";
 
 			//Attach nodes and return
 			node->next1 = listNode;
 			return node;
 		} else {
-			//We're a vector or array, just do the unpacking
+			//We're a random-access type, just do the unpacking
 			Converter c;
 			c.original = source;
-			c.transformed = inner;
+			if(inner.starts_with("std::array"))
+				c.transformed = inner;
+			else
+				c.transformed = inner.substr(0, inner.find_last_of(','));
 			c.op = Converter::Operation::List;
-			c.listInsertion = (prefix.compare("std::array<") == 0) ? Converter::ListInsertionType::Assign : Converter::ListInsertionType::PushBack;
 			converters.push_back(c);
+			std::size_t cvtIndex = converters.size() - 1;
 
 			//Make and return node
 			ConverterChainNode* node = new ConverterChainNode();
 			node->prev = prev;
 			node->self = &converters[converters.size() - 1];
-			node->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, node);
+			node->next1 = createConverterChain(c.transformed, substitutes, converters, reflectableTypes, reflectableClasses, node);
+			converters[cvtIndex].transformed = prefix + getSerializedType(inner, node->next1) + ">";
 			return node;
 		}
 	}
 
 	//String substitution
-	if(source.compare("std::string") == 0 || source.compare("std::string_view") == 0 || source.compare("const char*") == 0) {
+	if(source.compare("std::string_view") == 0 || source.compare("const char*") == 0) {
 		//Set up converter
 		Converter c;
 		c.original = source;
 		c.op = Converter::Operation::STLConvert;
 		c.transformed = "std::string";
+		converters.push_back(c);
+
+		//Make and return node
+		ConverterChainNode* node = new ConverterChainNode();
+		node->prev = prev;
+		node->self = &converters[converters.size() - 1];
+		return node;
+	}
+
+	//Direct std::string copy
+	if(source.compare("std::string") == 0) {
+		//Set up converter
+		Converter c;
+		c.original = source;
+		c.transformed = source;
+		c.op = Converter::Operation::Direct;
 		converters.push_back(c);
 
 		//Make and return node
@@ -391,37 +487,12 @@ void describeConverterChain(nlohmann::json& json, nlohmann::json& current, Conve
 		case Converter::Operation::STLConvert:
 			step["op"] = "stlcvt";
 			step["mapped"] = node->self->transformed;
-			switch(node->self->listInsertion) {
-				case Converter::ListInsertionType::Push:
-					step["insertion"] = "push";
-					break;
-				case Converter::ListInsertionType::PushBack:
-					step["insertion"] = "push_back";
-					break;
-				case Converter::ListInsertionType::Insert:
-					step["insertion"] = "insert";
-					break;
-				case Converter::ListInsertionType::Assign:
-					step["insertion"] = "assign";
-					break;
-			}
+			step["container"] = !(node->self->transformed.compare("std::string") == 0 || node->self->transformed.compare("std::string_view") == 0 ||
+								  node->self->transformed.compare("const char*") == 0 || node->self->transformed.compare("std::size_t") == 0 ||
+								  node->self->transformed.compare("std::byte") == 0);
 			break;
 		case Converter::Operation::List:
 			step["op"] = "list";
-			switch(node->self->listInsertion) {
-				case Converter::ListInsertionType::Push:
-					step["insertion"] = "push";
-					break;
-				case Converter::ListInsertionType::PushBack:
-					step["insertion"] = "push_back";
-					break;
-				case Converter::ListInsertionType::Insert:
-					step["insertion"] = "insert";
-					break;
-				case Converter::ListInsertionType::Assign:
-					step["insertion"] = "assign";
-					break;
-			}
 			step["item_cvt"] = current["fn_name"].get<std::string>() + "_item";
 			current["serialized_type"] = node->self->transformed;
 			{
@@ -529,7 +600,16 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			cvtJson["fn_name"] = field["name"];
 			cvtJson["original_type"] = cvt->self->original;
 			cvtJson["steps"] = nlohmann::json::array();
-			describeConverterChain(substitute["converters"], cvtJson, cvt);
+			if(auto serializedType = getSerializedType(cvt->self->original, cvt); cvt->self->original.compare(serializedType) != 0) {
+				describeConverterChain(substitute["converters"], cvtJson, cvt);
+			} else {
+				//The chain results in no change, so we can "short-circuit" it and just directly pass the object through
+				cvtJson["serialized_type"] = serializedType;
+				nlohmann::json& step = cvtJson["steps"].emplace_back(nlohmann::json::object());
+				step["original_type"] = cvt->self->original;
+				step["serialized_type"] = serializedType;
+				step["op"] = "direct";
+			}
 
 			//Add field to list
 			substitute["fields"].push_back(fieldDesc);

@@ -167,7 +167,13 @@ int main(int argc, char* argv[]) {
 		}
 		return dest;
 	});
-	VERBOSE_LOG("Codegen ready");
+	inja.add_callback("startsWith", 2, [](inja::Arguments& args) {
+		const nlohmann::json* src = args[0];
+		const nlohmann::json* test = args[1];
+		return src->get<std::string>().starts_with(test->get<std::string>());
+	});
+	inja.set_trim_blocks(true);
+	VERBOSE_LOG("Template engine ready");
 
 	//Create template objects
 	inja::Template headerTemplate = inja.parse(templates::Header);
@@ -289,12 +295,7 @@ int main(int argc, char* argv[]) {
 		//Render header file
 		inja.render_to(hpp, headerTemplate, json);
 		if(json["is_substitute"].get<bool>()) {
-			std::stringstream hppContents;
-			inja.render_to(hppContents, subTemplate, json);
-			std::string line;
-			while(std::getline(hppContents, line)) {
-				if(!std::all_of(line.begin(), line.end(), [](unsigned char c) { return std::isspace(c); })) hpp << line << "\n";
-			}
+			inja.render_to(hpp, subTemplate, json);
 		}
 		hpp.close();
 		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << hppFile.generic_string());

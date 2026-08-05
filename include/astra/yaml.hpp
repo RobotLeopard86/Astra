@@ -25,18 +25,18 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static T fromNode(const YAML::Node& node) {
-			T obj;
+			using S = SerializedSubstitute<T>;
+			S obj;
 			deserialize(Var(&obj), node);
-			return obj;
+			return obj.deserialize();
 		}
 
 		///@cond
 		template<Serializable T>
-			requires(!is_reflectable_v<T>)
-		static T fromNode(const YAML::Node& node) {
-			using S = SerializedSubstitute<T>;
-			S obj;
-			deserialize(Var(&obj), node);
+			requires std::is_enum_v<T>
+		static T fromNode(const YAML::Node& json) {
+			T obj;
+			deserialize(Var(&obj), json);
 			return obj.deserialize();
 		}
 		///@endcond
@@ -114,17 +114,6 @@ namespace astra {
 		 */
 		template<Serializable T>
 		static YAML::Node toNode(const T* obj) {
-			YAML::Node node;
-			node["__astraforcemapcreate__"] = true;
-			node.remove("__astraforcemapcreate__");
-			serialize(node, Var(obj));
-			return node;
-		}
-
-		///@cond
-		template<Serializable T>
-			requires(!is_reflectable_v<T>)
-		static YAML::Node toNode(const T* obj) {
 			using S = SerializedSubstitute<T>;
 			YAML::Node node;
 			node["__astraforcemapcreate__"] = true;
@@ -132,6 +121,18 @@ namespace astra {
 			if(!obj) throw std::runtime_error("Invalid object pointer!");
 			S sub(*obj);
 			serialize(node, Var(&sub));
+			return node;
+		}
+
+		///@cond
+		template<Serializable T>
+			requires std::is_enum_v<T>
+		static YAML::Node toNode(const T* obj) {
+			YAML::Node node;
+			node["__astraforcemapcreate__"] = true;
+			node.remove("__astraforcemapcreate__");
+			if(!obj) throw std::runtime_error("Invalid object pointer!");
+			serialize(node, Var(obj));
 			return node;
 		}
 		///@endcond
