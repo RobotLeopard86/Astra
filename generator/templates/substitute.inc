@@ -1,7 +1,7 @@
 R"(
 
 {% for header in headers -%}
-#include "astra_generated/{{header}}.astra.hpp"
+#include "{{header}}"
 {% endfor -%}
 
 template<>

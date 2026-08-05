@@ -5,6 +5,7 @@
 #include "parser.hpp"
 #include "to_filename.hpp"
 #include "flag.hpp"
+#include "subgen.hpp"
 
 #include "CLI11.hpp"
 #include "inja/inja.hpp"// IWYU pragma: keep
@@ -33,8 +34,6 @@
 #define clock std::chrono::steady_clock
 
 inline std::stringstream lastMsg;
-
-extern void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results, const std::unordered_map<std::string, nlohmann::json>& inherited);
 
 int main(int argc, char* argv[]) {
 	//Configure CLI
@@ -164,7 +163,7 @@ int main(int argc, char* argv[]) {
 	VERBOSE_LOG("Source parsing completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(parseEnd - parseBegin).count() * 10000) / 10000) << " seconds");
 
 	//Load inherited summaries
-	std::unordered_map<std::string, nlohmann::json> inheritedData;
+	std::vector<InheritedData> inheritedData;
 	for(const std::string& summaryFile : inheritedSummaries) {
 		//Open file stream
 		std::ifstream inStream(summaryFile);
@@ -177,11 +176,14 @@ int main(int argc, char* argv[]) {
 		}
 
 		//Add to data map
+		InheritedData& id = inheritedData.emplace_back();
+		id.basePath = std::filesystem::relative(std::filesystem::path(summaryFile).parent_path(), std::filesystem::path(outDir) / "a_particular_nonexistent_file").generic_string() + "/astra_generated/";
 		nlohmann::json root = nlohmann::json::parse(inStream);
 		for(auto it = root.begin(); it != root.end(); ++it) {
-			inheritedData[it.key()] = it.value();
+			id.results[it.key()] = it.value();
 		}
 	}
+	VERBOSE_LOG("Processed inherited summaries");
 
 	//Serialized substitute generation
 	generateSubstitutes(parsed, inheritedData);
@@ -238,9 +240,6 @@ int main(int argc, char* argv[]) {
 #include "astra/type_actions/all_types.hpp" // IWYU pragma: export
 
 )";
-	for(const std::string& summaryFile : inheritedSummaries) {
-		rootHeader << "#include \"" << std::filesystem::relative(summaryFile, out / (project + ".astra.hpp")) << "\" // IWYU pragma: export";
-	}
 	std::ofstream rootCpp(out / (project + ".astra.cpp"));
 	if(!rootCpp.is_open()) {
 		ERROR("Failed to open root implementation file for writing!");

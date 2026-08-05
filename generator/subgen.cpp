@@ -10,6 +10,7 @@
 #include "nlohmann/json.hpp"
 
 #include "to_filename.hpp"
+#include "subgen.hpp"
 
 struct Converter {
 	std::string original;	//Original type name
@@ -93,19 +94,19 @@ std::vector<std::string_view> splitType(std::string_view typeName) {
 	return tokens;
 }
 
-std::string tryQualifyType(const std::string& source, const std::string& holder, const std::vector<std::string>& reflectableTypes) {
+std::string tryQualifyType(const std::string& source, const std::string& holder, const std::vector<std::string>& knownTypes) {
 	//Gather template arguments
 	std::vector<std::string_view> components = splitType(source);
 
 	//If there are template arguments, then we need to process each one individually and then reconstitute the type
 	if(components.size() > 1) {
 		//We leave components that are just template bits alone and transform the rest
-		auto transformed = components | std::views::transform([&holder, &reflectableTypes](std::string_view component) {
+		auto transformed = components | std::views::transform([&holder, &knownTypes](std::string_view component) {
 			std::string asStr(component);
 			if(asStr.find_first_not_of("<> ,") == std::string::npos)
 				return asStr;
 			else
-				return tryQualifyType(asStr, holder, reflectableTypes);
+				return tryQualifyType(asStr, holder, knownTypes);
 		}) | std::views::join |
 						   std::views::common;
 
@@ -117,7 +118,7 @@ std::string tryQualifyType(const std::string& source, const std::string& holder,
 	std::string work = source;
 	if(source.find("::") == std::string::npos && !source.starts_with("std::")) {
 		std::string qualified = holder + "::" + source;
-		for(const auto& rt : reflectableTypes) {
+		for(const auto& rt : knownTypes) {
 			if(rt.compare(qualified) == 0) {
 				work = qualified;
 				break;
@@ -127,7 +128,7 @@ std::string tryQualifyType(const std::string& source, const std::string& holder,
 		//If we didn't find it, try going a scope up
 		if(work.compare(qualified) != 0) {
 			std::size_t lastScope = holder.find_last_of("::");
-			if(lastScope != std::string::npos) return tryQualifyType(source, holder.substr(0, lastScope), reflectableTypes);
+			if(lastScope != std::string::npos) return tryQualifyType(source, holder.substr(0, lastScope), knownTypes);
 		}
 	}
 	return work;
@@ -192,7 +193,7 @@ std::string getSerializedType(const std::string& source, ConverterChainNode* nod
 }
 #undef continue_if_next
 
-ConverterChainNode* createConverterChain(const std::string& source, std::set<std::string>& substitutes, std::deque<Converter>& converters, const std::vector<std::string>& reflectableTypes, const std::vector<std::string>& reflectableClasses, ConverterChainNode* prev) {
+ConverterChainNode* createConverterChain(const std::string& source, std::set<std::string>& substitutes, std::deque<Converter>& converters, const std::vector<std::string>& substitutableTypes, ConverterChainNode* prev) {
 	//Check for smart pointers
 	if(source.starts_with("std::unique_ptr<") || source.starts_with("std::shared_ptr<")) {
 		//Gather template arguments
@@ -212,7 +213,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
-		node->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, node);
+		node->next1 = createConverterChain(inner, substitutes, converters, substitutableTypes, node);
 		return node;
 	}
 
@@ -234,7 +235,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		ConverterChainNode* node = new ConverterChainNode();
 		node->prev = prev;
 		node->self = &converters[converters.size() - 1];
-		node->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, node);
+		node->next1 = createConverterChain(inner, substitutes, converters, substitutableTypes, node);
 		return node;
 	}
 
@@ -276,8 +277,8 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 				ConverterChainNode* node = new ConverterChainNode();
 				node->self = &converters[converters.size() - 1];
 				node->prev = prev;
-				node->next1 = createConverterChain(args[0], substitutes, converters, reflectableTypes, reflectableClasses, node);
-				node->next2 = createConverterChain(args[1], substitutes, converters, reflectableTypes, reflectableClasses, node);
+				node->next1 = createConverterChain(args[0], substitutes, converters, substitutableTypes, node);
+				node->next2 = createConverterChain(args[1], substitutes, converters, substitutableTypes, node);
 				converters[cvtIndex].transformed = prefix + getSerializedType(args[0], node->next1) + ", " + getSerializedType(args[1], node->next2) + ">";
 				return node;
 			}
@@ -309,7 +310,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			ConverterChainNode* listNode = new ConverterChainNode();
 			listNode->prev = node;
 			listNode->self = &converters[converters.size() - 1];
-			listNode->next1 = createConverterChain(inner, substitutes, converters, reflectableTypes, reflectableClasses, listNode);
+			listNode->next1 = createConverterChain(inner, substitutes, converters, substitutableTypes, listNode);
 			converters[cvtIndex].transformed = "std::vector<" + getSerializedType(inner, listNode->next1) + ">";
 
 			//Attach nodes and return
@@ -331,7 +332,7 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 			ConverterChainNode* node = new ConverterChainNode();
 			node->prev = prev;
 			node->self = &converters[converters.size() - 1];
-			node->next1 = createConverterChain(c.transformed, substitutes, converters, reflectableTypes, reflectableClasses, node);
+			node->next1 = createConverterChain(c.transformed, substitutes, converters, substitutableTypes, node);
 			converters[cvtIndex].transformed = prefix + getSerializedType(inner, node->next1) + ">";
 			return node;
 		}
@@ -399,39 +400,15 @@ ConverterChainNode* createConverterChain(const std::string& source, std::set<std
 		return node;
 	}
 
-	//Check for reflectable type
-	bool isReflectable = false;
-	for(const auto& rt : reflectableTypes) {
-		if(rt == source) {
-			isReflectable = true;
-			break;
-		}
-	}
-	if(!isReflectable) {
-		//Not reflectable, write type directly
-		//This shouldn't happen often because if your class has non-reflectable types, you should make an explicit substitute
-		Converter c;
-		c.original = source;
-		c.transformed = source;
-		c.op = Converter::Operation::Direct;
-		converters.push_back(c);
-
-		//Make and return node
-		ConverterChainNode* node = new ConverterChainNode();
-		node->prev = prev;
-		node->self = &converters[converters.size() - 1];
-		return node;
-	}
-
 	//Check for class (only classes can have autogenerated substitutes)
-	bool isClass = false;
-	for(const auto& rc : reflectableClasses) {
-		if(rc == source) {
-			isClass = true;
+	bool isSubstitutable = false;
+	for(const auto& st : substitutableTypes) {
+		if(st.compare(source) == 0) {
+			isSubstitutable = true;
 			break;
 		}
 	}
-	if(isClass) {
+	if(isSubstitutable) {
 		//Set up converter
 		Converter c;
 		c.original = source;
@@ -548,29 +525,52 @@ void destroyConverterChain(ConverterChainNode* node) {
 	delete node;
 }
 
-void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results, const std::unordered_map<std::string, nlohmann::json>& inherited) {
-	//Separate into reflectable classes and enums + classes
-	std::vector<std::string> reflectableTypes;
-	std::vector<std::string> reflectableClasses;
-	std::vector<std::string> classesToGenerate;
-	for(auto const& [name, data] : results) {
-		if(data.contains("kind") && name.find("astra::SerializedSubstitute") == std::string::npos) {
-			reflectableTypes.push_back(name);
+void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& results, const std::vector<InheritedData>& inherited) {
+	//Classify type names
+	std::vector<std::string> generate;
+	std::set<std::string> canSubstitute;
+	std::set<std::string> allKnown;
+	std::unordered_map<std::string, std::string> subOrigins;
+	for(const auto& [name, data] : results) {
+		if(!data.contains("kind")) continue;
+		if(name.find("astra::SerializedSubstitute") == std::string::npos) {
 			if(data["kind"] == 0) {
-				reflectableClasses.push_back(name);
-				classesToGenerate.push_back(name);
+				generate.push_back(name);
+				canSubstitute.insert(name);
+				subOrigins[name] = "astra_generated/";
+				subOrigins["astra::SerializedSubstitute<" + name + ">"] = "astra_generated/";
 			}
+		} else {
+			std::string inner = name.substr(name.find_first_of('<') + 1, name.find_last_of('>') - name.find_first_of('<') - 1);
+			canSubstitute.insert(inner);
+			subOrigins[inner] = "astra_generated/";
+			subOrigins[name] = "astra_generated/";
+		}
+		allKnown.insert(name);
+	}
+	for(const InheritedData& id : inherited) {
+		for(const auto& [name, data] : id.results) {
+			if(!data.contains("kind")) continue;
+			if(name.find("astra::SerializedSubstitute") == std::string::npos) {
+				if(data["kind"] == 0) {
+					canSubstitute.insert(name);
+					subOrigins[name] = id.basePath;
+					subOrigins["astra::SerializedSubstitute<" + name + ">"] = id.basePath;
+				}
+			} else {
+				std::string inner = name.substr(name.find_first_of('<') + 1, name.find_last_of('>') - name.find_first_of('<') - 1);
+				canSubstitute.insert(inner);
+				subOrigins[inner] = id.basePath;
+				subOrigins[name] = id.basePath;
+			}
+			allKnown.insert(name);
 		}
 	}
-	for(auto const& [name, data] : inherited) {
-		if(data.contains("kind") && name.find("astra::SerializedSubstitute") == std::string::npos) {
-			reflectableTypes.push_back(name);
-			if(data["kind"] == 0) reflectableClasses.push_back(name);
-		}
-	}
+	std::vector<std::string> substitutable(canSubstitute.begin(), canSubstitute.end());
+	std::vector<std::string> knownTypes(allKnown.begin(), allKnown.end());
 
 	//Generate substitutes for classes
-	for(const std::string& clazz : classesToGenerate) {
+	for(const std::string& clazz : generate) {
 		//Check that we haven't seen this class before
 		std::string subName = "astra::SerializedSubstitute<" + clazz + ">";
 		if(results.count(subName)) continue;
@@ -592,11 +592,11 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 		std::set<std::string> substitutes;
 		for(const nlohmann::json& field : original["fields"]) {
 			//Get field type
-			std::string originalType = tryQualifyType(field["type"], clazz, reflectableTypes);
+			std::string originalType = tryQualifyType(field["type"], clazz, knownTypes);
 
 			//Generate converter for field
 			std::deque<Converter> converterObjs;
-			ConverterChainNode* cvt = createConverterChain(originalType, substitutes, converterObjs, reflectableTypes, reflectableClasses, nullptr);
+			ConverterChainNode* cvt = createConverterChain(originalType, substitutes, converterObjs, substitutable, nullptr);
 
 			//Set up field object
 			nlohmann::json fieldDesc = nlohmann::json::object();
@@ -631,7 +631,12 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 		//Generate headers list
 		substitute["headers"] = nlohmann::json::array();
 		for(const auto& sub : substitutes) {
-			substitute["headers"].push_back(toFilename(sub));
+			std::string filename = toFilename(sub);
+			std::string dirLevelAdjust = "";
+			for(char c : filename) {
+				if(c == '/') dirLevelAdjust += "../";
+			}
+			substitute["headers"].push_back(dirLevelAdjust + subOrigins.at(sub) + filename + ".astra.hpp");
 		}
 	}
 }
