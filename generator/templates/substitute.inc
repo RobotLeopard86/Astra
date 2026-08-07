@@ -133,9 +133,10 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
     };
 
     SerializedSubstitute(const {{original_type}}& original)
-        : {% for field in fields -%}
+        {% for field in fields -%}
+          {% if loop.is_first -%}:{% endif -%}
           {{field.name}}(cvt::en_{{field.name}}(original.{{field.name}})){% if not loop.is_last -%}, {% endif -%}
-          {% endfor -%}
+        {% endfor -%}
     {}
 
     {{original_type}} deserialize() const {

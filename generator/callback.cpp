@@ -94,6 +94,22 @@ void JsonBuilder::handleEnum(const EnumDecl* e) {
 	addEnum(e);
 }
 
+void JsonBuilder::handleBasesRecursive(const CXXRecordDecl* c, nlohmann::json& parents, std::vector<const clang::CXXRecordDecl*>& parentDecls) {
+	for(auto&& b : c->bases()) {
+		//Collect info
+		nlohmann::json item;
+		item["acc"] = accessStr(b.getAccessSpecifier());
+		item["name"] = b.getType()->getAsRecordDecl()->getQualifiedNameAsString();
+
+		//Add to lists
+		parents.push_back(std::move(item));
+		parentDecls.push_back(b.getType()->getAsCXXRecordDecl());
+
+		//Now get its bases forever and ever and ever
+		handleBasesRecursive(b.getType()->getAsCXXRecordDecl(), parents, parentDecls);
+	}
+}
+
 void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	//Get qualified name
 	std::string name = c->getQualifiedNameAsString();
@@ -151,28 +167,16 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 		json["namespace"] = "";
 	}
 
+	//Handle base classes
 	std::vector<const clang::CXXRecordDecl*> decls;
-
 	auto parents = nlohmann::json::array();
-
-	for(auto&& b : c->bases()) {
-		nlohmann::json item;
-
-		item["acc"] = accessStr(b.getAccessSpecifier());
-		item["name"] = b.getType()->getAsRecordDecl()->getQualifiedNameAsString();
-
-		parents.push_back(std::move(item));
-
-		decls.push_back(b.getType()->getAsCXXRecordDecl());
-	}
+	handleBasesRecursive(c, parents, decls);
 	json.emplace("parents", std::move(parents));
 
+	//Process primary class members
 	auto fields = nlohmann::json::array();
 	auto func = nlohmann::json::array();
-
 	std::vector<std::string> funcNames;
-
-	//Process primary class members
 	for(auto&& d : c->getPrimaryContext()->decls()) {
 		if(const auto* f = dyn_cast<FieldDecl>(d)) {
 			addField(&fields, f, false);

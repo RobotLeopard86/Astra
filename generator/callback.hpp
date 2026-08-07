@@ -35,6 +35,8 @@ struct JsonBuilder {
 	void addFunction(nlohmann::json* functions, const FunctionDecl* f, const std::string& className, bool inherited);
 	void addField(nlohmann::json* fields, const ValueDecl* v, bool inherited);
 
+	void handleBasesRecursive(const CXXRecordDecl* c, nlohmann::json& json, std::vector<const clang::CXXRecordDecl*>& parentDecls);
+
 	inline std::string typeStr(QualType type, bool removeCVref = false) const {
 		const PrintingPolicy pp(options);
 		SplitQualType split;

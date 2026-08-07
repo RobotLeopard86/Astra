@@ -21,7 +21,7 @@ struct TypeActions<{{name}}> {
       {% for item in constants -%}
       {{"{"}}{{name}}::{{item.name}}, "{{item.alias}}"},
     {% if not loop.is_last -%}  {% else -%}}}};{% endif -%}
-      {% endfor -%}
+      {% endfor %}
     return Enum(static_cast<{{name}}*>(value), isConst, constants);
   }
 };
