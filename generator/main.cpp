@@ -346,7 +346,7 @@ int main(int argc, char* argv[]) {
 			inja.render_to(hpp, subTemplate, json);
 		}
 		hpp.close();
-		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << hppFile.generic_string());
+		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << hppFile);
 
 		//Render implementation file
 		if(json["kind"].get<int>() == 0) {
@@ -355,7 +355,7 @@ int main(int argc, char* argv[]) {
 			inja.render_to(cpp, enumTemplate, json);
 		}
 		cpp.close();
-		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << cppFile.generic_string());
+		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << cppFile);
 
 		//Add includes to root files
 		const std::string includeStr = "#include \"astra_generated/";

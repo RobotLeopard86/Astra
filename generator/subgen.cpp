@@ -638,5 +638,43 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			}
 			substitute["headers"].push_back(dirLevelAdjust + subOrigins.at(sub) + filename + ".astra.hpp");
 		}
+
+		//Add data for required functions
+		{
+			nlohmann::json& deInternal = substitute["methods"].emplace_back(nlohmann::json::object());
+			deInternal["name"] = "ASTRA__deserializeinternal";
+			deInternal["alias"] = "ASTRA__deserializeinternal";
+			deInternal["acc"] = nlohmann::json::array({std::string("Public")});
+			deInternal["return"] = "void";
+			deInternal["params"] = nlohmann::json::array();
+			deInternal["params"].emplace_back("void*");
+		}
+		{
+			nlohmann::json& dePublic = substitute["methods"].emplace_back(nlohmann::json::object());
+			dePublic["name"] = "deserialize";
+			dePublic["alias"] = "deserialize";
+			dePublic["acc"] = nlohmann::json::array({std::string("Public")});
+			dePublic["return"] = "void";
+			dePublic["params"] = nlohmann::json::array();
+			dePublic["params"].emplace_back(clazz + "*");
+		}
+		{
+			nlohmann::json& enInternal = substitute["methods"].emplace_back(nlohmann::json::object());
+			enInternal["name"] = "ASTRA__serializeinternal";
+			enInternal["alias"] = "ASTRA__serializeinternal";
+			enInternal["acc"] = nlohmann::json::array({std::string("Public")});
+			enInternal["return"] = "void";
+			enInternal["params"] = nlohmann::json::array();
+			enInternal["params"].emplace_back("void*");
+		}
+		{
+			nlohmann::json& enPublic = substitute["methods"].emplace_back(nlohmann::json::object());
+			enPublic["name"] = "serialize";
+			enPublic["alias"] = "serialize";
+			enPublic["acc"] = nlohmann::json::array({std::string("Public")});
+			enPublic["return"] = "void";
+			enPublic["params"] = nlohmann::json::array();
+			enPublic["params"].emplace_back(clazz + "*");
+		}
 	}
 }

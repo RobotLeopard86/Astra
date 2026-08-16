@@ -25,7 +25,8 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
             {% if step.op == "direct" -%}
                 s{{ loop.index1 - 1}};
             {% else if step.op == "sub" -%}
-                s{{ loop.index1 - 1}}.deserialize();
+				{{ step.original_type }}();
+                s{{ loop.index1 - 1}}.deserialize(&s{{ loop.index1 }});
             {% else if step.op == "unique" -%}
                 std::make_unique<{{ step.serialized_type }}>(s{{ loop.index1 - 1}});
             {% else if step.op == "shared" -%}
@@ -139,12 +140,16 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
         {% endfor -%}
     {}
 
-    {{original_type}} deserialize() const {
-        {{original_type}} res;
+	ASTRA_SUBSTITUTE_SERIALIZE({{original_type}}) {
         {% for field in fields -%}
-        res.{{field.name}} = cvt::de_{{field.name}}({{field.name}});
+        {{field.name}} = cvt::en_{{field.name}}(in->{{field.name}});
         {% endfor -%}
-        return res;
+    }
+
+    ASTRA_SUBSTITUTE_DESERIALIZE({{original_type}}) {
+        {% for field in fields -%}
+        out->{{field.name}} = cvt::de_{{field.name}}({{field.name}});
+        {% endfor -%}
     }
 
     ASTRASETUP(SerializedSubstitute)

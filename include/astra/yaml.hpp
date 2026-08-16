@@ -28,7 +28,9 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), node);
-			return obj.deserialize();
+			T out;
+			obj.deserialize(&out);
+			return out;
 		}
 
 		///@cond
@@ -37,7 +39,7 @@ namespace astra {
 		static T fromNode(const YAML::Node& json) {
 			T obj;
 			deserialize(Var(&obj), json);
-			return obj.deserialize();
+			return obj;
 		}
 		///@endcond
 
@@ -77,9 +79,7 @@ namespace astra {
 		 * @param node The YAML node to deserialize from
 		 * @param var The Var to write into
 		 */
-		static void fromNodeIntoVar(const YAML::Node& json, Var var) {
-			deserialize(var, json);
-		}
+		static void fromNodeIntoVar(const YAML::Node& node, Var var);
 
 		/**
 		 * @brief Deserialize a YAML string into a Var
@@ -173,13 +173,7 @@ namespace astra {
 		 *
 		 * @return A YAML node containing the serialized data
 		 */
-		static YAML::Node toNodeFromVar(Var var) {
-			YAML::Node node;
-			node["__astraforcemapcreate__"] = true;
-			node.remove("__astraforcemapcreate__");
-			serialize(node, var);
-			return node;
-		}
+		static YAML::Node toNodeFromVar(Var var);
 
 		/**
 		 * @brief Serialize a Var to a YAML string

@@ -102,6 +102,29 @@ int main() {
 			  << astra::json::toString(suvAsCar) << std::endl;
 	std::cout << "As you can see, it still has the SUV information." << std::endl;
 
+	//Let's mess around with substitution
+	std::cout << "I have a type that can't be serialized easily (well, it could, but this is a demo so shut up)" << std::endl;
+	SubstitutedType sub;
+	sub.computed = 64;
+	sub.someData = "I have 6 dogs";
+	std::cout << "Here's what it looks like manually:\n\tComputed Value: " << sub.computed << "\n\tSome Data: " << sub.someData << std::endl;
+	std::cout << "But I can still serialize it! Here it is in JSON: " << astra::json::toString(&sub) << std::endl;
+	std::string sub2Yaml = "base: s32;3";
+	std::cout << "I can deserialize it too! Here's a similar one in YAML: " << sub2Yaml << std::endl;
+	SubstitutedType sub2 = astra::yaml::fromString<SubstitutedType>(sub2Yaml);
+	std::cout << "And here it is deserialized:\n\tComputed Value: " << sub2.computed << "\n\tSome Data: " << sub2.someData << std::endl;
+
+	//Direct Var serialization/deserialization
+	std::string suvYaml = astra::yaml::toStringFromVar(astra::Var(&suv));
+	std::cout << "We can also do serialization through type erasure! Remember that SUV from earlier? Here it is in YAML (with this mechanism):\n---\n"
+			  << suvYaml << "\n---" << std::endl;
+	ExampleNamespace::SUV anotherSuv;
+	std::cout << "Okay, cool. So, I have another, blank SUV, and we're going to write to it through a type-erased reference to the new object casted as a Car, because that's cool or something. Look, it's empty:\n"
+			  << astra::json::toString(&anotherSuv) << std::endl;
+	astra::yaml::fromStringIntoVar(suvYaml, astra::Var(static_cast<Car*>(&anotherSuv)));
+	std::cout << "And now it's not:\n"
+			  << astra::json::toString(&anotherSuv) << std::endl;
+
 	//Write out the complicated type to binary
 	std::cout << "For my last magic trick, I will write a very complicated type to a binary file!" << std::endl;
 	ExampleNamespace::ComplicatedType complicated;
@@ -138,18 +161,6 @@ int main() {
 	std::vector<unsigned char> c = astra::convert::jsonStringToBinaryVec(complicatedJson);
 	std::ranges::copy(c, std::ostreambuf_iterator<char>(of2));
 	std::cout << "I turned it back to binary and put it in another file. Tee-hee!" << std::endl;
-
-	//Let's mess around with substitution
-	std::cout << "I have a type that can't be serialized easily (well, it could, but this is a demo so shut up)" << std::endl;
-	SubstitutedType sub;
-	sub.computed = 64;
-	sub.someData = "I have 6 dogs";
-	std::cout << "Here's what it looks like manually:\n\tComputed Value: " << sub.computed << "\n\tSome Data: " << sub.someData << std::endl;
-	std::cout << "But I can still serialize it! Here it is in JSON: " << astra::json::toString(&sub) << std::endl;
-	std::string sub2Yaml = "base: s32;3";
-	std::cout << "I can deserialize it too! Here's a similar one in YAML: " << sub2Yaml << std::endl;
-	SubstitutedType sub2 = astra::yaml::fromString<SubstitutedType>(sub2Yaml);
-	std::cout << "And here it is deserialized:\n\tComputed Value: " << sub2.computed << "\n\tSome Data: " << sub2.someData << std::endl;
 
 	//Done
 	std::cout << "Thanks for checking out the Astra demo!" << std::endl;

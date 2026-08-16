@@ -2,7 +2,7 @@ R"(
 #include "{{file_name}}"
 
 // clang-format off
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/type_actions/common_actions.hpp"
 #include "astra/type_actions/type_actions.hpp"
 
@@ -28,7 +28,7 @@ struct TypeActions<{{name}}> {
 
 template<>
 TypeId TypeId::get<{{name}}>() {
-  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      
+  static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,      
                                                  &CommonActions<{{name}}>::typeName,  
                                                  &CommonActions<{{name}}>::sizeOf,  
                                                  &CommonActions<{{name}}>::construct,  

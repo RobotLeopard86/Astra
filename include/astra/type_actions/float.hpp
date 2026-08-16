@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common_actions.hpp"
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/dll.hpp"
 
 ///@cond
@@ -17,7 +17,7 @@ namespace astra {
 	template<typename T>
 		requires std::is_floating_point_v<T>
 	TypeId TypeId::get() {
-		static TypeId id(ActionsTable::record(Actions(&FloatActions<T>::reflect,
+		static TypeId id(TypeTable::recordActions(Actions(&FloatActions<T>::reflect,
 			&CommonActions<T>::typeName,
 			&CommonActions<T>::sizeOf,
 			&CommonActions<T>::nop,

@@ -24,6 +24,7 @@ astra_sources = [
 	'reflection.cpp',
 	'stringify.hpp',
 	'var.cpp',
+	'varserialize.cpp',
 	'yaml.cpp'
 ]
 

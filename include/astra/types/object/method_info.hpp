@@ -91,9 +91,13 @@ namespace astra {
 			std::vector<Var> vArgs;
 			foldArgs(&vArgs, &args...);
 
-			R ret;
-			data->invoke(Var(&ret), base, vArgs);
-			return ret;
+			if constexpr(!std::is_void_v<R>) {
+				R ret;
+				data->invoke(Var(&ret), base, vArgs);
+				return ret;
+			} else {
+				data->invoke(Var(), base, vArgs);
+			}
 		}
 
 		/**

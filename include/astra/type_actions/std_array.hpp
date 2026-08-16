@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/traits.hpp"
 #include "astra/type_actions/common_actions.hpp"
 #include "astra/type_actions/type_actions.hpp"
@@ -22,7 +22,7 @@ namespace astra {
 	template<typename T>
 		requires is_std_array_v<T>
 	TypeId TypeId::get() {
-		static TypeId id(ActionsTable::record(Actions(&TypeActions<T>::reflect,
+		static TypeId id(TypeTable::recordActions(Actions(&TypeActions<T>::reflect,
 			&CommonActions<T>::typeName,
 			&CommonActions<T>::sizeOf,
 			&CommonActions<T>::construct,

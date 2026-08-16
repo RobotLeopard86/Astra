@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common_actions.hpp"
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/dll.hpp"
 
 ///@cond
@@ -13,7 +13,7 @@ namespace astra {
 	};
 
 	inline TypeId TypeId::getBoolId() {
-		static TypeId id(ActionsTable::record(Actions(&BoolActions::reflect,
+		static TypeId id(TypeTable::recordActions(Actions(&BoolActions::reflect,
 			&CommonActions<bool>::typeName,
 			&CommonActions<bool>::sizeOf,
 			&CommonActions<bool>::nop,

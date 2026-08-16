@@ -35,8 +35,9 @@ namespace astra {
 	constexpr inline bool is_reflectable_v = is_reflectable<T>::value;
 
 	template<typename T>
-	concept serializable_ok = std::constructible_from<SerializedSubstitute<T>, const T&> && requires(const SerializedSubstitute<T>& obj) {
-		{ obj.deserialize() } -> std::same_as<T>;
+	concept serializable_ok = std::constructible_from<SerializedSubstitute<T>, const T&> && requires(const SerializedSubstitute<T>& obj, T* out) {
+		{ obj.deserialize(out) } -> std::same_as<void>;
+		{ obj.ASTRA__deserializeinternal((void*)0) } -> std::same_as<void>;
 	};
 
 	template<typename T>

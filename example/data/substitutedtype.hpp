@@ -30,11 +30,13 @@ struct ASTRA_REFLECT astra::SerializedSubstitute<SubstitutedType> : public Astra
 		base = std::log2(st.computed);
 	}
 
-	SubstitutedType deserialize() const {
-		SubstitutedType sub;
-		sub.computed = std::pow(2, base);
-		sub.someData = std::format("I have {} dogs", base);
-		return sub;
+	ASTRA_SUBSTITUTE_SERIALIZE(SubstitutedType) {
+		base = std::log2(in->computed);
+	}
+
+	ASTRA_SUBSTITUTE_DESERIALIZE(SubstitutedType) {
+		out->computed = std::pow(2, base);
+		out->someData = std::format("I have {} dogs", base);
 	}
 
 	ASTRASETUP(SerializedSubstitute)

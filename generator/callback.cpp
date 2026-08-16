@@ -288,7 +288,7 @@ void JsonBuilder::addEnum(const EnumDecl* e) {
 }
 
 void JsonBuilder::addFunction(nlohmann::json* functions, const FunctionDecl* f, const std::string& className, bool inherited) {
-	if(f->hasAttr<clang::AnnotateAttr>()) {
+	if(hasIgnoreAttr(f)) {
 		return;
 	}
 

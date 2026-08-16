@@ -29,7 +29,9 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), json);
-			return obj.deserialize();
+			T out;
+			obj.deserialize(&out);
+			return out;
 		}
 
 		///@cond
@@ -38,7 +40,7 @@ namespace astra {
 		static T fromJson(const nlohmann::json& json) {
 			T obj;
 			deserialize(Var(&obj), json);
-			return obj.deserialize();
+			return obj;
 		}
 		///@endcond
 
@@ -78,9 +80,7 @@ namespace astra {
 		 * @param json The JSON object to deserialize from
 		 * @param var The Var to write into
 		 */
-		static void fromJsonIntoVar(const nlohmann::json& json, Var var) {
-			deserialize(var, json);
-		}
+		static void fromJsonIntoVar(const nlohmann::json& json, Var var);
 
 		/**
 		 * @brief Deserialize a JSON string into a Var
@@ -168,11 +168,7 @@ namespace astra {
 		 *
 		 * @return A JSON object containing the serialized data
 		 */
-		static nlohmann::json toJsonFromVar(Var var) {
-			nlohmann::json j;
-			serialize(j, var);
-			return j;
-		}
+		static nlohmann::json toJsonFromVar(Var var);
 
 		/**
 		 * @brief Serialize a Var to a JSON string

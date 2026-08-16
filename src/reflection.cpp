@@ -2,32 +2,32 @@
 
 #include <cstddef>
 
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/type_actions/all_types.hpp"// IWYU pragma: keep
 
 namespace astra {
 
 	TypeInfo reflect(Var variable) {
-		return ActionsTable::data()[variable.typeId().number()].reflect(const_cast<void*>(variable.raw()),
+		return TypeTable::actions()[variable.typeId().number()].reflect(const_cast<void*>(variable.raw()),
 			variable.isConst());
 	}
 
 	const std::string& typeName(TypeId id) {
-		return ActionsTable::data()[id.number()].typeName();
+		return TypeTable::actions()[id.number()].typeName();
 	}
 
 	std::size_t sizeOf(TypeId id) {
-		return ActionsTable::data()[id.number()].sizeOf();
+		return TypeTable::actions()[id.number()].sizeOf();
 	}
 
 	void construct(Var variable) {
-		return ActionsTable::data()[variable.typeId().number()].construct(variable.rawMut());
+		return TypeTable::actions()[variable.typeId().number()].construct(variable.rawMut());
 	}
 
 	void destroy(Var variable) {
 		if(variable.raw() == nullptr) {
 		}
-		ActionsTable::data()[variable.typeId().number()].destroy(variable.rawMut());
+		TypeTable::actions()[variable.typeId().number()].destroy(variable.rawMut());
 	}
 
 	void copy(Var to, Var from) {
@@ -37,7 +37,7 @@ namespace astra {
 		if(to.typeId() != from.typeId()) {
 			throw std::runtime_error(::astra::format("Cannot copy {} to {}", typeName(from.typeId()), typeName(to.typeId())));
 		}
-		ActionsTable::data()[to.typeId().number()].copy(to.rawMut(), from.raw());
+		TypeTable::actions()[to.typeId().number()].copy(to.rawMut(), from.raw());
 		return;
 	}
 
@@ -48,7 +48,7 @@ namespace astra {
 		if(to.typeId() != from.typeId()) {
 			throw std::runtime_error(::astra::format("Cannot move {} to {}", typeName(from.typeId()), typeName(to.typeId())));
 		}
-		ActionsTable::data()[to.typeId().number()].move(to.rawMut(), from.rawMut());
+		TypeTable::actions()[to.typeId().number()].move(to.rawMut(), from.rawMut());
 		return;
 	}
 }

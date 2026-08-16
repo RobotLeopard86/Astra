@@ -31,4 +31,16 @@ class ASTRA_API AstraReflectBase {
 	friend struct astra::SerializedSubstitute<x>; \
 	virtual astra::TypeId ASTRA__gettypeid() const override;
 #endif
+
+#define ASTRA_SUBSTITUTE_SERIALIZE(type)         \
+	void ASTRA__serializeinternal(void* in) {    \
+		this->serialize(static_cast<type*>(in)); \
+	}                                            \
+	void serialize(type* in)
+
+#define ASTRA_SUBSTITUTE_DESERIALIZE(type)             \
+	void ASTRA__deserializeinternal(void* out) const { \
+		this->deserialize(static_cast<type*>(out));    \
+	}                                                  \
+	void deserialize(type* out) const
 ///@endcond

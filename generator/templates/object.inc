@@ -1,7 +1,7 @@
 R"(
 #include "{{file_name}}"
 
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/type_actions/common_actions.hpp"
 #include "astra/type_actions/type_actions.hpp"
 
@@ -41,7 +41,7 @@ struct TypeActions<{{name}}> {
     if (args[{{loop.index}}].typeId() != TypeId::get<{{type}}>()) {
       throw std::runtime_error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].typeId())));
     }
-    const {{type}}& a{{loop.index}} = *static_cast<const {{type}}*>(args[{{loop.index}}].raw());
+    std::add_const_t<{{type}}>& a{{loop.index}} = *args[{{loop.index}}].rtCast<std::add_const_t<{{type}}>>();
 
     {% endfor -%}
 
@@ -62,13 +62,17 @@ struct TypeActions<{{name}}> {
 
 template<>
 TypeId TypeId::get<{{name}}>() {
-  static TypeId id(ActionsTable::record(Actions(&TypeActions<{{name}}>::reflect,      
+  static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,      
                                                  &CommonActions<{{name}}>::typeName,  
                                                  &CommonActions<{{name}}>::sizeOf,  
                                                  &CommonActions<{{name}}>::construct,  
                                                  &CommonActions<{{name}}>::destroy,    
                                                  &CommonActions<{{name}}>::copy,       
                                                  &CommonActions<{{name}}>::move)));
+  {% if not startsWith(name, "astra::SerializedSubstitute") -%}
+  TypeId subId = TypeId::get<astra::SerializedSubstitute<{{name}}>>();
+  TypeTable::recordMapping(id.number(), subId.number());
+  {% endif -%}
   return id;
 }
 

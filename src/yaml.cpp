@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string_view>
 
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/box.hpp"
 #include "astra/types/list/list.hpp"
 #include "astra/reflection.hpp"
@@ -157,7 +157,7 @@ namespace astra {
 					if(i >= arr.size()) throw std::runtime_error("Too many items in array!");
 					Var tgt = arr.at(i);
 					if(tgt.isConst()) throw std::runtime_error("Cannot deserialize into const array!");
-					ActionsTable::data()[tgt.typeId().number()].move(tgt.rawMut(), nested.var().rawMut());
+					TypeTable::actions()[tgt.typeId().number()].move(tgt.rawMut(), nested.var().rawMut());
 				}
 				break;
 			}

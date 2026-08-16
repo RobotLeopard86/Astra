@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <type_traits>
 
 #include "access.hpp"
@@ -15,24 +14,26 @@ namespace astra {
 	class ASTRA_API FieldDesc {
 	  public:
 		/**
-		 * @brief Create a new field description
+		 * @brief Create a field description for a member
 		 *
 		 * @tparam T The type of the field
 		 * @tparam C The type of the containing class
 		 *
-		 * @param ptr A pointer to the field
+		 * @param ptr A pointer to the member, like so: @c &SomeClass::someField
 		 * @param acc The field's access rules
 		 */
 		template<typename T, typename C>
 		FieldDesc(T C::* ptr, Access acc)
-		  : valueData(static_cast<uintptr_t>(delta(ptr))),
+		  : resolve([ptr](void* base) {
+				return std::addressof(static_cast<C*>(base)->*ptr);
+			}),
 			type(TypeId::get<std::remove_const_t<T>>()),
 			acc(acc),
 			areWeReadOnly(is_ref_type_v<T>) {
 		}
 
 		/**
-		 * @brief Create a new field description
+		 * @brief Create a field description for a static field
 		 *
 		 * @tparam T The type of the field
 		 *
@@ -41,20 +42,13 @@ namespace astra {
 		 */
 		template<typename T>
 		FieldDesc(T* ptr, Access acc)
-		  : valueData(reinterpret_cast<uintptr_t>(ptr)),
+		  : resolve([ptr](void*) { return ptr; }),
 			type(TypeId::get<std::remove_const_t<T>>()),
 			acc(acc),
 			areWeReadOnly(is_ref_type_v<T>) {
 		}
 
-		/**
-		 * @brief Get the field value
-		 *
-		 * @return A pointer to the field if it's static or an offset into the class if it's not
-		 */
-		uintptr_t value() const {
-			return valueData;
-		}
+		const std::function<void*(void*)> resolve;///<Returns a pointer to the field (parameter ignored for static fields, parameter is base for members)
 
 		/**
 		 * @brief Get the type ID of the field
@@ -129,16 +123,9 @@ namespace astra {
 		}
 
 	  private:
-		const uintptr_t valueData;///<Pointer for static fields, offset for members
 		const TypeId type;
 
 		const Access acc;
 		const bool areWeReadOnly;
-
-		template<class C, typename T>
-		std::ptrdiff_t delta(T C::* ptr) {
-			//Using NULL intentionally, DO NOT sub for nullptr
-			return reinterpret_cast<std::ptrdiff_t>(&(reinterpret_cast<C const*>(NULL)->*ptr));
-		}
 	};
 }

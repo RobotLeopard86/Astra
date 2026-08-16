@@ -27,7 +27,9 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), doc);
-			return obj.deserialize();
+			T out;
+			obj.deserialize(&out);
+			return out;
 		}
 
 		///@cond
@@ -36,7 +38,7 @@ namespace astra {
 		static T fromDocument(libjaguar::Document& doc) {
 			T obj;
 			deserialize(Var(&obj), doc);
-			return obj.deserialize();
+			return obj;
 		}
 		///@endcond
 
@@ -54,7 +56,9 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), vector);
-			return obj.deserialize();
+			T out;
+			obj.deserialize(&out);
+			return out;
 		}
 
 		///@cond
@@ -63,7 +67,7 @@ namespace astra {
 		static T fromVector(const std::vector<uint8_t>& vector) {
 			T obj;
 			deserialize(Var(&obj), vector);
-			return obj.deserialize();
+			return obj;
 		}
 		///@endcond
 
@@ -81,7 +85,9 @@ namespace astra {
 			using S = SerializedSubstitute<T>;
 			S obj;
 			deserialize(Var(&obj), stream);
-			return obj.deserialize();
+			T out;
+			obj.deserialize(&out);
+			return out;
 		}
 
 		///@cond
@@ -90,7 +96,7 @@ namespace astra {
 		static T fromStream(std::istream& stream) {
 			T obj;
 			deserialize(Var(&obj), stream);
-			return obj.deserialize();
+			return obj;
 		}
 		///@endcond
 
@@ -100,9 +106,7 @@ namespace astra {
 		 * @param doc The Jaguar document to deserialize from
 		 * @param var The Var to write into
 		 */
-		static void fromDocumentIntoVar(libjaguar::Document& doc, Var var) {
-			deserialize(var, doc);
-		}
+		static void fromDocumentIntoVar(libjaguar::Document& doc, Var var);
 
 		/**
 		 * @brief Deserialize a vector of Jaguar data into a Var
@@ -110,9 +114,7 @@ namespace astra {
 		 * @param vector A vector storing Jaguar data to deserialize from
 		 * @param var The Var to write into
 		 */
-		static void fromVectorIntoVar(const std::vector<uint8_t>& vector, Var var) {
-			deserialize(var, vector);
-		}
+		static void fromVectorIntoVar(const std::vector<uint8_t>& vector, Var var);
 
 		/**
 		 * @brief Deserialize a stream of Jaguar data into a Var
@@ -120,9 +122,7 @@ namespace astra {
 		 * @param stream A stream storing Jaguar data to deserialize from
 		 * @param var The Var to write into
 		 */
-		static void fromStreamIntoVar(std::istream& stream, Var var) {
-			deserialize(var, stream);
-		}
+		static void fromStreamIntoVar(std::istream& stream, Var var);
 
 		/**
 		 * @brief Serialize a T object to a Jaguar document
@@ -204,11 +204,7 @@ namespace astra {
 		 *
 		 * @return A document containing the serialized data
 		 */
-		static libjaguar::Document toDocumentFromVar(Var var) {
-			libjaguar::Document doc;
-			serialize(doc, var);
-			return doc;
-		}
+		static libjaguar::Document toDocumentFromVar(Var var);
 
 		/**
 		 * @brief Serialize a Var to a vector of Jaguar data
@@ -217,11 +213,7 @@ namespace astra {
 		 *
 		 * @return A vector containing the serialized data encoded in Jaguar format
 		 */
-		static std::vector<uint8_t> toVectorFromVar(Var var) {
-			std::vector<uint8_t> result;
-			serialize(result, var);
-			return result;
-		}
+		static std::vector<uint8_t> toVectorFromVar(Var var);
 
 		/**
 		 * @brief Serialize a Var to a stream as Jaguar data

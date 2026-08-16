@@ -127,5 +127,9 @@ namespace astra {
 
 		explicit TypeId(uint32_t id)
 		  : id(id) {}
+
+		friend struct binary;
+		friend struct json;
+		friend struct yaml;
 	};
 }

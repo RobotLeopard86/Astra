@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common_actions.hpp"
-#include "astra/actions_table.hpp"
+#include "astra/type_table.hpp"
 #include "astra/dll.hpp"
 
 ///@cond
@@ -17,7 +17,7 @@ namespace astra {
 	template<typename T>
 		requires std::is_integral_v<T> && (!std::is_same_v<T, bool>)
 	TypeId TypeId::get() {
-		static TypeId id(ActionsTable::record(Actions(&IntActions<T>::reflect,
+		static TypeId id(TypeTable::recordActions(Actions(&IntActions<T>::reflect,
 			&CommonActions<T>::typeName,
 			&CommonActions<T>::sizeOf,
 			&CommonActions<T>::nop,

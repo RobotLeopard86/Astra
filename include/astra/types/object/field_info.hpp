@@ -2,11 +2,8 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <type_traits>
 #include <utility>
 
-#include "access.hpp"
-#include "astra/type_id.hpp"
 #include "astra/dll.hpp"
 #include "field_desc.hpp"
 #include "astra/var.hpp"
@@ -70,9 +67,9 @@ namespace astra {
 		 */
 		Var var() const {
 			if(isStatic()) {
-				return {reinterpret_cast<void*>(data->value()), data->typeId(), data->isConst()};
+				return {data->resolve(nullptr), data->typeId(), data->isConst()};
 			}
-			return {shift(base, data->value()), data->typeId(), data->isConst()};
+			return {data->resolve(const_cast<void*>(base)), data->typeId(), data->isConst()};
 		}
 
 		/**
