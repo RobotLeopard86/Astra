@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Struct ActionsTable &#8212; Astra Documentation</title>
+    <title>Struct TypeTable &#8212; Astra Documentation</title>
   
   
   
@@ -45,7 +45,7 @@
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js?v=73120307"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js?v=660e4f45"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/structastra_1_1ActionsTable';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/structastra_1_1TypeTable';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/RobotLeopard86/Astra/refs/heads/main/docs/switcher.json';
@@ -55,8 +55,8 @@
         </script>
     <link rel="icon" href="../_static/astra_logo.png"/>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Struct binary" href="structastra_1_1binary.html" />
-    <link rel="prev" title="Struct Actions" href="structastra_1_1Actions.html" />
+    <link rel="next" title="Struct Var" href="structastra_1_1Var.html" />
+    <link rel="prev" title="Struct TypeId" href="structastra_1_1TypeId.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -359,9 +359,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
 </ul>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Struct ActionsTable</a></li>
-</ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1binary.html">Struct binary</a></li>
 </ul>
@@ -394,6 +391,9 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1TypeId.html">Struct TypeId</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Struct TypeTable</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Var.html">Struct Var</a></li>
@@ -542,7 +542,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Astra API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Struct ActionsTable</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Struct TypeTable</span></li>
   </ul>
 </nav>
 </div>
@@ -559,34 +559,34 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="struct-actionstable">
-<span id="exhale-struct-structastra-1-1actionstable"></span><h1>Struct ActionsTable<a class="headerlink" href="#struct-actionstable" title="Link to this heading"><span/></a></h1>
+  <section id="struct-typetable">
+<span id="exhale-struct-structastra-1-1typetable"></span><h1>Struct TypeTable<a class="headerlink" href="#struct-typetable" title="Link to this heading"><span/></a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_include_astra_actions_table.hpp.html#file-include-astra-actions-table-hpp"><span class="std std-ref">File actions_table.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_include_astra_type_table.hpp.html#file-include-astra-type-table-hpp"><span class="std std-ref">File type_table.hpp</span></a></p></li>
 </ul>
 <section id="struct-documentation">
 <h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Link to this heading"><span/></a></h2>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra12ActionsTableE">
-<span id="_CPPv3N5astra12ActionsTableE"></span><span id="_CPPv2N5astra12ActionsTableE"></span><span id="astra::ActionsTable"></span><span class="target" id="structastra_1_1ActionsTable"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ActionsTable</span></span></span><a class="headerlink" href="#_CPPv4N5astra12ActionsTableE" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>Centralized storage for reflected type actions. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra9TypeTableE">
+<span id="_CPPv3N5astra9TypeTableE"></span><span id="_CPPv2N5astra9TypeTableE"></span><span id="astra::TypeTable"></span><span class="target" id="structastra_1_1TypeTable"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TypeTable</span></span></span><a class="headerlink" href="#_CPPv4N5astra9TypeTableE" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Centralized storage for reflected type information. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra12ActionsTable4dataEv">
-<span id="_CPPv3N5astra12ActionsTable4dataEv"></span><span id="_CPPv2N5astra12ActionsTable4dataEv"></span><span id="astra::ActionsTable::data"></span><span class="target" id="structastra_1_1ActionsTable_1a4579d4852000cd40caedbf4951ca84fe"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structastra_1_1Actions.html#_CPPv4N5astra7ActionsE" title="astra::Actions"><span class="n"><span class="pre">Actions</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra12ActionsTable4dataEv" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>Access the stored data. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra9TypeTable7actionsEv">
+<span id="_CPPv3N5astra9TypeTable7actionsEv"></span><span id="_CPPv2N5astra9TypeTable7actionsEv"></span><span id="astra::TypeTable::actions"></span><span class="target" id="structastra_1_1TypeTable_1a6d87a49ebf849fd52b4a7f03be61ef0d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structastra_1_1Actions.html#_CPPv4N5astra7ActionsE" title="astra::Actions"><span class="n"><span class="pre">Actions</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">actions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra9TypeTable7actionsEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Access the stored actions data. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The stored data array </p>
+<dd class="field-odd"><p>The stored actions data array </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5astra12ActionsTable6recordE7Actions">
-<span id="_CPPv3N5astra12ActionsTable6recordE7Actions"></span><span id="_CPPv2N5astra12ActionsTable6recordE7Actions"></span><span id="astra::ActionsTable::record__Actions"></span><span class="target" id="structastra_1_1ActionsTable_1ab45499f44e6bbe2dadeedcf2374b9874"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">record</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Actions.html#_CPPv4N5astra7ActionsE" title="astra::Actions"><span class="n"><span class="pre">Actions</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">actions</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra12ActionsTable6recordE7Actions" title="Link to this definition"><span/></a><br /></dt>
-<dd><p>Record function entries for a new type in the table. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N5astra9TypeTable13recordActionsE7Actions">
+<span id="_CPPv3N5astra9TypeTable13recordActionsE7Actions"></span><span id="_CPPv2N5astra9TypeTable13recordActionsE7Actions"></span><span id="astra::TypeTable::recordActions__Actions"></span><span class="target" id="structastra_1_1TypeTable_1a314c42ac200b0037881b4cd31cffc1b0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recordActions</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structastra_1_1Actions.html#_CPPv4N5astra7ActionsE" title="astra::Actions"><span class="n"><span class="pre">Actions</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">actions</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra9TypeTable13recordActionsE7Actions" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Record actions entries for a new type in the table. </p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This function should only be called by generated reflection code headers!</p>
@@ -596,6 +596,27 @@
 <dd class="field-odd"><p>The new type’s ID number </p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra9TypeTable6submapEv">
+<span id="_CPPv3N5astra9TypeTable6submapEv"></span><span id="_CPPv2N5astra9TypeTable6submapEv"></span><span id="astra::TypeTable::submap"></span><span class="target" id="structastra_1_1TypeTable_1abf2bcb801809f0ee01149288a2479eaa"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">submap</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra9TypeTable6submapEv" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Access the stored substitute type mapping data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The stored mapping </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5astra9TypeTable13recordMappingEjj">
+<span id="_CPPv3N5astra9TypeTable13recordMappingEjj"></span><span id="_CPPv2N5astra9TypeTable13recordMappingEjj"></span><span id="astra::TypeTable::recordMapping__unsigned-i.unsigned-i"></span><span class="target" id="structastra_1_1TypeTable_1a8e2ad57339707e7ec7a197b9ed810d28"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recordMapping</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">original</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">substitute</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5astra9TypeTable13recordMappingEjj" title="Link to this definition"><span/></a><br /></dt>
+<dd><p>Record entries for the substitute mapper. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function should only be called by generated reflection code headers! </p>
+</div>
 </dd></dl>
 
 </div>
@@ -615,20 +636,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="structastra_1_1Actions.html"
+       href="structastra_1_1TypeId.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Struct Actions</p>
+        <p class="prev-next-title">Struct TypeId</p>
       </div>
     </a>
     <a class="right-next"
-       href="structastra_1_1binary.html"
+       href="structastra_1_1Var.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Struct binary</p>
+        <p class="prev-next-title">Struct Var</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -652,9 +673,11 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struct-documentation">Struct Documentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra12ActionsTableE"><code class="docutils literal notranslate"><span class="pre">astra::ActionsTable</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra12ActionsTable4dataEv"><code class="docutils literal notranslate"><span class="pre">data()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra12ActionsTable6recordE7Actions"><code class="docutils literal notranslate"><span class="pre">record()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra9TypeTableE"><code class="docutils literal notranslate"><span class="pre">astra::TypeTable</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra9TypeTable7actionsEv"><code class="docutils literal notranslate"><span class="pre">actions()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra9TypeTable13recordActionsE7Actions"><code class="docutils literal notranslate"><span class="pre">recordActions()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra9TypeTable6submapEv"><code class="docutils literal notranslate"><span class="pre">submap()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N5astra9TypeTable13recordMappingEjj"><code class="docutils literal notranslate"><span class="pre">recordMapping()</span></code></a></li>
 </ul>
 </li>
 </ul>

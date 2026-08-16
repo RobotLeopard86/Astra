@@ -413,11 +413,8 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdint&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;access.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/type_id.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/dll.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;field_desc.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/var.hpp&quot;</span>
@@ -465,9 +462,9 @@
 
 <span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">isStatic</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">typeId</span><span class="p">(),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">isConst</span><span class="p">()};</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">resolve</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">typeId</span><span class="p">(),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">isConst</span><span class="p">()};</span>
 <span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">shift</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">typeId</span><span class="p">(),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">isConst</span><span class="p">()};</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">resolve</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">base</span><span class="p">)),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">typeId</span><span class="p">(),</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">isConst</span><span class="p">()};</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isConst</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>

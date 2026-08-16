@@ -413,7 +413,7 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/actions_table.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/type_table.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/type_info.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/type_actions/common_actions.hpp&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/dll.hpp&quot;</span>
@@ -432,7 +432,7 @@
 <span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="k">requires</span><span class="w"> </span><span class="n">is_shared_ptr_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
 <span class="w">    </span><span class="n">TypeId</span><span class="w"> </span><span class="n">TypeId</span><span class="o">::</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">TypeId</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="n">ActionsTable</span><span class="o">::</span><span class="n">record</span><span class="p">(</span><span class="n">Actions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">TypeActions</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">reflect</span><span class="p">,</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">TypeId</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="n">TypeTable</span><span class="o">::</span><span class="n">recordActions</span><span class="p">(</span><span class="n">Actions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">TypeActions</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">reflect</span><span class="p">,</span>
 <span class="w">            </span><span class="o">&amp;</span><span class="n">CommonActions</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">typeName</span><span class="p">,</span>
 <span class="w">            </span><span class="o">&amp;</span><span class="n">CommonActions</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">sizeOf</span><span class="p">,</span>
 <span class="w">            </span><span class="o">&amp;</span><span class="n">CommonActions</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">construct</span><span class="p">,</span>

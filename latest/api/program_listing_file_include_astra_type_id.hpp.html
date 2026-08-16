@@ -511,6 +511,10 @@
 
 <span class="w">        </span><span class="k">explicit</span><span class="w"> </span><span class="n">TypeId</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">id</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">        </span><span class="k">friend</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">binary</span><span class="p">;</span>
+<span class="w">        </span><span class="k">friend</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">json</span><span class="p">;</span>
+<span class="w">        </span><span class="k">friend</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">yaml</span><span class="p">;</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="p">}</span>
 </pre></div>

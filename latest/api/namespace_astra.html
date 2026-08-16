@@ -360,9 +360,6 @@
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Actions.html">Struct Actions</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="structastra_1_1ActionsTable.html">Struct ActionsTable</a></li>
-</ul>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1binary.html">Struct binary</a></li>
 </ul>
 <ul class="nav bd-sidenav">
@@ -394,6 +391,9 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1TypeId.html">Struct TypeId</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="structastra_1_1TypeTable.html">Struct TypeTable</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="structastra_1_1Var.html">Struct Var</a></li>
@@ -573,7 +573,6 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"><span/></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="structastra_1_1Actions.html#exhale-struct-structastra-1-1actions"><span class="std std-ref">Struct Actions</span></a></p></li>
-<li><p><a class="reference internal" href="structastra_1_1ActionsTable.html#exhale-struct-structastra-1-1actionstable"><span class="std std-ref">Struct ActionsTable</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1binary.html#exhale-struct-structastra-1-1binary"><span class="std std-ref">Struct binary</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Box.html#exhale-struct-structastra-1-1box"><span class="std std-ref">Struct Box</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1ConstexprMap_1_1Entry.html#exhale-struct-structastra-1-1constexprmap-1-1entry"><span class="std std-ref">Struct ConstexprMap::Entry</span></a></p></li>
@@ -585,6 +584,7 @@
 <li><p><a class="reference internal" href="structastra_1_1SerializedSubstitute.html#exhale-struct-structastra-1-1serializedsubstitute"><span class="std std-ref">Template Struct SerializedSubstitute</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Sizeof.html#exhale-struct-structastra-1-1sizeof"><span class="std std-ref">Template Struct Sizeof</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1TypeId.html#exhale-struct-structastra-1-1typeid"><span class="std std-ref">Struct TypeId</span></a></p></li>
+<li><p><a class="reference internal" href="structastra_1_1TypeTable.html#exhale-struct-structastra-1-1typetable"><span class="std std-ref">Struct TypeTable</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Var.html#exhale-struct-structastra-1-1var"><span class="std std-ref">Struct Var</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1Variant.html#exhale-struct-structastra-1-1variant"><span class="std std-ref">Template Struct Variant</span></a></p></li>
 <li><p><a class="reference internal" href="structastra_1_1yaml.html#exhale-struct-structastra-1-1yaml"><span class="std std-ref">Struct yaml</span></a></p></li>
@@ -625,9 +625,9 @@
 <li><p><a class="reference internal" href="function_format_8hpp_1ab7e7d29a95da2ff06cf43aca41d54f91.html#exhale-function-format-8hpp-1ab7e7d29a95da2ff06cf43aca41d54f91"><span class="std std-ref">Template Function astra::format</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a67f4ab294419f8c113cc8e2072cbc5d4.html#exhale-function-reflection-8hpp-1a67f4ab294419f8c113cc8e2072cbc5d4"><span class="std std-ref">Function astra::move</span></a></p></li>
 <li><p><a class="reference internal" href="function_overloaded_8hpp_1aab8921fe63674c9f2b4d37fe09c9b4f2.html#exhale-function-overloaded-8hpp-1aab8921fe63674c9f2b4d37fe09c9b4f2"><span class="std std-ref">Template Function astra::Overloaded</span></a></p></li>
-<li><p><a class="reference internal" href="function_reflection_8hpp_1a6570da25f1d3fa9b105d8466378c571a.html#exhale-function-reflection-8hpp-1a6570da25f1d3fa9b105d8466378c571a"><span class="std std-ref">Template Function astra::reflect(const T *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1a55c2d4b75265cb03d7f2406d9a64aff7.html#exhale-function-reflection-8hpp-1a55c2d4b75265cb03d7f2406d9a64aff7"><span class="std std-ref">Function astra::reflect(Var)</span></a></p></li>
 <li><p><a class="reference internal" href="function_reflection_8hpp_1aad262ca670e6430753354c6c4bf155ea.html#exhale-function-reflection-8hpp-1aad262ca670e6430753354c6c4bf155ea"><span class="std std-ref">Template Function astra::reflect(T *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_reflection_8hpp_1a6570da25f1d3fa9b105d8466378c571a.html#exhale-function-reflection-8hpp-1a6570da25f1d3fa9b105d8466378c571a"><span class="std std-ref">Template Function astra::reflect(const T *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_type__query_8hpp_1afebd838c2236cd1c3bacd0cab3484315.html#exhale-function-type-query-8hpp-1afebd838c2236cd1c3bacd0cab3484315"><span class="std std-ref">Function astra::sizeOf</span></a></p></li>
 <li><p><a class="reference internal" href="function_type__query_8hpp_1afa8c65247a6975c8d5af710bff06c9af.html#exhale-function-type-query-8hpp-1afa8c65247a6975c8d5af710bff06c9af"><span class="std std-ref">Function astra::typeName</span></a></p></li>
 </ul>

@@ -441,6 +441,18 @@
 <span class="cp">    friend struct astra::SerializedSubstitute&lt;x&gt;; \</span>
 <span class="cp">    virtual astra::TypeId ASTRA__gettypeid() const override;</span>
 <span class="cp">#endif</span>
+
+<span class="cp">#define ASTRA_SUBSTITUTE_SERIALIZE(type)         \</span>
+<span class="cp">    void ASTRA__serializeinternal(void* in) {    \</span>
+<span class="cp">        this-&gt;serialize(static_cast&lt;type*&gt;(in)); \</span>
+<span class="cp">    }                                            \</span>
+<span class="cp">    void serialize(type* in)</span>
+
+<span class="cp">#define ASTRA_SUBSTITUTE_DESERIALIZE(type)             \</span>
+<span class="cp">    void ASTRA__deserializeinternal(void* out) const { \</span>
+<span class="cp">        this-&gt;deserialize(static_cast&lt;type*&gt;(out));    \</span>
+<span class="cp">    }                                                  \</span>
+<span class="cp">    void deserialize(type* out) const</span>
 </pre></div>
 </div>
 </section>

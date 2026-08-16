@@ -474,9 +474,13 @@
 <span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Var</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vArgs</span><span class="p">;</span>
 <span class="w">            </span><span class="n">foldArgs</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vArgs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">args</span><span class="p">...);</span>
 
-<span class="w">            </span><span class="n">R</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
-<span class="w">            </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">invoke</span><span class="p">(</span><span class="n">Var</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ret</span><span class="p">),</span><span class="w"> </span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">vArgs</span><span class="p">);</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">constexpr</span><span class="p">(</span><span class="o">!</span><span class="n">std</span><span class="o">::</span><span class="n">is_void_v</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">R</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">                </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">invoke</span><span class="p">(</span><span class="n">Var</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ret</span><span class="p">),</span><span class="w"> </span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">vArgs</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">invoke</span><span class="p">(</span><span class="n">Var</span><span class="p">(),</span><span class="w"> </span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="n">vArgs</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isConst</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
