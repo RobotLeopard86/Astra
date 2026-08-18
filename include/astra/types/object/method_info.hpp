@@ -76,6 +76,13 @@ namespace astra {
 			return data->invoke(Var(), base, vArgs);
 		}
 
+		///@cond
+		template<>
+		void invoke() const {
+			return data->invoke(Var(), base, {});
+		}
+		///@endcond
+
 		/**
 		 * @brief Invoke the method and capture the return value
 		 *
@@ -99,6 +106,19 @@ namespace astra {
 				data->invoke(Var(), base, vArgs);
 			}
 		}
+
+		///@cond
+		template<typename R>
+		R invoke() const {
+			if constexpr(!std::is_void_v<R>) {
+				R ret;
+				data->invoke(Var(&ret), base, {});
+				return ret;
+			} else {
+				data->invoke(Var(), base, {});
+			}
+		}
+		///@endcond
 
 		/**
 		 * @brief Check if the method is const or not (can be invoked on a const object)
