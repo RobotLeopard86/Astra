@@ -414,9 +414,9 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;constexpr_sort.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;format.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dll.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"constexpr_sort.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"format.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"dll.hpp"</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="o">&gt;</span>
@@ -447,7 +447,7 @@
 <span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searchByValue</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
 
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot find an entry&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot find an entry"</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span>
 
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
@@ -457,17 +457,17 @@
 <span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searchByKey</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
 
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="o">::</span><span class="n">astra</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Cannot find the key </span><span class="se">\&quot;</span><span class="s">{}</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">));</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="o">::</span><span class="n">astra</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">"Cannot find the key </span><span class="se">\"</span><span class="s">{}</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">));</span>
 <span class="w">            </span><span class="p">}</span>
 
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span><span class="w"> </span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">[[</span><span class="na">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span><span class="w"> </span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span><span class="w"> </span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">[[</span><span class="na">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span><span class="w"> </span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 

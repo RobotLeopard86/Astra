@@ -413,9 +413,9 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdint&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;iinteger.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;int.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/dll.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"iinteger.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"int.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/dll.hpp"</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="p">{</span>
@@ -427,39 +427,39 @@
 <span class="w">            </span><span class="k">new</span><span class="p">(</span><span class="n">mem</span><span class="p">)</span><span class="w"> </span><span class="n">Int</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">isConst</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">assign</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">assign</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">assign</span><span class="p">(</span><span class="n">var</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unsafeAssign</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">unsafeAssign</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">unsafeAssign</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="nf">var</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">var</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">isSigned</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isSigned</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">isSigned</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">asSigned</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int64_t</span><span class="w"> </span><span class="nf">asSigned</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">asSigned</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">asUnsigned</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="nf">asUnsigned</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">asUnsigned</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">setSigned</span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSigned</span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSigned</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">setUnsigned</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUnsigned</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">impl</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setUnsigned</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 

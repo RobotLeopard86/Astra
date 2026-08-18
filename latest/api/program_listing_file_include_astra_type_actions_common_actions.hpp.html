@@ -415,8 +415,8 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/names.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/dll.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/names.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/dll.hpp"</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
@@ -446,7 +446,7 @@
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_copy_constructible_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_copy_assignable_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">to</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot copy a non-copyable class!&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot copy a non-copyable class!"</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 
@@ -454,7 +454,7 @@
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_move_constructible_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_move_assignable_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">to</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">from</span><span class="p">));</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot move a non-movable class!&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot move a non-movable class!"</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>

@@ -411,10 +411,10 @@
 <p>↰ <a class="reference internal" href="file_include_astra_setup.hpp.html#file-include-astra-setup-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/astra/setup.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_actions/type_actions.hpp&quot;</span><span class="c1">// IWYU pragma: keep</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;type_id.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dll.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reflectable.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"type_actions/type_actions.hpp"</span><span class="c1">// IWYU pragma: keep</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"type_id.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"dll.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"reflectable.hpp"</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">AstraReflectBase</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">public</span><span class="o">:</span>
@@ -422,15 +422,15 @@
 <span class="p">};</span>
 
 <span class="cp">#ifdef _ASTRAGENERATE</span>
-<span class="cp">#define ASTRA_REFLECT [[clang::annotate(&quot;astra.reflect&quot;)]]</span>
-<span class="cp">#define ASTRA_IGNORE [[clang::annotate(&quot;astra.ignore&quot;)]]</span>
-<span class="cp">#define ASTRA_ALIAS(x) [[clang::annotate(&quot;astra.alias:&quot; x)]]</span>
+<span class="cp">#define ASTRA_REFLECT [[clang::annotate("astra.reflect")]]</span>
+<span class="cp">#define ASTRA_IGNORE [[clang::annotate("astra.ignore")]]</span>
+<span class="cp">#define ASTRA_ALIAS(x) [[clang::annotate("astra.alias:" x)]]</span>
 <span class="cp">#define ASTRASETUP(x)                                                                                                                                  \</span>
 <span class="cp">    friend struct astra::TypeActions&lt;x&gt;;                                                                                                               \</span>
 <span class="cp">    friend struct astra::SerializedSubstitute&lt;x&gt;;                                                                                                      \</span>
 <span class="cp">    ASTRA_IGNORE virtual astra::TypeId ASTRA__gettypeid() const override;                                                                              \</span>
 <span class="cp">    ASTRA_IGNORE void ASTRA__checkreflectability() {                                                                                                   \</span>
-<span class="cp">        static_assert(astra::is_reflectable_v&lt;x&gt;, &quot;Cannot generate reflection data for a type that does not meet the conditions for reflectability!&quot;); \</span>
+<span class="cp">        static_assert(astra::is_reflectable_v&lt;x&gt;, "Cannot generate reflection data for a type that does not meet the conditions for reflectability!"); \</span>
 <span class="cp">    }</span>
 <span class="cp">#else</span>
 <span class="cp">#define ASTRA_REFLECT</span>

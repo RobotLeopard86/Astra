@@ -413,18 +413,18 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/type_info.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/dll.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/type_info.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/dll.hpp"</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ASTRA_API</span><span class="w"> </span><span class="n">UnknownActions</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">TypeInfo</span><span class="w"> </span><span class="nf">reflect</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*value*/</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="cm">/*isConst*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot reflect a value with unknown type&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot reflect a value with unknown type"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">typeName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;unknowntype&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"unknowntype"</span><span class="p">;</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
@@ -433,19 +433,19 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*p*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot construct ASTRA_API a value for unknown type&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot construct ASTRA_API a value for unknown type"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*p*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot destroy a value with unknown type&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot destroy a value with unknown type"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*to*/</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*from*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot copy a value with unknown type&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot copy a value with unknown type"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*to*/</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="cm">/*from*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cannot move a value with unknown type&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Cannot move a value with unknown type"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 

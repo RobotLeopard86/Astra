@@ -413,11 +413,11 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/type_query.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/format.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/variant.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;istring.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;astra/dll.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/type_query.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/format.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/variant.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"istring.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/dll.hpp"</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">astra</span><span class="w"> </span><span class="p">{</span>
 
@@ -430,9 +430,9 @@
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">inner</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">assign</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">assign</span><span class="p">(</span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">var</span><span class="p">.</span><span class="n">typeId</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">inner</span><span class="p">.</span><span class="n">typeId</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="o">::</span><span class="n">astra</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;Cannot assign type: {} to {}&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="o">::</span><span class="n">astra</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">"Cannot assign type: {} to {}"</span><span class="p">,</span>
 <span class="w">                    </span><span class="n">typeName</span><span class="p">(</span><span class="n">var</span><span class="p">.</span><span class="n">typeId</span><span class="p">()),</span>
 <span class="w">                    </span><span class="n">typeName</span><span class="p">(</span><span class="n">inner</span><span class="p">.</span><span class="n">typeId</span><span class="p">())));</span>
 <span class="w">            </span><span class="p">}</span>
@@ -440,20 +440,20 @@
 <span class="w">            </span><span class="n">cachedVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">inner</span><span class="p">.</span><span class="n">raw</span><span class="p">());</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unsafeAssign</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">unsafeAssign</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">inner</span><span class="p">.</span><span class="n">unsafeAssign</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
 <span class="w">            </span><span class="n">cachedVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">inner</span><span class="p">.</span><span class="n">raw</span><span class="p">());</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">cachedVal</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Trying to set read-only value&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Trying to set read-only value"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="n">var</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Var</span><span class="w"> </span><span class="nf">var</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">inner</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
