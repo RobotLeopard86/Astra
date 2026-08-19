@@ -20,23 +20,23 @@ namespace astra {
 				break;
 			case TypeInfo::Kind::Integer:
 				if(auto intInfo = info.asUnsafe<Integer>(); intInfo.isSigned()) {
-					json = ::astra::format("s{};{}", intInfo.size() * 8, intInfo.asSigned());
+					json = intInfo.asSigned();
 				} else {
-					json = ::astra::format("u{};{}", intInfo.size() * 8, intInfo.asUnsigned());
+					json = intInfo.asUnsigned();
 				}
 				break;
 			case TypeInfo::Kind::Float:
 				if(auto floatInfo = info.asUnsafe<Float>(); floatInfo.size() == sizeof(float)) {
-					json = ::astra::format("{}f", (float)floatInfo.get());
+					json = static_cast<float>(floatInfo.get());
 				} else {
-					json = std::to_string(floatInfo.get());
+					json = floatInfo.get();
 				}
 				break;
 			case TypeInfo::Kind::String:
-				json = ::astra::format("'{}'", info.asUnsafe<String>().get());
+				json = info.asUnsafe<String>().get();
 				break;
 			case TypeInfo::Kind::Enum:
-				json = ::astra::format("'{}'", info.asUnsafe<Enum>().toString());
+				json = info.asUnsafe<Enum>().toString();
 				break;
 			case TypeInfo::Kind::Object:
 				for(const auto& [name, contents] : info.asUnsafe<Object>().getFields()) {
@@ -98,43 +98,34 @@ namespace astra {
 				info.asUnsafe<Bool>().set(json.get<bool>());
 				break;
 			case TypeInfo::Kind::Integer: {
-				if(!json.is_string()) throw std::runtime_error("Invalid integer format!");
-				std::string fullNum = json.get<std::string>();
-				std::string descriptor = fullNum.substr(0, fullNum.find_first_of(";"));
-				if(descriptor.compare(fullNum) == 0) throw std::runtime_error("Invalid integer format!");
-				std::string numStr = fullNum.substr(descriptor.size() + 1);
-				if(descriptor.size() < 2 || descriptor.size() > 3) throw std::runtime_error("Invalid integer format!");
-				if(!(descriptor.ends_with("8") || descriptor.ends_with("16") || descriptor.ends_with("32") || descriptor.ends_with(64))) throw std::runtime_error("Invalid integer format!");
-				if(descriptor[0] == 's') {
-					info.asUnsafe<Integer>().setSigned(std::stoll(numStr));
+				Integer intInfo = info.asUnsafe<Integer>();
+				if(intInfo.isSigned()) {
+					if(!json.is_number_integer()) throw std::runtime_error("Invalid integer format!");
+					intInfo.setSigned(json.get<int64_t>());
 				} else {
-					info.asUnsafe<Integer>().setUnsigned(std::stoull(numStr));
+					if(!json.is_number_unsigned()) throw std::runtime_error("Invalid integer format!");
+					intInfo.setUnsigned(json.get<uint64_t>());
 				}
 				break;
 			}
 			case TypeInfo::Kind::Float: {
-				if(!json.is_string()) throw std::runtime_error("Invalid floating-point format!");
-				std::string fullNum = json.get<std::string>();
-				if(char last = fullNum[fullNum.size() - 1]; last == 'f') {
-					info.asUnsafe<Float>().set(std::stof(fullNum.substr(0, fullNum.size() - 2)));
-				} else if(last >= '0' && last <= '9') {
-					info.asUnsafe<Float>().set(std::stod(fullNum.substr(0, fullNum.size() - 1)));
-				} else
-					throw std::runtime_error("Invalid floating-point format!");
+				if(!json.is_number_float()) throw std::runtime_error("Invalid floating-point format!");
+				Float floatInfo = info.asUnsafe<Float>();
+				if(floatInfo.size() == sizeof(float)) {
+					floatInfo.set(json.get<float>());
+				} else {
+					floatInfo.set(json.get<double>());
+				}
 				break;
 			}
 			case TypeInfo::Kind::String: {
 				if(!json.is_string()) throw std::runtime_error("Invalid string format!");
-				std::string value = json.get<std::string>();
-				if(value[0] != '\'' || value[value.size() - 1] != '\'') throw std::runtime_error("Invalid string format!");
-				info.asUnsafe<String>().set(value.substr(1, value.size() - 2));
+				info.asUnsafe<String>().set(json.get<std::string>());
 				break;
 			}
 			case TypeInfo::Kind::Enum: {
 				if(!json.is_string()) throw std::runtime_error("Invalid enum format!");
-				std::string value = json.get<std::string>();
-				if(value[0] != '\'' || value[value.size() - 1] != '\'') throw std::runtime_error("Invalid enum format!");
-				info.asUnsafe<Enum>().fromString(value.substr(1, value.size() - 2));
+				info.asUnsafe<Enum>().fromString(json.get<std::string>());
 				break;
 			}
 			case TypeInfo::Kind::Object: {

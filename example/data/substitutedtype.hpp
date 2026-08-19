@@ -1,6 +1,6 @@
 #pragma once
 
-#include "astra/reflectable.hpp"
+#include "astra/traits.hpp"
 #include "astra/serialized_substitute.hpp"
 #include "astra/setup.hpp"
 

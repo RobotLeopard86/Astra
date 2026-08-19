@@ -1,9 +1,9 @@
 #pragma once
 
+#include "dll.hpp"
 #include "type_actions/type_actions.hpp"// IWYU pragma: keep
 #include "type_id.hpp"
-#include "dll.hpp"
-#include "reflectable.hpp"
+#include "traits.hpp"// IWYU pragma: keep
 
 ///@cond
 class ASTRA_API AstraReflectBase {

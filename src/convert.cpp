@@ -7,6 +7,7 @@
 #include "nlohmann/json.hpp"
 #include "yaml-cpp/emitter.h"
 #include "yaml-cpp/emittermanip.h"
+#include <stdexcept>
 
 namespace astra {
 	std::string convert::yamlStringToJsonString(const std::string& str) {
@@ -132,9 +133,9 @@ namespace astra {
 			switch(ve.type) {
 				case libjaguar::TypeTag::String:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("'{}'", doc.QueryValue<std::string>(effectivePath));
+						json[ve.name] = doc.QueryValue<std::string>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("'{}'", doc.QueryValue<std::string>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<std::string>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::ByteBuffer:
@@ -153,9 +154,9 @@ namespace astra {
 					break;
 				case libjaguar::TypeTag::Float32:
 					if(!scope.list) {
-						json[ve.name] = std::to_string(doc.QueryValue<float>(effectivePath)) + "f";
+						json[ve.name] = doc.QueryValue<float>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = std::to_string(doc.QueryValue<float>(effectivePath)) + "f";
+						json[std::stoul(ve.name)] = doc.QueryValue<float>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::Float64:
@@ -167,58 +168,58 @@ namespace astra {
 					break;
 				case libjaguar::TypeTag::SInt8:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("s8;{}", doc.QueryValue<int8_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<int8_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("s8;{}", doc.QueryValue<int8_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<int8_t>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::SInt16:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("s16;{}", doc.QueryValue<int16_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<int16_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("s16;{}", doc.QueryValue<int16_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<int16_t>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::SInt32:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("s32;{}", doc.QueryValue<int32_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<int32_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("s32;{}", doc.QueryValue<int32_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<int32_t>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::SInt64:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("s64;{}", doc.QueryValue<int64_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<int64_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("s64;{}", doc.QueryValue<int64_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<int64_t>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::UInt8:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("u8;{}", doc.QueryValue<uint8_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<uint8_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("u8;{}", doc.QueryValue<uint8_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<uint8_t>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::UInt16:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("u16;{}", doc.QueryValue<uint16_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<uint16_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("u16;{}", doc.QueryValue<uint16_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<uint16_t>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::UInt32:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("u32;{}", doc.QueryValue<uint32_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<uint32_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("u32;{}", doc.QueryValue<uint32_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<uint32_t>(effectivePath);
 					}
 					break;
 				case libjaguar::TypeTag::UInt64:
 					if(!scope.list) {
-						json[ve.name] = ::astra::format("u64;{}", doc.QueryValue<uint64_t>(effectivePath));
+						json[ve.name] = doc.QueryValue<uint64_t>(effectivePath);
 					} else {
-						json[std::stoul(ve.name)] = ::astra::format("u64  ;{}", doc.QueryValue<uint64_t>(effectivePath));
+						json[std::stoul(ve.name)] = doc.QueryValue<uint64_t>(effectivePath);
 					}
 					break;
 				default: break;
@@ -259,76 +260,41 @@ namespace astra {
 	}
 
 	void json2BinaryRecursive(libjaguar::Document& doc, const nlohmann::json& json, const std::string& path) {
+		static struct IntArrInfo {
+			int64_t s;
+			uint64_t u;
+			bool isSigned;
+			bool active = false;
+		} iai;
 		if(json.is_boolean()) {
 			doc.SetOrCreateValue<bool>(path, json.get<bool>());
-		}
-		if(json.is_number_integer()) {
-			doc.SetOrCreateValue<int64_t>(path, json.get<int64_t>());
-		}
-		if(json.is_number_unsigned()) {
-			doc.SetOrCreateValue<uint64_t>(path, json.get<uint64_t>());
-		}
-		if(json.is_number_float()) {
+		} else if(json.is_number_unsigned()) {
+			if(iai.active && iai.isSigned) throw std::runtime_error("Cannot mix signs in integer array!");
+			uint64_t value = iai.active ? iai.u : json.get<uint64_t>();
+			if(value > UINT32_MAX)
+				doc.SetOrCreateValue<uint64_t>(path, value);
+			else if(value > UINT16_MAX)
+				doc.SetOrCreateValue<uint32_t>(path, value);
+			else if(value > UINT8_MAX)
+				doc.SetOrCreateValue<uint16_t>(path, value);
+			else
+				doc.SetOrCreateValue<uint8_t>(path, value);
+		} else if(json.is_number_integer()) {
+			if(iai.active && !iai.isSigned) throw std::runtime_error("Cannot mix signs in integer array!");
+			int64_t value = iai.active ? iai.s : json.get<int64_t>();
+			if(value < INT32_MIN || value > INT32_MAX)
+				doc.SetOrCreateValue<int64_t>(path, value);
+			else if(value < INT16_MIN || value > INT16_MAX)
+				doc.SetOrCreateValue<int32_t>(path, value);
+			else if(value < INT8_MIN || value > INT8_MAX)
+				doc.SetOrCreateValue<int16_t>(path, value);
+			else
+				doc.SetOrCreateValue<int8_t>(path, value);
+		} else if(json.is_number_float()) {
 			doc.SetOrCreateValue<double>(path, json.get<double>());
-		}
-		if(json.is_string()) {
-			std::string str = json.get<std::string>();
-			if(str[0] == '\'' && str[str.size() - 1] == '\'') {
-				doc.SetOrCreateValue<std::string>(path, str.substr(1, str.size() - 2));
-				return;
-			}
-			std::string descriptor = str.substr(0, str.find_first_of(";"));
-			if(descriptor.compare(str) == 0) {
-				if(str[str.size() - 1] == 'f') {
-					try {
-						doc.SetOrCreateValue<float>(path, std::stof(str.substr(0, str.size() - 1)));
-						return;
-					} catch(...) {}
-				} else {
-					try {
-						doc.SetOrCreateValue<double>(path, std::stod(str));
-						return;
-					} catch(...) {}
-				}
-			} else {
-				if(descriptor.size() < 2 || descriptor.size() > 3) throw std::runtime_error("Invalid integer format!");
-				if(!(descriptor.ends_with("8") || descriptor.ends_with("16") || descriptor.ends_with("32") || descriptor.ends_with(64))) throw std::runtime_error("Invalid integer format!");
-				if(descriptor[0] != 's' && descriptor[0] != 'u') throw std::runtime_error("Invalid integer format!");
-				std::string numStr = str.substr(descriptor.size() + 1);
-				if(descriptor.compare("s8") == 0) {
-					int64_t val = std::stol(numStr);
-					if(val < INT8_MIN || val > INT8_MAX) throw std::runtime_error("Invalid integer!");
-					doc.SetOrCreateValue<int8_t>(path, val);
-				} else if(descriptor.compare("s16") == 0) {
-					int64_t val = std::stol(numStr);
-					if(val < INT16_MIN || val > INT16_MAX) throw std::runtime_error("Invalid integer!");
-					doc.SetOrCreateValue<int16_t>(path, val);
-				} else if(descriptor.compare("s32") == 0) {
-					int64_t val = std::stol(numStr);
-					if(val < INT32_MIN || val > INT32_MAX) throw std::runtime_error("Invalid integer!");
-					doc.SetOrCreateValue<int32_t>(path, val);
-				} else if(descriptor.compare("s64") == 0) {
-					doc.SetOrCreateValue<int64_t>(path, std::stol(numStr));
-				} else if(descriptor.compare("u8") == 0) {
-					uint64_t val = std::stol(numStr);
-					if(val > UINT8_MAX) throw std::runtime_error("Invalid integer!");
-					doc.SetOrCreateValue<uint8_t>(path, val);
-				} else if(descriptor.compare("u16") == 0) {
-					uint64_t val = std::stol(numStr);
-					if(val > UINT16_MAX) throw std::runtime_error("Invalid integer!");
-					doc.SetOrCreateValue<uint16_t>(path, val);
-				} else if(descriptor.compare("u32") == 0) {
-					uint64_t val = std::stol(numStr);
-					if(val > UINT32_MAX) throw std::runtime_error("Invalid integer!");
-					doc.SetOrCreateValue<uint32_t>(path, val);
-				} else if(descriptor.compare("u64") == 0) {
-					doc.SetOrCreateValue<uint64_t>(path, std::stoul(numStr));
-				}
-				return;
-			}
-			throw std::runtime_error("Invalid string value!");
-		}
-		if(json.is_object()) {
+		} else if(json.is_string()) {
+			doc.SetOrCreateValue<std::string>(path, json.get<std::string>());
+		} else if(json.is_object()) {
 			if(!path.empty()) {
 				doc.CreateValue<libjaguar::UnstructuredObjTag>(path);
 			}
@@ -336,8 +302,7 @@ namespace astra {
 				std::string subpath = (path.empty() ? "" : path + ".") + it.key();
 				json2BinaryRecursive(doc, it.value(), subpath);
 			}
-		}
-		if(json.is_array()) {
+		} else if(json.is_array()) {
 			if(json.empty()) {
 				doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 				return;
@@ -345,37 +310,52 @@ namespace astra {
 			const nlohmann::json& first = json[0];
 			if(first.is_boolean()) {
 				doc.CreateValue<std::vector<bool>>(path);
-			} else if(first.is_number_integer()) {
-				doc.CreateValue<std::vector<int64_t>>(path);
 			} else if(first.is_number_unsigned()) {
-				doc.CreateValue<std::vector<uint64_t>>(path);
+				std::size_t i = 0;
+				uint64_t value = 0;
+				for(; i < json.size(); ++i) {
+					if(auto v = json[i].get<uint64_t>(); v > value) value = v;
+				}
+				iai.active = true;
+				iai.isSigned = false;
+				if(value > UINT32_MAX) {
+					doc.CreateValue<std::vector<uint64_t>>(path);
+					iai.u = value;
+				} else if(value > UINT16_MAX) {
+					doc.CreateValue<std::vector<uint32_t>>(path);
+					iai.u = value;
+				} else if(value > UINT8_MAX) {
+					doc.CreateValue<std::vector<uint16_t>>(path);
+					iai.u = value;
+				} else {
+					doc.CreateValue<std::vector<uint8_t>>(path, true);
+					iai.u = value;
+				}
+			} else if(first.is_number_integer()) {
+				std::size_t i = 0;
+				int64_t value = INT64_MIN;
+				for(; i < json.size(); ++i) {
+					if(auto v = json[i].get<int64_t>(); v > value) value = v;
+				}
+				iai.active = true;
+				iai.isSigned = true;
+				if(value < INT32_MIN || value > INT32_MAX) {
+					doc.CreateValue<std::vector<int64_t>>(path);
+					iai.s = value;
+				} else if(value < INT16_MIN || value > INT16_MAX) {
+					doc.CreateValue<std::vector<int32_t>>(path);
+					iai.s = value;
+				} else if(value < INT8_MIN || value > INT8_MAX) {
+					doc.CreateValue<std::vector<int16_t>>(path);
+					iai.s = value;
+				} else {
+					doc.CreateValue<std::vector<int8_t>>(path);
+					iai.s = value;
+				}
 			} else if(first.is_number_float()) {
 				doc.CreateValue<std::vector<double>>(path);
 			} else if(first.is_string()) {
-				std::string str = first.get<std::string>();
-				if(str.starts_with("s8;")) {
-					doc.CreateValue<std::vector<int8_t>>(path);
-				} else if(str.starts_with("s16;")) {
-					doc.CreateValue<std::vector<int16_t>>(path);
-				} else if(str.starts_with("s32;")) {
-					doc.CreateValue<std::vector<int32_t>>(path);
-				} else if(str.starts_with("s64;")) {
-					doc.CreateValue<std::vector<int64_t>>(path);
-				} else if(str.starts_with("u8;")) {
-					doc.CreateValue<std::vector<uint8_t>>(path, true);
-				} else if(str.starts_with("u16;")) {
-					doc.CreateValue<std::vector<uint16_t>>(path);
-				} else if(str.starts_with("u32;")) {
-					doc.CreateValue<std::vector<uint32_t>>(path);
-				} else if(str.starts_with("u64;")) {
-					doc.CreateValue<std::vector<uint64_t>>(path);
-				} else if(!str.empty() && str[str.size() - 1] == 'f') {
-					doc.CreateValue<std::vector<float>>(path);
-				} else if(!str.empty() && str[0] == '\'' && str[str.size() - 1] == '\'') {
-					doc.CreateValue<std::vector<std::string>>(path);
-				} else {
-					doc.CreateValue<std::vector<double>>(path);
-				}
+				doc.CreateValue<std::vector<std::string>>(path);
 			} else {
 				doc.CreateValue<std::vector<libjaguar::UnstructuredObjTag>>(path);
 			}
@@ -388,6 +368,7 @@ namespace astra {
 					json2BinaryRecursive(doc, json[i], subpath);
 				}
 			}
+			iai.active = false;
 		}
 	}
 

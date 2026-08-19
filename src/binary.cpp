@@ -1,6 +1,7 @@
 #include "astra/binary.hpp"
 
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <stdexcept>
 
@@ -287,45 +288,107 @@ namespace astra {
 				break;
 			case TypeInfo::Kind::Integer: {
 				Integer intInfo = info.asUnsafe<Integer>();
+				const libjaguar::ValueEntry& ve = doc.QueryValueInfo(path);
+				if(auto tagByte = static_cast<uint8_t>(ve.type); tagByte < 0x1A || tagByte > 0x2D) throw std::runtime_error("Found a non-integer value where an integer was expected!");
 				if(intInfo.isSigned()) {
+					int64_t min, max;
 					switch(intInfo.size()) {
-						case sizeof(int8_t):
-							intInfo.setSigned(doc.QueryValue<int8_t>(path));
+						case 8:
+							min = INT8_MIN;
+							max = INT8_MAX;
 							break;
-						case sizeof(int16_t):
-							intInfo.setSigned(doc.QueryValue<int16_t>(path));
+						case 16:
+							min = INT16_MIN;
+							max = INT16_MAX;
 							break;
-						case sizeof(int32_t):
-							intInfo.setSigned(doc.QueryValue<int32_t>(path));
+						case 32:
+							min = INT32_MIN;
+							max = INT32_MAX;
 							break;
-						case sizeof(int64_t):
-							intInfo.setSigned(doc.QueryValue<int64_t>(path));
+						case 64:
+							min = INT64_MIN;
+							max = INT64_MAX;
 							break;
 					}
+					if(static_cast<uint8_t>(ve.type) >= 0x2A) {
+						uint64_t value;
+						switch(ve.type) {
+							case libjaguar::TypeTag::UInt8: value = doc.QueryValue<uint8_t>(path); break;
+							case libjaguar::TypeTag::UInt16: value = doc.QueryValue<uint16_t>(path); break;
+							case libjaguar::TypeTag::UInt32: value = doc.QueryValue<uint32_t>(path); break;
+							case libjaguar::TypeTag::UInt64: value = doc.QueryValue<uint64_t>(path); break;
+							default: throw std::runtime_error("UNREACHABLE CODE");
+						}
+						if(value > static_cast<uint64_t>(max)) throw std::runtime_error("Integer type coercion failed; value is out of range!");
+						intInfo.setSigned(static_cast<int64_t>(value));
+					} else {
+						int64_t value;
+						switch(ve.type) {
+							case libjaguar::TypeTag::SInt8: value = doc.QueryValue<int8_t>(path); break;
+							case libjaguar::TypeTag::SInt16: value = doc.QueryValue<int16_t>(path); break;
+							case libjaguar::TypeTag::SInt32: value = doc.QueryValue<int32_t>(path); break;
+							case libjaguar::TypeTag::SInt64: value = doc.QueryValue<int64_t>(path); break;
+							default: throw std::runtime_error("UNREACHABLE CODE");
+						}
+						if(value < min || value > max) throw std::runtime_error("Integer type coercion failed; value is out of range!");
+						intInfo.setSigned(value);
+					}
 				} else {
+					uint64_t max;
 					switch(intInfo.size()) {
-						case sizeof(uint8_t):
-							intInfo.setUnsigned(doc.QueryValue<uint8_t>(path));
+						case 8:
+							max = UINT8_MAX;
 							break;
-						case sizeof(uint16_t):
-							intInfo.setUnsigned(doc.QueryValue<uint16_t>(path));
+						case 16:
+							max = UINT16_MAX;
 							break;
-						case sizeof(uint32_t):
-							intInfo.setUnsigned(doc.QueryValue<uint32_t>(path));
+						case 32:
+							max = UINT32_MAX;
 							break;
-						case sizeof(uint64_t):
-							intInfo.setUnsigned(doc.QueryValue<uint64_t>(path));
+						case 64:
+							max = UINT64_MAX;
 							break;
+					}
+					if(static_cast<uint8_t>(ve.type) >= 0x2A) {
+						uint64_t value;
+						switch(ve.type) {
+							case libjaguar::TypeTag::UInt8: value = doc.QueryValue<uint8_t>(path); break;
+							case libjaguar::TypeTag::UInt16: value = doc.QueryValue<uint16_t>(path); break;
+							case libjaguar::TypeTag::UInt32: value = doc.QueryValue<uint32_t>(path); break;
+							case libjaguar::TypeTag::UInt64: value = doc.QueryValue<uint64_t>(path); break;
+							default: throw std::runtime_error("UNREACHABLE CODE");
+						}
+						if(value > max) throw std::runtime_error("Integer type coercion failed; value is out of range!");
+						intInfo.setUnsigned(value);
+					} else {
+						int64_t value;
+						switch(ve.type) {
+							case libjaguar::TypeTag::SInt8: value = doc.QueryValue<int8_t>(path); break;
+							case libjaguar::TypeTag::SInt16: value = doc.QueryValue<int16_t>(path); break;
+							case libjaguar::TypeTag::SInt32: value = doc.QueryValue<int32_t>(path); break;
+							case libjaguar::TypeTag::SInt64: value = doc.QueryValue<int64_t>(path); break;
+							default: throw std::runtime_error("UNREACHABLE CODE");
+						}
+						if(value < 0 || static_cast<uint64_t>(value) > max) throw std::runtime_error("Integer type coercion failed; value is out of range!");
+						intInfo.setUnsigned(static_cast<uint64_t>(value));
 					}
 				}
 				break;
 			}
 			case TypeInfo::Kind::Float: {
 				Float floatInfo = info.asUnsafe<Float>();
-				if(floatInfo.size() == sizeof(float)) {
+				const libjaguar::ValueEntry& ve = doc.QueryValueInfo(path);
+				if(ve.type != libjaguar::TypeTag::Float32 && ve.type != libjaguar::TypeTag::Float64) throw std::runtime_error("Found a non-float value where a float was expected!");
+				if(ve.type == libjaguar::TypeTag::Float32) {
 					floatInfo.set(doc.QueryValue<float>(path));
 				} else {
-					floatInfo.set(doc.QueryValue<double>(path));
+					double value = doc.QueryValue<double>(path);
+					if(floatInfo.size() >= sizeof(double)) {
+						floatInfo.set(value);
+					} else {
+						if(std::abs(value) != std::numeric_limits<float>::infinity() && (value < std::numeric_limits<float>::min() || value > std::numeric_limits<float>::max())) throw std::runtime_error("Float type coercion failed; value is out of range!");
+						floatInfo.set(value);
+					}
 				}
 				break;
 			}

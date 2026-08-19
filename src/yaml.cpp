@@ -1,14 +1,15 @@
 #include "astra/yaml.hpp"
-
-#include <stdexcept>
-#include <string_view>
-
 #include "astra/type_table.hpp"
 #include "astra/box.hpp"
 #include "astra/types/list/list.hpp"
 #include "astra/reflection.hpp"
 #include "astra/type_info.hpp"
 #include "astra/types/integer/integer.hpp"
+
+
+#include <stdexcept>
+
+#include "yaml-cpp/exceptions.h"
 
 namespace astra {
 	void serializeYamlRecursive(YAML::Node _node, const TypeInfo& info, const std::string& field) {
@@ -19,23 +20,23 @@ namespace astra {
 				break;
 			case TypeInfo::Kind::Integer:
 				if(auto intInfo = info.asUnsafe<Integer>(); intInfo.isSigned()) {
-					node = ::astra::format("s{};{}", intInfo.size() * 8, intInfo.asSigned());
+					node = intInfo.asSigned();
 				} else {
-					node = ::astra::format("u{};{}", intInfo.size() * 8, intInfo.asUnsigned());
+					node = intInfo.asUnsigned();
 				}
 				break;
 			case TypeInfo::Kind::Float:
 				if(auto floatInfo = info.asUnsafe<Float>(); floatInfo.size() == sizeof(float)) {
-					node = ::astra::format("{}f", (float)floatInfo.get());
+					node = static_cast<float>(floatInfo.get());
 				} else {
-					node = std::to_string(floatInfo.get());
+					node = floatInfo.get();
 				}
 				break;
 			case TypeInfo::Kind::String:
-				node = ::astra::format("'{}'", info.asUnsafe<String>().get());
+				node = info.asUnsafe<String>().get();
 				break;
 			case TypeInfo::Kind::Enum:
-				node = ::astra::format("'{}'", info.asUnsafe<Enum>().toString());
+				node = info.asUnsafe<Enum>().toString();
 				break;
 			case TypeInfo::Kind::Object:
 				for(const auto& [name, contents] : info.asUnsafe<Object>().getFields()) {
@@ -97,43 +98,39 @@ namespace astra {
 				info.asUnsafe<Bool>().set(node.as<bool>());
 				break;
 			case TypeInfo::Kind::Integer: {
-				if(!node.IsScalar()) throw std::runtime_error("Invalid integer format!");
-				std::string fullNum = node.as<std::string>();
-				std::string descriptor = fullNum.substr(0, fullNum.find_first_of(";"));
-				if(descriptor.compare(fullNum) == 0) throw std::runtime_error("Invalid integer format!");
-				std::string numStr = fullNum.substr(descriptor.size() + 1);
-				if(descriptor.size() < 2 || descriptor.size() > 3) throw std::runtime_error("Invalid integer format!");
-				if(!(descriptor.ends_with("8") || descriptor.ends_with("16") || descriptor.ends_with("32") || descriptor.ends_with(64))) throw std::runtime_error("Invalid integer format!");
-				if(descriptor[0] == 's') {
-					info.asUnsafe<Integer>().setSigned(std::stoll(numStr));
+				Integer intInfo = info.asUnsafe<Integer>();
+				if(intInfo.isSigned()) {
+					if(!node.IsScalar()) throw std::runtime_error("Invalid integer format!");
+					intInfo.setSigned(node.as<int64_t>());
 				} else {
-					info.asUnsafe<Integer>().setUnsigned(std::stoull(numStr));
+					if(!node.IsScalar()) throw std::runtime_error("Invalid integer format!");
+					if(node.Scalar()[0] == '-') throw std::runtime_error("Invalid integer format!");
+					intInfo.setUnsigned(node.as<uint64_t>());
 				}
 				break;
 			}
 			case TypeInfo::Kind::Float: {
 				if(!node.IsScalar()) throw std::runtime_error("Invalid floating-point format!");
-				std::string fullNum = node.as<std::string>();
-				if(char last = fullNum[fullNum.size() - 1]; last == 'f') {
-					info.asUnsafe<Float>().set(std::stof(fullNum.substr(0, fullNum.size() - 2)));
-				} else if(last >= '0' && last <= '9') {
-					info.asUnsafe<Float>().set(std::stod(fullNum.substr(0, fullNum.size() - 1)));
-				} else
+				Float floatInfo = info.asUnsafe<Float>();
+				try {
+					if(floatInfo.size() == sizeof(float)) {
+						floatInfo.set(node.as<float>());
+					} else {
+						floatInfo.set(node.as<double>());
+					}
+				} catch(const YAML::Exception&) {
 					throw std::runtime_error("Invalid floating-point format!");
+				}
 				break;
 			}
 			case TypeInfo::Kind::String: {
 				if(!node.IsScalar()) throw std::runtime_error("Invalid string format!");
-				std::string value = node.as<std::string>();
-				if(value[0] != '\'' || value[value.size() - 1] != '\'') throw std::runtime_error("Invalid string format!");
-				info.asUnsafe<String>().set(value.substr(1, value.size() - 2));
+				info.asUnsafe<String>().set(node.as<std::string>());
 				break;
 			}
 			case TypeInfo::Kind::Enum: {
 				if(!node.IsScalar()) throw std::runtime_error("Invalid enum format!");
-				std::string value = node.as<std::string>();
-				if(value[0] != '\'' || value[value.size() - 1] != '\'') throw std::runtime_error("Invalid enum format!");
-				info.asUnsafe<Enum>().fromString(value.substr(1, value.size() - 2));
+				info.asUnsafe<Enum>().fromString(node.as<std::string>());
 				break;
 			}
 			case TypeInfo::Kind::Object: {

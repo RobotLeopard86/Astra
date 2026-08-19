@@ -3,7 +3,7 @@
 #include <istream>
 
 #include "var.hpp"
-#include "reflectable.hpp"
+#include "traits.hpp"
 #include "dll.hpp"
 
 #include "libjaguar/Document.hpp"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "dll.hpp"
-#include "reflectable.hpp"
+#include "traits.hpp"
 #include "type_id.hpp"
 #include <stdexcept>
 

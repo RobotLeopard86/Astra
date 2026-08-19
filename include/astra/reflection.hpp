@@ -1,6 +1,6 @@
 #pragma once
 
-#include "reflectable.hpp"
+#include "traits.hpp"
 #include "type_info.hpp"
 #include "dll.hpp"
 

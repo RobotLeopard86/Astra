@@ -11,7 +11,6 @@
 #include "astra/yaml.hpp"
 #include "astra/binary.hpp"
 #include "astra/serialized_convert.hpp"
-#include "astra/reflectable.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -109,7 +108,7 @@ int main() {
 	sub.someData = "I have 6 dogs";
 	std::cout << "Here's what it looks like manually:\n\tComputed Value: " << sub.computed << "\n\tSome Data: " << sub.someData << std::endl;
 	std::cout << "But I can still serialize it! Here it is in JSON: " << astra::json::toString(&sub) << std::endl;
-	std::string sub2Yaml = "base: s32;3";
+	std::string sub2Yaml = "base: 3";
 	std::cout << "I can deserialize it too! Here's a similar one in YAML: " << sub2Yaml << std::endl;
 	SubstitutedType sub2 = astra::yaml::fromString<SubstitutedType>(sub2Yaml);
 	std::cout << "And here it is deserialized:\n\tComputed Value: " << sub2.computed << "\n\tSome Data: " << sub2.someData << std::endl;
@@ -131,7 +130,7 @@ int main() {
 	complicated.myString = "Lorem impsum sit dolor amet i do not know how to write lorem ipsum ahhhhhhh";
 	complicated.ptrToAnotherEnum = std::make_unique<ExampleNamespace::ComplicatedType::AnotherEnum>(ExampleNamespace::ComplicatedType::AnotherEnum::ArrozConPollo);
 	complicated.carrrrr = std::make_unique<std::shared_ptr<Car>>(std::make_shared<Car>());
-	(*complicated.carrrrr)->brand = "Toronto Motors";
+	(*complicated.carrrrr)->brand = "Very Regular Car Company";
 	(*complicated.carrrrr)->owner = "Lord Moldevort";
 	(*complicated.carrrrr)->hasInsurance = false;
 	(*complicated.carrrrr)->hasSatRadio = false;
