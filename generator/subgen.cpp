@@ -6,6 +6,7 @@
 #include <regex>
 #include <algorithm>
 #include <set>
+#include <deque>
 
 #include "nlohmann/json.hpp"
 

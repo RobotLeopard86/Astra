@@ -84,7 +84,7 @@ namespace astra {
 	 * @return The fully formatted string result.
 	 */
 	template<typename... Ts>
-	ASTRA_API std::string format(std::string_view fmt, Ts&&... args) {
+	ASTRA_API inline std::string format(std::string_view fmt, Ts&&... args) {
 		std::string result;
 		format(&result, fmt, 0, std::forward<Ts>(args)...);
 		return result;

@@ -35,4 +35,4 @@ includes = include_directories('..' / 'include')
 libastra = library('astra', astra_sources, include_directories: includes, dependencies: [nlohmann_json_dep, yaml_cpp_dep, jaguar_dep, dbghelp_dep], pic: true, install: true)
 
 # Dependency
-astra_dep = declare_dependency(link_with: libastra, include_directories: includes, dependencies: [nlohmann_json_dep, yaml_cpp_dep.partial_dependency(includes: true, compile_args: true), jaguar_dep.partial_dependency(includes: true, compile_args: true)])
+astra_dep = declare_dependency(link_with: libastra, include_directories: includes, compile_args: (get_option('default_library') == 'static' ? ['-DASTRA_STATICLIB'] : []), dependencies: [nlohmann_json_dep, yaml_cpp_dep.partial_dependency(includes: true, compile_args: true), jaguar_dep.partial_dependency(includes: true, compile_args: true)])
