@@ -411,8 +411,9 @@
 <p>↰ <a class="reference internal" href="file_include_astra_dll.hpp.html#file-include-astra-dll-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/astra/dll.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#ifdef _WIN32</span>
 <span class="cp">#define NOMINMAX</span>
+
+<span class="cp">#if defined(_WIN32) &amp;&amp; !defined(ASTRA_STATICLIB)</span>
 <span class="cp">#ifdef ASTRA_BUILD</span>
 <span class="cp">#define ASTRA_API __declspec(dllexport)</span>
 <span class="cp">#else</span>
