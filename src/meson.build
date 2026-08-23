@@ -23,6 +23,7 @@ astra_sources = [
 	'json.cpp',
 	'reflection.cpp',
 	'stringify.hpp',
+	'type_table.cpp',
 	'var.cpp',
 	'varserialize.cpp',
 	'yaml.cpp'
