@@ -104,8 +104,32 @@ namespace astra {
 		em.SetStringFormat(YAML::EMITTER_MANIP::DoubleQuoted);
 		em.SetMapFormat(YAML::EMITTER_MANIP::Flow);
 		em.SetSeqFormat(YAML::EMITTER_MANIP::Flow);
+		em.SetBoolFormat(YAML::EMITTER_MANIP::TrueFalseBool);
 		em << node;
-		return nlohmann::json::parse(em.c_str());
+
+		//Boolean replacement (so fun)
+		nlohmann::json json = nlohmann::json::parse(em.c_str());
+		auto convertBooleanStrings = [](auto&& self, nlohmann::json& json) -> void {
+			if(json.is_object()) {
+				for(auto& [key, value] : json.items()) {
+					self(self, value);
+				}
+			} else if(json.is_array()) {
+				for(auto& value : json) {
+					self(self, value);
+				}
+			} else if(json.is_string()) {
+				const auto& str = json.get_ref<const std::string&>();
+
+				if(str == "true") {
+					json = true;
+				} else if(str == "false") {
+					json = false;
+				}
+			}
+		};
+		convertBooleanStrings(convertBooleanStrings, json);
+		return json;
 	}
 
 	YAML::Node convert::jsonToYaml(const nlohmann::json& json) {

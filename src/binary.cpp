@@ -392,9 +392,15 @@ namespace astra {
 				}
 				break;
 			}
-			case TypeInfo::Kind::String:
-				info.asUnsafe<String>().set(doc.QueryValue<std::string>(path));
+			case TypeInfo::Kind::String: {
+				const libjaguar::ValueEntry& ve = doc.QueryValueInfo(path);
+				if(ve.type == libjaguar::TypeTag::Boolean) {
+					info.asUnsafe<String>().set(doc.QueryValue<bool>(path) ? "true" : "false");
+				} else {
+					info.asUnsafe<String>().set(doc.QueryValue<std::string>(path));
+				}
 				break;
+			}
 			case TypeInfo::Kind::Enum:
 				info.asUnsafe<Enum>().fromString(doc.QueryValue<std::string>(path));
 				break;
