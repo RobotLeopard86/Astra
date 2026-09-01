@@ -36,7 +36,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T>
+			requires std::is_enum_v<T> || (!std::is_class_v<T>)
 		static T fromJson(const nlohmann::json& json) {
 			T obj;
 			deserialize(Var(&obj), json);
@@ -125,7 +125,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T>
+			requires std::is_enum_v<T> || (!std::is_class_v<T>)
 		static nlohmann::json toJson(const T* obj) {
 			nlohmann::json j;
 			if(!obj) throw std::runtime_error("Invalid object pointer!");

@@ -35,7 +35,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T>
+			requires std::is_enum_v<T> || (!std::is_class_v<T>)
 		static T fromNode(const YAML::Node& json) {
 			T obj;
 			deserialize(Var(&obj), json);
@@ -126,7 +126,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T>
+			requires std::is_enum_v<T> || (!std::is_class_v<T>)
 		static YAML::Node toNode(const T* obj) {
 			YAML::Node node;
 			node["__astraforcemapcreate__"] = true;
