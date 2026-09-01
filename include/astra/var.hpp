@@ -53,12 +53,12 @@ namespace astra {
 
 		///@cond
 		template<Reflectable T>
-			requires(!std::is_enum_v<T> && std::is_class_v<T>)
+			requires std::is_base_of_v<AstraReflectBase, T>
 		explicit Var(const T* value)
 		  : value(const_cast<T*>(value)), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), areWeConst(true) {}
 
 		template<Reflectable T>
-			requires(!std::is_enum_v<T> && std::is_class_v<T>)
+			requires std::is_base_of_v<AstraReflectBase, T>
 		explicit Var(T* value, bool isConst = false)
 		  : value(value), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), areWeConst(isConst) {}
 		///@endcond

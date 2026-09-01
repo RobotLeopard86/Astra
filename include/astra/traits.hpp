@@ -158,7 +158,27 @@ namespace astra {
 	constexpr inline bool has_serialized_v = is_substitute_valid<T>::value;
 
 	template<typename T>
-		requires std::is_enum_v<T> || (!std::is_class_v<T>) || (std::is_class_v<T> && std::default_initializable<T> && std::is_base_of_v<AstraReflectBase, T>)
+		requires std::is_enum_v<T> || (!std::is_class_v<T>) || (is_class_v<T> && std::default_initializable<T> && std::is_base_of_v<AstraReflectBase, T>)
+	struct is_reflectable<T> : public std::true_type {};
+
+	template<typename T>
+		requires is_string_v<T>
+	struct is_reflectable<T> : public std::true_type {};
+
+	template<typename T>
+		requires is_array_v<T> && is_reflectable<array_value_t<T>>::value
+	struct is_reflectable<T> : public std::true_type {};
+
+	template<typename T>
+		requires(is_std_array_v<T> || is_list_v<T>) && is_reflectable<typename T::value_type>::value
+	struct is_reflectable<T> : public std::true_type {};
+
+	template<typename T>
+		requires(is_shared_ptr_v<T> || is_unique_ptr_v<T>) && is_reflectable<typename T::element_type>::value
+	struct is_reflectable<T> : public std::true_type {};
+
+	template<typename T>
+		requires is_map_v<T> && is_reflectable<typename T::key_type>::value && is_reflectable<typename T::mapped_type>::value
 	struct is_reflectable<T> : public std::true_type {};
 
 	template<typename T>

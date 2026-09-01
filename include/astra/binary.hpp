@@ -34,7 +34,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T> || (!std::is_class_v<T>)
+			requires std::is_enum_v<T> || (!is_class_v<T>)
 		static T fromDocument(libjaguar::Document& doc) {
 			T obj;
 			deserialize(Var(&obj), doc);
@@ -63,7 +63,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T> || (!std::is_class_v<T>)
+			requires std::is_enum_v<T> || (!is_class_v<T>)
 		static T fromVector(const std::vector<uint8_t>& vector) {
 			T obj;
 			deserialize(Var(&obj), vector);
@@ -92,7 +92,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T> || (!std::is_class_v<T>)
+			requires std::is_enum_v<T> || (!is_class_v<T>)
 		static T fromStream(std::istream& stream) {
 			T obj;
 			deserialize(Var(&obj), stream);
@@ -145,7 +145,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T> || (!std::is_class_v<T>)
+			requires std::is_enum_v<T> || (!is_class_v<T>)
 		static libjaguar::Document toDocument(const T* obj) {
 			libjaguar::Document doc;
 			if(!obj) throw std::runtime_error("Invalid object pointer!");
@@ -175,7 +175,7 @@ namespace astra {
 
 		///@cond
 		template<Serializable T>
-			requires std::is_enum_v<T> || (!std::is_class_v<T>)
+			requires std::is_enum_v<T> || (!is_class_v<T>)
 		static std::vector<uint8_t> toVector(const T* obj) {
 			std::vector<uint8_t> result;
 			if(!obj) throw std::runtime_error("Invalid object pointer!");
