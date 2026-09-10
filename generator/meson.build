@@ -6,12 +6,6 @@ inja_dep = subproject('inja', required: true, default_options: {
 spinners_dep = subproject('spinners-plus-plus', required: true).get_variable('spinners_dep')
 deps = [cli11_dep, inja_dep, spinners_dep]
 
-# Validate cross-compilation
-generator_cross = get_option('generator')
-if meson.is_cross_build() and generator_cross and not ['windows', 'darwin', 'linux'].contains(host_machine.system())
-	error('Cannot cross-compile generator to unsupported platform!')
-endif
-
 # LLVM/Clang dependencies
 if host_machine.system() == 'windows'
 	cxx = meson.get_compiler('cpp')
