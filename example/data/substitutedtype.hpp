@@ -26,10 +26,6 @@ struct ASTRA_REFLECT astra::SerializedSubstitute<SubstitutedType> : public Astra
 
 	SerializedSubstitute() = default;
 
-	SerializedSubstitute(const SubstitutedType& st) {
-		base = std::log2(st.computed);
-	}
-
 	ASTRA_SUBSTITUTE_SERIALIZE(SubstitutedType) {
 		base = std::log2(in->computed);
 	}
