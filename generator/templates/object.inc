@@ -26,38 +26,35 @@ struct TypeActions<{{name}}> {
     static std::map<std::string_view, MethodDesc> methods {% if length(methods) != 0 -%}{
       {% else -%}{};{% endif -%}
       {% for item in methods -%}
-        {"{{item.alias}}", MethodDesc(&invoke_{{item.name}}, Access::{{join(item.acc," | Access::")}})},
+        {"{{item.alias}}", MethodDesc([](Var res, void* obj, const std::vector<Var>& args) {
+          if (args.size() != {{length(item.params)}}) {
+            throw std::runtime_error("Number of arguments is not the same as in the callable");
+          }
+
+          {% for type in item.params -%}
+          if (args[{{loop.index}}].typeId() != TypeId::get<{{type}}>()) {
+            throw std::runtime_error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].typeId())));
+          }
+          std::add_const_t<{{type}}>& a{{loop.index}} = *args[{{loop.index}}].rtCast<std::add_const_t<{{type}}>>();
+
+          {% endfor -%}
+
+          {% if item.return != "void" -%}
+          if (res.typeId() != TypeId::get<{{item.return}}>()) {
+            throw std::runtime_error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.typeId())));
+          }
+          *reinterpret_cast<{{item.return}}*>(res.rawMut()) = 
+          {% endif -%}
+          std::invoke(&{{name}}::{{item.name}}{% if not ("Static" in item.acc) -%}, static_cast<{{name}}*>(obj){% endif -%}{% if length(item.params) != 0 -%},{% else -%});{% endif -%}
+            {% for i in range(length(item.params)) -%}
+              a{{loop.index}}{% if not loop.is_last -%},
+            {% else -%});{% endif -%}
+            {% endfor -%}
+        }, Access::{{join(item.acc," | Access::")}})},
     {% if not loop.is_last -%}  {% else -%}};{% endif -%}
       {% endfor %}
     return Object(Var(p, isConst), &fields, &methods);
   }
-{% for item in methods -%}
-  static void invoke_{{item.name}}(Var res, void* obj, const std::vector<Var>& args) {
-    if (args.size() != {{length(item.params)}}) {
-      throw std::runtime_error("Number of arguments is not the same as in the callable");
-    }
-
-    {% for type in item.params -%}
-    if (args[{{loop.index}}].typeId() != TypeId::get<{{type}}>()) {
-      throw std::runtime_error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].typeId())));
-    }
-    std::add_const_t<{{type}}>& a{{loop.index}} = *args[{{loop.index}}].rtCast<std::add_const_t<{{type}}>>();
-
-    {% endfor -%}
-
-    {% if item.return != "void" -%}
-    if (res.typeId() != TypeId::get<{{item.return}}>()) {
-      throw std::runtime_error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.typeId())));
-    }
-    *reinterpret_cast<{{item.return}}*>(res.rawMut()) = 
-    {% endif -%}
-    std::invoke(&{{name}}::{{item.name}}{% if not ("Static" in item.acc) -%}, static_cast<{{name}}*>(obj){% endif -%}{% if length(item.params) != 0 -%},{% else -%});{% endif -%}
-      {% for i in range(length(item.params)) -%}
-        a{{loop.index}}{% if not loop.is_last -%},
-      {% else -%});{% endif -%}
-      {% endfor -%}
-  }
-{% endfor -%}
 };
 
 template<>
