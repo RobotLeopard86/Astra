@@ -1,13 +1,7 @@
 R"(
-#include "astra/type_table.hpp"
-#include "astra/type_actions/common_actions.hpp"
-#include "astra/type_actions/type_actions.hpp"
-
 {% if (namespace != "") -%}
 using namespace {{namespace}};
 {% endif -%}
-
-namespace astra {
 
 template<>
 struct TypeActions<{{name}}> {
@@ -25,15 +19,13 @@ struct TypeActions<{{name}}> {
 
 template<>
 inline TypeId TypeId::get<{{name}}>() {
-  static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,      
-                                                 &CommonActions<{{name}}>::typeName,  
-                                                 &CommonActions<{{name}}>::sizeOf,  
-                                                 &CommonActions<{{name}}>::construct,  
-                                                 &CommonActions<{{name}}>::destroy,    
-                                                 &CommonActions<{{name}}>::copy,       
+  static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,
+                                                 &CommonActions<{{name}}>::typeName,
+                                                 &CommonActions<{{name}}>::sizeOf,
+                                                 &CommonActions<{{name}}>::construct,
+                                                 &CommonActions<{{name}}>::destroy,
+                                                 &CommonActions<{{name}}>::copy,
                                                  &CommonActions<{{name}}>::move)));
   return id;
-}
-
 }
 )"

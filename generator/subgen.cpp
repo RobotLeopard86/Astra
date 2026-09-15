@@ -531,21 +531,16 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 	std::vector<std::string> generate;
 	std::set<std::string> canSubstitute;
 	std::set<std::string> allKnown;
-	std::unordered_map<std::string, std::string> subOrigins;
 	for(const auto& [name, data] : results) {
 		if(!data.contains("kind")) continue;
 		if(name.find("astra::SerializedSubstitute") == std::string::npos) {
 			if(data["kind"] == 0) {
 				generate.push_back(name);
 				canSubstitute.insert(name);
-				subOrigins[name] = "astra_generated/";
-				subOrigins["astra::SerializedSubstitute<" + name + ">"] = "astra_generated/";
 			}
 		} else {
 			std::string inner = name.substr(name.find_first_of('<') + 1, name.find_last_of('>') - name.find_first_of('<') - 1);
 			canSubstitute.insert(inner);
-			subOrigins[inner] = "astra_generated/";
-			subOrigins[name] = "astra_generated/";
 		}
 		allKnown.insert(name);
 	}
@@ -555,14 +550,10 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			if(name.find("astra::SerializedSubstitute") == std::string::npos) {
 				if(data["kind"] == 0) {
 					canSubstitute.insert(name);
-					subOrigins[name] = id.basePath;
-					subOrigins["astra::SerializedSubstitute<" + name + ">"] = id.basePath;
 				}
 			} else {
 				std::string inner = name.substr(name.find_first_of('<') + 1, name.find_last_of('>') - name.find_first_of('<') - 1);
 				canSubstitute.insert(inner);
-				subOrigins[inner] = id.basePath;
-				subOrigins[name] = id.basePath;
 			}
 			allKnown.insert(name);
 		}
@@ -627,17 +618,6 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 
 			//Clean up converter chain
 			destroyConverterChain(cvt);
-		}
-
-		//Generate headers list
-		substitute["headers"] = nlohmann::json::array();
-		for(const auto& sub : substitutes) {
-			std::string filename = toFilename(sub);
-			std::string dirLevelAdjust = "";
-			for(char c : filename) {
-				if(c == '/') dirLevelAdjust += "../";
-			}
-			substitute["headers"].push_back(dirLevelAdjust + subOrigins.at(sub) + filename + ".astra.hpp");
 		}
 
 		//Add data for required functions

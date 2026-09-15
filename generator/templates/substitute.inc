@@ -1,9 +1,4 @@
 R"(
-
-{% for header in headers -%}
-#include "{{header}}"
-{% endfor -%}
-
 template<>
 struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase {
     {% for field in fields -%}

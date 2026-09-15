@@ -16,4 +16,8 @@ namespace templates {
 	const std::string Substitute =
 #include "templates/substitute.inc"
 		;
+
+	const std::string Member =
+#include "templates/member.inc"
+		;
 }

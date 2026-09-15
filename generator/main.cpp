@@ -178,8 +178,8 @@ int main(int argc, char* argv[]) {
 		//Add to data map
 		InheritedData& id = inheritedData.emplace_back();
 		id.basePath = std::filesystem::relative(std::filesystem::path(summaryFile).parent_path(), std::filesystem::path(outDir) / "a_particular_nonexistent_file").generic_string() + "/astra_generated/";
-		nlohmann::json root = nlohmann::json::parse(inStream);
-		for(auto it = root.begin(); it != root.end(); ++it) {
+		nlohmann::json header = nlohmann::json::parse(inStream);
+		for(auto it = header.begin(); it != header.end(); ++it) {
 			id.results[it.key()] = it.value();
 		}
 	}
@@ -212,21 +212,20 @@ int main(int argc, char* argv[]) {
 	inja::Template enumTemplate = inja.parse(templates::Enum);
 	inja::Template objectTemplate = inja.parse(templates::Object);
 	inja::Template subTemplate = inja.parse(templates::Substitute);
+	inja::Template memberTemplate = inja.parse(templates::Member);
 	VERBOSE_LOG("Loaded templates");
 
-	//Write root files
+	//Write files
 	clock::time_point writeBegin = clock::now();
-	int writeCount = parsed.size() + 2;//Root header file, root summary file, and individual class headers
-	counter = 0;
-	std::ofstream root(out / (project + ".astra.hpp"));
-	if(!root.is_open()) {
-		ERROR("Failed to open root header file for writing!");
+	std::ofstream header(out / (project + ".astra.hpp"));
+	if(!header.is_open()) {
+		ERROR("Failed to open generated header file for writing!");
 		if(!quiet) {
 			spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
 		}
 		return -1;
 	}
-	root << R"(
+	header << R"(
 /* ---------------------------------------- *\
 |                                            |
 |   Astra-generated reflection info file.    |
@@ -238,12 +237,16 @@ int main(int argc, char* argv[]) {
 
 #include "astra/reflection.hpp" // IWYU pragma: export
 #include "astra/type_actions/all_types.hpp" // IWYU pragma: export
+#include "astra/type_id.hpp"
+#include "astra/type_table.hpp"
+#include "astra/type_actions/common_actions.hpp"
+#include "astra/type_actions/type_actions.hpp"
 
 )";
 
-	std::ofstream rootSummary(out / (project + ".astra.json"));
-	if(!rootSummary.is_open()) {
-		ERROR("Failed to open root summary file for writing!");
+	std::ofstream summary(out / (project + ".astra.json"));
+	if(!summary.is_open()) {
+		ERROR("Failed to open header summary file for writing!");
 		if(!quiet) {
 			spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
 		}
@@ -253,75 +256,58 @@ int main(int argc, char* argv[]) {
 	for(const auto& [_, json] : inheritedData) {
 		jsonSum.merge_patch(json);
 	}
-	rootSummary << jsonSum.dump(1, '\t', true);
-	rootSummary.close();
-	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".astra.json"));
+	summary << jsonSum.dump(1, '\t', true);
+	summary.close();
+	VERBOSE_LOG("(1/2) Generated " << out / (project + ".astra.json"));
 
-	//Create type reflection directory
-	std::filesystem::path typesDir = out / "astra_generated";
-	std::filesystem::create_directories(typesDir);
-
-	//Write file templates
-	for(auto&& [_, json] : parsed) root << "template<>\nastra::TypeId astra::TypeId::get<" << json["name"].get<std::string>() << ">();\n";
-	root << "\n";
-	for(auto&& [objectName, json] : parsed) {
-		//Generate filenames
-		auto filenameUTF8 = toFilename(objectName);
-		filenameUTF8 += ".astra";
-#ifdef _WIN32
-		auto hppFile = typesDir / (files.fromUTF8(filenameUTF8.data(), filenameUTF8.size()) + L".hpp");
-#else
-		auto hppFile = typesDir / (filenameUTF8 + ".hpp");
-#endif
-
-		//Ensure directories are okay
-		if(!includePrefix.empty()) json["origin"] = std::format("{}/{}", includePrefix, json["origin"].get<std::string>());
-		json["file_name"] = hppFile.filename();
-		json["project"] = project;
-		std::filesystem::create_directories(hppFile.parent_path());
-
-		//Open file streams
-		std::ofstream hpp(hppFile);
-		if(!hpp.is_open()) {
-			ERROR("Failed to open type header file for writing!");
-			if(!quiet) {
-				spinner->finish(jms::FinishedState::FAILURE, "Failed to generate reflection data.");
-			}
-			return -1;
-		}
-
-		//Write generation notes
-		hpp << R"(
-/* ---------------------------------------- *\
-|                                            |
-|   Astra-generated reflection info file.    |
-|               DO NOT EDIT!                 |
-|                                            |
-\* ---------------------------------------- */
-
-)";
-
-		//Render header file
-		inja.render_to(hpp, headerTemplate, json);
-		if(json["is_substitute"].get<bool>()) {
-			inja.render_to(hpp, subTemplate, json);
-		}
-		if(json["kind"].get<int>() == 0) {
-			inja.render_to(hpp, objectTemplate, json);
-		} else {
-			inja.render_to(hpp, enumTemplate, json);
-		}
-		hpp.close();
-		VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << hppFile);
-
-		//Add includes to root files
-		const std::string includeStr = "#include \"astra_generated/";
-		root << includeStr << filenameUTF8 << ".hpp\" // IWYU pragma: export\n";
+	//Write consolidated reflection data to header header
+	//1. Type Origin Includes
+	for(auto&& [_, json] : parsed) {
+		std::string origin = json["origin"].get<std::string>();
+		if(!includePrefix.empty()) origin = std::format("{}/{}", includePrefix, origin);
+		header << "#include \"" << origin << "\" // IWYU pragma: export\n";
 	}
+	header << "\n";
 
-	//Close root files
-	root.close();
-	VERBOSE_LOG("(" << ++counter << "/" << writeCount << ") Generated " << out / (project + ".astra.hpp"));
+	//2. Forward Declarations
+	header << "namespace astra {\n";
+	for(auto&& [_, json] : parsed) {
+		inja.render_to(header, headerTemplate, json);
+		header << "template<>\nTypeId TypeId::get<" << json["name"].get<std::string>() << ">();\n";
+	}
+	header << "}\n\n";
+
+	//3. Substitute Definitions
+	for(auto&& [_, json] : parsed) {
+		if(json["is_substitute"].get<bool>()) {
+			inja.render_to(header, subTemplate, json);
+		}
+	}
+	header << "\n";
+
+	//4. Implementations
+	header << "namespace astra {\n";
+	for(auto&& [_, json] : parsed) {
+		if(json["is_substitute"].get<bool>()) continue;
+		if(json["kind"].get<int>() == 0) {
+			inja.render_to(header, objectTemplate, json);
+		} else {
+			inja.render_to(header, enumTemplate, json);
+		}
+	}
+	header << "}\n\n";
+
+	//5. Member Functions
+	for(auto&& [objectName, json] : parsed) {
+		if(json["kind"].get<int>() == 0 && !json["is_substitute"].get<bool>()) {
+			inja.render_to(header, memberTemplate, json);
+		}
+	}
+	header << "\n";
+
+	//Close header files
+	header.close();
+	VERBOSE_LOG("(2/2) Generated " << out / (project + ".astra.hpp"));
 	clock::time_point writeEnd = clock::now();
 	VERBOSE_LOG("File generation completed in " << (std::round(std::chrono::duration_cast<std::chrono::duration<float>>(writeEnd - writeBegin).count() * 10000) / 10000) << " seconds");
 
