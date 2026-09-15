@@ -1,6 +1,4 @@
 R"(
-#include "{{file_name}}"
-
 #include "astra/type_table.hpp"
 #include "astra/type_actions/common_actions.hpp"
 #include "astra/type_actions/type_actions.hpp"
@@ -58,7 +56,7 @@ struct TypeActions<{{name}}> {
 };
 
 template<>
-TypeId TypeId::get<{{name}}>() {
+inline TypeId TypeId::get<{{name}}>() {
   static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,      
                                                  &CommonActions<{{name}}>::typeName,  
                                                  &CommonActions<{{name}}>::sizeOf,  
@@ -75,7 +73,7 @@ TypeId TypeId::get<{{name}}>() {
 
 }
 
-astra::TypeId {{name}}::ASTRA__gettypeid() const {
+inline astra::TypeId {{name}}::ASTRA__gettypeid() const {
 	return astra::TypeId::get<{{name}}>();
 }
 )"

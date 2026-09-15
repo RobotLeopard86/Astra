@@ -13,8 +13,5 @@ namespace astra {
 template<>
 struct TypeActions<{{name}}>;
 
-template<>
-TypeId TypeId::get<{{name}}>();
-
 }
 )"

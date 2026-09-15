@@ -19,9 +19,9 @@ This guide assumes you are using Meson for your project (Astra's build system). 
 2. Configure reflection codegen
 	1. Create the custom target. It should look something like this:
 	```{code-block}
-	reflection = custom_target('example.astra.[cpphpp]', output: ['example.astra.hpp', 'example.astra.cpp'],
+	reflection = custom_target('example.astra.hpp', output: 'example.astra.hpp',
 		input: ['some_header.hpp'], console: true, command: [astra_generator, '-c', meson.global_build_root(), '-o', 
-		meson.current_build_dir(), '-n', 'example', '-i', meson.current_source_dir()])
+		meson.current_build_dir(), '-n', 'example', '@INPUT@'])
 	```
 	2. Add the custom target to your library/executable's sources
 	3. Add `astra_dep` to your library/executable's dependencies
