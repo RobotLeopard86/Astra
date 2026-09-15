@@ -216,7 +216,7 @@ int main(int argc, char* argv[]) {
 
 	//Write root files
 	clock::time_point writeBegin = clock::now();
-	int writeCount = (parsed.size() * 2) + 3;//.hpp and .cpp for all parsed types, plus root files
+	int writeCount = parsed.size() + 2;//Root header file, root summary file, and individual class headers
 	counter = 0;
 	std::ofstream root(out / (project + ".astra.hpp"));
 	if(!root.is_open()) {
