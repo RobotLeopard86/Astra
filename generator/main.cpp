@@ -208,11 +208,9 @@ int main(int argc, char* argv[]) {
 	VERBOSE_LOG("Template engine ready");
 
 	//Create template objects
-	inja::Template headerTemplate = inja.parse(templates::Header);
 	inja::Template enumTemplate = inja.parse(templates::Enum);
 	inja::Template objectTemplate = inja.parse(templates::Object);
 	inja::Template subTemplate = inja.parse(templates::Substitute);
-	inja::Template memberTemplate = inja.parse(templates::Member);
 	VERBOSE_LOG("Loaded templates");
 
 	//Write files
@@ -260,7 +258,7 @@ int main(int argc, char* argv[]) {
 	summary.close();
 	VERBOSE_LOG("(1/2) Generated " << out / (project + ".astra.json"));
 
-	//Write consolidated reflection data to header header
+	//Write reflection data to output header
 	//1. Type Origin Includes
 	for(auto&& [_, json] : parsed) {
 		std::string origin = json["origin"].get<std::string>();
@@ -272,8 +270,8 @@ int main(int argc, char* argv[]) {
 	//2. Forward Declarations
 	header << "namespace astra {\n";
 	for(auto&& [_, json] : parsed) {
-		inja.render_to(header, headerTemplate, json);
-		header << "template<>\nTypeId TypeId::get<" << json["name"].get<std::string>() << ">();\n";
+		std::string name = json["name"].get<std::string>();
+		header << "template<>\nstruct TypeActions<" << name << ">;\ntemplate<>\nTypeId TypeId::get<" << name << ">();\n\n";
 	}
 	header << "}\n\n";
 
@@ -288,7 +286,6 @@ int main(int argc, char* argv[]) {
 	//4. Implementations
 	header << "namespace astra {\n";
 	for(auto&& [_, json] : parsed) {
-		if(json["is_substitute"].get<bool>()) continue;
 		if(json["kind"].get<int>() == 0) {
 			inja.render_to(header, objectTemplate, json);
 		} else {
@@ -297,10 +294,11 @@ int main(int argc, char* argv[]) {
 	}
 	header << "}\n\n";
 
-	//5. Member Functions
+	//5. ASTRA__typeid
 	for(auto&& [objectName, json] : parsed) {
-		if(json["kind"].get<int>() == 0 && !json["is_substitute"].get<bool>()) {
-			inja.render_to(header, memberTemplate, json);
+		if(json["kind"].get<int>() == 0) {
+			std::string className = json["name"].get<std::string>();
+			header << "inline astra::TypeId " << className << "::ASTRA__gettypeid() const {\n\treturn astra::TypeId::get<" << className << ">();\n}\n\n";
 		}
 	}
 	header << "\n";

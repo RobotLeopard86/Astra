@@ -6,18 +6,11 @@ namespace templates {
 	const std::string Enum =
 #include "templates/enum.inc"
 		;
-	const std::string Header =
-#include "templates/header.inc"
-		;
 	const std::string Object =
 #include "templates/object.inc"
 		;
 
 	const std::string Substitute =
 #include "templates/substitute.inc"
-		;
-
-	const std::string Member =
-#include "templates/member.inc"
 		;
 }

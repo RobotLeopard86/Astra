@@ -18,7 +18,7 @@ struct TypeActions<{{name}}> {
     static std::map<std::string_view, MethodDesc> methods {% if length(methods) != 0 -%}{
       {% else -%}{};{% endif -%}
       {% for item in methods -%}
-        {"{{item.alias}}", MethodDesc([](Var res, void* obj, const std::vector<Var>& args) {
+        {"{{item.alias}}", MethodDesc([](Var {% if item.return != "void" -%}res{% endif -%}, void* obj, const std::vector<Var>& args) {
           if (args.size() != {{length(item.params)}}) {
             throw std::runtime_error("Number of arguments is not the same as in the callable");
           }
