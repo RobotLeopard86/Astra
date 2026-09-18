@@ -9,6 +9,7 @@
 #include "clang/AST/Attrs.inc"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
+#include "clang/Lex/Lexer.h"
 #include "clang/AST/DeclarationName.h"
 #include "clang/AST/PrettyPrinter.h"
 #include "clang/AST/TemplateBase.h"
@@ -142,6 +143,52 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	json["kind"] = 0;
 	json["name"] = name;
 	json["origin"] = std::filesystem::path(fileName(c)).filename();
+	json["is_template"] = false;
+
+	//Process template stuff
+	if(const auto* tmpl = c->getDescribedClassTemplate()) {
+		const auto* params = tmpl->getTemplateParameters();
+		std::string paramsText = clang::Lexer::getSourceText(
+			clang::CharSourceRange::getTokenRange(params->getSourceRange()),
+			*srcMgr,
+			options)
+									 .str();
+		if(auto* req = params->getRequiresClause()) {
+			paramsText += " " + clang::Lexer::getSourceText(
+									clang::CharSourceRange::getTokenRange(req->getSourceRange()),
+									*srcMgr,
+									options)
+									.str();
+		}
+		json["is_template"] = true;
+		json["template_prefix"] = paramsText;
+
+		std::string templatedName = name;
+		templatedName += "<";
+		for(unsigned i = 0; i < params->size(); ++i) {
+			if(i > 0) templatedName += ", ";
+			templatedName += params->getParam(i)->getNameAsString();
+		}
+		templatedName += ">";
+		json["name"] = templatedName;
+	} else if(const auto* partial = llvm::dyn_cast<clang::ClassTemplatePartialSpecializationDecl>(c)) {
+		const auto* tmpl = partial->getSpecializedTemplate();
+		const auto* params = tmpl->getTemplateParameters();
+		std::string paramsText = clang::Lexer::getSourceText(
+			clang::CharSourceRange::getTokenRange(params->getSourceRange()),
+			*srcMgr,
+			options)
+									 .str();
+		if(auto* req = params->getRequiresClause()) {
+			paramsText += " " + clang::Lexer::getSourceText(
+									clang::CharSourceRange::getTokenRange(req->getSourceRange()),
+									*srcMgr,
+									options)
+									.str();
+		}
+		json["is_template"] = true;
+		json["template_prefix"] = paramsText;
+	}
 
 	//Generate namespace identifier
 	if(const clang::NamespaceDecl* nsDecl = llvm::dyn_cast<clang::NamespaceDecl>(c->getDeclContext()->getEnclosingNamespaceContext())) {
@@ -249,6 +296,7 @@ void JsonBuilder::addEnum(const EnumDecl* e) {
 	json["kind"] = 1;
 	json["name"] = name;
 	json["origin"] = std::filesystem::path(fileName(e)).filename();
+	json["is_template"] = false;
 
 	//Generate namespace identifier
 	if(const clang::NamespaceDecl* nsDecl = llvm::dyn_cast<clang::NamespaceDecl>(e->getDeclContext()->getEnclosingNamespaceContext())) {

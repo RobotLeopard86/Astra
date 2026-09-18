@@ -3,7 +3,11 @@ R"(
 using namespace {{namespace}};
 {% endif -%}
 
+{% if exists("is_template") and is_template -%}
+{{template_prefix}}
+{% else -%}
 template<>
+{% endif -%}
 struct TypeActions<{{name}}> {
   static TypeInfo reflect(void* value, bool isConst) {
     auto* p = static_cast<{{name}}*>(value);
@@ -49,7 +53,11 @@ struct TypeActions<{{name}}> {
   }
 };
 
+{% if exists("is_template") and is_template -%}
+{{template_prefix}}
+{% else -%}
 template<>
+{% endif -%}
 inline TypeId TypeId::get<{{name}}>() {
   static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,
                                                  &CommonActions<{{name}}>::typeName,
