@@ -26,6 +26,12 @@
 	void deserialize(type* out) const
 ///@endcond
 
+#ifdef ASTRA_BUILD
+#define SSREFLECT [[clang::annotate("astra.reflect")]]
+#else
+#define SSREFLECT
+#endif
+
 namespace astra {
 	/**
 	 * @brief Template for specifying a substitute reflectable type for a non-reflectable type T.
