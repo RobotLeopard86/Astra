@@ -412,6 +412,7 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;functional&gt;</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">"access.hpp"</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">"astra/traits.hpp"</span>
@@ -426,7 +427,7 @@
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">resolve</span><span class="p">([</span><span class="n">ptr</span><span class="p">](</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">addressof</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">C</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">base</span><span class="p">)</span><span class="o">-&gt;*</span><span class="n">ptr</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}),</span>
-<span class="w">            </span><span class="n">type</span><span class="p">(</span><span class="n">TypeId</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">remove_const_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">()),</span>
+<span class="w">            </span><span class="n">type</span><span class="p">(</span><span class="n">TypeIdFactory</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">remove_const_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;::</span><span class="n">get</span><span class="p">()),</span>
 <span class="w">            </span><span class="n">acc</span><span class="p">(</span><span class="n">acc</span><span class="p">),</span>
 <span class="w">            </span><span class="n">areWeReadOnly</span><span class="p">(</span><span class="n">is_ref_type_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
@@ -434,7 +435,7 @@
 <span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
 <span class="w">        </span><span class="n">FieldDesc</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">Access</span><span class="w"> </span><span class="n">acc</span><span class="p">)</span>
 <span class="w">          </span><span class="o">:</span><span class="w"> </span><span class="n">resolve</span><span class="p">([</span><span class="n">ptr</span><span class="p">](</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span><span class="w"> </span><span class="p">}),</span>
-<span class="w">            </span><span class="n">type</span><span class="p">(</span><span class="n">TypeId</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">remove_const_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">()),</span>
+<span class="w">            </span><span class="n">type</span><span class="p">(</span><span class="n">TypeIdFactory</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">remove_const_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;::</span><span class="n">get</span><span class="p">()),</span>
 <span class="w">            </span><span class="n">acc</span><span class="p">(</span><span class="n">acc</span><span class="p">),</span>
 <span class="w">            </span><span class="n">areWeReadOnly</span><span class="p">(</span><span class="n">is_ref_type_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
