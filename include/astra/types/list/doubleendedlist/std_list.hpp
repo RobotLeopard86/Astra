@@ -56,11 +56,11 @@ namespace astra {
 		}
 
 		TypeId nestedType() const override {
-			return TypeId::get<T>();
+			return TypeIdFactory<T>::get();
 		}
 
 		void forEach(std::function<void(Var)> callback) const override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 
 			for(auto&& entry : *list) {
 				callback(Var(&entry, nestedType, true));
@@ -68,7 +68,7 @@ namespace astra {
 		}
 
 		void forEach(std::function<void(Var)> callback) override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 
 			for(auto&& entry : *list) {
 				callback(Var(&entry, nestedType, isConst));
@@ -90,7 +90,7 @@ namespace astra {
 		}
 
 		void push(Var value) override {
-			auto nestedType = TypeId::get<T>();
+			auto nestedType = TypeIdFactory<T>::get();
 
 			if(nestedType != value.typeId()) {
 				error("Trying to set with type: {} to list<{}>",
@@ -115,14 +115,14 @@ namespace astra {
 			if(list->empty()) {
 				throw std::runtime_error("The list is empty");
 			}
-			return Var(&list->front(), TypeId::get<T>(), isConst);
+			return Var(&list->front(), TypeIdFactory<T>::get(), isConst);
 		};
 
 		Var back() override {
 			if(list->empty()) {
 				throw std::runtime_error("The list is empty");
 			}
-			return Var(&list->back(), TypeId::get<T>(), isConst);
+			return Var(&list->back(), TypeIdFactory<T>::get(), isConst);
 		};
 
 	  private:

@@ -58,11 +58,11 @@ namespace astra {
 		}
 
 		TypeId nestedType() const override {
-			return TypeId::get<T>();
+			return TypeIdFactory<T>::get();
 		}
 
 		void forEach(std::function<void(Var)> callback) const override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 			const auto end = QueueIterator<T>::end(queue);
 
 			for(auto it = QueueIterator<T>::begin(queue); it != end; ++it) {
@@ -71,7 +71,7 @@ namespace astra {
 		}
 
 		void forEach(std::function<void(Var)> callback) override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 			const auto end = QueueIterator<T>::end(queue);
 
 			for(auto it = QueueIterator<T>::begin(queue); it != end; ++it) {
@@ -98,7 +98,7 @@ namespace astra {
 		}
 
 		void push(Var value) override {
-			auto nestedType = TypeId::get<T>();
+			auto nestedType = TypeIdFactory<T>::get();
 
 			if(nestedType != value.typeId()) {
 				error("Trying to set with type: {} to queue<{}>",

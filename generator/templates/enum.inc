@@ -18,7 +18,7 @@ struct TypeActions<{{name}}> {
 };
 
 template<>
-inline TypeId TypeId::get<{{name}}>() {
+inline TypeId TypeIdFactory<{{name}}>::get() {
   static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,
                                                  &CommonActions<{{name}}>::typeName,
                                                  &CommonActions<{{name}}>::sizeOf,

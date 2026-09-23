@@ -49,15 +49,15 @@ namespace astra {
 		}
 
 		Var ownVar() const override {
-			return Var(array, TypeId::get<T[size_v]>(), isConst);
+			return Var(array, TypeIdFactory<T[size_v]>::get(), isConst);
 		}
 
 		TypeId nestedType() const override {
-			return TypeId::get<T>();
+			return TypeIdFactory<T>::get();
 		}
 
 		void forEach(std::function<void(Var)> callback) const override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 
 			for(auto i = 0; i < size_v; ++i) {
 				callback(Var(&(array[i]), nestedType, true));
@@ -65,7 +65,7 @@ namespace astra {
 		}
 
 		void forEach(std::function<void(Var)> callback) override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 
 			for(auto i = 0; i < size_v; ++i) {
 				callback(Var(&(array[i]), nestedType, isConst));
@@ -83,11 +83,11 @@ namespace astra {
 		}
 
 		Var front() override {
-			return Var(array, TypeId::get<T>(), isConst);
+			return Var(array, TypeIdFactory<T>::get(), isConst);
 		};
 
 		Var back() override {
-			return Var(&(array[size_v - 1]), TypeId::get<T>(), isConst);
+			return Var(&(array[size_v - 1]), TypeIdFactory<T>::get(), isConst);
 		};
 
 		Var at(std::size_t idx) override {
@@ -95,7 +95,7 @@ namespace astra {
 				throw std::runtime_error(::astra::format("Index: {} is out of array's size: {}", idx, size_v));
 			}
 
-			return Var(&(array[idx]), TypeId::get<T>(), isConst);
+			return Var(&(array[idx]), TypeIdFactory<T>::get(), isConst);
 		}
 
 		Var operator[](std::size_t idx) override {

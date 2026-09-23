@@ -16,7 +16,7 @@ namespace astra {
 
 	template<typename T>
 		requires std::is_integral_v<T> && (!std::is_same_v<T, bool>)
-	TypeId TypeId::get() {
+	TypeId TypeIdFactory<T>::get() {
 		static TypeId id(TypeTable::recordActions(Actions(&IntActions<T>::reflect,
 			&CommonActions<T>::typeName,
 			&CommonActions<T>::sizeOf,

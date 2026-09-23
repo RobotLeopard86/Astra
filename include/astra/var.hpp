@@ -35,7 +35,7 @@ namespace astra {
 		 */
 		template<typename T>
 		explicit Var(const T* value)
-		  : value(value == nullptr ? throw std::runtime_error("Cannot create Var with type deduction using a nullptr!") : const_cast<T*>(value)), type(TypeId::get<T>()), areWeConst(true) {
+		  : value(value == nullptr ? throw std::runtime_error("Cannot create Var with type deduction using a nullptr!") : const_cast<T*>(value)), type(TypeIdFactory<T>::get()), areWeConst(true) {
 		}
 
 		/**
@@ -55,12 +55,12 @@ namespace astra {
 		template<Reflectable T>
 			requires std::is_base_of_v<AstraReflectBase, T>
 		explicit Var(const T* value)
-		  : value(const_cast<T*>(value)), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), areWeConst(true) {}
+		  : value(const_cast<T*>(value)), type(value != nullptr ? value->ASTRA__gettypeid() : TypeIdFactory<T>::get()), areWeConst(true) {}
 
 		template<Reflectable T>
 			requires std::is_base_of_v<AstraReflectBase, T>
 		explicit Var(T* value, bool isConst = false)
-		  : value(value), type(value != nullptr ? value->ASTRA__gettypeid() : TypeId::get<T>()), areWeConst(isConst) {}
+		  : value(value), type(value != nullptr ? value->ASTRA__gettypeid() : TypeIdFactory<T>::get()), areWeConst(isConst) {}
 		///@endcond
 
 		/**
@@ -126,7 +126,7 @@ namespace astra {
 				throw std::runtime_error("Cannot return mutable reference to const Var!");
 			}
 
-			auto desiredType = TypeId::get<std::remove_cvref_t<T>>();
+			auto desiredType = TypeIdFactory<std::remove_cvref_t<T>>::get();
 			if(desiredType != type) {
 				error(type, desiredType);
 			}

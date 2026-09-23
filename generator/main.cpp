@@ -271,7 +271,9 @@ int main(int argc, char* argv[]) {
 	header << "namespace astra {\n";
 	for(auto&& [_, json] : parsed) {
 		std::string name = json["name"].get<std::string>();
-		header << "template<>\nstruct TypeActions<" << name << ">;\ntemplate<>\nTypeId TypeId::get<" << name << ">();\n\n";
+		std::string templateStr = (json.contains("is_template") && json["is_template"].get<bool>()) ? json["template_prefix"].get<std::string>() : "template<>";
+		header << templateStr << "\nstruct TypeActions<" << name << ">;\n"
+			   << templateStr << "\nTypeId TypeIdFactory<" << name << ">::get();\n\n";
 	}
 	header << "}\n\n";
 
@@ -298,7 +300,7 @@ int main(int argc, char* argv[]) {
 	for(auto&& [objectName, json] : parsed) {
 		if(json["kind"].get<int>() == 0) {
 			std::string className = json["name"].get<std::string>();
-			header << "inline astra::TypeId " << className << "::ASTRA__gettypeid() const {\n\treturn astra::TypeId::get<" << className << ">();\n}\n\n";
+			header << "inline astra::TypeId " << className << "::ASTRA__gettypeid() const {\n\treturn astra::TypeIdFactory<" << className << ">::get();\n}\n\n";
 		}
 	}
 	header << "\n";

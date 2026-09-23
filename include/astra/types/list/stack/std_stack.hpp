@@ -57,11 +57,11 @@ namespace astra {
 		}
 
 		TypeId nestedType() const override {
-			return TypeId::get<T>();
+			return TypeIdFactory<T>::get();
 		}
 
 		void forEach(std::function<void(Var)> callback) const override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 			const auto end = StackIterator<T>::end(stack);
 
 			for(auto it = StackIterator<T>::begin(stack); it != end; ++it) {
@@ -70,7 +70,7 @@ namespace astra {
 		}
 
 		void forEach(std::function<void(Var)> callback) override {
-			const auto nestedType = TypeId::get<T>();
+			const auto nestedType = TypeIdFactory<T>::get();
 			const auto end = StackIterator<T>::end(stack);
 
 			for(auto it = StackIterator<T>::begin(stack); it != end; ++it) {
@@ -95,7 +95,7 @@ namespace astra {
 		}
 
 		void push(Var value) override {
-			auto nestedType = TypeId::get<T>();
+			auto nestedType = TypeIdFactory<T>::get();
 
 			if(nestedType != value.typeId()) {
 				error("Trying to set with type: {} to set<{}>",
@@ -113,7 +113,7 @@ namespace astra {
 				throw std::runtime_error("The stack is empty");
 			}
 
-			return Var(&stack->top(), TypeId::get<T>(), isConst);
+			return Var(&stack->top(), TypeIdFactory<T>::get(), isConst);
 		};
 
 	  private:

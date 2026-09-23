@@ -55,15 +55,15 @@ namespace astra {
 		}
 
 		TypeId keyType() const override {
-			return TypeId::get<K>();
+			return TypeIdFactory<K>::get();
 		}
 
 		TypeId valType() const override {
-			return TypeId::get<V>();
+			return TypeIdFactory<V>::get();
 		}
 
 		void forEach(std::function<void(Var, Var)> callback) const override {
-			const auto valueType = TypeId::get<V>();
+			const auto valueType = TypeIdFactory<V>::get();
 
 			for(auto&& pair : *map) {
 				callback(Var(&pair.first), Var(&pair.second, valueType, true));
@@ -71,7 +71,7 @@ namespace astra {
 		}
 
 		void forEach(std::function<void(Var, Var)> callback) override {
-			const auto valueType = TypeId::get<V>();
+			const auto valueType = TypeIdFactory<V>::get();
 
 			for(auto&& pair : *map) {
 				callback(Var(&pair.first), Var(&pair.second, valueType, isConst));

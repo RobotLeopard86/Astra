@@ -33,7 +33,7 @@ namespace astra {
 		 * @throws std::runtime_error If the source Var does not contain a bool
 		 */
 		void assign(Var var) {
-			auto t = TypeId::get<bool>();
+			auto t = TypeIdFactory<bool>::get();
 			if(var.typeId() != t) {
 				throw std::runtime_error(::astra::format("Cannot assign type: {} to {}",
 					typeName(var.typeId()),

@@ -56,7 +56,7 @@ namespace astra {
 		}
 
 		TypeId nestedType() const override {
-			return TypeId::get<T>();
+			return TypeIdFactory<T>::get();
 		}
 
 		void forEach(std::function<void(Var)> callback) const override {
@@ -82,7 +82,7 @@ namespace astra {
 		}
 
 		void push(Var value) override {
-			auto nestedType = TypeId::get<T>();
+			auto nestedType = TypeIdFactory<T>::get();
 
 			if(nestedType != value.typeId()) {
 				error("Trying to set with type: {} to set<{}>",
@@ -92,7 +92,7 @@ namespace astra {
 		}
 
 		void remove(Var value) override {
-			auto nestedType = TypeId::get<T>();
+			auto nestedType = TypeIdFactory<T>::get();
 
 			if(nestedType != value.typeId()) {
 				error("Cannot remove value with type: {} from set<{}>",

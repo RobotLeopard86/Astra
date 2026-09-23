@@ -1,6 +1,7 @@
 #pragma once
 
 #include <type_traits>
+#include <functional>
 
 #include "access.hpp"
 #include "astra/traits.hpp"
@@ -27,7 +28,7 @@ namespace astra {
 		  : resolve([ptr](void* base) {
 				return std::addressof(static_cast<C*>(base)->*ptr);
 			}),
-			type(TypeId::get<std::remove_const_t<T>>()),
+			type(TypeIdFactory<std::remove_const_t<T>>::get()),
 			acc(acc),
 			areWeReadOnly(is_ref_type_v<T>) {
 		}
@@ -43,7 +44,7 @@ namespace astra {
 		template<typename T>
 		FieldDesc(T* ptr, Access acc)
 		  : resolve([ptr](void*) { return ptr; }),
-			type(TypeId::get<std::remove_const_t<T>>()),
+			type(TypeIdFactory<std::remove_const_t<T>>::get()),
 			acc(acc),
 			areWeReadOnly(is_ref_type_v<T>) {
 		}

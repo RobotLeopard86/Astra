@@ -16,7 +16,7 @@ namespace astra {
 
 	template<typename T>
 		requires is_string_v<T>
-	TypeId TypeId::get() {
+	TypeId TypeIdFactory<T>::get() {
 		static TypeId id(TypeTable::recordActions(Actions(&StringActions<T>::reflect,
 			&CommonActions<T>::typeName,
 			&CommonActions<T>::sizeOf,

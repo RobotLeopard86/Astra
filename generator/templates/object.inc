@@ -28,7 +28,7 @@ struct TypeActions<{{name}}> {
           }
 
           {% for type in item.params -%}
-          if (args[{{loop.index}}].typeId() != TypeId::get<{{type}}>()) {
+          if (args[{{loop.index}}].typeId() != TypeIdFactory<{{type}}>::get()) {
             throw std::runtime_error(astra::format("Argument type expected: {{type}}, received: {}", typeName(args[{{loop.index}}].typeId())));
           }
           std::add_const_t<{{type}}>& a{{loop.index}} = *args[{{loop.index}}].rtCast<std::add_const_t<{{type}}>>();
@@ -36,7 +36,7 @@ struct TypeActions<{{name}}> {
           {% endfor -%}
 
           {% if item.return != "void" -%}
-          if (res.typeId() != TypeId::get<{{item.return}}>()) {
+          if (res.typeId() != TypeIdFactory<{{item.return}}>::get()) {
             throw std::runtime_error(astra::format("Return type expected: {{item.return}}, received: {}", typeName(res.typeId())));
           }
           *reinterpret_cast<{{item.return}}*>(res.rawMut()) =
@@ -58,7 +58,7 @@ struct TypeActions<{{name}}> {
 {% else -%}
 template<>
 {% endif -%}
-inline TypeId TypeId::get<{{name}}>() {
+inline TypeId TypeIdFactory<{{name}}>::get() {
   static TypeId id(TypeTable::recordActions(Actions(&TypeActions<{{name}}>::reflect,
                                                  &CommonActions<{{name}}>::typeName,
                                                  &CommonActions<{{name}}>::sizeOf,
@@ -67,7 +67,7 @@ inline TypeId TypeId::get<{{name}}>() {
                                                  &CommonActions<{{name}}>::copy,
                                                  &CommonActions<{{name}}>::move)));
   {% if not startsWith(name, "astra::SerializedSubstitute") -%}
-  TypeId subId = TypeId::get<astra::SerializedSubstitute<{{name}}>>();
+  TypeId subId = TypeIdFactory<astra::SerializedSubstitute<{{name}}>>::get();
   TypeTable::recordMapping(id.number(), subId.number());
   {% endif -%}
   return id;

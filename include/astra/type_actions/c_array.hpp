@@ -63,7 +63,7 @@ namespace astra {
 
 	template<typename T>
 		requires is_array_v<T>
-	TypeId TypeId::get() {
+	TypeId TypeIdFactory<T>::get() {
 		static TypeId id(TypeTable::recordActions(Actions(&TypeActions<T>::reflect,
 			&CommonActions<T>::typeName,
 			&TypeActions<T>::sizeOf,

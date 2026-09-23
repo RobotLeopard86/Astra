@@ -56,7 +56,7 @@ namespace astra {
 		 * @return A Var holding the contents of this object, const state inherited
 		 */
 		Var var() const override {
-			return Var(value, TypeId::get<T>(), isConst);
+			return Var(value, TypeIdFactory<T>::get(), isConst);
 		}
 
 		std::string toString() const override {

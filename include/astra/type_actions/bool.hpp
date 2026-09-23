@@ -12,7 +12,7 @@ namespace astra {
 		}
 	};
 
-	inline TypeId TypeId::getBoolId() {
+	inline TypeId TypeIdFactory<bool>::get() {
 		static TypeId id(TypeTable::recordActions(Actions(&BoolActions::reflect,
 			&CommonActions<bool>::typeName,
 			&CommonActions<bool>::sizeOf,
