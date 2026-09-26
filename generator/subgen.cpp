@@ -573,12 +573,14 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 		substitute["kind"] = 0;
 		substitute["name"] = subName;
 		substitute["is_substitute"] = true;
-		substitute["original_type"] = clazz;
+		substitute["original_type"] = original["name"];
 		substitute["origin"] = original["origin"];
 		substitute["namespace"] = "astra";
 		substitute["methods"] = nlohmann::json::array();
 		substitute["fields"] = nlohmann::json::array();
 		substitute["converters"] = nlohmann::json::array();
+		substitute["is_template"] = (original.contains("is_template") && original["is_template"].get<bool>());
+		substitute["template_prefix"] = substitute["is_template"].get<bool>() ? original["template_prefix"] : "template<>";
 
 		//Process fields
 		std::set<std::string> substitutes;

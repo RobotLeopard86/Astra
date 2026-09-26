@@ -9,7 +9,6 @@ namespace templates {
 	const std::string Object =
 #include "templates/object.inc"
 		;
-
 	const std::string Substitute =
 #include "templates/substitute.inc"
 		;

@@ -1,6 +1,12 @@
 R"(
+{% if exists("is_template") and is_template -%}
+{{template_prefix}}
+{% else -%}
 template<>
+{% endif -%}
 struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase {
+	using original_t = {{original_type}};
+
     {% for field in fields -%}
     {{field.type}} {{field.name}};
     {% endfor %}
@@ -128,13 +134,13 @@ struct astra::SerializedSubstitute<{{original_type}}> : public AstraReflectBase 
         {% endfor -%}
     };
 
-	ASTRA_SUBSTITUTE_SERIALIZE({{original_type}}) {
+	ASTRA_SUBSTITUTE_SERIALIZE(original_t) {
         {% for field in fields -%}
         {{field.name}} = cvt::en_{{field.name}}(in->{{field.name}});
         {% endfor -%}
     }
 
-    ASTRA_SUBSTITUTE_DESERIALIZE({{original_type}}) {
+    ASTRA_SUBSTITUTE_DESERIALIZE(original_t) {
         {% for field in fields -%}
         out->{{field.name}} = cvt::de_{{field.name}}({{field.name}});
         {% endfor -%}

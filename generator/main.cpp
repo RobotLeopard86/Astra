@@ -273,7 +273,7 @@ int main(int argc, char* argv[]) {
 		std::string name = json["name"].get<std::string>();
 		std::string templateStr = (json.contains("is_template") && json["is_template"].get<bool>()) ? json["template_prefix"].get<std::string>() : "template<>";
 		header << templateStr << "\nstruct TypeActions<" << name << ">;\n"
-			   << templateStr << "\nTypeId TypeIdFactory<" << name << ">::get();\n\n";
+			   << templateStr << "\nstruct ASTRA_API TypeIdFactory<" << name << "> {\n\tstatic TypeId get();\n};\n";
 	}
 	header << "}\n\n";
 
