@@ -4,7 +4,6 @@
 #include "clang/AST/Type.h"
 #include "clang/AST/Attr.h"
 #include "clang/AST/Decl.h"
-#include "clang/Sema/Lookup.h"
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/Attrs.inc"
 #include "clang/AST/DeclCXX.h"
@@ -14,8 +13,6 @@
 #include "clang/AST/PrettyPrinter.h"
 #include "clang/AST/TemplateBase.h"
 #include "clang/AST/TypeBase.h"
-#include "clang/Basic/IdentifierTable.h"
-#include "clang/Basic/LangOptions.h"
 #include "clang/Basic/SourceLocation.h"
 #include "clang/Basic/Specifiers.h"
 #include "clang/Sema/Ownership.h"
@@ -347,7 +344,7 @@ void JsonBuilder::addFunction(nlohmann::json* functions, const FunctionDecl* f, 
 
 	auto name = f->getNameAsString();
 
-	if(name == className ||								   //constructor
+	if(name.starts_with(className) ||					   //constructor
 		(name.find(className, 1) == 1 && name[0] == '~') ||//destructor
 		name.find("operator") == 0) {
 		return;

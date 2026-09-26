@@ -3,14 +3,11 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <regex>
-#include <algorithm>
 #include <set>
 #include <deque>
 
 #include "nlohmann/json.hpp"
 
-#include "to_filename.hpp"
 #include "subgen.hpp"
 
 struct Converter {
@@ -569,6 +566,7 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 
 		//Get original class info and set up substitute info
 		const nlohmann::json& original = results[clazz];
+		subName = "astra::SerializedSubstitute<" + original["name"].get<std::string>() + ">";
 		nlohmann::json& substitute = results[subName];
 		substitute["kind"] = 0;
 		substitute["name"] = subName;
@@ -639,7 +637,7 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			dePublic["acc"] = nlohmann::json::array({std::string("Public")});
 			dePublic["return"] = "void";
 			dePublic["params"] = nlohmann::json::array();
-			dePublic["params"].emplace_back(clazz + "*");
+			dePublic["params"].emplace_back(original["name"].get<std::string>() + "*");
 		}
 		{
 			nlohmann::json& enInternal = substitute["methods"].emplace_back(nlohmann::json::object());
@@ -657,7 +655,7 @@ void generateSubstitutes(std::unordered_map<std::string, nlohmann::json>& result
 			enPublic["acc"] = nlohmann::json::array({std::string("Public")});
 			enPublic["return"] = "void";
 			enPublic["params"] = nlohmann::json::array();
-			enPublic["params"].emplace_back(clazz + "*");
+			enPublic["params"].emplace_back(original["name"].get<std::string>() + "*");
 		}
 	}
 }

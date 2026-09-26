@@ -300,7 +300,8 @@ int main(int argc, char* argv[]) {
 	for(auto&& [objectName, json] : parsed) {
 		if(json["kind"].get<int>() == 0) {
 			std::string className = json["name"].get<std::string>();
-			header << "inline astra::TypeId " << className << "::ASTRA__gettypeid() const {\n\treturn astra::TypeIdFactory<" << className << ">::get();\n}\n\n";
+			std::string templateStr = (json.contains("is_template") && json["is_template"].get<bool>()) ? json["template_prefix"].get<std::string>() + "\n" : "";
+			header << templateStr << "inline astra::TypeId " << className << "::ASTRA__gettypeid() const {\n\treturn astra::TypeIdFactory<" << className << ">::get();\n}\n\n";
 		}
 	}
 	header << "\n";

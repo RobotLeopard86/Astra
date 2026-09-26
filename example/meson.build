@@ -1,5 +1,5 @@
 # Generate reflection info
-reflection = custom_target('example.astra.hpp', output: 'example.astra.hpp', input: ['data' / 'car.hpp', 'data' / 'colors.hpp', 'data' / 'suv.hpp', 'data' / 'complicatedtype.hpp', 'data' / 'substitutedtype.hpp'], console: true,
+reflection = custom_target('example.astra.hpp', output: 'example.astra.hpp', input: ['data' / 'car.hpp', 'data' / 'colors.hpp', 'data' / 'suv.hpp', 'data' / 'complicatedtype.hpp', 'data' / 'substitutedtype.hpp', 'data' / 'templated.hpp'], console: true,
 	command: [astra_generator, '-c', meson.global_build_root(), '-o', meson.current_build_dir(), '-n', 'example', '@INPUT@'])
 
 # Create program
@@ -10,5 +10,6 @@ executable('astra_example', sources: [
 	'data' / 'suv.hpp',
 	'data' / 'complicatedtype.hpp',
 	'data' / 'substitutedtype.hpp',
+	'data' / 'templated.hpp',
 	reflection
 ], include_directories: include_directories('data'), dependencies: astra_dep)

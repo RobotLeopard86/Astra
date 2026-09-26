@@ -36,15 +36,3 @@ namespace ExampleNamespace {
 		ASTRASETUP(ComplicatedType)
 	};
 }
-
-template<typename P, uint8_t S>
-class ASTRA_REFLECT Bucket : public AstraReflectBase {
-  public:
-	std::array<int, S> thingies;
-	std::vector<P> otherThingies;
-	std::string theOwnerOfTheBucket;
-
-	Bucket() = default;
-	virtual ~Bucket();
-	ASTRASETUP(Bucket);
-};

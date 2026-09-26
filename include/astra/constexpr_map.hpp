@@ -38,7 +38,7 @@ namespace astra {
 		 */
 		constexpr ConstexprMap(std::array<Entry, size>&& array)
 		  : data(array), value_ptr {}, name_ptr {} {
-			for(auto i = 0; i < data.size(); i++) {
+			for(std::size_t i = 0; i < data.size(); i++) {
 				value_ptr[i] = &data[i];
 				name_ptr[i] = &data[i];
 			}
