@@ -19,6 +19,7 @@
 #include "llvm/Support/Casting.h"
 #include "llvm/Support/raw_ostream.h"
 
+#include <clang/Basic/LangOptions.h>
 #include <filesystem>
 #include <stdexcept>
 #include <vector>
@@ -108,26 +109,81 @@ void JsonBuilder::handleBasesRecursive(const CXXRecordDecl* c, nlohmann::json& p
 	}
 }
 
+template<typename T>
+const clang::NamedDecl* lookupTemplateParameter(const clang::TemplateParameterList* params, const T& parm) {
+	if(!params || parm.getIndex() >= params->size())
+		return nullptr;
+	if(parm.getDepth() != 0)
+		return nullptr;
+	return params->getParam(parm.getIndex());
+}
+
+void printTemplateArgument(const clang::TemplateArgument& arg, const clang::PrintingPolicy& policy, const clang::TemplateParameterList* params, llvm::raw_ostream& oss) {
+	switch(arg.getKind()) {
+		case TemplateArgument::Type: {
+			//Handle direct type parameters
+			const QualType type = arg.getAsType();
+			if(const auto* parm = type->getAs<TemplateTypeParmType>()) {
+				if(const auto* decl = parm->getDecl()) {
+					oss << decl->getName();
+					return;
+				}
+				if(const auto* decl = lookupTemplateParameter(params, *parm)) {
+					oss << decl->getName();
+					return;
+				}
+			}
+
+			//Handle another templated type
+			if(const auto* spec = type->getAs<TemplateSpecializationType>()) {
+				spec->getTemplateName().print(oss, policy);
+				oss << '<';
+				llvm::ListSeparator sep;
+				for(const TemplateArgument& nested : spec->template_arguments()) {
+					oss << sep;
+					printTemplateArgument(nested, policy, params, oss);
+				}
+				oss << '>';
+				return;
+			}
+
+			//Fallback to Clang's type printer
+			type.print(oss, policy);
+			return;
+		}
+		case TemplateArgument::Expression: {
+			//Handle dependent non-type parameters
+			const Expr* expr = arg.getAsExpr();
+			if(const auto* declRef = llvm::dyn_cast<DeclRefExpr>(expr->IgnoreParenImpCasts())) {
+				if(const auto* parm = llvm::dyn_cast<NonTypeTemplateParmDecl>(declRef->getDecl())) {
+					oss << parm->getName();
+					return;
+				}
+			}
+			expr->printPretty(oss, nullptr, policy);
+			return;
+		}
+		default:
+			//Anything else gets printed according to Clang's default rules
+			arg.print(policy, oss, true);
+			return;
+	}
+}
+
 void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	//Get qualified name
 	std::string name = c->getQualifiedNameAsString();
-	if(const ClassTemplateSpecializationDecl* spec = llvm::dyn_cast<ClassTemplateSpecializationDecl>(c)) {
+	if(const auto* spec = llvm::dyn_cast<clang::ClassTemplateSpecializationDecl>(c)) {
 		llvm::raw_string_ostream oss(name);
-		oss << "<";
-		const TemplateArgumentList& args = spec->getTemplateArgs();
-		bool first = true;
-		for(const TemplateArgument& ta : args.asArray()) {
-			//Comma formatting
-			if(!first) {
-				oss << ", ";
-			} else {
-				first = false;
-			}
+		oss << '<';
 
-			//Add argument
-			ta.print(PrintingPolicy {options}, oss, true);
+		llvm::ListSeparator sep;
+		for(const clang::TemplateArgument& arg : spec->getTemplateArgs().asArray()) {
+			oss << sep;
+			printTemplateArgument(arg, PrintingPolicy {options}, spec->getDescribedTemplateParams(), oss);
 		}
-		oss << ">";
+
+		oss << '>';
 	}
 
 	//Check if this class is already handled
