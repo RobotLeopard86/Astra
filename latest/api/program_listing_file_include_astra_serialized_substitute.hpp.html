@@ -420,20 +420,20 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_map&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ranges&gt;</span>
 
-<span class="cp">#define ASTRA_SUBSTITUTE_SERIALIZE(type)               \</span>
-<span class="cp">    void ASTRA__serializeinternal(const void* in) {    \</span>
-<span class="cp">        this-&gt;serialize(static_cast&lt;const type*&gt;(in)); \</span>
-<span class="cp">    }                                                  \</span>
-<span class="cp">    SerializedSubstitute(const type&amp; input) {          \</span>
-<span class="cp">        this-&gt;serialize(&amp;input);                       \</span>
-<span class="cp">    }                                                  \</span>
-<span class="cp">    void serialize(const type* in)</span>
+<span class="cp">#define ASTRA_SUBSTITUTE_SERIALIZE(...)                       \</span>
+<span class="cp">    void ASTRA__serializeinternal(const void* in) {           \</span>
+<span class="cp">        this-&gt;serialize(static_cast&lt;const __VA_ARGS__*&gt;(in)); \</span>
+<span class="cp">    }                                                         \</span>
+<span class="cp">    SerializedSubstitute(const __VA_ARGS__&amp; input) {          \</span>
+<span class="cp">        this-&gt;serialize(&amp;input);                              \</span>
+<span class="cp">    }                                                         \</span>
+<span class="cp">    void serialize(const __VA_ARGS__* in)</span>
 
-<span class="cp">#define ASTRA_SUBSTITUTE_DESERIALIZE(type)             \</span>
-<span class="cp">    void ASTRA__deserializeinternal(void* out) const { \</span>
-<span class="cp">        this-&gt;deserialize(static_cast&lt;type*&gt;(out));    \</span>
-<span class="cp">    }                                                  \</span>
-<span class="cp">    void deserialize(type* out) const</span>
+<span class="cp">#define ASTRA_SUBSTITUTE_DESERIALIZE(...)                  \</span>
+<span class="cp">    void ASTRA__deserializeinternal(void* out) const {     \</span>
+<span class="cp">        this-&gt;deserialize(static_cast&lt;__VA_ARGS__*&gt;(out)); \</span>
+<span class="cp">    }                                                      \</span>
+<span class="cp">    void deserialize(__VA_ARGS__* out) const</span>
 
 <span class="cp">#ifdef ASTRA_BUILD</span>
 <span class="cp">#define SSREFLECT [[clang::annotate("astra.reflect")]]</span>
