@@ -10,20 +10,20 @@
 #include <ranges>
 
 ///@cond
-#define ASTRA_SUBSTITUTE_SERIALIZE(type)               \
-	void ASTRA__serializeinternal(const void* in) {    \
-		this->serialize(static_cast<const type*>(in)); \
-	}                                                  \
-	SerializedSubstitute(const type& input) {          \
-		this->serialize(&input);                       \
-	}                                                  \
-	void serialize(const type* in)
+#define ASTRA_SUBSTITUTE_SERIALIZE(...)                       \
+	void ASTRA__serializeinternal(const void* in) {           \
+		this->serialize(static_cast<const __VA_ARGS__*>(in)); \
+	}                                                         \
+	SerializedSubstitute(const __VA_ARGS__& input) {          \
+		this->serialize(&input);                              \
+	}                                                         \
+	void serialize(const __VA_ARGS__* in)
 
-#define ASTRA_SUBSTITUTE_DESERIALIZE(type)             \
-	void ASTRA__deserializeinternal(void* out) const { \
-		this->deserialize(static_cast<type*>(out));    \
-	}                                                  \
-	void deserialize(type* out) const
+#define ASTRA_SUBSTITUTE_DESERIALIZE(...)                  \
+	void ASTRA__deserializeinternal(void* out) const {     \
+		this->deserialize(static_cast<__VA_ARGS__*>(out)); \
+	}                                                      \
+	void deserialize(__VA_ARGS__* out) const
 ///@endcond
 
 #ifdef ASTRA_BUILD
