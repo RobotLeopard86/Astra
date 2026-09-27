@@ -151,11 +151,11 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 			options)
 									 .str();
 		if(auto* req = params->getRequiresClause()) {
-			paramsText += " " + clang::Lexer::getSourceText(
-									clang::CharSourceRange::getTokenRange(req->getSourceRange()),
-									*srcMgr,
-									options)
-									.str();
+			paramsText += " requires " + clang::Lexer::getSourceText(
+											 clang::CharSourceRange::getTokenRange(req->getSourceRange()),
+											 *srcMgr,
+											 options)
+											 .str();
 		}
 		json["is_template"] = true;
 		json["template_prefix"] = paramsText;
@@ -169,19 +169,18 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 		templatedName += ">";
 		json["name"] = templatedName;
 	} else if(const auto* partial = llvm::dyn_cast<clang::ClassTemplatePartialSpecializationDecl>(c)) {
-		const auto* tmpl = partial->getSpecializedTemplate();
-		const auto* params = tmpl->getTemplateParameters();
+		const auto* params = partial->getTemplateParameters();
 		std::string paramsText = clang::Lexer::getSourceText(
 			clang::CharSourceRange::getTokenRange(params->getSourceRange()),
 			*srcMgr,
 			options)
 									 .str();
 		if(auto* req = params->getRequiresClause()) {
-			paramsText += " " + clang::Lexer::getSourceText(
-									clang::CharSourceRange::getTokenRange(req->getSourceRange()),
-									*srcMgr,
-									options)
-									.str();
+			paramsText += " requires " + clang::Lexer::getSourceText(
+											 clang::CharSourceRange::getTokenRange(req->getSourceRange()),
+											 *srcMgr,
+											 options)
+											 .str();
 		}
 		json["is_template"] = true;
 		json["template_prefix"] = paramsText;
