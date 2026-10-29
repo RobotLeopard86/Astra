@@ -3,19 +3,8 @@ project('astra', 'c', 'cpp', version: '1.0.0-rc1', meson_version: '>=1.6.0', lic
 bt = get_option('buildtype')
 cxx = meson.get_compiler('cpp')
 
-# Define compile args
+# Define compile args for export
 add_project_arguments(['-DASTRA_BUILD'], language: 'cpp')
-if bt.contains('debug')
-	add_project_arguments(['-D_DEBUG'], language: 'cpp')
-endif
-
-# Set some Windows-specific options
-if host_machine.system() == 'windows'
-	add_project_arguments(['-D_DLL', '-D_MT'], language: 'cpp')
-	if bt == 'debug'
-		add_project_arguments('-D_ITERATOR_DEBUG_LEVEL=2', language: 'cpp')
-	endif
-endif
 
 # Get options
 example = get_option('example')
