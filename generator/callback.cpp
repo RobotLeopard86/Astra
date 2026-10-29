@@ -82,6 +82,7 @@ std::string getAttrAlias(const clang::Decl* decl) {
 void JsonBuilder::handleClass(const CXXRecordDecl* c) {
 	if(srcMgr->isInSystemHeader(c->getLocation())) return;
 	if(!srcMgr->isInMainFile(c->getLocation())) return;
+	if(!c->isThisDeclarationADefinition()) return;
 	if(!hasReflectAttr(c)) return;
 	addClass(c);
 }
@@ -89,6 +90,7 @@ void JsonBuilder::handleClass(const CXXRecordDecl* c) {
 void JsonBuilder::handleEnum(const EnumDecl* e) {
 	if(srcMgr->isInSystemHeader(e->getLocation())) return;
 	if(!srcMgr->isInMainFile(e->getLocation())) return;
+	if(!e->isThisDeclarationADefinition()) return;
 	if(!hasReflectAttr(e)) return;
 	addEnum(e);
 }
@@ -171,6 +173,9 @@ void printTemplateArgument(const clang::TemplateArgument& arg, const clang::Prin
 }
 
 void JsonBuilder::addClass(const CXXRecordDecl* c) {
+	//Skip implicit template instantiations
+	if(c->getTemplateSpecializationKind() == clang::TSK_ImplicitInstantiation) return;
+
 	//Get qualified name
 	std::string name = c->getQualifiedNameAsString();
 	if(const auto* spec = llvm::dyn_cast<clang::ClassTemplateSpecializationDecl>(c)) {
@@ -187,9 +192,7 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 	}
 
 	//Check if this class is already handled
-	if(context->result.count(name) != 0) {
-		return;
-	}
+	if(context->result.count(name) != 0) return;
 
 	//Basic properties
 	nlohmann::json json;
@@ -207,11 +210,7 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 			options)
 									 .str();
 		if(auto* req = params->getRequiresClause()) {
-			paramsText += " requires " + clang::Lexer::getSourceText(
-											 clang::CharSourceRange::getTokenRange(req->getSourceRange()),
-											 *srcMgr,
-											 options)
-											 .str();
+			paramsText += " requires " + clang::Lexer::getSourceText(clang::CharSourceRange::getTokenRange(req->getSourceRange()), *srcMgr, options).str();
 		}
 		json["is_template"] = true;
 		json["template_prefix"] = paramsText;
@@ -226,17 +225,9 @@ void JsonBuilder::addClass(const CXXRecordDecl* c) {
 		json["name"] = templatedName;
 	} else if(const auto* partial = llvm::dyn_cast<clang::ClassTemplatePartialSpecializationDecl>(c)) {
 		const auto* params = partial->getTemplateParameters();
-		std::string paramsText = clang::Lexer::getSourceText(
-			clang::CharSourceRange::getTokenRange(params->getSourceRange()),
-			*srcMgr,
-			options)
-									 .str();
+		std::string paramsText = clang::Lexer::getSourceText(clang::CharSourceRange::getTokenRange(params->getSourceRange()), *srcMgr, options).str();
 		if(auto* req = params->getRequiresClause()) {
-			paramsText += " requires " + clang::Lexer::getSourceText(
-											 clang::CharSourceRange::getTokenRange(req->getSourceRange()),
-											 *srcMgr,
-											 options)
-											 .str();
+			paramsText += " requires " + clang::Lexer::getSourceText(clang::CharSourceRange::getTokenRange(req->getSourceRange()), *srcMgr, options).str();
 		}
 		json["is_template"] = true;
 		json["template_prefix"] = paramsText;
