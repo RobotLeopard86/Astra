@@ -20,6 +20,7 @@
 #include <chrono>
 #include <fstream>
 #include <filesystem>
+#include <set>
 
 #ifndef PROJECT_VER
 #define PROJECT_VER "unknown"
@@ -34,6 +35,61 @@
 #define clock std::chrono::steady_clock
 
 inline std::stringstream lastMsg;
+
+std::vector<std::string> sortTypes(const std::unordered_map<std::string, nlohmann::json>& parsed) {
+	std::vector<std::string> sorted;
+	std::set<std::string> visited;
+	std::set<std::string> visiting;
+	std::vector<std::string> knownTypes;
+	for(const auto& [name, _] : parsed) {
+		knownTypes.push_back(name);
+	}
+
+	std::function<void(const std::string&)> visit = [&](const std::string& name) {
+		if(visiting.count(name)) {
+			ERROR("Circular dependency detected involving type \"" << name << "\"!");
+			return;
+		}
+		if(visited.count(name)) return;
+
+		visiting.insert(name);
+
+		const auto& json = parsed.at(name);
+		if(json.contains("fields")) {
+			for(const auto& field : json["fields"]) {
+				std::string type = field["type"].get<std::string>();
+
+				//We need to check if this type (or its substitute) is in our parsed map.
+				//We can use tryQualifyType to see if it matches any known reflectable type.
+				std::string qualified = tryQualifyType(type, name, knownTypes);
+				if(parsed.count(qualified)) {
+					visit(qualified);
+				}
+
+				//Also check if the substitute version is what's actually needed.
+				//If the original is in parsed, the substitute might also be there.
+				if(!qualified.empty() && qualified != name) {
+					std::string subName = "astra::SerializedSubstitute<" + qualified + ">";
+					if(parsed.count(subName)) {
+						visit(subName);
+					}
+				}
+			}
+		}
+
+		visiting.erase(name);
+		visited.insert(name);
+		sorted.push_back(name);
+	};
+
+	for(const auto& [name, _] : parsed) {
+		if(!visited.count(name)) {
+			visit(name);
+		}
+	}
+
+	return sorted;
+}
 
 int main(int argc, char* argv[]) {
 	//Configure CLI
@@ -187,6 +243,7 @@ int main(int argc, char* argv[]) {
 
 	//Serialized substitute generation
 	generateSubstitutes(parsed, inheritedData);
+	std::vector<std::string> sortedTypes = sortTypes(parsed);
 	VERBOSE_LOG("Generated serialization data");
 
 	//Set up inja
@@ -260,7 +317,8 @@ int main(int argc, char* argv[]) {
 
 	//Write reflection data to output header
 	//1. Type Origin Includes
-	for(auto&& [_, json] : parsed) {
+	for(const std::string& name : sortedTypes) {
+		const auto& json = parsed[name];
 		std::string origin = json["origin"].get<std::string>();
 		if(!includePrefix.empty()) origin = std::format("{}/{}", includePrefix, origin);
 		header << "#include \"" << origin << "\" // IWYU pragma: export\n";
@@ -269,16 +327,18 @@ int main(int argc, char* argv[]) {
 
 	//2. Forward Declarations
 	header << "namespace astra {\n";
-	for(auto&& [_, json] : parsed) {
-		std::string name = json["name"].get<std::string>();
+	for(const std::string& name : sortedTypes) {
+		const auto& json = parsed[name];
+		std::string typeName = json["name"].get<std::string>();
 		std::string templateStr = (json.contains("is_template") && json["is_template"].get<bool>()) ? json["template_prefix"].get<std::string>() : "template<>";
-		header << templateStr << "\nstruct TypeActions<" << name << ">;\n"
-			   << templateStr << "\nstruct ASTRA_API TypeIdFactory<" << name << "> {\n\tstatic TypeId get();\n};\n";
+		header << templateStr << "\nstruct TypeActions<" << typeName << ">;\n"
+			   << templateStr << "\nstruct ASTRA_API TypeIdFactory<" << typeName << "> {\n\tstatic TypeId get();\n};\n";
 	}
 	header << "}\n\n";
 
 	//3. Substitute Definitions
-	for(auto&& [_, json] : parsed) {
+	for(const std::string& name : sortedTypes) {
+		const auto& json = parsed[name];
 		if(json["is_substitute"].get<bool>()) {
 			inja.render_to(header, subTemplate, json);
 		}
@@ -287,7 +347,8 @@ int main(int argc, char* argv[]) {
 
 	//4. Implementations
 	header << "namespace astra {\n";
-	for(auto&& [_, json] : parsed) {
+	for(const std::string& name : sortedTypes) {
+		const auto& json = parsed[name];
 		if(json["kind"].get<int>() == 0) {
 			inja.render_to(header, objectTemplate, json);
 		} else {
@@ -297,7 +358,8 @@ int main(int argc, char* argv[]) {
 	header << "}\n\n";
 
 	//5. ASTRA__typeid
-	for(auto&& [objectName, json] : parsed) {
+	for(const std::string& name : sortedTypes) {
+		const auto& json = parsed[name];
 		if(json["kind"].get<int>() == 0) {
 			std::string className = json["name"].get<std::string>();
 			std::string templateStr = (json.contains("is_template") && json["is_template"].get<bool>()) ? json["template_prefix"].get<std::string>() + "\n" : "";
