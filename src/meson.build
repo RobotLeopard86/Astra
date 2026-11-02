@@ -12,7 +12,7 @@ yaml_cpp_dep = subproject('yaml-cpp', required: true, default_options: {
 jaguar_dep = subproject('jaguar', required: true, default_options: ['testing=false']).get_variable('libjaguar_static_dep').as_link_whole()
 
 # dbghelp.lib (Windows)
-dbghelp_dep = cxx.find_library('dbghelp.lib', required: host_machine.system() == 'windows')
+dbghelp_dep = cxx.find_library('dbghelp', required: host_machine.system() == 'windows')
 
 # Define sources
 astra_sources = [
