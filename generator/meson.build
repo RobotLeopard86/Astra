@@ -29,4 +29,4 @@ generator_sources = [
 ]
 
 # Executable
-astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"', '-D_ITERATOR_DEBUG_LEVEL=2'], native: not (meson.is_cross_build() and generator_cross), install: true)
+astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"', '-D_ITERATOR_DEBUG_LEVEL=0', '-U_DEBUG', '-D_MT', '-fms-runtime-lib=static'], link_args: '-fms-runtime-lib=static', native: not (meson.is_cross_build() and generator_cross), install: true)

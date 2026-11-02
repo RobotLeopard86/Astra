@@ -1,3 +1,6 @@
-[wrap-git]
-url = https://github.com/RobotLeopard86/Astra
-revision = llvm-x64
+[wrap-file]
+directory = clang+llvm-23.1.4-x86_64-pc-windows-msvc
+source_url = https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.4/clang+llvm-23.1.4-x86_64-pc-windows-msvc.tar.xz
+source_filename = clang+llvm-23.1.4-x86_64-pc-windows-msvc.tar.xz
+source_hash = 854bffcfc84528e0ee92490ff5c178920abd358a79c3e98f053e41e3e8e4c6d2
+patch_directory = llvm
