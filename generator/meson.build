@@ -13,6 +13,8 @@ if host_machine.system() == 'windows'
 	deps += llvm_win_sp.get_variable('llvm_dep')
 	deps += cxx.find_library('Version', required: true)
 	deps += cxx.find_library('ntdll', required: true)
+	deps += dependency('zlib', static: true, required: true)
+	deps += dependency('libzstd', static: true, required: true)
 else
 	deps += dependency('llvm', version: '>=19.0.0', required: true)
 	deps += cxx.find_library('clang-cpp', required: true, dirs: host_machine.system() == 'darwin' ? '/opt/homebrew/opt/llvm/lib' : [])
@@ -29,4 +31,4 @@ generator_sources = [
 ]
 
 # Executable
-astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"', '-D_ITERATOR_DEBUG_LEVEL=0', '-U_DEBUG', '-D_MT', '-fms-runtime-lib=static'], link_args: '-fms-runtime-lib=static', native: not (meson.is_cross_build() and generator_cross), install: true)
+astra_generator = executable('astragen', generator_sources, dependencies: deps, cpp_args: ['-DPROJECT_VER="' + meson.project_version() + '"', '-D_ITERATOR_DEBUG_LEVEL=0', '-U_DEBUG', '-D_MT', host_machine.system() == 'windows' ? ['-fms-runtime-lib=static', '-DCLANG_BUILD_STATIC', '-DLLVM_BUILD_STATIC'] : []], link_args: host_machine.system() == 'windows' ? ['/ignore:4099', '/ignore:4217'] : [], native: not (meson.is_cross_build() and generator_cross), install: true)
