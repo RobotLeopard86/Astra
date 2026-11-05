@@ -1,9 +1,15 @@
 project('llvm', 'c', 'cpp', version: '23.1.4', license: 'Apache-2.0 WITH LLVM-exception')
 
+# You must be on Microslop Windows to use these
 if host_machine.system() != 'windows'
     error('Cannot use Windows LLVM binaries on another OS!')
 endif
 
+# Terrible no good very bad hacky patch
+libexe = find_program('lib.exe', required: true)
+run_command([libexe, '/NOLOGO', '/REMOVE:lib/Support/CMakeFiles/LLVMSupport.dir/rpmalloc/rpmalloc.c.obj',  meson.current_source_dir() / 'lib' / 'LLVMSupport.lib'], check: true)
+
+# Dependencies
 cxx = meson.get_compiler('cpp')
 llvm_dep = declare_dependency(include_directories: 'include', dependencies: [
     cxx.find_library('LLVMAnalysis', required: true, dirs: meson.current_source_dir() / 'lib'),
@@ -64,5 +70,6 @@ llvm_dep = declare_dependency(include_directories: 'include', dependencies: [
     cxx.find_library('clangSerialization', required: true, dirs: meson.current_source_dir() / 'lib'),
     cxx.find_library('clangSupport', required: true, dirs: meson.current_source_dir() / 'lib'),
     cxx.find_library('clangTooling', required: true, dirs: meson.current_source_dir() / 'lib'),
+    cxx.find_library('clangUnifiedSymbolResolution', required: true, dirs: meson.current_source_dir() / 'lib'),
     cxx.find_library('libclang', required: true, dirs: meson.current_source_dir() / 'lib')
 ])
